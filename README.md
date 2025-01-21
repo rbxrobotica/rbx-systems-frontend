@@ -1,107 +1,76 @@
-# FRONTEND RBX ROBÓTICA
+# Projeto Next.js (Typescript) - RBX Robótica
 
-Acessável via rbxrobotica.com.br ou www.rbxrobotica.com.br
+<div align="center">
+  <img src="https://media.licdn.com/dms/image/v2/D4D3DAQGoUOZ6EYFGTg/image-scale_127_750/image-scale_127_750/0/1723270584583/rbxrobotica_cover?e=1737860400&v=beta&t=speQmxCVgNMsunBkt4rDjGC42UL71VAXXHZG5FBDK9M" alt="Logo RBX Robótica">
+</div>
+<br>
 
-Algumas rotas importantes:
+Este projeto foi desenvolvido com o framework [Next.js](https://nextjs.org), criado usando o comando [`npx shadcn@latest init`](https://ui.shadcn.com/docs/installation/next). Ele também utiliza as bibliotecas [ShaduiCN](https://ui.shadcn.com/) para componentes UI, [Tailwind CSS](https://tailwindcss.com/) para estilos e [Framer Motion](https://www.framer.com/motion/) para animações.
 
-/projetos
-/portfolio
-/login
-/cadastro
-/quem-somos
-/contato
-/politica-de-privacidade
-/termos-de-uso
-/servicos
-/nossa-historia
-/nosso-modelo-de-negocios
-/parceria
-/quero-ser-parceiro
-/parceiro-estrategico
-/loja
-/nossa-infraestrutura
-/processo-de-desenvolvimento
-/nossos-valores
-/sistemas
-/backup
-/automacao
-/automacoes
-/webservices
-/produtos
-/precos
-/protecao-de-dados
-/extracao-de-dados
-/pipeline-de-dados
-/analise-de-dados
-/fluxo-de-dados
-/integracao-de-sistemas
-/desenvolvimento-de-sistemas
-/desenvolvimento-de-software
-/desenvolvimento-de-api
-/desenvolvimento-de-sistemas-web
-/desenvolvimento-de-sistemas-web-formulario-dados-por-email
-/desenvolvimento-de-aplicativos-mobile
-/desenvolvimento-de-sistemas-embarcados
-/desenvolvimento-de-sistemas-desktop
-/desenvolvimento-de-sistemas-delivery
-/desenvolvimento-de-sistemas-delivery-restaurantes
-/desenvolvimento-de-sistemas-delivery-entregadores
-/desenvolvimento-de-sistemas-pagamentos
-/desenvolvimento-de-sistemas-ecommerce
-/desenvolvimento-de-sistemas-investimentos
-/desenvolvimento-de-sistemas-inteligencia-artificial
-/desenvolvimento-de-sistemas-autonomos
-/desenvolvimento-de-hardware
-/fabricacao-de-pcb
-/treinamento
-/implementacao
-/implantacao
-/consultoria
-/terceirizacao
-/suporte
-/manutencao
-/marketing
-/ferramentas-de-marketing
-/marketing-digital
-/leads
-/crm
-/geracao-de-leads
-/captura-de-leads
-/anuncios
-/disparo
-/trafego-pago
-/vendas-online
-/bi
-/inteligencia-de-negocios
-/gestao-de-projetos
-
-Este é um projeto [Next.js](https://nextjs.org/) inicializado com [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+A RBX Robótica é uma empresa especializada no desenvolvimento de soluções inovadoras no campo da robótica e automação. Com foco em tecnologias emergentes, a RBX está sempre na vanguarda, oferecendo produtos e serviços que atendem às necessidades do mercado de maneira eficiente e personalizada. Este projeto visa expandir as soluções da RBX para o mundo digital, trazendo inovação e eficiência para o ecossistema da robótica.
 
 ## Começando
 
-Primeiro, execute o servidor de desenvolvimento:
+### Requisitos
+
+Antes de iniciar, certifique-se de ter o [Node.js](https://nodejs.org) instalado em seu sistema. Se ainda não o instalou, você pode fazer isso a partir do site oficial.
+
+### Instalando Dependências
+
+No diretório do projeto, execute o comando abaixo para instalar as dependências necessárias:
+
+```bash
+npm install
+# ou
+yarn
+# ou
+pnpm install
+```
+
+### Iniciando o Servidor de Desenvolvimento
+
+Após instalar as dependências, inicie o servidor de desenvolvimento com o seguinte comando:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
+# ou
+yarn run dev
+# ou
 pnpm dev
-# or
+# ou
 bun dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000) com seu navegador para ver o resultado.
+O servidor será iniciado e você poderá acessar o projeto em [http://localhost:3000](http://localhost:3000).
 
-Você pode começar a editar a página modificando `app/page.tsx`. A página se atualiza automaticamente enquanto você edita o arquivo.
+### Editando a Página
 
-Este projeto usa [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) para otimizar e carregar automaticamente o Inter, uma fonte personalizada do Google.
+Você pode começar a editar a página modificando o arquivo `app/page.tsx`. As alterações serão refletidas em tempo real no navegador.
 
-## Saiba Mais
+## Tecnologias Utilizadas
+
+Este projeto usa várias tecnologias modernas para melhorar a experiência do usuário e o fluxo de desenvolvimento:
+
+- **[Next.js](https://nextjs.org)**: Framework para criação de aplicações React com foco em desempenho e SEO.
+- **[ShadCN](https://github.com/shadcn)**: Biblioteca para criação de componentes UI acessíveis e otimizados.
+- **[Tailwind CSS](https://tailwindcss.com/)**: Framework de utilitários para estilização rápida e responsiva.
+- **[Framer Motion](https://www.framer.com/motion/)**: Biblioteca para animações e transições de alta performance em React.
+
+## Aprenda Mais
 
 Para aprender mais sobre o Next.js, confira os seguintes recursos:
 
-- [Next.js Documentation](https://nextjs.org/docs) - saiba mais sobre as funcionalidades e a API do Next.js.
-- [Learn Next.js](https://nextjs.org/learn) - um tutorial interativo de Next.js.
+- [Documentação do Next.js](https://nextjs.org/docs) - Aprenda sobre os recursos e a API do Next.js.
+- [Aprenda Next.js](https://nextjs.org/learn) - Um tutorial interativo sobre Next.js.
 
-Você pode conferir [the Next.js GitHub repository](https://github.com/vercel/next.js/) - seu feedback e contribuições são bem-vindos!
+Além disso, você pode conferir [o repositório do Next.js no GitHub](https://github.com/vercel/next.js) para ver contribuições e feedbacks de outros desenvolvedores.
+
+## Deploy no Vercel
+
+O deploy da sua aplicação pode ser feito facilmente utilizando a [Plataforma Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme). É a plataforma recomendada para a hospedagem de aplicativos Next.js.
+
+Confira a [documentação de deploy do Next.js](https://nextjs.org/docs/app/building-your-application/deploying) para mais detalhes.
+
+---
+
+**RBX Robótica**: Trazendo a inovação para o futuro da robótica e automação.
