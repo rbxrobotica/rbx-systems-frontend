@@ -8,6 +8,7 @@ html, body {
   padding: 0;
   overflow-x: hidden; /* Remove apenas o scroll horizontal */
   width: 100%;
+  scroll-behavior: smooth;
 }
 
 body {

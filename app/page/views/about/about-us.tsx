@@ -19,7 +19,7 @@ const AboutUs: React.FC = () => {
   };
 
   return (
-    <section className="-mt-10 py-16 md:py-32 px-6 md:px-16">
+    <section className="-mt-10 py-16 md:py-32 px-6 md:px-16" id="about-us">
       <div className="container flex flex-col gap-28">
         {/* Header */}
         <motion.div
@@ -35,7 +35,11 @@ const AboutUs: React.FC = () => {
           >
             Levando a inovação tecnológica para todos
           </motion.h1>
-          <motion.p className="max-w-xl text-lg" variants={fadeInUp}>
+          <motion.p
+            id="mission"
+            className="max-w-xl text-lg"
+            variants={fadeInUp}
+          >
             A RBX Robótica facilita a criação de sistemas personalizados,
             plataformas de automação e soluções de software inovadoras para
             empresas de diversos setores.
@@ -64,7 +68,7 @@ const AboutUs: React.FC = () => {
             draggable="false"
           >
             <p className="text-sm text-muted-foreground">NOSSA MISSÃO</p>
-            <p className="text-lg font-medium">
+            <p className="text-lg font-medium" id="approach">
               Acreditamos que a construção de soluções tecnológicas deve ser
               simples e acessível. Todos devem ter a liberdade de criar sistemas
               inovadores para resolver problemas reais, sem a necessidade de
@@ -109,7 +113,9 @@ const AboutUs: React.FC = () => {
                 <h3 className="mb-3 mt-2 text-lg font-semibold">
                   {item.title}
                 </h3>
-                <p className="text-foreground">{item.description}</p>
+                <p className="text-foreground" id="team">
+                  {item.description}
+                </p>
               </motion.div>
             ))}
           </motion.div>

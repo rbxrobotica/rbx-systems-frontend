@@ -67,7 +67,7 @@ export const servicesItems = [
 export const aboutUsItems = [
     {
         id:0,
-        href: "/",
+        href: "#about-us",
         title: "Quem somos",
         description:
             "Saiba mais sobre nossa empresa, nossa trajetória e os valores que nos guiam.",
@@ -75,21 +75,21 @@ export const aboutUsItems = [
     },
     {
         id:1,
-        href: "/docs",
-        title: "Nossa história",
+        href: "#mission",
+        title: "Missão, visão e valores",
         description:
             "Conheça a jornada que nos trouxe até aqui e nossas conquistas ao longo do tempo.",
     },
     {
         id:2,
-        href: "/docs/installation",
-        title: "Missão, visão e valores",
+        href: "#approach",
+        title: "Nossa Abordagem",
         description:
             "Descubra o que nos move, nossa visão de futuro e os valores que norteiam nosso trabalho.",
     },
     {
         id:3,
-        href: "/docs/primitives/typography",
+        href: "#team",
         title: "Equipe",
         description:
             "Apresentamos nossa equipe de especialistas dedicados ao sucesso do seu projeto.",
