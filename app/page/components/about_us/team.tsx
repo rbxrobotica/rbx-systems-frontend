@@ -8,32 +8,32 @@ const people = [
   {
     id: "person-1",
     name: "Rafael Scharf",
-    role: "Engenheiro de Software",
+    role: "Software Engineer Manager | Tech Lead",
     avatar: "https://media.licdn.com/dms/image/v2/D4D03AQFvqMPm5iq4vA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1721338506559?e=1743033600&v=beta&t=29BP6v1lCqUXwdCv-OCjzJ97ElRF3aH7DL3yB7QJOOE",
   },
   {
     id: "person-2",
     name: "Anthony Farias",
-    role: "Desenvolvedor Full Stack",
+    role: "Full Stack Developer | Cybersecurity Engineer",
     avatar: "https://media.licdn.com/dms/image/v2/D4D03AQFpQF6LaAgiBw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1727209167224?e=1743033600&v=beta&t=ma0W26-Zm2g8sUn-d4mlaj3bsZx0WQ8crj0EEOe7GRM",
   },
   {
     id: "person-3",
-    name: "Leandro Damásio",
-    role: "CEO - CTO",
+    name: "Leandro Damasio",
+    role: "CEO | Principal Software Engineer | SRE | DevOps",
     avatar: "https://media.licdn.com/dms/image/v2/D4D03AQH1A7fWu0QDKw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1714692052061?e=1743033600&v=beta&t=heeTdd4MSVKuiSl98bre_Qox6R2cRjTRDFOEDQTUg90",
   },
   
   {
     id: "person-4",
     name: "Magno Ozzyr",
-    role: "PM - consultor",
+    role: "PM | Lean-Agile Software Delivery Manager",
     avatar: "https://media.licdn.com/dms/image/v2/D4E03AQHE0DVhQ0EGNQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1729826161143?e=1743033600&v=beta&t=Omdu7cfTe4pBsaEFGe8EM-QsKdasB9bxNv1lE0bLMVg",
   },
   {
     id: "person-5",
     name: "Flávia Ribeiro",
-    role: "Atendimento ao cliente",
+    role: "SDR | Client Support | Customer Care",
     avatar: "https://media.licdn.com/dms/image/v2/D4D03AQGJ6F3E25EeXA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1714833615433?e=1743033600&v=beta&t=OwsKIi484nQtaPvNwzT3O66NPibnEAC-3QNOfWB9zhw",
   }
 ];
