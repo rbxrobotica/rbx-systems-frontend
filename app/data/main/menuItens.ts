@@ -104,7 +104,7 @@ export const blogEcontatoItems = [
     },
     {
         id:1,
-        href: "/docs",
+        href: "#footer",
         title: "Contato"
     }
 ]

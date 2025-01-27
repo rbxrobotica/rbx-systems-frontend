@@ -27,7 +27,7 @@ const people = [
   {
     id: "person-4",
     name: "Magno Ozzyr",
-    role: "Tech Lead",
+    role: "Gestor de projetos",
     avatar: "https://media.licdn.com/dms/image/v2/D4E03AQHE0DVhQ0EGNQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1729826161143?e=1743033600&v=beta&t=Omdu7cfTe4pBsaEFGe8EM-QsKdasB9bxNv1lE0bLMVg",
   },
   {

@@ -5,16 +5,16 @@ export default function Footer() {
   // Dados para os links das seções
   const sections = [
     {
-      title: "Product",
-      links: ["Overview", "Pricing", "Marketplace", "Features"],
+      title: "Soluções",
+      links: ["Automação", "IA Integrada", "Serviços Personalizados", "Consultoria"],
     },
     {
-      title: "Company",
-      links: ["About", "Team", "Blog", "Careers"],
+      title: "Sobre Nós",
+      links: ["Nossa História", "Equipe", "Blog", "Carreiras"],
     },
     {
-      title: "Resources",
-      links: ["Help", "Sales", "Advertise", "Privacy"],
+      title: "Suporte",
+      links: ["FAQ", "Contato", "Documentação", "Política de Privacidade"],
     },
   ];
 
@@ -26,7 +26,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-32 bg-[#1D1D22] border-t border-[#1D1D22] py-10">
+    <footer className="mt-32 bg-[#1D1D22] border-t border-[#1D1D22] py-10" id="footer">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
           {/* Logo e descrição */}
@@ -40,9 +40,9 @@ export default function Footer() {
                 className="mb-4"
               />
             </div>
-            <h2 className="text-xl font-bold text-gray-800">Shadcnblocks</h2>
-            <p className="text-gray-500 mt-2">
-              A collection of 100+ responsive HTML templates for your startup business or side project.
+            <h2 className="text-xl font-bold text-gray-100">RBX Robótica</h2>
+            <p className="text-gray-400 mt-2">
+              Criando soluções inteligentes em robótica e automação para transformar o futuro.
             </p>
           </div>
 
@@ -50,11 +50,11 @@ export default function Footer() {
           <div className="flex flex-wrap justify-center lg:justify-between w-full lg:w-auto">
             {sections.map((section, index) => (
               <div key={index} className="mr-12">
-                <h3 className="font-medium text-gray-800">{section.title}</h3>
-                <ul className="mt-4 space-y-2 text-gray-500">
+                <h3 className="font-medium text-gray-100">{section.title}</h3>
+                <ul className="mt-4 space-y-2 text-gray-400">
                   {section.links.map((link, idx) => (
                     <li key={idx}>
-                      <a href="#" className="hover:text-gray-800">
+                      <a href="#" className="hover:text-gray-100">
                         {link}
                       </a>
                     </li>
@@ -66,23 +66,23 @@ export default function Footer() {
         </div>
 
         {/* Ícones de redes sociais dinâmicos */}
-        <div className="flex justify-center lg:justify-start mt-8 space-x-6 text-gray-500">
+        <div className="flex justify-center lg:justify-start mt-8 space-x-6 text-gray-400">
           {socialLinks.map(({ icon: Icon, href }, index) => (
-            <a key={index} href={href} className="hover:text-gray-800">
+            <a key={index} href={href} className="hover:text-gray-100">
               <Icon className="w-6 h-6" />
             </a>
           ))}
         </div>
 
         {/* Rodapé inferior */}
-        <div className="mt-10 border-t pt-6 text-center text-gray-500">
-          <p>© 2024 Shadcnblocks. All rights reserved.</p>
+        <div className="mt-10 border-t border-gray-600 pt-6 text-center text-gray-400">
+          <p>© {new Date().getFullYear()} RBX Robótica. Todos os direitos reservados.</p>
           <div className="flex justify-center mt-4 space-x-4">
-            <a href="#" className="hover:text-gray-800">
-              Terms and Conditions
+            <a href="#" className="hover:text-gray-100">
+              Termos e Condições
             </a>
-            <a href="#" className="hover:text-gray-800">
-              Privacy Policy
+            <a href="#" className="hover:text-gray-100">
+              Política de Privacidade
             </a>
           </div>
         </div>
