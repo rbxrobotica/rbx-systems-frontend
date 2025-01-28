@@ -69,28 +69,39 @@ const Team = () => {
       </div>
     
       <motion.div
-        className="h-96 w-full bg-fixed bg-[url('/polka-dots.svg')] bg-cover mt-16 grid md:grid-cols-2 lg:grid-cols-5 bg-center bg-no-repeat shadow-lg rounded-2xl"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={staggerContainer}
-      >
-        {/* Ajuste aqui para centralizar os itens */}
-        {people.map((person) => (
-          <motion.div
-            key={person.id}
-            className="flex flex-col items-center justify-center transition-colors duration-200 hover:text-primary" 
-            variants={fadeInUp}
-          >
-            <Avatar className="mb-4 size-15 border md:mb-5 lg:size-20">
-              <Image quality={100} priority src={person.avatar} alt={person.name} width={100} height={100} />
-              <AvatarFallback>{person.name}</AvatarFallback>
-            </Avatar>
-            <p className="text-center font-medium">{person.name}</p>
-            <p className="text-center text-muted-foreground">{person.role}</p>
-          </motion.div>
-        ))}
-      </motion.div>
+  className="h-auto w-full bg-fixed bg-[url('/polka-dots.svg')] bg-cover mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 bg-center bg-no-repeat shadow-lg rounded-2xl p-10"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.3 }}
+  variants={staggerContainer}
+>
+  {/* Mapeando pessoas com ajustes responsivos */}
+  {people.map((person) => (
+    <motion.div
+      key={person.id}
+      className="flex flex-col items-center justify-center transition-colors duration-200 hover:text-primary p-2"
+      variants={fadeInUp}
+    >
+      <Avatar className="mb-4 h-20 w-20 md:h-18 md:w-18 lg:h-18 lg:w-18 border">
+        <Image
+          quality={100}
+          priority
+          src={person.avatar}
+          alt={person.name}
+          width={100}
+          height={100}
+          className="rounded-full"
+        />
+        <AvatarFallback>{person.name}</AvatarFallback>
+      </Avatar>
+      <p className="text-center font-medium text-sm md:text-base lg:text-lg">{person.name}</p>
+      <p className="text-center text-xs text-muted-foreground md:text-sm lg:text-base">
+        {person.role}
+      </p>
+    </motion.div>
+  ))}
+</motion.div>
+
     </section>
   );
 };

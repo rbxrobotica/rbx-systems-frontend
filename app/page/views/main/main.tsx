@@ -56,8 +56,8 @@ const Main: React.FC = () => {
         animate="visible"
         variants={container}
       >
-        <motion.div
-          className="-mt-[45rem] px-5 text-center md:px-0 md:text-start md:ml-24 md:mt-36 md:w-[50%] lg:px-0 lg:text-start lg:ml-24 lg:mt-36 lg:w-[50%]"
+       <motion.div
+          className="-mt-[25rem] px-5 text-center md:px-0 md:text-start md:ml-24 md:mt-36 md:w-[50%] lg:px-0 lg:text-start lg:ml-24 lg:mt-36 lg:w-[50%]"
           variants={container}
         >
           <div className="space-y-4">
@@ -77,7 +77,7 @@ const Main: React.FC = () => {
         </motion.div>
 
         <motion.div
-          className="-mt-[27rem] relative w-[100%] h-[100%] md:w-[90%] md:h-[90%] md:-mt-0 lg:w-[90%] lg:h-[90%] lg:-mt-0"
+          className="-mt-[17rem] relative w-[100%] h-[100%] md:w-[90%] md:h-[90%] md:-mt-0 lg:w-[90%] lg:h-[90%] lg:-mt-0"
           variants={image}
         >
           <Image

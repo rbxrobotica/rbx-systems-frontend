@@ -2,7 +2,6 @@ import Image from "next/image";
 import { SiFacebook, SiInstagram, SiLinkedin } from "react-icons/si";
 
 export default function Footer() {
-  // Dados para os links das seções
   const sections = [
     {
       title: "Soluções",
@@ -18,7 +17,6 @@ export default function Footer() {
     },
   ];
 
-  // Dados para os ícones de redes sociais
   const socialLinks = [
     { icon: SiInstagram, href: "#" },
     { icon: SiFacebook, href: "#" },
@@ -28,12 +26,12 @@ export default function Footer() {
   return (
     <footer className="mt-32 bg-[#1D1D22] border-t border-[#1D1D22] py-10" id="footer">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
+        <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start space-y-8 lg:space-y-0">
           {/* Logo e descrição */}
-          <div className="mb-6 lg:mb-0 text-center lg:text-left">
+          <div className="text-center lg:text-left lg:w-1/3">
             <div className="flex justify-center lg:justify-start">
               <Image
-                src="/bitmap.svg" 
+                src="/bitmap.svg"
                 alt="RBX Robótica"
                 width={50}
                 height={50}
@@ -47,9 +45,9 @@ export default function Footer() {
           </div>
 
           {/* Links dinâmicos */}
-          <div className="flex flex-wrap justify-center lg:justify-between w-full lg:w-auto">
+          <div className="flex flex-wrap justify-center lg:justify-between w-full lg:w-2/3 space-y-8 lg:space-y-0">
             {sections.map((section, index) => (
-              <div key={index} className="mr-12">
+              <div key={index} className="w-1/2 sm:w-1/3 lg:w-auto px-4">
                 <h3 className="font-medium text-gray-100">{section.title}</h3>
                 <ul className="mt-4 space-y-2 text-gray-400">
                   {section.links.map((link, idx) => (
