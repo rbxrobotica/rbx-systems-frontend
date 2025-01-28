@@ -1,7 +1,7 @@
 # Projeto Next.js (Typescript) - RBX Robótica
 
 <div align="center">
-  <img src="https://media.licdn.com/dms/image/v2/D4D3DAQGoUOZ6EYFGTg/image-scale_127_750/image-scale_127_750/0/1723270584583/rbxrobotica_cover?e=1737860400&v=beta&t=speQmxCVgNMsunBkt4rDjGC42UL71VAXXHZG5FBDK9M" alt="Logo RBX Robótica">
+  <img src="https://media.licdn.com/dms/image/v2/D4D3DAQGoUOZ6EYFGTg/image-scale_127_750/image-scale_127_750/0/1723270584583/rbxrobotica_cover?e=1738692000&v=beta&t=QO_a9Dr3mkfFx053ldSSQAS0bseJP6VTG-O_c2R88PM" alt="Logo RBX Robótica">
 </div>
 <br>
 
