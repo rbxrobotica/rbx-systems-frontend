@@ -99,11 +99,16 @@ export const aboutUsItems = [
 export const blogEcontatoItems = [
     {
         id:0,
+        href: "/produtos",
+        title: "Produtos"
+    },
+    {
+        id:1,
         href: "/docs",
         title: "Blog"
     },
     {
-        id:1,
+        id:2,
         href: "#footer",
         title: "Contato"
     }
