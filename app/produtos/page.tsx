@@ -146,13 +146,13 @@ export default function ProdutosPage() {
             Todos os repositórios são públicos. Issues, PRs e discussões são bem-vindos.
           </p>
           <a
-            href="https://github.com/ldamasio"
+            href="https://github.com/rbxrobotica"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
           >
             <GitHubIcon className="h-4 w-4" />
-            github.com/ldamasio
+            github.com/rbxrobotica
           </a>
         </motion.div>
       </div>
