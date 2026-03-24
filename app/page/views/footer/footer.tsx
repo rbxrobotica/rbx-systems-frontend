@@ -1,19 +1,35 @@
 import Image from "next/image";
+import Link from "next/link";
 import { SiFacebook, SiInstagram, SiLinkedin } from "react-icons/si";
 
 export default function Footer() {
   const sections = [
     {
       title: "Soluções",
-      links: ["Automação", "IA Integrada", "Serviços Personalizados", "Consultoria"],
+      links: [
+        { label: "Produtos", href: "/produtos" },
+        { label: "Automação", href: "#" },
+        { label: "IA Integrada", href: "#" },
+        { label: "Consultoria", href: "#" },
+      ],
     },
     {
       title: "Sobre Nós",
-      links: ["Nossa História", "Equipe", "Blog", "Carreiras"],
+      links: [
+        { label: "Nossa História", href: "#" },
+        { label: "Equipe", href: "#" },
+        { label: "Blog", href: "#" },
+        { label: "Carreiras", href: "#" },
+      ],
     },
     {
       title: "Suporte",
-      links: ["FAQ", "Contato", "Documentação", "Política de Privacidade"],
+      links: [
+        { label: "FAQ", href: "#" },
+        { label: "Contato", href: "#" },
+        { label: "Documentação", href: "#" },
+        { label: "Política de Privacidade", href: "#" },
+      ],
     },
   ];
 
@@ -52,9 +68,9 @@ export default function Footer() {
                 <ul className="mt-4 space-y-2 text-gray-400">
                   {section.links.map((link, idx) => (
                     <li key={idx}>
-                      <a href="#" className="hover:text-gray-100">
-                        {link}
-                      </a>
+                      <Link href={link.href} className="hover:text-gray-100">
+                        {link.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>

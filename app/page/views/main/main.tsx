@@ -3,6 +3,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import MotionVariants from "@/app/utils/motionsVariants";
@@ -71,8 +72,11 @@ const Main: React.FC = () => {
               para impulsionar o sucesso do seu negócio.
             </p>
           </div>
-          <motion.div variants={button}>
-            <Button className="mt-10">Simule um projeto</Button>
+          <motion.div variants={button} className="flex flex-wrap gap-4 mt-10">
+            <Button>Simule um projeto</Button>
+            <Button variant="outline" asChild>
+              <Link href="/produtos">Conheça nossos produtos</Link>
+            </Button>
           </motion.div>
         </motion.div>
 
