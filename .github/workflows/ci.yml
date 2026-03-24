@@ -51,7 +51,7 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           export GIT_SSH_COMMAND="ssh -i ~/.ssh/infra_deploy_key -o IdentitiesOnly=yes"
 
-          git clone git@github.com:ldamasio/rbx-infra.git /tmp/rbx-infra
+          git clone git@github.com:rbxrobotica/rbx-infra.git /tmp/rbx-infra
           cd /tmp/rbx-infra
 
           # Update the image newTag in kustomization.yml
