@@ -8,6 +8,7 @@ export default function Footer() {
       title: "Soluções",
       links: [
         { label: "Produtos", href: "/produtos" },
+        { label: "Blog", href: "/blog" },
         { label: "Automação", href: "#" },
         { label: "IA Integrada", href: "#" },
         { label: "Consultoria", href: "#" },
