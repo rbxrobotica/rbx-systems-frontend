@@ -4,14 +4,14 @@ import Image from "next/image";
 import { NavigationMenuBar } from "../page/views/header/nav-bar-menu";
 import Footer from "../page/views/footer/footer";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default async function BlogPage() {
   let posts: PostMeta[] = [];
   try {
     posts = await getAllPosts();
-  } catch {
-    // S3 not configured yet — render empty state
+  } catch (err) {
+    console.error("[blog] failed to load posts from S3:", err);
   }
 
   return (
