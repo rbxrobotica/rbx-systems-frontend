@@ -27,9 +27,16 @@ excerpt: "One sentence describing the post. Shown in listing and at the top of t
 
 **Do NOT include a `cover` field yet** — it will be added in Step 5 after the image is uploaded.
 
-**Tone:** institutional, clear, and direct — similar to Cursor or Anthropic blog posts. English only.
+**Tone:** institutional, clear, and direct — similar to Cursor or Anthropic blog posts. English only. See `docs/WRITING-STYLE.md` for editorial guidelines (no em-dashes, no arrows, natural prose).
 
 **Do NOT include sensitive infrastructure details** (IPs, credentials, internal hostnames, security incidents).
+
+**Markdown Features**: The blog supports **GitHub Flavored Markdown (GFM)** via `remark-gfm`:
+- ✅ Tables (use standard Markdown table syntax)
+- ✅ Strikethrough (~~text~~)
+- ✅ Task lists
+- ✅ Autolinks
+- ✅ Code blocks with syntax highlighting
 
 ### Step 2 — Upload the MDX to S3
 
