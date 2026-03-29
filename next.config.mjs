@@ -8,6 +8,11 @@ const nextConfig = {
         hostname: "media.licdn.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "eu2.contabostorage.com",
+        pathname: "/rbx-content/**",
+      },
     ],
   },
 };

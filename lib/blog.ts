@@ -1,5 +1,5 @@
 import matter from "gray-matter";
-import { listPostKeys, getPostContent, coverUrl } from "./s3";
+import { listPostKeys, getPostContent } from "./s3";
 
 export interface PostMeta {
   slug: string;
@@ -36,7 +36,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
         authorRole: data.authorRole,
         tags: data.tags ?? [],
         excerpt: data.excerpt ?? "",
-        cover: data.cover ?? coverUrl(slug),
+        cover: data.cover,
       } satisfies PostMeta;
     })
   );
@@ -56,7 +56,7 @@ export async function getPost(slug: string): Promise<Post | null> {
       authorRole: data.authorRole,
       tags: data.tags ?? [],
       excerpt: data.excerpt ?? "",
-      cover: data.cover ?? coverUrl(slug),
+      cover: data.cover,
       content,
     };
   } catch {

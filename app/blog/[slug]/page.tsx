@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { NavigationMenuBar } from "../../page/views/header/nav-bar-menu";
 import Footer from "../../page/views/footer/footer";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export async function generateStaticParams() {
   try {
