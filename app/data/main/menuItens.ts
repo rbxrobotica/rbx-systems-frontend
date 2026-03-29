@@ -113,3 +113,10 @@ export const blogEcontatoItems = [
         title: "Contato"
     }
 ]
+
+export const atelierItem = {
+    id: "atelier",
+    href: "/atelier",
+    title: "Atelier",
+    isHighlight: true,
+}

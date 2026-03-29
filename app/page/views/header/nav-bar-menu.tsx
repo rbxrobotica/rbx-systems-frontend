@@ -24,6 +24,7 @@ import {
   aboutUsItems,
   blogEcontatoItems,
   servicesItems,
+  atelierItem,
 } from "../../../data/main/menuItens";
 import { MenuItem } from "@/app/interfaces/types/nav-bar-menu/navBarMenuTypes";
 import { ModeToggle } from "../../middleware/toggle-mode";
@@ -80,6 +81,7 @@ export function NavigationMenuBar(): JSX.Element {
           services={servicesItems}
           aboutUs={aboutUsItems}
           blogEcontato={blogEcontatoItems}
+          atelier={atelierItem}
         />
       ) : (
         <>
@@ -171,6 +173,16 @@ export function NavigationMenuBar(): JSX.Element {
                     </NavigationMenuLink>
                   </Link>
                 ))}
+              </NavigationMenuItem>
+              {/* Atelier - Highlighted */}
+              <NavigationMenuItem>
+                <Link href={atelierItem.href} legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className="bg-transparent text-white/90 hover:text-cyan-400 font-medium transition-colors duration-200 px-4 py-2"
+                  >
+                    {atelierItem.title}
+                  </NavigationMenuLink>
+                </Link>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>

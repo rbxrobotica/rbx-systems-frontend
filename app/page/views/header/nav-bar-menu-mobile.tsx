@@ -27,15 +27,18 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { MenuItemMobile } from "@/app/interfaces/types/nav-bar-menu/navBarMenuTypes";
 import { ModeToggle } from "../../middleware/toggle-mode";
+import Link from "next/link";
 
 export function DrawerMobile({
   services,
   aboutUs,
   blogEcontato,
+  atelier,
 }: {
   services: MenuItemMobile[];
   aboutUs: MenuItemMobile[];
   blogEcontato: MenuItemMobile[];
+  atelier: { href: string; title: string };
 }) {
   return (
     <Drawer>
@@ -115,6 +118,14 @@ export function DrawerMobile({
                 {blogEcontato.title}
               </Button>
             ))}
+            </div>
+            {/* Atelier - Highlighted */}
+            <div className="mt-4 pt-4 border-t border-neutral-800">
+              <Link href={atelier.href} className="block">
+                <Button className="w-full bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30 border border-cyan-500/30">
+                  {atelier.title}
+                </Button>
+              </Link>
             </div>
           </div>
           <DrawerFooter>
