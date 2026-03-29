@@ -69,7 +69,7 @@ export async function getPost(slug: string): Promise<Post | null> {
       authorRole: data.authorRole,
       tags: data.tags ?? [],
       excerpt: data.excerpt ?? "",
-      cover: data.cover,
+      cover: normalizeCover(data.cover),
       content,
     };
   } catch {
