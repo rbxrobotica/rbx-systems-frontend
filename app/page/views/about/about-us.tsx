@@ -33,16 +33,16 @@ const AboutUs: React.FC = () => {
             className="text-3xl font-semibold lg:text-5xl"
             variants={fadeInUp}
           >
-            Levando a inovação tecnológica para todos
+            Sistemas projetados para operar
           </motion.h1>
           <motion.p
             id="mission"
             className="max-w-xl text-lg"
             variants={fadeInUp}
           >
-            A RBX Robótica facilita a criação de sistemas personalizados,
-            plataformas de automação e soluções de software inovadoras para
-            empresas de diversos setores.
+            A RBX projeta e opera plataformas, automacoes e infraestrutura
+            para ambientes onde confiabilidade, governanca e controle sao
+            requisitos, nao diferenciais.
           </motion.p>
         </motion.div>
 
@@ -67,12 +67,12 @@ const AboutUs: React.FC = () => {
             variants={slideInRight}
             draggable="false"
           >
-            <p className="text-sm text-muted-foreground">NOSSA MISSÃO</p>
+            <p className="text-sm text-muted-foreground">POSICIONAMENTO</p>
             <p className="text-lg font-medium" id="approach">
-              Acreditamos que a construção de soluções tecnológicas deve ser
-              simples e acessível. Todos devem ter a liberdade de criar sistemas
-              inovadores para resolver problemas reais, sem a necessidade de
-              equipes grandes ou processos complexos.
+              Tratamos software como infraestrutura operacional. Cada sistema
+              que entregamos e projetado para ser mantido, observado e
+              evoluido com seguranca ao longo de anos, nao apenas
+              para funcionar no dia do deploy.
             </p>
           </motion.div>
         </motion.div>
@@ -87,12 +87,12 @@ const AboutUs: React.FC = () => {
         >
           <motion.div className="max-w-xl" variants={fadeInUp}>
             <h2 className="mb-2.5 text-2xl font-semibold md:text-4xl">
-              Tornamos a criação de software extremamente simples
+              Como operamos
             </h2>
             <p className="text-muted-foreground">
-              Nosso objetivo é capacitar 1.000.000 de empresas a desenvolverem
-              soluções personalizadas que atendam às suas necessidades. Veja
-              como planejamos alcançar esse objetivo.
+              Cada projeto segue principios de arquitetura, rastreabilidade
+              e operacao continua. Construimos para que sistemas funcionem
+              de forma previsivel em producao.
             </p>
           </motion.div>
 
@@ -133,10 +133,10 @@ const AboutUs: React.FC = () => {
         >
           <motion.div variants={fadeInUp}>
             <p className="mb-10 text-sm font-medium text-muted-foreground">
-              Junte-se à nossa equipe
+              Trabalhe conosco
             </p>
             <h2 className="mb-2.5 text-2xl font-semibold md:text-4xl">
-              Estamos transformando a forma como a tecnologia é desenvolvida
+              Engenheiros que projetam sistemas para durar
             </h2>
           </motion.div>
           <motion.div variants={slideInRight}>
@@ -149,9 +149,9 @@ const AboutUs: React.FC = () => {
             /> */}
             <div className="mb-6 h-3 rounded-full w-full bg-foreground"></div>
             <p className="text-muted-foreground">
-              E estamos em busca de pessoas apaixonadas por inovação e
-              transformação digital. Se você quer fazer a diferença, venha fazer
-              parte da nossa equipe.
+              Buscamos perfis tecnicos com experiencia em backend,
+              infraestrutura, automacao ou IA aplicada. Se voce valoriza
+              rigor operacional e trabalho com proposito, envie seu curriculo.
             </p>
             <SubmitCV />
           </motion.div>

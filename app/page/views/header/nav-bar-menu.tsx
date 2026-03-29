@@ -195,7 +195,9 @@ export function NavigationMenuBar(): JSX.Element {
             transition={{ duration: 0.5, delay: 0.5 }}
           >
             <ModeToggle />
-            <Button>Solicitar consulta</Button>
+            <Button asChild>
+              <Link href="#footer">Contato</Link>
+            </Button>
           </motion.div>
         </>
       )}

@@ -51,7 +51,7 @@ export function DrawerMobile({
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader>
             <DrawerTitle>Menu</DrawerTitle>
-            <DrawerDescription>Explore o que oferecemos:</DrawerDescription>
+            <DrawerDescription>Navegacao</DrawerDescription>
           </DrawerHeader>
           <div className="p-4">
             <div className="flex items-center justify-end space-x-1 mb-2">
@@ -113,10 +113,12 @@ export function DrawerMobile({
               </AccordionItem>
             </Accordion>
             <div className="flex flex-col mt-2 space-y-2">
-            {blogEcontato.map((blogEcontato, index) => (
-              <Button key={index} className="bg-muted text-foreground">
-                {blogEcontato.title}
-              </Button>
+            {blogEcontato.map((item, index) => (
+              <Link key={index} href={item.href}>
+                <Button className="w-full bg-muted text-foreground">
+                  {item.title}
+                </Button>
+              </Link>
             ))}
             </div>
             {/* Atelier - Highlighted */}

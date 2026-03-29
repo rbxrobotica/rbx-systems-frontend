@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "RBX Systems",
-  description: "RBX Systems — intelligent automation, algorithmic trading, and open-source infrastructure for the next generation of robotics and AI.",
+  title: "RBX Systems — Engenharia de Sistemas e Infraestrutura",
+  description: "Engenharia de sistemas, automacao operacional, IA aplicada e infraestrutura cloud para operacoes de alta exigencia.",
 };
 
 /**

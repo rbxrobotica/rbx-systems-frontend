@@ -63,19 +63,21 @@ const Main: React.FC = () => {
         >
           <div className="space-y-4">
             <p className="text-2xl font-semibold md:text-3xl lg:text-3xl">
-              Inovação Sob Medida: Transformando Ideias em Soluções Digitais
+              Engenharia de sistemas para operacoes que exigem controle
             </p>
             <p className="text-sm opacity-80">
-              Somos especializados em desenvolver sites, aplicativos e sistemas
-              personalizados que aliam tecnologia e design para atender às suas
-              necessidades. Nosso foco é criar soluções eficientes e inovadoras
-              para impulsionar o sucesso do seu negócio.
+              Projetamos plataformas, automacoes e infraestrutura para empresas
+              que operam com alta exigencia. Backend, cloud, agentes
+              inteligentes e integracoes construidos para confiabilidade
+              e escala previsivel.
             </p>
           </div>
           <motion.div variants={button} className="flex flex-wrap gap-4 mt-10">
-            <Button>Simule um projeto</Button>
+            <Button asChild>
+              <Link href="/servicos">Nossos servicos</Link>
+            </Button>
             <Button variant="outline" asChild>
-              <Link href="/produtos">Conheça nossos produtos</Link>
+              <Link href="/produtos">Produtos</Link>
             </Button>
           </motion.div>
         </motion.div>

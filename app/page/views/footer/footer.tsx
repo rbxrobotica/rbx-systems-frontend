@@ -1,67 +1,65 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SiFacebook, SiInstagram, SiLinkedin } from "react-icons/si";
+import { SiLinkedin, SiGithub } from "react-icons/si";
 
 export default function Footer() {
   const sections = [
     {
-      title: "Soluções",
+      title: "Servicos",
       links: [
-        { label: "Produtos", href: "/produtos" },
+        { label: "Sistemas Web e Plataformas", href: "/servicos#sistemas-web" },
+        { label: "Automacao e Integracoes", href: "/servicos#automacao" },
+        { label: "IA Aplicada e Agentes", href: "/servicos#ia-aplicada" },
+        { label: "Infraestrutura Cloud", href: "/servicos#infraestrutura" },
+        { label: "Backend e APIs", href: "/servicos#backend" },
+        { label: "Manutencao Evolutiva", href: "/servicos#manutencao" },
+      ],
+    },
+    {
+      title: "Empresa",
+      links: [
+        { label: "Sobre nos", href: "#about-us" },
+        { label: "Equipe", href: "#team" },
         { label: "Blog", href: "/blog" },
-        { label: "Automação", href: "#" },
-        { label: "IA Integrada", href: "#" },
-        { label: "Consultoria", href: "#" },
+        { label: "Produtos", href: "/produtos" },
+        { label: "Atelier", href: "/atelier" },
       ],
     },
     {
-      title: "Sobre Nós",
+      title: "Contato",
       links: [
-        { label: "Nossa História", href: "#" },
-        { label: "Equipe", href: "#" },
-        { label: "Blog", href: "#" },
-        { label: "Carreiras", href: "#" },
-      ],
-    },
-    {
-      title: "Suporte",
-      links: [
-        { label: "FAQ", href: "#" },
-        { label: "Contato", href: "#" },
-        { label: "Documentação", href: "#" },
-        { label: "Política de Privacidade", href: "#" },
+        { label: "contato@rbx.ia.br", href: "mailto:contato@rbx.ia.br" },
       ],
     },
   ];
 
   const socialLinks = [
-    { icon: SiInstagram, href: "#" },
-    { icon: SiFacebook, href: "#" },
-    { icon: SiLinkedin, href: "#" },
+    { icon: SiGithub, href: "https://github.com/rbxrobotica" },
+    { icon: SiLinkedin, href: "https://linkedin.com/company/rbxrobotica" },
   ];
 
   return (
     <footer className="mt-32 bg-[#1D1D22] border-t border-[#1D1D22] py-10" id="footer">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start space-y-8 lg:space-y-0">
-          {/* Logo e descrição */}
+          {/* Logo e descricao */}
           <div className="text-center lg:text-left lg:w-1/3">
             <div className="flex justify-center lg:justify-start">
               <Image
                 src="/bitmap.svg"
-                alt="RBX Robótica"
+                alt="RBX Robotica"
                 width={50}
                 height={50}
                 className="mb-4"
               />
             </div>
-            <h2 className="text-xl font-bold text-gray-100">RBX Robótica</h2>
+            <h2 className="text-xl font-bold text-gray-100">RBX Systems</h2>
             <p className="text-gray-400 mt-2">
-              Criando soluções inteligentes em robótica e automação para transformar o futuro.
+              Engenharia de sistemas, automacao e infraestrutura para operacoes de alta exigencia.
             </p>
           </div>
 
-          {/* Links dinâmicos */}
+          {/* Links dinamicos */}
           <div className="flex flex-wrap justify-center lg:justify-between w-full lg:w-2/3 space-y-8 lg:space-y-0">
             {sections.map((section, index) => (
               <div key={index} className="w-1/2 sm:w-1/3 lg:w-auto px-4">
@@ -80,26 +78,18 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Ícones de redes sociais dinâmicos */}
+        {/* Redes sociais */}
         <div className="flex justify-center lg:justify-start mt-8 space-x-6 text-gray-400">
           {socialLinks.map(({ icon: Icon, href }, index) => (
-            <a key={index} href={href} className="hover:text-gray-100">
+            <a key={index} href={href} className="hover:text-gray-100" target="_blank" rel="noopener noreferrer">
               <Icon className="w-6 h-6" />
             </a>
           ))}
         </div>
 
-        {/* Rodapé inferior */}
+        {/* Rodape inferior */}
         <div className="mt-10 border-t border-gray-600 pt-6 text-center text-gray-400">
-          <p>© {new Date().getFullYear()} RBX Robótica. Todos os direitos reservados.</p>
-          <div className="flex justify-center mt-4 space-x-4">
-            <a href="#" className="hover:text-gray-100">
-              Termos e Condições
-            </a>
-            <a href="#" className="hover:text-gray-100">
-              Política de Privacidade
-            </a>
-          </div>
+          <p>&copy; {new Date().getFullYear()} RBX Systems. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>

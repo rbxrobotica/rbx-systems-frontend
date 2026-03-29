@@ -1,114 +1,93 @@
 export const servicesItems = [
     {
-        id:0,
-        title: "Desenvolvimento Web",
-        href: "/docs/services/web-development",
+        id: 0,
+        title: "Sistemas Web e Plataformas",
+        href: "/servicos#sistemas-web",
         description:
-            "Criamos sites modernos, responsivos e otimizados para oferecer a melhor experiência aos seus usuários.",
+            "Aplicacoes web e plataformas internas com arquitetura para operacao continua e escala controlada.",
     },
     {
-        id:1,
-        title: "Aplicativos Mobile",
-        href: "/docs/services/mobile-apps",
+        id: 1,
+        title: "Automacao e Integracoes",
+        href: "/servicos#automacao",
         description:
-            "Desenvolvemos aplicativos móveis personalizados para Android e iOS, adaptados às suas necessidades.",
+            "Workflows automatizados e integracoes entre sistemas para eliminar operacao manual em fluxos criticos.",
     },
     {
-        id:2,
-        title: "Sistemas Personalizados",
-        href: "/docs/services/custom-systems",
+        id: 2,
+        title: "IA Aplicada e Agentes",
+        href: "/servicos#ia-aplicada",
         description:
-            "Construímos sistemas sob medida para atender às demandas específicas do seu negócio.",
+            "Modelos e agentes inteligentes integrados a fluxos de negocio com governanca e observabilidade.",
     },
     {
-        id:3,
-        title: "Consultoria Técnica",
-        href: "/docs/services/technical-consulting",
+        id: 3,
+        title: "Infraestrutura Cloud",
+        href: "/servicos#infraestrutura",
         description:
-            "Oferecemos suporte técnico especializado para ajudar sua empresa a superar desafios tecnológicos.",
+            "Ambientes cloud com provisionamento declarativo, pipelines CI/CD e operacao confiavel.",
     },
     {
-        id:4,
-        title: "Automação de Processos",
-        href: "/docs/services/process-automation",
+        id: 4,
+        title: "Backend e APIs",
+        href: "/servicos#backend",
         description:
-            "Desenvolvemos soluções para automatizar tarefas repetitivas e aumentar a eficiência operacional de sua empresa.",
+            "Servicos de backend, APIs e camadas de dados projetados para consistencia, performance e manutencao.",
     },
     {
-        id:5,
-        title: "Integração de APIs",
-        href: "/docs/services/api-integration",
+        id: 5,
+        title: "Manutencao Evolutiva",
+        href: "/servicos#manutencao",
         description:
-            "Conectamos sistemas e plataformas através de APIs para garantir um fluxo de dados eficiente e seguro.",
-    },
-    {
-        id:6,
-        title: "Manutenção de Sistemas",
-        href: "/docs/services/system-maintenance",
-        description:
-            "Garantimos que seus sistemas permaneçam atualizados, seguros e funcionando de forma eficiente.",
-    },
-    {
-        id:7,
-        title: "Design UX/UI",
-        href: "/docs/services/ux-ui-design",
-        description:
-            "Criamos interfaces intuitivas e experiências de usuário que encantam e engajam seus clientes.",
-    },
-    {
-        id:8,
-        title: "Soluções em Nuvem",
-        href: "/docs/services/cloud-solutions",
-        description:
-            "Oferecemos serviços de armazenamento, hospedagem e computação em nuvem para tornar sua empresa mais ágil e escalável.",
+            "Evolucao continua de sistemas em producao com estabilidade, rastreabilidade e controle de regressao.",
     },
 ];
 
 export const aboutUsItems = [
     {
-        id:0,
+        id: 0,
         href: "#about-us",
         title: "Quem somos",
         description:
-            "Saiba mais sobre nossa empresa, nossa trajetória e os valores que nos guiam.",
+            "Engenharia de sistemas, automacao e infraestrutura para operacoes de alta exigencia.",
         isHighlight: true,
     },
     {
-        id:1,
+        id: 1,
         href: "#mission",
-        title: "Missão, visão e valores",
+        title: "Posicionamento",
         description:
-            "Conheça a jornada que nos trouxe até aqui e nossas conquistas ao longo do tempo.",
+            "Como pensamos sobre tecnologia, operacao e confiabilidade.",
     },
     {
-        id:2,
+        id: 2,
         href: "#approach",
-        title: "Nossa Abordagem",
+        title: "Abordagem",
         description:
-            "Descubra o que nos move, nossa visão de futuro e os valores que norteiam nosso trabalho.",
+            "Arquitetura, governanca e disciplina operacional como base de cada projeto.",
     },
     {
-        id:3,
+        id: 3,
         href: "#team",
         title: "Equipe",
         description:
-            "Apresentamos nossa equipe de especialistas dedicados ao sucesso do seu projeto.",
+            "Engenheiros e especialistas com experiencia em sistemas criticos e infraestrutura.",
     },
 ];
 
 export const blogEcontatoItems = [
     {
-        id:0,
+        id: 0,
         href: "/produtos",
         title: "Produtos"
     },
     {
-        id:1,
+        id: 1,
         href: "/blog",
         title: "Blog"
     },
     {
-        id:2,
+        id: 2,
         href: "#footer",
         title: "Contato"
     }

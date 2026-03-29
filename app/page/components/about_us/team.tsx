@@ -52,7 +52,7 @@ const Team = () => {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
         >
-          Conheça o nosso time
+          Nossa equipe
         </motion.h2>
         <motion.p
           className="mb-8 max-w-3xl text-muted-foreground lg:text-xl"
@@ -61,10 +61,9 @@ const Team = () => {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
         >
-          Na RBX Robótica, contamos com uma equipe apaixonada por inovação e
-          tecnologia, trabalhando constantemente para trazer soluções
-          revolucionárias. Estamos em busca de pessoas talentosas para fazer
-          parte do nosso time!
+          Engenheiros, arquitetos de sistemas e especialistas em infraestrutura.
+          Operamos com foco em backend, cloud, automacao e IA aplicada em
+          ambientes de producao.
         </motion.p>
       </div>
     
