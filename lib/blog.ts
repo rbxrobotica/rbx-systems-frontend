@@ -20,6 +20,19 @@ function keyToSlug(key: string): string {
   return key.replace("blog/posts/", "").replace(".mdx", "");
 }
 
+const S3_COVER_PREFIX = "https://eu2.contabostorage.com/rbx-content/blog/covers/";
+
+function normalizeCover(cover: string | undefined): string | undefined {
+  if (!cover) return undefined;
+  // Rewrite direct S3 cover URLs to the internal proxy route.
+  // Contabo does not allow unauthenticated public object access.
+  if (cover.startsWith(S3_COVER_PREFIX)) {
+    const filename = cover.slice(S3_COVER_PREFIX.length);
+    return `/api/blog/cover/${filename}`;
+  }
+  return cover;
+}
+
 export async function getAllPosts(): Promise<PostMeta[]> {
   const keys = await listPostKeys();
 
@@ -36,7 +49,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
         authorRole: data.authorRole,
         tags: data.tags ?? [],
         excerpt: data.excerpt ?? "",
-        cover: data.cover,
+        cover: normalizeCover(data.cover),
       } satisfies PostMeta;
     })
   );
