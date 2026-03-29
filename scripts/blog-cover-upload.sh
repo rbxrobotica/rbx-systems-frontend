@@ -24,7 +24,8 @@ echo "Uploading cover: $FILE → s3://$BUCKET/$DEST"
 
 aws s3 cp "$FILE" "s3://$BUCKET/$DEST" \
   --endpoint-url "$ENDPOINT" \
-  --content-type "$CONTENT_TYPE"
+  --content-type "$CONTENT_TYPE" \
+  --acl public-read
 
 echo "Cover live at: ${ENDPOINT}/${BUCKET}/${DEST}"
 echo "Frontmatter:   cover: \"${ENDPOINT}/${BUCKET}/${DEST}\""

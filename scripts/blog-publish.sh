@@ -11,6 +11,7 @@ echo "Publishing: $SLUG → s3://$BUCKET/blog/posts/$SLUG.mdx"
 
 aws s3 cp "$FILE" "s3://$BUCKET/blog/posts/$SLUG.mdx" \
   --endpoint-url "$ENDPOINT" \
-  --content-type "text/plain; charset=utf-8"
+  --content-type "text/plain; charset=utf-8" \
+  --acl public-read
 
 echo "Done. Will be live on rbx.ia.br/blog/$SLUG within 5 minutes (ISR revalidate)."
