@@ -123,11 +123,11 @@ Ao pedir a um agente para publicar um post, ele executará os seguintes passos e
 | Propriedade | Valor |
 |-------------|-------|
 | Dimensões | 1200 × 630 px |
-| Formato | JPEG |
+| Formato | JPEG ou PNG (PNG é preferível para imagens geradas por IA com estilo minimal/dark) |
 | Aspect ratio | 16:9 |
 | Estilo | Fundo escuro, minimal, tech-abstract, sem texto |
-| Chave S3 | `blog/covers/{slug}.jpg` |
-| URL pública | `https://eu2.contabostorage.com/rbx-content/blog/covers/{slug}.jpg` |
+| Chave S3 | `blog/covers/{slug}.jpg` ou `blog/covers/{slug}.png` |
+| URL pública | `https://eu2.contabostorage.com/rbx-content/blog/covers/{slug}.{ext}` |
 
 **Prompt base para Nano Banana:**
 ```
