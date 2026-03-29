@@ -1,0 +1,2 @@
+- [Founder and brand positioning](user_profile.md) — AI systems engineer profile, Zurich-coded brand direction
+- [Zurich-coded editorial direction](feedback_zurich_coded.md) — No agency speak, prefer engineering language for all site copy

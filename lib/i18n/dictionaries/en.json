@@ -1,0 +1,250 @@
+{
+  "meta": {
+    "title": "RBX Systems — Systems Engineering & Infrastructure",
+    "description": "Systems engineering, operational automation, applied AI and cloud infrastructure for high-demand operations."
+  },
+  "nav": {
+    "aboutUs": "About Us",
+    "services": "Services",
+    "products": "Products",
+    "blog": "Blog",
+    "contact": "Contact",
+    "atelier": "Atelier",
+    "learnMore": "Learn more",
+    "close": "Close",
+    "mode": "Mode",
+    "menu": "Menu",
+    "navigation": "Navigation",
+    "subtitle": "Systems"
+  },
+  "theme": {
+    "srOnly": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "aboutUsMenu": [
+    {
+      "id": 0,
+      "href": "#about-us",
+      "title": "Who We Are",
+      "description": "Systems engineering, automation and infrastructure for high-demand operations.",
+      "isHighlight": true
+    },
+    {
+      "id": 1,
+      "href": "#mission",
+      "title": "Positioning",
+      "description": "How we think about technology, operations and reliability."
+    },
+    {
+      "id": 2,
+      "href": "#approach",
+      "title": "Approach",
+      "description": "Architecture, governance and operational discipline as the foundation of every project."
+    },
+    {
+      "id": 3,
+      "href": "#team",
+      "title": "Team",
+      "description": "Engineers and specialists with experience in critical systems and infrastructure."
+    }
+  ],
+  "servicesMenu": [
+    {
+      "id": 0,
+      "title": "Web Systems & Platforms",
+      "href": "/servicos#sistemas-web",
+      "description": "Web applications and internal platforms with architecture for continuous operation and controlled scale."
+    },
+    {
+      "id": 1,
+      "title": "Automation & Integrations",
+      "href": "/servicos#automacao",
+      "description": "Automated workflows and system integrations to eliminate manual operations in critical flows."
+    },
+    {
+      "id": 2,
+      "title": "Applied AI & Agents",
+      "href": "/servicos#ia-aplicada",
+      "description": "Intelligent models and agents integrated into business flows with governance and observability."
+    },
+    {
+      "id": 3,
+      "title": "Cloud Infrastructure",
+      "href": "/servicos#infraestrutura",
+      "description": "Cloud environments with declarative provisioning, CI/CD pipelines and reliable operations."
+    },
+    {
+      "id": 4,
+      "title": "Backend & APIs",
+      "href": "/servicos#backend",
+      "description": "Backend services, APIs and data layers designed for consistency, performance and maintainability."
+    },
+    {
+      "id": 5,
+      "title": "Evolutionary Maintenance",
+      "href": "/servicos#manutencao",
+      "description": "Continuous evolution of production systems with stability, traceability and regression control."
+    }
+  ],
+  "blogEcontatoMenu": [
+    {
+      "id": 0,
+      "href": "/produtos",
+      "title": "Products"
+    },
+    {
+      "id": 1,
+      "href": "/blog",
+      "title": "Blog"
+    },
+    {
+      "id": 2,
+      "href": "#footer",
+      "title": "Contact"
+    }
+  ],
+  "atelierMenu": {
+    "id": "atelier",
+    "href": "/atelier",
+    "title": "Atelier",
+    "isHighlight": true
+  },
+  "hero": {
+    "headline": "Systems engineering for operations that demand control",
+    "body": "We design platforms, automations and infrastructure for companies operating with high demands. Backend, cloud, intelligent agents and integrations built for reliability and predictable scale.",
+    "ctaServices": "Our services",
+    "ctaProducts": "Products"
+  },
+  "about": {
+    "heading": "Systems designed to operate",
+    "mission": "RBX designs and operates platforms, automations and infrastructure for environments where reliability, governance and control are requirements, not differentiators.",
+    "positioning": "POSITIONING",
+    "positioningBody": "We treat software as operational infrastructure. Every system we deliver is designed to be maintained, observed and evolved safely over years, not just to work on deployment day.",
+    "howWeOperate": "How we operate",
+    "howWeOperateBody": "Every project follows principles of architecture, traceability and continuous operation. We build so systems function predictably in production.",
+    "cards": [
+      {
+        "title": "Architecture",
+        "description": "Systems designed with scalable, observable and testable architecture from the start."
+      },
+      {
+        "title": "Governance",
+        "description": "Processes, standards and operational discipline integrated at every development phase."
+      },
+      {
+        "title": "Operations",
+        "description": "Continuous support, monitoring and safe evolution of production systems."
+      }
+    ],
+    "teamSection": {
+      "heading": "Our team",
+      "body": "Engineers specialized in mission-critical systems, infrastructure and large-scale operations."
+    },
+    "joinTeam": {
+      "label": "Work with us",
+      "heading": "Engineers who design systems to last",
+      "body": "We seek technical profiles passionate about infrastructure, reliability and operational excellence.",
+      "cvLabel": "Send your CV: ",
+      "cvLink": "Send Resume to RBX Systems"
+    }
+  },
+  "services": {
+    "pageTitle": "Services",
+    "pageSubtitle": "We design, build and operate systems engineering solutions for operations that demand control and reliability.",
+    "ctaHeading": "Need systems engineering?",
+    "ctaBody": "If your operations depend on reliable infrastructure, contact our team.",
+    "ctaButton": "Get in touch",
+    "items": [
+      {
+        "id": 0,
+        "title": "Web Systems & Platforms",
+        "href": "/servicos#sistemas-web",
+        "description": "Web applications and internal platforms with architecture for continuous operation and controlled scale."
+      },
+      {
+        "id": 1,
+        "title": "Automation & Integrations",
+        "href": "/servicos#automacao",
+        "description": "Automated workflows and system integrations to eliminate manual operations in critical flows."
+      },
+      {
+        "id": 2,
+        "title": "Applied AI & Agents",
+        "href": "/servicos#ia-aplicada",
+        "description": "Intelligent models and agents integrated into business flows with governance and observability."
+      },
+      {
+        "id": 3,
+        "title": "Cloud Infrastructure",
+        "href": "/servicos#infraestrutura",
+        "description": "Cloud environments with declarative provisioning, CI/CD pipelines and reliable operations."
+      },
+      {
+        "id": 4,
+        "title": "Backend & APIs",
+        "href": "/servicos#backend",
+        "description": "Backend services, APIs and data layers designed for consistency, performance and maintainability."
+      },
+      {
+        "id": 5,
+        "title": "Evolutionary Maintenance",
+        "href": "/servicos#manutencao",
+        "description": "Continuous evolution of production systems with stability, traceability and regression control."
+      }
+    ]
+  },
+  "products": {
+    "badge": "Open source · Made in Brazil",
+    "heading": "RBX Products",
+    "body": "All products are open source and publicly available. Built with operational rigor and ready for mission-critical deployments.",
+    "phases": {
+      "seed": "Seed",
+      "structuring": "Structuring",
+      "expansion": "Expansion",
+      "institutionalized": "Institutionalized"
+    },
+    "types": {
+      "api": "API",
+      "fullstack": "Fullstack",
+      "webStatic": "Web",
+      "agent": "Agent",
+      "cli": "CLI"
+    },
+    "contribute": {
+      "heading": "Contribute",
+      "body": "All repositories are public. Contributions, issues and feedback are welcome.",
+      "cta": "github.com/rbxrobotica"
+    }
+  },
+  "atelier": {
+    "footerNote": "RBX Atelier is part of"
+  },
+  "blog": {
+    "heading": "Blog",
+    "tagline": "Ideas, launches and reflections from RBX Systems.",
+    "empty": "Coming soon.",
+    "backLabel": "← Blog"
+  },
+  "footer": {
+    "description": "Systems engineering, automation and infrastructure for high-demand operations.",
+    "sections": {
+      "services": "Services",
+      "company": "Company",
+      "contact": "Contact"
+    },
+    "links": {
+      "systems_web": "Web Systems & Platforms",
+      "automacao": "Automation & Integrations",
+      "ia_aplicada": "Applied AI & Agents",
+      "infraestrutura": "Cloud Infrastructure",
+      "backend": "Backend & APIs",
+      "manutencao": "Evolutionary Maintenance",
+      "aboutUs": "About us",
+      "team": "Team",
+      "products": "Products"
+    },
+    "copyright": "All rights reserved."
+  }
+}

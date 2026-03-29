@@ -1,32 +1,33 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SiLinkedin, SiGithub } from "react-icons/si";
+import type { Dictionary } from "@/lib/i18n/types";
 
-export default function Footer() {
+export default function Footer({ dict }: { dict: Dictionary }) {
   const sections = [
     {
-      title: "Servicos",
+      title: dict.footer.sections.services,
       links: [
-        { label: "Sistemas Web e Plataformas", href: "/servicos#sistemas-web" },
-        { label: "Automacao e Integracoes", href: "/servicos#automacao" },
-        { label: "IA Aplicada e Agentes", href: "/servicos#ia-aplicada" },
-        { label: "Infraestrutura Cloud", href: "/servicos#infraestrutura" },
-        { label: "Backend e APIs", href: "/servicos#backend" },
-        { label: "Manutencao Evolutiva", href: "/servicos#manutencao" },
+        { label: dict.footer.links.systems_web, href: "/servicos#sistemas-web" },
+        { label: dict.footer.links.automacao, href: "/servicos#automacao" },
+        { label: dict.footer.links.ia_aplicada, href: "/servicos#ia-aplicada" },
+        { label: dict.footer.links.infraestrutura, href: "/servicos#infraestrutura" },
+        { label: dict.footer.links.backend, href: "/servicos#backend" },
+        { label: dict.footer.links.manutencao, href: "/servicos#manutencao" },
       ],
     },
     {
-      title: "Empresa",
+      title: dict.footer.sections.company,
       links: [
-        { label: "Sobre nos", href: "#about-us" },
-        { label: "Equipe", href: "#team" },
+        { label: dict.footer.links.aboutUs, href: "#about-us" },
+        { label: dict.footer.links.team, href: "#team" },
         { label: "Blog", href: "/blog" },
-        { label: "Produtos", href: "/produtos" },
+        { label: dict.footer.links.products, href: "/produtos" },
         { label: "Atelier", href: "/atelier" },
       ],
     },
     {
-      title: "Contato",
+      title: dict.footer.sections.contact,
       links: [
         { label: "contato@rbx.ia.br", href: "mailto:contato@rbx.ia.br" },
       ],
@@ -55,7 +56,7 @@ export default function Footer() {
             </div>
             <h2 className="text-xl font-bold text-gray-100">RBX Systems</h2>
             <p className="text-gray-400 mt-2">
-              Engenharia de sistemas, automacao e infraestrutura para operacoes de alta exigencia.
+              {dict.footer.description}
             </p>
           </div>
 
@@ -89,7 +90,7 @@ export default function Footer() {
 
         {/* Rodape inferior */}
         <div className="mt-10 border-t border-gray-600 pt-6 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} RBX Systems. Todos os direitos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} RBX Systems. {dict.footer.copyright}</p>
         </div>
       </div>
     </footer>

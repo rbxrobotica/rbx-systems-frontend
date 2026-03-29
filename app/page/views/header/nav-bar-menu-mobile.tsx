@@ -28,17 +28,20 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { MenuItemMobile } from "@/app/interfaces/types/nav-bar-menu/navBarMenuTypes";
 import { ModeToggle } from "../../middleware/toggle-mode";
 import Link from "next/link";
+import type { Dictionary } from "@/lib/i18n/types";
 
 export function DrawerMobile({
   services,
   aboutUs,
   blogEcontato,
   atelier,
+  dict,
 }: {
   services: MenuItemMobile[];
   aboutUs: MenuItemMobile[];
   blogEcontato: MenuItemMobile[];
   atelier: { href: string; title: string };
+  dict: Dictionary;
 }) {
   return (
     <Drawer>
@@ -50,18 +53,18 @@ export function DrawerMobile({
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader>
-            <DrawerTitle>Menu</DrawerTitle>
-            <DrawerDescription>Navegacao</DrawerDescription>
+            <DrawerTitle>{dict.nav.menu}</DrawerTitle>
+            <DrawerDescription>{dict.nav.navigation}</DrawerDescription>
           </DrawerHeader>
           <div className="p-4">
             <div className="flex items-center justify-end space-x-1 mb-2">
-              <p className="text-sm font-semibold">Modo</p>
-              <ModeToggle />
+              <p className="text-sm font-semibold">{dict.nav.mode}</p>
+              <ModeToggle dict={dict} />
             </div>
             <Accordion type="single" collapsible className="w-full">
               {/* Sobre nós */}
               <AccordionItem value="about-us">
-                <AccordionTrigger>Sobre nós</AccordionTrigger>
+                <AccordionTrigger>{dict.nav.aboutUs}</AccordionTrigger>
                 <AccordionContent>
                   <ScrollArea className="h-72">
                     <ul className="space-y-4">
@@ -77,7 +80,7 @@ export function DrawerMobile({
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            Saiba mais
+                            {dict.nav.learnMore}
                           </a>
                         </li>
                       ))}
@@ -87,7 +90,7 @@ export function DrawerMobile({
               </AccordionItem>
               {/* Serviços */}
               <AccordionItem value="services">
-                <AccordionTrigger>Serviços</AccordionTrigger>
+                <AccordionTrigger>{dict.nav.services}</AccordionTrigger>
                 <AccordionContent>
                   <ScrollArea className="h-72">
                     <ul className="space-y-4">
@@ -103,7 +106,7 @@ export function DrawerMobile({
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            Saiba mais
+                            {dict.nav.learnMore}
                           </a>
                         </li>
                       ))}
@@ -133,7 +136,7 @@ export function DrawerMobile({
           <DrawerFooter>
             <DrawerClose asChild>
               <Button variant="outline" className="border-red-600 text-red-600">
-                Fechar
+                {dict.nav.close}
               </Button>
             </DrawerClose>
           </DrawerFooter>

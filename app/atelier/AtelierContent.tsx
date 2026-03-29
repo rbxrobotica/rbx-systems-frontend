@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Footer from "@/app/page/views/footer/footer";
+import type { Dictionary } from "@/lib/i18n/types";
 
 // CTA Links - Centralized for easy updates
 const CTA_LINKS = {
@@ -74,7 +75,7 @@ const staggerContainer = {
   },
 };
 
-export default function AtelierContent() {
+export default function AtelierContent({ dict }: { dict: Dictionary }) {
   return (
     <div className="min-h-screen bg-[#0a0a0b] text-white">
       {/* Hero Section */}
@@ -341,7 +342,7 @@ export default function AtelierContent() {
       <section className="py-12 px-6 border-t border-neutral-900">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-neutral-600 text-sm">
-            RBX Atelier is part of{" "}
+            {dict.atelier.footerNote}{" "}
             <a
               href="/"
               className="text-neutral-400 hover:text-neutral-200 transition-colors"
@@ -352,7 +353,7 @@ export default function AtelierContent() {
         </div>
       </section>
 
-      <Footer />
+      <Footer dict={dict} />
     </div>
   );
 }

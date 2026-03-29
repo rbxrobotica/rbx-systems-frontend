@@ -5,10 +5,10 @@ import { NavigationMenuBar } from "@/app/page/views/header/nav-bar-menu";
 import Footer from "@/app/page/views/footer/footer";
 import {
   products,
-  PHASE_LABEL,
   type Product,
   type Phase,
 } from "@/app/data/products/productsData";
+import { useI18n } from "@/lib/i18n/LocaleContext";
 
 const PHASE_ORDER: Phase[] = [
   "institutionalized",
@@ -28,14 +28,6 @@ const PHASE_STYLE: Record<Phase, string> = {
     "border-emerald-400/40 bg-emerald-400/10 text-emerald-300",
 };
 
-const TYPE_LABEL: Record<Product["type"], string> = {
-  api: "API",
-  fullstack: "Fullstack",
-  "web-static": "Web",
-  agent: "Agente",
-  cli: "CLI",
-};
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
@@ -47,6 +39,25 @@ const itemVariants = {
 };
 
 export default function ProdutosPage() {
+  const { dict } = useI18n();
+  const phaseLabels = dict.products.phases;
+  const typeLabels = dict.products.types;
+
+  const PHASE_LABEL: Record<Phase, string> = {
+    seed: phaseLabels.seed,
+    structuring: phaseLabels.structuring,
+    expansion: phaseLabels.expansion,
+    institutionalized: phaseLabels.institutionalized,
+  };
+
+  const TYPE_LABEL: Record<Product["type"], string> = {
+    api: typeLabels.api,
+    fullstack: typeLabels.fullstack,
+    "web-static": typeLabels.webStatic,
+    agent: typeLabels.agent,
+    cli: typeLabels.cli,
+  };
+
   const grouped = PHASE_ORDER.reduce<Record<Phase, Product[]>>(
     (acc, phase) => {
       acc[phase] = products.filter((p) => p.phase === phase);
@@ -58,7 +69,7 @@ export default function ProdutosPage() {
   return (
     <>
       <div className="main-container w-full px-4 md:px-12 py-6">
-        <NavigationMenuBar />
+        <NavigationMenuBar dict={dict} />
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-12 pb-24">
@@ -71,18 +82,16 @@ export default function ProdutosPage() {
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            Open source · Made in Brazil
+            {dict.products.badge}
           </span>
 
           <h1 className="text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-5">
-            Produtos{" "}
+            {dict.products.heading}{" "}
             <span className="text-primary">RBX</span>
           </h1>
 
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Todos os produtos são open source, implantados em infraestrutura própria
-            via ArgoCD e Kubernetes. O ciclo de vida segue quatro fases:{" "}
-            <span className="text-foreground font-medium">Semente, Estruturação, Expansão e Institucionalizado</span>.
+            {dict.products.body}
           </p>
         </motion.div>
 
@@ -125,7 +134,7 @@ export default function ProdutosPage() {
                   viewport={{ once: true, margin: "-60px" }}
                 >
                   {grouped[phase].map((product) => (
-                    <ProductCard key={product.name} product={product} />
+                    <ProductCard key={product.name} product={product} phaseLabels={PHASE_LABEL} typeLabels={TYPE_LABEL} />
                   ))}
                 </motion.div>
               </section>
@@ -141,9 +150,9 @@ export default function ProdutosPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-xl font-semibold mb-3">Contribua</h2>
+          <h2 className="text-xl font-semibold mb-3">{dict.products.contribute.heading}</h2>
           <p className="text-muted-foreground text-sm max-w-md mx-auto mb-6">
-            Todos os repositórios são públicos. Issues, PRs e discussões são bem-vindos.
+            {dict.products.contribute.body}
           </p>
           <a
             href="https://github.com/rbxrobotica"
@@ -152,17 +161,25 @@ export default function ProdutosPage() {
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
           >
             <GitHubIcon className="h-4 w-4" />
-            github.com/rbxrobotica
+            {dict.products.contribute.cta}
           </a>
         </motion.div>
       </div>
 
-      <Footer />
+      <Footer dict={dict} />
     </>
   );
 }
 
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({
+  product,
+  phaseLabels,
+  typeLabels
+}: {
+  product: Product
+  phaseLabels: Record<Phase, string>
+  typeLabels: Record<Product["type"], string>
+}) {
   return (
     <motion.div
       variants={itemVariants}
@@ -172,7 +189,7 @@ function ProductCard({ product }: { product: Product }) {
       <div className="flex items-start justify-between gap-2">
         <h3 className="font-semibold text-lg leading-tight">{product.name}</h3>
         <span className="shrink-0 font-mono text-[10px] tracking-wider text-muted-foreground bg-muted rounded px-1.5 py-0.5">
-          {TYPE_LABEL[product.type]}
+          {typeLabels[product.type]}
         </span>
       </div>
 
@@ -201,9 +218,17 @@ function ProductCard({ product }: { product: Product }) {
       {/* Footer */}
       <div className="flex items-center justify-between pt-2 border-t border-border">
         <span
-          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${PHASE_STYLE[product.phase]}`}
+          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${
+            product.phase === "institutionalized"
+              ? "border-amber-400/40 bg-amber-400/10 text-amber-300"
+              : product.phase === "structuring"
+              ? "border-primary/40 bg-primary/10 text-primary"
+              : product.phase === "expansion"
+              ? "border-violet-400/40 bg-violet-400/10 text-violet-300"
+              : "border-emerald-400/40 bg-emerald-400/10 text-emerald-300"
+          }`}
         >
-          {PHASE_LABEL[product.phase]}
+          {phaseLabels[product.phase]}
         </span>
         <a
           href={product.repo}

@@ -3,6 +3,11 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NavigationMenuBar } from "./page/views/header/nav-bar-menu";
+import { getLocaleFromHeaders } from "@/lib/i18n/getLocaleFromHeaders";
+import { getDictionary } from "@/lib/i18n/getDictionary";
+import { LocaleProvider } from "@/lib/i18n/LocaleContext";
+import type { Locale } from "@/lib/i18n/getDictionary";
+import type { Dictionary } from "@/lib/i18n/types";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,10 +20,14 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = {
-  title: "RBX Systems — Engenharia de Sistemas e Infraestrutura",
-  description: "Engenharia de sistemas, automacao operacional, IA aplicada e infraestrutura cloud para operacoes de alta exigencia.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = getLocaleFromHeaders();
+  const dict = (await getDictionary(locale)) as Dictionary;
+  return {
+    title: dict.meta.title as string,
+    description: dict.meta.description as string,
+  };
+}
 
 /**
  * Componente RootLayout
@@ -27,13 +36,16 @@ export const metadata: Metadata = {
  * @param {React.ReactNode} props.children - Conteúdo a ser renderizado dentro do layout
  * @returns {JSX.Element} - O elemento JSX que representa o layout principal
  */
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = getLocaleFromHeaders() as Locale;
+  const dict = (await getDictionary(locale)) as Dictionary;
+
   return (
-    <html lang="pt-br">
+    <html lang={locale === "pt-BR" ? "pt-br" : "en"}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -43,10 +55,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="fixed w-full z-50 p-4">
-            <NavigationMenuBar />
-          </div>
-          {children}
+          <LocaleProvider locale={locale} dict={dict}>
+            <div className="fixed w-full z-50 p-4">
+              <NavigationMenuBar dict={dict} />
+            </div>
+            {children}
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

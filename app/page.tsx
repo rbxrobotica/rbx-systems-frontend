@@ -4,15 +4,22 @@ import Marquee from "./page/components/about_us/marquee";
 import AboutUs from "./page/views/about/about-us";
 import Footer from "./page/views/footer/footer";
 import Main from "./page/views/main/main";
+import { getLocaleFromHeaders } from "@/lib/i18n/getLocaleFromHeaders";
+import { getDictionary } from "@/lib/i18n/getDictionary";
+import type { Locale } from "@/lib/i18n/getDictionary";
+import type { Dictionary } from "@/lib/i18n/types";
 
 
-export default function Home() {
+export default async function Home() {
+  const locale = getLocaleFromHeaders() as Locale;
+  const dict = (await getDictionary(locale)) as Dictionary;
+
   return (
     <>
-      <Main />
+      <Main dict={dict} />
       <Marquee />
-      <AboutUs />
-      <Footer />
+      <AboutUs dict={dict} />
+      <Footer dict={dict} />
     </>
   );
 }

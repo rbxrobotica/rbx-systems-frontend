@@ -3,10 +3,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { NavigationMenuBar } from "../page/views/header/nav-bar-menu";
 import Footer from "../page/views/footer/footer";
+import { getLocaleFromHeaders } from "@/lib/i18n/getLocaleFromHeaders";
+import { getDictionary } from "@/lib/i18n/getDictionary";
+import type { Locale } from "@/lib/i18n/getDictionary";
+import type { Dictionary } from "@/lib/i18n/types";
 
 export const revalidate = 300;
 
 export default async function BlogPage() {
+  const locale = getLocaleFromHeaders() as Locale;
+  const dict = (await getDictionary(locale)) as Dictionary;
+
   let posts: PostMeta[] = [];
   try {
     posts = await getAllPosts();
@@ -16,17 +23,17 @@ export default async function BlogPage() {
 
   return (
     <>
-      <NavigationMenuBar />
+      <NavigationMenuBar dict={dict} />
       <main className="max-w-4xl mx-auto px-6 pt-32 pb-24">
         <div className="mb-16">
-          <h1 className="text-4xl font-bold tracking-tight mb-3">Blog</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-3">{dict.blog.heading}</h1>
           <p className="text-muted-foreground text-lg">
-            Ideias, lançamentos e reflexões da RBX Systems.
+            {dict.blog.tagline}
           </p>
         </div>
 
         {posts.length === 0 ? (
-          <p className="text-muted-foreground">Em breve.</p>
+          <p className="text-muted-foreground">{dict.blog.empty}</p>
         ) : (
           <div className="divide-y divide-border">
             {posts.map((post) => (
@@ -75,7 +82,7 @@ export default async function BlogPage() {
           </div>
         )}
       </main>
-      <Footer />
+      <Footer dict={dict} />
     </>
   );
 }

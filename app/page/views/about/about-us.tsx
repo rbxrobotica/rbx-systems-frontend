@@ -1,14 +1,15 @@
 // app/views/aboutus/about-us.tsx
 "use client";
 
-import { cardItems } from "@/app/data/about_us/aboutUs";
+import { cardMeta } from "@/app/data/about_us/aboutUs";
 import MotionVariants from "@/app/utils/motionsVariants";
 import { motion, Variants } from "framer-motion";
 
 import { SubmitCV } from "../../components/about_us/submitCVForm";
 import Team from "../../components/about_us/team";
+import type { Dictionary } from "@/lib/i18n/types";
 
-const AboutUs: React.FC = () => {
+const AboutUs: React.FC<{ dict: Dictionary }> = ({ dict }) => {
   const fadeInUp: Variants = MotionVariants.fadeInUp();
   const staggerContainer: Variants = MotionVariants.staggerContainer();
   const slideInLeft: Variants = MotionVariants.slideInLeft();
@@ -33,16 +34,14 @@ const AboutUs: React.FC = () => {
             className="text-3xl font-semibold lg:text-5xl"
             variants={fadeInUp}
           >
-            Sistemas projetados para operar
+            {dict.about.heading}
           </motion.h1>
           <motion.p
             id="mission"
             className="max-w-xl text-lg"
             variants={fadeInUp}
           >
-            A RBX projeta e opera plataformas, automacoes e infraestrutura
-            para ambientes onde confiabilidade, governanca e controle sao
-            requisitos, nao diferenciais.
+            {dict.about.mission}
           </motion.p>
         </motion.div>
 
@@ -67,12 +66,9 @@ const AboutUs: React.FC = () => {
             variants={slideInRight}
             draggable="false"
           >
-            <p className="text-sm text-muted-foreground">POSICIONAMENTO</p>
+            <p className="text-sm text-muted-foreground">{dict.about.positioning}</p>
             <p className="text-lg font-medium" id="approach">
-              Tratamos software como infraestrutura operacional. Cada sistema
-              que entregamos e projetado para ser mantido, observado e
-              evoluido com seguranca ao longo de anos, nao apenas
-              para funcionar no dia do deploy.
+              {dict.about.positioningBody}
             </p>
           </motion.div>
         </motion.div>
@@ -87,12 +83,10 @@ const AboutUs: React.FC = () => {
         >
           <motion.div className="max-w-xl" variants={fadeInUp}>
             <h2 className="mb-2.5 text-2xl font-semibold md:text-4xl">
-              Como operamos
+              {dict.about.howWeOperate}
             </h2>
             <p className="text-muted-foreground">
-              Cada projeto segue principios de arquitetura, rastreabilidade
-              e operacao continua. Construimos para que sistemas funcionem
-              de forma previsivel em producao.
+              {dict.about.howWeOperateBody}
             </p>
           </motion.div>
 
@@ -101,27 +95,27 @@ const AboutUs: React.FC = () => {
             variants={staggerContainer}
           >
             {/* Cards */}
-            {cardItems.map((item) => (
+            {cardMeta.map((meta, idx) => (
               <motion.div
-                className={`flex flex-col p-4 h-full w-full bg-gradient-to-r ${item.gradient} rounded-2xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 `}
-                key={item.id}
+                className={`flex flex-col p-4 h-full w-full bg-gradient-to-r ${meta.gradient} rounded-2xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 `}
+                key={meta.id}
                 variants={fadeInUp}
               >
                 <div className="mb-5 flex size-12 items-center justify-center rounded-2xl bg-accent">
-                  <item.Icon className="size-5" />
+                  <meta.Icon className="size-5" />
                 </div>
                 <h3 className="mb-3 mt-2 text-lg font-semibold">
-                  {item.title}
+                  {dict.about.cards[idx]?.title}
                 </h3>
                 <p className="text-foreground" id="team">
-                  {item.description}
+                  {dict.about.cards[idx]?.description}
                 </p>
               </motion.div>
             ))}
           </motion.div>
         </motion.div>
         {/* Team */}
-        <Team />
+        <Team dict={dict} />
 
         {/* Join Our Team */}
         <motion.div
@@ -133,10 +127,10 @@ const AboutUs: React.FC = () => {
         >
           <motion.div variants={fadeInUp}>
             <p className="mb-10 text-sm font-medium text-muted-foreground">
-              Trabalhe conosco
+              {dict.about.joinTeam.label}
             </p>
             <h2 className="mb-2.5 text-2xl font-semibold md:text-4xl">
-              Engenheiros que projetam sistemas para durar
+              {dict.about.joinTeam.heading}
             </h2>
           </motion.div>
           <motion.div variants={slideInRight}>
@@ -149,11 +143,9 @@ const AboutUs: React.FC = () => {
             /> */}
             <div className="mb-6 h-3 rounded-full w-full bg-foreground"></div>
             <p className="text-muted-foreground">
-              Buscamos perfis tecnicos com experiencia em backend,
-              infraestrutura, automacao ou IA aplicada. Se voce valoriza
-              rigor operacional e trabalho com proposito, envie seu curriculo.
+              {dict.about.joinTeam.body}
             </p>
-            <SubmitCV />
+            <SubmitCV dict={dict} />
           </motion.div>
         </motion.div>
       </div>

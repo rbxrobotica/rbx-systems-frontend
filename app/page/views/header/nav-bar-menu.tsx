@@ -20,14 +20,9 @@ import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import { DrawerMobile } from "./nav-bar-menu-mobile";
-import {
-  aboutUsItems,
-  blogEcontatoItems,
-  servicesItems,
-  atelierItem,
-} from "../../../data/main/menuItens";
 import { MenuItem } from "@/app/interfaces/types/nav-bar-menu/navBarMenuTypes";
 import { ModeToggle } from "../../middleware/toggle-mode";
+import type { Dictionary } from "@/lib/i18n/types";
 
 const useIsMobile = (): boolean => {
   const [isMobile, setIsMobile] = React.useState(false);
@@ -46,7 +41,7 @@ const useIsMobile = (): boolean => {
   return isMobile;
 };
 
-export function NavigationMenuBar(): JSX.Element {
+export function NavigationMenuBar({ dict }: { dict: Dictionary }): JSX.Element {
   const isMobile = useIsMobile();
 
   return (
@@ -72,16 +67,17 @@ export function NavigationMenuBar(): JSX.Element {
         />
         <div className="flex flex-col -space-y-2">
           <p className="text-lg font-bold">RBX</p>
-          <p className="text-xs">Robótica</p>
+          <p className="text-xs">{dict.nav.subtitle}</p>
         </div>
       </motion.div>
 
       {isMobile ? (
         <DrawerMobile
-          services={servicesItems}
-          aboutUs={aboutUsItems}
-          blogEcontato={blogEcontatoItems}
-          atelier={atelierItem}
+          services={dict.servicesMenu as MenuItem[]}
+          aboutUs={dict.aboutUsMenu as MenuItem[]}
+          blogEcontato={dict.blogEcontatoMenu as MenuItem[]}
+          atelier={dict.atelierMenu as MenuItem}
+          dict={dict}
         />
       ) : (
         <>
@@ -90,7 +86,7 @@ export function NavigationMenuBar(): JSX.Element {
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent">
-                  Sobre nós
+                  {dict.nav.aboutUs}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <motion.ul
@@ -106,7 +102,7 @@ export function NavigationMenuBar(): JSX.Element {
                       },
                     }}
                   >
-                    {aboutUsItems.map((item: MenuItem) =>
+                    {(dict.aboutUsMenu as MenuItem[]).map((item: MenuItem) =>
                       item.isHighlight ? (
                         <motion.li
                           key={item.id}
@@ -146,11 +142,11 @@ export function NavigationMenuBar(): JSX.Element {
               {/* Serviços */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent">
-                  Serviços
+                  {dict.nav.services}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[600px] gap-3 p-4 md:w-[750px] md:grid-cols-3 lg:w-[800px]">
-                    {servicesItems.map((item: MenuItem) => (
+                    {(dict.servicesMenu as MenuItem[]).map((item: MenuItem) => (
                       <ListItem
                         key={item.id}
                         title={item.title}
@@ -164,7 +160,7 @@ export function NavigationMenuBar(): JSX.Element {
               </NavigationMenuItem>
               {/* Blog e Contato */}
               <NavigationMenuItem>
-                {blogEcontatoItems.map((item: MenuItem) => (
+                {(dict.blogEcontatoMenu as MenuItem[]).map((item: MenuItem) => (
                   <Link href={item.href} key={item.id} legacyBehavior passHref>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
@@ -176,11 +172,11 @@ export function NavigationMenuBar(): JSX.Element {
               </NavigationMenuItem>
               {/* Atelier - Highlighted */}
               <NavigationMenuItem>
-                <Link href={atelierItem.href} legacyBehavior passHref>
+                <Link href={dict.atelierMenu.href} legacyBehavior passHref>
                   <NavigationMenuLink
                     className="bg-transparent text-white/90 hover:text-cyan-400 font-medium transition-colors duration-200 px-4 py-2"
                   >
-                    {atelierItem.title}
+                    {dict.atelierMenu.title}
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
@@ -194,9 +190,9 @@ export function NavigationMenuBar(): JSX.Element {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            <ModeToggle />
+            <ModeToggle dict={dict} />
             <Button asChild>
-              <Link href="#footer">Contato</Link>
+              <Link href="#footer">{dict.nav.contact}</Link>
             </Button>
           </motion.div>
         </>

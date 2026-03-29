@@ -7,8 +7,9 @@ import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import MotionVariants from "@/app/utils/motionsVariants";
+import type { Dictionary } from "@/lib/i18n/types";
 
-const Main: React.FC = () => {
+const Main: React.FC<{ dict: Dictionary }> = ({ dict }) => {
   const interBubbleRef = useRef<HTMLDivElement | null>(null);
 
   const handleContextMenu = (e: React.MouseEvent<HTMLImageElement>) => {
@@ -63,21 +64,18 @@ const Main: React.FC = () => {
         >
           <div className="space-y-4">
             <p className="text-2xl font-semibold md:text-3xl lg:text-3xl">
-              Engenharia de sistemas para operacoes que exigem controle
+              {dict.hero.headline}
             </p>
             <p className="text-sm opacity-80">
-              Projetamos plataformas, automacoes e infraestrutura para empresas
-              que operam com alta exigencia. Backend, cloud, agentes
-              inteligentes e integracoes construidos para confiabilidade
-              e escala previsivel.
+              {dict.hero.body}
             </p>
           </div>
           <motion.div variants={button} className="flex flex-wrap gap-4 mt-10">
             <Button asChild>
-              <Link href="/servicos">Nossos servicos</Link>
+              <Link href="/servicos">{dict.hero.ctaServices}</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/produtos">Produtos</Link>
+              <Link href="/produtos">{dict.hero.ctaProducts}</Link>
             </Button>
           </motion.div>
         </motion.div>

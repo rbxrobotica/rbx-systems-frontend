@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { motion, Variants } from "framer-motion";
 import MotionVariants from "@/app/utils/motionsVariants"; // Certifique-se de ter o MotionVariants com as animações
 import Image from "next/image";
+import type { Dictionary } from "@/lib/i18n/types";
 
 const people = [
   {
@@ -38,7 +39,7 @@ const people = [
   }
 ];
 
-const Team = () => {
+const Team = ({ dict }: { dict: Dictionary }) => {
   const fadeInUp: Variants = MotionVariants.fadeInUp();
   const staggerContainer: Variants = MotionVariants.staggerContainer();
 
@@ -52,7 +53,7 @@ const Team = () => {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
         >
-          Nossa equipe
+          {dict.about.teamSection.heading}
         </motion.h2>
         <motion.p
           className="mb-8 max-w-3xl text-muted-foreground lg:text-xl"
@@ -61,9 +62,7 @@ const Team = () => {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
         >
-          Engenheiros, arquitetos de sistemas e especialistas em infraestrutura.
-          Operamos com foco em backend, cloud, automacao e IA aplicada em
-          ambientes de producao.
+          {dict.about.teamSection.body}
         </motion.p>
       </div>
     

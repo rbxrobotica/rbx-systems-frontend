@@ -6,6 +6,10 @@ import { notFound } from "next/navigation";
 import { NavigationMenuBar } from "../../page/views/header/nav-bar-menu";
 import Footer from "../../page/views/footer/footer";
 import remarkGfm from "remark-gfm";
+import { getLocaleFromHeaders } from "@/lib/i18n/getLocaleFromHeaders";
+import { getDictionary } from "@/lib/i18n/getDictionary";
+import type { Locale } from "@/lib/i18n/getDictionary";
+import type { Dictionary } from "@/lib/i18n/types";
 
 export const revalidate = 300;
 
@@ -23,19 +27,21 @@ export default async function PostPage({
 }: {
   params: { slug: string };
 }) {
+  const locale = getLocaleFromHeaders() as Locale;
+  const dict = (await getDictionary(locale)) as Dictionary;
   const post = await getPost(params.slug);
   if (!post) notFound();
 
   return (
     <>
-      <NavigationMenuBar />
+      <NavigationMenuBar dict={dict} />
       <main className="max-w-3xl mx-auto px-6 pt-32 pb-24">
         {/* Back */}
         <Link
           href="/blog"
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
         >
-          ← Blog
+          {dict.blog.backLabel}
         </Link>
 
         {/* Header */}
@@ -98,7 +104,7 @@ export default async function PostPage({
           />
         </article>
       </main>
-      <Footer />
+      <Footer dict={dict} />
     </>
   );
 }

@@ -44,7 +44,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Update image tag in rbx-infra
+      - name: Update image tag in rbx-infra (both namespaces)
         env:
           INFRA_DEPLOY_KEY: ${{ secrets.INFRA_DEPLOY_KEY }}
         run: |
@@ -58,11 +58,12 @@ jobs:
           git clone git@github.com:rbxrobotica/rbx-infra.git /tmp/rbx-infra
           cd /tmp/rbx-infra
 
-          # Update the image newTag in kustomization.yml
+          # Update the image newTag in both kustomization files
           sed -i "s|newTag:.*|newTag: ${{ steps.tag.outputs.sha }}|" apps/prod/rbx-ia-br/kustomization.yml
+          sed -i "s|newTag:.*|newTag: ${{ steps.tag.outputs.sha }}|" apps/prod/rbxsystems-ch/kustomization.yml
 
           git config user.email "ci@rbx.ia.br"
           git config user.name "RBX CI"
-          git add apps/prod/rbx-ia-br/kustomization.yml
-          git diff --cached --quiet || git commit -m "chore(rbx-ia-br): deploy ${{ steps.tag.outputs.sha }} [skip ci]"
+          git add apps/prod/rbx-ia-br/kustomization.yml apps/prod/rbxsystems-ch/kustomization.yml
+          git diff --cached --quiet || git commit -m "chore(deploy): ${{ steps.tag.outputs.sha }} → rbx-ia-br + rbxsystems-ch [skip ci]"
           git push
