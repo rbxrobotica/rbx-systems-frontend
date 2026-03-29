@@ -5,6 +5,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { NavigationMenuBar } from "../../page/views/header/nav-bar-menu";
 import Footer from "../../page/views/footer/footer";
+import remarkGfm from "remark-gfm";
 
 export const revalidate = 300;
 
@@ -87,7 +88,14 @@ export default async function PostPage({
 
         {/* Body */}
         <article className="prose prose-neutral dark:prose-invert prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-code:text-primary prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-table:border-collapse prose-th:border prose-th:border-border prose-th:bg-muted prose-th:px-4 prose-th:py-2 prose-td:border prose-td:border-border prose-td:px-4 prose-td:py-2">
-          <MDXRemote source={post.content} />
+          <MDXRemote
+            source={post.content}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+              },
+            }}
+          />
         </article>
       </main>
       <Footer />
