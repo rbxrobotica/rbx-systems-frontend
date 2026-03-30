@@ -55,11 +55,14 @@ const AboutUs: React.FC<{ dict: Dictionary }> = ({ dict }) => {
         >
           <motion.img
             src="/api/assets/about/rbx-about.jpeg"
-            alt="placeholder"
+            alt="RBX Systems"
             className="size-full max-h-96 select-none rounded-2xl object-cover"
             variants={slideInLeft}
             draggable="false"
             onContextMenu={handleContextMenu}
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "/rbx_robotica_image4.jpeg";
+            }}
           />
           <motion.div
             className="flex flex-col justify-between gap-10 rounded-2xl bg-repeat p-10"
