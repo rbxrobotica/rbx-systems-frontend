@@ -52,24 +52,26 @@ export function NavigationMenuBar({ dict }: { dict: Dictionary }): JSX.Element {
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       {/* Logo e título */}
-      <motion.div
-        className="flex items-center space-x-2"
-        initial={{ opacity: 0, x: -30 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
-        <Image
-          src="/bitmap.svg"
-          alt="logo"
-          quality={100}
-          width={55}
-          height={55}
-        />
-        <div className="flex flex-col -space-y-2">
-          <p className="text-lg font-bold">RBX</p>
-          <p className="text-xs">{dict.nav.subtitle}</p>
-        </div>
-      </motion.div>
+      <Link href="/" className="flex items-center space-x-2">
+        <motion.div
+          className="flex items-center space-x-2"
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <Image
+            src="/bitmap.svg"
+            alt="logo"
+            quality={100}
+            width={55}
+            height={55}
+          />
+          <div className="flex flex-col -space-y-2">
+            <p className="text-lg font-bold">RBX</p>
+            <p className="text-xs">{dict.nav.subtitle}</p>
+          </div>
+        </motion.div>
+      </Link>
 
       {isMobile ? (
         <DrawerMobile
