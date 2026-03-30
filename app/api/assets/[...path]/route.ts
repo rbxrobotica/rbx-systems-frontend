@@ -37,16 +37,29 @@ export async function GET(
     // S3 miss — fall through to local fallback
   }
 
-  // 2. Fall back to public/ (only ui/ prefix maps to public root)
-  if (segments[0] === "ui") {
-    const filename = segments.slice(1).join("/");
+  // 2. Fall back to public/ for known prefixes
+  const LOCAL_FALLBACKS: Record<string, string> = {
+    // assets/ui/foo.svg → public/foo.svg
+    "ui": "",
+    // assets/about/rbx-about.jpeg → public/rbx_robotica_image4.jpeg
+    "about": "",
+  };
+
+  const ABOUT_FILENAME_MAP: Record<string, string> = {
+    "rbx-about.jpeg": "rbx_robotica_image4.jpeg",
+  };
+
+  if (segments[0] in LOCAL_FALLBACKS) {
+    let filename = segments.slice(1).join("/");
+    if (segments[0] === "about") {
+      filename = ABOUT_FILENAME_MAP[filename] ?? filename;
+    }
     try {
       const localPath = join(process.cwd(), "public", filename);
       const bytes = await readFile(localPath);
       return new NextResponse(bytes, {
         headers: {
           "Content-Type": contentType,
-          // Short cache so S3 upload takes over quickly once deployed
           "Cache-Control": "public, max-age=60",
         },
       });
