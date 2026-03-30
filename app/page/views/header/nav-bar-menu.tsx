@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { DrawerMobile } from "./nav-bar-menu-mobile";
 import { MenuItem } from "@/app/interfaces/types/nav-bar-menu/navBarMenuTypes";
 import { ModeToggle } from "../../middleware/toggle-mode";
+import { LocaleSwitcher } from "@/components/locale-switcher";
 import type { Dictionary } from "@/lib/i18n/types";
 
 const useIsMobile = (): boolean => {
@@ -194,6 +195,7 @@ export function NavigationMenuBar({ dict }: { dict: Dictionary }): JSX.Element {
             transition={{ duration: 0.5, delay: 0.5 }}
           >
             <ModeToggle dict={dict} />
+            <LocaleSwitcher />
             <Button asChild>
               <Link href="#footer">{dict.nav.contact}</Link>
             </Button>

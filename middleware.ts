@@ -9,13 +9,19 @@ const DOMAIN_LOCALE_MAP: Record<string, Locale> = {
 
 const DEFAULT_LOCALE: Locale = 'pt-BR';
 
+const VALID_LOCALES = new Set<Locale>(['pt-BR', 'en']);
+
 function resolveLocale(request: NextRequest): Locale {
+  // Cookie takes precedence — user explicit override
+  const cookie = request.cookies.get('rbx-locale-override')?.value;
+  if (cookie && VALID_LOCALES.has(cookie as Locale)) return cookie as Locale;
+
+  // Fall back to domain-based detection
   // x-forwarded-host is set by Traefik before the Host header can be spoofed
   const host =
     request.headers.get('x-forwarded-host') ??
     request.headers.get('host') ??
     '';
-  // Strip port suffix for local dev (localhost:3000)
   const hostname = host.split(':')[0];
   return DOMAIN_LOCALE_MAP[hostname] ?? DEFAULT_LOCALE;
 }

@@ -27,6 +27,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { MenuItemMobile } from "@/app/interfaces/types/nav-bar-menu/navBarMenuTypes";
 import { ModeToggle } from "../../middleware/toggle-mode";
+import { LocaleSwitcher } from "@/components/locale-switcher";
 import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n/types";
 
@@ -57,9 +58,12 @@ export function DrawerMobile({
             <DrawerDescription>{dict.nav.navigation}</DrawerDescription>
           </DrawerHeader>
           <div className="p-4">
-            <div className="flex items-center justify-end space-x-1 mb-2">
-              <p className="text-sm font-semibold">{dict.nav.mode}</p>
-              <ModeToggle dict={dict} />
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-1">
+                <p className="text-sm font-semibold">{dict.nav.mode}</p>
+                <ModeToggle dict={dict} />
+              </div>
+              <LocaleSwitcher />
             </div>
             <Accordion type="single" collapsible className="w-full">
               {/* Sobre nós */}
