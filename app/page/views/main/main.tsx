@@ -85,13 +85,14 @@ const Main: React.FC<{ dict: Dictionary }> = ({ dict }) => {
           variants={image}
         >
           <Image
-            src="/bitmap_bg.svg"
+            src="/api/assets/ui/bitmap_bg.svg"
             alt="Background"
             quality={100}
             fill
             style={{ objectFit: "contain" }}
-            priority // prioridade no carregamento da imagem
-            draggable="false" 
+            priority
+            draggable="false"
+            unoptimized
             onContextMenu={handleContextMenu}
           />
         </motion.div>

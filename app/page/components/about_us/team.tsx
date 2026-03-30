@@ -10,33 +10,32 @@ const people = [
     id: "person-1",
     name: "Rafael Scharf",
     role: "Software Engineer Manager | Tech Lead",
-    avatar: "https://media.licdn.com/dms/image/v2/D4D03AQFvqMPm5iq4vA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1721338506559?e=1743033600&v=beta&t=29BP6v1lCqUXwdCv-OCjzJ97ElRF3aH7DL3yB7QJOOE",
+    avatar: "/api/assets/team/rafael-scharf.jpg",
   },
   {
     id: "person-2",
     name: "Anthony Farias",
     role: "Full Stack Developer | Cybersecurity Engineer",
-    avatar: "https://media.licdn.com/dms/image/v2/D4D03AQFpQF6LaAgiBw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1727209167224?e=1743033600&v=beta&t=ma0W26-Zm2g8sUn-d4mlaj3bsZx0WQ8crj0EEOe7GRM",
+    avatar: "/api/assets/team/anthony-farias.jpg",
   },
   {
     id: "person-3",
     name: "Leandro Damasio",
     role: "CEO | Principal Software Engineer | SRE | DevOps",
-    avatar: "https://media.licdn.com/dms/image/v2/D4D03AQH1A7fWu0QDKw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1714692052061?e=1743033600&v=beta&t=heeTdd4MSVKuiSl98bre_Qox6R2cRjTRDFOEDQTUg90",
+    avatar: "/api/assets/team/leandro-damasio.jpg",
   },
-  
   {
     id: "person-4",
     name: "Magno Ozzyr",
     role: "PM | Lean-Agile Software Delivery Manager",
-    avatar: "https://media.licdn.com/dms/image/v2/D4E03AQHE0DVhQ0EGNQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1729826161143?e=1743033600&v=beta&t=Omdu7cfTe4pBsaEFGe8EM-QsKdasB9bxNv1lE0bLMVg",
+    avatar: "/api/assets/team/magno-ozzyr.jpg",
   },
   {
     id: "person-5",
     name: "Flávia Ribeiro",
     role: "SDR | Client Support | Customer Care",
-    avatar: "https://media.licdn.com/dms/image/v2/D4D03AQGJ6F3E25EeXA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1714833615433?e=1743033600&v=beta&t=OwsKIi484nQtaPvNwzT3O66NPibnEAC-3QNOfWB9zhw",
-  }
+    avatar: "/api/assets/team/flavia-ribeiro.jpg",
+  },
 ];
 
 const Team = ({ dict }: { dict: Dictionary }) => {
@@ -67,7 +66,8 @@ const Team = ({ dict }: { dict: Dictionary }) => {
       </div>
     
       <motion.div
-  className="h-auto w-full bg-fixed bg-[url('/polka-dots.svg')] bg-cover mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 bg-center bg-no-repeat shadow-lg rounded-2xl p-10"
+  className="h-auto w-full bg-fixed bg-cover mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 bg-center bg-no-repeat shadow-lg rounded-2xl p-10"
+  style={{ backgroundImage: "url('/api/assets/ui/polka-dots.svg')" }}
   initial="hidden"
   whileInView="visible"
   viewport={{ once: true, amount: 0.3 }}

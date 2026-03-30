@@ -60,11 +60,12 @@ export function NavigationMenuBar({ dict }: { dict: Dictionary }): JSX.Element {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <Image
-            src="/bitmap.svg"
+            src="/api/assets/ui/bitmap.svg"
             alt="logo"
             quality={100}
             width={55}
             height={55}
+            unoptimized
           />
           <div className="flex flex-col -space-y-2">
             <p className="text-lg font-bold">RBX</p>

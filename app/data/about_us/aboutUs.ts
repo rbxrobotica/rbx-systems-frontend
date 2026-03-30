@@ -5,17 +5,17 @@ export const cardMeta = [
     {
         id: 0,
         Icon: Users,
-        gradient: "from-blue-500 to-blue-700",
+        gradient: "from-cyan-950 to-slate-900",
     },
     {
         id: 1,
         Icon: Rocket,
-        gradient: "from-green-500 to-green-700",
+        gradient: "from-zinc-900 to-zinc-950",
     },
     {
         id: 2,
         Icon: Files,
-        gradient: "from-[#FF2C9C] to-purple-700",
+        gradient: "from-pink-950 to-slate-900",
     },
 ]
 

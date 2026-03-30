@@ -54,7 +54,7 @@ const AboutUs: React.FC<{ dict: Dictionary }> = ({ dict }) => {
           variants={staggerContainer}
         >
           <motion.img
-            src="/rbx_robotica_image4.jpeg"
+            src="/api/assets/about/rbx-about.jpeg"
             alt="placeholder"
             className="size-full max-h-96 select-none rounded-2xl object-cover"
             variants={slideInLeft}
@@ -62,7 +62,8 @@ const AboutUs: React.FC<{ dict: Dictionary }> = ({ dict }) => {
             onContextMenu={handleContextMenu}
           />
           <motion.div
-            className="flex flex-col justify-between gap-10 rounded-2xl bg-[url('/diamond-sunset.svg')] bg-repeat p-10"
+            className="flex flex-col justify-between gap-10 rounded-2xl bg-repeat p-10"
+            style={{ backgroundImage: "url('/api/assets/ui/diamond-sunset.svg')" }}
             variants={slideInRight}
             draggable="false"
           >

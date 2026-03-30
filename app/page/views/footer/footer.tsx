@@ -47,11 +47,12 @@ export default function Footer({ dict }: { dict: Dictionary }) {
           <div className="text-center lg:text-left lg:w-1/3">
             <div className="flex justify-center lg:justify-start">
               <Image
-                src="/bitmap.svg"
+                src="/api/assets/ui/bitmap.svg"
                 alt="RBX Robotica"
                 width={50}
                 height={50}
                 className="mb-4"
+                unoptimized
               />
             </div>
             <h2 className="text-xl font-bold text-gray-100">RBX Systems</h2>

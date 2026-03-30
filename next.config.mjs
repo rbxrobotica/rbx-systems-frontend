@@ -5,11 +5,6 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "media.licdn.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
         hostname: "eu2.contabostorage.com",
         pathname: "/rbx-content/**",
       },

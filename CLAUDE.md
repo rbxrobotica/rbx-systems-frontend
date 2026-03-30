@@ -117,6 +117,33 @@ s3://rbx-content/
       YYYY-MM-DD-slug.mdx     ← post content
     covers/
       YYYY-MM-DD-slug.jpg     ← cover image (1200×630 JPEG)
+  assets/
+    ui/
+      bitmap.svg              ← logo mark
+      bitmap_bg.svg           ← hero background graphic
+      polka-dots.svg          ← team section background pattern
+      diamond-sunset.svg      ← about section card background pattern
+    team/
+      rafael-scharf.jpg       ← team member photo
+      anthony-farias.jpg
+      leandro-damasio.jpg
+      magno-ozzyr.jpg
+      flavia-ribeiro.jpg
+    about/
+      rbx-about.jpeg          ← about section hero image
+```
+
+All assets are served via `/api/assets/[...path]` which proxies from S3 with
+`Cache-Control: public, max-age=31536000, immutable`.
+
+To upload UI assets (SVGs + root-level JPEGs from public/):
+```bash
+./scripts/assets-upload.sh --bulk-ui
+```
+
+To upload a single asset:
+```bash
+./scripts/assets-upload.sh /path/to/file.jpg team/nome-pessoa.jpg
 ```
 
 ---
