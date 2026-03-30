@@ -1,7 +1,8 @@
 'use client'
+import { useState } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { motion, Variants } from "framer-motion";
-import MotionVariants from "@/app/utils/motionsVariants"; // Certifique-se de ter o MotionVariants com as animações
+import MotionVariants from "@/app/utils/motionsVariants";
 import Image from "next/image";
 import type { Dictionary } from "@/lib/i18n/types";
 
@@ -38,6 +39,37 @@ const people = [
   },
 ];
 
+function initials(name: string): string {
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
+
+function TeamMemberAvatar({ src, name }: { src: string; name: string }) {
+  const [error, setError] = useState(false);
+
+  return (
+    <Avatar className="mb-4 h-20 w-20 border">
+      {!error && (
+        <Image
+          unoptimized
+          priority
+          src={src}
+          alt={name}
+          width={80}
+          height={80}
+          className="rounded-full object-cover w-full h-full"
+          onError={() => setError(true)}
+        />
+      )}
+      <AvatarFallback>{initials(name)}</AvatarFallback>
+    </Avatar>
+  );
+}
+
 const Team = ({ dict }: { dict: Dictionary }) => {
   const fadeInUp: Variants = MotionVariants.fadeInUp();
   const staggerContainer: Variants = MotionVariants.staggerContainer();
@@ -64,42 +96,31 @@ const Team = ({ dict }: { dict: Dictionary }) => {
           {dict.about.teamSection.body}
         </motion.p>
       </div>
-    
-      <motion.div
-  className="h-auto w-full bg-fixed bg-cover mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 bg-center bg-no-repeat shadow-lg rounded-2xl p-10"
-  style={{ backgroundImage: "url('/api/assets/ui/polka-dots.svg')" }}
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true, amount: 0.3 }}
-  variants={staggerContainer}
->
-  {/* Mapeando pessoas com ajustes responsivos */}
-  {people.map((person) => (
-    <motion.div
-      key={person.id}
-      className="flex flex-col items-center justify-center transition-colors duration-200 hover:text-primary p-2"
-      variants={fadeInUp}
-    >
-      <Avatar className="mb-4 h-20 w-20 md:h-18 md:w-18 lg:h-18 lg:w-18 border">
-        <Image
-          quality={100}
-          priority
-          src={person.avatar}
-          alt={person.name}
-          width={100}
-          height={100}
-          className="rounded-full"
-        />
-        <AvatarFallback>{person.name}</AvatarFallback>
-      </Avatar>
-      <p className="text-center font-medium text-sm md:text-base lg:text-lg">{person.name}</p>
-      <p className="text-center text-xs text-muted-foreground md:text-sm lg:text-base">
-        {person.role}
-      </p>
-    </motion.div>
-  ))}
-</motion.div>
 
+      <motion.div
+        className="h-auto w-full bg-fixed bg-cover mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 bg-center bg-no-repeat shadow-lg rounded-2xl p-10"
+        style={{ backgroundImage: "url('/api/assets/ui/polka-dots.svg')" }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={staggerContainer}
+      >
+        {people.map((person) => (
+          <motion.div
+            key={person.id}
+            className="flex flex-col items-center justify-center transition-colors duration-200 hover:text-primary p-2"
+            variants={fadeInUp}
+          >
+            <TeamMemberAvatar src={person.avatar} name={person.name} />
+            <p className="text-center font-medium text-sm md:text-base lg:text-lg">
+              {person.name}
+            </p>
+            <p className="text-center text-xs text-muted-foreground md:text-sm lg:text-base">
+              {person.role}
+            </p>
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
   );
 };
