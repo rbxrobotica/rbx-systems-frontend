@@ -8,7 +8,7 @@ import { getDictionary } from "@/lib/i18n/getDictionary";
 import type { Locale } from "@/lib/i18n/getDictionary";
 import type { Dictionary } from "@/lib/i18n/types";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default async function BlogPage() {
   const locale = getLocaleFromHeaders() as Locale;

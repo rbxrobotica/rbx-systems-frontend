@@ -4,8 +4,14 @@ export const s3 = new S3Client({
   endpoint: process.env.CONTABO_S3_ENDPOINT ?? "https://eu2.contabostorage.com",
   region: "default",
   credentials: {
-    accessKeyId: process.env.CONTABO_S3_ACCESS_KEY ?? "",
-    secretAccessKey: process.env.CONTABO_S3_SECRET_KEY ?? "",
+    accessKeyId:
+      process.env.CONTABO_S3_ACCESS_KEY ??
+      process.env.AWS_ACCESS_KEY_ID ??
+      "",
+    secretAccessKey:
+      process.env.CONTABO_S3_SECRET_KEY ??
+      process.env.AWS_SECRET_ACCESS_KEY ??
+      "",
   },
   forcePathStyle: true,
 });

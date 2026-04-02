@@ -1,4 +1,4 @@
-import { getPost, getAllPosts, formatDate } from "@/lib/blog";
+import { getPost, formatDate } from "@/lib/blog";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,16 +11,7 @@ import { getDictionary } from "@/lib/i18n/getDictionary";
 import type { Locale } from "@/lib/i18n/getDictionary";
 import type { Dictionary } from "@/lib/i18n/types";
 
-export const revalidate = 300;
-
-export async function generateStaticParams() {
-  try {
-    const posts = await getAllPosts();
-    return posts.map((p) => ({ slug: p.slug }));
-  } catch {
-    return [];
-  }
-}
+export const dynamic = "force-dynamic";
 
 export default async function PostPage({
   params,
