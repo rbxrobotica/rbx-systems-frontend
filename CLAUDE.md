@@ -10,6 +10,20 @@ This is the public-facing website for RBX Systems (`rbx.ia.br`). It is a Next.js
 
 This is the canonical workflow for an AI agent to publish a new blog post end-to-end. Follow all steps in order.
 
+### Default rule for future agentic publishing
+
+When a user provides a new blog post in **either** `pt-BR` or `en`, the agent should treat that text as the source version and automatically produce the missing locale variant before publishing.
+
+Required outcome for every new post:
+
+- Same public slug for both languages
+- `blog-posts/YYYY-MM-DD-slug.pt-BR.mdx`
+- `blog-posts/YYYY-MM-DD-slug.en.mdx`
+- Same cover image for both variants
+- Upload all available variants with `./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug`
+
+If the user sends the cover image path in the same prompt, use it directly. No second round-trip is required unless the file is missing or invalid.
+
 ### Step 1 — Write the MDX file
 
 Create the post in `blog-posts/` with filename `YYYY-MM-DD-slug.mdx`. Use this frontmatter:
@@ -35,6 +49,8 @@ Use locale-specific variants when needed:
 
 The public URL slug remains `YYYY-MM-DD-slug`. The site serves the locale-specific variant that matches the current site language and falls back to the base file if needed.
 
+For all **new** agent-published posts, prefer creating both locale files and skip the base fallback file unless there is a specific reason to keep a single-language post.
+
 **Tone:** institutional, clear, and direct — similar to Cursor or Anthropic blog posts. Match the active locale. See `docs/WRITING-STYLE.md` for editorial guidelines (no em-dashes, no arrows, natural prose).
 
 **Do NOT include sensitive infrastructure details** (IPs, credentials, internal hostnames, security incidents).
@@ -49,27 +65,19 @@ The public URL slug remains `YYYY-MM-DD-slug`. The site serves the locale-specif
 ### Step 2 — Upload the MDX to S3
 
 ```bash
-./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.mdx
-```
-
-If locale variants exist, upload each one separately:
-
-```bash
-./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.pt-BR.mdx
-./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.en.mdx
-```
-
-Recommended for multilingual posts:
-
-```bash
 ./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug
 ```
 
-This publishes the base file plus any `pt-BR` and `en` variants that exist.
+This publishes the base file plus any `pt-BR` and `en` variants that exist. For the canonical agentic workflow, the expected publish set is the two locale-specific files.
 
 Requires `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables set.
 
-The post is now live at `rbx.ia.br/blog/YYYY-MM-DD-slug` (no cover image yet).
+The post is now live at:
+
+- `rbx.ia.br/blog/YYYY-MM-DD-slug` with `pt-BR` as the default locale
+- `rbxsystems.ch/blog/YYYY-MM-DD-slug` with `en` as the default locale
+
+The header locale toggle may override either default via cookie.
 
 ### Step 3 — Output the Nano Banana cover image prompt
 
@@ -98,7 +106,7 @@ Wait for the user to provide the local file path of the generated cover image.
 
 ### Step 6 — Add the cover field to the MDX and re-upload
 
-Edit the MDX file to add the `cover` field to frontmatter:
+Edit both locale variants to add the same `cover` field to frontmatter:
 
 ```yaml
 cover: "https://eu2.contabostorage.com/rbx-content/blog/covers/YYYY-MM-DD-slug.jpg"
@@ -107,7 +115,7 @@ cover: "https://eu2.contabostorage.com/rbx-content/blog/covers/YYYY-MM-DD-slug.j
 Then re-upload:
 
 ```bash
-./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.mdx
+./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug
 ```
 
 ### Step 7 — Verify
@@ -117,12 +125,12 @@ aws s3 ls s3://rbx-content/blog/posts/ --endpoint-url https://eu2.contabostorage
 aws s3 ls s3://rbx-content/blog/covers/ --endpoint-url https://eu2.contabostorage.com
 ```
 
-Confirm both objects exist. The post with cover will be live within 5 minutes (ISR revalidate=300).
+Confirm the localized post objects and the cover object exist. The post with cover will be live within 5 minutes (ISR revalidate=300).
 
 ### Step 8 — Commit the MDX to git
 
 ```bash
-git add blog-posts/YYYY-MM-DD-slug.mdx
+git add blog-posts/YYYY-MM-DD-slug.pt-BR.mdx blog-posts/YYYY-MM-DD-slug.en.mdx
 git commit -m "blog: add post YYYY-MM-DD-slug"
 git push
 ```

@@ -126,15 +126,31 @@ git push
 
 Ao pedir a um agente para publicar um post, ele executará os seguintes passos em ordem:
 
-1. Escreve o MDX em `blog-posts/` — sem `cover` ainda
+### Regra padrão para novos posts
+
+Se o usuário enviar um texto em **português** ou **inglês**, o agente deve:
+
+1. Tratar esse texto como fonte canônica
+2. Produzir automaticamente a variante no outro idioma
+3. Criar os dois arquivos:
+   `blog-posts/YYYY-MM-DD-slug.pt-BR.mdx`
+   `blog-posts/YYYY-MM-DD-slug.en.mdx`
+4. Reutilizar a mesma capa para ambas as variantes
+5. Publicar tudo com `./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug`
+
+Se o caminho da imagem de capa vier no mesmo prompt, o agente deve usar esse arquivo diretamente.
+
+### Passos
+
+1. Escreve os MDX de locale em `blog-posts/` — sem `cover` ainda
 2. Obtém as credenciais do secret `contabo-s3-credentials` via kubectl
-3. Faz upload do MDX principal ou de todas as variantes com `./scripts/blog-publish.sh --all-locales`
+3. Faz upload de todas as variantes com `./scripts/blog-publish.sh --all-locales`
 4. Gera e exibe um **prompt para o Nano Banana** (ver especificações abaixo)
 5. Aguarda o usuário fornecer o caminho do arquivo gerado (sugerido: `/tmp/cover-slug.jpg`)
 6. Faz upload da capa: `./scripts/blog-cover-upload.sh`
-7. Adiciona `cover:` no frontmatter e republica o MDX
+7. Adiciona `cover:` no frontmatter das duas variantes e republica tudo
 8. Verifica os objetos no S3
-9. Commita o MDX no git
+9. Commita os MDX no git
 
 > O fluxo detalhado para agentes está em `CLAUDE.md` na raiz do repositório.
 
