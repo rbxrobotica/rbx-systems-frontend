@@ -16,7 +16,7 @@ export default async function BlogPage() {
 
   let posts: PostMeta[] = [];
   try {
-    posts = await getAllPosts();
+    posts = await getAllPosts(locale);
   } catch (err) {
     console.error("[blog] failed to load posts from S3:", err);
   }
@@ -52,7 +52,7 @@ export default async function BlogPage() {
                     )}
                     <div className="flex-1 flex flex-col justify-center">
                       <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
-                        <time dateTime={post.date}>{formatDate(post.date)}</time>
+                        <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
                         {post.tags.slice(0, 2).map((t) => (
                           <span
                             key={t}

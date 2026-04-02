@@ -27,7 +27,15 @@ excerpt: "One sentence describing the post. Shown in listing and at the top of t
 
 **Do NOT include a `cover` field yet** — it will be added in Step 5 after the image is uploaded.
 
-**Tone:** institutional, clear, and direct — similar to Cursor or Anthropic blog posts. English only. See `docs/WRITING-STYLE.md` for editorial guidelines (no em-dashes, no arrows, natural prose).
+Use locale-specific variants when needed:
+
+- `YYYY-MM-DD-slug.mdx` for a single-language or legacy fallback version
+- `YYYY-MM-DD-slug.pt-BR.mdx` for Brazilian Portuguese
+- `YYYY-MM-DD-slug.en.mdx` for English
+
+The public URL slug remains `YYYY-MM-DD-slug`. The site serves the locale-specific variant that matches the current site language and falls back to the base file if needed.
+
+**Tone:** institutional, clear, and direct — similar to Cursor or Anthropic blog posts. Match the active locale. See `docs/WRITING-STYLE.md` for editorial guidelines (no em-dashes, no arrows, natural prose).
 
 **Do NOT include sensitive infrastructure details** (IPs, credentials, internal hostnames, security incidents).
 
@@ -42,6 +50,13 @@ excerpt: "One sentence describing the post. Shown in listing and at the top of t
 
 ```bash
 ./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.mdx
+```
+
+If locale variants exist, upload each one separately:
+
+```bash
+./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.pt-BR.mdx
+./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.en.mdx
 ```
 
 Requires `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables set.
@@ -114,7 +129,9 @@ The git repo serves as the source of truth and backup for all blog content.
 s3://rbx-content/
   blog/
     posts/
-      YYYY-MM-DD-slug.mdx     ← post content
+      YYYY-MM-DD-slug.mdx           ← base / fallback post content
+      YYYY-MM-DD-slug.pt-BR.mdx     ← Brazilian Portuguese variant
+      YYYY-MM-DD-slug.en.mdx        ← English variant
     covers/
       YYYY-MM-DD-slug.jpg     ← cover image (1200×630 JPEG)
   assets/
@@ -162,7 +179,7 @@ To upload a single asset:
 
 ## Important Rules
 
-- **English only** for all blog content
+- **Match the current locale** for localized blog content
 - **No sensitive security details** (IPs, credentials, internal topology)
 - **No cover field without an uploaded image** — omit it if the image isn't uploaded yet
 - **Commit MDX files to git** after publishing — S3 is live storage, git is the backup

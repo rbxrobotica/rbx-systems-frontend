@@ -20,7 +20,7 @@ export default async function PostPage({
 }) {
   const locale = getLocaleFromHeaders() as Locale;
   const dict = (await getDictionary(locale)) as Dictionary;
-  const post = await getPost(params.slug);
+  const post = await getPost(params.slug, locale);
   if (!post) notFound();
 
   return (
@@ -38,7 +38,7 @@ export default async function PostPage({
         {/* Header */}
         <header className="mb-10">
           <div className="flex items-center gap-2 text-xs text-muted-foreground mb-4">
-            <time dateTime={post.date}>{formatDate(post.date)}</time>
+            <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
             {post.tags.map((t) => (
               <span
                 key={t}

@@ -1,0 +1,94 @@
+---
+title: "O modelo nao e o sistema"
+date: "2026-04-01"
+author: "RBX Systems"
+authorRole: "Engineering Team"
+tags: [ia, agentes, runtime, arquitetura, observabilidade]
+excerpt: "Um incidente recente envolvendo a arquitetura de um agente de IA reforcou um ponto que muitas equipes ainda ignoram: agentes confiaveis sao definidos pelo controle de runtime, nao apenas pela escolha do modelo."
+cover: "https://eu2.contabostorage.com/rbx-content/blog/covers/2026-04-01-the-model-is-not-the-system.png"
+---
+
+Um incidente recente expôs parcialmente a arquitetura interna de um CLI de agente de codificacao com IA amplamente usado. A internet reagiu com curiosidade. Alguns trataram como vazamento. Outros como fofoca. Para equipes que constroem sistemas agênticos em producao, o sinal real era arquitetural.
+
+O que veio a publico nao foi apenas um prompt. Foi um runtime. E e no runtime que sistemas se tornam confiaveis, ou falham em silencio.
+
+## O que o incidente realmente revelou
+
+Quando as pessoas falam sobre agentes de IA, normalmente falam sobre modelos. Qual modelo e mais inteligente. Qual e mais rapido. Qual pontua melhor em benchmarks. A arquitetura exposta apontou para uma realidade diferente.
+
+O modelo era um componente substituivel dentro de um sistema muito maior. A complexidade real nao estava no modelo em si. Estava em tudo o que existe ao redor dele:
+
+- Governanca de ferramentas
+- Gerenciamento de estado
+- Controle de execucao
+- Camadas de permissao
+- Coordenacao de streaming
+- Renderizacao de UI
+
+Nada disso mora dentro do modelo. Tudo isso mora no runtime.
+
+O modelo raciocina sobre o que recebe. O runtime decide o que isso sera.
+
+Este e o ponto que muitas equipes ainda deixam passar.
+
+## Governanca de ferramentas
+
+Em sistemas agênticos de producao, ferramentas nao sao funcoes abertas que o modelo pode chamar livremente. Elas sao capacidades governadas. Cada ferramenta carrega um contexto. Cada ferramenta tem limites de permissao. Cada ferramenta tem regras explicitas sobre quando e como pode ser invocada.
+
+Isto nao e uma preferencia de design. E uma exigencia. Em ambientes regulados, como financeiro e juridico, uma chamada de ferramenta sem controle nao e apenas um bug. E um incidente de compliance.
+
+O runtime precisa definir o que o modelo esta autorizado a fazer, nao o contrario.
+
+Governanca de ferramentas significa que o sistema define os limites. O modelo opera dentro deles. Se o seu agente trata chamadas de ferramenta como despacho irrestrito de funcoes, voce construiu um passivo, nao um produto.
+
+## O loop de eventos como maquina de estados
+
+Se o seu agente e apenas um loop em volta de uma chamada de API, voce nao tem um sistema. Voce tem uma demo.
+
+Agentes de producao nao funcionam assim. Em um agente bem construido, o loop de eventos e uma maquina de estados com transicoes incrementais. Ele lida com emissao de tokens em streaming e execucao de ferramentas como preocupacoes separadas, mas coordenadas. Processa resultados parciais, gerencia interrupcoes, resolve retries e coordena caminhos paralelos de execucao.
+
+Essa distincao importa no nivel de implementacao. Emissao de eventos nao e a mesma coisa que mutacao de estado. Enviar um token para a UI e um evento. Concluir uma chamada de ferramenta e atualizar o contexto de execucao e outro. O runtime precisa separar essas coisas com clareza, ou o sistema se torna imprevisivel sob carga real.
+
+Isto e orquestracao orientada a eventos. A distancia entre isso e um `while` com uma chamada de API dentro e a distancia entre uma demo e um sistema.
+
+## Orquestracao e separacao de responsabilidades
+
+Outro padrao que apareceu com clareza e a separacao entre execucao e coordenacao. Em arquiteturas multiagente, isso normalmente significa um coordenador que planeja e delega, e workers que executam dentro de limites definidos.
+
+O principio e familiar em sistemas distribuidos: menor privilegio. Cada componente recebe acesso apenas ao que precisa. Aplicado a agentes, o orquestrador nao deve executar toda ferramenta diretamente. Workers nao devem decidir a estrategia do sistema. Cada camada tem um papel. O runtime faz valer esse isolamento.
+
+Isso vai alem da separacao de papeis. Inclui modelos de delegacao com limites explicitos de tarefa, isolamento de dominios de falha para que um worker nao corrompa outro e estrategias de contencao para que uma chamada de ferramenta com falha nao escale para a camada de orquestracao.
+
+Em producao, auditabilidade nao e opcional. Toda decisao, toda delegacao e toda invocacao de ferramenta precisam ter um caminho rastreavel pelo runtime.
+
+## UI como superficie de execucao
+
+Um dos padroes menos obvios, mas mais importantes, esta em como a camada de UI funciona. Nesses sistemas, o terminal nao esta apenas renderizando saida. Ele esta renderizando execucao.
+
+A arquitetura frequentemente usa um modelo declarativo, parecido com a forma como o React funciona. Componentes descrevem o que deve aparecer com base no estado atual. O sistema atualiza a tela de forma incremental por streaming. O ponto nao e estetica. E visibilidade.
+
+A UI e uma projecao do fluxo de eventos. E uma superficie de depuracao. E a camada de controle do operador. Quando um agente transmite sua execucao em tempo real, ele torna o estado interno visivel:
+
+- Quais ferramentas estao sendo chamadas
+- Quais decisoes estao sendo tomadas
+- Em que ponto do grafo de execucao o sistema esta
+
+Em producao, isto nao e um extra conveniente. E observabilidade. Sem isso, voce opera no escuro.
+
+## Controle sobre a inteligencia
+
+Todos esses padroes apontam para a mesma conclusao. Sistemas agênticos confiaveis nao sao construidos tornando o modelo mais inteligente. Eles sao construidos tornando o runtime mais forte.
+
+Governanca sobre ferramentas. Gerenciamento de estado por loops orientados a eventos. Orquestracao com isolamento e contencao de falhas. UI como superficie de observabilidade. Esses pontos nao sao secundarios. Eles sao a arquitetura.
+
+As equipes que entendem isso nao estao apenas correndo atras do proximo lancamento de modelo. Elas estao construindo a infraestrutura que torna qualquer modelo seguro para operar. O modelo gera saídas. O runtime decide o que vira acao.
+
+## O que isso significa em producao
+
+O incidente nao foi importante por causa do que foi exposto. Foi importante por causa do que ele confirmou. Os melhores sistemas agênticos do mundo nao sao construidos em torno de prompts. Sao construidos em torno de controle de runtime.
+
+Se voce esta construindo agentes hoje, a pergunta nao e apenas qual modelo voce usa. A pergunta e como seu runtime se parece. Como voce governa ferramentas. Como gerencia transicoes de estado. Como separa coordenacao de execucao. Como torna o sistema observavel, auditavel e contido.
+
+Em producao, inteligencia nao e o que o sistema sabe. E o que o sistema esta autorizado a fazer.
+
+Inteligencia precisa ser estruturada antes de ser escalada. Confiavel antes de autonoma.

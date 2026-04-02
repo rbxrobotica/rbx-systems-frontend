@@ -135,4 +135,8 @@ Never include:
 
 ## Language
 
-All blog posts are in **English** (RBX Systems institutional standard).
+Blog posts may be published in **English** and **pt-BR**.
+
+- Prefer English for `rbxsystems.ch`
+- Prefer pt-BR for `rbx.ia.br`
+- When both variants exist, keep them semantically aligned instead of writing two unrelated articles under the same slug

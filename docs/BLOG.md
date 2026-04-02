@@ -6,7 +6,8 @@ O blog vive em **rbx.ia.br/blog**. Posts são arquivos MDX armazenados no Contab
 
 ## Regras editoriais
 
-- **Idioma:** inglês (padrão institucional RBX Systems)
+- **Idioma:** posts podem ter variantes em `pt-BR` e `en`
+- **Seleção de idioma:** `rbx.ia.br` prioriza `pt-BR`, `rbxsystems.ch` prioriza `en`, e o toggle do header permite alternância manual
 - **Tom:** direto, claro, institucional — estilo Cursor ou Anthropic
 - **Sem detalhes sensíveis de segurança:** não expor IPs internos, credenciais, topologia de rede, ou incidentes em aberto
 - **Commit obrigatório:** após publicar, commitar o MDX no git — S3 é o storage vivo, git é o backup
@@ -19,7 +20,9 @@ O blog vive em **rbx.ia.br/blog**. Posts são arquivos MDX armazenados no Contab
 s3://rbx-content/
   blog/
     posts/
-      YYYY-MM-DD-slug.mdx     ← conteúdo do post
+      YYYY-MM-DD-slug.mdx           ← fallback legado / idioma único
+      YYYY-MM-DD-slug.pt-BR.mdx     ← variante pt-BR opcional
+      YYYY-MM-DD-slug.en.mdx        ← variante en opcional
     covers/
       YYYY-MM-DD-slug.jpg     ← capa (1200×630 JPEG, mesmo slug)
 ```
@@ -70,6 +73,13 @@ export AWS_SECRET_ACCESS_KEY=<sua_secret_key>
 
 Crie `blog-posts/YYYY-MM-DD-slug.mdx` com o frontmatter acima e o corpo em Markdown.
 
+Se o post tiver variantes por idioma, use também:
+
+- `blog-posts/YYYY-MM-DD-slug.pt-BR.mdx`
+- `blog-posts/YYYY-MM-DD-slug.en.mdx`
+
+O slug público continua sendo `YYYY-MM-DD-slug`. O site escolhe a variante com base no locale atual e faz fallback para o arquivo sem sufixo se a variante não existir.
+
 ### 2. Publique no S3
 
 ```bash
@@ -106,7 +116,7 @@ Ao pedir a um agente para publicar um post, ele executará os seguintes passos e
 
 1. Escreve o MDX em `blog-posts/` — sem `cover` ainda
 2. Obtém as credenciais do secret `contabo-s3-credentials` via kubectl
-3. Faz upload do MDX: `./scripts/blog-publish.sh`
+3. Faz upload do MDX principal ou de cada variante de locale: `./scripts/blog-publish.sh`
 4. Gera e exibe um **prompt para o Nano Banana** (ver especificações abaixo)
 5. Aguarda o usuário fornecer o caminho do arquivo gerado (sugerido: `/tmp/cover-slug.jpg`)
 6. Faz upload da capa: `./scripts/blog-cover-upload.sh`
