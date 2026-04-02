@@ -59,6 +59,14 @@ If locale variants exist, upload each one separately:
 ./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.en.mdx
 ```
 
+Recommended for multilingual posts:
+
+```bash
+./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug
+```
+
+This publishes the base file plus any `pt-BR` and `en` variants that exist.
+
 Requires `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables set.
 
 The post is now live at `rbx.ia.br/blog/YYYY-MM-DD-slug` (no cover image yet).

@@ -86,6 +86,18 @@ O slug público continua sendo `YYYY-MM-DD-slug`. O site escolhe a variante com 
 ./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.mdx
 ```
 
+Para publicar todas as variantes do mesmo post de uma vez:
+
+```bash
+./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug
+```
+
+O script procura, nesta ordem, por:
+
+- `blog-posts/YYYY-MM-DD-slug.mdx`
+- `blog-posts/YYYY-MM-DD-slug.pt-BR.mdx`
+- `blog-posts/YYYY-MM-DD-slug.en.mdx`
+
 ### 3. Imagem de capa
 
 Gere a imagem no Nano Banana com as especificações abaixo e faça upload:
@@ -116,7 +128,7 @@ Ao pedir a um agente para publicar um post, ele executará os seguintes passos e
 
 1. Escreve o MDX em `blog-posts/` — sem `cover` ainda
 2. Obtém as credenciais do secret `contabo-s3-credentials` via kubectl
-3. Faz upload do MDX principal ou de cada variante de locale: `./scripts/blog-publish.sh`
+3. Faz upload do MDX principal ou de todas as variantes com `./scripts/blog-publish.sh --all-locales`
 4. Gera e exibe um **prompt para o Nano Banana** (ver especificações abaixo)
 5. Aguarda o usuário fornecer o caminho do arquivo gerado (sugerido: `/tmp/cover-slug.jpg`)
 6. Faz upload da capa: `./scripts/blog-cover-upload.sh`
@@ -152,6 +164,7 @@ Dark background, minimal, tech-abstract, cinematic lighting, no text,
 | Script | Uso |
 |--------|-----|
 | `./scripts/blog-publish.sh <arquivo.mdx>` | Faz upload do post para o S3 |
+| `./scripts/blog-publish.sh --all-locales <slug-ou-arquivo>` | Faz upload do post base e de todas as variantes de locale encontradas |
 | `./scripts/blog-cover-upload.sh <imagem.jpg> <slug>` | Faz upload da capa para o S3 |
 
 ---
