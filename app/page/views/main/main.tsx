@@ -53,24 +53,27 @@ const Main: React.FC<{ dict: Dictionary }> = ({ dict }) => {
   return (
     <>
       <motion.div
-        className="h-screen w-full flex flex-col-reverse md:flex-row lg:flex-row items-center justify-around main-container md:-mt-16 lg:-mt-16"
+        className="relative z-10 flex min-h-screen w-full flex-col-reverse items-center justify-center gap-10 px-4 pb-12 pt-28 sm:px-6 sm:pt-32 lg:flex-row lg:gap-16 lg:px-10 lg:pb-20"
         initial="hidden"
         animate="visible"
         variants={container}
       >
-       <motion.div
-          className="-mt-[25rem] px-5 text-center md:px-0 md:text-start md:ml-24 md:mt-36 md:w-[50%] lg:px-0 lg:text-start lg:ml-24 lg:mt-36 lg:w-[50%]"
+        <motion.div
+          className="w-full max-w-xl text-center lg:text-left"
           variants={container}
         >
           <div className="space-y-4">
-            <p className="text-2xl font-semibold md:text-3xl lg:text-3xl">
+            <p className="text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
               {dict.hero.headline}
             </p>
-            <p className="text-sm opacity-80">
+            <p className="text-sm opacity-80 sm:text-base">
               {dict.hero.body}
             </p>
           </div>
-          <motion.div variants={button} className="flex flex-wrap gap-4 mt-10">
+          <motion.div
+            variants={button}
+            className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start"
+          >
             <Button asChild>
               <Link href="/servicos">{dict.hero.ctaServices}</Link>
             </Button>
@@ -81,7 +84,7 @@ const Main: React.FC<{ dict: Dictionary }> = ({ dict }) => {
         </motion.div>
 
         <motion.div
-          className="-mt-[17rem] relative w-[100%] h-[100%] md:w-[90%] md:h-[90%] md:-mt-0 lg:w-[90%] lg:h-[90%] lg:-mt-0"
+          className="relative aspect-square w-full max-w-[32rem] sm:aspect-[4/3] lg:max-w-[42rem] lg:aspect-square"
           variants={image}
         >
           <Image
@@ -97,7 +100,7 @@ const Main: React.FC<{ dict: Dictionary }> = ({ dict }) => {
           />
         </motion.div>
       </motion.div>
-      <div className="gradient-bg fixed top- left-0 right-0 bottom-0">
+      <div className="gradient-bg fixed inset-0">
         <svg xmlns="http://www.w3.org/2000/svg">
           <defs>
             <filter id="goo">
@@ -130,4 +133,3 @@ const Main: React.FC<{ dict: Dictionary }> = ({ dict }) => {
 };
 
 export default Main;
-

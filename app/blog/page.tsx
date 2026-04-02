@@ -1,7 +1,6 @@
 import { getAllPosts, formatDate, PostMeta } from "@/lib/blog";
 import Link from "next/link";
 import Image from "next/image";
-import { NavigationMenuBar } from "../page/views/header/nav-bar-menu";
 import Footer from "../page/views/footer/footer";
 import { getLocaleFromHeaders } from "@/lib/i18n/getLocaleFromHeaders";
 import { getDictionary } from "@/lib/i18n/getDictionary";
@@ -23,11 +22,12 @@ export default async function BlogPage() {
 
   return (
     <>
-      <NavigationMenuBar dict={dict} />
-      <main className="max-w-4xl mx-auto px-6 pt-32 pb-24">
+      <main className="mx-auto w-full max-w-4xl px-4 pb-16 pt-28 sm:px-6 sm:pb-24 sm:pt-32">
         <div className="mb-16">
-          <h1 className="text-4xl font-bold tracking-tight mb-3">{dict.blog.heading}</h1>
-          <p className="text-muted-foreground text-lg">
+          <h1 className="mb-3 text-3xl font-bold tracking-tight sm:text-4xl">
+            {dict.blog.heading}
+          </h1>
+          <p className="text-base text-muted-foreground sm:text-lg">
             {dict.blog.tagline}
           </p>
         </div>
@@ -37,11 +37,11 @@ export default async function BlogPage() {
         ) : (
           <div className="divide-y divide-border">
             {posts.map((post) => (
-              <article key={post.slug} className="py-10 group">
+              <article key={post.slug} className="group py-8 sm:py-10">
                 <Link href={`/blog/${post.slug}`} className="block">
-                  <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex flex-col gap-5 sm:gap-6 md:flex-row">
                     {post.cover && (
-                      <div className="relative w-full md:w-48 h-32 rounded-lg overflow-hidden shrink-0 bg-muted">
+                      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg bg-muted md:h-32 md:w-48 md:aspect-auto md:shrink-0">
                         <Image
                           src={post.cover}
                           alt={post.title}
@@ -50,8 +50,8 @@ export default async function BlogPage() {
                         />
                       </div>
                     )}
-                    <div className="flex-1 flex flex-col justify-center">
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
+                    <div className="flex min-w-0 flex-1 flex-col justify-center">
+                      <div className="mb-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                         <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
                         {post.tags.slice(0, 2).map((t) => (
                           <span
@@ -62,16 +62,16 @@ export default async function BlogPage() {
                           </span>
                         ))}
                       </div>
-                      <h2 className="text-xl font-semibold tracking-tight group-hover:text-primary transition-colors mb-2">
+                      <h2 className="mb-2 text-xl font-semibold tracking-tight transition-colors group-hover:text-primary sm:text-2xl">
                         {post.title}
                       </h2>
-                      <p className="text-muted-foreground text-sm line-clamp-2">
+                      <p className="line-clamp-3 text-sm text-muted-foreground sm:line-clamp-2">
                         {post.excerpt}
                       </p>
                       <p className="mt-3 text-xs text-muted-foreground">
                         {post.author}
                         {post.authorRole && (
-                          <span className="opacity-60"> — {post.authorRole}</span>
+                          <span className="opacity-60"> | {post.authorRole}</span>
                         )}
                       </p>
                     </div>

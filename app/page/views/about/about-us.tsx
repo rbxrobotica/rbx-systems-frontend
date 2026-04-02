@@ -20,8 +20,8 @@ const AboutUs: React.FC<{ dict: Dictionary }> = ({ dict }) => {
   };
 
   return (
-    <section className="-mt-10 py-16 md:py-32 px-6 md:px-16" id="about-us">
-      <div className="container flex flex-col gap-28">
+    <section className="-mt-10 px-4 py-16 sm:px-6 md:py-24 lg:px-8" id="about-us">
+      <div className="mx-auto flex max-w-6xl flex-col gap-20 md:gap-28">
         {/* Header */}
         <motion.div
           className="flex flex-col gap-7"
@@ -38,7 +38,7 @@ const AboutUs: React.FC<{ dict: Dictionary }> = ({ dict }) => {
           </motion.h1>
           <motion.p
             id="mission"
-            className="max-w-xl text-lg"
+            className="max-w-xl text-base sm:text-lg"
             variants={fadeInUp}
           >
             {dict.about.mission}
@@ -65,7 +65,7 @@ const AboutUs: React.FC<{ dict: Dictionary }> = ({ dict }) => {
             }}
           />
           <motion.div
-            className="flex flex-col justify-between gap-10 rounded-2xl bg-repeat p-10"
+            className="flex flex-col justify-between gap-10 rounded-2xl bg-repeat p-6 sm:p-10"
             style={{ backgroundImage: "url('/api/assets/ui/diamond-sunset.svg')" }}
             variants={slideInRight}
             draggable="false"

@@ -56,8 +56,10 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <LocaleProvider locale={locale} dict={dict}>
-            <div className="fixed w-full z-50 p-4">
-              <NavigationMenuBar dict={dict} />
+            <div className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 py-4 sm:px-6">
+              <div className="pointer-events-auto mx-auto w-full max-w-7xl">
+                <NavigationMenuBar dict={dict} />
+              </div>
             </div>
             {children}
           </LocaleProvider>
@@ -66,4 +68,3 @@ export default async function RootLayout({
     </html>
   );
 }
-

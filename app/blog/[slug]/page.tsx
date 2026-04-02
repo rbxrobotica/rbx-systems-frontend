@@ -3,7 +3,6 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { NavigationMenuBar } from "../../page/views/header/nav-bar-menu";
 import Footer from "../../page/views/footer/footer";
 import remarkGfm from "remark-gfm";
 import { getLocaleFromHeaders } from "@/lib/i18n/getLocaleFromHeaders";
@@ -25,19 +24,16 @@ export default async function PostPage({
 
   return (
     <>
-      <NavigationMenuBar dict={dict} />
-      <main className="max-w-3xl mx-auto px-6 pt-32 pb-24">
-        {/* Back */}
+      <main className="mx-auto w-full max-w-3xl px-4 pb-16 pt-28 sm:px-6 sm:pb-24 sm:pt-32">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
+          className="mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:mb-10"
         >
           {dict.blog.backLabel}
         </Link>
 
-        {/* Header */}
         <header className="mb-10">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground mb-4">
+          <div className="mb-4 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
             <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
             {post.tags.map((t) => (
               <span
@@ -49,16 +45,16 @@ export default async function PostPage({
             ))}
           </div>
 
-          <h1 className="text-4xl font-bold tracking-tight leading-tight mb-4">
+          <h1 className="mb-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
             {post.title}
           </h1>
 
-          <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+          <p className="mb-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
             {post.excerpt}
           </p>
 
           <div className="flex items-center gap-3 text-sm">
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-xs">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
               {post.author[0]}
             </div>
             <div>
@@ -70,9 +66,8 @@ export default async function PostPage({
           </div>
         </header>
 
-        {/* Cover */}
         {post.cover && (
-          <div className="relative w-full h-72 md:h-96 rounded-xl overflow-hidden mb-12 bg-muted">
+          <div className="relative mb-10 aspect-[16/9] w-full overflow-hidden rounded-xl bg-muted sm:mb-12 md:h-96 md:aspect-auto">
             <Image
               src={post.cover}
               alt={post.title}
@@ -83,8 +78,7 @@ export default async function PostPage({
           </div>
         )}
 
-        {/* Body */}
-        <article className="prose prose-neutral dark:prose-invert prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-code:text-primary prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-table:border-collapse prose-th:border prose-th:border-border prose-th:bg-muted prose-th:px-4 prose-th:py-2 prose-td:border prose-td:border-border prose-td:px-4 prose-td:py-2">
+        <article className="blog-prose">
           <MDXRemote
             source={post.content}
             options={{

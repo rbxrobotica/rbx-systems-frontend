@@ -76,7 +76,7 @@ const Team = ({ dict }: { dict: Dictionary }) => {
 
   return (
     <section className="py-5">
-      <div className="container flex flex-col items-center text-center">
+      <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
         <motion.h2
           className="my-6 text-pretty text-2xl font-bold lg:text-4xl"
           initial="hidden"
@@ -98,7 +98,7 @@ const Team = ({ dict }: { dict: Dictionary }) => {
       </div>
 
       <motion.div
-        className="h-auto w-full bg-fixed bg-cover mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 bg-center bg-no-repeat shadow-lg rounded-2xl p-10"
+        className="mt-16 grid h-auto w-full grid-cols-1 gap-4 rounded-2xl bg-cover bg-center bg-no-repeat p-6 shadow-lg sm:grid-cols-2 sm:p-8 md:grid-cols-3 lg:grid-cols-4 lg:p-10 xl:grid-cols-5"
         style={{ backgroundImage: "url('/api/assets/ui/polka-dots.svg')" }}
         initial="hidden"
         whileInView="visible"

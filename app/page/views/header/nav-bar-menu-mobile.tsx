@@ -1,7 +1,6 @@
 // app/page/components/main/nav-bar-menu-mobile.tsx
 "use client";
 
-import * as React from "react";
 import { Menu } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -47,18 +46,18 @@ export function DrawerMobile({
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button size="icon">
+        <Button size="icon" variant="outline" className="border-border/70 bg-background/70 backdrop-blur">
           <Menu />
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
-        <div className="mx-auto w-full max-w-sm">
+      <DrawerContent className="max-h-[90svh] overflow-hidden">
+        <div className="mx-auto w-full max-w-md">
           <DrawerHeader>
             <DrawerTitle>{dict.nav.menu}</DrawerTitle>
             <DrawerDescription>{dict.nav.navigation}</DrawerDescription>
           </DrawerHeader>
-          <div className="p-4">
-            <div className="flex items-center justify-between mb-2">
+          <div className="px-4 pb-2 sm:px-6">
+            <div className="mb-2 flex items-center justify-between gap-4">
               <div className="flex items-center gap-1">
                 <p className="text-sm font-semibold">{dict.nav.mode}</p>
                 <ModeToggle dict={dict} />
@@ -70,7 +69,7 @@ export function DrawerMobile({
               <AccordionItem value="about-us">
                 <AccordionTrigger>{dict.nav.aboutUs}</AccordionTrigger>
                 <AccordionContent>
-                  <ScrollArea className="h-72">
+                  <ScrollArea className="h-[min(18rem,50vh)] pr-4">
                     <ul className="space-y-4">
                       {aboutUs.map((item, index) => (
                         <li key={index}>
@@ -78,14 +77,14 @@ export function DrawerMobile({
                           <p className="text-sm text-muted-foreground">
                             {item.description}
                           </p>
-                          <a
-                            href={item.href}
-                            className="text-blue-500 underline"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {dict.nav.learnMore}
-                          </a>
+                          <DrawerClose asChild>
+                            <Link
+                              href={item.href}
+                              className="inline-flex text-sm text-primary underline underline-offset-4"
+                            >
+                              {dict.nav.learnMore}
+                            </Link>
+                          </DrawerClose>
                         </li>
                       ))}
                     </ul>
@@ -96,7 +95,7 @@ export function DrawerMobile({
               <AccordionItem value="services">
                 <AccordionTrigger>{dict.nav.services}</AccordionTrigger>
                 <AccordionContent>
-                  <ScrollArea className="h-72">
+                  <ScrollArea className="h-[min(18rem,50vh)] pr-4">
                     <ul className="space-y-4">
                       {services.map((service, index) => (
                         <li key={index}>
@@ -104,14 +103,14 @@ export function DrawerMobile({
                           <p className="text-sm text-muted-foreground">
                             {service.description}
                           </p>
-                          <a
-                            href={service.href}
-                            className="text-blue-500 underline"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {dict.nav.learnMore}
-                          </a>
+                          <DrawerClose asChild>
+                            <Link
+                              href={service.href}
+                              className="inline-flex text-sm text-primary underline underline-offset-4"
+                            >
+                              {dict.nav.learnMore}
+                            </Link>
+                          </DrawerClose>
                         </li>
                       ))}
                     </ul>
@@ -119,22 +118,27 @@ export function DrawerMobile({
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
-            <div className="flex flex-col mt-2 space-y-2">
-            {blogEcontato.map((item, index) => (
-              <Link key={index} href={item.href}>
-                <Button className="w-full bg-muted text-foreground">
-                  {item.title}
-                </Button>
-              </Link>
-            ))}
+            <div className="mt-4 flex flex-col space-y-2">
+              {blogEcontato.map((item, index) => (
+                <DrawerClose asChild key={index}>
+                  <Link
+                    href={item.href}
+                    className="inline-flex w-full items-center justify-start rounded-md bg-muted px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                  >
+                    {item.title}
+                  </Link>
+                </DrawerClose>
+              ))}
             </div>
-            {/* Atelier - Highlighted */}
             <div className="mt-4 pt-4 border-t border-neutral-800">
-              <Link href={atelier.href} className="block">
-                <Button className="w-full bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30 border border-cyan-500/30">
+              <DrawerClose asChild>
+                <Link
+                  href={atelier.href}
+                  className="inline-flex w-full items-center justify-start rounded-md border border-cyan-500/30 bg-cyan-500/20 px-4 py-2 text-sm font-medium text-cyan-400 transition-colors hover:bg-cyan-500/30"
+                >
                   {atelier.title}
-                </Button>
-              </Link>
+                </Link>
+              </DrawerClose>
             </div>
           </div>
           <DrawerFooter>

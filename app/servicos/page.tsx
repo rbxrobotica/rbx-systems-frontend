@@ -29,14 +29,14 @@ export default async function ServicosPage() {
 
   return (
     <>
-      <div className="min-h-screen pt-32 pb-16 px-6 md:px-16">
-        <div className="container mx-auto max-w-5xl">
+      <div className="min-h-screen px-4 pb-16 pt-28 sm:px-6 sm:pb-24 sm:pt-32 lg:px-8">
+        <div className="mx-auto max-w-5xl">
           {/* Header */}
           <div className="mb-20">
-            <h1 className="text-3xl font-semibold lg:text-5xl mb-6">
+            <h1 className="mb-6 text-3xl font-semibold sm:text-4xl lg:text-5xl">
               {dict.services.pageTitle}
             </h1>
-            <p className="max-w-2xl text-lg text-muted-foreground">
+            <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">
               {dict.services.pageSubtitle}
             </p>
           </div>
@@ -45,7 +45,7 @@ export default async function ServicosPage() {
           <div className="space-y-24">
             {services.map((service) => (
               <section key={service.id} id={String(service.id)} className="scroll-mt-28">
-                <div className="flex items-start gap-4 mb-6">
+                <div className="mb-6 flex items-start gap-4">
                   <div className="flex-shrink-0 flex size-12 items-center justify-center rounded-2xl bg-accent">
                     <service.icon className="size-5" />
                   </div>
@@ -55,7 +55,7 @@ export default async function ServicosPage() {
                     </h2>
                   </div>
                 </div>
-                <p className="text-lg text-muted-foreground mb-8 max-w-3xl">
+                <p className="mb-8 max-w-3xl text-base text-muted-foreground sm:text-lg">
                   {service.description}
                 </p>
               </section>
