@@ -60,6 +60,8 @@ The public URL must stay the same across locales:
 - Reuse the same `date`, `tags`, `author`, `authorRole`, and `cover`
 - Keep the same slug across locales
 - Follow the writing rules in `docs/WRITING-STYLE.md`
+- For `pt-BR`, write natural Portuguese with UTF-8 accents and cedilha
+- Never transliterate `pt-BR` prose to ASCII forms such as `nao`, `producao`, or `configuracao`
 - Do not include sensitive security details
 
 ## Publishing Steps
@@ -130,3 +132,4 @@ Before finishing, confirm:
 - the variants were uploaded to S3
 - the changes were committed and pushed
 - the deploy pipeline was triggered
+- the `pt-BR` variant was not written in ASCII-transliterated Portuguese

@@ -1,89 +1,89 @@
 ---
-title: "Atualizacao de Infraestrutura: maturidade em GitOps, bancos mais resilientes e um cluster mais saudavel"
+title: "Atualização de Infraestrutura: maturidade em GitOps, bancos mais resilientes e um cluster mais saudável"
 date: "2026-03-29"
 author: "RBX Systems"
 authorRole: "Engineering Team"
 tags: [infra, gitops, codigo-aberto, kubernetes, argocd]
-excerpt: "Passamos os ultimos dias reforcando nossa infraestrutura de producao: migramos para uma arquitetura de banco mais resiliente, corrigimos o pipeline de GitOps e limpamos uma fila importante de divida tecnica. Aqui esta o que mudou e por que isso importa."
+excerpt: "Passamos os últimos dias reforçando nossa infraestrutura de produção: migramos para uma arquitetura de banco mais resiliente, corrigimos o pipeline de GitOps e limpamos uma fila importante de dívida técnica. Aqui está o que mudou e por que isso importa."
 cover: "https://eu2.contabostorage.com/rbx-content/blog/covers/2026-03-29-infrastructure-update.jpg"
 ---
 
 ## Por que estamos escrevendo isto
 
-Na RBX Systems, acreditamos que trabalho de infraestrutura merece a mesma visibilidade que funcionalidades de produto. O cluster que sustenta Robson, TruthMetal e tudo o mais que construimos tambem e um produto. Nossos usuarios, contribuidores e futuros parceiros dependem dele.
+Na RBX Systems, acreditamos que trabalho de infraestrutura merece a mesma visibilidade que funcionalidades de produto. O cluster que sustenta Robson, TruthMetal e tudo o mais que construímos também é um produto. Nossos usuários, contribuidores e futuros parceiros dependem dele.
 
-Este post documenta uma sessao importante de infraestrutura concluida em 28 e 29 de marco de 2026. Nenhuma nova feature foi entregue, mas a base ficou substancialmente mais forte.
+Este post documenta uma sessão importante de infraestrutura concluída em 28 e 29 de março de 2026. Nenhuma nova feature foi entregue, mas a base ficou substancialmente mais forte.
 
 ## O que mudou
 
-### O GitOps agora esta totalmente saudavel
+### O GitOps agora está totalmente saudável
 
-Todas as nossas aplicacoes sao implantadas com [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) usando o padrao GitOps: a unica forma de mudar algo em producao e commitar em `rbxrobotica/rbx-infra`. Esta sessao resolveu um problema antigo em que varias aplicacoes estavam presas em um estado inconsistente de sincronizacao, impedindo a reconciliacao automatica.
+Todas as nossas aplicações são implantadas com [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) usando o padrão GitOps: a única forma de mudar algo em produção é commitar em `rbxrobotica/rbx-infra`. Esta sessão resolveu um problema antigo em que várias aplicações estavam presas em um estado inconsistente de sincronização, impedindo a reconciliação automática.
 
-A causa raiz era uma configuracao sutil de ownership de campos no Kubernetes. Depois de uma investigacao sistematica em todas as aplicacoes implantadas, todos os servicos estao agora em estado **Synced + Healthy**.
+A causa raiz era uma configuração sutil de ownership de campos no Kubernetes. Depois de uma investigação sistemática em todas as aplicações implantadas, todos os serviços estão agora em estado **Synced + Healthy**.
 
-Isso importa porque um pipeline de GitOps saudavel significa:
+Isso importa porque um pipeline de GitOps saudável significa:
 
-- Toda mudanca e auditavel via `git log`
-- Rollbacks levam um unico `git revert`
-- O cluster pode ser reconstruido do zero a qualquer momento
+- Toda mudança é auditável via `git log`
+- Rollbacks levam um único `git revert`
+- O cluster pode ser reconstruído do zero a qualquer momento
 
 ### Uma arquitetura de banco mais resiliente
 
-Formalizamos uma decisao arquitetural que ja estava implicitamente em vigor havia algum tempo: **o ParadeDB, nosso banco analitico compativel com PostgreSQL, roda em hardware dedicado fora do cluster Kubernetes.**
+Formalizamos uma decisão arquitetural que já estava implicitamente em vigor havia algum tempo: **o ParadeDB, nosso banco analítico compatível com PostgreSQL, roda em hardware dedicado fora do cluster Kubernetes.**
 
-Isso pode soar contraintuitivo quando quase todo o resto roda em k8s, mas reflete um trade-off deliberado: o codigo da aplicacao esta versionado em Git e pode ser redeployado em minutos. Os dados nao. Ao desacoplar o ciclo de vida do banco do ciclo de vida do cluster, podemos apagar e reprovisionar todo o cluster sem arriscar um unico byte de dados de usuario.
+Isso pode soar contraintuitivo quando quase todo o resto roda em k8s, mas reflete um trade-off deliberado: o código da aplicação está versionado em Git e pode ser redeployado em minutos. Os dados não. Ao desacoplar o ciclo de vida do banco do ciclo de vida do cluster, podemos apagar e reprovisionar todo o cluster sem arriscar um único byte de dados de usuário.
 
-Os servicos que se conectam ao ParadeDB fazem isso por um endpoint interno estavel. O cluster e efemero. Os dados nao.
+Os serviços que se conectam ao ParadeDB fazem isso por um endpoint interno estável. O cluster é efêmero. Os dados não.
 
-### O motor de deteccao de padroes esta em producao
+### O motor de detecção de padrões está em produção
 
-O subsistema de pattern scanning do Robson, que detecta padroes de candles e grafico como Hammer, Engulfing, Head & Shoulders e Morning Star, agora roda em producao com o agendamento correto.
+O subsistema de pattern scanning do Robson, que detecta padrões de candles e gráfico como Hammer, Engulfing, Head & Shoulders e Morning Star, agora roda em produção com o agendamento correto.
 
-O motor executa a cada 15 minutos, varrendo os pares configurados e persistindo os resultados no banco. Ele e idempotente: executar o mesmo scan duas vezes nao produz registros duplicados.
+O motor executa a cada 15 minutos, varrendo os pares configurados e persistindo os resultados no banco. Ele é idempotente: executar o mesmo scan duas vezes não produz registros duplicados.
 
-Isto faz parte do **CORE 1.0**, a camada de deteccao de padroes do motor de decisao do Robson. O CORE 1.2, o EntryGate, que transforma alertas de padroes em decisoes de trade, e o proximo passo.
+Isto faz parte do **CORE 1.0**, a camada de detecção de padrões do motor de decisão do Robson. O CORE 1.2, o EntryGate, que transforma alertas de padrões em decisões de trade, é o próximo passo.
 
-### Limpeza e descontinuacoes
+### Limpeza e descontinuações
 
-Removemos duas aplicacoes placeholder, `argos-radar` e `thalamus`, que ainda nao tinham implementacao funcional. Ambas voltarao quando seus respectivos produtos estiverem prontos, reconstruidos do zero sob a organizacao `rbxrobotica` com pipelines corretos de CI/CD.
+Removemos duas aplicações placeholder, `argos-radar` e `thalamus`, que ainda não tinham implementação funcional. Ambas voltarão quando seus respectivos produtos estiverem prontos, reconstruídos do zero sob a organização `rbxrobotica` com pipelines corretos de CI/CD.
 
-## Como isso se traduz na pratica
+## Como isso se traduz na prática
 
-Nossa infraestrutura e definida integralmente como codigo em um repositorio publico. Este e o estado atual da producao apos essa sessao:
+Nossa infraestrutura é definida integralmente como código em um repositório público. Este é o estado atual da produção após essa sessão:
 
-| Servico | Status |
+| Serviço | Status |
 |---------|--------|
 | ArgoCD (controlador de GitOps) | Synced · Healthy |
 | cert-manager (TLS) | Synced · Healthy |
 | Robson (plataforma de trading) | Synced · Healthy |
-| TruthMetal (ledger de configuracao) | Synced · Healthy |
+| TruthMetal (ledger de configuração) | Synced · Healthy |
 | rbx.ia.br | Synced · Healthy |
 | rbxsystems.ch | Synced · Healthy |
 
-Todos os certificados TLS sao gerenciados e renovados automaticamente. Todos os servicos se autocorrigem se um pod falhar.
+Todos os certificados TLS são gerenciados e renovados automaticamente. Todos os serviços se autocorrigem se um pod falhar.
 
-## O angulo open source
+## O ângulo open source
 
-A infraestrutura que sustenta a RBX Systems esta sendo progressivamente aberta sob a organizacao do GitHub [`rbxrobotica`](https://github.com/rbxrobotica).
+A infraestrutura que sustenta a RBX Systems está sendo progressivamente aberta sob a organização do GitHub [`rbxrobotica`](https://github.com/rbxrobotica).
 
-Se voce roda Kubernetes em producao com ArgoCD e GitOps, ou se tem curiosidade sobre como uma equipe pequena opera bancos externos ao lado de workloads em k8s, o repositorio e publico. Leia, faca fork, aprenda com ele.
+Se você roda Kubernetes em produção com ArgoCD e GitOps, ou se tem curiosidade sobre como uma equipe pequena opera bancos externos ao lado de workloads em k8s, o repositório é público. Leia, faça fork, aprenda com ele.
 
 Estamos procurando pessoas que atuem em:
 
-- **Robotica e automacao**, nosso dominio central
-- **Trading algoritmico**, porque o Robson foi construido para execucao no mundo real
-- **Sistemas distribuidos**, porque o TruthMetal e um ledger imutavel de parametros de proposito geral
-- **Infrastructure as Code**, porque o cluster inteiro e reproduzivel a partir de um unico playbook Ansible
+- **Robótica e automação**, nosso domínio central
+- **Trading algorítmico**, porque o Robson foi construído para execução no mundo real
+- **Sistemas distribuídos**, porque o TruthMetal é um ledger imutável de parâmetros de propósito geral
+- **Infrastructure as Code**, porque o cluster inteiro é reproduzível a partir de um único playbook Ansible
 
-Encontrou um bug? Abra uma issue. Tem uma ideia? Inicie uma discussao. Quer contribuir? A porta esta aberta.
+Encontrou um bug? Abra uma issue. Tem uma ideia? Inicie uma discussão. Quer contribuir? A porta está aberta.
 
 ## O que vem a seguir
 
-- CORE 1.2: EntryGate, alertas de padroes virando sinais acionaveis
-- Strategos: plataforma de autoria de estrategias e backtesting
-- Migracao para a org `rbxrobotica`, com todos os repositorios saindo de contas pessoais para a organizacao
+- CORE 1.2: EntryGate, alertas de padrões virando sinais acionáveis
+- Strategos: plataforma de autoria de estratégias e backtesting
+- Migração para a org `rbxrobotica`, com todos os repositórios saindo de contas pessoais para a organização
 
-Construimos em aberto. Acompanhe.
+Construímos em aberto. Acompanhe.
 
 **RBX Systems Engineering Team**

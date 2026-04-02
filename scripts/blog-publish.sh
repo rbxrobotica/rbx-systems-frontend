@@ -27,6 +27,56 @@ strip_locale_suffix() {
   esac
 }
 
+assert_utf8() {
+  local file="$1"
+
+  if command -v iconv >/dev/null 2>&1; then
+    if ! iconv -f UTF-8 -t UTF-8 "$file" >/dev/null; then
+      echo "Invalid UTF-8 encoding: $file" >&2
+      exit 1
+    fi
+  fi
+}
+
+is_legacy_pt_br_base() {
+  local file="$1"
+  local slug base_dir
+
+  [[ "$file" == blog-posts/*.mdx ]] || return 1
+  [[ "$file" != *.pt-BR.mdx ]] || return 1
+  [[ "$file" != *.en.mdx ]] || return 1
+
+  base_dir=$(dirname "$file")
+  slug=$(basename "$file" .mdx)
+
+  [[ -f "$base_dir/$slug.en.mdx" ]] || return 1
+  [[ ! -f "$base_dir/$slug.pt-BR.mdx" ]]
+}
+
+assert_pt_br_orthography() {
+  local file="$1"
+  local regex
+
+  regex='(^|[^[:alpha:]])(nao|producao|producoes|configuracao|configuracoes|operacao|operacoes|execucao|execucoes|decisao|decisoes|aplicacao|aplicacoes|informacao|informacoes|integracao|integracoes|migracao|migracoes|manutencao|orquestracao|reconciliacao|investigacao|codificacao|permissao|permissoes|transicao|transicoes|observacao|observacoes|depuracao|dominio|dominios|parametro|parametros|proposito|estrategia|estrategias|grafico|graficos|sessao|sessoes|angulo|pratica|autonoma|autonomo)([^[:alpha:]]|$)'
+
+  if LC_ALL=C grep -Eni "$regex" "$file" >/dev/null; then
+    echo "Refusing to publish $file: suspected ASCII transliteration in pt-BR content." >&2
+    echo "Use Portuguese orthography with UTF-8 accents and cedilha." >&2
+    LC_ALL=C grep -Eni "$regex" "$file" >&2
+    exit 1
+  fi
+}
+
+validate_file_before_publish() {
+  local file="$1"
+
+  assert_utf8 "$file"
+
+  if [[ "$file" == *.pt-BR.mdx ]] || is_legacy_pt_br_base "$file"; then
+    assert_pt_br_orthography "$file"
+  fi
+}
+
 publish_file() {
   local file="$1"
   local slug public_slug
@@ -35,6 +85,8 @@ publish_file() {
     echo "File not found: $file" >&2
     exit 1
   fi
+
+  validate_file_before_publish "$file"
 
   slug=$(basename "$file" .mdx)
   public_slug=$(strip_locale_suffix "$slug")
