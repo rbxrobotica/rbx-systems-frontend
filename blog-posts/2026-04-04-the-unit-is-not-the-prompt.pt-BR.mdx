@@ -1,0 +1,57 @@
+---
+title: "O prompt não é a unidade"
+date: "2026-04-04"
+author: "RBX Systems"
+authorRole: "Engineering Team"
+tags: [ia, agentes, runtime, arquitetura, execução]
+excerpt: "Query e QueryEngine apontam para uma abstração mais robusta para sistemas agênticos: a execução é um objeto governado, com estado, eventos, orçamentos e permissões."
+cover: "https://eu2.contabostorage.com/rbx-content/blog/covers/2026-04-04-the-unit-is-not-the-prompt.png"
+---
+
+A maioria das pessoas se concentrou no que o Claude Code consegue fazer. A parte mais interessante é como ele decide.
+
+Query e QueryEngine sugerem uma unidade mais útil para sistemas agênticos. Não é o prompt. Não é a chamada ao modelo. É a query.
+
+## O prompt não é a unidade
+
+Um prompt é uma entrada estática. Uma query é uma execução viva, com estado, streaming e ciclo de vida próprio.
+
+Ela pode ser observada. Pode ser interrompida. Pode ser restringida.
+
+Isso muda onde o sistema realmente vive. Não no modelo. Não no modelo de prompt. No runtime que governa o comportamento ao longo do tempo.
+
+Esse ponto importa porque sistemas agênticos falham quando o controle é implícito. Se a execução for apenas um efeito colateral de uma chamada ao modelo, permissões, controle de custo, novas tentativas, interrupções e aprovações do usuário acabam espalhados entre wrappers e handlers. A arquitetura fica mais difícil de entender justamente onde a confiabilidade mais importa.
+
+Tratar a query como unidade de execução corrige isso. O ciclo de vida se torna explícito. Os limites passam a ser aplicáveis.
+
+## Onde a lógica deve ficar
+
+É aqui que permissões de ferramentas, memória, streaming, compactação, orçamentos e barreiras de aprovação realmente devem ficar. Não espalhados por camadas auxiliares. Centralizados no próprio objeto de execução.
+
+O QueryEngine também define limites de uso como parte do ciclo de vida. Orçamento de tokens, rastreamento de custo e limites de execução não são políticas aplicadas depois. São parte do modelo de execução.
+
+As interfaces de ferramentas seguem o mesmo princípio. Ferramentas não deveriam existir como funções soltas em um registro. Elas deveriam ser governadas por uma interface estruturada que define permissões, descrições e comportamento. O runtime precisa saber o que cada ferramenta pode fazer antes mesmo de o modelo pedir por ela.
+
+Essa é a diferença entre anexar governança do lado de fora do sistema e construir governança dentro do próprio sistema.
+
+## Streaming e estado são camadas diferentes
+
+A maioria das implementações de agentes ainda trata execução como efeito colateral. O padrão de QueryEngine trata execução como objeto de primeira classe.
+
+O que faz isso funcionar na prática é a separação entre a camada de streaming e a máquina de estados por trás dela. O stream cuida do que o usuário vê. A máquina de estados cuida do que o sistema faz.
+
+Isso inclui transições, decisões, chamadas de ferramenta, interrupções, novas tentativas e conclusão. As duas camadas caminham juntas, mas não precisam ser a mesma camada.
+
+Essa separação é o que transforma um padrão técnico em boa UX. O usuário recebe uma interface fluida e responsiva. O sistema mantém um modelo de execução limpo por baixo.
+
+Se o stream também for sua fonte de verdade para o estado da execução, o desenho fica frágil. Preocupações de renderização vazam para o fluxo de controle. Transições internas ficam mais difíceis de inspecionar e mais difíceis de governar. Um objeto de execução com estado evita esse colapso.
+
+## Execução como objeto governável
+
+Uma query tem estado. Uma query emite eventos. Uma query tem um ciclo de vida sobre o qual você consegue raciocinar de fora do modelo.
+
+Isso se alinha com a forma como sistemas agênticos confiáveis deveriam ser construídos. O modelo raciocina sobre o que recebe. O runtime decide o que isso será. O runtime decide quando a execução pode continuar, quais ferramentas ficam visíveis, quanto orçamento resta e quais restrições estão ativas.
+
+É por isso que o runtime é o produto.
+
+O modelo importa. Prompts importam. Nenhum dos dois é o sistema completo. Se você quer um comportamento agêntico observável, interrompível, auditável e seguro de operar, a execução precisa ser um objeto governável, não um detalhe de implementação.

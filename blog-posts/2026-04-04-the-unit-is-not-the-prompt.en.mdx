@@ -1,0 +1,57 @@
+---
+title: "The Unit Is Not the Prompt"
+date: "2026-04-04"
+author: "RBX Systems"
+authorRole: "Engineering Team"
+tags: [ai, agents, runtime, architecture, execution]
+excerpt: "Query and QueryEngine point to a more durable abstraction for agent systems: execution is a governed object with state, events, budgets, and permissions."
+cover: "https://eu2.contabostorage.com/rbx-content/blog/covers/2026-04-04-the-unit-is-not-the-prompt.png"
+---
+
+Most people focused on what Claude Code can do. The more interesting part is how it decides.
+
+Query and QueryEngine suggest a more useful unit for agent systems. Not the prompt. Not the model call. The query.
+
+## The unit is not the prompt
+
+A prompt is static input. A query is a live, stateful, streamable execution with a lifecycle.
+
+It can be observed. It can be interrupted. It can be constrained.
+
+That changes where the system actually lives. Not in the model. Not in the prompt template. In the runtime that governs behavior over time.
+
+This matters because agent systems fail when control is implicit. If execution is only a side effect of a model call, then permissions, cost controls, retries, interruptions, and user approvals end up scattered across wrappers and handlers. The architecture becomes harder to reason about exactly where reliability matters most.
+
+Treating the query as the unit of execution fixes that. The lifecycle becomes explicit. The boundaries become enforceable.
+
+## Where the logic belongs
+
+This is where tool permissions, memory, streaming, compaction, budgets, and approval gates actually belong. Not spread across helper layers. Centralized in the execution object itself.
+
+The QueryEngine also defines usage boundaries as part of the lifecycle. Token budgets, cost tracking, and execution limits are not policies applied after the fact. They are part of the execution model.
+
+Tool interfaces follow the same principle. Tools should not exist as free functions floating in a registry. They should be governed through a structured interface that defines permissions, descriptions, and behavior. The runtime should know what each tool can do before the model ever asks for it.
+
+This is the difference between attaching governance to the outside of the system and building governance into the system itself.
+
+## Stream and state are different layers
+
+Most agent implementations still treat execution as a side effect. The QueryEngine pattern treats it as a first-class object.
+
+What makes that work in practice is the separation between the streaming layer and the state machine behind it. The stream handles what the user sees. The state machine handles what the system does.
+
+That includes transitions, decisions, tool calls, interruptions, retries, and completion. The two layers move together, but they do not need to be the same layer.
+
+This separation is what turns a technical pattern into good UX. The user gets a fluid and responsive interface. The system keeps a clean execution model underneath it.
+
+If the stream is also your source of truth for execution state, the design becomes fragile. Rendering concerns leak into control flow. Internal transitions become harder to inspect and harder to govern. A stateful execution object avoids that collapse.
+
+## Execution as a governable object
+
+A query has state. A query emits events. A query has a lifecycle you can reason about from outside the model.
+
+That aligns with how reliable agent systems should be built. The model reasons about what it receives. The runtime decides what that is. The runtime decides when execution can continue, what tools are visible, what budgets remain, and which constraints are active.
+
+This is why the runtime is the product.
+
+The model matters. Prompts matter. Neither is the full system. If you want agent behavior to be observable, interruptible, auditable, and safe to operate, execution has to be a governable object, not an implementation detail.
