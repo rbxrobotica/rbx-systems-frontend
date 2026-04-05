@@ -1,0 +1,101 @@
+---
+title: "Robson v2 finds its missing execution glue"
+date: "2026-04-05"
+author: "RBX Systems"
+authorRole: "Engineering Team"
+tags: [robson, runtime, architecture, execution, agents]
+excerpt: "Over the last three days, Robson v2 gained the governed layer it was missing between risk, approval, audit, projections, and recovery. That is laying real groundwork for v3."
+cover: "https://eu2.contabostorage.com/rbx-content/blog/covers/2026-04-05-robson-v2-finds-its-missing-execution-glue.png"
+---
+
+Over the last three days, Robson v2 stopped looking like a promising collection of runtime parts and started looking more coherent as an execution system.
+
+The main change was not more automation. It was making execution more explicit, more governable, and more recoverable. In our case, that means tightening the link between QueryEngine, risk, operator approval, EventLog, projector, and recovery.
+
+That matters because Robson does not exist to generate signals. It exists to govern what happens after a trading decision already exists. The critical layer is not the model layer. It is the execution layer.
+
+## What actually changed
+
+Yesterday, most of the work revolved around `QE-P2` and `QE-P3`.
+
+We added more explicit query lifecycle states such as `RiskChecked` and `Denied`. We also introduced `GovernedAction`, which makes a cleaner distinction between domain decisions, risk blocks, and operational errors.
+
+That sounds like a modeling detail until you look at the runtime effect. When an entry is denied, the system should not behave as if it crashed. When there is a state error, it should not be treated as a policy denial. That distinction is now sharper in both code and events.
+
+In the same window, Robson started counting `Entering` positions in risk context, aligned open-position semantics between `MemoryStore` and Postgres, and tightened the recovery contract for non-terminal states. That removes ambiguity exactly where financial systems tend to fail quietly.
+
+Today, the work moved in another important direction. The runtime gained more explicit approval gates, query lifecycle snapshots, materialized query audit state, and deterministic replay coverage for that path. In parallel, the daemon gained an SSE surface for the operator. This is not only a UX improvement. It is an operational control improvement.
+
+## Recovery is no longer a vague promise
+
+A relevant part of this cycle was `MIG-v2.5#2`.
+
+At first glance, that item looked like a projector-handler problem. In practice, it was an integrity problem between runtime and recovery.
+
+What landed was a more serious bridge between position events, EventLog, and projections:
+
+- centralized persistence in `execute_and_persist()`
+- domain event coverage in the projector
+- fail-fast handling for write-path failures when PostgreSQL is configured
+- recovery tests and dispatcher coverage tests for the events the runtime actually emits
+
+We also closed an important retry hole. If the EventLog append had already succeeded but projection apply had failed, the previous idempotent path could assume success too early. Now, when `IdempotentDuplicate` shows up, the runtime re-applies the projection from the already persisted envelope.
+
+This still does not turn the write path into a single atomic append-and-apply transaction. The documentation now says that plainly. But it already removes a class of silent drift that was previously handled with too much optimism.
+
+## What the Claude Code architecture helped make visible
+
+The last few weeks made a pattern clearer that we were already moving toward. The partial Claude Code architecture leak was useful not because of the model, but because of the runtime it exposed.
+
+The important signal there was not "which prompt do they use". It was something else: execution as a governed object.
+
+That is what pulled our attention toward pieces such as `Query`, `QueryEngine`, explicit approval gates, observable state transitions, and a cleaner separation between streaming and the state machine behind it.
+
+In Robson, that idea worked like the missing glue for the execution layer.
+
+Before that, too many important decisions risked being spread across handlers, wrappers, and one-off operational paths. Now the direction is clearer:
+
+- the query carries the execution lifecycle
+- the runtime decides when it can advance
+- risk blocks explicitly
+- operator approval enters as a formal transition, not an informal exception
+- EventLog and projector support audit and recovery
+
+That glue is not there to turn Robson into a coding agent. It is there to make the financial execution layer more serious, more observable, and more governable.
+
+## Naming also became infrastructure
+
+Another advance from these days was less flashy, but just as important. We standardized the technical language of the repository.
+
+We now use:
+
+- `MIG-v2.5#N` for migration steps from `v2` to `v2.5`
+- `MIG-v3#N` for the track from `v2.5` to `v3`
+- `QE-PN` for internal QueryEngine evolution
+- `Stage N` for runtime pipeline stages inside a single execution cycle
+
+That sounds bureaucratic until docs, code, and review start talking about "phase 3" while meaning three different things.
+
+Serious architecture needs stable names. Without them, the system may still compile, but coordination degrades. Yesterday and today we also consolidated that in a canonical root `AGENTS.md` inside `robson`, reducing drift between documentation, tool adapters, and the real repository state.
+
+## Why this prepares the ground for v3
+
+The important point is that none of this was treated like roadmap theater.
+
+We did not mark `MIG-v2.5#2` as done just because the architectural direction looks good. Its status remains `Pending` until there is real execution against PostgreSQL with `DATABASE_URL` configured. That discipline matters because v3 cannot be born as a slide. It has to emerge from a v2 that already has a defensible runtime.
+
+Today, Robson v2 is closer to that.
+
+It now has:
+
+- sharper risk gates
+- operator approval integrated into lifecycle
+- query snapshots and replay
+- materialized audit projection
+- SSE for the operational surface
+- a more serious bridge between position events, projection, and recovery
+- less ambiguous architectural language
+
+In other words, v3 no longer looks like an abstract rewrite. It is starting to look like the natural continuation of a runtime that finally got the right glue between execution, governance, and observability.
+
+That was the real progress of the last three days.

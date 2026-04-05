@@ -1,0 +1,101 @@
+---
+title: "Robson v2 encontra a cola de execução que faltava"
+date: "2026-04-05"
+author: "RBX Systems"
+authorRole: "Engineering Team"
+tags: [robson, runtime, arquitetura, execução, agentes]
+excerpt: "Nos últimos três dias, o Robson v2 ganhou a camada governada que faltava entre risco, aprovação, auditoria, projeções e recovery. Isso está preparando o terreno real para o v3."
+cover: "https://eu2.contabostorage.com/rbx-content/blog/covers/2026-04-05-robson-v2-finds-its-missing-execution-glue.png"
+---
+
+Nos últimos três dias, o Robson v2 deixou de ser apenas uma coleção promissora de componentes de runtime. Ele ficou mais coerente como sistema de execução.
+
+O ponto central não foi adicionar mais automação. Foi tornar a execução mais explícita, mais governável e mais recuperável. No nosso caso, isso significa apertar a ligação entre QueryEngine, risco, aprovação do operador, EventLog, projector e recovery.
+
+Esse trabalho importa porque o Robson não existe para gerar sinais. Ele existe para governar o que acontece depois que uma decisão de trading já existe. A camada crítica não é a do modelo. É a da execução.
+
+## O que mudou de fato
+
+Ontem, a maior parte do trabalho girou em torno de `QE-P2` e `QE-P3`.
+
+Entraram estados mais explícitos para o ciclo de vida das queries, como `RiskChecked` e `Denied`. Entrou também a ideia de `GovernedAction`, que separa com mais clareza o que é decisão de domínio, o que é bloqueio de risco e o que é erro operacional.
+
+Isso parece detalhe de modelagem até você olhar o efeito no runtime. Quando uma entrada é negada, o sistema não deveria se comportar como se tivesse quebrado. Quando há um erro de estado, ele não deveria ser tratado como se fosse só uma negação de política. Essa distinção ficou mais nítida no código e nos eventos.
+
+No mesmo intervalo, o Robson passou a contar posições `Entering` no contexto de risco, alinhou a semântica de posições abertas entre `MemoryStore` e Postgres e endureceu o contrato de recovery para estados não terminais. Isso tira ambiguidade exatamente onde sistemas financeiros costumam falhar em silêncio.
+
+Hoje, o trabalho avançou em outra direção importante. O runtime ganhou gates de aprovação mais explícitos, snapshots do ciclo de vida das queries, projeção materializada do estado de auditoria e replay determinístico para esse fluxo. Em paralelo, o daemon ganhou uma superfície SSE para o operador. Isso não é só uma melhoria de UX. É uma melhoria de controle operacional.
+
+## A recuperação deixou de ser uma promessa vaga
+
+Uma parte relevante desse ciclo foi `MIG-v2.5#2`.
+
+Esse item parecia, à primeira vista, um problema de handlers do projector. Na prática, ele era um problema de integridade entre runtime e recovery.
+
+O que entrou foi uma ponte mais séria entre eventos de posição, EventLog e projeções:
+
+- persistência centralizada em `execute_and_persist()`
+- cobertura de eventos de domínio no projector
+- tratamento fail-fast para falhas no write path quando PostgreSQL está configurado
+- testes de recovery e de cobertura do dispatcher para os eventos que o runtime realmente emite
+
+Também corrigimos um buraco importante de retry. Se o append no EventLog já tivesse acontecido, mas a aplicação na projeção falhasse, o caminho idempotente anterior podia assumir sucesso cedo demais. Agora, quando aparece `IdempotentDuplicate`, o runtime reaplica a projeção a partir do envelope já persistido.
+
+Isso ainda não transforma o write path em uma transação única entre append e apply. A documentação agora deixa isso explícito. Mas já impede uma classe de drift silencioso que antes era tratada com otimismo demais.
+
+## O que a arquitetura do Claude Code ajudou a revelar
+
+As últimas semanas deixaram mais claro um padrão que já vínhamos perseguindo. O vazamento parcial da arquitetura do Claude Code foi útil não por causa do modelo, mas por causa do runtime que ele deixou entrever.
+
+O sinal mais importante ali não era "qual prompt eles usam". Era outra coisa: execução como objeto governado.
+
+Foi isso que puxou nossa atenção para peças como `Query`, `QueryEngine`, gates explícitos de aprovação, transições de estado observáveis e uma separação mais limpa entre streaming e máquina de estados.
+
+No Robson, essa ideia funcionou como a cola que faltava para a camada de execução.
+
+Antes, muitas decisões importantes corriam o risco de ficar espalhadas entre handlers, wrappers e caminhos operacionais pontuais. Agora, a direção está mais clara:
+
+- a query carrega o ciclo de vida da execução
+- o runtime decide quando ela pode avançar
+- o risco bloqueia de forma explícita
+- a aprovação do operador entra como transição formal, não como exceção informal
+- o EventLog e o projector sustentam auditoria e recovery
+
+Essa cola não veio para transformar o Robson em um agente de codificação. Veio para tornar a camada de execução do domínio financeiro mais séria, mais observável e mais governável.
+
+## A nomenclatura também virou infraestrutura
+
+Outro avanço destes dias foi menos chamativo, mas igualmente importante. Padronizamos a linguagem técnica do repositório.
+
+Agora usamos:
+
+- `MIG-v2.5#N` para etapas de migração de `v2` para `v2.5`
+- `MIG-v3#N` para a trilha de `v2.5` para `v3`
+- `QE-PN` para a evolução interna do QueryEngine
+- `Stage N` para etapas do pipeline runtime dentro de um ciclo de execução
+
+Isso parece burocracia até o momento em que docs, código e revisão começam a falar de "fase 3" querendo dizer três coisas diferentes.
+
+Arquitetura séria precisa de nomes estáveis. Sem isso, o sistema até compila, mas a coordenação degrada. Ontem e hoje nós também consolidamos isso em um `AGENTS.md` canônico na raiz do `robson`, para reduzir drift entre documentação, adapters de ferramentas e estado real do repositório.
+
+## Por que isso prepara o terreno para o v3
+
+O ponto importante é que nada disso foi tratado como teatro de roadmap.
+
+Não marcamos `MIG-v2.5#2` como concluído só porque a direção arquitetural parece boa. O status continua `Pending` enquanto faltar execução real contra PostgreSQL com `DATABASE_URL` configurado. Essa disciplina importa porque o v3 não pode nascer como slide. Ele precisa nascer de um v2 que já tenha runtime defensável.
+
+Hoje o Robson v2 está mais próximo disso.
+
+Ele já tem:
+
+- gates de risco mais explícitos
+- aprovação do operador integrada ao ciclo de vida
+- snapshots e replay de queries
+- projeção materializada para auditoria
+- SSE para a superfície operacional
+- uma ponte mais séria entre eventos de posição, projeção e recovery
+- uma linguagem arquitetural menos ambígua
+
+Em outras palavras, o v3 deixou de parecer uma reescrita abstrata. Ele começa a parecer uma continuação natural de um runtime que finalmente ganhou a cola certa entre execução, governança e observabilidade.
+
+Esse foi o progresso real dos últimos três dias.
