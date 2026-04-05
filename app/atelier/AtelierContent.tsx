@@ -11,34 +11,6 @@ const CTA_LINKS = {
   scheduleCall: "#contact",
 };
 
-// Selected Works data
-const SELECTED_WORKS = [
-  {
-    id: 1,
-    title: "Institutional Narrative",
-    description: "Strategic positioning through visual storytelling",
-    youtubeUrl: "https://www.youtube.com/embed/b1waaKdSHKM",
-  },
-  {
-    id: 2,
-    title: "Executive Communication",
-    description: "Leadership presence and corporate messaging",
-    youtubeUrl: "https://www.youtube.com/embed/9Wy9B_BlvwA",
-  },
-  {
-    id: 3,
-    title: "Product Storytelling",
-    description: "Complex systems translated into clear narratives",
-    youtubeUrl: "https://www.youtube.com/embed/kIYyb-3iDMg",
-  },
-  {
-    id: 4,
-    title: "Strategic Briefing",
-    description: "Decision-making support through visual clarity",
-    youtubeUrl: "https://www.youtube.com/embed/B30GzSKNHVA",
-  },
-];
-
 // How we work steps
 const WORK_STEPS = [
   {
@@ -179,65 +151,6 @@ export default function AtelierContent({ dict }: { dict: Dictionary }) {
               variants={fadeInUp}
             >
               Each project is developed to align with the client&apos;s positioning, audience and operational context.
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Selected Works Section */}
-      <section className="py-24 px-6 border-t border-neutral-900">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-          >
-            <motion.p
-              className="text-sm tracking-[0.2em] uppercase text-neutral-500 mb-4"
-              variants={fadeInUp}
-            >
-              Selected Works
-            </motion.p>
-            <motion.p
-              className="text-xl md:text-2xl text-neutral-300 mb-16 max-w-2xl"
-              variants={fadeInUp}
-            >
-              A curated selection of recent productions.
-            </motion.p>
-
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-8"
-              variants={staggerContainer}
-            >
-              {SELECTED_WORKS.map((work) => (
-                <motion.div
-                  key={work.id}
-                  className="group"
-                  variants={fadeInUp}
-                >
-                  <div className="aspect-video bg-neutral-900 rounded-lg overflow-hidden mb-4 border border-neutral-800 group-hover:border-neutral-700 transition-colors duration-300">
-                    <iframe
-                      src={work.youtubeUrl}
-                      title={work.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
-                  </div>
-                  <h3 className="text-lg font-medium text-neutral-200 mb-1">
-                    {work.title}
-                  </h3>
-                  <p className="text-sm text-neutral-500">{work.description}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.p
-              className="text-neutral-500 mt-12 max-w-2xl"
-              variants={fadeInUp}
-            >
-              Each piece reflects a different layer of communication, from institutional presence to product positioning and strategic messaging.
             </motion.p>
           </motion.div>
         </div>
