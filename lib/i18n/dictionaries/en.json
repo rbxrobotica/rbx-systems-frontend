@@ -26,26 +26,26 @@
   "aboutUsMenu": [
     {
       "id": 0,
-      "href": "#about-us",
+      "href": "/#about-us",
       "title": "Who We Are",
       "description": "Systems engineering, automation and infrastructure for high-demand operations.",
       "isHighlight": true
     },
     {
       "id": 1,
-      "href": "#mission",
+      "href": "/#mission",
       "title": "Positioning",
       "description": "How we think about technology, operations and reliability."
     },
     {
       "id": 2,
-      "href": "#approach",
+      "href": "/#approach",
       "title": "Approach",
       "description": "Architecture, governance and operational discipline as the foundation of every project."
     },
     {
       "id": 3,
-      "href": "#team",
+      "href": "/#team",
       "title": "Team",
       "description": "Engineers and specialists with experience in critical systems and infrastructure."
     }
@@ -101,7 +101,7 @@
     },
     {
       "id": 2,
-      "href": "#footer",
+      "href": "/#footer",
       "title": "Contact"
     }
   ],

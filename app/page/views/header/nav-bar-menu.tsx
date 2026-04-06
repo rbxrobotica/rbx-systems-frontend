@@ -175,7 +175,7 @@ export function NavigationMenuBar({ dict }: { dict: Dictionary }): JSX.Element {
           <ModeToggle dict={dict} />
           <LocaleSwitcher />
           <Button asChild className="hidden xl:inline-flex">
-            <Link href="#footer">{dict.nav.contact}</Link>
+            <Link href="/#footer">{dict.nav.contact}</Link>
           </Button>
         </motion.div>
       </div>

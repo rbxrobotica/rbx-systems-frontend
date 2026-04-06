@@ -19,8 +19,8 @@ export default function Footer({ dict }: { dict: Dictionary }) {
     {
       title: dict.footer.sections.company,
       links: [
-        { label: dict.footer.links.aboutUs, href: "#about-us" },
-        { label: dict.footer.links.team, href: "#team" },
+        { label: dict.footer.links.aboutUs, href: "/#about-us" },
+        { label: dict.footer.links.team, href: "/#team" },
         { label: "Blog", href: "/blog" },
         { label: dict.footer.links.products, href: "/produtos" },
         { label: "Atelier", href: "/atelier" },

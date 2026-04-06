@@ -26,26 +26,26 @@
   "aboutUsMenu": [
     {
       "id": 0,
-      "href": "#about-us",
+      "href": "/#about-us",
       "title": "Quem somos",
       "description": "Engenharia de sistemas, automacao e infraestrutura para operacoes de alta exigencia.",
       "isHighlight": true
     },
     {
       "id": 1,
-      "href": "#mission",
+      "href": "/#mission",
       "title": "Posicionamento",
       "description": "Como pensamos sobre tecnologia, operacao e confiabilidade."
     },
     {
       "id": 2,
-      "href": "#approach",
+      "href": "/#approach",
       "title": "Abordagem",
       "description": "Arquitetura, governanca e disciplina operacional como base de cada projeto."
     },
     {
       "id": 3,
-      "href": "#team",
+      "href": "/#team",
       "title": "Equipe",
       "description": "Engenheiros e especialistas com experiencia em sistemas criticos e infraestrutura."
     }
@@ -101,7 +101,7 @@
     },
     {
       "id": 2,
-      "href": "#footer",
+      "href": "/#footer",
       "title": "Contato"
     }
   ],
