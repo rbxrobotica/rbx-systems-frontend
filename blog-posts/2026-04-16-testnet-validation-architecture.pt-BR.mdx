@@ -1,0 +1,84 @@
+---
+title: "Como validamos o Robson antes de habilitar capital real"
+date: "2026-04-16"
+author: "RBX Systems"
+authorRole: "Engineering Team"
+tags: [robson, testnet, validação, arquitetura, risco, websocket, event-sourcing]
+excerpt: "Antes de habilitar qualquer capital real, o Robson passa por uma validação E2E formal de 5 fases em testnet. Aqui está como esse processo funciona, o que encontramos e o que a arquitetura aprendeu."
+---
+
+Sistemas de software que lidam com dinheiro não podem ser colocados em produção com base apenas em confiança. Antes de habilitar capital real no Robson, a equipe de engenharia da RBX conduz uma sessão formal de validação end-to-end em testnet. Este post descreve como esse processo funciona, o que encontramos na sessão mais recente e por que algumas decisões arquiteturais tornaram a validação significativa, e não apenas uma formalidade.
+
+## O runbook E2E de 5 fases
+
+A validação em testnet não é um smoke test improvisado. Ela segue um runbook estruturado com cinco fases sequenciais:
+
+- **ARM** — o daemon inicia, conecta ao feed de dados de mercado e confirma que todos os subsistemas estão operacionais
+- **Sinal do detector** — o detector dispara um sinal real baseado em dados de mercado ao vivo, com um nível de stop calculado
+- **Verificação de fill** — o sistema tenta posicionar uma ordem e verifica o tratamento do fill pela trilha de auditoria
+- **Monitoramento do trailing stop** — o monitor de posição começa a processar ticks e o EventLog registra cada ciclo
+- **Saída** — a posição é fechada e todos os eventos do ciclo de vida são corretamente registrados
+
+Cada fase tem um critério de aprovação ou reprovação definido antes da sessão começar. A equipe não avança para a próxima fase sem confirmar a fase atual no EventLog. Isso é intencional: torna uma validação parcial visível em vez de escondê-la atrás de um badge verde de CI.
+
+## Stops derivados do gráfico, não de percentuais
+
+Uma decisão tomada em trabalho arquitetural anterior, formalizada no ADR-0021, afetou diretamente como o sinal de validação foi interpretado.
+
+O Robson não calcula níveis de stop-loss como percentual do preço de entrada. Os níveis de stop vêm do gráfico de 15 minutos: o sistema identifica pontos de swing e usa o ATR como fallback quando a estrutura recente é ambígua. Isso posiciona o stop em um nível tecnicamente significativo, e não em uma distância arbitrária da entrada.
+
+A separação entre Detecção de Oportunidades e Análise Técnica de Stop é uma fronteira arquitetural explícita. O detector identifica que existe uma configuração de trade. Um componente distinto calcula onde o stop deve estar, com base na geometria do gráfico. As duas responsabilidades são mantidas separadas por design.
+
+Isso importa para a validação porque significa que o nível de stop associado a um sinal não é um parâmetro escolhido pela equipe. É um resultado calculado a partir de dados de mercado. Validá-lo significa verificar que o cálculo rodou corretamente, não que alguém escolheu um percentual razoável.
+
+Durante esta sessão, o detector disparou um sinal real de cruzamento de médias em um feed ao vivo de testnet. O sinal carregava um stop derivado do gráfico, calculado a partir da estrutura recente de swings. A avaliação de risco que se seguiu operou sobre dados reais, não sobre entradas sintéticas preparadas para o teste.
+
+## Confiabilidade do WebSocket: dois bugs encontrados e corrigidos
+
+Antes de chegar à fase de sinal, a sessão de testnet revelou dois bugs de WebSocket que teriam causado degradação periódica e silenciosa em produção.
+
+O primeiro foi um erro na implementação do frame Pong. O daemon do Robson estava enviando frames Pong vazios em resposta às mensagens Ping da Binance. O protocolo WebSocket exige que um frame Pong ecoe o payload do Ping que o originou. A Binance envia um payload não vazio. Enviar um Pong vazio é tecnicamente não conforme e causou desconexões periódicas na conexão com o testnet.
+
+O segundo foi um erro de URL. O endpoint WebSocket de testnet difere do endpoint de produção, e o daemon estava usando o errado para sessões de testnet. As conexões pareciam se estabelecer e depois falhavam em silêncio.
+
+Os dois bugs foram corrigidos antes de a fase de sinal rodar. Nenhum deles seria óbvio a partir de testes unitários isolados, porque eles só se manifestam contra um servidor WebSocket real com comportamento real. Esse é o argumento para rodar sessões de testnet contra infraestrutura real em vez de mockar tudo.
+
+## Event sourcing como trilha de auditoria primária
+
+Cada ordem que o Robson coloca carrega um `cycle_id` que a vincula à aprovação do Risk Engine que a autorizou. Esse não é um campo de conveniência. É o mecanismo de auditoria.
+
+Ao validar a fase de fill, a equipe não inspeciona logs procurando IDs de ordens. O EventLog é consultado diretamente. Uma ordem sem um `cycle_id` rastreável seria uma anomalia, não apenas uma linha de log ausente.
+
+Esse design reflete um princípio que a equipe da RBX mantém de forma consistente: logs são saída operacional, mas o EventLog é o registro do que o sistema decidiu e por quê. Para um daemon financeiro, essa distinção importa porque logs podem ser ruidosos, filtrados ou perdidos. O EventLog é append-only e é a evidência primária para qualquer revisão posterior.
+
+## O gate de risco funcionou como projetado
+
+Durante a sessão de validação, o sinal de cruzamento de médias disparou com um stop derivado do gráfico. O Risk Engine avaliou o tamanho de posição proposto em relação ao limite de exposição configurado e bloqueou o trade.
+
+Isso é o sistema funcionando corretamente.
+
+O sinal era real. O stop era real. O Risk Engine fez seu trabalho: calculou que o tamanho proposto excederia o limite de exposição de capital configurado e retornou uma negação. A negação foi registrada no EventLog com o contexto completo da avaliação.
+
+Para equipes que ainda não rodaram esse tipo de validação formal, vale dizer claramente: o gate de risco bloqueando um trade durante a validação é um resultado de aprovação, não de falha. O objetivo não é confirmar que os trades passam. O objetivo é confirmar que a camada de governança se comporta corretamente dado os limites configurados.
+
+## position_monitor_tick: tornando a validação de curta duração possível
+
+Uma lacuna que ficou clara durante sessões anteriores era que o EventLog só registrava atualizações do trailing stop quando o trailing stop de fato se movia. Para um monitor de posição processando ticks, isso significava que uma sessão de validação curta com pouca movimentação de preço produziria quase nenhuma evidência de auditoria para a fase de monitoramento.
+
+Para corrigir isso, a equipe adicionou um evento `position_monitor_tick`. Esse evento é inserido no EventLog a cada tick processado pelo monitor de posição, independente de o nível do trailing stop ter mudado. Ele registra o preço atual, o nível de stop atual e o resultado da avaliação.
+
+A mudança torna possível validações de curta duração. A equipe pode verificar que o monitor de posição está rodando, que os ticks estão sendo processados e que a avaliação de stop está acontecendo, sem precisar esperar que o preço se mova favoravelmente o suficiente para disparar um ajuste de stop.
+
+## O que esta sessão confirmou
+
+A sessão E2E de testnet confirmou diversas coisas que a arquitetura assume mas que não podem ser provadas apenas com testes unitários:
+
+- A conectividade WebSocket contra uma exchange real se comporta de forma diferente de transportes mockados
+- Os níveis de stop derivados do gráfico são calculados e associados aos sinais corretamente
+- O gate de risco avalia limites de exposição com precisão
+- O EventLog captura o ciclo de vida completo de um sinal, desde a detecção até a avaliação de risco e a negação
+- O monitor de posição processa ticks e registra evidências a cada ciclo
+
+Antes de habilitar capital real, a equipe rodará as mesmas cinco fases novamente, desta vez com a fase de trailing stop executando tempo suficiente para confirmar o fechamento de posição pelo handler de saída. Essa sessão será o gate final antes de trocar de chaves de testnet para produção.
+
+O runbook existe porque disciplina nessa etapa é mais barata do que um incidente em produção.
