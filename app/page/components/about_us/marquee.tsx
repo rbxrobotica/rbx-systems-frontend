@@ -20,37 +20,37 @@ const IconsList = () => {
   const fadeInUp: Variants = MotionVariants.fadeInUp();
   const staggerContainer: Variants = MotionVariants.staggerContainer();
 
+  const allIcons = [...icons, ...icons];
+
   return (
-    <section className="-mt-16 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-15">
-      <div className="flex flex-col items-center text-center">
+    <section className="w-full overflow-hidden -mt-16 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-15">
+      <motion.div
+        className="h-24 flex"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={staggerContainer}
+      >
         <motion.div
-          className="h-24 w-full bg-fixed bg-cover flex overflow-hidden"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={staggerContainer}
+          className="flex shrink-0"
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{
+            duration: 20,
+            ease: 'linear',
+            repeat: Infinity,
+          }}
         >
-          <motion.div
-            className="flex"
-            animate={{ x: ['10%', '-100%'] }}
-            transition={{
-              duration: 30,
-              ease: 'linear',
-              repeat: Infinity,
-            }}
-          >
-            {icons.map(({ id, icon }) => (
-              <motion.div
-                key={id}
-                className="flex justify-center items-center text-4xl mx-6"
-                variants={fadeInUp}
-              >
-                {icon}
-              </motion.div>
-            ))}
-          </motion.div>
+          {allIcons.map(({ id, icon }, i) => (
+            <motion.div
+              key={`${id}-${i}`}
+              className="flex justify-center items-center text-4xl w-24"
+              variants={fadeInUp}
+            >
+              {icon}
+            </motion.div>
+          ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };
