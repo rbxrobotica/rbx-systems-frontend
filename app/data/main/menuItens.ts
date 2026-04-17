@@ -4,42 +4,42 @@ export const servicesItems = [
         title: "Sistemas Web e Plataformas",
         href: "/servicos#sistemas-web",
         description:
-            "Aplicacoes web e plataformas internas com arquitetura para operacao continua e escala controlada.",
+            "Aplicações web e plataformas internas com arquitetura para operação contínua e escala controlada.",
     },
     {
         id: 1,
-        title: "Automacao e Integracoes",
+        title: "Automação e Integrações",
         href: "/servicos#automacao",
         description:
-            "Workflows automatizados e integracoes entre sistemas para eliminar operacao manual em fluxos criticos.",
+            "Workflows automatizados e integrações entre sistemas para eliminar operação manual em fluxos críticos.",
     },
     {
         id: 2,
         title: "IA Aplicada e Agentes",
         href: "/servicos#ia-aplicada",
         description:
-            "Modelos e agentes inteligentes integrados a fluxos de negocio com governanca e observabilidade.",
+            "Modelos e agentes inteligentes integrados a fluxos de negócio com governança e observabilidade.",
     },
     {
         id: 3,
         title: "Infraestrutura Cloud",
         href: "/servicos#infraestrutura",
         description:
-            "Ambientes cloud com provisionamento declarativo, pipelines CI/CD e operacao confiavel.",
+            "Ambientes cloud com provisionamento declarativo, pipelines CI/CD e operação confiável.",
     },
     {
         id: 4,
         title: "Backend e APIs",
         href: "/servicos#backend",
         description:
-            "Servicos de backend, APIs e camadas de dados projetados para consistencia, performance e manutencao.",
+            "Serviços de backend, APIs e camadas de dados projetados para consistência, performance e manutenção.",
     },
     {
         id: 5,
-        title: "Manutencao Evolutiva",
+        title: "Manutenção Evolutiva",
         href: "/servicos#manutencao",
         description:
-            "Evolucao continua de sistemas em producao com estabilidade, rastreabilidade e controle de regressao.",
+            "Evolução contínua de sistemas em produção com estabilidade, rastreabilidade e controle de regressão.",
     },
 ];
 
@@ -49,7 +49,7 @@ export const aboutUsItems = [
         href: "#about-us",
         title: "Quem somos",
         description:
-            "Engenharia de sistemas, automacao e infraestrutura para operacoes de alta exigencia.",
+            "Engenharia de sistemas, automação e infraestrutura para operações de alta exigência.",
         isHighlight: true,
     },
     {
@@ -57,21 +57,21 @@ export const aboutUsItems = [
         href: "#mission",
         title: "Posicionamento",
         description:
-            "Como pensamos sobre tecnologia, operacao e confiabilidade.",
+            "Como pensamos sobre tecnologia, operação e confiabilidade.",
     },
     {
         id: 2,
         href: "#approach",
         title: "Abordagem",
         description:
-            "Arquitetura, governanca e disciplina operacional como base de cada projeto.",
+            "Arquitetura, governança e disciplina operacional como base de cada projeto.",
     },
     {
         id: 3,
         href: "#team",
         title: "Equipe",
         description:
-            "Engenheiros e especialistas com experiencia em sistemas criticos e infraestrutura.",
+            "Engenheiros e especialistas com experiência em sistemas críticos e infraestrutura.",
     },
 ];
 

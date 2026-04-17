@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "RBX Systems — Engenharia de Sistemas e Infraestrutura",
-    "description": "Engenharia de sistemas, automacao operacional, IA aplicada e infraestrutura cloud para operacoes de alta exigencia."
+    "description": "Engenharia de sistemas, automação operacional, IA aplicada e infraestrutura cloud para operações de alta exigência."
   },
   "nav": {
     "aboutUs": "Sobre nós",
@@ -28,26 +28,26 @@
       "id": 0,
       "href": "/#about-us",
       "title": "Quem somos",
-      "description": "Engenharia de sistemas, automacao e infraestrutura para operacoes de alta exigencia.",
+      "description": "Engenharia de sistemas, automação e infraestrutura para operações de alta exigência.",
       "isHighlight": true
     },
     {
       "id": 1,
       "href": "/#mission",
       "title": "Posicionamento",
-      "description": "Como pensamos sobre tecnologia, operacao e confiabilidade."
+      "description": "Como pensamos sobre tecnologia, operação e confiabilidade."
     },
     {
       "id": 2,
       "href": "/#approach",
       "title": "Abordagem",
-      "description": "Arquitetura, governanca e disciplina operacional como base de cada projeto."
+      "description": "Arquitetura, governança e disciplina operacional como base de cada projeto."
     },
     {
       "id": 3,
       "href": "/#team",
       "title": "Equipe",
-      "description": "Engenheiros e especialistas com experiencia em sistemas criticos e infraestrutura."
+      "description": "Engenheiros e especialistas com experiência em sistemas críticos e infraestrutura."
     }
   ],
   "servicesMenu": [
@@ -55,37 +55,37 @@
       "id": 0,
       "title": "Sistemas Web e Plataformas",
       "href": "/servicos#sistemas-web",
-      "description": "Aplicacoes web e plataformas internas com arquitetura para operacao continua e escala controlada."
+      "description": "Aplicações web e plataformas internas com arquitetura para operação contínua e escala controlada."
     },
     {
       "id": 1,
-      "title": "Automacao e Integracoes",
+      "title": "Automação e Integrações",
       "href": "/servicos#automacao",
-      "description": "Workflows automatizados e integracoes entre sistemas para eliminar operacao manual em fluxos criticos."
+      "description": "Workflows automatizados e integrações entre sistemas para eliminar operação manual em fluxos críticos."
     },
     {
       "id": 2,
       "title": "IA Aplicada e Agentes",
       "href": "/servicos#ia-aplicada",
-      "description": "Modelos e agentes inteligentes integrados a fluxos de negocio com governanca e observabilidade."
+      "description": "Modelos e agentes inteligentes integrados a fluxos de negócio com governança e observabilidade."
     },
     {
       "id": 3,
       "title": "Infraestrutura Cloud",
       "href": "/servicos#infraestrutura",
-      "description": "Ambientes cloud com provisionamento declarativo, pipelines CI/CD e operacao confiavel."
+      "description": "Ambientes cloud com provisionamento declarativo, pipelines CI/CD e operação confiável."
     },
     {
       "id": 4,
       "title": "Backend e APIs",
       "href": "/servicos#backend",
-      "description": "Servicos de backend, APIs e camadas de dados projetados para consistencia, performance e manutencao."
+      "description": "Serviços de backend, APIs e camadas de dados projetados para consistência, performance e manutenção."
     },
     {
       "id": 5,
-      "title": "Manutencao Evolutiva",
+      "title": "Manutenção Evolutiva",
       "href": "/servicos#manutencao",
-      "description": "Evolucao continua de sistemas em producao com estabilidade, rastreabilidade e controle de regressao."
+      "description": "Evolução contínua de sistemas em produção com estabilidade, rastreabilidade e controle de regressão."
     }
   ],
   "blogEcontatoMenu": [
@@ -112,97 +112,97 @@
     "isHighlight": true
   },
   "hero": {
-    "headline": "Engenharia de sistemas para operacoes que exigem controle",
-    "body": "Projetamos plataformas, automacoes e infraestrutura para empresas que operam com alta exigencia. Backend, cloud, agentes inteligentes e integracoes construidos para confiabilidade e escala previsivel.",
-    "ctaServices": "Nossos servicos",
+    "headline": "Engenharia de sistemas para operações que exigem controle",
+    "body": "Projetamos plataformas, automações e infraestrutura para empresas que operam com alta exigência. Backend, cloud, agentes inteligentes e integrações construídos para confiabilidade e escala previsível.",
+    "ctaServices": "Nossos serviços",
     "ctaProducts": "Produtos"
   },
   "about": {
     "heading": "Sistemas projetados para operar",
-    "mission": "A RBX projeta e opera plataformas, automacoes e infraestrutura para ambientes onde confiabilidade, governanca e controle sao requisitos, nao diferenciais.",
+    "mission": "A RBX projeta e opera plataformas, automações e infraestrutura para ambientes onde confiabilidade, governança e controle são requisitos, não diferenciais.",
     "positioning": "POSICIONAMENTO",
-    "positioningBody": "Tratamos software como infraestrutura operacional. Cada sistema que entregamos e projetado para ser mantido, observado e evoluido com seguranca ao longo de anos, nao apenas para funcionar no dia do deploy.",
+    "positioningBody": "Tratamos software como infraestrutura operacional. Cada sistema que entregamos é projetado para ser mantido, observado e evoluído com segurança ao longo de anos, não apenas para funcionar no dia do deploy.",
     "howWeOperate": "Como operamos",
-    "howWeOperateBody": "Cada projeto segue principios de arquitetura, rastreabilidade e operacao continua. Construimos para que sistemas funcionem de forma previsivel em producao.",
+    "howWeOperateBody": "Cada projeto segue princípios de arquitetura, rastreabilidade e operação contínua. Construímos para que sistemas funcionem de forma previsível em produção.",
     "cards": [
       {
         "title": "Arquitetura",
-        "description": "Sistemas projetados com arquitetura escalavel, observavel e testavel desde o inicio."
+        "description": "Sistemas projetados com arquitetura escalável, observável e testável desde o início."
       },
       {
-        "title": "Governanca",
-        "description": "Processos, padroes e disciplina operacional integrados em cada fase do desenvolvimento."
+        "title": "Governança",
+        "description": "Processos, padrões e disciplina operacional integrados em cada fase do desenvolvimento."
       },
       {
-        "title": "Operacao",
-        "description": "Suporte contínuo, monitoramento e evolução de sistemas em producao com seguranca."
+        "title": "Operação",
+        "description": "Suporte contínuo, monitoramento e evolução de sistemas em produção com segurança."
       }
     ],
     "teamSection": {
       "heading": "Nossa equipe",
-      "body": "Engenheiros especializados em sistemas de missao critica, infraestrutura e operacoes em larga escala."
+      "body": "Engenheiros especializados em sistemas de missão crítica, infraestrutura e operações em larga escala."
     },
     "joinTeam": {
       "label": "Trabalhe conosco",
       "heading": "Engenheiros que projetam sistemas para durar",
-      "body": "Buscamos perfis tecnicos apaixonados por infraestrutura, confiabilidade e excelencia operacional.",
+      "body": "Buscamos perfis técnicos apaixonados por infraestrutura, confiabilidade e excelência operacional.",
       "cvLabel": "Envie seu CV: ",
       "cvLink": "Enviar Currículo para RBX Systems"
     }
   },
   "services": {
-    "pageTitle": "Servicos",
-    "pageSubtitle": "Projetamos, construimos e operamos solucoes de engenharia de sistemas para operacoes que exigem controle e confiabilidade.",
+    "pageTitle": "Serviços",
+    "pageSubtitle": "Projetamos, construímos e operamos soluções de engenharia de sistemas para operações que exigem controle e confiabilidade.",
     "ctaHeading": "Precisa de engenharia de sistemas?",
-    "ctaBody": "Se a sua operacao depende de infraestrutura confiavel, entre em contato com nosso time.",
+    "ctaBody": "Se a sua operação depende de infraestrutura confiável, entre em contato com nosso time.",
     "ctaButton": "Entrar em contato",
     "items": [
       {
         "id": 0,
         "title": "Sistemas Web e Plataformas",
         "href": "/servicos#sistemas-web",
-        "description": "Aplicacoes web e plataformas internas com arquitetura para operacao continua e escala controlada."
+        "description": "Aplicações web e plataformas internas com arquitetura para operação contínua e escala controlada."
       },
       {
         "id": 1,
-        "title": "Automacao e Integracoes",
+        "title": "Automação e Integrações",
         "href": "/servicos#automacao",
-        "description": "Workflows automatizados e integracoes entre sistemas para eliminar operacao manual em fluxos criticos."
+        "description": "Workflows automatizados e integrações entre sistemas para eliminar operação manual em fluxos críticos."
       },
       {
         "id": 2,
         "title": "IA Aplicada e Agentes",
         "href": "/servicos#ia-aplicada",
-        "description": "Modelos e agentes inteligentes integrados a fluxos de negocio com governanca e observabilidade."
+        "description": "Modelos e agentes inteligentes integrados a fluxos de negócio com governança e observabilidade."
       },
       {
         "id": 3,
         "title": "Infraestrutura Cloud",
         "href": "/servicos#infraestrutura",
-        "description": "Ambientes cloud com provisionamento declarativo, pipelines CI/CD e operacao confiavel."
+        "description": "Ambientes cloud com provisionamento declarativo, pipelines CI/CD e operação confiável."
       },
       {
         "id": 4,
         "title": "Backend e APIs",
         "href": "/servicos#backend",
-        "description": "Servicos de backend, APIs e camadas de dados projetados para consistencia, performance e manutencao."
+        "description": "Serviços de backend, APIs e camadas de dados projetados para consistência, performance e manutenção."
       },
       {
         "id": 5,
-        "title": "Manutencao Evolutiva",
+        "title": "Manutenção Evolutiva",
         "href": "/servicos#manutencao",
-        "description": "Evolucao continua de sistemas em producao com estabilidade, rastreabilidade e controle de regressao."
+        "description": "Evolução contínua de sistemas em produção com estabilidade, rastreabilidade e controle de regressão."
       }
     ]
   },
   "products": {
     "badge": "Open source · Made in Brazil",
     "heading": "Produtos RBX",
-    "body": "Todos os produtos sao open source e disponíveis publicamente. Construidos com rigor operacional e pronto para missoes criticas.",
+    "body": "Todos os produtos são open source e disponíveis publicamente. Construídos com rigor operacional e prontos para missões críticas.",
     "phases": {
       "seed": "Semente",
-      "structuring": "Estruturacao",
-      "expansion": "Expansao",
+      "structuring": "Estruturação",
+      "expansion": "Expansão",
       "institutionalized": "Institucionalizado"
     },
     "types": {
@@ -214,7 +214,7 @@
     },
     "contribute": {
       "heading": "Contribua",
-      "body": "Todos os repositorios sao públicos. Contribuicoes, issues e feedback sao bem-vindos.",
+      "body": "Todos os repositórios são públicos. Contribuições, issues e feedback são bem-vindos.",
       "cta": "github.com/rbxrobotica"
     }
   },
@@ -223,25 +223,25 @@
   },
   "blog": {
     "heading": "Blog",
-    "tagline": "Ideias, lancamentos e reflexoes da RBX Systems.",
+    "tagline": "Ideias, lançamentos e reflexões da RBX Systems.",
     "empty": "Em breve.",
     "backLabel": "← Blog"
   },
   "footer": {
-    "description": "Engenharia de sistemas, automacao e infraestrutura para operacoes de alta exigencia.",
+    "description": "Engenharia de sistemas, automação e infraestrutura para operações de alta exigência.",
     "sections": {
-      "services": "Servicos",
+      "services": "Serviços",
       "company": "Empresa",
       "contact": "Contato"
     },
     "links": {
       "systems_web": "Sistemas Web e Plataformas",
-      "automacao": "Automacao e Integracoes",
+      "automacao": "Automação e Integrações",
       "ia_aplicada": "IA Aplicada e Agentes",
       "infraestrutura": "Infraestrutura Cloud",
       "backend": "Backend e APIs",
-      "manutencao": "Manutencao Evolutiva",
-      "aboutUs": "Sobre nos",
+      "manutencao": "Manutenção Evolutiva",
+      "aboutUs": "Sobre nós",
       "team": "Equipe",
       "products": "Produtos"
     },
