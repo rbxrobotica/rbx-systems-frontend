@@ -21,7 +21,7 @@ export const products: Product[] = [
     name: "Robson",
     type: "fullstack",
     phase: "institutionalized",
-    domains: ["app.robson.rbx.ia.br", "api.robson.rbx.ia.br"],
+    domains: ["robson.{domain}", "api.robson.{domain}"],
     repo: "https://github.com/ldamasio/robson",
     description:
       "Motor de inteligência direcional para trading algorítmico. Análise de mercado em tempo real, gestão de risco automatizada e execução de estratégias com IA.",
@@ -39,7 +39,7 @@ export const products: Product[] = [
     name: "TruthMetal",
     type: "api",
     phase: "seed",
-    domains: ["api.truthmetal.rbx.ia.br"],
+    domains: ["api.truthmetal.{domain}"],
     repo: "https://github.com/ldamasio/truthmetal",
     description:
       "Plano de controle de verdade canônica para sistemas de IA. Garante que parâmetros e decisões compartilhados entre agentes sejam auditáveis, versionados e imutáveis.",
@@ -48,7 +48,7 @@ export const products: Product[] = [
     name: "Thalamus",
     type: "api",
     phase: "seed",
-    domains: ["api.thalamus.rbx.ia.br"],
+    domains: ["api.thalamus.{domain}"],
     repo: "https://github.com/ldamasio/thalamus",
     description:
       "Camada de roteamento e orquestração de dados analíticos. Hub central de sinais e eventos para os produtos RBX.",
@@ -57,7 +57,7 @@ export const products: Product[] = [
     name: "Argos Radar",
     type: "fullstack",
     phase: "seed",
-    domains: ["app.argos.rbx.ia.br", "api.argos.rbx.ia.br"],
+    domains: ["argos.{domain}", "api.argos.{domain}"],
     repo: "https://github.com/ldamasio/argos-radar",
     description:
       "Plataforma de vigilância e monitoramento de mercados. Detecta padrões, anomalias e sinais relevantes em múltiplos ativos e timeframes.",

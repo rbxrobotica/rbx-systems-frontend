@@ -175,6 +175,11 @@ function ProductCard({
   phaseLabels: Record<Phase, string>
   typeLabels: Record<Product["type"], string>
 }) {
+  const { locale } = useI18n();
+  const baseDomain = locale === "pt-BR" ? "rbx.ia.br" : "rbxsystems.ch";
+
+  const resolveDomain = (domain: string) => domain.replace("{domain}", baseDomain);
+
   return (
     <motion.div
       variants={itemVariants}
@@ -198,12 +203,12 @@ function ProductCard({
           {product.domains.map((domain) => (
             <a
               key={domain}
-              href={`https://${domain}`}
+              href={`https://${resolveDomain(domain)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="break-all rounded bg-muted px-2 py-0.5 font-mono text-[11px] text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
             >
-              {domain}
+              {resolveDomain(domain)}
             </a>
           ))}
         </div>
