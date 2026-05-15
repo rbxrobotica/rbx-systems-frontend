@@ -6,6 +6,7 @@ import { NavigationMenuBar } from "./page/views/header/nav-bar-menu";
 import { getLocaleFromHeaders } from "@/lib/i18n/getLocaleFromHeaders";
 import { getDictionary } from "@/lib/i18n/getDictionary";
 import { LocaleProvider } from "@/lib/i18n/LocaleContext";
+import WhatsAppFloat from "./page/views/contact/whatsapp-float";
 import type { Locale } from "@/lib/i18n/getDictionary";
 import type { Dictionary } from "@/lib/i18n/types";
 
@@ -62,6 +63,7 @@ export default async function RootLayout({
               </div>
             </div>
             {children}
+            <WhatsAppFloat />
           </LocaleProvider>
         </ThemeProvider>
       </body>

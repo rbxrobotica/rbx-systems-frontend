@@ -101,7 +101,7 @@
     },
     {
       "id": 2,
-      "href": "/#footer",
+      "href": "/#contact",
       "title": "Contato"
     }
   ],
@@ -246,5 +246,26 @@
       "products": "Produtos"
     },
     "copyright": "Todos os direitos reservados."
+  },
+  "contact": {
+    "heading": "Fale conosco",
+    "body": "Preencha o formulário abaixo ou entre em contato diretamente por e-mail ou WhatsApp.",
+    "form": {
+      "name": "Nome",
+      "namePlaceholder": "Seu nome",
+      "email": "E-mail",
+      "emailPlaceholder": "seu@email.com",
+      "phone": "Telefone (opcional)",
+      "phonePlaceholder": "+55 (XX) XXXXX-XXXX",
+      "message": "Mensagem",
+      "messagePlaceholder": "Como podemos ajudar?",
+      "whatsappOptIn": "Quero receber uma resposta por WhatsApp",
+      "submit": "Enviar mensagem",
+      "submitting": "Enviando...",
+      "success": "Mensagem enviada com sucesso. Entraremos em contato em breve.",
+      "error": "Erro ao enviar. Tente novamente ou entre em contato por e-mail."
+    },
+    "emailLabel": "E-mail",
+    "whatsappLabel": "WhatsApp"
   }
 }

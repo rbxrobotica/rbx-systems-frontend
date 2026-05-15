@@ -139,4 +139,25 @@ export type Dictionary = {
     };
     copyright: string;
   };
+  contact: {
+    heading: string;
+    body: string;
+    form: {
+      name: string;
+      namePlaceholder: string;
+      email: string;
+      emailPlaceholder: string;
+      phone: string;
+      phonePlaceholder: string;
+      message: string;
+      messagePlaceholder: string;
+      whatsappOptIn: string;
+      submit: string;
+      submitting: string;
+      success: string;
+      error: string;
+    };
+    emailLabel: string;
+    whatsappLabel: string;
+  };
 };

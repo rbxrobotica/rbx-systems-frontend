@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SiLinkedin, SiGithub } from "react-icons/si";
+import { FaWhatsapp } from "react-icons/fa";
+import { Mail, MessageCircle } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
+
+const EMAIL = "contact@rbxsystems.ch";
+const WHATSAPP = "https://wa.me/5511913734954";
 
 export default function Footer({ dict }: { dict: Dictionary }) {
   const sections = [
@@ -29,7 +34,8 @@ export default function Footer({ dict }: { dict: Dictionary }) {
     {
       title: dict.footer.sections.contact,
       links: [
-        { label: "contato@rbx.ia.br", href: "mailto:contato@rbx.ia.br" },
+        { label: EMAIL, href: `mailto:${EMAIL}`, icon: Mail },
+        { label: "WhatsApp", href: WHATSAPP, icon: MessageCircle },
       ],
     },
   ];
@@ -37,6 +43,7 @@ export default function Footer({ dict }: { dict: Dictionary }) {
   const socialLinks = [
     { icon: SiGithub, href: "https://github.com/rbxrobotica" },
     { icon: SiLinkedin, href: "https://linkedin.com/company/rbxrobotica" },
+    { icon: FaWhatsapp, href: WHATSAPP },
   ];
 
   return (
@@ -65,13 +72,23 @@ export default function Footer({ dict }: { dict: Dictionary }) {
               <div key={index}>
                 <h3 className="font-medium text-gray-100">{section.title}</h3>
                 <ul className="mt-4 space-y-2 text-gray-400">
-                  {section.links.map((link, idx) => (
-                    <li key={idx}>
-                      <Link href={link.href} className="break-words hover:text-gray-100">
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
+                  {section.links.map((link, idx) => {
+                    const Icon = "icon" in link ? link.icon : null;
+                    return (
+                      <li key={idx}>
+                        {"icon" in link ? (
+                          <a href={link.href} className="inline-flex items-center gap-2 break-words hover:text-gray-100" target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+                            {Icon && <Icon className="h-4 w-4 shrink-0" />}
+                            {link.label}
+                          </a>
+                        ) : (
+                          <Link href={link.href} className="break-words hover:text-gray-100">
+                            {link.label}
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
