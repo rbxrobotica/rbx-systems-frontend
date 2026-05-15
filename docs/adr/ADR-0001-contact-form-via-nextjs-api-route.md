@@ -4,6 +4,8 @@
 
 **Date**: 2026-05-15
 
+**Program**: This ADR belongs to the [Contact System program](../implementation/contact-system.md). See the program index for status of subsequent phases (Bidirectional, Service extraction, Strategos bridge) and the consolidated decision log.
+
 ## Context
 
 The RBX Systems website (rbx.ia.br / rbxsystems.ch) had no contact capabilities beyond a static `mailto:` link in the footer. We need a contact form that:
