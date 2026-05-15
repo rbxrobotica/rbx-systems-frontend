@@ -83,6 +83,7 @@ All channel logic is currently colocated in the `rbx-robotica-frontend` Next.js 
 |-----|-------|--------|
 | **`contact-system.md`** | **This document — program index** | Live |
 | [`contact-system-bidirectional.md`](contact-system-bidirectional.md) | Phase 1 — anti-abuse, webhook, persistence, observability (4 entry points) | Draft |
+| [`../operator-brief.md`](../operator-brief.md) | Fast operational summary — live state, secrets, verification, pending actions | Live |
 | `contact-system-rbx-comms-extraction.md` (planned) | Phase 2 — extract to standalone service | Deferred |
 
 ### Runbooks
