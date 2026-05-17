@@ -146,8 +146,24 @@
       "label": "Work with us",
       "heading": "Engineers who design systems to last",
       "body": "We seek technical profiles passionate about infrastructure, reliability and operational excellence.",
-      "cvLabel": "Send your CV: ",
-      "cvLink": "Send Resume to RBX Systems"
+      "name": "Full name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+41 XX XXX XX XX",
+      "role": "Area of interest",
+      "rolePlaceholder": "E.g. Backend, DevOps, AI...",
+      "message": "About you",
+      "messagePlaceholder": "Briefly tell us your experience and what you are looking for...",
+      "submit": "Submit application",
+      "submitting": "Sending...",
+      "success": "Application sent. Our team will be in touch soon.",
+      "sendAnother": "Send another",
+      "error": "Error sending. Please try again or contact us by email.",
+      "metaLocation": "Remote · Zug, CH",
+      "metaMode": "Mode: continuous build",
+      "metaStack": "Stack: Go, Rust, TypeScript, Python"
     }
   },
   "services": {

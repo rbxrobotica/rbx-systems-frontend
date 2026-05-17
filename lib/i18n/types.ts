@@ -75,8 +75,24 @@ export type Dictionary = {
       label: string;
       heading: string;
       body: string;
-      cvLabel: string;
-      cvLink: string;
+      name: string;
+      namePlaceholder: string;
+      email: string;
+      emailPlaceholder: string;
+      phone: string;
+      phonePlaceholder: string;
+      role: string;
+      rolePlaceholder: string;
+      message: string;
+      messagePlaceholder: string;
+      submit: string;
+      submitting: string;
+      success: string;
+      sendAnother: string;
+      error: string;
+      metaLocation: string;
+      metaMode: string;
+      metaStack: string;
     };
   };
   services: {

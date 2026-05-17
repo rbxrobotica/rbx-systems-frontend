@@ -121,36 +121,60 @@ const AboutUs: React.FC<{ dict: Dictionary }> = ({ dict }) => {
         {/* Team */}
         <Team dict={dict} />
 
-        {/* Join Our Team */}
+        {/* Join Our Team — Zug-Coded Panel */}
         <motion.div
-          className="grid gap-10 md:grid-cols-2"
+          id="careers"
+          className="relative"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2 }}
           variants={staggerContainer}
         >
-          <motion.div variants={fadeInUp}>
-            <p className="mb-10 text-sm font-medium text-muted-foreground">
+          {/* Tick ruler */}
+          <div className="mb-8 flex items-center gap-3">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#00FFFF]/40 to-transparent" />
+            <span className="text-[10px] font-mono font-medium uppercase tracking-[0.2em] text-[#06B6B6]">
               {dict.about.joinTeam.label}
-            </p>
-            <h2 className="mb-2.5 text-2xl font-semibold md:text-4xl">
-              {dict.about.joinTeam.heading}
-            </h2>
-          </motion.div>
-          <motion.div variants={slideInRight}>
-            {/* <Image
-              src=""
-              alt="placeholder"
-              width={0}
-              height={0}
-              className="mb-6 max-h-36 w-full rounded-xl object-cover"
-            /> */}
-            <div className="mb-6 h-3 rounded-full w-full bg-foreground"></div>
-            <p className="text-muted-foreground">
-              {dict.about.joinTeam.body}
-            </p>
-            <SubmitCV dict={dict} />
-          </motion.div>
+            </span>
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#00FFFF]/40 to-transparent" />
+          </div>
+
+          <div className="grid gap-10 lg:grid-cols-5">
+            <motion.div className="lg:col-span-2 flex flex-col justify-center" variants={fadeInUp}>
+              <h2 className="mb-4 text-3xl font-semibold tracking-tight md:text-4xl lg:text-5xl">
+                {dict.about.joinTeam.heading}
+              </h2>
+              <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+                {dict.about.joinTeam.body}
+              </p>
+
+              {/* Institutional metadata */}
+              <div className="mt-8 space-y-3 border-l border-[#00FFFF]/20 pl-4">
+                <div className="flex items-center gap-3">
+                  <div className="size-1.5 rounded-full bg-[#00FFFF]" />
+                  <span className="text-xs font-mono text-gray-400">
+                    {dict.about.joinTeam.metaLocation}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="size-1.5 rounded-full bg-[#22E5E5]" />
+                  <span className="text-xs font-mono text-gray-400">
+                    {dict.about.joinTeam.metaMode}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="size-1.5 rounded-full bg-[#06B6B6]" />
+                  <span className="text-xs font-mono text-gray-400">
+                    {dict.about.joinTeam.metaStack}
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div className="lg:col-span-3" variants={slideInRight}>
+              <SubmitCV dict={dict} />
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
