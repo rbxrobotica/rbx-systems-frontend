@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useRef, type FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Mail, MessageCircle, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
+import AltchaWidget from "@/app/components/altcha-widget";
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
@@ -18,16 +19,30 @@ export default function ContactForm({ dict }: { dict: Dictionary }) {
   const [message, setMessage] = useState("");
   const [whatsappOptIn, setWhatsappOptIn] = useState(false);
   const [status, setStatus] = useState<SubmitStatus>("idle");
+  const altchaRef = useRef<{ value: string | null }>(null);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
 
+    const altchaPayload = altchaRef.current?.value;
+    if (!altchaPayload) {
+      setStatus("error");
+      return;
+    }
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone: phone || undefined, message, whatsappOptIn }),
+        body: JSON.stringify({
+          name,
+          email,
+          phone: phone || undefined,
+          message,
+          whatsappOptIn,
+          altcha: altchaPayload,
+        }),
       });
 
       if (!res.ok) throw new Error("Request failed");
@@ -56,6 +71,12 @@ export default function ContactForm({ dict }: { dict: Dictionary }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Honeypot field — hidden from humans, visible to bots */}
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="space-y-2">
         <Label htmlFor="name" className="text-sm text-gray-300">
           {dict.contact.form.name} *
@@ -126,6 +147,10 @@ export default function ContactForm({ dict }: { dict: Dictionary }) {
         <Label htmlFor="whatsappOptIn" className="text-sm text-gray-400 leading-snug cursor-pointer">
           {dict.contact.form.whatsappOptIn}
         </Label>
+      </div>
+
+      <div className="space-y-2">
+        <AltchaWidget ref={altchaRef} />
       </div>
 
       {status === "error" && (

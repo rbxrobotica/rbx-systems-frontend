@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+import { verify } from "altcha-lib/frameworks/shared";
+import { deriveKey } from "altcha-lib/algorithms/pbkdf2";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_MESSAGE = 5000;
+const ALTCHA_SECRET = process.env.ALTCHA_SECRET;
 
-type ContactPayload = {
-  name: string;
-  email: string;
-  phone?: string;
-  message: string;
-  whatsappOptIn?: boolean;
-};
+// In-memory rate limiter: 5 submissions per IP per hour
+const rateLimitMap = new Map<string, number[]>();
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const RATE_LIMIT_MAX = 5;
 
 function sanitize(s: string, max: number): string {
   return s.trim().slice(0, max);
@@ -21,7 +21,40 @@ function toE164(raw: string): string | null {
   return `+${digits}`;
 }
 
+function getClientIp(req: NextRequest): string {
+  const forwarded = req.headers.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0].trim();
+  return req.ip ?? "unknown";
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = rateLimitMap.get(ip) ?? [];
+  const valid = timestamps.filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+  rateLimitMap.set(ip, valid);
+  return valid.length >= RATE_LIMIT_MAX;
+}
+
+function recordRequest(ip: string): void {
+  const timestamps = rateLimitMap.get(ip) ?? [];
+  timestamps.push(Date.now());
+  rateLimitMap.set(ip, timestamps);
+}
+
+type ContactPayload = {
+  name: string;
+  email: string;
+  phone?: string;
+  message: string;
+  whatsappOptIn?: boolean;
+  altcha?: string;
+  website?: string;
+};
+
 export async function POST(req: NextRequest) {
+  const ip = getClientIp(req);
+
+  // 1. Honeypot check — instant silent reject
   let body: ContactPayload;
   try {
     body = await req.json();
@@ -29,6 +62,33 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
+  if (body.website && body.website.trim().length > 0) {
+    // Bot filled the honeypot. Return 200 to avoid tipping them off.
+    return NextResponse.json({ success: true });
+  }
+
+  // 2. Rate limit check
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 });
+  }
+
+  // 3. Altcha verification
+  if (!body.altcha) {
+    return NextResponse.json({ error: "Missing anti-abuse token" }, { status: 403 });
+  }
+
+  if (!ALTCHA_SECRET) {
+    console.error("ALTCHA_SECRET not configured");
+    return NextResponse.json({ error: "Service unavailable" }, { status: 500 });
+  }
+
+  const altchaResult = await verify(body.altcha, deriveKey, ALTCHA_SECRET);
+
+  if (altchaResult.error || !altchaResult.verification?.verified) {
+    return NextResponse.json({ error: "Invalid anti-abuse token" }, { status: 403 });
+  }
+
+  // 4. Input validation
   const name = sanitize(body.name ?? "", 200);
   const email = sanitize(body.email ?? "", 200);
   const message = sanitize(body.message ?? "", MAX_MESSAGE);
@@ -45,6 +105,9 @@ export async function POST(req: NextRequest) {
   if (!EMAIL_RE.test(email)) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
+
+  // Record successful validation for rate limiting
+  recordRequest(ip);
 
   // --- Send email via Postmark ---
   const postmarkToken = process.env.POSTMARK_SERVER_TOKEN;

@@ -1,6 +1,6 @@
 # Contact System — Operator Brief
 
-**Last updated**: 2026-05-15
+**Last updated**: 2026-05-16
 **Status**: Phase 0 LIVE in production on both domains. Phase 1 planned, not started.
 
 > Git-tracked operator brief. Evolves with the code in the same PRs. For the full program index, phase plans, and decision log, see `docs/implementation/contact-system.md`. This brief is the fast operational summary.
@@ -54,7 +54,7 @@ kubectl create secret generic rbx-contact-secrets -n rbx-ia-br \
 ## Pending operator actions before public announcement
 
 1. **Approve template** `contact_form_acknowledgment` in the 360dialog hub (24–48h SLA). Until approved, the WhatsApp acknowledgment call fails silently (fire-and-forget). Email still works.
-2. **Execute EP-001 (anti-abuse)** — Turnstile + honeypot + rate limit. Hard prerequisite for any public announcement. Plan: `docs/implementation/contact-system-bidirectional.md` §EP-001.
+2. **Execute EP-001 (anti-abuse)** — Altcha anti-abuse + honeypot + rate limit. Hard prerequisite for any public announcement. Plan: `docs/implementation/contact-system-bidirectional.md` §EP-001.
 
 Image tag bumps are handled automatically by `.github/workflows/ci.yml` (builds, pushes to GHCR, commits the new tag to `rbx-infra`). **Do not manually bump the image tag.**
 
@@ -138,3 +138,4 @@ Phase 2 (rbx-comms extraction) and Phase 3 (Strategos bridge) are gated — do n
 | Date | Change |
 |------|--------|
 | 2026-05-15 | Initial operator brief — Phase 0 LIVE, Phase 1 planned |
+| 2026-05-16 | Updated EP-001 description from Turnstile to Altcha anti-abuse |

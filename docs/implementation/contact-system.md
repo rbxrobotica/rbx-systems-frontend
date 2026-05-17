@@ -132,7 +132,7 @@ Four entry points (execute in order unless noted):
 
 | EP | Slice | Target effort |
 |----|-------|---------------|
-| EP-001 | CONTACT-P1 — Anti-abuse hardening (Turnstile + honeypot + rate limit) | 1–2 days |
+| EP-001 | CONTACT-P1 — Anti-abuse hardening (Altcha anti-abuse + honeypot + rate limit) | 1–2 days |
 | EP-002 | CONTACT-P2 — Inbound WhatsApp webhook | 2–3 days |
 | EP-003 | CONTACT-P3 — Lead persistence schema | 2–3 days |
 | EP-004 | CONTACT-P4 — Observability (metrics, dashboards, alerts) | 1–2 days |
@@ -167,7 +167,8 @@ Compact summary of every load-bearing decision. Full rationale lives in each ADR
 | 2026-05-15 | Secrets follow rbx-infra ESO pattern (manual `kubectl` in `rbx-ia-br` + ExternalSecret in other namespaces) | `rbx-infra@cb55dad` commit message |
 | 2026-05-15 | Postgres for Phase 1 will share the PDNS VPS, not new VPS | `contact-system-bidirectional.md` §Open Questions (Q1) |
 | 2026-05-15 | Drizzle ORM chosen for Phase 1 persistence | `contact-system-bidirectional.md` §Open Questions (Q2) |
-| 2026-05-15 | Turnstile chosen over hCaptcha for anti-abuse | `contact-system-bidirectional.md` §Appendix B |
+| 2026-05-15 | Altcha chosen over hCaptcha and Turnstile for anti-abuse | `contact-system-bidirectional.md` §Appendix B |
+| 2026-05-16 | Corrected EP-001 from Cloudflare Turnstile to Altcha (self-hosted PoW, HMAC signed by API route). Purged all Turnstile references from docs. | `contact-system-bidirectional.md` §EP-001, `operator-brief.md`, this decision log |
 
 When a new decision is made, add a row here and link to the document where the rationale lives. Do not duplicate rationale here.
 
@@ -248,3 +249,4 @@ If you're proposing a new phase or major scope change, draft an ADR first and li
 | Date       | Change                                  | Author |
 |------------|-----------------------------------------|--------|
 | 2026-05-15 | Initial program index — Phase 0 live, Phase 1 planned | Claude Opus 4.7 |
+| 2026-05-16 | Decision log updated: Turnstile→Altcha correction registered; EP-001 scope updated |

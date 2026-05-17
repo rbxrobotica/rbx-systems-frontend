@@ -2361,6 +2361,18 @@ ajv@^8.17.1:
     json-schema-traverse "^1.0.0"
     require-from-string "^2.0.2"
 
+altcha-lib@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/altcha-lib/-/altcha-lib-2.0.3.tgz"
+  integrity sha512-rbBOrVcg5DiBPfn5dfhT+7J5k/Dqtj4seR5m1BB+w0QK4pZOBSS0ZpZ5PkolypmR315/SVbpXHM/QuL0kH5Seg==
+
+altcha@^3.0.9:
+  version "3.0.9"
+  resolved "https://registry.npmjs.org/altcha/-/altcha-3.0.9.tgz"
+  integrity sha512-VTBUxypBWQuhaOwgZc148t7pmTq1mQRbMM+segqdcqTUzuTNRNs/TX1BYMtip7y6YprPZ+YqlMgqXU0bzFOlJQ==
+  dependencies:
+    hash-wasm "^4.12.0"
+
 ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz"
@@ -2875,7 +2887,7 @@ cookie@^1.1.1:
   resolved "https://registry.npmjs.org/cookie/-/cookie-1.1.1.tgz"
   integrity sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ==
 
-cors@^2.8.5:
+cors@^2.0.0, cors@^2.8.5:
   version "2.8.6"
   resolved "https://registry.npmjs.org/cors/-/cors-2.8.6.tgz"
   integrity sha512-tJtZBBHA6vjIAaF6EnIaq6laBBP9aq/Y3ouVJjEfoHbRBcHBAHYcMh/w8LDrk2PvIMMq8gmopa5D4V8RmbrxGw==
@@ -3645,7 +3657,7 @@ express-rate-limit@^8.2.1:
   dependencies:
     ip-address "^10.2.0"
 
-express@^5.2.1, "express@>= 4.11":
+"express@^4.0.0 || ^5.0.0", express@^5.2.1, "express@>= 4.11":
   version "5.2.1"
   resolved "https://registry.npmjs.org/express/-/express-5.2.1.tgz"
   integrity sha512-hIS4idWWai69NezIdRt2xFVofaF4j+6INOpJlVOLDO8zXGpUVEVzIYk12UUi2JzjEzWL3IOAxcTubgz9Po0yXw==
@@ -4117,6 +4129,11 @@ has-tostringtag@^1.0.2:
   dependencies:
     has-symbols "^1.0.3"
 
+hash-wasm@^4.12.0:
+  version "4.12.0"
+  resolved "https://registry.npmjs.org/hash-wasm/-/hash-wasm-4.12.0.tgz"
+  integrity sha512-+/2B2rYLb48I/evdOIhP+K/DD2ca2fgBjp6O+GBEnCDk2e4rpeXIK8GvIyRPjTezgmWn9gmKwkQjjx6BtqDHVQ==
+
 hasown@^2.0.0, hasown@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmjs.org/hasown/-/hasown-2.0.2.tgz"
@@ -4182,7 +4199,7 @@ headers-polyfill@^5.0.1:
     "@types/set-cookie-parser" "^2.4.10"
     set-cookie-parser "^3.0.1"
 
-hono@^4, hono@^4.11.4:
+hono@^4, hono@^4.0.0, hono@^4.11.4:
   version "4.12.18"
   resolved "https://registry.npmjs.org/hono/-/hono-4.12.18.tgz"
   integrity sha512-RWzP96k/yv0PQfyXnWjs6zot20TqfpfsNXhOnev8d1InAxubW93L11/oNUc3tQqn2G0bSdAOBpX+2uDFHV7kdQ==

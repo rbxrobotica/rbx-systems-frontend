@@ -16,7 +16,7 @@
 **Problem Statement**: The contact form shipped on 2026-05-15 (commit `7ca2868`) is outbound-only and unprotected. Before any public announcement, it needs anti-abuse hardening. Beyond that, the WhatsApp channel is half-duplex (we send template acknowledgments but never receive replies), and every submission is ephemeral (it lives in the operator's inbox, not in any structured store). This guide closes those gaps in four ordered slices.
 
 **Key Findings**:
-- The `/api/contact` route has zero rate limiting, no CAPTCHA, and no honeypot. Public exposure without protection will trigger abuse within hours of any social-media announcement and may lock Postmark/D360 quotas.
+- The `/api/contact` route has zero rate limiting, no anti-abuse token, and no honeypot. Public exposure without protection will trigger abuse within hours of any social-media announcement and may lock Postmark/D360 quotas.
 - The D360 webhook URL is already provisioned (`pass show rbx/d360/webhook-url`) but no handler exists. Leads who reply to the acknowledgment template have their messages dropped.
 - No persistence layer exists. If `contact@rbxsystems.ch` mailbox is misconfigured or full, submissions vanish.
 - No metrics or alerts cover the contact flow. Postmark or D360 outages would be invisible until a customer complaint.
@@ -68,8 +68,8 @@ The original delivery (ADR-0001) intentionally scoped down to "outbound-only MVP
 
 | Priority | Component | Issue | Blocker For |
 |----------|-----------|-------|-------------|
-| P0 | `app/api/contact/route.ts` | No rate limit, no CAPTCHA, no honeypot | Public rollout |
-| P0 | `app/page/views/contact/contact-form.tsx` | No Turnstile widget rendered, no honeypot input | EP-001 |
+| P0 | `app/api/contact/route.ts` | No rate limit, no anti-abuse verification, no honeypot | Public rollout |
+| P0 | `app/page/views/contact/contact-form.tsx` | No anti-abuse widget rendered, no honeypot input | EP-001 |
 | P0 | `app/api/whatsapp/webhook/route.ts` | Does not exist | EP-002 |
 | P0 | `lib/contact/repo.ts` (or equivalent) | No persistence layer exists | EP-003 |
 | P1 | `app/api/contact/route.ts` | No metrics emitted (request count, errors, latency) | EP-004 |
@@ -79,7 +79,7 @@ The original delivery (ADR-0001) intentionally scoped down to "outbound-only MVP
 
 | Priority | Resource | Issue | Impact |
 |----------|----------|-------|--------|
-| P0 | Cloudflare Turnstile site keys | Not provisioned | EP-001 blocker |
+| P0 | Altcha HMAC secret | Not generated | EP-001 blocker |
 | P0 | Postgres database for contact data | No DB provisioned (memory: Postgres always external) | EP-003 blocker |
 | P0 | D360 webhook URL registered | URL stored in pass but not yet registered with D360 hub | EP-002 blocker |
 | P1 | Grafana dashboard for contact metrics | Does not exist | EP-004 |
@@ -91,21 +91,22 @@ The original delivery (ADR-0001) intentionally scoped down to "outbound-only MVP
 
 ### Track 1: CONTACT-P1 — Anti-abuse hardening
 **Effort**: 1–2 days
-**Dependencies**: Cloudflare Turnstile keys provisioned (sitekey + secret)
+**Dependencies**: Altcha HMAC secret generated and stored
 **Deliverables**:
-- Cloudflare Turnstile widget rendered in the form
-- Server-side Turnstile token verification in `/api/contact`
+- Altcha challenge endpoint (`/api/altcha-challenge`) generating HMAC-signed proof-of-work challenges
+- Server-side Altcha payload verification in `/api/contact`
 - Honeypot field (`website` or similar) — instant reject if filled
 - Simple in-memory IP rate limit (e.g., 5 submissions per IP per hour) — acceptable for low traffic; replace with Redis when scaling
 
 **Tasks**:
-1. Provision Turnstile in Cloudflare dashboard for `rbx.ia.br` and `rbxsystems.ch`
-2. Store secret in `pass` at `rbx/turnstile/secret-key`
-3. Add Turnstile sitekey as public env var; add secret to `rbx-contact-secrets`
-4. Add Turnstile React widget to `contact-form.tsx`
-5. Add token verification call to `/api/contact` (Cloudflare `siteverify` endpoint)
-6. Add honeypot input field (CSS-hidden, validated server-side)
-7. Add IP-based rate limit middleware (Next.js middleware or in-route check)
+1. Generate a strong random HMAC secret (`openssl rand -hex 32`) and store in `pass` at `rbx/altcha/hmac-secret`
+2. Add `ALTCHA_SECRET` to `rbx-contact-secrets` k8s Secret
+3. Install `altcha` package (`yarn add altcha`)
+4. Create `app/api/altcha-challenge/route.ts` — generates random challenge, signs with HMAC-SHA256, returns `{challenge, signature, algorithm, maxnumber}`
+5. Add Altcha widget to `contact-form.tsx` (fetches challenge from `/api/altcha-challenge`, solves PoW client-side)
+6. Add Altcha payload verification to `/api/contact` (verify HMAC + proof-of-work)
+7. Add honeypot input field (CSS-hidden, validated server-side)
+8. Add IP-based rate limit middleware (Next.js middleware or in-route check)
 
 ### Track 2: CONTACT-P2 — Inbound WhatsApp webhook handler
 **Effort**: 2–3 days
@@ -190,13 +191,12 @@ Choose the correct entrypoint based on objective:
 
 ### EP-001: CONTACT-P1 — Anti-abuse hardening
 
-**Objective**: Make `/api/contact` safe to expose publicly. Block bots, throttle abuse, refuse missing-CAPTCHA submissions.
+**Objective**: Make `/api/contact` safe to expose publicly. Block bots, throttle abuse, refuse missing or invalid anti-abuse token submissions.
 
 **Preconditions**:
 ```bash
-# Turnstile sitekey + secret in pass
-pass show rbx/turnstile/sitekey | wc -c | awk '$1 > 10 {exit 0} {exit 1}'
-pass show rbx/turnstile/secret-key | wc -c | awk '$1 > 10 {exit 0} {exit 1}'
+# Altcha HMAC secret exists and is non-empty
+pass show rbx/altcha/hmac-secret | wc -c | awk '$1 > 10 {exit 0} {exit 1}'
 
 # Form is currently live and unprotected (confirmation)
 curl -X POST https://rbx.ia.br/api/contact -H 'content-type: application/json' \
@@ -204,28 +204,39 @@ curl -X POST https://rbx.ia.br/api/contact -H 'content-type: application/json' \
 ```
 
 **Inputs** (explicit):
-- `TURNSTILE_SITEKEY`: public, exposed via `NEXT_PUBLIC_TURNSTILE_SITEKEY`
-- `TURNSTILE_SECRET_KEY`: private, in `rbx-contact-secrets`
+- `ALTCHA_SECRET`: private HMAC key for signing challenges, in `rbx-contact-secrets`
+- `NEXT_PUBLIC_ALTCHA_API`: public, exposed via `NEXT_PUBLIC_ALTCHA_API=/api/altcha-challenge` (or relative path)
 
 **Steps**:
 ```bash
-# Add Turnstile React component
-yarn add @marsidev/react-turnstile
+# Add Altcha React component and server-side library
+yarn add altcha
 
-# Update contact-form.tsx to render widget, capture token
-# Update /api/contact/route.ts to verify token before accepting
+# Create app/api/altcha-challenge/route.ts
+#   - Generates a random challenge string
+#   - Computes HMAC-SHA256(challenge, ALTCHA_SECRET)
+#   - Returns JSON: { challenge, signature, algorithm: "SHA-256", maxnumber: <difficulty> }
 
-# Add honeypot field (hidden via CSS)
+# Update contact-form.tsx to render <AltchaWidget challengeurl="/api/altcha-challenge" />
+#   - Widget fetches challenge, solves proof-of-work client-side, produces payload string
+
+# Update /api/contact/route.ts
+#   - Parse altcha payload from request body
+#   - Verify HMAC-SHA256(challenge, ALTCHA_SECRET) matches signature
+#   - Verify proof-of-work number satisfies difficulty
+#   - Reject 403 if any verification fails
+
+# Add honeypot field (hidden via CSS, e.g. name="website")
 # Add in-memory rate limiter (5/IP/hour using Map<string, number[]>)
 
 # Apply secrets via kubectl (operator action)
 kubectl create secret generic rbx-contact-secrets -n rbx-ia-br \
   --from-literal=POSTMARK_SERVER_TOKEN="$(pass show rbx/postmark/rbx-institutional-server-token)" \
   --from-literal=D360_API_KEY="$(pass show rbx/d360/api-key)" \
-  --from-literal=TURNSTILE_SECRET_KEY="$(pass show rbx/turnstile/secret-key)" \
+  --from-literal=ALTCHA_SECRET="$(pass show rbx/altcha/hmac-secret)" \
   --dry-run=client -o yaml | kubectl apply -f -
 
-# Add NEXT_PUBLIC_TURNSTILE_SITEKEY to rbx-infra deploy.yml
+# Add NEXT_PUBLIC_ALTCHA_API=/api/altcha-challenge to rbx-infra deploy.yml
 # Bump image tag, push, ArgoCD applies
 ```
 
@@ -246,7 +257,7 @@ curl -X POST https://rbx.ia.br/api/contact \
 # 6th submission from same IP within an hour returns 429
 for i in {1..6}; do
   curl -X POST https://rbx.ia.br/api/contact -H 'content-type: application/json' \
-    -d "{\"name\":\"t$i\",\"email\":\"a@b.c\",\"message\":\"x\",\"turnstileToken\":\"<valid>\"}" \
+    -d "{\"name\":\"t$i\",\"email\":\"a@b.c\",\"message\":\"x\",\"altcha\":\"<valid_payload>\"}" \
     -w '%{http_code}\n' -o /dev/null
 done | tail -1 | grep -q '^429$'
 ```
@@ -254,13 +265,13 @@ done | tail -1 | grep -q '^429$'
 **Failure Detection**:
 ```bash
 # FAIL if 5xx on any of the verification steps
-# FAIL if Turnstile siteverify returns error-codes containing "invalid-input-secret"
+# FAIL if Altcha verification reveals the secret or challenge algorithm to clients
 # FAIL if honeypot reject logs reveal the field name to clients
 ```
 
 **Rollback**:
 ```bash
-git restore app/api/contact/route.ts app/page/views/contact/contact-form.tsx
+git restore app/api/contact/route.ts app/api/altcha-challenge/route.ts app/page/views/contact/contact-form.tsx
 # Revert image tag in rbx-infra/apps/prod/{rbx-ia-br,rbxsystems-ch}/kustomization.yml
 git -C ../rbx-infra commit -am "revert: rollback contact anti-abuse"
 git -C ../rbx-infra push origin main
@@ -607,14 +618,13 @@ Out of scope for this guide — declared explicitly so reviewers can hold the li
 - ADR-0001 — Contact form via Next.js API route (`docs/adr/ADR-0001-contact-form-via-nextjs-api-route.md`)
 - Strategos ADR-0005 — WhatsApp channel via 360dialog (in `strategos-core` repo, for cross-reference only — not consumed here)
 - 360dialog webhook docs — <https://docs.360dialog.com/whatsapp-api/whatsapp-api/webhooks>
-- Cloudflare Turnstile docs — <https://developers.cloudflare.com/turnstile/>
 - Postmark API — <https://postmarkapp.com/developer/api/email-api>
 
 ### Appendix B: Decision Log
 
 - **2026-05-15** — Decided to keep contact persistence in the FE repo rather than create `rbx-comms` immediately. Threshold for extraction: >100 msgs/day OR need for CRM features. Rationale: premature service-extraction overhead vs. trivial Next.js API route.
 - **2026-05-15** — Decided to share the PDNS Postgres VPS rather than provision dedicated. Tradeoff: blast radius if DB outage hits both contact + DNS, but DNS Postgres is read-mostly for `pdns` user and the load profile is low. Revisit after first 30 days of production data.
-- **2026-05-15** — Decided to ship Turnstile rather than hCaptcha. RBX already uses Cloudflare for DNS at the apex; integration is one less vendor relationship.
+- **2026-05-15** — Decided to ship Altcha rather than hCaptcha or Turnstile. Self-hosted proof-of-work with HMAC challenge signed by the API route aligns with the sovereign in-cluster philosophy; zero external vendor, no new k8s service.
 
 ### Appendix C: Evolution Path
 
@@ -630,3 +640,4 @@ This guide ends when EP-004 lands. Beyond that, two evolution branches:
 | Date       | Change                                | Author |
 |------------|---------------------------------------|--------|
 | 2026-05-15 | Initial draft — 4 entry points + open questions | Claude Opus 4.7 |
+| 2026-05-16 | EP-001 rewritten for Altcha (self-hosted PoW, HMAC challenge). Purged all Cloudflare/Turnstile references. | Kimi Code CLI |
