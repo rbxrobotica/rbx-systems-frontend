@@ -12,6 +12,15 @@ import AltchaWidget from "@/app/components/altcha-widget";
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
+function getCommsBaseUrl(): string {
+  if (typeof window === "undefined") return "";
+  const host = window.location.host;
+  if (host.includes("rbxsystems.ch")) {
+    return "https://comms.rbxsystems.ch";
+  }
+  return "https://comms.rbx.ia.br";
+}
+
 export default function ContactForm({ dict }: { dict: Dictionary }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,6 +29,9 @@ export default function ContactForm({ dict }: { dict: Dictionary }) {
   const [whatsappOptIn, setWhatsappOptIn] = useState(false);
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const altchaRef = useRef<{ value: string | null }>(null);
+
+  const commsBase = getCommsBaseUrl();
+  const challengeUrl = `${commsBase}/api/altcha-challenge`;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -32,7 +44,7 @@ export default function ContactForm({ dict }: { dict: Dictionary }) {
     }
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(`${commsBase}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -150,7 +162,7 @@ export default function ContactForm({ dict }: { dict: Dictionary }) {
       </div>
 
       <div className="space-y-2">
-        <AltchaWidget ref={altchaRef} />
+        <AltchaWidget ref={altchaRef} challengeUrl={challengeUrl} />
       </div>
 
       {status === "error" && (
