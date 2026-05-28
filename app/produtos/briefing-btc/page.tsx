@@ -9,14 +9,14 @@ import type { Dictionary } from "@/lib/i18n/types";
 // ─── LP-S1: Metadata ─────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Briefing Diário BTC — RBX",
+  title: "Briefing Diário BTC · RBX",
   description:
-    "Leitura operacional diária do mercado BTC Futuros, entregue às 07h todo dia útil. Contexto, cenários e plano de voo.",
+    "Leitura operacional diária do mercado BTC Futuros, entregue às 07h todos os dias. Contexto, cenários e plano de voo.",
   openGraph: {
     type: "website",
-    title: "Briefing Diário BTC — RBX",
+    title: "Briefing Diário BTC · RBX",
     description:
-      "Leitura operacional diária do mercado BTC Futuros. Contexto, cenários e plano de voo, entregues por e-mail antes das 07h.",
+      "Leitura operacional diária do mercado BTC Futuros. Contexto, cenários e plano de voo, entregues por e-mail ou WhatsApp antes das 07h.",
     images: [{ url: "/og/briefing-btc", width: 1200, height: 630 }],
   },
   alternates: {
@@ -30,7 +30,7 @@ const ARTIFACTS = [
   {
     label: "Plano de Voo",
     description:
-      "Leitura narrativa do contexto operacional do dia — tendência, volatilidade, hipóteses e regras de não-operação.",
+      "Leitura narrativa do contexto operacional do dia: tendência, volatilidade, hipóteses e regras de não-operação.",
   },
   {
     label: "Snapshot de Mercado",
@@ -45,7 +45,7 @@ const ARTIFACTS = [
   {
     label: "Fontes Consultadas",
     description:
-      "APIs, janelas de tempo e endpoints utilizados na coleta — rastreável e verificável.",
+      "APIs, janelas de tempo e endpoints utilizados na coleta. Rastreável e verificável.",
   },
   {
     label: "Evidência do Modelo",
@@ -55,7 +55,7 @@ const ARTIFACTS = [
   {
     label: "Log de Execução",
     description:
-      "Etapas, duração, status e erros do pipeline — cada briefing é rastreável do início ao fim.",
+      "Etapas, duração, status e erros do pipeline. Cada briefing é rastreável do início ao fim.",
   },
 ] as const;
 
@@ -64,11 +64,11 @@ const ARTIFACTS = [
 const FAQ = [
   {
     q: "O briefing dá sinais de compra ou venda?",
-    a: "Não. O briefing entrega leitura de contexto, cenários e plano de voo — não sinais, não recomendações de entrada ou saída, não targets de preço.",
+    a: "Não. O briefing entrega leitura de contexto, cenários e plano de voo. Sem sinais de entrada ou saída, sem targets de preço, sem recomendações de alocação.",
   },
   {
     q: "Com que frequência é publicado?",
-    a: "Todo dia útil, entregue por e-mail até as 07h BRT.",
+    a: "Todos os dias, entregue por e-mail (ou WhatsApp, se preferir) até as 07h BRT. O mercado BTC não tem feriados.",
   },
   {
     q: "Quais dados são usados?",
@@ -82,7 +82,7 @@ const FAQ = [
 
 // ─── Sample flight-plan excerpt (LP-S5) ──────────────────────────────────────
 
-const SAMPLE_EXCERPT = `# Plano de Voo — BTCUSDT Futures — Exemplo
+const SAMPLE_EXCERPT = `# Plano de Voo · BTCUSDT Futures · Exemplo
 
 ## 1. Resumo Executivo
 
@@ -93,7 +93,7 @@ coletados está em 100% de completude.
 
 ## 2. Contexto de Mercado
 
-- Tendência: SMA 9 e SMA 21 próximas — estrutura neutra de curto prazo.
+- Tendência: SMA 9 e SMA 21 próximas, estrutura neutra de curto prazo.
 - Volatilidade: ATR-14 em patamar moderado. Considerar no dimensionamento de risco.
 - Funding Rate: baixo, sem pressão direcional significativa.
 - Open Interest: estável. Variação deve ser monitorada em janelas maiores.
@@ -127,11 +127,11 @@ export default async function BriefingBtcPage() {
   return (
     <>
       <main
-        aria-label="Briefing Diário BTC — produto de assinatura"
+        aria-label="Briefing Diário BTC · produto de assinatura"
         className="mx-auto max-w-3xl px-4 pb-24 pt-28 sm:px-6 sm:pt-36 lg:px-8"
       >
 
-        {/* LP-S2 — Hero */}
+        {/* LP-S2 · Hero */}
         <section aria-labelledby="hero-heading" className="pb-20 border-b border-border">
           <p className="font-mono text-xs tracking-widest text-muted-foreground mb-6 uppercase">
             RBX · Inteligência de Mercado
@@ -145,9 +145,9 @@ export default async function BriefingBtcPage() {
             <span className="text-primary">Às 07h, você já leu.</span>
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mb-10">
-            Leitura operacional diária do mercado de Futuros BTC/USDT —
-            contexto, cenários e plano de voo. Entregue por e-mail todo dia
-            útil.
+            Leitura operacional diária do mercado de Futuros BTC/USDT:
+            contexto, cenários e plano de voo. Entregue por e-mail ou WhatsApp,
+            todos os dias.
           </p>
           <a
             href="#receber"
@@ -158,7 +158,7 @@ export default async function BriefingBtcPage() {
           </a>
         </section>
 
-        {/* LP-S3 — O que você recebe */}
+        {/* LP-S3 · O que você recebe */}
         <section aria-labelledby="artifacts-heading" className="py-20 border-b border-border">
           <p className="font-mono text-xs tracking-widest text-muted-foreground mb-3 uppercase">
             01 · O que você recebe
@@ -167,7 +167,7 @@ export default async function BriefingBtcPage() {
             id="artifacts-heading"
             className="text-2xl font-semibold tracking-tight mb-10"
           >
-            Seis artefatos, todo dia útil.
+            Seis artefatos, todos os dias.
           </h2>
           <div className="grid sm:grid-cols-2 gap-0">
             {ARTIFACTS.map((a) => (
@@ -186,7 +186,7 @@ export default async function BriefingBtcPage() {
           </div>
         </section>
 
-        {/* LP-S4 — Para quem é */}
+        {/* LP-S4 · Para quem é */}
         <section aria-labelledby="forwhom-heading" className="py-20 border-b border-border">
           <p className="font-mono text-xs tracking-widest text-muted-foreground mb-3 uppercase">
             02 · Para quem é
@@ -206,15 +206,15 @@ export default async function BriefingBtcPage() {
             <p className="text-sm font-medium text-muted-foreground mb-3">
               Não é para você se:
             </p>
-            <ul className="space-y-1.5 text-sm text-muted-foreground">
-              <li>— Você busca sinais de compra/venda automatizados</li>
-              <li>— Você espera recomendações de alocação ou gestão de carteira</li>
-              <li>— Você nunca operou futuros de criptomoedas</li>
+            <ul className="space-y-1.5 text-sm text-muted-foreground list-disc list-inside marker:text-muted-foreground/40">
+              <li>Você busca sinais de compra/venda automatizados</li>
+              <li>Você espera recomendações de alocação ou gestão de carteira</li>
+              <li>Você nunca operou futuros de criptomoedas</li>
             </ul>
           </div>
         </section>
 
-        {/* LP-S5 — Amostra real */}
+        {/* LP-S5 · Amostra real */}
         <section aria-labelledby="sample-heading" className="py-20 border-b border-border">
           <p className="font-mono text-xs tracking-widest text-muted-foreground mb-3 uppercase">
             03 · Amostra
@@ -238,7 +238,7 @@ export default async function BriefingBtcPage() {
           </p>
         </section>
 
-        {/* LP-S6 — Preço */}
+        {/* LP-S6 · Preço */}
         <section aria-labelledby="pricing-heading" className="py-20 border-b border-border">
           <p className="font-mono text-xs tracking-widest text-muted-foreground mb-3 uppercase">
             04 · Preço
@@ -254,8 +254,8 @@ export default async function BriefingBtcPage() {
               </span>
             </p>
             <p className="text-muted-foreground text-sm mt-2">
-              Entregue por e-mail todo dia útil às 07h BRT. Cancele a qualquer
-              momento.
+              Entregue por e-mail ou WhatsApp, todos os dias às 07h BRT.
+              Pagamento por PIX ou cartão. Cancele a qualquer momento.
             </p>
           </div>
 
@@ -284,7 +284,7 @@ export default async function BriefingBtcPage() {
           </div>
         </section>
 
-        {/* LP-S7 — Formulário CTA */}
+        {/* LP-S7 · Formulário CTA */}
         <section
           id="receber"
           aria-labelledby="cta-heading"
