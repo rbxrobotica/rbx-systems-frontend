@@ -9,13 +9,14 @@
     "products": "Produtos",
     "blog": "Blog",
     "contact": "Contato",
+    "careers": "Trabalhe conosco",
     "atelier": "Atelier",
     "learnMore": "Saiba mais",
     "close": "Fechar",
     "mode": "Modo",
     "menu": "Menu",
     "navigation": "Navegação",
-    "subtitle": "Robótica"
+    "subtitle": "Systems"
   },
   "theme": {
     "srOnly": "Mudar tema",
@@ -163,7 +164,8 @@
       "error": "Erro ao enviar. Tente novamente ou entre em contato por e-mail.",
       "metaLocation": "Remoto · Zug, CH",
       "metaMode": "Modo: construção contínua",
-      "metaStack": "Stack: Go, Rust, TypeScript, Python"
+      "metaStack": "Stack: Go, Rust, TypeScript, Python",
+      "cta": "Ver vagas"
     }
   },
   "services": {
@@ -262,6 +264,18 @@
       "products": "Produtos"
     },
     "copyright": "Todos os direitos reservados."
+  },
+  "careers": {
+    "pageTitle": "Carreiras",
+    "metaTitle": "Posição",
+    "metaType": "Regime: Full-time / B2B",
+    "processTitle": "Processo seletivo",
+    "processSteps": [
+      "Análise do perfil e experiência",
+      "Entrevista técnica",
+      "Conversa com o time",
+      "Proposta e onboarding"
+    ]
   },
   "contact": {
     "heading": "Fale conosco",
