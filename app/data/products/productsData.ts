@@ -30,7 +30,7 @@ export const products: Product[] = [
     name: "Strategos",
     type: "fullstack",
     phase: "structuring",
-    domains: ["app.strategos.gr", "api.strategos.gr"],
+    domains: ["strategos.gr", "app.rbxsystems.ch", "api.strategos.gr"],
     repo: "https://github.com/ldamasio/strategos",
     description:
       "Sistema operacional estratégico para coordenação cognitiva organizacional. Integra planejamento, execução e aprendizado contínuo em uma plataforma unificada.",
