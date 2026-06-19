@@ -6,36 +6,48 @@ import MotionVariants from "@/app/utils/motionsVariants";
 import Image from "next/image";
 import type { Dictionary } from "@/lib/i18n/types";
 
-const people = [
+type TeamMember = {
+  id: string;
+  name: string;
+  role: string;
+  avatar?: string;
+};
+
+const people: TeamMember[] = [
   {
     id: "person-1",
     name: "Rafael Scharf",
     role: "Software Engineer Manager | Tech Lead",
-    avatar: "/api/assets/team/rafael-scharf.jpg",
   },
   {
     id: "person-2",
     name: "Anthony Farias",
     role: "Full Stack Developer | Cybersecurity Engineer",
-    avatar: "/api/assets/team/anthony-farias.jpg",
   },
   {
     id: "person-3",
     name: "Leandro Damasio",
-    role: "CEO | Principal Software Engineer | SRE | DevOps",
-    avatar: "/api/assets/team/leandro-damasio.jpg",
+    role: "CEO | CTO",
   },
   {
     id: "person-4",
     name: "Magno Ozzyr",
     role: "PM | Lean-Agile Software Delivery Manager",
-    avatar: "/api/assets/team/magno-ozzyr.jpg",
   },
   {
     id: "person-5",
     name: "Flávia Ribeiro",
     role: "SDR | Client Support | Customer Care",
-    avatar: "/api/assets/team/flavia-ribeiro.jpg",
+  },
+  {
+    id: "person-6",
+    name: "Cauê Souza Azevedo Alencar",
+    role: "CFO",
+  },
+  {
+    id: "person-7",
+    name: "Fabio Gama Nascimento",
+    role: "Knowledge Operations & Information Governance Specialist",
   },
 ];
 
@@ -48,12 +60,13 @@ function initials(name: string): string {
     .toUpperCase();
 }
 
-function TeamMemberAvatar({ src, name }: { src: string; name: string }) {
+function TeamMemberAvatar({ src, name }: { src?: string; name: string }) {
   const [error, setError] = useState(false);
+  const hasImage = src && src.trim().length > 0;
 
   return (
     <Avatar className="mb-4 h-20 w-20 border">
-      {!error && (
+      {hasImage && !error && (
         <Image
           unoptimized
           priority
