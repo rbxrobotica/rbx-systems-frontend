@@ -31,13 +31,11 @@ import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n/types";
 
 export function DrawerMobile({
-  services,
   aboutUs,
   blogEcontato,
   atelier,
   dict,
 }: {
-  services: MenuItemMobile[];
   aboutUs: MenuItemMobile[];
   blogEcontato: MenuItemMobile[];
   atelier: { href: string; title: string };
@@ -91,32 +89,6 @@ export function DrawerMobile({
                   </ScrollArea>
                 </AccordionContent>
               </AccordionItem>
-              {/* Serviços */}
-              <AccordionItem value="services">
-                <AccordionTrigger>{dict.nav.services}</AccordionTrigger>
-                <AccordionContent>
-                  <ScrollArea className="h-[min(18rem,50vh)] pr-4">
-                    <ul className="space-y-4">
-                      {services.map((service, index) => (
-                        <li key={index}>
-                          <h3 className="font-semibold">{service.title}</h3>
-                          <p className="text-sm text-muted-foreground">
-                            {service.description}
-                          </p>
-                          <DrawerClose asChild>
-                            <Link
-                              href={service.href}
-                              className="inline-flex text-sm text-primary underline underline-offset-4"
-                            >
-                              {dict.nav.learnMore}
-                            </Link>
-                          </DrawerClose>
-                        </li>
-                      ))}
-                    </ul>
-                  </ScrollArea>
-                </AccordionContent>
-              </AccordionItem>
             </Accordion>
             <div className="mt-4 flex flex-col space-y-2">
               {blogEcontato.map((item, index) => (
@@ -129,6 +101,14 @@ export function DrawerMobile({
                   </Link>
                 </DrawerClose>
               ))}
+              <DrawerClose asChild>
+                <Link
+                  href="/careers"
+                  className="inline-flex w-full items-center justify-start rounded-md bg-muted px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                >
+                  {dict.nav.careers}
+                </Link>
+              </DrawerClose>
             </div>
             <div className="mt-4 pt-4 border-t border-neutral-800">
               <DrawerClose asChild>

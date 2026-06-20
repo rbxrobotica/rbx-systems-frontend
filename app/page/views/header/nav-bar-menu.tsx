@@ -58,7 +58,6 @@ export function NavigationMenuBar({ dict }: { dict: Dictionary }): JSX.Element {
 
       <div className="lg:hidden">
         <DrawerMobile
-          services={dict.servicesMenu as MenuItem[]}
           aboutUs={dict.aboutUsMenu as MenuItem[]}
           blogEcontato={dict.blogEcontatoMenu as MenuItem[]}
           atelier={dict.atelierMenu as MenuItem}
@@ -126,25 +125,6 @@ export function NavigationMenuBar({ dict }: { dict: Dictionary }): JSX.Element {
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent">
-                {dict.nav.services}
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[600px] gap-3 p-4 md:w-[750px] md:grid-cols-3 lg:w-[800px]">
-                  {(dict.servicesMenu as MenuItem[]).map((item: MenuItem) => (
-                    <ListItem
-                      key={item.id}
-                      title={item.title}
-                      href={item.href}
-                    >
-                      {item.description}
-                    </ListItem>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-
-            <NavigationMenuItem>
               {(dict.blogEcontatoMenu as MenuItem[]).map((item: MenuItem) => (
                 <Link href={item.href} key={item.id} legacyBehavior passHref>
                   <NavigationMenuLink
@@ -154,6 +134,14 @@ export function NavigationMenuBar({ dict }: { dict: Dictionary }): JSX.Element {
                   </NavigationMenuLink>
                 </Link>
               ))}
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <Link href="/careers" legacyBehavior passHref>
+                <NavigationMenuLink className="bg-transparent px-4 py-2 font-medium text-foreground/90 transition-colors duration-200 hover:text-primary">
+                  {dict.nav.careers}
+                </NavigationMenuLink>
+              </Link>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
@@ -207,12 +195,15 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
+          {children ? (
+            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+              {children}
+            </p>
+          ) : null}
         </a>
       </NavigationMenuLink>
     </motion.li>
   );
 });
+
 ListItem.displayName = "ListItem";
