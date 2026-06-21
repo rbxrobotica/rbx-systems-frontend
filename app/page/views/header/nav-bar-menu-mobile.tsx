@@ -101,14 +101,6 @@ export function DrawerMobile({
                   </Link>
                 </DrawerClose>
               ))}
-              <DrawerClose asChild>
-                <Link
-                  href="/careers"
-                  className="inline-flex w-full items-center justify-start rounded-md bg-muted px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-                >
-                  {dict.nav.careers}
-                </Link>
-              </DrawerClose>
             </div>
             <div className="mt-4 pt-4 border-t border-neutral-800">
               <DrawerClose asChild>
