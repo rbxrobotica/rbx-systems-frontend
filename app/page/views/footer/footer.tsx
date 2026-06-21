@@ -11,17 +11,6 @@ const WHATSAPP = "https://wa.me/5511913734954";
 export default function Footer({ dict }: { dict: Dictionary }) {
   const sections = [
     {
-      title: dict.footer.sections.services,
-      links: [
-        { label: dict.footer.links.systems_web, href: "/servicos#sistemas-web" },
-        { label: dict.footer.links.automacao, href: "/servicos#automacao" },
-        { label: dict.footer.links.ia_aplicada, href: "/servicos#ia-aplicada" },
-        { label: dict.footer.links.infraestrutura, href: "/servicos#infraestrutura" },
-        { label: dict.footer.links.backend, href: "/servicos#backend" },
-        { label: dict.footer.links.manutencao, href: "/servicos#manutencao" },
-      ],
-    },
-    {
       title: dict.footer.sections.company,
       links: [
         { label: dict.footer.links.aboutUs, href: "/#about-us" },

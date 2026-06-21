@@ -75,10 +75,10 @@ const Main: React.FC<{ dict: Dictionary }> = ({ dict }) => {
             className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start"
           >
             <Button asChild>
-              <Link href="/servicos">{dict.hero.ctaServices}</Link>
+              <Link href="/produtos">{dict.hero.ctaProducts}</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/produtos">{dict.hero.ctaProducts}</Link>
+              <Link href="/#contact">{dict.nav.contact}</Link>
             </Button>
           </motion.div>
         </motion.div>
