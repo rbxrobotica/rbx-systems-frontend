@@ -1,9 +1,9 @@
 import { Mail, MessageCircle } from "lucide-react";
 import ContactForm from "./contact-form";
+import { WhatsAppDrawer } from "@/app/page/components/whatsapp-drawer";
+import { Button } from "@/components/ui/button";
 import type { Dictionary } from "@/lib/i18n/types";
 
-const WHATSAPP_NUMBER = "5511913734954";
-const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
 const EMAIL_ADDRESS = "contact@rbxsystems.ch";
 
 export default function ContactSection({ dict }: { dict: Dictionary }) {
@@ -50,15 +50,19 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
                   <h3 className="text-[10px] font-mono font-medium uppercase tracking-[0.15em] text-[#06B6B6]">
                     {dict.contact.whatsappLabel}
                   </h3>
-                  <a
-                    href={WHATSAPP_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 flex items-center gap-3 text-lg text-gray-100 transition-colors hover:text-[#00FFFF]"
-                  >
-                    <MessageCircle className="size-5 text-[#00FFFF]/70" />
-                    +55 11 9137-34954
-                  </a>
+                  <WhatsAppDrawer
+                    dict={dict}
+                    trigger={
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="mt-2 inline-flex items-center gap-2 border-[#06B6B6]/30 text-[#00FFFF] hover:bg-[#00FFFF]/10 hover:text-[#22E5E5]"
+                      >
+                        <MessageCircle className="size-4" />
+                        {dict.contact.whatsappCta}
+                      </Button>
+                    }
+                  />
                 </div>
               </div>
             </div>

@@ -175,5 +175,6 @@ export type Dictionary = {
     };
     emailLabel: string;
     whatsappLabel: string;
+    whatsappCta: string;
   };
 };

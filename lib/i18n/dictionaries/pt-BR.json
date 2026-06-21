@@ -296,6 +296,7 @@
       "error": "Erro ao enviar. Tente novamente ou entre em contato por e-mail."
     },
     "emailLabel": "E-mail",
-    "whatsappLabel": "WhatsApp"
+    "whatsappLabel": "WhatsApp",
+    "whatsappCta": "Prefiro WhatsApp"
   }
 }

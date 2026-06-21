@@ -282,6 +282,7 @@
       "error": "Error sending message. Please try again or contact us via email."
     },
     "emailLabel": "Email",
-    "whatsappLabel": "WhatsApp"
+    "whatsappLabel": "WhatsApp",
+    "whatsappCta": "Prefer WhatsApp"
   }
 }

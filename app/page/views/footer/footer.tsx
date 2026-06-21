@@ -6,7 +6,7 @@ import { Mail, MessageCircle } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
 
 const EMAIL = "contact@rbxsystems.ch";
-const WHATSAPP = "https://wa.me/5511913734954";
+const CONTACT_HASH = "/#contact";
 
 export default function Footer({ dict }: { dict: Dictionary }) {
   const sections = [
@@ -24,7 +24,7 @@ export default function Footer({ dict }: { dict: Dictionary }) {
       title: dict.footer.sections.contact,
       links: [
         { label: EMAIL, href: `mailto:${EMAIL}`, icon: Mail },
-        { label: "WhatsApp", href: WHATSAPP, icon: MessageCircle },
+        { label: "WhatsApp", href: CONTACT_HASH, icon: MessageCircle },
       ],
     },
   ];
@@ -32,7 +32,7 @@ export default function Footer({ dict }: { dict: Dictionary }) {
   const socialLinks = [
     { icon: SiGithub, href: "https://github.com/rbxrobotica" },
     { icon: SiLinkedin, href: "https://linkedin.com/company/rbxrobotica" },
-    { icon: FaWhatsapp, href: WHATSAPP },
+    { icon: FaWhatsapp, href: CONTACT_HASH },
   ];
 
   return (

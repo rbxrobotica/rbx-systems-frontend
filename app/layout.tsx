@@ -63,7 +63,7 @@ export default async function RootLayout({
               </div>
             </div>
             {children}
-            <WhatsAppFloat />
+            <WhatsAppFloat dict={dict} />
           </LocaleProvider>
         </ThemeProvider>
       </body>
