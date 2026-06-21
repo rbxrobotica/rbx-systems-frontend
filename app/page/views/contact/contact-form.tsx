@@ -31,7 +31,7 @@ export default function ContactForm({ dict }: { dict: Dictionary }) {
   const altchaRef = useRef<{ value: string | null }>(null);
 
   const commsBase = getCommsBaseUrl();
-  const challengeUrl = `${commsBase}/api/altcha-challenge`;
+  const challengeUrl = "/api/altcha-challenge";
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

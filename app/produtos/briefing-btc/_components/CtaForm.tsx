@@ -129,7 +129,7 @@ export default function CtaForm() {
       </div>
 
       <div className="pt-1">
-        <AltchaWidget ref={altchaRef} challengeUrl={`${getCommsBaseUrl()}/api/altcha-challenge`} />
+        <AltchaWidget ref={altchaRef} challengeUrl="/api/altcha-challenge" />
       </div>
 
       {status === "error" && (

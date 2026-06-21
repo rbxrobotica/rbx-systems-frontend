@@ -49,7 +49,7 @@ export function WhatsAppDrawer({
   const altchaRef = useRef<{ value: string | null }>(null);
 
   const commsBase = getCommsBaseUrl();
-  const challengeUrl = `${commsBase}/api/altcha-challenge`;
+  const challengeUrl = "/api/altcha-challenge";
 
   const resetForm = () => {
     setName("");
