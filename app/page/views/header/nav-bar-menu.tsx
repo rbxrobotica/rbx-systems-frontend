@@ -137,6 +137,14 @@ export function NavigationMenuBar({ dict }: { dict: Dictionary }): JSX.Element {
             </NavigationMenuItem>
 
             <NavigationMenuItem>
+              <Link href="/solucoes" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  {dict.nav.solutions}
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
               <Link href={dict.atelierMenu.href} legacyBehavior passHref>
                 <NavigationMenuLink className="bg-transparent px-4 py-2 font-medium text-foreground/90 transition-colors duration-200 hover:text-primary">
                   {dict.atelierMenu.title}

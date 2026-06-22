@@ -7,6 +7,7 @@ import type { Dictionary } from "@/lib/i18n/types";
 
 const EMAIL = "contact@rbxsystems.ch";
 const CONTACT_HASH = "/#contact";
+const STATUS_URL = "https://status.rbxsystems.ch";
 
 export default function Footer({ dict }: { dict: Dictionary }) {
   const sections = [
@@ -15,9 +16,19 @@ export default function Footer({ dict }: { dict: Dictionary }) {
       links: [
         { label: dict.footer.links.aboutUs, href: "/#about-us" },
         { label: dict.footer.links.team, href: "/#team" },
-        { label: "Blog", href: "/blog" },
         { label: dict.footer.links.products, href: "/produtos" },
         { label: "Atelier", href: "/atelier" },
+      ],
+    },
+    {
+      title: dict.footer.sections.resources,
+      links: [
+        { label: dict.footer.links.journal, href: "/journal" },
+        { label: dict.footer.links.changelog, href: "/changelog" },
+        { label: dict.footer.links.cases, href: "/cases" },
+        { label: dict.footer.links.newsroom, href: "/newsroom" },
+        { label: dict.footer.links.trust, href: "/trust" },
+        { label: dict.footer.links.status, href: STATUS_URL },
       ],
     },
     {
@@ -25,6 +36,8 @@ export default function Footer({ dict }: { dict: Dictionary }) {
       links: [
         { label: EMAIL, href: `mailto:${EMAIL}`, icon: Mail },
         { label: "WhatsApp", href: CONTACT_HASH, icon: MessageCircle },
+        { label: dict.footer.links.github, href: "https://github.com/rbxrobotica", icon: SiGithub },
+        { label: dict.footer.links.linkedin, href: "https://linkedin.com/company/rbxrobotica", icon: SiLinkedin },
       ],
     },
   ];

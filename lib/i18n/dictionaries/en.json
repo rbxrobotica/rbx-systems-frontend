@@ -7,6 +7,8 @@
     "aboutUs": "About Us",
     "services": "Services",
     "products": "Products",
+    "solutions": "Solutions",
+    "journal": "Journal",
     "blog": "Blog",
     "contact": "Contact",
     "atelier": "Atelier",
@@ -96,8 +98,8 @@
     },
     {
       "id": 1,
-      "href": "/blog",
-      "title": "Blog"
+      "href": "/journal",
+      "title": "Journal"
     },
     {
       "id": 2,
@@ -243,23 +245,66 @@
     "empty": "Coming soon.",
     "backLabel": "← Blog"
   },
+  "journal": {
+    "heading": "RBX Journal",
+    "tagline": "Ideas, engineering, product and field notes on AI systems, automation and operational infrastructure.",
+    "body": "Technical articles, product vision, governance, infrastructure and field learnings.",
+    "empty": "Coming soon.",
+    "backLabel": "← Journal"
+  },
+  "solutions": {
+    "heading": "Solutions",
+    "tagline": "Engineering capabilities for operations that demand control.",
+    "body": "RBX designs, builds and operates systems where reliability, auditability and long-term maintainability are requirements, not details."
+  },
+  "changelog": {
+    "heading": "Changelog",
+    "tagline": "Objective record of product and infrastructure evolution.",
+    "body": "What we built, changed and learned. Short, factual entries. Links to Journal posts when there is a bigger story."
+  },
+  "cases": {
+    "heading": "Cases",
+    "tagline": "Proof of work, field notes and internal systems.",
+    "body": "We do not publish client names or sensitive details without authorization. What appears here is public with consent, anonymized field learning or work on our own infrastructure and products.",
+    "typePublic": "Public case",
+    "typeFieldNote": "Field note",
+    "typeInternal": "Internal system"
+  },
+  "newsroom": {
+    "heading": "Newsroom",
+    "tagline": "Official information, press resources and company facts.",
+    "body": "This is the institutional source of RBX Systems. For press contact, use the email below.",
+    "boilerplateTitle": "Boilerplate",
+    "factsTitle": "Facts",
+    "contactTitle": "Press contact",
+    "pressKitTitle": "Press kit",
+    "announcementsTitle": "Official announcements"
+  },
+  "trust": {
+    "heading": "Trust",
+    "tagline": "How RBX builds, operates and governs its systems.",
+    "body": "This page describes our working principles. It is not a wall of certifications. Where we are still maturing, we say so."
+  },
   "footer": {
     "description": "Systems engineering, automation and infrastructure for high-demand operations.",
     "sections": {
-      "services": "Services",
       "company": "Company",
+      "resources": "Resources",
       "contact": "Contact"
     },
     "links": {
-      "systems_web": "Web Systems & Platforms",
-      "automacao": "Automation & Integrations",
-      "ia_aplicada": "Applied AI & Agents",
-      "infraestrutura": "Cloud Infrastructure",
-      "backend": "Backend & APIs",
-      "manutencao": "Evolutionary Maintenance",
       "aboutUs": "About us",
       "team": "Team",
-      "products": "Products"
+      "products": "Products",
+      "journal": "Journal",
+      "changelog": "Changelog",
+      "cases": "Cases",
+      "newsroom": "Newsroom",
+      "trust": "Trust",
+      "status": "Status",
+      "legal": "Legal / Impressum",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
     },
     "copyright": "All rights reserved."
   },

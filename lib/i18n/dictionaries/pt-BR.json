@@ -7,9 +7,10 @@
     "aboutUs": "Sobre nós",
     "services": "Serviços",
     "products": "Produtos",
+    "solutions": "Soluções",
+    "journal": "Journal",
     "blog": "Blog",
     "contact": "Contato",
-    "careers": "Trabalhe conosco",
     "atelier": "Atelier",
     "learnMore": "Saiba mais",
     "close": "Fechar",
@@ -97,8 +98,8 @@
     },
     {
       "id": 1,
-      "href": "/blog",
-      "title": "Blog"
+      "href": "/journal",
+      "title": "Journal"
     },
     {
       "id": 2,
@@ -245,37 +246,68 @@
     "empty": "Em breve.",
     "backLabel": "← Blog"
   },
+  "journal": {
+    "heading": "RBX Journal",
+    "tagline": "Ideias, engenharia, produto e notas de campo sobre sistemas de IA, automação e infraestrutura operacional.",
+    "body": "Artigos técnicos, visão de produto, governança, infraestrutura e aprendizados de campo.",
+    "empty": "Em breve.",
+    "backLabel": "← Journal"
+  },
+  "solutions": {
+    "heading": "Soluções",
+    "tagline": "Capacidades de engenharia para operações que exigem controle.",
+    "body": "A RBX projeta, constrói e opera sistemas onde confiabilidade, auditabilidade e manutenibilidade de longo prazo são requisitos, não detalhes."
+  },
+  "changelog": {
+    "heading": "Changelog",
+    "tagline": "Registro objetivo da evolução de produtos e infraestrutura.",
+    "body": "O que construímos, mudamos e aprendemos. Entradas curtas e factuais. Links para posts do Journal quando há uma história maior."
+  },
+  "cases": {
+    "heading": "Cases",
+    "tagline": "Prova de trabalho, field notes e sistemas internos.",
+    "body": "Não publicamos nomes de clientes ou detalhes sensíveis sem autorização. O que aparece aqui é público com consentimento, aprendizado de campo anonimizado ou trabalho em nossa própria infraestrutura e produtos.",
+    "typePublic": "Case público",
+    "typeFieldNote": "Field note",
+    "typeInternal": "Sistema interno"
+  },
+  "newsroom": {
+    "heading": "Newsroom",
+    "tagline": "Informação oficial, recursos de imprensa e fatos da empresa.",
+    "body": "Esta é a fonte institucional da RBX Systems. Para contato de imprensa, use o e-mail abaixo.",
+    "boilerplateTitle": "Boilerplate",
+    "factsTitle": "Fatos",
+    "contactTitle": "Contato de imprensa",
+    "pressKitTitle": "Press kit",
+    "announcementsTitle": "Comunicados oficiais"
+  },
+  "trust": {
+    "heading": "Trust",
+    "tagline": "Como a RBX constrói, opera e governa seus sistemas.",
+    "body": "Esta página descreve nossos princípios de trabalho. Não é uma parede de certificações. Onde ainda estamos amadurecendo, dizemos isso."
+  },
   "footer": {
     "description": "Engenharia de sistemas, automação e infraestrutura para operações de alta exigência.",
     "sections": {
-      "services": "Serviços",
       "company": "Empresa",
+      "resources": "Recursos",
       "contact": "Contato"
     },
     "links": {
-      "systems_web": "Sistemas Web e Plataformas",
-      "automacao": "Automação e Integrações",
-      "ia_aplicada": "IA Aplicada e Agentes",
-      "infraestrutura": "Infraestrutura Cloud",
-      "backend": "Backend e APIs",
-      "manutencao": "Manutenção Evolutiva",
       "aboutUs": "Sobre nós",
       "team": "Equipe",
-      "products": "Produtos"
+      "products": "Produtos",
+      "journal": "Journal",
+      "changelog": "Changelog",
+      "cases": "Cases",
+      "newsroom": "Newsroom",
+      "trust": "Trust",
+      "status": "Status",
+      "legal": "Legal / Impressum",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
     },
     "copyright": "Todos os direitos reservados."
-  },
-  "careers": {
-    "pageTitle": "Carreiras",
-    "metaTitle": "Posição",
-    "metaType": "Regime: Full-time / B2B",
-    "processTitle": "Processo seletivo",
-    "processSteps": [
-      "Análise do perfil e experiência",
-      "Entrevista técnica",
-      "Conversa com o time",
-      "Proposta e onboarding"
-    ]
   },
   "contact": {
     "heading": "Fale conosco",

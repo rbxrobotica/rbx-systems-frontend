@@ -30,6 +30,8 @@ export type Dictionary = {
     aboutUs: string;
     services: string;
     products: string;
+    solutions: string;
+    journal: string;
     blog: string;
     contact: string;
     atelier: string;
@@ -135,23 +137,66 @@ export type Dictionary = {
     empty: string;
     backLabel: string;
   };
+  journal: {
+    heading: string;
+    tagline: string;
+    body: string;
+    empty: string;
+    backLabel: string;
+  };
+  solutions: {
+    heading: string;
+    tagline: string;
+    body: string;
+  };
+  changelog: {
+    heading: string;
+    tagline: string;
+    body: string;
+  };
+  cases: {
+    heading: string;
+    tagline: string;
+    body: string;
+    typePublic: string;
+    typeFieldNote: string;
+    typeInternal: string;
+  };
+  newsroom: {
+    heading: string;
+    tagline: string;
+    body: string;
+    boilerplateTitle: string;
+    factsTitle: string;
+    contactTitle: string;
+    pressKitTitle: string;
+    announcementsTitle: string;
+  };
+  trust: {
+    heading: string;
+    tagline: string;
+    body: string;
+  };
   footer: {
     description: string;
     sections: {
-      services: string;
       company: string;
+      resources: string;
       contact: string;
     };
     links: {
-      systems_web: string;
-      automacao: string;
-      ia_aplicada: string;
-      infraestrutura: string;
-      backend: string;
-      manutencao: string;
       aboutUs: string;
       team: string;
       products: string;
+      journal: string;
+      changelog: string;
+      cases: string;
+      newsroom: string;
+      trust: string;
+      status: string;
+      legal: string;
+      github: string;
+      linkedin: string;
     };
     copyright: string;
   };
