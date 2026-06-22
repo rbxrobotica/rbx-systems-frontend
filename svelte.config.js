@@ -19,6 +19,9 @@ const config = {
       '$i18n': 'src/lib/i18n',
       '$types': 'src/lib/types'
     },
+    paths: {
+      relative: false
+    },
     prerender: {
       handleHttpError: 'warn',
       handleMissingId: 'warn',
