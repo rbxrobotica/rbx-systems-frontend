@@ -1,0 +1,18 @@
+
+# 2026-05-03 01:54:58.016205
++y
+
+# 2026-05-03 01:56:52.032426
++Na tela de produtos, precisamos corrigir o domínio do FE do Robson: não é mais app.* e sim direto robson.* (já funciona tanto para rbxsystems.ch quanto para rbx.ia.br, então renderiza sempre conforme o acesso do usuário). Você pode fazer essa correção inteira: remover o "app." e garantir renderização do domínio conforme acesso atual?
+
+# 2026-05-03 01:58:50.068943
++/exit
+
+# 2026-05-03 01:59:02.050198
++n
+
+# 2026-05-03 02:00:03.129101
++Na tela de produtos, precisamos corrigir o domínio do FE do Robson: não é mais app.* e sim direto robson.* (já funciona tanto para rbxsystems.ch quanto para rbx.ia.br, então renderiza sempre conforme o acesso do usuário). Você pode fazer essa correção inteira: remover o "app." e garantir renderização do domínio conforme acesso atual?
+
+# 2026-05-03 03:24:36.647037
++/exit
