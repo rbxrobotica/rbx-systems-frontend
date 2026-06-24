@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 
 const s3 = new S3Client({
@@ -13,7 +14,9 @@ const s3 = new S3Client({
 const BUCKET = 'rbx-content';
 
 function put(key, body) {
-  return s3.send(new PutObjectCommand({ Bucket: BUCKET, Key: key, Body: body, ContentType: 'text/markdown' }));
+  return s3.send(
+    new PutObjectCommand({ Bucket: BUCKET, Key: key, Body: body, ContentType: 'text/markdown' })
+  );
 }
 
 const pages = [];
@@ -24,15 +27,16 @@ function addPage(path, pt, en) {
 }
 
 // Home
-addPage('home',
-`---
+addPage(
+  'home',
+  `---
 title: Engenharia de sistemas para operações que exigem controle
 description: Engenharia de sistemas, automação operacional, IA aplicada e infraestrutura em nuvem para operações de alta exigência.
 eyebrow: RBX Systems
 lead: Projetamos plataformas, automações e infraestrutura para empresas que operam com alta exigência. Backend, cloud, agentes inteligentes e integrações construídos para confiabilidade e escala previsível.
 ---
 `,
-`---
+  `---
 title: Systems engineering for operations that demand control
 description: Systems engineering, operational automation, applied AI and cloud infrastructure for high-demand operations.
 eyebrow: RBX Systems
@@ -42,8 +46,9 @@ lead: We design platforms, automations and infrastructure for companies operatin
 );
 
 // Solutions
-addPage('solutions',
-`---
+addPage(
+  'solutions',
+  `---
 title: Soluções
 description: Capacidades de engenharia para operações que exigem controle.
 eyebrow: Engineering
@@ -106,7 +111,7 @@ Software that lasts beyond the first deploy.
 - Technical debt triage and modernization
 - Runbooks and operational documentation
 `,
-`---
+  `---
 title: Solutions
 description: Engineering capabilities for operations that demand control.
 eyebrow: Engineering
@@ -172,8 +177,9 @@ Software that lasts beyond the first deploy.
 );
 
 // Cases
-addPage('cases',
-`---
+addPage(
+  'cases',
+  `---
 title: Cases
 description: Prova de trabalho, field notes e sistemas internos.
 eyebrow: Work
@@ -230,7 +236,7 @@ Field note sobre integrar assistentes baseados em LLM com registros de ERP sem p
 - Human confirmation gate for write operations
 - Observability of every generated recommendation
 `,
-`---
+  `---
 title: Cases
 description: Proof of work, field notes and internal systems.
 eyebrow: Work
@@ -290,8 +296,9 @@ A field note on integrating LLM-based assistants with ERP records without allowi
 );
 
 // Changelog
-addPage('changelog',
-`---
+addPage(
+  'changelog',
+  `---
 title: Changelog
 description: Registro objetivo da evolução de produtos e infraestrutura.
 eyebrow: Log
@@ -337,7 +344,7 @@ O que construímos, mudamos e aprendemos. Entradas curtas e factuais.
 
 - **TruthMetal** — added: Anúncio do TruthMetal como camada de ground truth da RBX para evals, benchmarks e accountability de agentes.
 `,
-`---
+  `---
 title: Changelog
 description: Objective record of product and infrastructure evolution.
 eyebrow: Log
@@ -386,8 +393,9 @@ What we built, changed and learned. Short, factual entries.
 );
 
 // Newsroom
-addPage('newsroom',
-`---
+addPage(
+  'newsroom',
+  `---
 title: Newsroom
 description: Informação oficial, recursos de imprensa e fatos da empresa.
 eyebrow: Press
@@ -421,7 +429,7 @@ A RBX Systems é uma empresa de engenharia focada em automação, infraestrutura
 - **2026-06-18** — RBX atualiza arquitetura editorial com Journal, Changelog, Cases, Newsroom e Trust.
 - **2026-03-25** — TruthMetal lançado como camada de ground truth para sistemas de agentes da RBX.
 `,
-`---
+  `---
 title: Newsroom
 description: Official information, press resources and company facts.
 eyebrow: Press
@@ -458,8 +466,9 @@ RBX Systems is an engineering company focused on automation, AI infrastructure a
 );
 
 // Trust
-addPage('trust',
-`---
+addPage(
+  'trust',
+  `---
 title: Trust
 description: Como a RBX constrói, opera e governa seus sistemas.
 eyebrow: Governance
@@ -492,7 +501,7 @@ Os produtos RBX são desenvolvidos em repositórios públicos. Issues, discussõ
 
 Projetamos para modos de falha, operação degradada e recuperação. Uptime é função de disciplina, não otimismo.
 `,
-`---
+  `---
 title: Trust
 description: How RBX builds, operates and governs its systems.
 eyebrow: Governance
@@ -528,8 +537,9 @@ We design for failure modes, degraded operation and recovery. Uptime is a functi
 );
 
 // Products
-addPage('products',
-`---
+addPage(
+  'products',
+  `---
 title: Produtos
 description: Produtos open source da RBX Systems.
 eyebrow: Open source
@@ -540,7 +550,7 @@ Todos os produtos são open source e disponíveis publicamente. Construídos com
 
 Os repositórios estão em [github.com/rbxrobotica](https://github.com/rbxrobotica).
 `,
-`---
+  `---
 title: Products
 description: RBX Systems open source products.
 eyebrow: Open source
@@ -554,8 +564,9 @@ Repositories are at [github.com/rbxrobotica](https://github.com/rbxrobotica).
 );
 
 // Atelier
-addPage('atelier',
-`---
+addPage(
+  'atelier',
+  `---
 title: Atelier
 description: RBX Atelier.
 eyebrow: Studio
@@ -564,7 +575,7 @@ lead: RBX Atelier.
 
 Em breve.
 `,
-`---
+  `---
 title: Atelier
 description: RBX Atelier.
 eyebrow: Studio
@@ -576,8 +587,9 @@ Coming soon.
 );
 
 // About
-addPage('about',
-`---
+addPage(
+  'about',
+  `---
 title: Sobre nós
 description: Quem somos.
 eyebrow: Company
@@ -586,7 +598,7 @@ lead: Sistemas projetados para operar.
 
 A RBX projeta e opera plataformas, automações e infraestrutura para ambientes onde confiabilidade, governança e controle são requisitos.
 `,
-`---
+  `---
 title: About us
 description: Who we are.
 eyebrow: Company
@@ -598,8 +610,9 @@ RBX designs and operates platforms, automations and infrastructure for environme
 );
 
 // Contact
-addPage('contact',
-`---
+addPage(
+  'contact',
+  `---
 title: Contato
 description: Fale conosco.
 eyebrow: Contact
@@ -608,7 +621,7 @@ lead: Fale conosco.
 
 Envie um e-mail para **contact@rbxsystems.ch** ou use o formulário em breve disponível nesta página.
 `,
-`---
+  `---
 title: Contact
 description: Get in touch.
 eyebrow: Contact
