@@ -148,7 +148,7 @@
     <AltchaWidget
       bind:this={altchaWidget}
       challengeurl={challengeUrl}
-      on:statechange={(ev) => (altchaPayload = ev.detail)}
+      onstatechange={(payload) => (altchaPayload = payload)}
     />
 
     {#if status === 'error'}
