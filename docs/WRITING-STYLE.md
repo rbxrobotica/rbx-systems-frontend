@@ -13,16 +13,19 @@ This guide defines the editorial voice for RBX Systems blog posts. The goal is t
 AI models overuse em-dashes. They make text sound algorithmic and stilted.
 
 **Bad:**
+
 ```
 The system is resilient — it self-heals automatically.
 ```
 
 **Good:**
+
 ```
 The system is resilient. It self-heals automatically.
 ```
 
 Or use a comma when appropriate:
+
 ```
 The system is resilient, self-healing automatically when pods crash.
 ```
@@ -32,6 +35,7 @@ The system is resilient, self-healing automatically when pods crash.
 Arrows are a visual crutch that LLMs use to show progression. Use proper prose instead.
 
 **Bad:**
+
 ```
 SUBMITTED → VALIDATING → CONSENSUS_PENDING → CANONICAL
                                            ↓
@@ -39,11 +43,13 @@ SUBMITTED → VALIDATING → CONSENSUS_PENDING → CANONICAL
 ```
 
 **Good:**
+
 ```
 A parameter moves through four states: SUBMITTED, VALIDATING, CONSENSUS_PENDING, and CANONICAL. If consensus fails, it becomes REJECTED.
 ```
 
 Or use a simple bulleted list when describing flows:
+
 ```
 State transitions follow this order:
 - SUBMITTED (initial state)
@@ -63,11 +69,13 @@ Use the tone of a Cursor or Anthropic blog post: clear, direct, technical but no
 - Trust the reader's technical competence
 
 **Bad:**
+
 ```
 It's worth noting that the system essentially provides a way to manage configuration parameters in a distributed manner, which is basically important because it allows for better consistency across services.
 ```
 
 **Good:**
+
 ```
 The system manages configuration parameters across services with guaranteed consistency.
 ```
@@ -90,6 +98,7 @@ kind: Service
 Use Markdown lists, not pseudo-graphical structures:
 
 **Bad:**
+
 ```
 Services ┬─ Robson
         ├─ TruthMetal
@@ -97,6 +106,7 @@ Services ┬─ Robson
 ```
 
 **Good:**
+
 ```
 Services:
 - Robson
@@ -108,9 +118,9 @@ Services:
 
 Use Markdown tables when comparing data:
 
-| Service | Status |
-|---------|--------|
-| Robson | Healthy |
+| Service    | Status  |
+| ---------- | ------- |
+| Robson     | Healthy |
 | TruthMetal | Healthy |
 
 ---
@@ -126,6 +136,7 @@ Use Markdown tables when comparing data:
 ## Security
 
 Never include:
+
 - IP addresses (internal or external)
 - Credentials or API keys
 - Internal hostnames or network topology

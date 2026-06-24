@@ -30,12 +30,12 @@ Create the post in `blog-posts/` with filename `YYYY-MM-DD-slug.mdx`. Use this f
 
 ```yaml
 ---
-title: "Post title"
-date: "YYYY-MM-DD"
-author: "RBX Systems"
-authorRole: "Engineering Team"
+title: 'Post title'
+date: 'YYYY-MM-DD'
+author: 'RBX Systems'
+authorRole: 'Engineering Team'
 tags: [tag1, tag2]
-excerpt: "One sentence describing the post. Shown in listing and at the top of the page."
+excerpt: 'One sentence describing the post. Shown in listing and at the top of the page.'
 ---
 ```
 
@@ -56,6 +56,7 @@ For all **new** agent-published posts, prefer creating both locale files and ski
 **Do NOT include sensitive infrastructure details** (IPs, credentials, internal hostnames, security incidents).
 
 **Markdown Features**: The blog supports **GitHub Flavored Markdown (GFM)** via `remark-gfm`:
+
 - ✅ Tables (use standard Markdown table syntax)
 - ✅ Strikethrough (~~text~~)
 - ✅ Task lists
@@ -109,7 +110,7 @@ Wait for the user to provide the local file path of the generated cover image.
 Edit both locale variants to add the same `cover` field to frontmatter:
 
 ```yaml
-cover: "https://eu2.contabostorage.com/rbx-content/blog/covers/YYYY-MM-DD-slug.jpg"
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/YYYY-MM-DD-slug.jpg'
 ```
 
 Then re-upload:
@@ -170,11 +171,13 @@ All assets are served via `/api/assets/[...path]` which proxies from S3 with
 `Cache-Control: public, max-age=31536000, immutable`.
 
 To upload UI assets (SVGs + root-level JPEGs from public/):
+
 ```bash
 ./scripts/assets-upload.sh --bulk-ui
 ```
 
 To upload a single asset:
+
 ```bash
 ./scripts/assets-upload.sh /path/to/file.jpg team/nome-pessoa.jpg
 ```
@@ -183,13 +186,13 @@ To upload a single asset:
 
 ## Cover Image Specifications
 
-| Property | Value |
-|----------|-------|
-| Dimensions | 1200 × 630 px |
-| Format | JPEG |
-| Aspect ratio | 16:9 |
-| S3 key | `blog/covers/{slug}.jpg` |
-| Public URL | `https://eu2.contabostorage.com/rbx-content/blog/covers/{slug}.jpg` |
+| Property     | Value                                                               |
+| ------------ | ------------------------------------------------------------------- |
+| Dimensions   | 1200 × 630 px                                                       |
+| Format       | JPEG                                                                |
+| Aspect ratio | 16:9                                                                |
+| S3 key       | `blog/covers/{slug}.jpg`                                            |
+| Public URL   | `https://eu2.contabostorage.com/rbx-content/blog/covers/{slug}.jpg` |
 
 ---
 

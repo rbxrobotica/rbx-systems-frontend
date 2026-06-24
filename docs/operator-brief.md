@@ -11,15 +11,15 @@
 
 LIVE in k3s production since 2026-05-15.
 
-| Aspect | Value |
-|--------|-------|
-| Image | `ghcr.io/rbxrobotica/rbx-ia-br:sha-<latest>` (CI-bumped automatically) |
-| Namespaces | `rbx-ia-br` (rbx.ia.br), `rbxsystems-ch` (rbxsystems.ch) |
-| Replicas | 2/2 per namespace |
-| Routes | `POST /api/contact`, floating WhatsApp button, updated footer |
-| Email path | Postmark → `contact@rbxsystems.ch` (Mailcow inbox) |
-| WhatsApp path | 360dialog template `contact_form_acknowledgment` (pt_BR) |
-| WhatsApp number | `+55 11 913734954` (`wa.me/5511913734954`) |
+| Aspect          | Value                                                                  |
+| --------------- | ---------------------------------------------------------------------- |
+| Image           | `ghcr.io/rbxrobotica/rbx-ia-br:sha-<latest>` (CI-bumped automatically) |
+| Namespaces      | `rbx-ia-br` (rbx.ia.br), `rbxsystems-ch` (rbxsystems.ch)               |
+| Replicas        | 2/2 per namespace                                                      |
+| Routes          | Form posts to `rbx-comms` (`api.comms.{domain}/api/contact`), floating WhatsApp button, updated footer |
+| Email path      | Postmark → `contact@rbxsystems.ch` (Mailcow inbox)                     |
+| WhatsApp path   | 360dialog template `contact_form_acknowledgment` (pt_BR)               |
+| WhatsApp number | `+55 11 913734954` (`wa.me/5511913734954`)                             |
 
 ---
 
@@ -27,21 +27,23 @@ LIVE in k3s production since 2026-05-15.
 
 Sources of truth live in `pass`. Per rbx-infra "No secrets in Git" rule.
 
-| Pass path | Used as | Notes |
-|-----------|---------|-------|
-| `rbx/postmark/rbx-institutional-server-token` | `POSTMARK_SERVER_TOKEN` | RBX Institutional Postmark server |
-| `rbx/d360/api-key` | `D360_API_KEY` | 360dialog WABA API key |
-| `rbx/d360/webhook-url` | Phase 1 only | Registered with 360dialog in EP-002 |
+| Pass path                                     | Used as                 | Notes                               |
+| --------------------------------------------- | ----------------------- | ----------------------------------- |
+| `rbx/postmark/rbx-institutional-server-token` | `POSTMARK_SERVER_TOKEN` | RBX Institutional Postmark server   |
+| `rbx/d360/api-key`                            | `D360_API_KEY`          | 360dialog WABA API key              |
+| `rbx/d360/webhook-url`                        | Phase 1 only            | Registered with 360dialog in EP-002 |
 
 k8s Secret `rbx-contact-secrets` lives in `rbx-ia-br`, replicated to `rbxsystems-ch` via ExternalSecret (15min refresh).
 
 Inspect without printing values:
+
 ```bash
 kubectl get secret rbx-contact-secrets -n rbx-ia-br -o json | \
   jq -r '.data | to_entries[] | "\(.key): \(.value | @base64d | length) chars"'
 ```
 
 To (re)apply the secret from pass:
+
 ```bash
 kubectl create secret generic rbx-contact-secrets -n rbx-ia-br \
   --from-literal=POSTMARK_SERVER_TOKEN="$(pass show rbx/postmark/rbx-institutional-server-token)" \
@@ -63,24 +65,28 @@ Image tag bumps are handled automatically by `.github/workflows/ci.yml` (builds,
 ## Verification commands
 
 Confirm pods are healthy:
+
 ```bash
 kubectl get pods -n rbx-ia-br -o wide
 kubectl get pods -n rbxsystems-ch -o wide
 ```
 
 Confirm ExternalSecret replication:
+
 ```bash
 kubectl get externalsecret rbx-contact-secrets -n rbxsystems-ch \
   -o jsonpath='{.status.conditions[*].type}'   # expect: includes "Ready"
 ```
 
 Confirm Postmark account reachable:
+
 ```bash
 curl -s -H "X-Postmark-Server-Token: $(pass show rbx/postmark/rbx-institutional-server-token)" \
   https://api.postmarkapp.com/server | jq -r .Name
 ```
 
 List D360 template status:
+
 ```bash
 curl -s -H "D360-API-KEY: $(pass show rbx/d360/api-key)" \
   https://waba.360dialog.io/v1/configs/templates | \
@@ -88,6 +94,7 @@ curl -s -H "D360-API-KEY: $(pass show rbx/d360/api-key)" \
 ```
 
 Tail contact route logs:
+
 ```bash
 kubectl logs -n rbx-ia-br -l app.kubernetes.io/part-of=rbx-ia-br -f --tail=100 | grep -i 'api/contact'
 ```
@@ -98,12 +105,12 @@ kubectl logs -n rbx-ia-br -l app.kubernetes.io/part-of=rbx-ia-br -f --tail=100 |
 
 Four entry points, default order. Full execution detail in `docs/implementation/contact-system-bidirectional.md`.
 
-| Order | Entry point | Slice | Effort | Hard prereq for next? |
-|-------|-------------|-------|--------|----------------------|
-| 1 | EP-001 | Anti-abuse | 1–2 days | Yes (public rollout gate) |
-| 2 | EP-003 | Postgres persistence | 2–3 days | Yes (EP-002 writes need a schema) |
-| 3 | EP-002 | Inbound webhook | 2–3 days | No |
-| 4 | EP-004 | Observability | 1–2 days | No (caps the phase) |
+| Order | Entry point | Slice                | Effort   | Hard prereq for next?             |
+| ----- | ----------- | -------------------- | -------- | --------------------------------- |
+| 1     | EP-001      | Anti-abuse           | 1–2 days | Yes (public rollout gate)         |
+| 2     | EP-003      | Postgres persistence | 2–3 days | Yes (EP-002 writes need a schema) |
+| 3     | EP-002      | Inbound webhook      | 2–3 days | No                                |
+| 4     | EP-004      | Observability        | 1–2 days | No (caps the phase)               |
 
 Alternate order (1→3→2→4) is acceptable if Postgres provisioning is blocked.
 
@@ -124,18 +131,18 @@ Phase 2 (rbx-comms extraction) and Phase 3 (Strategos bridge) are gated — do n
 
 ## Document map
 
-| Document | Role |
-|----------|------|
-| `docs/implementation/contact-system.md` | Program index — read first |
-| `docs/implementation/contact-system-bidirectional.md` | Phase 1 execution plan (4 EPs) |
-| `docs/adr/ADR-0001-contact-form-via-nextjs-api-route.md` | Foundational decision |
-| `docs/operator-brief.md` | This file — fast operational summary |
+| Document                                                 | Role                                 |
+| -------------------------------------------------------- | ------------------------------------ |
+| `docs/implementation/contact-system.md`                  | Program index — read first           |
+| `docs/implementation/contact-system-bidirectional.md`    | Phase 1 execution plan (4 EPs)       |
+| `docs/adr/ADR-0001-contact-form-via-nextjs-api-route.md` | Foundational decision                |
+| `docs/operator-brief.md`                                 | This file — fast operational summary |
 
 ---
 
 ## Changelog
 
-| Date | Change |
-|------|--------|
-| 2026-05-15 | Initial operator brief — Phase 0 LIVE, Phase 1 planned |
+| Date       | Change                                                         |
+| ---------- | -------------------------------------------------------------- |
+| 2026-05-15 | Initial operator brief — Phase 0 LIVE, Phase 1 planned         |
 | 2026-05-16 | Updated EP-001 description from Turnstile to Altcha anti-abuse |
