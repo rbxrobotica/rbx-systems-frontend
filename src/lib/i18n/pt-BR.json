@@ -30,6 +30,30 @@
     "readMore": "Ler mais",
     "back": "← Voltar",
     "comingSoon": "Em breve.",
-    "empty": "Nenhum conteúdo encontrado."
+    "empty": "Nenhum conteúdo encontrado.",
+    "close": "Fechar",
+    "languageCode": "pt"
+  },
+  "contact": {
+    "heading": "Entre em contato",
+    "body": "Envie uma mensagem. Retornamos em até um dia útil.",
+    "emailLabel": "E-mail",
+    "whatsappLabel": "WhatsApp",
+    "whatsappCta": "Falar no WhatsApp",
+    "form": {
+      "name": "Nome",
+      "email": "E-mail",
+      "phone": "Telefone",
+      "message": "Mensagem",
+      "namePlaceholder": "Seu nome",
+      "emailPlaceholder": "seu@email.com",
+      "phonePlaceholder": "+55 11 99999-9999",
+      "messagePlaceholder": "Como podemos ajudar?",
+      "whatsappOptIn": "Aceito receber resposta pelo WhatsApp.",
+      "submit": "Enviar mensagem",
+      "submitting": "Enviando...",
+      "success": "Mensagem enviada. Entraremos em contato em breve.",
+      "error": "Não foi possível enviar. Verifique os campos e tente novamente."
+    }
   }
 }

@@ -2,6 +2,7 @@
   import { _ } from 'svelte-i18n';
   import PageHeader from '$components/PageHeader.svelte';
   import Prose from '$components/Prose.svelte';
+  import ContactSection from '$components/ContactSection.svelte';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
@@ -31,6 +32,8 @@
   <a href="/solucoes" class="rbx-cta">{$_('home.ctaServices')}</a>
   <a href="/produtos" class="rbx-cta">{$_('home.ctaProducts')}</a>
 </div>
+
+<ContactSection />
 
 <style>
   .actions {

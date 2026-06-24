@@ -30,6 +30,30 @@
     "readMore": "Read more",
     "back": "← Back",
     "comingSoon": "Coming soon.",
-    "empty": "No content found."
+    "empty": "No content found.",
+    "close": "Close",
+    "languageCode": "en"
+  },
+  "contact": {
+    "heading": "Get in touch",
+    "body": "Send a message. We reply within one business day.",
+    "emailLabel": "Email",
+    "whatsappLabel": "WhatsApp",
+    "whatsappCta": "Chat on WhatsApp",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "you@email.com",
+      "phonePlaceholder": "+41 79 000 00 00",
+      "messagePlaceholder": "How can we help?",
+      "whatsappOptIn": "I agree to receive a reply via WhatsApp.",
+      "submit": "Send message",
+      "submitting": "Sending...",
+      "success": "Message sent. We'll get back to you soon.",
+      "error": "Could not send. Please check the fields and try again."
+    }
   }
 }
