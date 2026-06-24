@@ -12,16 +12,48 @@
   let payload = $state<string | null>(null);
   const dispatch = createEventDispatcher<{ statechange: string | null }>();
 
-  function onStateChange(ev: Event) {
-    const detail = (ev as CustomEvent).detail;
-    payload = detail?.payload ?? null;
+  async function onVerified() {
+    const el = widget as
+      | (HTMLElement & { verify?: () => Promise<{ payload?: string } | null> })
+      | undefined;
+    if (!el?.verify) {
+      payload = null;
+      dispatch('statechange', null);
+      return;
+    }
+    try {
+      const result = await el.verify();
+      payload = result?.payload ?? null;
+    } catch {
+      payload = null;
+    }
     dispatch('statechange', payload);
+  }
+
+  function onStateChange(ev: Event) {
+    const detail = (ev as CustomEvent)?.detail;
+    if (detail?.state === 'verified') {
+      // verified event will fire right after; payload is available there.
+      return;
+    }
+    if (
+      detail?.state === 'unverified' ||
+      detail?.state === 'error' ||
+      detail?.state === 'expired'
+    ) {
+      payload = null;
+      dispatch('statechange', null);
+    }
   }
 
   onMount(() => {
     const el = widget;
+    el?.addEventListener('verified', onVerified);
     el?.addEventListener('statechange', onStateChange);
-    return () => el?.removeEventListener('statechange', onStateChange);
+    return () => {
+      el?.removeEventListener('verified', onVerified);
+      el?.removeEventListener('statechange', onStateChange);
+    };
   });
 
   export function getValue(): string | null {
