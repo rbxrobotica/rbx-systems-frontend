@@ -13,6 +13,7 @@
   let website = $state(''); // honeypot
   let altchaPayload = $state<string | null>(null);
   let status = $state<Status>('idle');
+  let altchaWidget: AltchaWidget | undefined = $state();
 
   const commsBase = getCommsBaseUrl();
   const challengeUrl = `${commsBase}/api/altcha-challenge`;
@@ -20,7 +21,8 @@
   async function handleSubmit(ev: SubmitEvent) {
     ev.preventDefault();
 
-    if (!altchaPayload) {
+    const payload = altchaWidget?.getValue() ?? altchaPayload;
+    if (!payload) {
       status = 'error';
       return;
     }
@@ -37,7 +39,7 @@
           phone: phone || undefined,
           message,
           whatsapp_opt_in: whatsappOptIn,
-          altcha: altchaPayload,
+          altcha: payload,
           website,
           source: 'site',
           language: $_('common.languageCode') ?? 'pt'
@@ -144,6 +146,7 @@
     </div>
 
     <AltchaWidget
+      bind:this={altchaWidget}
       challengeurl={challengeUrl}
       on:statechange={(ev) => (altchaPayload = ev.detail)}
     />
