@@ -2,7 +2,7 @@ name: CI/CD — rbx.ia.br
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
 
 env:
   IMAGE_NAME: ghcr.io/rbxrobotica/rbx-ia-br

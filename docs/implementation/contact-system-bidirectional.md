@@ -16,6 +16,7 @@
 **Problem Statement**: The contact form shipped on 2026-05-15 (commit `7ca2868`) is outbound-only and unprotected. Before any public announcement, it needs anti-abuse hardening. Beyond that, the WhatsApp channel is half-duplex (we send template acknowledgments but never receive replies), and every submission is ephemeral (it lives in the operator's inbox, not in any structured store). This guide closes those gaps in four ordered slices.
 
 **Key Findings**:
+
 - The `/api/contact` route has zero rate limiting, no anti-abuse token, and no honeypot. Public exposure without protection will trigger abuse within hours of any social-media announcement and may lock Postmark/D360 quotas.
 - The D360 webhook URL is already provisioned (`pass show rbx/d360/webhook-url`) but no handler exists. Leads who reply to the acknowledgment template have their messages dropped.
 - No persistence layer exists. If `contact@rbxsystems.ch` mailbox is misconfigured or full, submissions vanish.
@@ -30,6 +31,7 @@
 ## Current State
 
 ### System Overview
+
 - **Frontend**: Next.js 14 App Router, deployed via ArgoCD GitOps from `rbx-infra` to k3s namespaces `rbx-ia-br` and `rbxsystems-ch`. Image at `ghcr.io/rbxrobotica/rbx-ia-br:sha-<sha>`.
 - **Contact route**: `app/api/contact/route.ts` — single POST handler doing Postmark email + D360 template (fire-and-forget).
 - **Email path**: Postmark relay → `contact@rbxsystems.ch` (Mailcow inbox at `mail.rbxsystems.ch`).
@@ -37,18 +39,21 @@
 - **Secrets**: `rbx-contact-secrets` in `rbx-ia-br`, replicated to `rbxsystems-ch` via ExternalSecret.
 
 ### Observed Behavior
+
 - Form submissions reach `contact@rbxsystems.ch` mailbox successfully (verified locally).
 - WhatsApp acknowledgment is not yet sent end-to-end because the D360 template is awaiting approval (24–48h after submission).
 - No mechanism captures inbound replies — they hit D360 webhook, which returns 404 from the current rbx site (no handler registered).
 - No metrics. No structured logs beyond stdout from the API route.
 
 ### Expected Behavior
+
 - Form is protected against bots and high-frequency abuse before public rollout.
 - Inbound WhatsApp replies are received, persisted, and surfaced to the operator (initially via email forward; eventually via a small inbox UI).
 - Every submission and reply is stored in Postgres with full audit fields (timestamps, source IP, user agent, D360 message IDs).
 - Operator can see real-time metrics: submissions/min, success rate, Postmark/D360 error counts, with alerts on anomalies.
 
 ### Root Cause Analysis
+
 The original delivery (ADR-0001) intentionally scoped down to "outbound-only MVP" to ship value within one session. The current state is the agreed MVP — these slices complete the channel.
 
 ---
@@ -57,48 +62,51 @@ The original delivery (ADR-0001) intentionally scoped down to "outbound-only MVP
 
 ### Documentation Gaps
 
-| Priority | File/Location | Issue | Impact |
-|----------|---------------|-------|--------|
-| P0 | This guide | Does not exist before this commit | HIGH |
-| P1 | `docs/adr/ADR-0002-contact-persistence-schema.md` | Needed once EP-003 schema is decided | MED |
-| P1 | `docs/runbooks/contact-incident.md` | No on-call playbook for Postmark/D360 outages | MED |
-| P2 | `docs/implementation/contact-rbx-comms-extraction.md` | Future guide for when volume justifies extraction (see ADR-0001 evolution path) | LOW |
+| Priority | File/Location                                         | Issue                                                                           | Impact |
+| -------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- | ------ |
+| P0       | This guide                                            | Does not exist before this commit                                               | HIGH   |
+| P1       | `docs/adr/ADR-0002-contact-persistence-schema.md`     | Needed once EP-003 schema is decided                                            | MED    |
+| P1       | `docs/runbooks/contact-incident.md`                   | No on-call playbook for Postmark/D360 outages                                   | MED    |
+| P2       | `docs/implementation/contact-rbx-comms-extraction.md` | Future guide for when volume justifies extraction (see ADR-0001 evolution path) | LOW    |
 
 ### Code Gaps
 
-| Priority | Component | Issue | Blocker For |
-|----------|-----------|-------|-------------|
-| P0 | `app/api/contact/route.ts` | No rate limit, no anti-abuse verification, no honeypot | Public rollout |
-| P0 | `app/page/views/contact/contact-form.tsx` | No anti-abuse widget rendered, no honeypot input | EP-001 |
-| P0 | `app/api/whatsapp/webhook/route.ts` | Does not exist | EP-002 |
-| P0 | `lib/contact/repo.ts` (or equivalent) | No persistence layer exists | EP-003 |
-| P1 | `app/api/contact/route.ts` | No metrics emitted (request count, errors, latency) | EP-004 |
-| P1 | `lib/contact/d360-client.ts` | D360 client logic is inline in the route; should be factored out before adding inbound | EP-002 |
+| Priority | Component                                 | Issue                                                                                  | Blocker For    |
+| -------- | ----------------------------------------- | -------------------------------------------------------------------------------------- | -------------- |
+| P0       | `app/api/contact/route.ts`                | No rate limit, no anti-abuse verification, no honeypot                                 | Public rollout |
+| P0       | `app/page/views/contact/contact-form.tsx` | No anti-abuse widget rendered, no honeypot input                                       | EP-001         |
+| P0       | `app/api/whatsapp/webhook/route.ts`       | Does not exist                                                                         | EP-002         |
+| P0       | `lib/contact/repo.ts` (or equivalent)     | No persistence layer exists                                                            | EP-003         |
+| P1       | `app/api/contact/route.ts`                | No metrics emitted (request count, errors, latency)                                    | EP-004         |
+| P1       | `lib/contact/d360-client.ts`              | D360 client logic is inline in the route; should be factored out before adding inbound | EP-002         |
 
 ### Infrastructure Gaps
 
-| Priority | Resource | Issue | Impact |
-|----------|----------|-------|--------|
-| P0 | Altcha HMAC secret | Not generated | EP-001 blocker |
-| P0 | Postgres database for contact data | No DB provisioned (memory: Postgres always external) | EP-003 blocker |
-| P0 | D360 webhook URL registered | URL stored in pass but not yet registered with D360 hub | EP-002 blocker |
-| P1 | Grafana dashboard for contact metrics | Does not exist | EP-004 |
-| P1 | Alertmanager rules for Postmark/D360 failures | Do not exist | EP-004 |
+| Priority | Resource                                      | Issue                                                   | Impact         |
+| -------- | --------------------------------------------- | ------------------------------------------------------- | -------------- |
+| P0       | Altcha HMAC secret                            | Not generated                                           | EP-001 blocker |
+| P0       | Postgres database for contact data            | No DB provisioned (memory: Postgres always external)    | EP-003 blocker |
+| P0       | D360 webhook URL registered                   | URL stored in pass but not yet registered with D360 hub | EP-002 blocker |
+| P1       | Grafana dashboard for contact metrics         | Does not exist                                          | EP-004         |
+| P1       | Alertmanager rules for Postmark/D360 failures | Do not exist                                            | EP-004         |
 
 ---
 
 ## Priority Tracks
 
 ### Track 1: CONTACT-P1 — Anti-abuse hardening
+
 **Effort**: 1–2 days
 **Dependencies**: Altcha HMAC secret generated and stored
 **Deliverables**:
+
 - Altcha challenge endpoint (`/api/altcha-challenge`) generating HMAC-signed proof-of-work challenges
 - Server-side Altcha payload verification in `/api/contact`
 - Honeypot field (`website` or similar) — instant reject if filled
 - Simple in-memory IP rate limit (e.g., 5 submissions per IP per hour) — acceptable for low traffic; replace with Redis when scaling
 
 **Tasks**:
+
 1. Generate a strong random HMAC secret (`openssl rand -hex 32`) and store in `pass` at `rbx/altcha/hmac-secret`
 2. Add `ALTCHA_SECRET` to `rbx-contact-secrets` k8s Secret
 3. Install `altcha` package (`yarn add altcha`)
@@ -109,15 +117,18 @@ The original delivery (ADR-0001) intentionally scoped down to "outbound-only MVP
 8. Add IP-based rate limit middleware (Next.js middleware or in-route check)
 
 ### Track 2: CONTACT-P2 — Inbound WhatsApp webhook handler
+
 **Effort**: 2–3 days
 **Dependencies**: CONTACT-P3 schema decided (or skipped with a TODO), D360 webhook URL registered, signature secret in `pass`
 **Deliverables**:
+
 - `app/api/whatsapp/webhook/route.ts` — POST handler accepting D360 webhook payloads
 - Signature verification (HMAC) before any processing
 - Forwarder that emails inbound messages to `contact@rbxsystems.ch` (interim, before persistence is live)
 - Idempotency guard keyed on D360 `message_id` to handle webhook retries
 
 **Tasks**:
+
 1. Extract D360 client into `lib/contact/d360-client.ts` (refactor existing outbound path)
 2. Read D360 webhook docs and confirm signature header + algorithm
 3. Implement signature verification (use `crypto.timingSafeEqual`)
@@ -127,9 +138,11 @@ The original delivery (ADR-0001) intentionally scoped down to "outbound-only MVP
 7. Register webhook URL in 360dialog hub: `https://rbx.ia.br/api/whatsapp/webhook`
 
 ### Track 3: CONTACT-P3 — Lead persistence schema
+
 **Effort**: 2–3 days
 **Dependencies**: Postgres VPS allocated, decision on DB scope (see Open Questions)
 **Deliverables**:
+
 - `contact` schema in Postgres with tables: `submissions`, `whatsapp_messages`, `whatsapp_threads`
 - `lib/contact/repo.ts` — typed repository (likely Drizzle or Kysely, matching existing Next.js patterns)
 - `/api/contact` writes submission row before sending email/WhatsApp; non-blocking
@@ -137,6 +150,7 @@ The original delivery (ADR-0001) intentionally scoped down to "outbound-only MVP
 - One-time migration SQL in `migrations/` committed to the repo
 
 **Tasks**:
+
 1. Decide Postgres location (PDNS VPS shared, new dedicated VPS, or Mailcow MySQL alternative) — see Open Questions
 2. Provision DB user `rbx_contact` with grants on `contact` schema
 3. Store connection URL in `pass` at `rbx/contact-db/dsn`
@@ -147,14 +161,17 @@ The original delivery (ADR-0001) intentionally scoped down to "outbound-only MVP
 8. Wire repo into `/api/contact` and `/api/whatsapp/webhook`
 
 ### Track 4: CONTACT-P4 — Observability
+
 **Effort**: 1–2 days
 **Dependencies**: CONTACT-P1, CONTACT-P2, CONTACT-P3 in place; Prometheus stack confirmed reachable from `rbx-ia-br` namespace
 **Deliverables**:
+
 - Prometheus metrics endpoint `/api/metrics` (or sidecar-scraped) exposing: submission count, success/failure by reason, Postmark/D360 latency, webhook event count
 - Grafana dashboard for the contact channel
 - Alertmanager rules: Postmark 5xx > 1% over 5min, D360 5xx > 1% over 5min, no submissions in 24h (early canary for breakage)
 
 **Tasks**:
+
 1. Add `prom-client` (or equivalent Next.js-compatible Prometheus library)
 2. Define counters: `contact_submissions_total{result}`, `contact_postmark_errors_total`, `contact_d360_errors_total`, `whatsapp_inbound_total`
 3. Define histograms: `contact_postmark_duration_seconds`, `contact_d360_duration_seconds`
@@ -169,12 +186,12 @@ The original delivery (ADR-0001) intentionally scoped down to "outbound-only MVP
 
 Choose the correct entrypoint based on objective:
 
-| Objective                              | Entry Point | Effort    |
-|----------------------------------------|-------------|-----------|
-| Block bots before public announcement  | EP-001      | 1–2 days  |
-| Enable two-way WhatsApp conversation   | EP-002      | 2–3 days  |
-| Persist all contact data structurally  | EP-003      | 2–3 days  |
-| Add metrics, dashboards, alerts        | EP-004      | 1–2 days  |
+| Objective                             | Entry Point | Effort   |
+| ------------------------------------- | ----------- | -------- |
+| Block bots before public announcement | EP-001      | 1–2 days |
+| Enable two-way WhatsApp conversation  | EP-002      | 2–3 days |
+| Persist all contact data structurally | EP-003      | 2–3 days |
+| Add metrics, dashboards, alerts       | EP-004      | 1–2 days |
 
 ### Default Execution Order (if unsure)
 
@@ -194,6 +211,7 @@ Choose the correct entrypoint based on objective:
 **Objective**: Make `/api/contact` safe to expose publicly. Block bots, throttle abuse, refuse missing or invalid anti-abuse token submissions.
 
 **Preconditions**:
+
 ```bash
 # Altcha HMAC secret exists and is non-empty
 pass show rbx/altcha/hmac-secret | wc -c | awk '$1 > 10 {exit 0} {exit 1}'
@@ -204,10 +222,12 @@ curl -X POST https://rbx.ia.br/api/contact -H 'content-type: application/json' \
 ```
 
 **Inputs** (explicit):
+
 - `ALTCHA_SECRET`: private HMAC key for signing challenges, in `rbx-contact-secrets`
 - `NEXT_PUBLIC_ALTCHA_API`: public, exposed via `NEXT_PUBLIC_ALTCHA_API=/api/altcha-challenge` (or relative path)
 
 **Steps**:
+
 ```bash
 # Add Altcha React component and server-side library
 yarn add altcha
@@ -241,6 +261,7 @@ kubectl create secret generic rbx-contact-secrets -n rbx-ia-br \
 ```
 
 **Expected Outcome**:
+
 ```bash
 # Submission without token returns 403
 curl -X POST https://rbx.ia.br/api/contact \
@@ -263,6 +284,7 @@ done | tail -1 | grep -q '^429$'
 ```
 
 **Failure Detection**:
+
 ```bash
 # FAIL if 5xx on any of the verification steps
 # FAIL if Altcha verification reveals the secret or challenge algorithm to clients
@@ -270,6 +292,7 @@ done | tail -1 | grep -q '^429$'
 ```
 
 **Rollback**:
+
 ```bash
 git restore app/api/contact/route.ts app/api/altcha-challenge/route.ts app/page/views/contact/contact-form.tsx
 # Revert image tag in rbx-infra/apps/prod/{rbx-ia-br,rbxsystems-ch}/kustomization.yml
@@ -284,6 +307,7 @@ git -C ../rbx-infra push origin main
 **Objective**: Receive D360 webhooks, verify signatures, forward inbound messages to the operator mailbox (and to persistence once EP-003 is live).
 
 **Preconditions**:
+
 ```bash
 # Webhook URL is provisioned (operator already stored it in pass)
 pass show rbx/d360/webhook-url | grep -q '^https://'
@@ -293,10 +317,12 @@ pass show rbx/d360/webhook-url | grep -q '^https://'
 ```
 
 **Inputs** (explicit):
+
 - `D360_WEBHOOK_SECRET`: HMAC signing secret from D360 hub (configure when registering URL)
 - `WEBHOOK_FORWARD_EMAIL`: `contact@rbxsystems.ch` (interim sink before EP-003)
 
 **Steps**:
+
 ```bash
 # 1. Refactor d360 calls out of /api/contact/route.ts into lib/contact/d360-client.ts
 # 2. Implement signature verification (D360 docs: X-Hub-Signature-256)
@@ -308,6 +334,7 @@ pass show rbx/d360/webhook-url | grep -q '^https://'
 ```
 
 **Expected Outcome**:
+
 ```bash
 # Webhook URL is registered
 curl -H "D360-API-KEY: $(pass show rbx/d360/api-key)" \
@@ -322,6 +349,7 @@ curl -H "D360-API-KEY: $(pass show rbx/d360/api-key)" \
 ```
 
 **Failure Detection**:
+
 ```bash
 # FAIL if webhook returns 5xx on valid signed payload
 # FAIL if invalid signature returns anything other than 401
@@ -329,6 +357,7 @@ curl -H "D360-API-KEY: $(pass show rbx/d360/api-key)" \
 ```
 
 **Rollback**:
+
 ```bash
 # Unregister webhook URL in 360dialog hub
 curl -X PATCH -H "D360-API-KEY: $(pass show rbx/d360/api-key)" \
@@ -346,6 +375,7 @@ git restore app/api/whatsapp lib/contact
 **Objective**: Move from "submissions are emails" to "submissions are rows". Every form post and every inbound message becomes a queryable record.
 
 **Preconditions**:
+
 ```bash
 # Postgres VPS reachable from k3s cluster (see Open Questions for which one)
 pg_isready -h <host> -p 5432
@@ -356,10 +386,12 @@ psql "$PG_ADMIN_DSN" -c "\l rbx_contact_prod" | grep -q rbx_contact_prod
 ```
 
 **Inputs** (explicit):
+
 - `DATABASE_URL`: full DSN, stored in `rbx-contact-secrets`
 - `MIGRATION_DIR`: `migrations/` in repo root
 
 **Steps**:
+
 ```bash
 # 1. Choose Postgres location (see Open Questions)
 # 2. Provision: CREATE USER rbx_contact ...; CREATE DATABASE rbx_contact_prod OWNER rbx_contact;
@@ -373,6 +405,7 @@ psql "$PG_ADMIN_DSN" -c "\l rbx_contact_prod" | grep -q rbx_contact_prod
 ```
 
 **Schema sketch** (subject to ADR-0002):
+
 ```sql
 CREATE SCHEMA contact;
 
@@ -412,6 +445,7 @@ CREATE TABLE contact.whatsapp_messages (
 ```
 
 **Expected Outcome**:
+
 ```bash
 # A submission appears in the table
 psql "$DATABASE_URL" -c "SELECT COUNT(*) FROM contact.submissions WHERE created_at > now() - interval '5 minutes';" | grep -E '^\s+[1-9]'
@@ -424,6 +458,7 @@ psql "$DATABASE_URL" -c "SELECT direction, COUNT(*) FROM contact.whatsapp_messag
 ```
 
 **Failure Detection**:
+
 ```bash
 # FAIL if route returns 200 but no row is inserted (silent DB failure)
 # FAIL if migrations regress on re-run (idempotency)
@@ -431,6 +466,7 @@ psql "$DATABASE_URL" -c "SELECT direction, COUNT(*) FROM contact.whatsapp_messag
 ```
 
 **Rollback**:
+
 ```bash
 # Drop schema (destroys data — only do this in pre-prod)
 psql "$DATABASE_URL" -c "DROP SCHEMA contact CASCADE;"
@@ -446,6 +482,7 @@ git restore app/api/contact app/api/whatsapp lib/contact lib/db
 **Objective**: Light up the contact channel in Prometheus + Grafana. Operator must be able to detect a Postmark or D360 outage within minutes, not after a customer complaint.
 
 **Preconditions**:
+
 ```bash
 # Prometheus operator and ServiceMonitor CRD installed in cluster
 kubectl get crd servicemonitors.monitoring.coreos.com
@@ -458,10 +495,12 @@ kubectl get configmap -n monitoring alertmanager-config
 ```
 
 **Inputs** (explicit):
+
 - `METRICS_BEARER`: optional token guarding `/api/metrics`
 - Slack channel webhook for alerts: `pass show rbx/slack/oncall-webhook`
 
 **Steps**:
+
 ```bash
 # 1. yarn add prom-client
 # 2. Define metrics in lib/contact/metrics.ts
@@ -474,6 +513,7 @@ kubectl get configmap -n monitoring alertmanager-config
 ```
 
 **Expected Outcome**:
+
 ```bash
 # Metrics endpoint scrapes
 curl -s -H "Authorization: Bearer $METRICS_BEARER" https://rbx.ia.br/api/metrics | \
@@ -489,6 +529,7 @@ curl -s -H "Authorization: Bearer $GRAFANA_TOKEN" \
 ```
 
 **Failure Detection**:
+
 ```bash
 # FAIL if metrics endpoint is publicly accessible without auth
 # FAIL if scrape interval misses bursts (>30s)
@@ -496,6 +537,7 @@ curl -s -H "Authorization: Bearer $GRAFANA_TOKEN" \
 ```
 
 **Rollback**:
+
 ```bash
 # Remove ServiceMonitor and alert rules
 kubectl -n rbx-ia-br delete servicemonitor contact-channel
@@ -507,12 +549,14 @@ git -C ../rbx-infra restore platform/monitoring/alerts/contact-channel.yml
 ## Verification Commands Reference
 
 **Check Postmark deliverability**:
+
 ```bash
 curl -s -H "X-Postmark-Server-Token: $(pass show rbx/postmark/rbx-institutional-server-token)" \
   https://api.postmarkapp.com/server | jq -r .Name | grep -q "RBX Institutional"
 ```
 
 **Check D360 outbound capacity**:
+
 ```bash
 curl -s -H "D360-API-KEY: $(pass show rbx/d360/api-key)" \
   https://waba.360dialog.io/v1/configs/templates | jq '.waba_templates[] | select(.name=="contact_form_acknowledgment") | .status'
@@ -520,12 +564,14 @@ curl -s -H "D360-API-KEY: $(pass show rbx/d360/api-key)" \
 ```
 
 **Check ExternalSecret sync status**:
+
 ```bash
 kubectl get externalsecret rbx-contact-secrets -n rbxsystems-ch -o jsonpath='{.status.conditions[*].type}'
 # Expected: includes "Ready"
 ```
 
 **Check form is rate-limited**:
+
 ```bash
 for i in {1..10}; do
   curl -s -o /dev/null -w '%{http_code}\n' -X POST https://rbx.ia.br/api/contact \
@@ -535,6 +581,7 @@ done | sort | uniq -c
 ```
 
 **Check inbound webhook handles signature**:
+
 ```bash
 curl -s -o /dev/null -w '%{http_code}\n' -X POST https://rbx.ia.br/api/whatsapp/webhook \
   -H 'content-type: application/json' -d '{"messages":[{"id":"x"}]}'
@@ -546,6 +593,7 @@ curl -s -o /dev/null -w '%{http_code}\n' -X POST https://rbx.ia.br/api/whatsapp/
 ## Rollback Notes
 
 ### Rollback Pattern 1: Application code
+
 ```bash
 # Revert specific files
 git restore app/api/contact/route.ts \
@@ -557,6 +605,7 @@ git restore app/api/contact/route.ts \
 ```
 
 ### Rollback Pattern 2: Database migration
+
 ```bash
 # Drop the entire schema (data loss — pre-prod only)
 psql "$DATABASE_URL" -c "DROP SCHEMA contact CASCADE;"
@@ -566,6 +615,7 @@ yarn drizzle-kit drop --tag <migration-name>
 ```
 
 ### Rollback Pattern 3: Secrets
+
 ```bash
 # Re-apply previous secret revision
 kubectl create secret generic rbx-contact-secrets -n rbx-ia-br \
@@ -575,6 +625,7 @@ kubectl create secret generic rbx-contact-secrets -n rbx-ia-br \
 ```
 
 ### Rollback Pattern 4: D360 webhook
+
 ```bash
 # Unregister webhook URL
 curl -X PATCH -H "D360-API-KEY: $(pass show rbx/d360/api-key)" \
@@ -589,13 +640,13 @@ curl -X PATCH -H "D360-API-KEY: $(pass show rbx/d360/api-key)" \
 
 These decisions are deferred to before EP-003 starts. Each blocks a downstream slice if left unanswered.
 
-| # | Question | Affects | Proposal |
-|---|----------|---------|----------|
-| Q1 | Where does the contact Postgres live? | EP-003 | Use the existing PDNS Postgres VPS (`161.97.147.76:5432`) as a host but a separate database (`rbx_contact_prod`) with its own user. Avoids a new VPS for low volume; revisit when DB shows load. |
-| Q2 | Should we adopt Drizzle, Kysely, or raw SQL? | EP-003 | Drizzle — best TypeScript ergonomics, supports migrations natively, ~ widely adopted in Next.js community. |
-| Q3 | Do we want a tiny operator inbox UI, or stay email-forward only? | Beyond EP-004 | Stay email-forward for v0.1. Build inbox UI only when volume justifies — gate at >20 inbound msgs/day. |
-| Q4 | Are we storing IP addresses? Any LGPD/GDPR compliance work needed? | EP-003 | Store IPs but mask after 30 days (cron job). Add a privacy notice next to the form. Defer formal LGPD doc to a separate task. |
-| Q5 | Rate limit backend: in-memory per-pod vs Redis? | EP-001 | Start in-memory (acceptable for ≤2 pods). Migrate to Redis when scaling horizontally. |
+| #   | Question                                                           | Affects       | Proposal                                                                                                                                                                                         |
+| --- | ------------------------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Q1  | Where does the contact Postgres live?                              | EP-003        | Use the existing PDNS Postgres VPS (`161.97.147.76:5432`) as a host but a separate database (`rbx_contact_prod`) with its own user. Avoids a new VPS for low volume; revisit when DB shows load. |
+| Q2  | Should we adopt Drizzle, Kysely, or raw SQL?                       | EP-003        | Drizzle — best TypeScript ergonomics, supports migrations natively, ~ widely adopted in Next.js community.                                                                                       |
+| Q3  | Do we want a tiny operator inbox UI, or stay email-forward only?   | Beyond EP-004 | Stay email-forward for v0.1. Build inbox UI only when volume justifies — gate at >20 inbound msgs/day.                                                                                           |
+| Q4  | Are we storing IP addresses? Any LGPD/GDPR compliance work needed? | EP-003        | Store IPs but mask after 30 days (cron job). Add a privacy notice next to the form. Defer formal LGPD doc to a separate task.                                                                    |
+| Q5  | Rate limit backend: in-memory per-pod vs Redis?                    | EP-001        | Start in-memory (acceptable for ≤2 pods). Migrate to Redis when scaling horizontally.                                                                                                            |
 
 ---
 
@@ -637,7 +688,7 @@ This guide ends when EP-004 lands. Beyond that, two evolution branches:
 
 ## Changelog
 
-| Date       | Change                                | Author |
-|------------|---------------------------------------|--------|
-| 2026-05-15 | Initial draft — 4 entry points + open questions | Claude Opus 4.7 |
-| 2026-05-16 | EP-001 rewritten for Altcha (self-hosted PoW, HMAC challenge). Purged all Cloudflare/Turnstile references. | Kimi Code CLI |
+| Date       | Change                                                                                                     | Author          |
+| ---------- | ---------------------------------------------------------------------------------------------------------- | --------------- |
+| 2026-05-15 | Initial draft — 4 entry points + open questions                                                            | Claude Opus 4.7 |
+| 2026-05-16 | EP-001 rewritten for Altcha (self-hosted PoW, HMAC challenge). Purged all Cloudflare/Turnstile references. | Kimi Code CLI   |

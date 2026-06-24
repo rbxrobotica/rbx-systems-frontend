@@ -33,13 +33,13 @@ s3://rbx-content/
 
 ```yaml
 ---
-title: "Título do post"
-date: "YYYY-MM-DD"
-author: "RBX Systems"
-authorRole: "Engineering Team"
+title: 'Título do post'
+date: 'YYYY-MM-DD'
+author: 'RBX Systems'
+authorRole: 'Engineering Team'
 tags: [tag1, tag2]
-excerpt: "Uma frase que resume o post. Aparece na listagem e no topo da página."
-cover: "https://eu2.contabostorage.com/rbx-content/blog/covers/YYYY-MM-DD-slug.jpg"
+excerpt: 'Uma frase que resume o post. Aparece na listagem e no topo da página.'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/YYYY-MM-DD-slug.jpg'
 ---
 ```
 
@@ -158,16 +158,17 @@ Se o caminho da imagem de capa vier no mesmo prompt, o agente deve usar esse arq
 
 ## Especificações da imagem de capa
 
-| Propriedade | Valor |
-|-------------|-------|
-| Dimensões | 1200 × 630 px |
-| Formato | JPEG ou PNG (PNG é preferível para imagens geradas por IA com estilo minimal/dark) |
-| Aspect ratio | 16:9 |
-| Estilo | Fundo escuro, minimal, tech-abstract, sem texto |
-| Chave S3 | `blog/covers/{slug}.jpg` ou `blog/covers/{slug}.png` |
-| URL pública | `https://eu2.contabostorage.com/rbx-content/blog/covers/{slug}.{ext}` |
+| Propriedade  | Valor                                                                              |
+| ------------ | ---------------------------------------------------------------------------------- |
+| Dimensões    | 1200 × 630 px                                                                      |
+| Formato      | JPEG ou PNG (PNG é preferível para imagens geradas por IA com estilo minimal/dark) |
+| Aspect ratio | 16:9                                                                               |
+| Estilo       | Fundo escuro, minimal, tech-abstract, sem texto                                    |
+| Chave S3     | `blog/covers/{slug}.jpg` ou `blog/covers/{slug}.png`                               |
+| URL pública  | `https://eu2.contabostorage.com/rbx-content/blog/covers/{slug}.{ext}`              |
 
 **Prompt base para Nano Banana:**
+
 ```
 Dark background, minimal, tech-abstract, cinematic lighting, no text,
 16:9, 1200x630 — [descrição visual do tema do post]
@@ -177,11 +178,11 @@ Dark background, minimal, tech-abstract, cinematic lighting, no text,
 
 ## Scripts
 
-| Script | Uso |
-|--------|-----|
-| `./scripts/blog-publish.sh <arquivo.mdx>` | Faz upload do post para o S3 |
+| Script                                                      | Uso                                                                   |
+| ----------------------------------------------------------- | --------------------------------------------------------------------- |
+| `./scripts/blog-publish.sh <arquivo.mdx>`                   | Faz upload do post para o S3                                          |
 | `./scripts/blog-publish.sh --all-locales <slug-ou-arquivo>` | Faz upload do post base e de todas as variantes de locale encontradas |
-| `./scripts/blog-cover-upload.sh <imagem.jpg> <slug>` | Faz upload da capa para o S3 |
+| `./scripts/blog-cover-upload.sh <imagem.jpg> <slug>`        | Faz upload da capa para o S3                                          |
 
 ---
 

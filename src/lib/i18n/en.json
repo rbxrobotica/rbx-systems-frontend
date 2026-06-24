@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "Home",
+    "solutions": "Solutions",
+    "products": "Products",
+    "journal": "Journal",
+    "cases": "Cases",
+    "changelog": "Changelog",
+    "newsroom": "Newsroom",
+    "trust": "Trust",
+    "atelier": "Atelier",
+    "contact": "Contact"
+  },
+  "footer": {
+    "description": "Systems engineering, automation and infrastructure for high-demand operations.",
+    "companyTitle": "Company",
+    "resourcesTitle": "Resources",
+    "contactTitle": "Contact",
+    "rights": "All rights reserved."
+  },
+  "home": {
+    "metaTitle": "RBX Systems — Systems Engineering & Infrastructure",
+    "metaDescription": "Systems engineering, operational automation, applied AI and cloud infrastructure for high-demand operations.",
+    "headline": "Systems engineering for operations that demand control",
+    "body": "We design platforms, automations and infrastructure for companies operating with high demands. Backend, cloud, intelligent agents and integrations built for reliability and predictable scale.",
+    "ctaServices": "Our solutions",
+    "ctaProducts": "Products"
+  },
+  "common": {
+    "readMore": "Read more",
+    "back": "← Back",
+    "comingSoon": "Coming soon.",
+    "empty": "No content found.",
+    "close": "Close",
+    "languageCode": "en"
+  },
+  "contact": {
+    "heading": "Get in touch",
+    "body": "Send a message. We reply within one business day.",
+    "emailLabel": "Email",
+    "whatsappLabel": "WhatsApp",
+    "whatsappCta": "Chat on WhatsApp",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "you@email.com",
+      "phonePlaceholder": "+41 79 000 00 00",
+      "messagePlaceholder": "How can we help?",
+      "whatsappOptIn": "I agree to receive a reply via WhatsApp.",
+      "submit": "Send message",
+      "submitting": "Sending...",
+      "success": "Message sent. We'll get back to you soon.",
+      "error": "Could not send. Please check the fields and try again."
+    }
+  }
+}

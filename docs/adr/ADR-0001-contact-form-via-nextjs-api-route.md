@@ -37,11 +37,11 @@ No new repository, no new deployment, no new container.
 
 ## Environment Variables
 
-| Variable | Purpose | Scope |
-|----------|---------|-------|
-| `POSTMARK_SERVER_TOKEN` | Send email from contact@rbxsystems.ch | Server-side only (secret) |
-| `D360_API_KEY` | Send WhatsApp template messages | Server-side only (secret) |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | wa.me link in floating button | Client-visible (public) |
+| Variable                      | Purpose                               | Scope                     |
+| ----------------------------- | ------------------------------------- | ------------------------- |
+| `POSTMARK_SERVER_TOKEN`       | Send email from contact@rbxsystems.ch | Server-side only (secret) |
+| `D360_API_KEY`                | Send WhatsApp template messages       | Server-side only (secret) |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | wa.me link in floating button         | Client-visible (public)   |
 
 Secrets are mounted via Kubernetes `secretKeyRef` in the deployment manifests.
 
@@ -71,6 +71,7 @@ A WhatsApp template `contact_form_acknowledgment` must be created and approved i
 Phase 1 (current): API route in Next.js container. Direct Postmark + D360 API calls. No queue, no retry.
 
 Phase 2 triggers (any one of):
+
 - Contact volume exceeds 100 messages/day consistently
 - Need for CRM integration (HubSpot, Odoo)
 - Need for async message queue with retry (Postmark webhook, D360 status callbacks)
@@ -78,6 +79,7 @@ Phase 2 triggers (any one of):
 - Need for D360 inbound webhook processing (two-way WhatsApp)
 
 Phase 2 target: A standalone `rbx-comms` service (Go) deployed as a separate K8s deployment. It would:
+
 - Own Postmark and D360 integrations
 - Expose a `/api/contact` endpoint consumed by any RBX product
 - Use Redis or Postgres for rate limiting and message dedup

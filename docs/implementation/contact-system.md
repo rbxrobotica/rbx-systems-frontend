@@ -24,12 +24,12 @@ It does **not** own (see Non-goals below): CRM, marketing campaigns, multi-tenan
 
 ## Status Dashboard
 
-| Phase | Scope | Status | Reference |
-|-------|-------|--------|-----------|
-| **Phase 0** | Outbound MVP — form submits, email + WhatsApp template ack | ✅ LIVE 2026-05-15 (commit `7ca2868`) | ADR-0001 |
-| **Phase 1** | Bidirectional — anti-abuse, inbound webhook, persistence, observability | 📋 Planned | `contact-system-bidirectional.md` |
-| **Phase 2** | Service extraction — move comms logic to standalone `rbx-comms` service | ⚫ Deferred (gate: >100 msgs/day) | TBD `contact-system-rbx-comms-extraction.md` |
-| **Phase 3** | Strategos bridge — read-only stream from `contact.*` schema to Strategos via Thalamus | ⚫ Deferred (gate: Strategos demand) | TBD ADR-0003 |
+| Phase       | Scope                                                                                 | Status                                | Reference                                    |
+| ----------- | ------------------------------------------------------------------------------------- | ------------------------------------- | -------------------------------------------- |
+| **Phase 0** | Outbound MVP — form submits, email + WhatsApp template ack                            | ✅ LIVE 2026-05-15 (commit `7ca2868`) | ADR-0001                                     |
+| **Phase 1** | Bidirectional — anti-abuse, inbound webhook, persistence, observability               | 📋 Planned                            | `contact-system-bidirectional.md`            |
+| **Phase 2** | Service extraction — move comms logic to standalone `rbx-comms` service               | ⚫ Deferred (gate: >100 msgs/day)     | TBD `contact-system-rbx-comms-extraction.md` |
+| **Phase 3** | Strategos bridge — read-only stream from `contact.*` schema to Strategos via Thalamus | ⚫ Deferred (gate: Strategos demand)  | TBD ADR-0003                                 |
 
 > Phases are sequential by default but Phase 2 and Phase 3 are conditionally gated — they only start when their triggering conditions are met, not on a fixed timeline.
 
@@ -43,8 +43,16 @@ It does **not** own (see Non-goals below): CRM, marketing campaigns, multi-tenan
                           │
                           ▼
               ┌────────────────────────┐
-              │  Next.js API route     │
-              │  /api/contact          │  ◄── form POST
+              │  SvelteKit frontend    │
+              │  ContactSection        │  ◄── form UI, Altcha widget
+              │  WhatsAppDrawer/Float  │  ◄── WhatsApp entry points
+              └────────────┬───────────┘
+                           │ POST /api/contact
+                           │ GET  /api/altcha-challenge
+                           ▼
+              ┌────────────────────────┐
+              │  rbx-comms API         │
+              │  /api/contact          │  ◄── validation, anti-abuse, persistence
               │  /api/whatsapp/webhook │  ◄── D360 inbound (Phase 1)
               └────────────┬───────────┘
                            │
@@ -63,7 +71,7 @@ It does **not** own (see Non-goals below): CRM, marketing campaigns, multi-tenan
               ▲ Phase 1 adds Postgres persistence under here ▲
 ```
 
-All channel logic is currently colocated in the `rbx-robotica-frontend` Next.js app. Per ADR-0001, this is intentional until volume justifies extraction.
+The public site (`rbx-robotica-frontend`, SvelteKit) renders the contact form and WhatsApp entry points, but form submissions are sent to the standalone `rbx-comms` service (`api.comms.{domain}/api/contact`). `rbx-comms` owns validation, anti-abuse, persistence, and outbound delivery (Postmark + 360dialog).
 
 ---
 
@@ -71,36 +79,36 @@ All channel logic is currently colocated in the `rbx-robotica-frontend` Next.js 
 
 ### Architecture Decision Records (ADRs)
 
-| ID | Title | Status | Phase |
-|----|-------|--------|-------|
-| [ADR-0001](../adr/ADR-0001-contact-form-via-nextjs-api-route.md) | Contact form via Next.js API route | Accepted | 0 |
-| ADR-0002 (planned) | Contact persistence schema | Draft pending | 1 |
-| ADR-0003 (planned) | Contact ↔ Strategos read bridge | Deferred | 3 |
+| ID                                                               | Title                              | Status        | Phase |
+| ---------------------------------------------------------------- | ---------------------------------- | ------------- | ----- |
+| [ADR-0001](../adr/ADR-0001-contact-form-via-nextjs-api-route.md) | Contact form via Next.js API route | Accepted      | 0     |
+| ADR-0002 (planned)                                               | Contact persistence schema         | Draft pending | 1     |
+| ADR-0003 (planned)                                               | Contact ↔ Strategos read bridge    | Deferred      | 3     |
 
 ### Implementation Guides
 
-| Doc | Scope | Status |
-|-----|-------|--------|
-| **`contact-system.md`** | **This document — program index** | Live |
-| [`contact-system-bidirectional.md`](contact-system-bidirectional.md) | Phase 1 — anti-abuse, webhook, persistence, observability (4 entry points) | Draft |
-| [`../operator-brief.md`](../operator-brief.md) | Fast operational summary — live state, secrets, verification, pending actions | Live |
-| `contact-system-rbx-comms-extraction.md` (planned) | Phase 2 — extract to standalone service | Deferred |
+| Doc                                                                  | Scope                                                                         | Status   |
+| -------------------------------------------------------------------- | ----------------------------------------------------------------------------- | -------- |
+| **`contact-system.md`**                                              | **This document — program index**                                             | Live     |
+| [`contact-system-bidirectional.md`](contact-system-bidirectional.md) | Phase 1 — anti-abuse, webhook, persistence, observability (4 entry points)    | Draft    |
+| [`../operator-brief.md`](../operator-brief.md)                       | Fast operational summary — live state, secrets, verification, pending actions | Live     |
+| `contact-system-rbx-comms-extraction.md` (planned)                   | Phase 2 — extract to standalone service                                       | Deferred |
 
 ### Runbooks
 
-| Doc | Use case | Status |
-|-----|----------|--------|
-| `docs/runbooks/contact-incident.md` (planned) | Postmark or D360 outage response | Not started |
+| Doc                                                      | Use case                                           | Status      |
+| -------------------------------------------------------- | -------------------------------------------------- | ----------- |
+| `docs/runbooks/contact-incident.md` (planned)            | Postmark or D360 outage response                   | Not started |
 | `docs/runbooks/contact-template-management.md` (planned) | D360 template lifecycle (submit, approve, version) | Not started |
 
 ### Infrastructure Manifests (in `rbx-infra` repo)
 
-| Path | Owns |
-|------|------|
-| `apps/prod/rbx-ia-br/deploy.yml` | Pod env vars referencing `rbx-contact-secrets` |
-| `apps/prod/rbxsystems-ch/deploy.yml` | Same, for second site |
-| `apps/prod/rbxsystems-ch/externalsecret-contact.yml` | Cross-namespace secret replication |
-| `apps/prod/rbx-ia-br/rbac-external-secrets-reader.yml` | RBAC for the ESO reader SA |
+| Path                                                   | Owns                                           |
+| ------------------------------------------------------ | ---------------------------------------------- |
+| `apps/prod/rbx-ia-br/deploy.yml`                       | Pod env vars referencing `rbx-contact-secrets` |
+| `apps/prod/rbxsystems-ch/deploy.yml`                   | Same, for second site                          |
+| `apps/prod/rbxsystems-ch/externalsecret-contact.yml`   | Cross-namespace secret replication             |
+| `apps/prod/rbx-ia-br/rbac-external-secrets-reader.yml` | RBAC for the ESO reader SA                     |
 
 ---
 
@@ -113,6 +121,7 @@ All channel logic is currently colocated in the `rbx-robotica-frontend` Next.js 
 **Authority**: [ADR-0001](../adr/ADR-0001-contact-form-via-nextjs-api-route.md)
 
 What shipped:
+
 - Contact form with name, email, phone, message, WhatsApp opt-in checkbox
 - Server-side validation, Postmark relay to `contact@rbxsystems.ch`
 - D360 fire-and-forget template `contact_form_acknowledgment` (pending hub approval)
@@ -121,6 +130,7 @@ What shipped:
 - IaC for `rbx-contact-secrets` replicated cross-namespace via ExternalSecret
 
 Pending operator actions to finish Phase 0:
+
 - Bump image tag in `rbx-infra` to `sha-7ca2868` (form goes live on rollout)
 - Approve template `contact_form_acknowledgment` in 360dialog hub
 
@@ -130,12 +140,12 @@ Pending operator actions to finish Phase 0:
 
 Four entry points (execute in order unless noted):
 
-| EP | Slice | Target effort |
-|----|-------|---------------|
-| EP-001 | CONTACT-P1 — Anti-abuse hardening (Altcha anti-abuse + honeypot + rate limit) | 1–2 days |
-| EP-002 | CONTACT-P2 — Inbound WhatsApp webhook | 2–3 days |
-| EP-003 | CONTACT-P3 — Lead persistence schema | 2–3 days |
-| EP-004 | CONTACT-P4 — Observability (metrics, dashboards, alerts) | 1–2 days |
+| EP     | Slice                                                                         | Target effort |
+| ------ | ----------------------------------------------------------------------------- | ------------- |
+| EP-001 | CONTACT-P1 — Anti-abuse hardening (Altcha anti-abuse + honeypot + rate limit) | 1–2 days      |
+| EP-002 | CONTACT-P2 — Inbound WhatsApp webhook                                         | 2–3 days      |
+| EP-003 | CONTACT-P3 — Lead persistence schema                                          | 2–3 days      |
+| EP-004 | CONTACT-P4 — Observability (metrics, dashboards, alerts)                      | 1–2 days      |
 
 EP-001 is a hard prerequisite for any public announcement of the form. The other three may proceed in alternate orders if a dependency blocks.
 
@@ -159,15 +169,15 @@ Trigger to start work: a Strategos ADR explicitly requests this data feed. At th
 
 Compact summary of every load-bearing decision. Full rationale lives in each ADR or implementation guide.
 
-| Date | Decision | Where to find full rationale |
-|------|----------|------------------------------|
-| 2026-05-15 | Contact logic lives in the Next.js FE app, not a separate service | ADR-0001 §Decision |
-| 2026-05-15 | Postmark for email, 360dialog for WhatsApp | ADR-0001 §Decision |
-| 2026-05-15 | Email inbox is `contact@rbxsystems.ch`, not `contato@rbx.ia.br` | ADR-0001 §Email infrastructure |
-| 2026-05-15 | Secrets follow rbx-infra ESO pattern (manual `kubectl` in `rbx-ia-br` + ExternalSecret in other namespaces) | `rbx-infra@cb55dad` commit message |
-| 2026-05-15 | Postgres for Phase 1 will share the PDNS VPS, not new VPS | `contact-system-bidirectional.md` §Open Questions (Q1) |
-| 2026-05-15 | Drizzle ORM chosen for Phase 1 persistence | `contact-system-bidirectional.md` §Open Questions (Q2) |
-| 2026-05-15 | Altcha chosen over hCaptcha and Turnstile for anti-abuse | `contact-system-bidirectional.md` §Appendix B |
+| Date       | Decision                                                                                                                                     | Where to find full rationale                                                      |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| 2026-05-15 | Contact logic lives in the Next.js FE app, not a separate service                                                                            | ADR-0001 §Decision                                                                |
+| 2026-05-15 | Postmark for email, 360dialog for WhatsApp                                                                                                   | ADR-0001 §Decision                                                                |
+| 2026-05-15 | Email inbox is `contact@rbxsystems.ch`, not `contato@rbx.ia.br`                                                                              | ADR-0001 §Email infrastructure                                                    |
+| 2026-05-15 | Secrets follow rbx-infra ESO pattern (manual `kubectl` in `rbx-ia-br` + ExternalSecret in other namespaces)                                  | `rbx-infra@cb55dad` commit message                                                |
+| 2026-05-15 | Postgres for Phase 1 will share the PDNS VPS, not new VPS                                                                                    | `contact-system-bidirectional.md` §Open Questions (Q1)                            |
+| 2026-05-15 | Drizzle ORM chosen for Phase 1 persistence                                                                                                   | `contact-system-bidirectional.md` §Open Questions (Q2)                            |
+| 2026-05-15 | Altcha chosen over hCaptcha and Turnstile for anti-abuse                                                                                     | `contact-system-bidirectional.md` §Appendix B                                     |
 | 2026-05-16 | Corrected EP-001 from Cloudflare Turnstile to Altcha (self-hosted PoW, HMAC signed by API route). Purged all Turnstile references from docs. | `contact-system-bidirectional.md` §EP-001, `operator-brief.md`, this decision log |
 
 When a new decision is made, add a row here and link to the document where the rationale lives. Do not duplicate rationale here.
@@ -246,7 +256,7 @@ If you're proposing a new phase or major scope change, draft an ADR first and li
 
 ## Changelog
 
-| Date       | Change                                  | Author |
-|------------|-----------------------------------------|--------|
-| 2026-05-15 | Initial program index — Phase 0 live, Phase 1 planned | Claude Opus 4.7 |
+| Date       | Change                                                                             | Author          |
+| ---------- | ---------------------------------------------------------------------------------- | --------------- |
+| 2026-05-15 | Initial program index — Phase 0 live, Phase 1 planned                              | Claude Opus 4.7 |
 | 2026-05-16 | Decision log updated: Turnstile→Altcha correction registered; EP-001 scope updated |
