@@ -13,11 +13,11 @@ const config = {
       strict: false
     }),
     alias: {
-      '$design': 'src/lib/design',
-      '$components': 'src/lib/design/components',
-      '$api': 'src/lib/api',
-      '$i18n': 'src/lib/i18n',
-      '$types': 'src/lib/types'
+      $design: 'src/lib/design',
+      $components: 'src/lib/design/components',
+      $api: 'src/lib/api',
+      $i18n: 'src/lib/i18n',
+      $types: 'src/lib/types'
     },
     paths: {
       relative: false

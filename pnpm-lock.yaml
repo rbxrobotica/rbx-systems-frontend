@@ -11,6 +11,9 @@ importers:
       '@aws-sdk/client-s3':
         specifier: ^3.1016.0
         version: 3.1073.0
+      altcha:
+        specifier: ^3.1.0
+        version: 3.1.0
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
@@ -21,6 +24,9 @@ importers:
         specifier: ^4.0.0
         version: 4.0.1(svelte@5.56.3(@typescript-eslint/types@8.61.1))
     devDependencies:
+      '@eslint/js':
+        specifier: ^9.39.4
+        version: 9.39.4
       '@sveltejs/adapter-static':
         specifier: ^3.0.0
         version: 3.0.10(@sveltejs/kit@2.66.0(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.56.3(@typescript-eslint/types@8.61.1))(vite@6.4.3(@types/node@20.19.43)))(svelte@5.56.3(@typescript-eslint/types@8.61.1))(typescript@5.9.3)(vite@6.4.3(@types/node@20.19.43)))
@@ -870,6 +876,9 @@ packages:
   ajv@6.15.0:
     resolution: {integrity: sha512-fgFx7Hfoq60ytK2c7DhnF8jIvzYgOMxfugjLOSMHjLIPgenqa7S7oaagATUq99mV6IYvN2tRmC0wnTYX6iPbMw==}
 
+  altcha@3.1.0:
+    resolution: {integrity: sha512-rzz+F1xGG55X1LWylHZyabf9V4+5qAZeqd0+mo+8HdFsCqPC4YfUyjQ7lcbW/GVXy1XSnKsPMFkBuhmTymZuWw==}
+
   ansi-styles@4.3.0:
     resolution: {integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==}
     engines: {node: '>=8'}
@@ -1184,6 +1193,9 @@ packages:
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
+
+  hash-wasm@4.12.0:
+    resolution: {integrity: sha512-+/2B2rYLb48I/evdOIhP+K/DD2ca2fgBjp6O+GBEnCDk2e4rpeXIK8GvIyRPjTezgmWn9gmKwkQjjx6BtqDHVQ==}
 
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
@@ -2402,6 +2414,10 @@ snapshots:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
+  altcha@3.1.0:
+    dependencies:
+      hash-wasm: 4.12.0
+
   ansi-styles@4.3.0:
     dependencies:
       color-convert: 2.0.1
@@ -2771,6 +2787,8 @@ snapshots:
       strip-bom-string: 1.0.0
 
   has-flag@4.0.0: {}
+
+  hash-wasm@4.12.0: {}
 
   ignore@5.3.2: {}
 
