@@ -25,7 +25,6 @@ export async function getObject(key: string): Promise<string> {
 }
 
 export function coverUrl(slug: string): string {
-  const base =
-    process.env.CONTABO_S3_PUBLIC_URL ?? 'https://eu2.contabostorage.com/rbx-content';
+  const base = process.env.CONTABO_S3_PUBLIC_URL ?? 'https://eu2.contabostorage.com/rbx-content';
   return `${base}/blog/covers/${slug}.jpg`;
 }

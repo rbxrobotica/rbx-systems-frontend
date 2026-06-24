@@ -88,7 +88,9 @@
     padding: var(--s-1) var(--s-2);
     border-bottom: 1px solid transparent;
     white-space: nowrap;
-    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    transition:
+      color var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
   }
   .nav-link:hover {
     color: var(--cyan-brand);

@@ -7,104 +7,104 @@
 
 :root {
   /* ——— Backgrounds ——— */
-  --bg-0: #07080A;
-  --bg-1: #0D0F12;
-  --bg-2: #13161A;
-  --bg-3: #1A1E23;
+  --bg-0: #07080a;
+  --bg-1: #0d0f12;
+  --bg-2: #13161a;
+  --bg-3: #1a1e23;
   --bg-overlay: rgba(7, 8, 10, 0.72);
 
   /* ——— Foreground ——— */
-  --fg-0: #ECECEC;
-  --fg-1: #B8BCC2;
-  --fg-2: #7A7F87;
-  --fg-3: #4A4F56;
+  --fg-0: #ececec;
+  --fg-1: #b8bcc2;
+  --fg-2: #7a7f87;
+  --fg-3: #4a4f56;
 
   /* ——— Borders ——— */
-  --border: #24282E;
-  --border-strong: #3A4048;
-  --border-accent: #22E5E5;
+  --border: #24282e;
+  --border-strong: #3a4048;
+  --border-accent: #22e5e5;
 
   /* ——— Voltage cyan scale ——— */
-  --cyan-signal:  #00FFFF;
-  --cyan-brand:   #22E5E5;
-  --cyan-muted:   #06B6B6;
-  --cyan-dim:     #0B6E6E;
-  --cyan-subtle:  rgba(0, 255, 255, 0.08);
+  --cyan-signal: #00ffff;
+  --cyan-brand: #22e5e5;
+  --cyan-muted: #06b6b6;
+  --cyan-dim: #0b6e6e;
+  --cyan-subtle: rgba(0, 255, 255, 0.08);
 
   /* ——— Semantic ——— */
-  --ok:    #7FB77E;
-  --warn:  #D9B55A;
-  --err:   #C56A6A;
-  --info:  #7A93B0;
-  --ok-subtle:    rgba(127, 183, 126, 0.12);
-  --warn-subtle:  rgba(217, 181,  90, 0.12);
-  --err-subtle:   rgba(197, 106, 106, 0.12);
-  --info-subtle:  rgba(122, 147, 176, 0.12);
+  --ok: #7fb77e;
+  --warn: #d9b55a;
+  --err: #c56a6a;
+  --info: #7a93b0;
+  --ok-subtle: rgba(127, 183, 126, 0.12);
+  --warn-subtle: rgba(217, 181, 90, 0.12);
+  --err-subtle: rgba(197, 106, 106, 0.12);
+  --info-subtle: rgba(122, 147, 176, 0.12);
 
   /* ——— Type ——— */
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
-  --text-xs:     0.6875rem;
-  --text-sm:     0.8125rem;
-  --text-base:   0.9375rem;
-  --text-md:     1rem;
-  --text-lg:     1.125rem;
-  --text-xl:     1.375rem;
-  --text-2xl:    1.75rem;
-  --text-3xl:    2.25rem;
-  --text-4xl:    3rem;
-  --text-5xl:    4rem;
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+  --text-5xl: 4rem;
 
-  --track-label:  0.14em;
-  --track-wide:   0.04em;
+  --track-label: 0.14em;
+  --track-wide: 0.04em;
   --track-tight: -0.015em;
   --track-normal: 0;
 
   --lead-tight: 1.1;
-  --lead-snug:  1.25;
-  --lead-body:  1.55;
+  --lead-snug: 1.25;
+  --lead-body: 1.55;
   --lead-loose: 1.7;
 
   /* ——— Spacing ——— */
-  --s-0:  0;
-  --s-1:  0.25rem;
-  --s-2:  0.5rem;
-  --s-3:  0.75rem;
-  --s-4:  1rem;
-  --s-5:  1.5rem;
-  --s-6:  2rem;
-  --s-7:  3rem;
-  --s-8:  4rem;
-  --s-9:  6rem;
+  --s-0: 0;
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
   --s-10: 8rem;
 
   /* ——— Radii ——— */
   --radius-none: 0;
-  --radius-sm:   2px;
-  --radius-md:   4px;
-  --radius-lg:   8px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
   --radius-pill: 999px;
 
   /* ——— Elevation ——— */
-  --shadow-none:    none;
+  --shadow-none: none;
   --shadow-overlay: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --ring:           0 0 0 1px var(--border);
-  --ring-strong:    0 0 0 1px var(--border-strong);
-  --ring-focus:     0 0 0 2px var(--cyan-brand);
+  --ring: 0 0 0 1px var(--border);
+  --ring-strong: 0 0 0 1px var(--border-strong);
+  --ring-focus: 0 0 0 2px var(--cyan-brand);
 
   /* ——— Motion ——— */
-  --ease:         cubic-bezier(0.2, 0, 0, 1);
-  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-fast:     120ms;
-  --dur:          160ms;
-  --dur-slow:     240ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 120ms;
+  --dur: 160ms;
+  --dur-slow: 240ms;
 
   /* ——— Layout ——— */
-  --content-w:  72rem;
-  --prose-w:    42rem;
-  --gutter:     1.5rem;
-  --header-h:   4rem;
+  --content-w: 72rem;
+  --prose-w: 42rem;
+  --gutter: 1.5rem;
+  --header-h: 4rem;
 }
 
 .rbx {
@@ -119,13 +119,42 @@
 }
 
 .rbx-display,
-.rbx h1 { font-family: var(--font-sans); font-size: var(--text-4xl); font-weight: 300; line-height: var(--lead-tight); letter-spacing: var(--track-tight); color: var(--fg-0); }
-.rbx h2 { font-size: var(--text-2xl); font-weight: 400; line-height: var(--lead-snug); letter-spacing: var(--track-tight); }
-.rbx h3 { font-size: var(--text-xl); font-weight: 500; line-height: var(--lead-snug); }
-.rbx h4 { font-size: var(--text-lg); font-weight: 500; line-height: var(--lead-snug); }
+.rbx h1 {
+  font-family: var(--font-sans);
+  font-size: var(--text-4xl);
+  font-weight: 300;
+  line-height: var(--lead-tight);
+  letter-spacing: var(--track-tight);
+  color: var(--fg-0);
+}
+.rbx h2 {
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  line-height: var(--lead-snug);
+  letter-spacing: var(--track-tight);
+}
+.rbx h3 {
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: var(--lead-snug);
+}
+.rbx h4 {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: var(--lead-snug);
+}
 .rbx p,
-.rbx-body { font-size: var(--text-base); line-height: var(--lead-body); color: var(--fg-1); }
-.rbx-lead { font-size: var(--text-lg); line-height: var(--lead-body); color: var(--fg-0); font-weight: 300; }
+.rbx-body {
+  font-size: var(--text-base);
+  line-height: var(--lead-body);
+  color: var(--fg-1);
+}
+.rbx-lead {
+  font-size: var(--text-lg);
+  line-height: var(--lead-body);
+  color: var(--fg-0);
+  font-weight: 300;
+}
 .rbx-eyebrow,
 .rbx-label {
   font-family: var(--font-mono);
@@ -135,7 +164,10 @@
   color: var(--fg-2);
   font-weight: 500;
 }
-.rbx-caption { font-size: var(--text-sm); color: var(--fg-2); }
+.rbx-caption {
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+}
 .rbx-mono,
 .rbx code,
 .rbx kbd {
@@ -149,7 +181,9 @@
   color: var(--fg-0);
   text-decoration: none;
   border-bottom: 1px solid var(--border-strong);
-  transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  transition:
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
 }
 .rbx a:hover {
   color: var(--cyan-brand);
@@ -162,11 +196,46 @@
   outline-offset: 2px;
 }
 
-.rbx hr { border: 0; border-top: 1px solid var(--border); margin: var(--s-6) 0; }
+.rbx hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: var(--s-6) 0;
+}
 
 /* Utility helpers */
-.rbx-surface { background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius-md); }
-.rbx-card { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--s-5); }
-.rbx-card:hover { border-color: var(--border-strong); }
-.rbx-cta { display: inline-flex; align-items: center; gap: var(--s-2); padding: var(--s-2) var(--s-4); background: var(--cyan-subtle); border: 1px solid var(--cyan-dim); border-radius: var(--radius-sm); color: var(--cyan-brand); font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: var(--track-label); transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease); }
-.rbx-cta:hover { background: rgba(0, 255, 255, 0.12); border-color: var(--cyan-brand); color: var(--cyan-signal); }
+.rbx-surface {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.rbx-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--s-5);
+}
+.rbx-card:hover {
+  border-color: var(--border-strong);
+}
+.rbx-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-4);
+  background: var(--cyan-subtle);
+  border: 1px solid var(--cyan-dim);
+  border-radius: var(--radius-sm);
+  color: var(--cyan-brand);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  transition:
+    background var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+.rbx-cta:hover {
+  background: rgba(0, 255, 255, 0.12);
+  border-color: var(--cyan-brand);
+  color: var(--cyan-signal);
+}

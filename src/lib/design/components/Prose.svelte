@@ -7,6 +7,7 @@
 </script>
 
 <article class="prose">
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
   {@html html}
 </article>
 
@@ -19,9 +20,18 @@
     margin-top: var(--s-6);
     margin-bottom: var(--s-3);
   }
-  .prose :global(h1) { font-size: var(--text-3xl); font-weight: 300; }
-  .prose :global(h2) { font-size: var(--text-2xl); font-weight: 400; }
-  .prose :global(h3) { font-size: var(--text-xl); font-weight: 500; }
+  .prose :global(h1) {
+    font-size: var(--text-3xl);
+    font-weight: 300;
+  }
+  .prose :global(h2) {
+    font-size: var(--text-2xl);
+    font-weight: 400;
+  }
+  .prose :global(h3) {
+    font-size: var(--text-xl);
+    font-weight: 500;
+  }
   .prose :global(p) {
     color: var(--fg-1);
     margin-bottom: var(--s-4);

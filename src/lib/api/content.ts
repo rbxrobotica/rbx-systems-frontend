@@ -11,10 +11,7 @@ export function getAlternateLocale(locale: Locale): Locale {
   return locale === 'pt-BR' ? 'en' : 'pt-BR';
 }
 
-export async function loadPage(
-  path: string,
-  locale: Locale
-): Promise<PageContent | null> {
+export async function loadPage(path: string, locale: Locale): Promise<PageContent | null> {
   const candidates = [
     `${SITE_PREFIX}${locale}/${path}/index.md`,
     `${SITE_PREFIX}${getAlternateLocale(locale)}/${path}/index.md`
@@ -48,11 +45,7 @@ function parsePostKey(key: string): { slug: string; locale: Locale } | null {
   return { slug: match[1], locale: (match[2] as Locale) ?? 'pt-BR' };
 }
 
-function selectBestKey(
-  keys: string[],
-  slug: string,
-  locale: Locale
-): string | null {
+function selectBestKey(keys: string[], slug: string, locale: Locale): string | null {
   const exact = keys.find((k) => k === `${BLOG_PREFIX}${slug}.${locale}.md`);
   if (exact) return exact;
   const legacy = keys.find((k) => k === `${BLOG_PREFIX}${slug}.md`);
@@ -115,9 +108,8 @@ export async function loadAllPosts(locale: Locale): Promise<PostMeta[]> {
     posts.push(await parsePost(key, slug));
   }
 
-  return posts
-    .sort((a, b) => (a.date < b.date ? 1 : -1))
-    .map(({ content, html, ...meta }) => meta);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return posts.sort((a, b) => (a.date < b.date ? 1 : -1)).map(({ content, html, ...meta }) => meta);
 }
 
 export async function loadPost(slug: string, locale: Locale): Promise<Post | null> {

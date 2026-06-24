@@ -5,6 +5,7 @@
   import type { Snippet } from 'svelte';
   import NavBar from '$components/NavBar.svelte';
   import Footer from '$components/Footer.svelte';
+  import WhatsAppFloat from '$components/WhatsAppFloat.svelte';
 
   interface Props {
     children: Snippet;
@@ -19,6 +20,7 @@
     {@render children()}
   </main>
   <Footer />
+  <WhatsAppFloat />
 </div>
 
 <style>
@@ -47,7 +49,9 @@
     color: var(--fg-0);
     text-decoration: none;
     border-bottom: 1px solid var(--border-strong);
-    transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+    transition:
+      border-color var(--dur) var(--ease),
+      color var(--dur) var(--ease);
   }
   :global(a:hover) {
     color: var(--cyan-brand);

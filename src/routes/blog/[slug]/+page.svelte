@@ -24,7 +24,9 @@
         <p class="rbx-lead">{data.post.excerpt}</p>
       {/if}
       {#if data.post.author}
-        <p class="rbx-caption">{data.post.author}{data.post.authorRole ? ` | ${data.post.authorRole}` : ''}</p>
+        <p class="rbx-caption">
+          {data.post.author}{data.post.authorRole ? ` | ${data.post.authorRole}` : ''}
+        </p>
       {/if}
     </header>
 

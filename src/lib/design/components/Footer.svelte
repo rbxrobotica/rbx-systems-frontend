@@ -36,8 +36,18 @@
         <h3 class="rbx-label">{$_('footer.contactTitle')}</h3>
         <ul>
           <li><a href="mailto:contact@rbxsystems.ch">contact@rbxsystems.ch</a></li>
-          <li><a href="https://github.com/rbxrobotica" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-          <li><a href="https://linkedin.com/company/rbxrobotica" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li>
+            <a href="https://github.com/rbxrobotica" target="_blank" rel="noopener noreferrer"
+              >GitHub</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://linkedin.com/company/rbxrobotica"
+              target="_blank"
+              rel="noopener noreferrer">LinkedIn</a
+            >
+          </li>
         </ul>
       </div>
     </div>
