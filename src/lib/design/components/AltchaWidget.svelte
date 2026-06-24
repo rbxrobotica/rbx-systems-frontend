@@ -12,7 +12,7 @@
   let payload = $state<string | null>(null);
   const dispatch = createEventDispatcher<{ statechange: string | null }>();
 
-  function readPayload(): string | null {
+  export function getValue(): string | null {
     const el = widget;
     if (!el) return null;
     const input = (el.shadowRoot ?? el).querySelector(
@@ -21,19 +21,19 @@
     return input?.value ?? null;
   }
 
-  function updatePayload() {
-    payload = readPayload();
+  function refreshPayload() {
+    payload = getValue();
     dispatch('statechange', payload);
   }
 
   function onVerified() {
-    updatePayload();
+    refreshPayload();
   }
 
   function onStateChange(ev: Event) {
     const detail = (ev as CustomEvent)?.detail;
     if (detail?.state === 'verified') {
-      updatePayload();
+      refreshPayload();
     } else if (
       detail?.state === 'unverified' ||
       detail?.state === 'error' ||
@@ -53,10 +53,6 @@
       el?.removeEventListener('statechange', onStateChange);
     };
   });
-
-  export function getValue(): string | null {
-    return payload;
-  }
 </script>
 
 <altcha-widget bind:this={widget} challenge={challengeurl}></altcha-widget>
