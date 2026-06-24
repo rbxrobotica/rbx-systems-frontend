@@ -12,31 +12,29 @@
   let payload = $state<string | null>(null);
   const dispatch = createEventDispatcher<{ statechange: string | null }>();
 
-  async function onVerified() {
-    const el = widget as
-      | (HTMLElement & { verify?: () => Promise<{ payload?: string } | null> })
-      | undefined;
-    if (!el?.verify) {
-      payload = null;
-      dispatch('statechange', null);
-      return;
-    }
-    try {
-      const result = await el.verify();
-      payload = result?.payload ?? null;
-    } catch {
-      payload = null;
-    }
+  function readPayload(): string | null {
+    const el = widget;
+    if (!el) return null;
+    const input = (el.shadowRoot ?? el).querySelector(
+      'input[name="altcha"]'
+    ) as HTMLInputElement | null;
+    return input?.value ?? null;
+  }
+
+  function updatePayload() {
+    payload = readPayload();
     dispatch('statechange', payload);
+  }
+
+  function onVerified() {
+    updatePayload();
   }
 
   function onStateChange(ev: Event) {
     const detail = (ev as CustomEvent)?.detail;
     if (detail?.state === 'verified') {
-      // verified event will fire right after; payload is available there.
-      return;
-    }
-    if (
+      updatePayload();
+    } else if (
       detail?.state === 'unverified' ||
       detail?.state === 'error' ||
       detail?.state === 'expired'
