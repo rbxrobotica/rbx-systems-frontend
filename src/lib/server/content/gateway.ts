@@ -4,7 +4,7 @@
  * fallback and safe degradation. The UI never touches the S3-compatible API.
  * (ADR-0002: RBX Sovereign Content Delivery Layer.)
  */
-import matter from 'gray-matter';
+import { load as parseYaml } from 'js-yaml';
 import { marked } from 'marked';
 import { getAlternateLocale } from '$api/content';
 import { getTextObject, getByteObject, listObjectKeys, type ByteObject } from './store';
@@ -23,6 +23,27 @@ const postCache = new SwrCache<Post | null>(ttlMs, staleMs);
 const listCache = new SwrCache<PostMeta[]>(ttlMs, staleMs);
 // Assets are stable by filename; cache longer.
 const assetCache = new SwrCache<ByteObject | null>(ttlMs * 10, staleMs * 10);
+
+/**
+ * Parse YAML frontmatter (gray-matter-compatible) using js-yaml 4 directly.
+ * Replaces gray-matter, which pinned js-yaml 3.x (unfixable CVE). Our content
+ * is simple trusted YAML from the CMS, so the slim parser is sufficient.
+ */
+function parseFrontmatter(raw: string): {
+  data: Record<string, any>;
+  content: string;
+} {
+  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(raw);
+  if (!match) return { data: {}, content: raw };
+  let data: Record<string, any> = {};
+  try {
+    const parsed = parseYaml(match[1]);
+    if (parsed && typeof parsed === 'object') data = parsed as Record<string, any>;
+  } catch {
+    data = {};
+  }
+  return { data, content: match[2] };
+}
 
 export async function loadPage(path: string, locale: Locale): Promise<PageContent | null> {
   return pageCache.get(`page:${locale}:${path}`, () => fetchPage(path, locale));
@@ -63,7 +84,7 @@ async function fetchPage(path: string, locale: Locale): Promise<PageContent | nu
     try {
       const obj = await getTextObject(key);
       if (!obj) continue;
-      const { data, content } = matter(obj.body);
+      const { data, content } = parseFrontmatter(obj.body);
       return {
         title: data.title ?? '',
         description: data.description ?? '',
@@ -125,7 +146,7 @@ async function parsePost(key: string, slug: string): Promise<Post | null> {
   try {
     const obj = await getTextObject(key);
     if (!obj) return null;
-    const { data, content } = matter(obj.body);
+    const { data, content } = parseFrontmatter(obj.body);
     return {
       slug,
       title: data.title ?? slug,
