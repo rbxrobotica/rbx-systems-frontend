@@ -1,0 +1,11 @@
+node_modules
+build
+.svelte-kit
+.git
+.env
+.env.*
+*.log
+.aider*
+.claude
+.codex
+FOUNDERS-DEMO.md
