@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "start": "node build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -14,7 +15,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
-    "@sveltejs/adapter-static": "^3.0.0",
     "@sveltejs/kit": "^2.5.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.0",
     "@types/node": "^20.11.0",
@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1016.0",
+    "@sveltejs/adapter-node": "^5.5.7",
     "altcha": "^3.1.0",
     "gray-matter": "^4.0.3",
     "marked": "^18.0.5",

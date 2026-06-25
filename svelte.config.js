@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-node';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -8,13 +8,9 @@ const config = {
     runes: true
   },
   kit: {
-    adapter: adapter({
-      pages: 'build',
-      assets: 'build',
-      fallback: 'index.html',
-      precompress: false,
-      strict: false
-    }),
+    // SSR adapter: content is read server-side from Contabo Object Storage
+    // via the Content Gateway (ADR-0002). No build-time prerender.
+    adapter: adapter(),
     alias: {
       $design: 'src/lib/design',
       $components: 'src/lib/design/components',
@@ -24,11 +20,6 @@ const config = {
     },
     paths: {
       relative: false
-    },
-    prerender: {
-      handleHttpError: 'warn',
-      handleMissingId: 'warn',
-      handleUnseenRoutes: 'ignore'
     }
   }
 };
