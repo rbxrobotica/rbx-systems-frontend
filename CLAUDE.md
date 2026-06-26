@@ -2,7 +2,9 @@
 
 ## Repository Purpose
 
-This is the public-facing website for RBX Systems (`rbx.ia.br`). It is a Next.js 14 App Router application with an MDX blog where posts and cover images are stored in Contabo Object Storage (S3-compatible).
+This is the public-facing website for RBX Systems (`rbx.ia.br` / `rbxsystems.ch`). It is a **SvelteKit (adapter-node) SSR** application. Blog posts are **Markdown** (rendered with `marked`; YAML frontmatter parsed with `js-yaml` 4) stored in Contabo Object Storage (S3-compatible, **private bucket**). Covers and UI assets are served through server-side proxies (`/api/blog/cover/...`, `/api/assets/...`); the bucket is never read from the client.
+
+> **Canonical publishing workflow:** see `~/docs/rbx-content-publish-workflow.md` (agnostic source of truth). Publishing writes one Markdown object to S3; the site reflects it within ~60s via the Content Gateway cache TTL — **no rebuild, no redeploy**.
 
 ---
 
@@ -17,16 +19,16 @@ When a user provides a new blog post in **either** `pt-BR` or `en`, the agent sh
 Required outcome for every new post:
 
 - Same public slug for both languages
-- `blog-posts/YYYY-MM-DD-slug.pt-BR.mdx`
-- `blog-posts/YYYY-MM-DD-slug.en.mdx`
+- `blog-posts/YYYY-MM-DD-slug.pt-BR.md`
+- `blog-posts/YYYY-MM-DD-slug.en.md`
 - Same cover image for both variants
 - Upload all available variants with `./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug`
 
 If the user sends the cover image path in the same prompt, use it directly. No second round-trip is required unless the file is missing or invalid.
 
-### Step 1 — Write the MDX file
+### Step 1 — Write the Markdown file
 
-Create the post in `blog-posts/` with filename `YYYY-MM-DD-slug.mdx`. Use this frontmatter:
+Create the post in `blog-posts/` with filename `YYYY-MM-DD-slug.md`. Use this frontmatter:
 
 ```yaml
 ---
@@ -39,13 +41,13 @@ excerpt: 'One sentence describing the post. Shown in listing and at the top of t
 ---
 ```
 
-**Do NOT include a `cover` field yet** — it will be added in Step 5 after the image is uploaded.
+**Do NOT include a `cover` field yet** — it will be added in Step 6 after the image is uploaded.
 
 Use locale-specific variants when needed:
 
-- `YYYY-MM-DD-slug.mdx` for a single-language or legacy fallback version
-- `YYYY-MM-DD-slug.pt-BR.mdx` for Brazilian Portuguese
-- `YYYY-MM-DD-slug.en.mdx` for English
+- `YYYY-MM-DD-slug.md` for a single-language or legacy fallback version
+- `YYYY-MM-DD-slug.pt-BR.md` for Brazilian Portuguese
+- `YYYY-MM-DD-slug.en.md` for English
 
 The public URL slug remains `YYYY-MM-DD-slug`. The site serves the locale-specific variant that matches the current site language and falls back to the base file if needed.
 
@@ -55,15 +57,15 @@ For all **new** agent-published posts, prefer creating both locale files and ski
 
 **Do NOT include sensitive infrastructure details** (IPs, credentials, internal hostnames, security incidents).
 
-**Markdown Features**: The blog supports **GitHub Flavored Markdown (GFM)** via `remark-gfm`:
+**Markdown features:** posts are rendered with `marked` (GFM enabled by default). Supported:
 
-- ✅ Tables (use standard Markdown table syntax)
-- ✅ Strikethrough (~~text~~)
+- ✅ Tables (standard Markdown table syntax)
+- ✅ Strikethrough (`~~text~~`)
 - ✅ Task lists
 - ✅ Autolinks
-- ✅ Code blocks with syntax highlighting
+- ✅ Code blocks (rendered as `<pre><code>`; no syntax highlighting)
 
-### Step 2 — Upload the MDX to S3
+### Step 2 — Upload the Markdown to S3
 
 ```bash
 ./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug
@@ -71,7 +73,7 @@ For all **new** agent-published posts, prefer creating both locale files and ski
 
 This publishes the base file plus any `pt-BR` and `en` variants that exist. For the canonical agentic workflow, the expected publish set is the two locale-specific files.
 
-Requires `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables set.
+The scripts auto-load `CONTABO_S3_*` credentials from the repo `.env` via `scripts/_s3-env.sh` (which also forces path-style addressing). In CI / the cluster, set standard `AWS_*` env vars or mount the `contabo-s3-credentials` secret.
 
 The post is now live at:
 
@@ -82,7 +84,7 @@ The header locale toggle may override either default via cookie.
 
 ### Step 3 — Output the Nano Banana cover image prompt
 
-After uploading the MDX, output the following block verbatim for the user to copy into Nano Banana:
+After uploading the post, output the following block verbatim for the user to copy into Nano Banana:
 
 ```
 --- COVER IMAGE PROMPT ---
@@ -105,13 +107,15 @@ Wait for the user to provide the local file path of the generated cover image.
 ./scripts/blog-cover-upload.sh /path/to/user/image.jpg YYYY-MM-DD-slug
 ```
 
-### Step 6 — Add the cover field to the MDX and re-upload
+### Step 6 — Add the cover field to the Markdown and re-upload
 
-Edit both locale variants to add the same `cover` field to frontmatter:
+Edit both locale variants to add the same `cover` field to frontmatter. The Content Gateway normalizes this S3 URL to the server-side proxy (`/api/blog/cover/...`), so the bucket stays private:
 
 ```yaml
 cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/YYYY-MM-DD-slug.jpg'
 ```
+
+For `.jpg` covers you may instead **omit** `cover` — it defaults to `/api/blog/cover/YYYY-MM-DD-slug.jpg` automatically.
 
 Then re-upload:
 
@@ -122,53 +126,51 @@ Then re-upload:
 ### Step 7 — Verify
 
 ```bash
+# The scripts source _s3-env.sh (path-style). For ad-hoc aws-cli, force path-style:
+#   printf '[default]\ns3.addressing_style = path\n' > /tmp/aws.cfg && export AWS_CONFIG_FILE=/tmp/aws.cfg
 aws s3 ls s3://rbx-content/blog/posts/ --endpoint-url https://eu2.contabostorage.com
 aws s3 ls s3://rbx-content/blog/covers/ --endpoint-url https://eu2.contabostorage.com
 ```
 
-Confirm the localized post objects and the cover object exist. The post with cover will be live within 5 minutes (ISR revalidate=300).
+Confirm the localized post objects and the cover object exist. The post (with cover) is live within **~60s** — the gateway cache TTL; no rebuild or redeploy is needed.
 
-### Step 8 — Commit the MDX to git
+### Step 8 — Commit the Markdown to git
 
 ```bash
-git add blog-posts/YYYY-MM-DD-slug.pt-BR.mdx blog-posts/YYYY-MM-DD-slug.en.mdx
+git add blog-posts/YYYY-MM-DD-slug.pt-BR.md blog-posts/YYYY-MM-DD-slug.en.md
 git commit -m "blog: add post YYYY-MM-DD-slug"
-git push
+# S3 is the live store; git is the backup. Push only with explicit operator authorization.
 ```
 
-The git repo serves as the source of truth and backup for all blog content.
+S3 is the live store; the git repo is the backup/source for all blog content.
 
 ---
 
 ## S3 Bucket Structure
 
 ```
-s3://rbx-content/
+s3://rbx-content/                       (PRIVATE — server-side reads only)
+  site/
+    pt-BR|en/{page}/index.md            ← site pages (home, solutions, products, ...)
   blog/
     posts/
-      YYYY-MM-DD-slug.mdx           ← base / fallback post content
-      YYYY-MM-DD-slug.pt-BR.mdx     ← Brazilian Portuguese variant
-      YYYY-MM-DD-slug.en.mdx        ← English variant
+      YYYY-MM-DD-slug.md                ← base / fallback post content
+      YYYY-MM-DD-slug.pt-BR.md          ← Brazilian Portuguese variant
+      YYYY-MM-DD-slug.en.md             ← English variant
     covers/
-      YYYY-MM-DD-slug.jpg     ← cover image (1200×630 JPEG)
+      YYYY-MM-DD-slug.jpg               ← cover image (1200×630 JPEG)
   assets/
     ui/
-      bitmap.svg              ← logo mark
-      bitmap_bg.svg           ← hero background graphic
-      polka-dots.svg          ← team section background pattern
-      diamond-sunset.svg      ← about section card background pattern
+      bitmap.svg, bitmap_bg.svg, polka-dots.svg, diamond-sunset.svg
     team/
-      rafael-scharf.jpg       ← team member photo
-      anthony-farias.jpg
-      leandro-damasio.jpg
-      magno-ozzyr.jpg
-      flavia-ribeiro.jpg
+      rafael-scharf.jpg, anthony-farias.jpg, leandro-damasio.jpg, magno-ozzyr.jpg, flavia-ribeiro.jpg
     about/
-      rbx-about.jpeg          ← about section hero image
+      rbx-about.jpeg
 ```
 
 All assets are served via `/api/assets/[...path]` which proxies from S3 with
-`Cache-Control: public, max-age=31536000, immutable`.
+`Cache-Control: public, max-age=31536000, immutable`. Covers are served via
+`/api/blog/cover/[...path]`. Both proxies read server-side; the bucket stays private.
 
 To upload UI assets (SVGs + root-level JPEGs from public/):
 
@@ -187,12 +189,12 @@ To upload a single asset:
 ## Cover Image Specifications
 
 | Property     | Value                                                               |
-| ------------ | ------------------------------------------------------------------- |
+|--------------|---------------------------------------------------------------------|
 | Dimensions   | 1200 × 630 px                                                       |
-| Format       | JPEG                                                                |
+| Format       | JPEG (or PNG)                                                       |
 | Aspect ratio | 16:9                                                                |
 | S3 key       | `blog/covers/{slug}.jpg`                                            |
-| Public URL   | `https://eu2.contabostorage.com/rbx-content/blog/covers/{slug}.jpg` |
+| Served via   | `/api/blog/cover/{slug}.jpg` (server-side proxy; bucket is private) |
 
 ---
 
@@ -201,4 +203,5 @@ To upload a single asset:
 - **Match the current locale** for localized blog content
 - **No sensitive security details** (IPs, credentials, internal topology)
 - **No cover field without an uploaded image** — omit it if the image isn't uploaded yet
-- **Commit MDX files to git** after publishing — S3 is live storage, git is the backup
+- **Commit Markdown files to git** after publishing — S3 is live storage, git is the backup
+- **Never `git push` (or any remote write) without explicit per-operation operator authorization**

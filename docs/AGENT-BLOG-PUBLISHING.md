@@ -1,5 +1,7 @@
 # Agent Blog Publishing Contract
 
+> **Atualizado 2026-06-25:** posts são **Markdown** (`.md`, não `.mdx`), renderizados com `marked`. Bucket **privado**; capas servidas via proxy `/api/blog/cover/...`. Sem ISR/deploy — a propagação é ~60s pelo Content Gateway. Workflow canônico: `~/docs/rbx-content-publish-workflow.md`.
+
 This document is the strict workflow for agents that create or publish blog posts in this repository.
 
 ## Scope
@@ -17,17 +19,17 @@ Apply this workflow whenever the user asks to:
 Every new post published agentically must produce:
 
 - one public slug
-- one `pt-BR` MDX variant
-- one `en` MDX variant
+- one `pt-BR` Markdown variant
+- one `en` Markdown variant
 - one shared cover image
 - one git commit containing the post sources
 
 For a slug `YYYY-MM-DD-slug`, the expected files are:
 
-- `blog-posts/YYYY-MM-DD-slug.pt-BR.mdx`
-- `blog-posts/YYYY-MM-DD-slug.en.mdx`
+- `blog-posts/YYYY-MM-DD-slug.pt-BR.md`
+- `blog-posts/YYYY-MM-DD-slug.en.md`
 
-The fallback base file `blog-posts/YYYY-MM-DD-slug.mdx` is optional and should not be the default choice for new bilingual posts.
+The fallback base file `blog-posts/YYYY-MM-DD-slug.md` is optional and should not be the default choice for new bilingual posts.
 
 ## Input Contract
 
@@ -70,8 +72,8 @@ The public URL must stay the same across locales:
 
 Create:
 
-- `blog-posts/YYYY-MM-DD-slug.pt-BR.mdx`
-- `blog-posts/YYYY-MM-DD-slug.en.mdx`
+- `blog-posts/YYYY-MM-DD-slug.pt-BR.md`
+- `blog-posts/YYYY-MM-DD-slug.en.md`
 
 Do not add `cover` until the image exists in S3.
 
@@ -97,7 +99,7 @@ The same cover URL must be added to both locale variants.
 
 ### 4. Re-publish all variants
 
-After adding `cover:` to both MDX files, run:
+After adding `cover:` to both Markdown files, run:
 
 ```bash
 ./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug
@@ -118,7 +120,7 @@ When updating an existing bilingual post:
 - update both locale variants when the content meaning changes
 - keep the slug unchanged
 - re-publish with `./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug`
-- commit the updated MDX files
+- commit the updated Markdown files
 
 If only one locale needs correction, the agent may update only that variant, but should verify whether the other locale now diverges materially.
 
@@ -131,5 +133,5 @@ Before finishing, confirm:
 - the cover URL matches in both files
 - the variants were uploaded to S3
 - the changes were committed and pushed
-- the deploy pipeline was triggered
+- no rebuild/deploy is needed — the gateway cache (~60s TTL) picks up the S3 write
 - the `pt-BR` variant was not written in ASCII-transliterated Portuguese
