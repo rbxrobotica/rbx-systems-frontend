@@ -1,6 +1,8 @@
 # Blog — RBX Systems
 
-O blog vive em **rbx.ia.br/blog**. Posts são arquivos MDX armazenados no Contabo Object Storage (S3-compatible). Publicar não requer deploy — o site busca o conteúdo do S3 a cada ciclo de ISR (revalidate: 5 minutos).
+> **Atualizado 2026-06-25:** o site é **SvelteKit SSR** (não mais Next.js/ISR). O bucket é **privado**; capas são servidas via proxy `/api/blog/cover/...`. Propagação após publish: **~60s** (TTL do Content Gateway), sem redeploy. Workflow canônico e atual: `~/docs/rbx-content-publish-workflow.md`. O restante deste arquivo mantém a orientação editorial (estilo, PT-BR, specs de capa) — ignore quaisquer remanescentes de MDX/ISR.
+
+O blog vive em **rbx.ia.br/blog**. Posts são arquivos Markdown armazenados no Contabo Object Storage (S3-compatible, **bucket privado**). Publicar não requer deploy — o site lê o S3 server-side via Content Gateway e reflete mudanças em **~60s** (TTL do cache do gateway).
 
 ---
 
@@ -10,7 +12,7 @@ O blog vive em **rbx.ia.br/blog**. Posts são arquivos MDX armazenados no Contab
 - **Seleção de idioma:** `rbx.ia.br` prioriza `pt-BR`, `rbxsystems.ch` prioriza `en`, e o toggle do header permite alternância manual
 - **Tom:** direto, claro, institucional — estilo Cursor ou Anthropic
 - **Sem detalhes sensíveis de segurança:** não expor IPs internos, credenciais, topologia de rede, ou incidentes em aberto
-- **Commit obrigatório:** após publicar, commitar o MDX no git — S3 é o storage vivo, git é o backup
+- **Commit obrigatório:** após publicar, commitar o Markdown no git — S3 é o storage vivo, git é o backup
 
 ---
 
@@ -20,9 +22,9 @@ O blog vive em **rbx.ia.br/blog**. Posts são arquivos MDX armazenados no Contab
 s3://rbx-content/
   blog/
     posts/
-      YYYY-MM-DD-slug.mdx           ← fallback legado / idioma único
-      YYYY-MM-DD-slug.pt-BR.mdx     ← variante pt-BR opcional
-      YYYY-MM-DD-slug.en.mdx        ← variante en opcional
+      YYYY-MM-DD-slug.md           ← fallback legado / idioma único
+      YYYY-MM-DD-slug.pt-BR.md     ← variante pt-BR opcional
+      YYYY-MM-DD-slug.en.md        ← variante en opcional
     covers/
       YYYY-MM-DD-slug.jpg     ← capa (1200×630 JPEG, mesmo slug)
 ```
@@ -71,19 +73,19 @@ export AWS_SECRET_ACCESS_KEY=<sua_secret_key>
 
 ### 1. Escreva o post
 
-Crie `blog-posts/YYYY-MM-DD-slug.mdx` com o frontmatter acima e o corpo em Markdown.
+Crie `blog-posts/YYYY-MM-DD-slug.md` com o frontmatter acima e o corpo em Markdown.
 
 Se o post tiver variantes por idioma, use também:
 
-- `blog-posts/YYYY-MM-DD-slug.pt-BR.mdx`
-- `blog-posts/YYYY-MM-DD-slug.en.mdx`
+- `blog-posts/YYYY-MM-DD-slug.pt-BR.md`
+- `blog-posts/YYYY-MM-DD-slug.en.md`
 
 O slug público continua sendo `YYYY-MM-DD-slug`. O site escolhe a variante com base no locale atual e faz fallback para o arquivo sem sufixo se a variante não existir.
 
 ### 2. Publique no S3
 
 ```bash
-./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.mdx
+./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.md
 ```
 
 Para publicar todas as variantes do mesmo post de uma vez:
@@ -94,9 +96,9 @@ Para publicar todas as variantes do mesmo post de uma vez:
 
 O script procura, nesta ordem, por:
 
-- `blog-posts/YYYY-MM-DD-slug.mdx`
-- `blog-posts/YYYY-MM-DD-slug.pt-BR.mdx`
-- `blog-posts/YYYY-MM-DD-slug.en.mdx`
+- `blog-posts/YYYY-MM-DD-slug.md`
+- `blog-posts/YYYY-MM-DD-slug.pt-BR.md`
+- `blog-posts/YYYY-MM-DD-slug.en.md`
 
 ### 3. Imagem de capa
 
@@ -106,16 +108,16 @@ Gere a imagem no Nano Banana com as especificações abaixo e faça upload:
 ./scripts/blog-cover-upload.sh /caminho/para/capa.jpg YYYY-MM-DD-slug
 ```
 
-Adicione o campo `cover` no frontmatter do MDX e republique:
+Adicione o campo `cover` no frontmatter do Markdown e republique:
 
 ```bash
-./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.mdx
+./scripts/blog-publish.sh blog-posts/YYYY-MM-DD-slug.md
 ```
 
 ### 4. Commit
 
 ```bash
-git add blog-posts/YYYY-MM-DD-slug.mdx
+git add blog-posts/YYYY-MM-DD-slug.md
 git commit -m "blog: add post YYYY-MM-DD-slug"
 git push
 ```
@@ -133,8 +135,8 @@ Se o usuário enviar um texto em **português** ou **inglês**, o agente deve:
 1. Tratar esse texto como fonte canônica
 2. Produzir automaticamente a variante no outro idioma
 3. Criar os dois arquivos:
-   `blog-posts/YYYY-MM-DD-slug.pt-BR.mdx`
-   `blog-posts/YYYY-MM-DD-slug.en.mdx`
+   `blog-posts/YYYY-MM-DD-slug.pt-BR.md`
+   `blog-posts/YYYY-MM-DD-slug.en.md`
 4. Reutilizar a mesma capa para ambas as variantes
 5. Publicar tudo com `./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug`
 
@@ -142,7 +144,7 @@ Se o caminho da imagem de capa vier no mesmo prompt, o agente deve usar esse arq
 
 ### Passos
 
-1. Escreve os MDX de locale em `blog-posts/` — sem `cover` ainda
+1. Escreve os Markdown de locale em `blog-posts/` — sem `cover` ainda
 2. Obtém as credenciais do secret `contabo-s3-credentials` via kubectl
 3. Faz upload de todas as variantes com `./scripts/blog-publish.sh --all-locales`
 4. Gera e exibe um **prompt para o Nano Banana** (ver especificações abaixo)
@@ -150,7 +152,7 @@ Se o caminho da imagem de capa vier no mesmo prompt, o agente deve usar esse arq
 6. Faz upload da capa: `./scripts/blog-cover-upload.sh`
 7. Adiciona `cover:` no frontmatter das duas variantes e republica tudo
 8. Verifica os objetos no S3
-9. Commita os MDX no git
+9. Commita os Markdown no git
 
 > O fluxo detalhado para agentes está em `CLAUDE.md` na raiz do repositório.
 
@@ -180,7 +182,7 @@ Dark background, minimal, tech-abstract, cinematic lighting, no text,
 
 | Script                                                      | Uso                                                                   |
 | ----------------------------------------------------------- | --------------------------------------------------------------------- |
-| `./scripts/blog-publish.sh <arquivo.mdx>`                   | Faz upload do post para o S3                                          |
+| `./scripts/blog-publish.sh <arquivo.md>`                   | Faz upload do post para o S3                                          |
 | `./scripts/blog-publish.sh --all-locales <slug-ou-arquivo>` | Faz upload do post base e de todas as variantes de locale encontradas |
 | `./scripts/blog-cover-upload.sh <imagem.jpg> <slug>`        | Faz upload da capa para o S3                                          |
 
@@ -196,12 +198,12 @@ aws s3 ls s3://rbx-content/blog/posts/ --endpoint-url https://eu2.contabostorage
 aws s3 ls s3://rbx-content/blog/covers/ --endpoint-url https://eu2.contabostorage.com
 
 # Remover post
-aws s3 rm s3://rbx-content/blog/posts/YYYY-MM-DD-slug.mdx \
+aws s3 rm s3://rbx-content/blog/posts/YYYY-MM-DD-slug.md \
   --endpoint-url https://eu2.contabostorage.com
 ```
 
 ---
 
-## Cache e ISR
+## Cache e propagação
 
-As páginas do blog usam **ISR com revalidate=300** (5 minutos). Após qualquer publicação ou atualização no S3, o conteúdo atualizado estará visível no site em até 5 minutos sem necessidade de redeploy.
+O site é **SSR (SvelteKit)**. O Content Gateway lê o S3 server-side com cache em memória (TTL ~60s, janela stale 300s). Após qualquer publicação ou atualização no S3, o conteúdo atualizado aparece no site em até ~60s, sem necessidade de redeploy.
