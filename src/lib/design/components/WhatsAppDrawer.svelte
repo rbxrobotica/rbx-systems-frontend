@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { untrack } from 'svelte';
   import { _ } from 'svelte-i18n';
   import type { Snippet } from 'svelte';
   import { getCommsBaseUrl } from '$lib/api/comms';
@@ -6,16 +7,17 @@
 
   interface Props {
     trigger: Snippet<[() => void]>;
+    initialMessage?: string;
   }
 
-  let { trigger }: Props = $props();
+  let { trigger, initialMessage = '' }: Props = $props();
 
   type Status = 'idle' | 'submitting' | 'success' | 'error';
 
   let open = $state(false);
   let name = $state('');
   let phone = $state('');
-  let message = $state('');
+  let message = $state(untrack(() => initialMessage));
   let altchaPayload = $state<string | null>(null);
   let status = $state<Status>('idle');
   let altchaWidget: AltchaWidget | undefined = $state();

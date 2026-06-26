@@ -1,5 +1,53 @@
 <script lang="ts">
+  import { page } from '$app/stores';
+  import { locale } from 'svelte-i18n';
   import WhatsAppDrawer from './WhatsAppDrawer.svelte';
+
+  const contextMessages: Record<string, { pt: string; en: string }> = {
+    '/solucoes': {
+      pt: 'Olá, tenho interesse nas soluções da RBX Systems.',
+      en: 'Hello, I am interested in RBX Systems solutions.'
+    },
+    '/produtos': {
+      pt: 'Olá, quero saber mais sobre os produtos da RBX Systems.',
+      en: 'Hello, I would like to learn more about RBX Systems products.'
+    },
+    '/cases': {
+      pt: 'Olá, quero entender como a RBX pode ajudar minha empresa.',
+      en: 'Hello, I would like to understand how RBX can help my company.'
+    },
+    '/trust': {
+      pt: 'Olá, tenho interesse na proposta de governança e confiança da RBX.',
+      en: 'Hello, I am interested in RBX governance and trust framework.'
+    },
+    '/atelier': {
+      pt: 'Olá, quero conhecer mais sobre o Atelier da RBX.',
+      en: 'Hello, I would like to know more about the RBX Atelier.'
+    },
+    '/blog': {
+      pt: 'Olá, li o blog da RBX e gostaria de conversar.',
+      en: 'Hello, I read the RBX blog and would like to chat.'
+    },
+    '/journal': {
+      pt: 'Olá, li o conteúdo da RBX e gostaria de conversar.',
+      en: 'Hello, I read RBX content and would like to chat.'
+    },
+    '/newsroom': {
+      pt: 'Olá, vim pela sala de imprensa da RBX e gostaria de conversar.',
+      en: 'Hello, I visited the RBX newsroom and would like to connect.'
+    }
+  };
+
+  function getContextMessage(path: string, loc: string | null | undefined): string {
+    const isEn = loc?.startsWith('en');
+    const entry = Object.entries(contextMessages).find(([key]) => path.startsWith(key));
+    if (entry) return isEn ? entry[1].en : entry[1].pt;
+    return isEn
+      ? 'Hello, I visited the RBX Systems website and would like to chat.'
+      : 'Olá, vim pelo site da RBX Systems e gostaria de conversar.';
+  }
+
+  const initialMessage = $derived(getContextMessage($page.url.pathname, $locale));
 </script>
 
 {#snippet trigger(open: () => void)}
@@ -15,7 +63,7 @@
   </button>
 {/snippet}
 
-<WhatsAppDrawer {trigger} />
+<WhatsAppDrawer {trigger} {initialMessage} />
 
 <style>
   .float {

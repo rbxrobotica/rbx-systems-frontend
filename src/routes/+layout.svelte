@@ -6,6 +6,7 @@
   import NavBar from '$components/NavBar.svelte';
   import Footer from '$components/Footer.svelte';
   import WhatsAppFloat from '$components/WhatsAppFloat.svelte';
+  import AIChatFloat from '$components/AIChatFloat.svelte';
 
   interface Props {
     children: Snippet;
@@ -20,6 +21,7 @@
     {@render children()}
   </main>
   <Footer />
+  <AIChatFloat />
   <WhatsAppFloat />
 </div>
 
