@@ -15,5 +15,5 @@
     "verbatimModuleSyntax": true,
     "noEmit": true
   },
-  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.svelte"]
+  "include": [".svelte-kit/ambient.d.ts", "src/**/*.d.ts", "src/**/*.ts", "src/**/*.svelte"]
 }
