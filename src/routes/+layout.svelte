@@ -74,6 +74,6 @@
     max-width: var(--content-w);
     width: 100%;
     margin: 0 auto;
-    padding: var(--s-7) var(--gutter);
+    padding: var(--s-6) var(--gutter);
   }
 </style>

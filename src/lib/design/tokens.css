@@ -89,9 +89,15 @@
   /* ——— Elevation ——— */
   --shadow-none: none;
   --shadow-overlay: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-nav: 0 4px 24px rgba(0, 0, 0, 0.6);
   --ring: 0 0 0 1px var(--border);
   --ring-strong: 0 0 0 1px var(--border-strong);
   --ring-focus: 0 0 0 2px var(--cyan-brand);
+
+  /* ——— Glass navigation ——— */
+  --bg-nav-glass: hsla(222, 47%, 6%, 0.72);
+  --border-nav-glass: rgba(36, 40, 46, 0.6);
+  --nav-w: 80rem;
 
   /* ——— Motion ——— */
   --ease: cubic-bezier(0.2, 0, 0, 1);
