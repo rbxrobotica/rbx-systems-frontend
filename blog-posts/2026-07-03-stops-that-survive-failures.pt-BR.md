@@ -3,8 +3,9 @@ title: 'Stops que sobrevivem a falhas: o redesenho da camada de execução do Ro
 date: '2026-07-03'
 author: 'RBX Systems'
 authorRole: 'Engineering Team'
-tags: [robson, execucao, risco, confiabilidade, trading]
+tags: [robson, execução, risco, confiabilidade, trading]
 excerpt: 'Um trade fechou 48% acima do teto de risco enquanto o daemon estava fora do ar. A investigação produziu dois ADRs, cinco correções de produção e uma surpresa da API da Binance. Estes são os números.'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-03-stops-that-survive-failures.jpg'
 ---
 
 Em junho, um trade do Robson fechou com perda de 1,48% do capital base. O teto da política é 1% por operação, sem exceções. Pior: a análise mostrou que aquele trade deveria ter fechado praticamente no zero a zero.

@@ -5,6 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, execution, risk, reliability, trading]
 excerpt: 'A trade closed 48% above the risk cap while the daemon was down. The investigation produced two ADRs, five production fixes, and a Binance API surprise. Here are the numbers.'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-03-stops-that-survive-failures.jpg'
 ---
 
 In June, a Robson trade closed with a loss of 1.48% of the capital base. The policy cap is 1% per trade, no exceptions. Worse: the analysis showed that this trade should have closed at roughly breakeven.
