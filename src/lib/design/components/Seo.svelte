@@ -43,11 +43,18 @@
         })
       : undefined
   );
+
+  const searchConsoleToken = $derived(
+    locale === 'pt-BR'
+      ? 'XOJy4RQxx2FSdQPIjHPwmjzYpxzbswFTNTS4NP9xrgM'
+      : 'QVnadKK8ypVbGXcK9MGhw59ux69hT8gOaC7EeKUbAK4'
+  );
 </script>
 
 <svelte:head>
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
+  <meta name="google-site-verification" content={searchConsoleToken} />
   <link rel="canonical" href={pageUrl} />
 
   <!-- Open Graph -->
