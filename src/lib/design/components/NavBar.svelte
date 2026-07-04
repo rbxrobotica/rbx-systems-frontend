@@ -11,12 +11,12 @@
 
   const navItems = [
     { href: '/', label: 'nav.home' },
+    { href: '/sobre', label: 'nav.about' },
     { href: '/solucoes', label: 'nav.solutions' },
     { href: '/produtos', label: 'nav.products' },
     { href: '/journal', label: 'nav.journal' },
     { href: '/cases', label: 'nav.cases' },
-    { href: '/newsroom', label: 'nav.newsroom' },
-    { href: '/trust', label: 'nav.trust' }
+    { href: '/contato', label: 'nav.contact' }
   ];
 </script>
 
