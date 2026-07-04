@@ -1,21 +1,27 @@
-name: CI/CD — rbx.ia.br
+name: build-image
 
 on:
   push:
-    branches: ['main']
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
 
 env:
   IMAGE_NAME: ghcr.io/rbxrobotica/rbx-ia-br
 
+# Pattern R: build + push only. Image tag promotion into rbx-infra is owned by
+# ArgoCD Image Updater (annotations on the rbx-ia-br + rbxsystems-ch Applications),
+# replacing the legacy CI self-push (INFRA_DEPLOY_KEY) promotion.
 jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
@@ -29,63 +35,33 @@ jobs:
       - name: Run svelte-check
         run: pnpm check
 
-  build-and-deploy:
+  image:
     needs: verify
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set image tag
-        id: tag
-        run: echo "sha=sha-$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
+      - name: Compute image tag
+        id: meta
+        run: echo "sha=sha-$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - uses: docker/setup-buildx-action@v3
 
-      - name: Login to GHCR
+      - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_PAT }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push image
-        uses: docker/build-push-action@v5
+      - name: Build and push
+        uses: docker/build-push-action@v6
         with:
           context: ./
           file: ./docker/Dockerfile
           push: true
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ steps.tag.outputs.sha }}
+            ${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.sha }}
             ${{ env.IMAGE_NAME }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-      - name: Update image tag in rbx-infra (both namespaces)
-        env:
-          INFRA_DEPLOY_KEY: ${{ secrets.INFRA_DEPLOY_KEY }}
-        run: |
-          # Configure SSH for rbx-infra access
-          mkdir -p ~/.ssh
-          echo "$INFRA_DEPLOY_KEY" > ~/.ssh/infra_deploy_key
-          chmod 600 ~/.ssh/infra_deploy_key
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          export GIT_SSH_COMMAND="ssh -i ~/.ssh/infra_deploy_key -o IdentitiesOnly=yes"
-
-          git clone git@github.com:rbxrobotica/rbx-infra.git /tmp/rbx-infra
-          cd /tmp/rbx-infra
-
-          # Update the image newTag in both kustomization files
-          sed -i "s|newTag:.*|newTag: ${{ steps.tag.outputs.sha }}|" apps/prod/rbx-ia-br/kustomization.yml
-          sed -i "s|newTag:.*|newTag: ${{ steps.tag.outputs.sha }}|" apps/prod/rbxsystems-ch/kustomization.yml
-
-          git config user.email "ci@rbx.ia.br"
-          git config user.name "RBX CI"
-          git add apps/prod/rbx-ia-br/kustomization.yml apps/prod/rbxsystems-ch/kustomization.yml
-          git diff --cached --quiet || git commit -m "chore(deploy): ${{ steps.tag.outputs.sha }} → rbx-ia-br + rbxsystems-ch [skip ci]"
-          git push
