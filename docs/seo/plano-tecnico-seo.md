@@ -269,9 +269,12 @@ Ações que exigem confirmação humana:
 - Adicionar TXT de verificação do Google Search Console.
 
 ### Search Console
-- Verificar `rbx.ia.br`, `rbxsystems.ch`, `merovelis.com`, `strategos.gr`.
-- Submeter sitemaps.
-- Configurar propriedades de domínio.
+- ✅ Verificar `rbx.ia.br` e `rbxsystems.ch` via meta tag HTML (`google-site-verification`).
+- ⬜ Submeter sitemaps:
+  - `https://rbx.ia.br/sitemap.xml`
+  - `https://rbxsystems.ch/sitemap.xml`
+- ⬜ Verificar `merovelis.com` e `strategos.gr` (quando priorizado).
+- Nota: optamos por propriedades de **prefixo de URL** para evitar alterações de DNS nos domínios principais.
 
 ### Risco
 **Alto** (e-mail). Qualquer erro pode quebrar entrega.

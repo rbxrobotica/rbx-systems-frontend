@@ -191,18 +191,20 @@ Todos os domínios testados respondem em HTTPS com HTTP/2 e certificados válido
 - Componente `Seo.svelte` no merovelis-site que pode ser reaproveitado.
 
 ### ❌ O que está ausente
-- `robots.txt` funcional em todos os domínios.
-- `sitemap.xml` funcional em todos os domínios.
-- Open Graph e Twitter Cards em rbx.ia.br/rbxsystems.ch e strategos.gr.
-- Canonical URLs em rbx.ia.br/rbxsystems.ch e strategos.gr.
-- JSON-LD / schema.org em todos os domínios.
-- Página `/leandro-damasio` no site institucional.
-- Página `/sobre` com informações sobre a RBX como organização.
-- Rotas em inglês `/solutions` e `/products` no rbxsystems.ch.
-- Sitemap dinâmico que inclua posts do journal/blog.
-- Headers de segurança adicionais (CSP, HSTS, X-Frame-Options, etc.).
+- Open Graph e Twitter Cards em strategos.gr.
+- Canonical URLs em strategos.gr.
+- JSON-LD / schema.org em strategos.gr.
+- Sitemap dinâmico que inclua posts do journal/blog automaticamente.
+- CSP e HSTS (parcial: X-Frame-Options, X-Content-Type-Options, Referrer-Policy e Permissions-Policy já estão ativos).
 - Registros DNS de e-mail para rbx.ia.br.
-- Registros TXT de verificação do Search Console.
+- Verificação do Search Console para `merovelis.com` e `strategos.gr`.
+
+### ✅ O que foi implementado
+- `robots.txt` e `sitemap.xml` funcionais em `rbx.ia.br` e `rbxsystems.ch`.
+- Open Graph, Twitter Cards, canonical URLs, hreflang e JSON-LD em `rbx.ia.br` e `rbxsystems.ch`.
+- Páginas `/sobre`, `/leandro-damasio`, `/solucoes`, `/produtos` e equivalentes em inglês (`/about`, `/solutions`, `/products`, `/contact`, `/contato`).
+- Componente `Seo.svelte` com suporte a verificação do Search Console via meta tag.
+- Verificação das propriedades `https://rbx.ia.br/` e `https://rbxsystems.ch/` no Google Search Console.
 
 ### ⚠️ O que está incorreto
 - `/solutions` e `/products` retornam 404 em `rbxsystems.ch`.

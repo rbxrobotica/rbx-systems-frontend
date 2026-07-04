@@ -57,6 +57,14 @@
   - `Permissions-Policy`
   - HSTS comentado/documentado (requer autorização para ativar)
 
+### Correção de SSR i18n
+- Novo `src/lib/i18n/translate.ts` — helper server-safe que resolve traduções por locale explicitamente.
+- Todas as rotas migradas de `$_()` (store global do `svelte-i18n`) para `t(data.locale, key)`, corrigindo title/description em inglês renderizados em português no servidor.
+
+### Search Console
+- `Seo.svelte` atualizado com meta tags `google-site-verification` por domínio.
+- Propriedades `https://rbx.ia.br/` e `https://rbxsystems.ch/` verificadas no Google Search Console via tag HTML.
+
 ### CI/Automação
 - `.github/workflows/ci.yml` atualizado com job `verify` que roda `pnpm seo-check` e `pnpm check` antes do deploy.
 - `package.json` com script `seo-check`.
@@ -87,12 +95,13 @@ node scripts/seo-check.js   # all checks passed
    - Risco: quebrar entrega de e-mail
    - Requer acesso ao painel do Registro.br e ao Postmark
 
-2. **Adicionar registros TXT de verificação do Search Console**
-   - Para `rbx.ia.br`, `rbxsystems.ch`, `merovelis.com`, `strategos.gr`
-   - Requer acesso ao Google Search Console e Bing Webmaster Tools
+2. **Verificar propriedades no Google Search Console**
+   - ✅ `rbx.ia.br` e `rbxsystems.ch` verificados via meta tag HTML (`google-site-verification`).
+   - ⬜ Submeter sitemaps em `https://rbx.ia.br/sitemap.xml` e `https://rbxsystems.ch/sitemap.xml`.
+   - ⬜ Avaliar Bing Webmaster Tools para os mesmos domínios.
 
-3. **Criar conteúdo no S3 para `/sobre`, `/leandro-damasio`, `/about`, `/solutions`, `/products`**
-   - As rotas existem e usam fallback, mas o conteúdo rico deve ser criado.
+3. **Criar conteúdo no S3 para `/sobre`, `/leandro-damasio`, `/about`, `/solutions`, `/products`, `/contact`, `/contato`**
+   - ✅ Conteúdo publicado para as páginas institucionais principais.
 
 ### Média prioridade
 4. **Criar páginas de serviço individuais**
@@ -122,9 +131,10 @@ node scripts/seo-check.js   # all checks passed
 ## 5. Roadmap recomendado
 
 ### 30 dias
-- [ ] Publicar conteúdo para `/sobre`, `/leandro-damasio`, `/solutions`, `/products`.
-- [ ] Criar páginas de serviço e produto.
-- [ ] Configurar Search Console e submeter sitemap.
+- [x] Publicar conteúdo para `/sobre`, `/leandro-damasio`, `/solutions`, `/products`.
+- [ ] Criar páginas de serviço e produto individuais.
+- [x] Configurar Search Console (`rbx.ia.br` e `rbxsystems.ch`).
+- [ ] Submeter sitemaps no Search Console.
 - [ ] Publicar 8–10 artigos do plano editorial.
 - [ ] Criar imagem OG padrão.
 

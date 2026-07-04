@@ -104,7 +104,7 @@
 
 - [ ] `npm run check` passa.
 - [ ] `npm run build` passa.
-- [ ] Script `seo-check` (quando implementado) passa.
+- [x] Script `seo-check` passa (`pnpm seo-check`).
 - [ ] Nenhum secret vazado no diff.
 
 ---
@@ -112,7 +112,8 @@
 ## Pós-deploy
 
 - [ ] Verificar URL em produção.
-- [ ] Submeter URL no Search Console (Request Indexing).
+- [ ] Submeter URL no Search Console (Request Indexing) — após verificação da propriedade.
+- [ ] Garantir que o sitemap do domínio esteja submetido no Search Console.
 - [ ] Publicar versão LinkedIn.
 - [ ] Registrar publicação no calendário editorial.
 - [ ] Monitorar indexação em 7 dias.

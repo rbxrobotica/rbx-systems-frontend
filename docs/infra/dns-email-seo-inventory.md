@@ -123,14 +123,20 @@ CAA   strategos.gr     0 issue "letsencrypt.org"
 
 ## 5. Verificações de Search Console
 
-| Domínio | Método | TXT de verificação | Status |
-|---|---|---|---|
-| `rbx.ia.br` | DNS TXT | **AUSENTE** | Não verificado |
-| `rbxsystems.ch` | DNS TXT | **AUSENTE** | Não verificado |
-| `merovelis.com` | DNS TXT | **AUSENTE** | Não verificado |
-| `strategos.gr` | DNS TXT | **AUSENTE** | Não verificado |
+| Domínio | Método | Status |
+|---|---|---|
+| `rbx.ia.br` | Meta tag HTML (`google-site-verification`) | ✅ Verificado |
+| `rbxsystems.ch` | Meta tag HTML (`google-site-verification`) | ✅ Verificado |
+| `merovelis.com` | — | ⬜ Não verificado |
+| `strategos.gr` | — | ⬜ Não verificado |
 
-Recomendação: criar propriedades de domínio no Google Search Console e Bing Webmaster Tools, gerar tokens de verificação e adicionar registros TXT.
+As propriedades de prefixo de URL `https://rbx.ia.br/` e `https://rbxsystems.ch/` foram verificadas via tag HTML injetada pelo componente `Seo.svelte`, sem alterações de DNS.
+
+**Sitemaps a submeter:**
+- `https://rbx.ia.br/sitemap.xml`
+- `https://rbxsystems.ch/sitemap.xml`
+
+Recomendação futura: avaliar Bing Webmaster Tools para os mesmos domínios.
 
 ---
 
