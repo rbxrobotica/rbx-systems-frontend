@@ -10,7 +10,10 @@ const ROOT = new URL('..', import.meta.url).pathname;
 const ROUTES_DIR = join(ROOT, 'src', 'routes');
 const STATIC_DIR = join(ROOT, 'static');
 
-const REQUIRED_STATIC = ['robots.txt', 'sitemap.xml'];
+const REQUIRED_DYNAMIC_ENDPOINTS = [
+  join(ROOT, 'src', 'routes', 'robots.txt', '+server.ts'),
+  join(ROOT, 'src', 'routes', 'sitemap.xml', '+server.ts')
+];
 const EXCLUDED_ROUTES = ['api', 'healthz', '[slug]', '+layout', '+error'];
 
 function walk(dir, files = []) {
@@ -32,13 +35,14 @@ function isExcluded(relativePath) {
 
 let errors = 0;
 
-// 1. Static files
-for (const file of REQUIRED_STATIC) {
+// 1. Dynamic robots.txt and sitemap.xml endpoints
+for (const endpoint of REQUIRED_DYNAMIC_ENDPOINTS) {
+  const name = endpoint.replace(ROOT, '').replace(/^\//, '');
   try {
-    statSync(join(STATIC_DIR, file));
-    console.log(`✓ static/${file} exists`);
+    statSync(endpoint);
+    console.log(`✓ ${name} exists`);
   } catch {
-    console.error(`✗ static/${file} is missing`);
+    console.error(`✗ ${name} is missing`);
     errors++;
   }
 }
