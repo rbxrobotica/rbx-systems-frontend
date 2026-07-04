@@ -5,6 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, execução, risco, depuração, trading]
 excerpt: 'Publicamos uma nova camada protetora para o motor de stops e usamos entradas reais para validá-la. A primeira ordem foi rejeitada pelo nosso próprio gate de risco, por uma margem de 0,0000000000000000000002. Três outros bugs se escondiam atrás desse.'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-04-one-entry-four-bugs.jpg'
 ---
 
 Ontem publicamos o invalidation guard, uma nova camada protetora para o motor de stops do Robson. Para validá-lo, o operador executou uma sequência de entradas reais em produção enquanto um agente monitorava logs, eventos e a exchange em tempo real. A primeira ordem nunca chegou à Binance. A segunda chegou e foi rejeitada. A terceira também. A quarta ativou sem ressalvas.

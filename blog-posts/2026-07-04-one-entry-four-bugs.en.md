@@ -5,6 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, execution, risk, debugging, trading]
 excerpt: 'We shipped a new protective layer for the stop engine and used live entries to validate it. The first order was rejected by our own risk gate, by a margin of 0.0000000000000000000002. Three more bugs were hiding behind that one.'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-04-one-entry-four-bugs.jpg'
 ---
 
 Yesterday we shipped the invalidation guard, a new protective layer for Robson's stop engine. To validate it, the operator placed a sequence of real entries in production while an agent monitored logs, events, and the exchange in real time. The first order never reached Binance. The second reached Binance and was rejected. So was the third. The fourth activated cleanly.
