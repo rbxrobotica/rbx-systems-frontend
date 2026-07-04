@@ -6,4 +6,9 @@
   let { data }: { data: PageData } = $props();
 </script>
 
-<ContentPage page={data.page} fallbackTitle={$_('nav.atelier')} />
+<ContentPage
+  page={data.page}
+  fallbackTitle={$_('nav.atelier')}
+  fallbackLead="Notas de laboratório, experimentos e pesquisa aplicada da RBX Systems."
+  locale={data.locale}
+/>

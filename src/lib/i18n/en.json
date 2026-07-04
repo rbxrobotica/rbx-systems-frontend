@@ -9,7 +9,9 @@
     "newsroom": "Newsroom",
     "trust": "Trust",
     "atelier": "Atelier",
-    "contact": "Contact"
+    "contact": "Contact",
+    "about": "About",
+    "leandroDamasio": "Leandro Damasio"
   },
   "footer": {
     "description": "Systems engineering, automation and infrastructure for high-demand operations.",
@@ -25,6 +27,85 @@
     "body": "We design platforms, automations and infrastructure for companies operating with high demands. Backend, cloud, intelligent agents and integrations built for reliability and predictable scale.",
     "ctaServices": "Our solutions",
     "ctaProducts": "Products"
+  },
+  "about": {
+    "metaTitle": "About RBX Systems — AI Engineering, LLMOps & Infrastructure",
+    "metaDescription": "Meet RBX Systems: applied AI engineering, sovereign platforms, operational automation and products for logistics, finance and critical operations.",
+    "headline": "RBX Systems builds operational platforms with AI",
+    "body": "We are a systems engineering company focused on high-demand operations. We build infrastructure, intelligent agents and enterprise software with governance, observability and predictable scale."
+  },
+  "leandroDamasio": {
+    "metaTitle": "Leandro Damasio — Founder & CEO of RBX Systems",
+    "metaDescription": "Leandro Damasio is an AI Engineer, founder of RBX Systems and creator of products such as Strategos, Robson and the RBX sovereign AI platform.",
+    "headline": "Leandro Damasio",
+    "body": "AI Engineer, Platform & Backend Systems, Technical Leadership. Founder & CEO of RBX Systems."
+  },
+  "solutions": {
+    "metaTitle": "RBX Systems Solutions — AI Engineering, LLMOps, Agents & Cloud",
+    "metaDescription": "AI engineering, LLMOps, intelligent agents, DevOps, cloud, financial software and logistics software services. Built for critical operations.",
+    "headline": "Solutions",
+    "body": "Engineering capabilities for operations that demand control, governance and predictable scale."
+  },
+  "products": {
+    "metaTitle": "RBX Systems Products — Strategos, Ledger, Yield, Maestro & Robson",
+    "metaDescription": "Products and open-source software by RBX Systems: Strategos, RBX Ledger, RBX Yield, RBX Maestro, Robson and Argos Radar. Systems for decisions, finance and operations.",
+    "headline": "Products",
+    "body": "Products and open-source systems built by RBX for high-demand operations."
+  },
+  "journal": {
+    "metaTitle": "RBX Journal — Engineering, AI & Field Notes",
+    "metaDescription": "Ideas, engineering and field notes from RBX Systems. Technical articles on AI, LLMOps, agents, software and infrastructure.",
+    "headline": "RBX Journal",
+    "body": "Ideas, engineering and field notes from RBX Systems."
+  },
+  "cases": {
+    "metaTitle": "RBX Systems Cases — Proof of Work & Production Systems",
+    "metaDescription": "RBX Systems implementation cases: operational automation, AI agents, financial software, logistics and critical systems.",
+    "headline": "Cases",
+    "body": "Proof of work, field notes and systems we put into production."
+  },
+  "contact": {
+    "metaTitle": "Contact RBX Systems — Talk to the Team",
+    "metaDescription": "Get in touch with RBX Systems. Send a message and we will reply within one business day.",
+    "headline": "Get in touch",
+    "body": "Send a message. We reply within one business day."
+  },
+  "services": {
+    "aiEngineering": {
+      "metaTitle": "AI Engineering — RBX Systems",
+      "metaDescription": "Applied AI engineering: intelligent agents, LLMs, evaluation pipelines and integration with enterprise systems.",
+      "headline": "AI Engineering"
+    },
+    "llmops": {
+      "metaTitle": "LLMOps — RBX Systems",
+      "metaDescription": "LLMOps at RBX Systems: LLM observability, model routing, cost, evaluation and governance in production.",
+      "headline": "LLMOps"
+    },
+    "aiAgents": {
+      "metaTitle": "AI Agents — RBX Systems",
+      "metaDescription": "AI agents in production: governed orchestration, memory, evaluation and secure integration with enterprise operations.",
+      "headline": "AI Agents"
+    },
+    "devopsCloud": {
+      "metaTitle": "DevOps & Cloud — RBX Systems",
+      "metaDescription": "DevOps, cloud-native and sovereign infrastructure: Kubernetes, GitOps, observability and reliability for critical operations.",
+      "headline": "DevOps & Cloud"
+    },
+    "financialSoftware": {
+      "metaTitle": "Financial Software — RBX Systems",
+      "metaDescription": "Tailored financial software: ledgers, automation, risk, compliance and decision systems for fintechs and institutions.",
+      "headline": "Financial Software"
+    },
+    "logisticsSoftware": {
+      "metaTitle": "Logistics Software — RBX Systems",
+      "metaDescription": "Software for logistics and critical operations: interoperability, OCR, traceability, offline-first and decision support.",
+      "headline": "Logistics Software"
+    },
+    "observability": {
+      "metaTitle": "Observability — RBX Systems",
+      "metaDescription": "System and LLM observability: traces, metrics, logs and alerts with PII redaction for regulated operations.",
+      "headline": "Observability"
+    }
   },
   "common": {
     "readMore": "Read more",
