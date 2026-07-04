@@ -97,7 +97,8 @@ node scripts/seo-check.js   # all checks passed
 
 2. **Verificar propriedades no Google Search Console**
    - ✅ `rbx.ia.br` e `rbxsystems.ch` verificados via meta tag HTML (`google-site-verification`).
-   - ⬜ Submeter sitemaps em `https://rbx.ia.br/sitemap.xml` e `https://rbxsystems.ch/sitemap.xml`.
+   - ✅ Sitemaps dinâmicos por domínio implementados em `/src/routes/sitemap.xml/+server.ts`.
+- ⬜ Submeter/confirmar sitemaps em `https://rbx.ia.br/sitemap.xml` e `https://rbxsystems.ch/sitemap.xml` no Search Console.
    - ⬜ Avaliar Bing Webmaster Tools para os mesmos domínios.
 
 3. **Criar conteúdo no S3 para `/sobre`, `/leandro-damasio`, `/about`, `/solutions`, `/products`, `/contact`, `/contato`**

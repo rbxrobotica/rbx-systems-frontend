@@ -270,7 +270,8 @@ Ações que exigem confirmação humana:
 
 ### Search Console
 - ✅ Verificar `rbx.ia.br` e `rbxsystems.ch` via meta tag HTML (`google-site-verification`).
-- ⬜ Submeter sitemaps:
+- ✅ Sitemaps dinâmicos por domínio implementados (`/src/routes/sitemap.xml/+server.ts`).
+- ⬜ Confirmar submissão dos sitemaps no Search Console:
   - `https://rbx.ia.br/sitemap.xml`
   - `https://rbxsystems.ch/sitemap.xml`
 - ⬜ Verificar `merovelis.com` e `strategos.gr` (quando priorizado).

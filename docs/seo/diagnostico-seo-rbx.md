@@ -194,7 +194,7 @@ Todos os domínios testados respondem em HTTPS com HTTP/2 e certificados válido
 - Open Graph e Twitter Cards em strategos.gr.
 - Canonical URLs em strategos.gr.
 - JSON-LD / schema.org em strategos.gr.
-- Sitemap dinâmico que inclua posts do journal/blog automaticamente.
+- Sitemap dinâmico que inclua posts do journal/blog automaticamente (já separado por domínio; falta incluir posts).
 - CSP e HSTS (parcial: X-Frame-Options, X-Content-Type-Options, Referrer-Policy e Permissions-Policy já estão ativos).
 - Registros DNS de e-mail para rbx.ia.br.
 - Verificação do Search Console para `merovelis.com` e `strategos.gr`.
