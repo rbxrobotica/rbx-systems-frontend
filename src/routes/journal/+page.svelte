@@ -2,17 +2,23 @@
   import { _ } from 'svelte-i18n';
   import { formatDate } from '$api/content';
   import PageHeader from '$components/PageHeader.svelte';
+  import Seo from '$components/Seo.svelte';
+  import { buildGraph } from '$lib/seo/schema';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
+
+  const title = $_('journal.metaTitle');
+  const description = $_('journal.metaDescription');
+  const pageUrl = $derived(
+    data.locale === 'pt-BR' ? 'https://rbx.ia.br/journal' : 'https://rbxsystems.ch/journal'
+  );
+  const schema = $derived(buildGraph(data.locale, pageUrl, title, description));
 </script>
 
-<svelte:head>
-  <title>RBX Journal</title>
-  <meta name="description" content="Ideas, engineering and field notes from RBX Systems." />
-</svelte:head>
+<Seo {title} {description} locale={data.locale} canonical={pageUrl} {schema} />
 
-<PageHeader title="RBX Journal" lead="Ideias, engenharia e notas de campo da RBX Systems." />
+<PageHeader title={$_('journal.headline')} lead={$_('journal.body')} />
 
 {#if data.posts.length === 0}
   <p class="rbx-caption">{$_('common.empty')}</p>

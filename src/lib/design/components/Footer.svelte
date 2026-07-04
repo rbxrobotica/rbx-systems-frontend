@@ -17,9 +17,10 @@
         <h3 class="rbx-label">{$_('footer.companyTitle')}</h3>
         <ul>
           <li><a href="/">{$_('nav.home')}</a></li>
+          <li><a href="/sobre">{$_('nav.about')}</a></li>
+          <li><a href="/leandro-damasio">{$_('nav.leandroDamasio')}</a></li>
           <li><a href="/solucoes">{$_('nav.solutions')}</a></li>
           <li><a href="/produtos">{$_('nav.products')}</a></li>
-          <li><a href="/atelier">{$_('nav.atelier')}</a></li>
         </ul>
       </div>
       <div>
@@ -29,12 +30,13 @@
           <li><a href="/changelog">{$_('nav.changelog')}</a></li>
           <li><a href="/cases">{$_('nav.cases')}</a></li>
           <li><a href="/newsroom">{$_('nav.newsroom')}</a></li>
-          <li><a href="/trust">{$_('nav.trust')}</a></li>
+          <li><a href="/atelier">{$_('nav.atelier')}</a></li>
         </ul>
       </div>
       <div>
         <h3 class="rbx-label">{$_('footer.contactTitle')}</h3>
         <ul>
+          <li><a href="/contato">{$_('nav.contact')}</a></li>
           <li><a href="mailto:contact@rbxsystems.ch">contact@rbxsystems.ch</a></li>
           <li>
             <a href="https://github.com/rbxrobotica" target="_blank" rel="noopener noreferrer"
@@ -43,7 +45,7 @@
           </li>
           <li>
             <a
-              href="https://linkedin.com/company/rbxrobotica"
+              href="https://www.linkedin.com/in/ldamasio/"
               target="_blank"
               rel="noopener noreferrer">LinkedIn</a
             >

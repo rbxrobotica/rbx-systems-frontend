@@ -6,4 +6,4 @@
   let { data }: { data: PageData } = $props();
 </script>
 
-<ContentPage page={data.page} fallbackTitle={$_('nav.solutions')} fallbackLead="" />
+<ContentPage page={data.page} fallbackTitle={$_('nav.solutions')} fallbackLead="" locale={data.locale} />

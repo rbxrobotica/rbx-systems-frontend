@@ -2,18 +2,41 @@
   import { _ } from 'svelte-i18n';
   import { formatDate } from '$api/content';
   import Prose from '$components/Prose.svelte';
+  import Seo from '$components/Seo.svelte';
+  import { buildGraph, blogPostingSchema } from '$lib/seo/schema';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
 
-  let pageTitle = $derived(data.post?.title ?? $_('common.empty'));
-  let pageDescription = $derived(data.post?.excerpt ?? '');
+  const siteUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
+  const pageUrl = $derived(data.post ? `${siteUrl}/blog/${data.post.slug}` : `${siteUrl}/journal`);
+  const pageTitle = $derived(data.post?.title ?? $_('common.empty'));
+  const pageDescription = $derived(data.post?.excerpt ?? '');
+
+  const schema = $derived(
+    data.post
+      ? buildGraph(
+          data.locale,
+          pageUrl,
+          pageTitle,
+          pageDescription,
+          [
+            blogPostingSchema(data.locale, pageUrl, {
+              title: data.post.title,
+              excerpt: data.post.excerpt,
+              date: data.post.date,
+              author: data.post.author,
+              authorRole: data.post.authorRole,
+              cover: data.post.cover
+            })
+          ],
+          `${pageUrl}#article`
+        )
+      : undefined
+  );
 </script>
 
-<svelte:head>
-  <title>{pageTitle}</title>
-  <meta name="description" content={pageDescription} />
-</svelte:head>
+<Seo title={pageTitle} description={pageDescription} locale={data.locale} canonical={pageUrl} type="article" {schema} />
 
 {#if data.post}
   <article>

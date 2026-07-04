@@ -3,15 +3,19 @@
   import PageHeader from '$components/PageHeader.svelte';
   import Prose from '$components/Prose.svelte';
   import ContactSection from '$components/ContactSection.svelte';
+  import Seo from '$components/Seo.svelte';
+  import { buildGraph } from '$lib/seo/schema';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
+
+  const title = $_('home.metaTitle');
+  const description = $_('home.metaDescription');
+  const pageUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br/' : 'https://rbxsystems.ch/');
+  const schema = $derived(buildGraph(data.locale, pageUrl, title, description));
 </script>
 
-<svelte:head>
-  <title>{$_('home.metaTitle')}</title>
-  <meta name="description" content={$_('home.metaDescription')} />
-</svelte:head>
+<Seo title={title} description={description} locale={data.locale} {schema} />
 
 {#if data.page}
   <PageHeader

@@ -8,7 +8,7 @@
 
 <ContentPage
   page={data.page}
-  fallbackTitle={$_('nav.newsroom')}
-  fallbackLead="Notícias, comunicados e posicionamentos oficiais da RBX Systems."
+  fallbackTitle={$_('about.headline')}
+  fallbackLead={$_('about.body')}
   locale={data.locale}
 />
