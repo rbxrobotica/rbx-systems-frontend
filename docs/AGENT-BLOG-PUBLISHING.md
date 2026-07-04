@@ -124,6 +124,21 @@ When updating an existing bilingual post:
 
 If only one locale needs correction, the agent may update only that variant, but should verify whether the other locale now diverges materially.
 
+## SEO Validation Checklist
+
+Before finishing, confirm every post has:
+
+- unique title ≤ 60 characters
+- unique meta description ≤ 160 characters (use `excerpt:`)
+- a single H1 matching the title
+- 3–5 internal links to RBX pages
+- `date`, `author`, `authorRole`, `tags` and `cover` in frontmatter
+- JSON-LD `BlogPosting` schema (the site injects it automatically from frontmatter)
+- a CTA in the conclusion
+- a LinkedIn-ready short version
+
+Run `pnpm seo-check` before committing.
+
 ## Validation Checklist
 
 Before finishing, confirm:
@@ -135,3 +150,4 @@ Before finishing, confirm:
 - the changes were committed and pushed
 - no rebuild/deploy is needed — the gateway cache (~60s TTL) picks up the S3 write
 - the `pt-BR` variant was not written in ASCII-transliterated Portuguese
+- `pnpm seo-check` passes
