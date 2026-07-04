@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
   import { formatDate } from '$api/content';
   import PageHeader from '$components/PageHeader.svelte';
   import Seo from '$components/Seo.svelte';
   import { buildGraph } from '$lib/seo/schema';
+  import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
 
-  const title = $_('journal.metaTitle');
-  const description = $_('journal.metaDescription');
+  const title = $derived(t(data.locale, 'journal.metaTitle'));
+  const description = $derived(t(data.locale, 'journal.metaDescription'));
   const pageUrl = $derived(
     data.locale === 'pt-BR' ? 'https://rbx.ia.br/journal' : 'https://rbxsystems.ch/journal'
   );
@@ -18,10 +18,10 @@
 
 <Seo {title} {description} locale={data.locale} canonical={pageUrl} {schema} />
 
-<PageHeader title={$_('journal.headline')} lead={$_('journal.body')} />
+<PageHeader title={t(data.locale, 'journal.headline')} lead={t(data.locale, 'journal.body')} />
 
 {#if data.posts.length === 0}
-  <p class="rbx-caption">{$_('common.empty')}</p>
+  <p class="rbx-caption">{t(data.locale, 'common.empty')}</p>
 {:else}
   <ul class="post-list">
     {#each data.posts as post}

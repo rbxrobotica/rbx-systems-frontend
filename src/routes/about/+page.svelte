@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
   import ContentPage from '$components/ContentPage.svelte';
+  import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
@@ -8,7 +8,7 @@
 
 <ContentPage
   page={data.page}
-  fallbackTitle={$_('about.headline')}
-  fallbackLead={$_('about.body')}
+  fallbackTitle={t(data.locale, 'about.headline')}
+  fallbackLead={t(data.locale, 'about.body')}
   locale={data.locale}
 />

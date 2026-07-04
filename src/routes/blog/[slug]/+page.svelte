@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
   import { formatDate } from '$api/content';
   import Prose from '$components/Prose.svelte';
   import Seo from '$components/Seo.svelte';
   import { buildGraph, blogPostingSchema } from '$lib/seo/schema';
+  import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
 
   const siteUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
   const pageUrl = $derived(data.post ? `${siteUrl}/blog/${data.post.slug}` : `${siteUrl}/journal`);
-  const pageTitle = $derived(data.post?.title ?? $_('common.empty'));
+  const pageTitle = $derived(data.post?.title ?? t(data.locale, 'common.empty'));
   const pageDescription = $derived(data.post?.excerpt ?? '');
 
   const schema = $derived(
@@ -60,9 +60,9 @@
     <Prose html={data.post.html} />
   </article>
 
-  <a href="/journal" class="back">{$_('common.back')}</a>
+  <a href="/journal" class="back">{t(data.locale, 'common.back')}</a>
 {:else}
-  <p class="rbx-caption">{$_('common.empty')}</p>
+  <p class="rbx-caption">{t(data.locale, 'common.empty')}</p>
 {/if}
 
 <style>

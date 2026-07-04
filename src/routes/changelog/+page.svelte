@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
   import ContentPage from '$components/ContentPage.svelte';
+  import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
@@ -8,7 +8,7 @@
 
 <ContentPage
   page={data.page}
-  fallbackTitle={$_('nav.changelog')}
+  fallbackTitle={t(data.locale, 'nav.changelog')}
   fallbackLead="Histórico público de mudanças, releases e decisões da RBX Systems."
   locale={data.locale}
 />
