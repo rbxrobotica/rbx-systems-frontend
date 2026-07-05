@@ -5,6 +5,7 @@ author: 'Cauê Souza Azevedo Alencar'
 authorRole: 'CFO'
 tags: [economia, inovação, startups, estratégia, strategos]
 excerpt: 'Tecnologia não é apenas software. É uma ferramenta de transformação econômica, e é essa lógica que orienta a forma como a RBX constrói o Strategos.'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-05-cost-of-innovation-startups.png'
 ---
 
 > O surgimento repentino de novas combinações, semelhante a um enxame, explica de forma fácil e necessária as características fundamentais dos períodos de crescimento acelerado.

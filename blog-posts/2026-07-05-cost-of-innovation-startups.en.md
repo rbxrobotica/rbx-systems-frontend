@@ -5,6 +5,7 @@ author: 'Cauê Souza Azevedo Alencar'
 authorRole: 'CFO'
 tags: [economics, innovation, startups, strategy, strategos]
 excerpt: 'Technology is not just software. It is a tool of economic transformation, and that logic is what drives how RBX builds Strategos.'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-05-cost-of-innovation-startups.png'
 ---
 
 > The sudden appearance of new combinations, swarm-like in nature, easily and necessarily explains the fundamental features of periods of accelerated growth.
