@@ -40,6 +40,7 @@
 
   async function handleSubmit(ev: SubmitEvent) {
     ev.preventDefault();
+    if (status === 'submitting') return;
 
     const payload = altchaWidget?.getValue() ?? altchaPayload;
     if (!payload) {
@@ -131,7 +132,7 @@
           <button type="button" class="rbx-cta" onclick={close}>{$_('common.close')}</button>
         </div>
       {:else}
-        <form class="form" onsubmit={handleSubmit}>
+        <form class="form" class:pending={status === 'submitting'} onsubmit={handleSubmit}>
           <div class="field">
             <label for="wa-name">{$_('contact.form.name')} *</label>
             <input
@@ -140,6 +141,7 @@
               required
               bind:value={name}
               placeholder={$_('contact.form.namePlaceholder')}
+              disabled={status === 'submitting'}
             />
           </div>
 
@@ -151,6 +153,7 @@
               required
               bind:value={phone}
               placeholder={$_('contact.form.phonePlaceholder')}
+              disabled={status === 'submitting'}
             />
           </div>
 
@@ -161,6 +164,7 @@
               rows="3"
               bind:value={message}
               placeholder={$_('contact.form.messagePlaceholder')}
+              disabled={status === 'submitting'}
             ></textarea>
           </div>
 
@@ -168,6 +172,7 @@
             bind:this={altchaWidget}
             challengeurl={challengeUrl}
             onstatechange={(payload) => (altchaPayload = payload)}
+            disabled={status === 'submitting'}
           />
 
           {#if status === 'error'}
@@ -289,6 +294,21 @@
     display: flex;
     flex-direction: column;
     gap: var(--s-4);
+    transition: opacity var(--dur) var(--ease);
+  }
+
+  .form.pending {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .form :global(.altcha-box) {
+    transition: opacity var(--dur) var(--ease);
+  }
+
+  .form.pending :global(.altcha-box) {
+    opacity: 0.6;
+    pointer-events: none;
   }
 
   .success {

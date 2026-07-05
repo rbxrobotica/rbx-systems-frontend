@@ -93,7 +93,7 @@
   const ctaForm = $derived($locale?.startsWith('en') ? 'Send a message' : 'Enviar mensagem');
 </script>
 
-<div class="panel" role="dialog" aria-modal="true" aria-label={label}>
+<div class="panel" class:pending={loading} role="dialog" aria-modal="true" aria-label={label}>
   <div class="hairline"></div>
 
   <div class="header">
@@ -115,7 +115,7 @@
         <span class="header-sub">RBX Systems</span>
       </div>
     </div>
-    <button type="button" class="close-btn" onclick={onclose} aria-label={closeLabel}>
+    <button type="button" class="close-btn" onclick={onclose} disabled={loading} aria-label={closeLabel}>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm">
         <line x1="18" y1="6" x2="6" y2="18" />
         <line x1="6" y1="6" x2="18" y2="18" />
@@ -148,6 +148,7 @@
         <button
           type="button"
           class="cta-btn secondary"
+          disabled={loading}
           onclick={() => {
             onclose();
             document.querySelector<HTMLButtonElement>('.float[aria-label="WhatsApp"]')?.click();
@@ -204,6 +205,18 @@
     z-index: 45;
     animation: slideUp 0.18s var(--ease-out) both;
     overflow: hidden;
+    transition: opacity var(--dur) var(--ease);
+  }
+
+  .panel.pending {
+    opacity: 0.75;
+  }
+
+  .panel.pending .messages,
+  .panel.pending .input-row,
+  .panel.pending .close-btn:not(:disabled),
+  .panel.pending .cta-row {
+    pointer-events: none;
   }
 
   @keyframes slideUp {

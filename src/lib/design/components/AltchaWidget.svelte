@@ -4,9 +4,10 @@
   interface Props {
     challengeurl?: string;
     onstatechange?: (payload: string | null) => void;
+    disabled?: boolean;
   }
 
-  let { challengeurl = '/api/altcha-challenge', onstatechange }: Props = $props();
+  let { challengeurl = '/api/altcha-challenge', onstatechange, disabled = false }: Props = $props();
 
   // svelte-ignore state_referenced_locally
   const {
@@ -38,7 +39,7 @@
 <button
   type="button"
   class="altcha-box"
-  disabled={$altchaState === 'loading'}
+  disabled={$altchaState === 'loading' || disabled}
   onclick={handleVerify}
   aria-label="Verify you are not a robot"
 >
