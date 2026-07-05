@@ -1,0 +1,14 @@
+# Gitleaks configuration (guardrails CI — see CLAUDE.md).
+#
+# Allowlisted paths contain placeholder values only — verified no real
+# credentials on 2026-07-05. Real secrets must never be allowlisted here;
+# rotate them instead.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Template files with placeholder values (audited 2026-07-05)"
+paths = [
+  '''\.env\.example$''',
+]

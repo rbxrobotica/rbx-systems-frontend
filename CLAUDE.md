@@ -6,6 +6,17 @@ This is the public-facing website for RBX Systems (`rbx.ia.br` / `rbxsystems.ch`
 
 > **Canonical publishing workflow:** see `~/docs/rbx-content-publish-workflow.md` (agnostic source of truth). Publishing writes one Markdown object to S3; the site reflects it within ~60s via the Content Gateway cache TTL — **no rebuild, no redeploy**.
 
+## Engineering Guardrails (binding)
+
+Before planning architecture, implementing, or reviewing code in this repository, agents must apply the RBX engineering guardrails checklist: `rbx-engineering-guardrails.md` in the `rbxrobotica/rbx-agent-layer` repository (workspace path `.agents/rbx-engineering-guardrails.md`).
+
+- **Performance:** count requests/queries per operation to avoid N+1 patterns, verify race-prone code with property tests such as `fast-check`, and monitor for leaks.
+- **Security:** run stack security lints, secret-scan every change, scan dependencies for known exploits in CI, and keep all dependency versions pinned with a committed lockfile.
+- **Architecture:** document the explicit trade-offs and failure modes of any non-trivial design, including what happens when external dependencies or this service fail.
+- **Frontend:** freeze the screen during mutations (full-screen loading or disabled surface) until the request resolves, preventing double submits.
+
+These guardrails are enforced in CI via `.github/workflows/guardrails.yml`.
+
 ---
 
 ## Publishing a Blog Post (Agentic Workflow)
