@@ -202,7 +202,7 @@
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-    z-index: 45;
+    z-index: 110;
     animation: slideUp 0.18s var(--ease-out) both;
     overflow: hidden;
     transition: opacity var(--dur) var(--ease);

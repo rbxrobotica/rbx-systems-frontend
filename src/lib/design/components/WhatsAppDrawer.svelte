@@ -220,7 +220,7 @@
   .overlay {
     position: fixed;
     inset: 0;
-    z-index: 50;
+    z-index: 110;
     background: rgba(7, 8, 10, 0.72);
     backdrop-filter: blur(4px);
     display: flex;
