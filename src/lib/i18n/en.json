@@ -136,5 +136,16 @@
       "success": "Message sent. We'll get back to you soon.",
       "error": "Could not send. Please check the fields and try again."
     }
+  },
+  "atelier": {
+    "ref": {
+      "indexLabel": "Repository",
+      "eyebrow": "Open source",
+      "fullName": "Organization / Repo",
+      "branch": "Branch",
+      "language": "Language",
+      "updated": "Updated",
+      "cta": "View on GitHub"
+    }
   }
 }
