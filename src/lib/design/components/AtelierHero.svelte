@@ -83,7 +83,7 @@
       <span class="footer-cell">Brand Voltage</span>
       <span class="footer-cell">Design Systems</span>
       <span class="footer-cell">Visual Identity</span>
-      <span class="footer-cell">Zürich · Brasil</span>
+      <span class="footer-cell">Creative Direction</span>
     </div>
   </div>
 </section>
