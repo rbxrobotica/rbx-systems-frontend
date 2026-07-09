@@ -3,7 +3,6 @@
   import ContactForm from './ContactForm.svelte';
   import WhatsAppDrawer from './WhatsAppDrawer.svelte';
 
-  const EMAIL_ADDRESS = 'contact@rbxsystems.ch';
 </script>
 
 <section id="contact" class="contact">
@@ -19,26 +18,8 @@
         <div class="corners" aria-hidden="true"></div>
         <div class="body">
           <div>
-            <h3>{$_('contact.emailLabel')}</h3>
-            <a href="mailto:{EMAIL_ADDRESS}" class="link">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                class="icon-small"
-              >
-                <path
-                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                />
-                <polyline points="22,6 12,13 2,6" />
-              </svg>
-              {EMAIL_ADDRESS}
-            </a>
-          </div>
-
-          <div>
             <h3>{$_('contact.whatsappLabel')}</h3>
+            <p class="note">{$_('contact.body')}</p>
             {#snippet waTrigger(open: () => void)}
               <button type="button" class="wa-button" onclick={open}>
                 <svg viewBox="0 0 24 24" fill="currentColor" class="icon-small">
@@ -151,20 +132,6 @@
     letter-spacing: var(--track-label);
     color: var(--cyan-muted);
     font-weight: 500;
-  }
-
-  .link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--s-2);
-    margin-top: var(--s-2);
-    font-size: var(--text-lg);
-    color: var(--fg-0);
-    border-bottom: none;
-  }
-
-  .link:hover {
-    color: var(--cyan-brand);
   }
 
   .wa-button {

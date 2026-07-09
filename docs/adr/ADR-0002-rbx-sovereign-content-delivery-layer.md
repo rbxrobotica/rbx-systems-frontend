@@ -45,7 +45,7 @@ while keeping the bucket private and credentials server-side.
 Adopt a **Sovereign Content Delivery Layer**: the institutional site runs as
 **SSR with `@sveltejs/adapter-node`** in the RBX k3s cluster, reading the
 **private** Contabo Object Storage as an **origin** through an internal
-**Content Gateway** that applies cache, fallback and normalization.
+**Content Gateway** that applies cache and normalization.
 
 Traffic model (target):
 
@@ -63,8 +63,8 @@ mandatory per-page-view hot path: public content is cacheable.
 - Content Gateway under `src/lib/server/content` (`store` → `cache` → `gateway`).
   The store is the **only** module aware of the S3-compatible API. The UI
   consumes the gateway abstraction and never touches Object Storage.
-- In-memory cache with short TTL + stale-while-revalidate, per-replica.
-- Safe fallback: origin error or 404 → render i18n fallback / stale, never 500.
+- In-memory cache with short TTL, per-replica.
+- Missing content or upstream error surfaces as an explicit 404 or 503; no silent stale fallback.
 - Server-side asset proxy routes (`/api/blog/cover/[...path]`, `/api/assets/[...path]`).
 - HTML and assets emitted with `Cache-Control` + `ETag` to prepare for a future
   RBX proxy/edge with no application change.
@@ -88,7 +88,6 @@ mandatory per-page-view hot path: public content is cacheable.
 | `PROTOCOL_HEADER` | `x-forwarded-proto` (Traefik) | per deployment |
 | `HOST_HEADER` | `x-forwarded-host` (Traefik) | per deployment |
 | `CONTENT_CACHE_TTL_SECONDS` | Content/list freshness TTL (default `60`) | optional |
-| `CONTENT_CACHE_STALE_SECONDS` | stale-while-revalidate window (default `300`) | optional |
 | `CONTABO_S3_ENDPOINT` | S3-compatible endpoint | existing |
 | `CONTABO_S3_CONTENT_BUCKET` | `rbx-content` | existing |
 | `CONTABO_S3_PUBLIC_URL` | Public base URL (server use only) | existing |

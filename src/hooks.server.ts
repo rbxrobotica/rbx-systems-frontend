@@ -3,9 +3,8 @@ import type { Handle } from '@sveltejs/kit';
 /**
  * Emit conservative cache headers on public HTML responses so the future RBX
  * edge / reverse-proxy layer (ADR-0002, Phase 4+) can serve cached content off
- * the origin. The in-process Content Gateway already bounds staleness through
- * its TTL + stale-while-revalidate cache, so a short max-age keeps the
- * publish→live window within the configured TTL.
+ * the origin. The in-process Content Gateway uses a TTL-only cache, so a short
+ * max-age keeps the publish→live window within the configured TTL.
  */
 export const handle: Handle = async ({ event, resolve }) => {
   const host = event.request.headers.get('host') ?? '';
@@ -28,7 +27,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     if (contentType.includes('text/html')) {
       response.headers.set(
         'Cache-Control',
-        'public, max-age=60, stale-while-revalidate=300'
+        'public, max-age=60'
       );
     }
   }

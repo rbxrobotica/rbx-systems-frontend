@@ -37,7 +37,6 @@
         <h3 class="rbx-label">{$_('footer.contactTitle')}</h3>
         <ul>
           <li><a href="/contato">{$_('nav.contact')}</a></li>
-          <li><a href="mailto:contact@rbxsystems.ch">contact@rbxsystems.ch</a></li>
           <li>
             <a href="https://github.com/rbxrobotica" target="_blank" rel="noopener noreferrer"
               >GitHub</a
