@@ -1,6 +1,6 @@
 /**
- * In-memory TTL + stale-while-revalidate cache. Generic, no coupling to Object
- * Storage. Per-replica (Phase 0); distributed cache arrives in Phase 2 (ADR-0002).
+ * In-memory TTL cache. Generic, no coupling to Object Storage. Per-replica
+ * (Phase 0); distributed cache arrives in Phase 2 (ADR-0002).
  */
 interface Entry<T> {
   value: T;
@@ -12,27 +12,17 @@ export class SwrCache<T> {
 
   constructor(
     private readonly ttlMs: number,
-    private readonly staleMs: number,
     private readonly onRefreshError?: (key: string, err: unknown) => void
   ) {}
 
   /**
-   * Return the cached value if fresh; serve stale and trigger a background
-   * refresh if within the stale window; otherwise load synchronously.
-   * `load` is expected to handle its own errors and return a safe fallback
-   * (null/empty) so callers never receive a throw from a cached miss.
+   * Return the cached value if fresh; otherwise load synchronously.
+   * `load` may throw. Cache misses are not masked.
    */
   async get(key: string, load: () => Promise<T>): Promise<T> {
     const now = Date.now();
     const entry = this.store.get(key);
-    if (entry) {
-      const age = now - entry.fetchedAt;
-      if (age < this.ttlMs) return entry.value;
-      if (age < this.ttlMs + this.staleMs) {
-        this.refresh(key, load);
-        return entry.value;
-      }
-    }
+    if (entry && now - entry.fetchedAt < this.ttlMs) return entry.value;
     const value = await load();
     this.store.set(key, { value, fetchedAt: Date.now() });
     return value;
@@ -55,7 +45,6 @@ export class SwrCache<T> {
         this.store.set(key, { value, fetchedAt: Date.now() });
       })
       .catch((err) => {
-        // Keep serving stale; surface to caller if it wants to log.
         this.onRefreshError?.(key, err);
       });
   }

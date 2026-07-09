@@ -126,7 +126,7 @@ What shipped:
 - Server-side validation, Postmark relay to `contact@rbxsystems.ch`
 - D360 fire-and-forget template `contact_form_acknowledgment` (pending hub approval)
 - Floating WhatsApp button on every page
-- Footer updated: email + WhatsApp links visible
+- Footer updated: contact + WhatsApp links visible
 - IaC for `rbx-contact-secrets` replicated cross-namespace via ExternalSecret
 
 Pending operator actions to finish Phase 0:

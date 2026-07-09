@@ -1,6 +1,6 @@
 # Blog — RBX Systems
 
-> **Atualizado 2026-06-25:** o site é **SvelteKit SSR** (não mais Next.js/ISR). O bucket é **privado**; capas são servidas via proxy `/api/blog/cover/...`. Propagação após publish: **~60s** (TTL do Content Gateway), sem redeploy. Workflow canônico e atual: `~/docs/rbx-content-publish-workflow.md`. O restante deste arquivo mantém a orientação editorial (estilo, PT-BR, specs de capa) — ignore quaisquer remanescentes de MDX/ISR.
+> **Atualizado 2026-07-08:** o site é **SvelteKit SSR** (não mais Next.js/ISR). O bucket é **privado**; capas são servidas via proxy `/api/blog/cover/...`. Propagação após publish: **~60s** (TTL do Content Gateway), sem stale fallback e sem redeploy. Workflow canônico e atual: `~/docs/rbx-content-publish-workflow.md`. O restante deste arquivo mantém a orientação editorial (estilo, PT-BR, specs de capa) — ignore quaisquer remanescentes de MDX/ISR.
 
 O blog vive em **rbx.ia.br/blog**. Posts são arquivos Markdown armazenados no Contabo Object Storage (S3-compatible, **bucket privado**). Publicar não requer deploy — o site lê o S3 server-side via Content Gateway e reflete mudanças em **~60s** (TTL do cache do gateway).
 
@@ -206,4 +206,4 @@ aws s3 rm s3://rbx-content/blog/posts/YYYY-MM-DD-slug.md \
 
 ## Cache e propagação
 
-O site é **SSR (SvelteKit)**. O Content Gateway lê o S3 server-side com cache em memória (TTL ~60s, janela stale 300s). Após qualquer publicação ou atualização no S3, o conteúdo atualizado aparece no site em até ~60s, sem necessidade de redeploy.
+O site é **SSR (SvelteKit)**. O Content Gateway lê o S3 server-side com cache em memória (TTL ~60s). Após qualquer publicação ou atualização no S3, o conteúdo atualizado aparece no site em até ~60s, sem necessidade de redeploy. Se o conteúdo remoto estiver indisponível, a página falha explicitamente.

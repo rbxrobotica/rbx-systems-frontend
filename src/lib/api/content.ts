@@ -4,9 +4,6 @@
  */
 import type { Locale } from '$types/content';
 
-export function getAlternateLocale(locale: Locale): Locale {
-  return locale === 'pt-BR' ? 'en' : 'pt-BR';
-}
 
 export function formatDate(iso: string, locale: Locale): string {
   const outputLocale = locale === 'en' ? 'en-US' : 'pt-BR';

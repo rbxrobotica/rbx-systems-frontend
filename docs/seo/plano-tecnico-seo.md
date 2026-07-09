@@ -243,7 +243,7 @@ Adicionar via `hooks.server.ts` ou Traefik middleware:
 - `Content-Security-Policy` (avançado, testar antes)
 
 Cache:
-- HTML: `public, max-age=60, stale-while-revalidate=300` (já existe)
+- HTML: `public, max-age=60` (já existe)
 - Assets: `public, max-age=31536000, immutable` (já existe)
 
 ### Risco

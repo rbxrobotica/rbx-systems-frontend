@@ -1,12 +1,12 @@
 /**
  * Content Gateway — the stable content abstraction consumed by the UI.
- * Orchestrates the Object Storage store + in-memory cache, applies locale
- * fallback and safe degradation. The UI never touches the S3-compatible API.
+ * Orchestrates the Object Storage store + in-memory cache. The UI never
+ * touches the S3-compatible API.
  * (ADR-0002: RBX Sovereign Content Delivery Layer.)
  */
+import { error } from '@sveltejs/kit';
 import { load as parseYaml } from 'js-yaml';
 import { marked } from 'marked';
-import { getAlternateLocale } from '$api/content';
 import { getTextObject, getByteObject, listObjectKeys, type ByteObject } from './store';
 import { SwrCache } from './cache';
 import type { Locale, PageContent, Post, PostMeta } from '$types/content';
@@ -16,13 +16,12 @@ const BLOG_PREFIX = 'blog/posts/';
 const S3_COVER_PREFIX = 'https://eu2.contabostorage.com/rbx-content/blog/covers/';
 
 const ttlMs = (Number(process.env.CONTENT_CACHE_TTL_SECONDS) || 60) * 1000;
-const staleMs = (Number(process.env.CONTENT_CACHE_STALE_SECONDS) || 300) * 1000;
 
-const pageCache = new SwrCache<PageContent | null>(ttlMs, staleMs);
-const postCache = new SwrCache<Post | null>(ttlMs, staleMs);
-const listCache = new SwrCache<PostMeta[]>(ttlMs, staleMs);
+const pageCache = new SwrCache<PageContent>(ttlMs);
+const postCache = new SwrCache<Post>(ttlMs);
+const listCache = new SwrCache<PostMeta[]>(ttlMs);
 // Assets are stable by filename; cache longer.
-const assetCache = new SwrCache<ByteObject | null>(ttlMs * 10, staleMs * 10);
+const assetCache = new SwrCache<ByteObject | null>(ttlMs * 10);
 
 /**
  * Parse YAML frontmatter (gray-matter-compatible) using js-yaml 4 directly.
@@ -45,16 +44,24 @@ function parseFrontmatter(raw: string): {
   return { data, content: match[2] };
 }
 
-export async function loadPage(path: string, locale: Locale): Promise<PageContent | null> {
-  return pageCache.get(`page:${locale}:${path}`, () => fetchPage(path, locale));
+export async function loadPage(path: string, locale: Locale): Promise<PageContent> {
+  return pageCache.get(`page:${locale}:${path}`, async () => {
+    const page = await fetchPage(path, locale);
+    if (!page) throw error(404, `Content not found: ${path}`);
+    return page;
+  });
 }
 
 export async function loadAllPosts(locale: Locale): Promise<PostMeta[]> {
   return listCache.get(`posts:${locale}`, () => fetchPostList(locale));
 }
 
-export async function loadPost(slug: string, locale: Locale): Promise<Post | null> {
-  return postCache.get(`post:${locale}:${slug}`, () => fetchPost(slug, locale));
+export async function loadPost(slug: string, locale: Locale): Promise<Post> {
+  return postCache.get(`post:${locale}:${slug}`, async () => {
+    const post = await fetchPost(slug, locale);
+    if (!post) throw error(404, `Post not found: ${slug}`);
+    return post;
+  });
 }
 
 /** Resolve a binary asset (cover / UI asset) for the server-side proxy routes. */
@@ -76,29 +83,23 @@ export async function getAsset(
 // --- fetchers (talk to the store; never throw to the UI) ---
 
 async function fetchPage(path: string, locale: Locale): Promise<PageContent | null> {
-  const candidates = [
-    `${SITE_PREFIX}${locale}/${path}/index.md`,
-    `${SITE_PREFIX}${getAlternateLocale(locale)}/${path}/index.md`
-  ];
-  for (const key of candidates) {
-    try {
-      const obj = await getTextObject(key);
-      if (!obj) continue;
-      const { data, content } = parseFrontmatter(obj.body);
-      return {
-        title: data.title ?? '',
-        description: data.description ?? '',
-        eyebrow: data.eyebrow,
-        lead: data.lead,
-        body: data.body,
-        html: marked.parse(content) as string,
-        meta: data
-      };
-    } catch {
-      continue;
-    }
+  const key = `${SITE_PREFIX}${locale}/${path}/index.md`;
+  try {
+    const obj = await getTextObject(key);
+    if (!obj) return null;
+    const { data, content } = parseFrontmatter(obj.body);
+    return {
+      title: data.title ?? '',
+      description: data.description ?? '',
+      eyebrow: data.eyebrow,
+      lead: data.lead,
+      body: data.body,
+      html: marked.parse(content) as string,
+      meta: data
+    };
+  } catch {
+    throw error(503, `Content unavailable: ${path}`);
   }
-  return null;
 }
 
 async function fetchPostList(locale: Locale): Promise<PostMeta[]> {
@@ -106,7 +107,7 @@ async function fetchPostList(locale: Locale): Promise<PostMeta[]> {
   try {
     keys = await listObjectKeys(BLOG_PREFIX);
   } catch {
-    return [];
+    throw error(503, 'Blog content unavailable');
   }
   const grouped = new Map<string, string[]>();
   for (const key of keys) {
@@ -134,7 +135,7 @@ async function fetchPost(slug: string, locale: Locale): Promise<Post | null> {
   try {
     keys = await listObjectKeys(BLOG_PREFIX);
   } catch {
-    return null;
+    throw error(503, 'Blog content unavailable');
   }
   const groupKeys = keys.filter((k) => parsePostKey(k)?.slug === slug);
   const key = selectBestKey(groupKeys, slug, locale);
@@ -160,7 +161,7 @@ async function parsePost(key: string, slug: string): Promise<Post | null> {
       html: marked.parse(content) as string
     };
   } catch {
-    return null;
+    throw error(503, 'Blog content unavailable');
   }
 }
 
@@ -173,11 +174,7 @@ function parsePostKey(key: string): { slug: string; locale: Locale } | null {
 
 function selectBestKey(keys: string[], slug: string, locale: Locale): string | null {
   const exact = keys.find((k) => k === `${BLOG_PREFIX}${slug}.${locale}.md`);
-  if (exact) return exact;
-  const legacy = keys.find((k) => k === `${BLOG_PREFIX}${slug}.md`);
-  if (legacy) return legacy;
-  const alternate = keys.find((k) => k === `${BLOG_PREFIX}${slug}.${getAlternateLocale(locale)}.md`);
-  return alternate ?? null;
+  return exact ?? null;
 }
 
 function normalizeCover(cover: string | undefined, slug: string): string | undefined {
