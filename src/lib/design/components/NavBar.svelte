@@ -1,14 +1,15 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { t } from '$lib/i18n/translate';
+  import type { Locale } from '$types/content';
 
   interface Props {
-    dictionary: Record<string, unknown>;
+    locale: Locale;
   }
 
-  let { dictionary }: Props = $props();
+  let { locale }: Props = $props();
 
-  const tr = (key: string) => t(dictionary, key);
+  const tr = (key: string) => t(locale, key);
 
   let currentPath = $derived($page.url.pathname);
 

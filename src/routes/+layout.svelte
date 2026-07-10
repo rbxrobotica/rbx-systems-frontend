@@ -7,16 +7,18 @@
   import Footer from '$components/Footer.svelte';
   import WhatsAppFloat from '$components/WhatsAppFloat.svelte';
   import AIChatFloat from '$components/AIChatFloat.svelte';
+  import type { LayoutData } from './$types';
 
   interface Props {
     children: Snippet;
+    data: LayoutData;
   }
 
-  let { children }: Props = $props();
+  let { children, data }: Props = $props();
 </script>
 
 <div class="rbx-root">
-  <NavBar />
+  <NavBar locale={data.locale} />
   <main class="page">
     {@render children()}
   </main>

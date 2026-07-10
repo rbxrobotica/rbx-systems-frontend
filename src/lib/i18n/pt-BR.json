@@ -11,6 +11,7 @@
     "atelier": "Atelier",
     "contact": "Contato",
     "about": "Sobre",
+    "team": "Equipe",
     "leandroDamasio": "Leandro Damasio"
   },
   "footer": {
@@ -33,6 +34,12 @@
     "metaDescription": "Conheça a RBX Systems: engenharia de IA aplicada, plataformas soberanas, automação operacional e produtos para logística, financeiro e operações críticas.",
     "headline": "A RBX Systems constrói plataformas operacionais com IA",
     "body": "Somos uma empresa de engenharia de sistemas focada em operações de alta exigência. Construímos infraestrutura, agentes inteligentes e software empresarial com governança, observabilidade e escala previsível."
+  },
+  "team": {
+    "metaTitle": "Equipe RBX Systems — Fundadores e Liderança",
+    "metaDescription": "Conheça a equipe fundadora da RBX Systems. Engenharia de sistemas, IA aplicada e liderança técnica para operações de alta exigência.",
+    "headline": "Equipe",
+    "body": "A RBX Systems é construída por engenheiros e operadores de sistemas. Conheça os fundadores e a liderança técnica por trás da plataforma."
   },
   "leandroDamasio": {
     "metaTitle": "Leandro Damasio — Fundador e CEO da RBX Systems",

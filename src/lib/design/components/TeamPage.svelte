@@ -9,13 +9,12 @@
   interface Props {
     page: PageContent | null;
     locale: Locale;
-    dictionary: Record<string, unknown>;
   }
 
-  let { page, locale, dictionary }: Props = $props();
+  let { page, locale }: Props = $props();
 
-  const title = $derived(page?.title || t(dictionary, 'team.headline'));
-  const description = $derived(page?.description ?? t(dictionary, 'team.body') ?? '');
+  const title = $derived(page?.title || t(locale, 'team.headline'));
+  const description = $derived(page?.description ?? t(locale, 'team.body') ?? '');
   const siteUrl = $derived(locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
   const pageUrl = $derived(`${siteUrl}${$pageStore.url.pathname}`);
   const schema = $derived(buildGraph(locale, pageUrl, title, description));
@@ -38,8 +37,8 @@
 
 <ContentPage
   {page}
-  fallbackTitle={t(dictionary, 'team.headline')}
-  fallbackLead={t(dictionary, 'team.body')}
+  fallbackTitle={t(locale, 'team.headline')}
+  fallbackLead={t(locale, 'team.body')}
   {locale}
 />
 
