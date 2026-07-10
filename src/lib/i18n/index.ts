@@ -1,9 +1,12 @@
 import { browser } from '$app/environment';
-import { init, register, getLocaleFromNavigator, locale } from 'svelte-i18n';
-export type Locale = 'pt-BR' | 'en';
+import { init, addMessages, getLocaleFromNavigator } from 'svelte-i18n';
+import ptBR from './pt-BR.json';
+import en from './en.json';
+import type { Locale } from '$types/content';
 
-register('pt-BR', () => import('./pt-BR.json'));
-register('en', () => import('./en.json'));
+// Pre-load dictionaries so SSR can format messages synchronously.
+addMessages('pt-BR', ptBR);
+addMessages('en', en);
 
 export function detectLocale(): Locale {
   if (!browser) return 'pt-BR';
@@ -25,4 +28,4 @@ init({
   initialLocale: detectLocale()
 });
 
-export { locale };
+export { locale } from 'svelte-i18n';
