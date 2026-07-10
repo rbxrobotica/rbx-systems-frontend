@@ -5,4 +5,4 @@
   let { data }: { data: PageData } = $props();
 </script>
 
-<TeamPage page={data.page} locale={data.locale} dictionary={data.dictionary} />
+<TeamPage page={data.page} locale={data.locale} />
