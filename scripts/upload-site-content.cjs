@@ -609,6 +609,52 @@ RBX designs and operates platforms, automations and infrastructure for environme
 `
 );
 
+// Team
+addPage(
+  'team',
+  `---
+title: Equipe
+description: Conheça os fundadores e a liderança da RBX Systems.
+eyebrow: People
+lead: A RBX Systems é construída por fundadores com background em engenharia, pesquisa, operações e empreendedorismo de alta tecnologia.
+---
+
+Nossa equipe é pequena, técnica e focada em entregar sistemas que funcionam em produção.
+`,
+  `---
+title: Team
+description: Meet the founders and leadership of RBX Systems.
+eyebrow: People
+lead: RBX Systems is built by founders with backgrounds in engineering, research, operations and deep-tech entrepreneurship.
+---
+
+Our team is small, technical and focused on delivering systems that work in production.
+`
+);
+
+// Leandro Damasio
+addPage(
+  'leandro-damasio',
+  `---
+title: Leandro Damasio
+description: Fundador e CEO da RBX Systems.
+eyebrow: Founder
+lead: AI Engineer, Platform & Backend Systems, Technical Leadership.
+---
+
+Leandro Damasio é AI Engineer e fundador da RBX Systems. Criou produtos como Strategos, Robson e a plataforma de IA soberana da RBX.
+`,
+  `---
+title: Leandro Damasio
+description: Founder & CEO of RBX Systems.
+eyebrow: Founder
+lead: AI Engineer, Platform & Backend Systems, Technical Leadership.
+---
+
+Leandro Damasio is an AI Engineer and founder of RBX Systems. He created products such as Strategos, Robson and the RBX sovereign AI platform.
+`
+);
+
 // Contact
 addPage(
   'contact',

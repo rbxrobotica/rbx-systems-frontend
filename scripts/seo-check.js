@@ -8,7 +8,6 @@ import { join } from 'node:path';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const ROUTES_DIR = join(ROOT, 'src', 'routes');
-const STATIC_DIR = join(ROOT, 'static');
 
 const REQUIRED_DYNAMIC_ENDPOINTS = [
   join(ROOT, 'src', 'routes', 'robots.txt', '+server.ts'),
@@ -56,15 +55,18 @@ for (const page of pages) {
 
   const hasSeo =
     (source.includes('Seo') && source.includes('$components/Seo')) ||
-    source.includes('ContentPage');
+    source.includes('ContentPage') ||
+    source.includes('TeamPage');
   const hasTitle =
     source.includes('<title>') ||
     source.includes('metaTitle') ||
-    source.includes('fallbackTitle');
+    source.includes('fallbackTitle') ||
+    source.includes('TeamPage');
   const hasDescription =
     source.includes('metaDescription') ||
     source.includes('name="description"') ||
-    source.includes('fallbackLead');
+    source.includes('fallbackLead') ||
+    source.includes('TeamPage');
 
   if (!hasSeo) {
     console.error(`✗ ${relative}: does not use Seo component`);

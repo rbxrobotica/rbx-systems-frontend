@@ -1,6 +1,14 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { _ } from 'svelte-i18n';
+  import { t } from '$lib/i18n/translate';
+
+  interface Props {
+    dictionary: Record<string, unknown>;
+  }
+
+  let { dictionary }: Props = $props();
+
+  const tr = (key: string) => t(dictionary, key);
 
   let currentPath = $derived($page.url.pathname);
 
@@ -12,6 +20,7 @@
   const navItems = [
     { href: '/', label: 'nav.home' },
     { href: '/sobre', label: 'nav.about' },
+    { href: '/equipe', label: 'nav.team' },
     { href: '/solucoes', label: 'nav.solutions' },
     { href: '/produtos', label: 'nav.products' },
     { href: '/journal', label: 'nav.journal' },
@@ -22,7 +31,7 @@
 
 <nav class="navbar">
   <div class="nav-inner">
-    <a href="/" class="brand" aria-label={$_('nav.home')}>
+    <a href="/" class="brand" aria-label={tr('nav.home')}>
       <img src="/brand/rbx-mark.svg" alt="" width="28" height="28" />
       <span class="brand-text">RBX</span>
     </a>
@@ -30,7 +39,7 @@
     <div class="nav-links">
       {#each navItems as item}
         <a href={item.href} class="nav-link" class:active={isActive(item.href)}>
-          {$_(item.label)}
+          {tr(item.label)}
         </a>
       {/each}
     </div>
