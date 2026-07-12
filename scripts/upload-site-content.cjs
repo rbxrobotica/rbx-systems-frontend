@@ -548,6 +548,18 @@ lead: Produtos open source, construídos com rigor operacional e prontos para de
 
 Todos os produtos são open source e disponíveis publicamente. Construídos com rigor operacional e prontos para deploys críticos.
 
+## Produtos RBX
+
+- **Strategos**: Sala de situação estratégica para sua operação. Conecta dados operacionais, financeiros e externos em um modelo único de decisão.
+- **RBX Ledger**: Event ledger para operações de alta exigência. Registra cada evento de negócio de forma imutável e auditável.
+- **RBX Yield**: Mede o retorno real de agentes e sistemas de IA. Conecta custo (tokens, infraestrutura, pessoas) a resultados de negócio.
+- **RBX Maestro**: Orquestração governada de agentes de IA. Coordena múltiplos agentes com controle semântico, memória e fallbacks seguros.
+- **Robson**: Motor de execução e risco para mercados de cripto. Open source, focado em perda limitada, auditabilidade e recuperação de falhas.
+- **Verentir**: Plano de medição e julgamento para IA. Avalia assistentes em shadow, compara com respostas de humanos e produz sinais de aprendizado.
+- **Argos Radar**: Vigilância de mercado e financiamento sustentável. Monitora sinais operacionais, de risco e sustentabilidade.
+- **Thalamus**: Camada de controle semântico para tráfego de IA. Aplica guardrails, políticas e roteamento baseado em conteúdo.
+- **TruthMetal**: Sistema de groundtruth e avaliação para IA. Mantém datasets de referência, métricas e evidências para decisões sobre modelos.
+
 Os repositórios estão em [github.com/rbxrobotica](https://github.com/rbxrobotica).
 `,
   `---
@@ -558,6 +570,18 @@ lead: Open source products, built with operational rigor and ready for mission-c
 ---
 
 All products are open source and publicly available. Built with operational rigor and ready for mission-critical deployments.
+
+## RBX Products
+
+- **Strategos**: The strategic situation room for your operation. Connects operational, financial and external data into a single decision model.
+- **RBX Ledger**: Event ledger for high-demand operations. Records every business event immutably and auditably.
+- **RBX Yield**: Measures the real return of agents and AI systems. Connects cost (tokens, infrastructure, people) to business outcomes.
+- **RBX Maestro**: Governed orchestration of AI agents. Coordinates multiple agents with semantic control, memory and safe fallbacks.
+- **Robson**: Execution and risk engine for crypto markets. Open source, focused on bounded loss, auditability and failure recovery.
+- **Verentir**: Measurement and judgment plane for AI. Evaluates assistants in shadow, compares with human answers and produces learning signals.
+- **Argos Radar**: Market surveillance and sustainable financing. Monitors operational, risk and sustainability signals.
+- **Thalamus**: Semantic control layer for AI traffic. Applies guardrails, policies and content-based routing.
+- **TruthMetal**: Groundtruth and evaluation system for AI. Maintains reference datasets, metrics and evidence for model decisions.
 
 Repositories are at [github.com/rbxrobotica](https://github.com/rbxrobotica).
 `
@@ -597,6 +621,11 @@ lead: Sistemas projetados para operar.
 ---
 
 A RBX projeta e opera plataformas, automações e infraestrutura para ambientes onde confiabilidade, governança e controle são requisitos.
+
+## Liderança
+
+- **Leandro Damasio** — Fundador & CEO. AI Engineer, Platform & Backend Systems, Technical Leadership. Criador de produtos como Strategos, Robson e Verentir.
+- **Cauê Souza** — CFO. Liderança financeira e estratégia para operações de alta exigência.
 `,
   `---
 title: About us
@@ -606,6 +635,11 @@ lead: Systems designed to operate.
 ---
 
 RBX designs and operates platforms, automations and infrastructure for environments where reliability, governance and control are requirements.
+
+## Leadership
+
+- **Leandro Damasio** — Founder & CEO. AI Engineer, Platform & Backend Systems, Technical Leadership. Creator of products such as Strategos, Robson and Verentir.
+- **Cauê Souza** — CFO. Financial leadership and strategy for high-demand operations.
 `
 );
 
@@ -652,6 +686,29 @@ lead: AI Engineer, Platform & Backend Systems, Technical Leadership.
 ---
 
 Leandro Damasio is an AI Engineer and founder of RBX Systems. He created products such as Strategos, Robson and the RBX sovereign AI platform.
+`
+);
+
+// Cauê Souza
+addPage(
+  'caue-souza',
+  `---
+title: Cauê Souza
+description: CFO da RBX Systems.
+eyebrow: Chief Financial Officer
+lead: Liderança financeira e estratégia para operações de alta exigência.
+---
+
+Cauê Souza é Chief Financial Officer da RBX Systems. Lidera a estratégia financeira e operacional para plataformas críticas.
+`,
+  `---
+title: Cauê Souza
+description: CFO of RBX Systems.
+eyebrow: Chief Financial Officer
+lead: Financial leadership and strategy for high-demand operations.
+---
+
+Cauê Souza is Chief Financial Officer of RBX Systems. He leads financial and operational strategy for mission-critical platforms.
 `
 );
 
