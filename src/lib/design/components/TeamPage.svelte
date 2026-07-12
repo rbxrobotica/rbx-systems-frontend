@@ -38,7 +38,7 @@
         locale === 'pt-BR'
           ? 'Chief Financial Officer. Liderança financeira e estratégia para operações de alta exigência.'
           : 'Chief Financial Officer. Financial leadership and strategy for high-demand operations.',
-      href: null
+      href: '/caue-souza'
     }
   ]);
 </script>
@@ -57,17 +57,10 @@
   <ul class="founders">
     {#each founders as founder}
       <li class="founder-card">
-        {#if founder.href}
-          <a href={founder.href} class="founder-link">
-            <span class="founder-name">{founder.name}</span>
-            <span class="founder-role">{founder.role}</span>
-          </a>
-        {:else}
-          <div class="founder-link">
-            <span class="founder-name">{founder.name}</span>
-            <span class="founder-role">{founder.role}</span>
-          </div>
-        {/if}
+        <a href={founder.href} class="founder-link">
+          <span class="founder-name">{founder.name}</span>
+          <span class="founder-role">{founder.role}</span>
+        </a>
         <p class="founder-bio">{founder.bio}</p>
       </li>
     {/each}

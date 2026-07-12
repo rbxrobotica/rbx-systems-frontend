@@ -19,6 +19,7 @@
           <li><a href="/">{$_('nav.home')}</a></li>
           <li><a href="/sobre">{$_('nav.about')}</a></li>
           <li><a href="/leandro-damasio">{$_('nav.leandroDamasio')}</a></li>
+          <li><a href="/caue-souza">{$_('nav.caueSouza')}</a></li>
           <li><a href="/solucoes">{$_('nav.solutions')}</a></li>
           <li><a href="/produtos">{$_('nav.products')}</a></li>
         </ul>

@@ -12,7 +12,8 @@
     "contact": "Contact",
     "about": "About",
     "team": "Team",
-    "leandroDamasio": "Leandro Damasio"
+    "leandroDamasio": "Leandro Damasio",
+    "caueSouza": "Cauê Souza"
   },
   "footer": {
     "description": "Systems engineering, automation and infrastructure for high-demand operations.",
@@ -46,6 +47,12 @@
     "metaDescription": "Leandro Damasio is an AI Engineer, founder of RBX Systems and creator of products such as Strategos, Robson, Verentir and the RBX sovereign AI platform.",
     "headline": "Leandro Damasio",
     "body": "AI Engineer, Platform & Backend Systems, Technical Leadership. Founder & CEO of RBX Systems."
+  },
+  "caueSouza": {
+    "metaTitle": "Cauê Souza — CFO of RBX Systems",
+    "metaDescription": "Cauê Souza is Chief Financial Officer of RBX Systems. Financial leadership and strategy for high-demand operations.",
+    "headline": "Cauê Souza",
+    "body": "Chief Financial Officer. Financial leadership and strategy for high-demand operations."
   },
   "solutions": {
     "metaTitle": "RBX Systems Solutions — AI Engineering, LLMOps, Agents & Cloud",
