@@ -1,5 +1,6 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { detectLocaleFromUrl } from '$lib/i18n/locale';
+import { loadAllPosts } from '$lib/server/content/gateway';
 import type { Locale } from '$types/content';
 
 interface SitemapEntry {
@@ -12,6 +13,7 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
   'pt-BR': [
     { path: '/', changefreq: 'weekly', priority: '1.0' },
     { path: '/sobre', changefreq: 'monthly', priority: '0.9' },
+    { path: '/equipe', changefreq: 'monthly', priority: '0.9' },
     { path: '/leandro-damasio', changefreq: 'monthly', priority: '0.9' },
     { path: '/solucoes', changefreq: 'weekly', priority: '0.9' },
     { path: '/produtos', changefreq: 'weekly', priority: '0.9' },
@@ -35,6 +37,7 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
   en: [
     { path: '/', changefreq: 'weekly', priority: '1.0' },
     { path: '/about', changefreq: 'monthly', priority: '0.9' },
+    { path: '/team', changefreq: 'monthly', priority: '0.9' },
     { path: '/leandro-damasio', changefreq: 'monthly', priority: '0.9' },
     { path: '/solutions', changefreq: 'weekly', priority: '0.9' },
     { path: '/products', changefreq: 'weekly', priority: '0.9' },
@@ -68,9 +71,23 @@ export const GET: RequestHandler = async ({ url }) => {
   const entries = entriesByLocale[locale];
   const today = new Date().toISOString().split('T')[0];
 
+  let postEntries: SitemapEntry[] = [];
+  try {
+    const posts = await loadAllPosts(locale);
+    postEntries = posts.map((post) => ({
+      path: `/journal/${post.slug}`,
+      changefreq: 'monthly',
+      priority: '0.6'
+    }));
+  } catch {
+    // If the post list is unavailable, emit the static sitemap only.
+  }
+
+  const allEntries = [...entries, ...postEntries];
+
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${entries
+${allEntries
   .map(
     (entry) => `  <url>
     <loc>${siteUrl}${entry.path}</loc>
