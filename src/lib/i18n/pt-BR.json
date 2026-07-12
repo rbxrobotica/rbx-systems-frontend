@@ -43,7 +43,7 @@
   },
   "leandroDamasio": {
     "metaTitle": "Leandro Damasio — Fundador e CEO da RBX Systems",
-    "metaDescription": "Leandro Damasio é AI Engineer, fundador da RBX Systems e criador de produtos como Strategos, Robson e a plataforma de IA soberana da RBX.",
+    "metaDescription": "Leandro Damasio é AI Engineer, fundador da RBX Systems e criador de produtos como Strategos, Robson, Verentir e a plataforma de IA soberana da RBX.",
     "headline": "Leandro Damasio",
     "body": "AI Engineer, Platform & Backend Systems, Technical Leadership. Fundador e CEO da RBX Systems."
   },
@@ -54,8 +54,8 @@
     "body": "Capacidades de engenharia para operações que exigem controle, governança e escala previsível."
   },
   "products": {
-    "metaTitle": "Produtos RBX Systems — Strategos, Ledger, Yield, Maestro e Robson",
-    "metaDescription": "Produtos e software open source da RBX Systems: Strategos, RBX Ledger, RBX Yield, RBX Maestro, Robson e Argos Radar. Sistemas para decisão, finanças e operações.",
+    "metaTitle": "Produtos RBX Systems — Strategos, Ledger, Yield, Maestro, Robson e Verentir",
+    "metaDescription": "Produtos e software open source da RBX Systems: Strategos, RBX Ledger, RBX Yield, RBX Maestro, Robson, Verentir e Argos Radar. Sistemas para decisão, finanças e operações.",
     "headline": "Produtos",
     "body": "Produtos e sistemas open source construídos pela RBX para operações de alta exigência."
   },
@@ -164,7 +164,7 @@
   },
   "robson": {
     "headline": "Robson · motor de execução e risco",
-    "body": "Execução determinística e gestão de risco para cripto alavancada. Não é autotrader. Não é sinal."
+    "body": "Execução determinística e gestão de risco para cripto. Não é autotrader. Não é sinal."
   },
   "briefing": {
     "headline": "Briefing Diário BTC",
