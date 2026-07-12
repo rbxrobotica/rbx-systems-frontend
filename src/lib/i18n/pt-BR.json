@@ -122,6 +122,12 @@
     "close": "Fechar",
     "languageCode": "pt"
   },
+  "altcha": {
+    "idle": "Não sou um robô",
+    "loading": "Verificando...",
+    "verified": "Verificado",
+    "error": "Falha na verificação. Tente novamente."
+  },
   "contact": {
     "heading": "Entre em contato",
     "body": "Envie uma mensagem. Retornamos em até um dia útil.",

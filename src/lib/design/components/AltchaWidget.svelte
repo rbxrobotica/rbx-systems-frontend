@@ -5,9 +5,29 @@
     challengeurl?: string;
     onstatechange?: (payload: string | null) => void;
     disabled?: boolean;
+    labels?: {
+      idle?: string;
+      loading?: string;
+      verified?: string;
+      error?: string;
+    };
   }
 
-  let { challengeurl = '/api/altcha-challenge', onstatechange, disabled = false }: Props = $props();
+  let {
+    challengeurl = '/api/altcha-challenge',
+    onstatechange,
+    disabled = false,
+    labels = {}
+  }: Props = $props();
+
+  const defaultLabels = {
+    idle: "I'm not a robot",
+    loading: 'Verifying...',
+    verified: 'Verified',
+    error: 'Verification failed. Try again.'
+  };
+
+  const l = $derived({ ...defaultLabels, ...labels });
 
   // svelte-ignore state_referenced_locally
   const {
@@ -54,13 +74,13 @@
   </span>
   <span class="label">
     {#if $altchaState === 'verified'}
-      Verified
+      {l.verified}
     {:else if $altchaState === 'loading'}
-      Verifying...
+      {l.loading}
     {:else if $altchaState === 'error'}
-      {$errorText ?? 'Verification failed. Try again.'}
+      {$errorText ?? l.error}
     {:else}
-      I'm not a robot
+      {l.idle}
     {/if}
   </span>
 </button>
