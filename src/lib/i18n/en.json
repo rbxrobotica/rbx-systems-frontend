@@ -72,10 +72,25 @@
     "body": "Proof of work, field notes and systems we put into production."
   },
   "contact": {
-    "metaTitle": "Contact RBX Systems — Talk to the Team",
-    "metaDescription": "Get in touch with RBX Systems. Send a message and we will reply within one business day.",
-    "headline": "Get in touch",
-    "body": "Send a message. We reply within one business day."
+    "heading": "Get in touch",
+    "body": "Send a message. We reply within one business day.",
+    "whatsappLabel": "WhatsApp",
+    "whatsappCta": "Chat on WhatsApp",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "you@email.com",
+      "phonePlaceholder": "+41 79 000 00 00",
+      "messagePlaceholder": "How can we help?",
+      "whatsappOptIn": "I agree to receive a reply via WhatsApp.",
+      "submit": "Send message",
+      "submitting": "Sending...",
+      "success": "Message sent. We'll get back to you soon.",
+      "error": "Could not send. Please check the fields and try again."
+    }
   },
   "services": {
     "aiEngineering": {
@@ -128,27 +143,6 @@
     "verified": "Verified",
     "error": "Verification failed. Try again."
   },
-  "contact": {
-    "heading": "Get in touch",
-    "body": "Send a message. We reply within one business day.",
-    "whatsappLabel": "WhatsApp",
-    "whatsappCta": "Chat on WhatsApp",
-    "form": {
-      "name": "Name",
-      "email": "Email",
-      "phone": "Phone",
-      "message": "Message",
-      "namePlaceholder": "Your name",
-      "emailPlaceholder": "you@email.com",
-      "phonePlaceholder": "+41 79 000 00 00",
-      "messagePlaceholder": "How can we help?",
-      "whatsappOptIn": "I agree to receive a reply via WhatsApp.",
-      "submit": "Send message",
-      "submitting": "Sending...",
-      "success": "Message sent. We'll get back to you soon.",
-      "error": "Could not send. Please check the fields and try again."
-    }
-  },
   "atelier": {
     "ref": {
       "indexLabel": "Repository",
@@ -159,5 +153,21 @@
       "updated": "Updated",
       "cta": "View on GitHub"
     }
+  },
+  "partnership": {
+    "headline": "Engineering partnership for complex software",
+    "body": "RBX is the engineering partner for founders whose product outgrew generalist approaches. Diagnosis, modernization, platform, governed AI, and continued operation."
+  },
+  "diagnostic": {
+    "headline": "Technical Product Review",
+    "body": "An independent technical diagnosis of your product. Fixed scope. One to two weeks. Read-only. The starting point."
+  },
+  "robson": {
+    "headline": "Robson · execution and risk engine",
+    "body": "Deterministic execution and risk management for leveraged crypto markets. Not an autotrader. Not a signal."
+  },
+  "briefing": {
+    "headline": "Daily BTC Briefing",
+    "body": "Daily operational reading of BTC futures. By 07h00 every business day. Not signals. Not advice."
   }
 }
