@@ -137,6 +137,12 @@
     "close": "Fechar",
     "languageCode": "pt"
   },
+  "altcha": {
+    "idle": "Não sou um robô",
+    "loading": "Verificando...",
+    "verified": "Verificado",
+    "error": "Falha na verificação. Tente novamente."
+  },
   "atelier": {
     "ref": {
       "indexLabel": "Repositório",

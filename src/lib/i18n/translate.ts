@@ -7,13 +7,21 @@ const messages: Record<Locale, Record<string, unknown>> = {
   en
 };
 
-export function t(locale: Locale, key: string): string {
-  const value = key.split('.').reduce<unknown>((obj, segment) => {
-    if (obj && typeof obj === 'object' && segment in obj) {
-      return (obj as Record<string, unknown>)[segment];
+function lookup(obj: Record<string, unknown>, key: string): unknown {
+  return key.split('.').reduce<unknown>((current, segment) => {
+    if (current && typeof current === 'object' && segment in current) {
+      return (current as Record<string, unknown>)[segment];
     }
     return undefined;
-  }, messages[locale]);
+  }, obj);
+}
 
+export function t(locale: Locale, key: string): string;
+export function t(dictionary: Record<string, unknown>, key: string): string;
+export function t(localeOrDictionary: Locale | Record<string, unknown>, key: string): string {
+  const value =
+    typeof localeOrDictionary === 'string'
+      ? lookup(messages[localeOrDictionary as Locale], key)
+      : lookup(localeOrDictionary, key);
   return typeof value === 'string' ? value : key;
 }

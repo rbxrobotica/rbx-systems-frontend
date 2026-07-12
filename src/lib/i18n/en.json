@@ -137,6 +137,12 @@
     "close": "Close",
     "languageCode": "en"
   },
+  "altcha": {
+    "idle": "I'm not a robot",
+    "loading": "Verifying...",
+    "verified": "Verified",
+    "error": "Verification failed. Try again."
+  },
   "atelier": {
     "ref": {
       "indexLabel": "Repository",
