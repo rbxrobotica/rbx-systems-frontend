@@ -24,7 +24,7 @@
 <Seo {title} {description} locale={data.locale} canonical={pageUrl} {schema} />
 
 <LandingOffer
-  dictionary={dictionary}
+  {dictionary}
   source="robson"
   titleKey="landing.robson.title"
   subtitleKey="landing.robson.subtitle"
@@ -32,6 +32,4 @@
   benefitsKey="landing.robson.benefits"
   ctaKey="landing.robson.cta"
   formTitleKey="landing.robson.formTitle"
-  metaTitleKey="landing.robson.metaTitle"
-  metaDescriptionKey="landing.robson.metaDescription"
 />

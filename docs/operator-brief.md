@@ -11,15 +11,15 @@
 
 LIVE in k3s production since 2026-05-15.
 
-| Aspect          | Value                                                                                                  |
-| --------------- | ------------------------------------------------------------------------------------------------------ |
-| Image           | `ghcr.io/rbxrobotica/rbx-ia-br:sha-<latest>` (CI-bumped automatically)                                 |
-| Namespaces      | `rbx-ia-br` (rbx.ia.br), `rbxsystems-ch` (rbxsystems.ch)                                               |
-| Replicas        | 2/2 per namespace                                                                                      |
+| Aspect          | Value                                                                                                          |
+| --------------- | -------------------------------------------------------------------------------------------------------------- |
+| Image           | `ghcr.io/rbxrobotica/rbx-ia-br:sha-<latest>` (CI-bumped automatically)                                         |
+| Namespaces      | `rbx-ia-br` (rbx.ia.br), `rbxsystems-ch` (rbxsystems.ch)                                                       |
+| Replicas        | 2/2 per namespace                                                                                              |
 | Routes          | Form posts to `rbx-comms` (`api.comms.{domain}/api/contact`), floating WhatsApp button, updated contact footer |
-| Email path      | Postmark → `contact@rbxsystems.ch` (Mailcow inbox)                                                     |
-| WhatsApp path   | 360dialog template `contact_form_acknowledgment` (pt_BR)                                               |
-| WhatsApp number | `+55 11 913734954` (`wa.me/5511913734954`)                                                             |
+| Email path      | Postmark → `contact@rbxsystems.ch` (Mailcow inbox)                                                             |
+| WhatsApp path   | 360dialog template `contact_form_acknowledgment` (pt_BR)                                                       |
+| WhatsApp number | `+55 11 913734954` (`wa.me/5511913734954`)                                                                     |
 
 ---
 

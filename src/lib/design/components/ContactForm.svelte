@@ -147,7 +147,12 @@
     </div>
 
     <div class="checkbox">
-      <input id="contact-whatsapp" type="checkbox" bind:checked={whatsappOptIn} disabled={status === 'submitting'} />
+      <input
+        id="contact-whatsapp"
+        type="checkbox"
+        bind:checked={whatsappOptIn}
+        disabled={status === 'submitting'}
+      />
       <label for="contact-whatsapp">{$_('contact.form.whatsappOptIn')}</label>
     </div>
 

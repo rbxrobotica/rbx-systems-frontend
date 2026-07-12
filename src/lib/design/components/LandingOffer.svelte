@@ -12,8 +12,6 @@
     benefitsKey: string;
     ctaKey: string;
     formTitleKey: string;
-    metaTitleKey?: string;
-    metaDescriptionKey?: string;
     children?: import('svelte').Snippet;
   }
 
@@ -26,8 +24,6 @@
     benefitsKey,
     ctaKey,
     formTitleKey,
-    metaTitleKey,
-    metaDescriptionKey,
     children
   }: Props = $props();
 
@@ -55,7 +51,13 @@
       <ul class="benefits">
         {#each benefits as benefit}
           <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="check">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              class="check"
+            >
               <polyline points="20 6 9 17 4 12" />
             </svg>
             {benefit}

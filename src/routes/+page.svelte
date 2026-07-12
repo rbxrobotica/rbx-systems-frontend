@@ -11,11 +11,13 @@
 
   const title = $derived(t(data.locale, 'home.metaTitle'));
   const description = $derived(t(data.locale, 'home.metaDescription'));
-  const pageUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br/' : 'https://rbxsystems.ch/');
+  const pageUrl = $derived(
+    data.locale === 'pt-BR' ? 'https://rbx.ia.br/' : 'https://rbxsystems.ch/'
+  );
   const schema = $derived(buildGraph(data.locale, pageUrl, title, description));
 </script>
 
-<Seo title={title} description={description} locale={data.locale} {schema} />
+<Seo {title} {description} locale={data.locale} {schema} />
 
 {#if data.page}
   <PageHeader

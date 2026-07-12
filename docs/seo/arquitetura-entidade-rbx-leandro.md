@@ -24,6 +24,7 @@ strategos.gr       → Produto Strategos (en)
 ```
 
 **Relações explícitas nos sites:**
+
 - RBX Systems → "Merovelis é uma marca RBX Systems" → link para merovelis.com
 - Merovelis → "Strategos by Merovelis" → link para strategos.gr
 - Merovelis → "Uma marca RBX Systems" → link para rbxsystems.ch
@@ -35,48 +36,48 @@ strategos.gr       → Produto Strategos (en)
 
 ### Páginas institucionais
 
-| URL pt-BR | URL en | Entidade | Schema |
-|---|---|---|---|
-| `/` | `/` | WebSite / WebPage | `WebSite`, `Organization`, `WebPage` |
-| `/sobre` | `/about` | Sobre a empresa | `AboutPage`, `Organization` |
-| `/leandro-damasio` | `/leandro-damasio` | Página do fundador | `ProfilePage`, `Person` |
-| `/contato` | `/contact` | Contato | `ContactPage`, `Organization` |
+| URL pt-BR          | URL en             | Entidade           | Schema                               |
+| ------------------ | ------------------ | ------------------ | ------------------------------------ |
+| `/`                | `/`                | WebSite / WebPage  | `WebSite`, `Organization`, `WebPage` |
+| `/sobre`           | `/about`           | Sobre a empresa    | `AboutPage`, `Organization`          |
+| `/leandro-damasio` | `/leandro-damasio` | Página do fundador | `ProfilePage`, `Person`              |
+| `/contato`         | `/contact`         | Contato            | `ContactPage`, `Organization`        |
 
 ### Serviços
 
-| URL pt-BR | URL en | Entidade | Schema |
-|---|---|---|---|
-| `/servicos/engenharia-de-ia` | `/services/ai-engineering` | Serviço | `Service` |
-| `/servicos/llmops` | `/services/llmops` | Serviço | `Service` |
-| `/servicos/agentes-de-ia` | `/services/ai-agents` | Serviço | `Service` |
-| `/servicos/devops-cloud` | `/services/devops-cloud` | Serviço | `Service` |
-| `/servicos/software-financeiro` | `/services/financial-software` | Serviço | `Service` |
-| `/servicos/software-para-logistica` | `/services/logistics-software` | Serviço | `Service` |
-| `/servicos/observabilidade` | `/services/observability` | Serviço | `Service` |
+| URL pt-BR                           | URL en                         | Entidade | Schema    |
+| ----------------------------------- | ------------------------------ | -------- | --------- |
+| `/servicos/engenharia-de-ia`        | `/services/ai-engineering`     | Serviço  | `Service` |
+| `/servicos/llmops`                  | `/services/llmops`             | Serviço  | `Service` |
+| `/servicos/agentes-de-ia`           | `/services/ai-agents`          | Serviço  | `Service` |
+| `/servicos/devops-cloud`            | `/services/devops-cloud`       | Serviço  | `Service` |
+| `/servicos/software-financeiro`     | `/services/financial-software` | Serviço  | `Service` |
+| `/servicos/software-para-logistica` | `/services/logistics-software` | Serviço  | `Service` |
+| `/servicos/observabilidade`         | `/services/observability`      | Serviço  | `Service` |
 
 ### Produtos
 
-| URL pt-BR | URL en | Entidade | Schema |
-|---|---|---|---|
-| `/produtos` | `/products` | Listagem | `CollectionPage` |
-| `/produtos/strategos` | `/products/strategos` | Produto | `SoftwareApplication` |
-| `/produtos/rbx-ledger` | `/products/rbx-ledger` | Produto | `SoftwareApplication` |
-| `/produtos/rbx-yield` | `/products/rbx-yield` | Produto | `SoftwareApplication` |
-| `/produtos/rbx-maestro` | `/products/rbx-maestro` | Produto | `SoftwareApplication` |
-| `/produtos/robson` | `/products/robson` | Produto | `SoftwareApplication` |
-| `/produtos/argos-radar` | `/products/argos-radar` | Produto | `SoftwareApplication` |
+| URL pt-BR               | URL en                  | Entidade | Schema                |
+| ----------------------- | ----------------------- | -------- | --------------------- |
+| `/produtos`             | `/products`             | Listagem | `CollectionPage`      |
+| `/produtos/strategos`   | `/products/strategos`   | Produto  | `SoftwareApplication` |
+| `/produtos/rbx-ledger`  | `/products/rbx-ledger`  | Produto  | `SoftwareApplication` |
+| `/produtos/rbx-yield`   | `/products/rbx-yield`   | Produto  | `SoftwareApplication` |
+| `/produtos/rbx-maestro` | `/products/rbx-maestro` | Produto  | `SoftwareApplication` |
+| `/produtos/robson`      | `/products/robson`      | Produto  | `SoftwareApplication` |
+| `/produtos/argos-radar` | `/products/argos-radar` | Produto  | `SoftwareApplication` |
 
 ### Conteúdo
 
-| URL pt-BR | URL en | Entidade | Schema |
-|---|---|---|---|
-| `/journal` | `/journal` | Listagem de posts | `CollectionPage`, `Blog` |
-| `/blog/[slug]` | `/blog/[slug]` | Artigo/journal | `BlogPosting` |
-| `/cases` | `/cases` | Cases | `CollectionPage` |
-| `/cases/[slug]` | `/cases/[slug]` | Case | `Article` |
-| `/newsroom` | `/newsroom` | Notícias | `CollectionPage` |
-| `/changelog` | `/changelog` | Changelog | `CollectionPage` |
-| `/atelier` | `/atelier` | Laboratório/R&D | `CollectionPage` |
+| URL pt-BR       | URL en          | Entidade          | Schema                   |
+| --------------- | --------------- | ----------------- | ------------------------ |
+| `/journal`      | `/journal`      | Listagem de posts | `CollectionPage`, `Blog` |
+| `/blog/[slug]`  | `/blog/[slug]`  | Artigo/journal    | `BlogPosting`            |
+| `/cases`        | `/cases`        | Cases             | `CollectionPage`         |
+| `/cases/[slug]` | `/cases/[slug]` | Case              | `Article`                |
+| `/newsroom`     | `/newsroom`     | Notícias          | `CollectionPage`         |
+| `/changelog`    | `/changelog`    | Changelog         | `CollectionPage`         |
+| `/atelier`      | `/atelier`      | Laboratório/R&D   | `CollectionPage`         |
 
 ---
 
@@ -88,6 +89,7 @@ Tipo: `Person`
 Página canônica: `https://rbx.ia.br/leandro-damasio` (pt-BR) / `https://rbxsystems.ch/leandro-damasio` (en)
 
 Propriedades:
+
 - `@id`: `https://rbx.ia.br/#leandro-damasio`
 - `name`: "Leandro Damasio"
 - `jobTitle`: "Founder & CEO, RBX Systems"
@@ -108,6 +110,7 @@ Tipo: `Organization`
 Página canônica: `https://rbx.ia.br/` / `https://rbxsystems.ch/`
 
 Propriedades:
+
 - `@id`: `https://rbx.ia.br/#organization`
 - `name`: "RBX Systems"
 - `alternateName`: ["RBX", "RBX Robótica"]
@@ -131,6 +134,7 @@ Tipo: `WebSite`
 Página canônica: `https://rbx.ia.br/` / `https://rbxsystems.ch/`
 
 Propriedades:
+
 - `@id`: `https://rbx.ia.br/#website`
 - `name`: "RBX Systems"
 - `url`: `https://rbx.ia.br`
@@ -141,6 +145,7 @@ Propriedades:
 
 Tipo: `WebPage` em todas as páginas  
 Propriedades:
+
 - `@id`: `{canonical}#webpage`
 - `url`: `{canonical}`
 - `name`: título da página
@@ -154,6 +159,7 @@ Propriedades:
 Tipo: `Service` para cada página de serviço.
 
 Propriedades:
+
 - `@id`: `{canonical}#service`
 - `serviceType`: nome do serviço
 - `provider`: `@id` da Organization RBX Systems
@@ -162,6 +168,7 @@ Propriedades:
 - `url`: `{canonical}`
 
 Exemplo — Engenharia de IA:
+
 ```json
 {
   "@type": "Service",
@@ -179,6 +186,7 @@ Exemplo — Engenharia de IA:
 Tipo: `SoftwareApplication` para cada produto.
 
 Propriedades:
+
 - `@id`: `{canonical}#product`
 - `name`: nome do produto
 - `applicationCategory`: "BusinessApplication" / "FinanceApplication" / "SecurityApplication"
@@ -192,6 +200,7 @@ Propriedades:
 Tipo: `BlogPosting` para journal posts.
 
 Propriedades:
+
 - `@id`: `{canonical}#article`
 - `headline`: título
 - `description`: excerpt
@@ -218,10 +227,7 @@ Propriedades:
       "name": "Leandro Damasio",
       "jobTitle": "Founder & CEO, RBX Systems",
       "url": "https://rbx.ia.br/leandro-damasio",
-      "sameAs": [
-        "https://www.linkedin.com/in/ldamasio/",
-        "https://github.com/ldamasio"
-      ],
+      "sameAs": ["https://www.linkedin.com/in/ldamasio/", "https://github.com/ldamasio"],
       "worksFor": { "@id": "https://rbx.ia.br/#organization" }
     },
     {

@@ -26,6 +26,7 @@ const WEBSITE_ID_EN = 'https://rbxsystems.ch/#website';
 const PERSON_ID_PT = 'https://rbx.ia.br/#leandro-damasio';
 const PERSON_ID_EN = 'https://rbxsystems.ch/#leandro-damasio';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function orgSameAs(locale: Locale): string[] {
   const sameAs = [
     'https://github.com/rbxrobotica',

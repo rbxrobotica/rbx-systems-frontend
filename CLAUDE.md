@@ -200,7 +200,7 @@ To upload a single asset:
 ## Cover Image Specifications
 
 | Property     | Value                                                               |
-|--------------|---------------------------------------------------------------------|
+| ------------ | ------------------------------------------------------------------- |
 | Dimensions   | 1200 × 630 px                                                       |
 | Format       | JPEG (or PNG)                                                       |
 | Aspect ratio | 16:9                                                                |

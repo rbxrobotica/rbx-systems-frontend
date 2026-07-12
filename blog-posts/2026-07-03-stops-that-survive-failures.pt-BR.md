@@ -64,10 +64,10 @@ Com as taxas dentro do orçamento de risco, elas viraram um alvo de engenharia. 
 
 As duas pontas não são simétricas:
 
-| Ponta | Custo de não executar | Taxa correta |
-| --- | --- | --- |
-| Entrada | Zero. Oportunidade perdida, nunca prejuízo | Maker, vale esperar |
-| Stop | Ilimitado. É a perna que limita a perda | Taker, sem negociação |
+| Ponta   | Custo de não executar                      | Taxa correta          |
+| ------- | ------------------------------------------ | --------------------- |
+| Entrada | Zero. Oportunidade perdida, nunca prejuízo | Maker, vale esperar   |
+| Stop    | Ilimitado. É a perna que limita a perda    | Taker, sem negociação |
 
 O ADR-0040 propõe entradas maker-first: ordem limite post-only no topo do livro, reprecificação em intervalo fixo e escape para mercado quando um orçamento de tempo ou de deriva de preço estoura. Stops e saídas permanecem a mercado para sempre. Essa assimetria virou regra escrita: otimização de taxa só é permitida em pernas onde a não-execução é gratuita.
 
@@ -78,10 +78,10 @@ O sizing não muda: ele continua assumindo taker nas duas pontas, porque o teto 
 A economia da entrada maker é linear em volume. Com taker de 0,10% e maker típico de 0,02%, a ponta de entrada cai 80%, o que reduz o custo de ida e volta em 40%:
 
 | Volume mensal negociado | Taxas hoje (0,20% ida e volta) | Com entrada maker | Economia anual |
-| --- | --- | --- | --- |
-| 25 mil USDT | 50 USDT | 30 USDT | 240 USDT |
-| 200 mil USDT | 400 USDT | 240 USDT | 1.920 USDT |
-| 1 milhão USDT | 2.000 USDT | 1.200 USDT | 9.600 USDT |
+| ----------------------- | ------------------------------ | ----------------- | -------------- |
+| 25 mil USDT             | 50 USDT                        | 30 USDT           | 240 USDT       |
+| 200 mil USDT            | 400 USDT                       | 240 USDT          | 1.920 USDT     |
+| 1 milhão USDT           | 2.000 USDT                     | 1.200 USDT        | 9.600 USDT     |
 
 Mas a hierarquia de valor é honesta: a maior economia deste ciclo não é de taxa. O incidente de junho custou 1,48 pontos percentuais do capital em um único evento que o novo desenho elimina por construção. Um ano inteiro de otimização de taxa não paga um único stop que ninguém executou.
 

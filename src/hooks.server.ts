@@ -25,10 +25,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   if (event.request.method === 'GET' && response.status === 200) {
     const contentType = response.headers.get('content-type') ?? '';
     if (contentType.includes('text/html')) {
-      response.headers.set(
-        'Cache-Control',
-        'public, max-age=60'
-      );
+      response.headers.set('Cache-Control', 'public, max-age=60');
     }
   }
 
