@@ -5,8 +5,7 @@
   import type { Snippet } from 'svelte';
   import NavBar from '$components/NavBar.svelte';
   import Footer from '$components/Footer.svelte';
-  import WhatsAppFloat from '$components/WhatsAppFloat.svelte';
-  import AIChatFloat from '$components/AIChatFloat.svelte';
+  import ContactMenu from '$components/ContactMenu.svelte';
   import Analytics from '$lib/analytics/Analytics.svelte';
   import type { LayoutData } from './$types';
 
@@ -24,8 +23,7 @@
     {@render children()}
   </main>
   <Footer />
-  <AIChatFloat />
-  <WhatsAppFloat />
+  <ContactMenu />
   <Analytics />
 </div>
 
