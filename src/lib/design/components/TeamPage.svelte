@@ -29,6 +29,16 @@
           ? 'AI Engineer, Platform & Backend Systems, Technical Leadership. Fundador e CEO da RBX Systems.'
           : 'AI Engineer, Platform & Backend Systems, Technical Leadership. Founder & CEO of RBX Systems.',
       href: '/leandro-damasio'
+    },
+    {
+      key: 'caue-souza',
+      name: 'Cauê Souza',
+      role: locale === 'pt-BR' ? 'CFO' : 'CFO',
+      bio:
+        locale === 'pt-BR'
+          ? 'Chief Financial Officer. Liderança financeira e estratégia para operações de alta exigência.'
+          : 'Chief Financial Officer. Financial leadership and strategy for high-demand operations.',
+      href: null
     }
   ]);
 </script>
@@ -47,10 +57,17 @@
   <ul class="founders">
     {#each founders as founder}
       <li class="founder-card">
-        <a href={founder.href} class="founder-link">
-          <span class="founder-name">{founder.name}</span>
-          <span class="founder-role">{founder.role}</span>
-        </a>
+        {#if founder.href}
+          <a href={founder.href} class="founder-link">
+            <span class="founder-name">{founder.name}</span>
+            <span class="founder-role">{founder.role}</span>
+          </a>
+        {:else}
+          <div class="founder-link">
+            <span class="founder-name">{founder.name}</span>
+            <span class="founder-role">{founder.role}</span>
+          </div>
+        {/if}
         <p class="founder-bio">{founder.bio}</p>
       </li>
     {/each}
