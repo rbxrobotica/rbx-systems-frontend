@@ -1,5 +1,3 @@
-import type { EventName, EventProps } from './index';
-
 export { trackEvent, trackPageview, type EventName, type EventProps } from './index';
 
 export const LANDING_OFFER_CTA = 'cta_click';

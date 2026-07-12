@@ -29,15 +29,15 @@ const assetCache = new SwrCache<ByteObject | null>(ttlMs * 10);
  * is simple trusted YAML from the CMS, so the slim parser is sufficient.
  */
 function parseFrontmatter(raw: string): {
-  data: Record<string, any>;
+  data: Record<string, unknown>;
   content: string;
 } {
   const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(raw);
   if (!match) return { data: {}, content: raw };
-  let data: Record<string, any> = {};
+  let data: Record<string, unknown> = {};
   try {
     const parsed = parseYaml(match[1]);
-    if (parsed && typeof parsed === 'object') data = parsed as Record<string, any>;
+    if (parsed && typeof parsed === 'object') data = parsed as Record<string, unknown>;
   } catch {
     data = {};
   }
@@ -89,11 +89,11 @@ async function fetchPage(path: string, locale: Locale): Promise<PageContent | nu
     if (!obj) return null;
     const { data, content } = parseFrontmatter(obj.body);
     return {
-      title: data.title ?? '',
-      description: data.description ?? '',
-      eyebrow: data.eyebrow,
-      lead: data.lead,
-      body: data.body,
+      title: (data.title as string) ?? '',
+      description: (data.description as string) ?? '',
+      eyebrow: data.eyebrow as string | undefined,
+      lead: data.lead as string | undefined,
+      body: data.body as string | undefined,
       html: marked.parse(content) as string,
       meta: data
     };
@@ -150,13 +150,13 @@ async function parsePost(key: string, slug: string): Promise<Post | null> {
     const { data, content } = parseFrontmatter(obj.body);
     return {
       slug,
-      title: data.title ?? slug,
-      date: data.date ?? '',
-      author: data.author ?? 'RBX Systems',
-      authorRole: data.authorRole,
-      tags: data.tags ?? [],
-      excerpt: data.excerpt ?? '',
-      cover: normalizeCover(data.cover, slug),
+      title: (data.title as string) ?? slug,
+      date: (data.date as string) ?? '',
+      author: (data.author as string) ?? 'RBX Systems',
+      authorRole: data.authorRole as string | undefined,
+      tags: (data.tags as string[]) ?? [],
+      excerpt: (data.excerpt as string) ?? '',
+      cover: normalizeCover(data.cover as string | undefined, slug),
       content,
       html: marked.parse(content) as string
     };

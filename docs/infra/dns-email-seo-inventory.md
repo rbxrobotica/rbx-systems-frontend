@@ -6,12 +6,12 @@
 
 ## 1. Domínios sob gestão RBX
 
-| Domínio | Provedor DNS | IP principal | Uso principal |
-|---|---|---|---|
-| `rbx.ia.br` | Registro.br (a.sec.dns.br, b.sec.dns.br) | `158.220.116.31` | Institucional pt-BR |
-| `rbxsystems.ch` | ns1.rbxsystems.ch, ns2.rbxsystems.ch | `158.220.116.31` | Institucional en |
-| `merovelis.com` | ns1.rbxsystems.ch, ns2.rbxsystems.ch | `158.220.116.31` | Marca de produto |
-| `strategos.gr` | ns1.rbxsystems.ch, ns2.rbxsystems.ch | `158.220.116.31` | Produto Strategos |
+| Domínio         | Provedor DNS                             | IP principal     | Uso principal       |
+| --------------- | ---------------------------------------- | ---------------- | ------------------- |
+| `rbx.ia.br`     | Registro.br (a.sec.dns.br, b.sec.dns.br) | `158.220.116.31` | Institucional pt-BR |
+| `rbxsystems.ch` | ns1.rbxsystems.ch, ns2.rbxsystems.ch     | `158.220.116.31` | Institucional en    |
+| `merovelis.com` | ns1.rbxsystems.ch, ns2.rbxsystems.ch     | `158.220.116.31` | Marca de produto    |
+| `strategos.gr`  | ns1.rbxsystems.ch, ns2.rbxsystems.ch     | `158.220.116.31` | Produto Strategos   |
 
 ---
 
@@ -19,76 +19,79 @@
 
 ### rbx.ia.br
 
-| Tipo | Registro | Observação |
-|---|---|---|
-| A | `158.220.116.31` | Aponta para cluster k3s |
-| NS | `a.sec.dns.br`, `b.sec.dns.br` | DNS do Registro.br |
-| MX | — | **AUSENTE** |
-| TXT | — | **AUSENTE** (sem SPF, DMARC, Search Console) |
-| CAA | — | **AUSENTE** |
+| Tipo | Registro                       | Observação                                   |
+| ---- | ------------------------------ | -------------------------------------------- |
+| A    | `158.220.116.31`               | Aponta para cluster k3s                      |
+| NS   | `a.sec.dns.br`, `b.sec.dns.br` | DNS do Registro.br                           |
+| MX   | —                              | **AUSENTE**                                  |
+| TXT  | —                              | **AUSENTE** (sem SPF, DMARC, Search Console) |
+| CAA  | —                              | **AUSENTE**                                  |
 
 ### rbxsystems.ch
 
-| Tipo | Registro | Observação |
-|---|---|---|
-| A | `158.220.116.31` | Cluster k3s |
-| MX | `10 mail.rbxsystems.ch` | Servidor de e-mail próprio |
-| TXT | `v=spf1 include:spf.mtasv.net ~all` | Postmark |
-| TXT (_dmarc) | `v=DMARC1; p=none; rua=mailto:dmarc@rbxsystems.ch; fo=1` | Modo monitoração |
-| DKIM | Não verificado | Requer checagem no Postmark |
-| CAA | — | **AUSENTE** |
+| Tipo          | Registro                                                 | Observação                  |
+| ------------- | -------------------------------------------------------- | --------------------------- |
+| A             | `158.220.116.31`                                         | Cluster k3s                 |
+| MX            | `10 mail.rbxsystems.ch`                                  | Servidor de e-mail próprio  |
+| TXT           | `v=spf1 include:spf.mtasv.net ~all`                      | Postmark                    |
+| TXT (\_dmarc) | `v=DMARC1; p=none; rua=mailto:dmarc@rbxsystems.ch; fo=1` | Modo monitoração            |
+| DKIM          | Não verificado                                           | Requer checagem no Postmark |
+| CAA           | —                                                        | **AUSENTE**                 |
 
 ### merovelis.com
 
-| Tipo | Registro | Observação |
-|---|---|---|
-| A | `158.220.116.31` | Cluster k3s |
-| NS | `ns1.rbxsystems.ch`, `ns2.rbxsystems.ch` | DNS delegado |
-| MX | — | **AUSENTE** (possivelmente herda via wildcard?) |
-| TXT | — | **AUSENTE** |
-| TXT (_dmarc) | `v=DMARC1; p=none; rua=mailto:dmarc@rbxsystems.ch; fo=1` | Existe |
-| DKIM | Não verificado | — |
-| CAA | — | **AUSENTE** |
+| Tipo          | Registro                                                 | Observação                                      |
+| ------------- | -------------------------------------------------------- | ----------------------------------------------- |
+| A             | `158.220.116.31`                                         | Cluster k3s                                     |
+| NS            | `ns1.rbxsystems.ch`, `ns2.rbxsystems.ch`                 | DNS delegado                                    |
+| MX            | —                                                        | **AUSENTE** (possivelmente herda via wildcard?) |
+| TXT           | —                                                        | **AUSENTE**                                     |
+| TXT (\_dmarc) | `v=DMARC1; p=none; rua=mailto:dmarc@rbxsystems.ch; fo=1` | Existe                                          |
+| DKIM          | Não verificado                                           | —                                               |
+| CAA           | —                                                        | **AUSENTE**                                     |
 
 ### strategos.gr
 
-| Tipo | Registro | Observação |
-|---|---|---|
-| A | `158.220.116.31` | Cluster k3s |
-| MX | `10 mail.rbxsystems.ch` | Mesmo MX de rbxsystems.ch |
-| TXT | `v=spf1 include:spf.mtasv.net ~all` | Postmark |
-| TXT (_dmarc) | — | **AUSENTE** |
-| DKIM | Não verificado | — |
-| CAA | — | **AUSENTE** |
+| Tipo          | Registro                            | Observação                |
+| ------------- | ----------------------------------- | ------------------------- |
+| A             | `158.220.116.31`                    | Cluster k3s               |
+| MX            | `10 mail.rbxsystems.ch`             | Mesmo MX de rbxsystems.ch |
+| TXT           | `v=spf1 include:spf.mtasv.net ~all` | Postmark                  |
+| TXT (\_dmarc) | —                                   | **AUSENTE**               |
+| DKIM          | Não verificado                      | —                         |
+| CAA           | —                                   | **AUSENTE**               |
 
 ---
 
 ## 3. Subdomínios detectados
 
-| Subdomínio | IP | Uso inferido | Recomendação |
-|---|---|---|---|
-| `www.rbxsystems.ch` | CNAME → rbxsystems.ch | Alias www | Manter + redirect 301 para apex |
-| `www.merovelis.com` | CNAME → merovelis.com | Alias www | Manter + redirect 301 para apex |
-| `mail.rbxsystems.ch` | `5.182.33.93` | Servidor de e-mail | Manter; proteger |
-| `console.rbx.ia.br` | `158.220.116.31` | Console RBX | Bloquear em robots.txt + auth |
-| `console.rbxsystems.ch` | `158.220.116.31` | Console RBX | Bloquear em robots.txt + auth |
-| `console.merovelis.com` | `158.220.116.31` | Console Merovelis | Bloquear em robots.txt + auth |
-| `app.rbxsystems.ch` | `158.220.116.31` | App RBX | Bloquear em robots.txt + auth |
-| `app.merovelis.com` | `158.220.116.31` | App Merovelis | Bloquear em robots.txt + auth |
-| `cms.rbxsystems.ch` | `158.220.116.31` | CMS RBX | Bloquear em robots.txt + auth |
-| `staging.rbx.ia.br` | `158.220.116.31` | Staging | Bloquear em robots.txt + auth + noindex |
+| Subdomínio              | IP                    | Uso inferido       | Recomendação                            |
+| ----------------------- | --------------------- | ------------------ | --------------------------------------- |
+| `www.rbxsystems.ch`     | CNAME → rbxsystems.ch | Alias www          | Manter + redirect 301 para apex         |
+| `www.merovelis.com`     | CNAME → merovelis.com | Alias www          | Manter + redirect 301 para apex         |
+| `mail.rbxsystems.ch`    | `5.182.33.93`         | Servidor de e-mail | Manter; proteger                        |
+| `console.rbx.ia.br`     | `158.220.116.31`      | Console RBX        | Bloquear em robots.txt + auth           |
+| `console.rbxsystems.ch` | `158.220.116.31`      | Console RBX        | Bloquear em robots.txt + auth           |
+| `console.merovelis.com` | `158.220.116.31`      | Console Merovelis  | Bloquear em robots.txt + auth           |
+| `app.rbxsystems.ch`     | `158.220.116.31`      | App RBX            | Bloquear em robots.txt + auth           |
+| `app.merovelis.com`     | `158.220.116.31`      | App Merovelis      | Bloquear em robots.txt + auth           |
+| `cms.rbxsystems.ch`     | `158.220.116.31`      | CMS RBX            | Bloquear em robots.txt + auth           |
+| `staging.rbx.ia.br`     | `158.220.116.31`      | Staging            | Bloquear em robots.txt + auth + noindex |
 
 ---
 
 ## 4. Configuração de e-mail
 
 ### Serviço identificado
+
 - Postmark (`spf.mtasv.net`) em uso para `rbxsystems.ch`, `merovelis.com` e `strategos.gr`.
 
 ### Provedores de envio
+
 - `mail.rbxsystems.ch` atua como MX.
 
 ### Riscos
+
 1. **rbx.ia.br** não tem infra de e-mail configurada. E-mails `@rbx.ia.br` não funcionam.
 2. **DMARC `p=none`** apenas monitora; não impede spoofing.
 3. **DKIM** não foi verificado; sem DKIM, entregabilidade fica prejudicada.
@@ -97,6 +100,7 @@
 ### Recomendações
 
 #### Para rbx.ia.br
+
 ```text
 MX    rbx.ia.br        10 mail.rbxsystems.ch
 TXT   rbx.ia.br        "v=spf1 include:spf.mtasv.net ~all"
@@ -106,12 +110,14 @@ TXT   rbx.ia.br        "google-site-verification=<token>"
 ```
 
 #### Para strategos.gr
+
 ```text
 TXT   _dmarc.strategos.gr "v=DMARC1; p=none; rua=mailto:dmarc@rbxsystems.ch; fo=1"
 TXT   default._domainkey.strategos.gr "<chave DKIM>"
 ```
 
 #### CAA (opcional mas recomendado)
+
 ```text
 CAA   rbx.ia.br        0 issue "letsencrypt.org"
 CAA   rbxsystems.ch    0 issue "letsencrypt.org"
@@ -123,16 +129,17 @@ CAA   strategos.gr     0 issue "letsencrypt.org"
 
 ## 5. Verificações de Search Console
 
-| Domínio | Método | Status |
-|---|---|---|
-| `rbx.ia.br` | Meta tag HTML (`google-site-verification`) | ✅ Verificado |
-| `rbxsystems.ch` | Meta tag HTML (`google-site-verification`) | ✅ Verificado |
-| `merovelis.com` | — | ⬜ Não verificado |
-| `strategos.gr` | — | ⬜ Não verificado |
+| Domínio         | Método                                     | Status            |
+| --------------- | ------------------------------------------ | ----------------- |
+| `rbx.ia.br`     | Meta tag HTML (`google-site-verification`) | ✅ Verificado     |
+| `rbxsystems.ch` | Meta tag HTML (`google-site-verification`) | ✅ Verificado     |
+| `merovelis.com` | —                                          | ⬜ Não verificado |
+| `strategos.gr`  | —                                          | ⬜ Não verificado |
 
 As propriedades de prefixo de URL `https://rbx.ia.br/` e `https://rbxsystems.ch/` foram verificadas via tag HTML injetada pelo componente `Seo.svelte`, sem alterações de DNS.
 
 **Sitemaps a submeter:**
+
 - `https://rbx.ia.br/sitemap.xml`
 - `https://rbxsystems.ch/sitemap.xml`
 
@@ -143,6 +150,7 @@ Recomendação futura: avaliar Bing Webmaster Tools para os mesmos domínios.
 ## 6. Redirects recomendados
 
 ### www → apex
+
 ```
 www.rbx.ia.br        → 301 → rbx.ia.br
 www.rbxsystems.ch    → 301 → rbxsystems.ch
@@ -151,11 +159,13 @@ www.strategos.gr     → 301 → strategos.gr
 ```
 
 ### http → https
+
 ```
 http://*  → 301 → https://*
 ```
 
 ### Idioma / conteúdo equivalente
+
 ```
 rbx.ia.br/servicos/*  ←hreflang→  rbxsystems.ch/services/*
 rbx.ia.br/produtos/*  ←hreflang→  rbxsystems.ch/products/*

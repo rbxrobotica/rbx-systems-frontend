@@ -64,10 +64,10 @@ With fees inside the risk budget, they became an engineering target. Every Robso
 
 The two legs are not symmetric:
 
-| Leg | Cost of not executing | Correct fee |
-| --- | --- | --- |
-| Entry | Zero. A missed opportunity, never a loss | Maker, worth waiting for |
-| Stop | Unbounded. This is the leg that bounds the loss | Taker, non-negotiable |
+| Leg   | Cost of not executing                           | Correct fee              |
+| ----- | ----------------------------------------------- | ------------------------ |
+| Entry | Zero. A missed opportunity, never a loss        | Maker, worth waiting for |
+| Stop  | Unbounded. This is the leg that bounds the loss | Taker, non-negotiable    |
 
 ADR-0040 proposes maker-first entries: a post-only limit order at the top of the book, repriced on a fixed interval, with a market escape when a time or price-drift budget is exhausted. Stops and exits remain market orders forever. That asymmetry became a written rule: fee optimization is only permitted on legs where non-execution is free.
 
@@ -78,10 +78,10 @@ Sizing does not change: it keeps assuming taker on both legs, because the 1% cap
 Maker-entry savings are linear in volume. With a 0.10% taker fee and a typical 0.02% maker fee, the entry leg drops by 80%, cutting round-trip cost by 40%:
 
 | Monthly traded volume | Fees today (0.20% round trip) | With maker entry | Annual savings |
-| --- | --- | --- | --- |
-| 25k USDT | 50 USDT | 30 USDT | 240 USDT |
-| 200k USDT | 400 USDT | 240 USDT | 1,920 USDT |
-| 1M USDT | 2,000 USDT | 1,200 USDT | 9,600 USDT |
+| --------------------- | ----------------------------- | ---------------- | -------------- |
+| 25k USDT              | 50 USDT                       | 30 USDT          | 240 USDT       |
+| 200k USDT             | 400 USDT                      | 240 USDT         | 1,920 USDT     |
+| 1M USDT               | 2,000 USDT                    | 1,200 USDT       | 9,600 USDT     |
 
 But the value hierarchy is honest: the biggest saving of this cycle is not about fees. The June incident cost 1.48 percentage points of capital in a single event that the new design eliminates by construction. A full year of fee optimization does not pay for one stop that nobody executed.
 

@@ -1,6 +1,6 @@
 ---
-title: "Nome do Serviço — RBX Systems"
-description: "Descrição do serviço em 120-160 caracteres. Inclua palavras-chave principais."
+title: 'Nome do Serviço — RBX Systems'
+description: 'Descrição do serviço em 120-160 caracteres. Inclua palavras-chave principais.'
 ---
 
 # H1: Nome do Serviço
@@ -37,6 +37,7 @@ CTA clara para contato ou diagnóstico.
 **Schema:** `Service` + `WebPage`
 
 **Links internos sugeridos:**
+
 - [/sobre](/sobre)
 - [/produtos](/produtos)
 - [/contato](/contato)

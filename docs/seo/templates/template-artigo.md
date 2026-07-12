@@ -1,11 +1,11 @@
 ---
-title: "Título otimizado com palavra-chave principal"
-date: "2026-07-03"
-author: "Leandro Damasio"
-authorRole: "Fundador e CEO, RBX Systems"
-excerpt: "Meta description da página. Entre 120 e 160 caracteres, com palavra-chave e CTA implícito."
-cover: "/api/assets/blog/covers/slug.jpg"
-tags: ["LLMOps", "agentes de IA", "observabilidade"]
+title: 'Título otimizado com palavra-chave principal'
+date: '2026-07-03'
+author: 'Leandro Damasio'
+authorRole: 'Fundador e CEO, RBX Systems'
+excerpt: 'Meta description da página. Entre 120 e 160 caracteres, com palavra-chave e CTA implícito.'
+cover: '/api/assets/blog/covers/slug.jpg'
+tags: ['LLMOps', 'agentes de IA', 'observabilidade']
 ---
 
 # H1: mesmo título ou variação curta
@@ -39,6 +39,7 @@ Resuma e inclua CTA.
 ---
 
 **Links internos sugeridos:**
+
 - [/servicos/llmops](/servicos/llmops)
 - [/produtos/rbx-yield](/produtos/rbx-yield)
 - [/cases](/cases)

@@ -81,17 +81,17 @@ mandatory per-page-view hot path: public content is cacheable.
 
 ## Environment Variables
 
-| Variable | Purpose | Scope |
-| --- | --- | --- |
-| `PORT` | Node listen port (`8080`) | per deployment |
-| `ORIGIN` | Canonical host for adapter-node host validation | per deployment (apex host) |
-| `PROTOCOL_HEADER` | `x-forwarded-proto` (Traefik) | per deployment |
-| `HOST_HEADER` | `x-forwarded-host` (Traefik) | per deployment |
-| `CONTENT_CACHE_TTL_SECONDS` | Content/list freshness TTL (default `60`) | optional |
-| `CONTABO_S3_ENDPOINT` | S3-compatible endpoint | existing |
-| `CONTABO_S3_CONTENT_BUCKET` | `rbx-content` | existing |
-| `CONTABO_S3_PUBLIC_URL` | Public base URL (server use only) | existing |
-| `CONTABO_S3_ACCESS_KEY` / `CONTABO_S3_SECRET_KEY` | Credentials (k8s Secret) | existing |
+| Variable                                          | Purpose                                         | Scope                      |
+| ------------------------------------------------- | ----------------------------------------------- | -------------------------- |
+| `PORT`                                            | Node listen port (`8080`)                       | per deployment             |
+| `ORIGIN`                                          | Canonical host for adapter-node host validation | per deployment (apex host) |
+| `PROTOCOL_HEADER`                                 | `x-forwarded-proto` (Traefik)                   | per deployment             |
+| `HOST_HEADER`                                     | `x-forwarded-host` (Traefik)                    | per deployment             |
+| `CONTENT_CACHE_TTL_SECONDS`                       | Content/list freshness TTL (default `60`)       | optional                   |
+| `CONTABO_S3_ENDPOINT`                             | S3-compatible endpoint                          | existing                   |
+| `CONTABO_S3_CONTENT_BUCKET`                       | `rbx-content`                                   | existing                   |
+| `CONTABO_S3_PUBLIC_URL`                           | Public base URL (server use only)               | existing                   |
+| `CONTABO_S3_ACCESS_KEY` / `CONTABO_S3_SECRET_KEY` | Credentials (k8s Secret)                        | existing                   |
 
 ## Consequences
 

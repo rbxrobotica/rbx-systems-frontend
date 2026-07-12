@@ -27,6 +27,11 @@ export default ts.config(
     }
   },
   {
+    rules: {
+      'svelte/no-at-html-tags': 'off'
+    }
+  },
+  {
     ignores: ['build/', '.svelte-kit/', 'node_modules/', 'docker/']
   }
 );

@@ -6,15 +6,15 @@
 
 ## 1. O que entregamos
 
-| Item | Status | URL |
-|------|--------|-----|
-| Site institucional RBX (SvelteKit) | ✅ No ar | https://rbx.ia.br |
-| Site institucional RBX (CH) | ✅ No ar | https://rbxsystems.ch |
-| Formulário de contato | ✅ Funcionando | Na home de ambos os sites |
-| Botão flutuante / drawer de WhatsApp | ✅ Funcionando | Canto inferior direito |
-| Anti-abuse Altcha | ✅ Funcionando | Botão customizado (resolve desafio SHA-256) |
-| Backend `rbx-comms` | ✅ No ar | https://api.comms.rbxsystems.ch |
-| Console de atendimento (inbox) | ✅ No ar | https://comms.rbxsystems.ch |
+| Item                                 | Status         | URL                                         |
+| ------------------------------------ | -------------- | ------------------------------------------- |
+| Site institucional RBX (SvelteKit)   | ✅ No ar       | https://rbx.ia.br                           |
+| Site institucional RBX (CH)          | ✅ No ar       | https://rbxsystems.ch                       |
+| Formulário de contato                | ✅ Funcionando | Na home de ambos os sites                   |
+| Botão flutuante / drawer de WhatsApp | ✅ Funcionando | Canto inferior direito                      |
+| Anti-abuse Altcha                    | ✅ Funcionando | Botão customizado (resolve desafio SHA-256) |
+| Backend `rbx-comms`                  | ✅ No ar       | https://api.comms.rbxsystems.ch             |
+| Console de atendimento (inbox)       | ✅ No ar       | https://comms.rbxsystems.ch                 |
 
 ---
 
@@ -84,14 +84,14 @@ A última mensagem enviada pelo site está persistida na tabela `comms.submissio
 
 ## 5. URLs importantes
 
-| Propósito | URL |
-|-----------|-----|
-| Site Brasil | https://rbx.ia.br |
-| Site Suíça | https://rbxsystems.ch |
-| API de comunicações | https://api.comms.rbxsystems.ch |
-| Console de atendimento | https://comms.rbxsystems.ch |
-| Repositório frontend | https://github.com/rbxrobotica/rbx-robotica-frontend |
-| Repositório backend | https://github.com/rbxrobotica/rbx-comms |
+| Propósito              | URL                                                  |
+| ---------------------- | ---------------------------------------------------- |
+| Site Brasil            | https://rbx.ia.br                                    |
+| Site Suíça             | https://rbxsystems.ch                                |
+| API de comunicações    | https://api.comms.rbxsystems.ch                      |
+| Console de atendimento | https://comms.rbxsystems.ch                          |
+| Repositório frontend   | https://github.com/rbxrobotica/rbx-robotica-frontend |
+| Repositório backend    | https://github.com/rbxrobotica/rbx-comms             |
 
 ---
 
@@ -104,4 +104,4 @@ A última mensagem enviada pelo site está persistida na tabela `comms.submissio
 
 ---
 
-*Documento gerado em 2026-06-24.*
+_Documento gerado em 2026-06-24._

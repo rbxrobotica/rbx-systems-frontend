@@ -24,7 +24,7 @@
 <Seo {title} {description} locale={data.locale} canonical={pageUrl} {schema} />
 
 <LandingOffer
-  dictionary={dictionary}
+  {dictionary}
   source="briefing-btc"
   titleKey="landing.briefingBtc.title"
   subtitleKey="landing.briefingBtc.subtitle"
@@ -32,6 +32,4 @@
   benefitsKey="landing.briefingBtc.benefits"
   ctaKey="landing.briefingBtc.cta"
   formTitleKey="landing.briefingBtc.formTitle"
-  metaTitleKey="landing.briefingBtc.metaTitle"
-  metaDescriptionKey="landing.briefingBtc.metaDescription"
 />

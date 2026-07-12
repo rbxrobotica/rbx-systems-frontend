@@ -7,9 +7,11 @@
 ## 1. Componente SEO reutilizável
 
 ### Onde
+
 `src/lib/design/components/Seo.svelte` no `rbx-robotica-frontend`.
 
 ### O que faz
+
 - Gera `<title>` e `<meta name="description">`.
 - Injeta `<link rel="canonical">`.
 - Injeta Open Graph (`og:title`, `og:description`, `og:url`, `og:type`, `og:site_name`).
@@ -19,6 +21,7 @@
 - Detecta idioma e domínio automaticamente.
 
 ### Props
+
 ```ts
 interface SeoProps {
   title: string;
@@ -32,12 +35,15 @@ interface SeoProps {
 ```
 
 ### Risco
+
 **Baixo**. Apenas metadados HTML.
 
 ### Rollback
+
 Remover importação do componente nas páginas; restaurar `svelte:head` anterior.
 
 ### Validação
+
 - `curl -s https://rbx.ia.br/ | grep -E '<title|<meta|ld+json'`
 - Google Rich Results Test
 - OpenGraph.xyz
@@ -47,9 +53,11 @@ Remover importação do componente nas páginas; restaurar `svelte:head` anterio
 ## 2. robots.txt seguro
 
 ### Onde
+
 `static/robots.txt` no `rbx-robotica-frontend`.
 
 ### Conteúdo proposto
+
 ```text
 User-agent: *
 Allow: /
@@ -70,15 +78,19 @@ Sitemap: https://rbx.ia.br/sitemap.xml
 Para `rbxsystems.ch`, `merovelis.com` e `strategos.gr`, versões equivalentes com seus respectivos domínios.
 
 ### Observação
+
 `robots.txt` **não é segurança**. Áreas privadas devem usar autenticação e/ou `noindex`.
 
 ### Risco
+
 **Baixo**. Apenas diretriz de rastreamento.
 
 ### Rollback
+
 Remover arquivo `static/robots.txt`.
 
 ### Validação
+
 - `curl https://rbx.ia.br/robots.txt`
 - Google Search Console → robots.txt Tester
 
@@ -87,16 +99,20 @@ Remover arquivo `static/robots.txt`.
 ## 3. sitemap.xml
 
 ### Opção A — sitemap estático (rápido)
+
 Criar `static/sitemap.xml` com URLs fixas.
 
 ### Opção B — sitemap dinâmico (recomendado)
+
 Criar rota `src/routes/sitemap.xml/+server.ts` que:
+
 - Lista páginas institucionais.
 - Lista serviços e produtos.
 - Consulta `loadAllPosts()` para incluir posts do journal.
 - Gera XML com `<lastmod>`, `<changefreq>`, `<priority>`.
 
 ### Estrutura do sitemap
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -111,12 +127,15 @@ Criar rota `src/routes/sitemap.xml/+server.ts` que:
 ```
 
 ### Risco
+
 **Baixo** (estático) a **médio** (dinâmico — precisa de S3 disponível).
 
 ### Rollback
+
 Remover rota/arquivo.
 
 ### Validação
+
 - `curl https://rbx.ia.br/sitemap.xml`
 - Google Search Console → Sitemaps
 
@@ -125,10 +144,13 @@ Remover rota/arquivo.
 ## 4. Correção de rotas em inglês no rbxsystems.ch
 
 ### Problema
+
 `/solutions` e `/products` retornam 404.
 
 ### Solução
+
 Criar aliases de rota no SvelteKit ou rotas dedicadas:
+
 - `src/routes/solutions/+page.svelte` → reutiliza componente `/solucoes`.
 - `src/routes/products/+page.svelte` → reutiliza componente `/produtos`.
 - `src/routes/about/+page.svelte` → `/sobre`.
@@ -137,12 +159,15 @@ Criar aliases de rota no SvelteKit ou rotas dedicadas:
 Ou, preferencialmente, configurar redirecionamentos no `hooks.server.ts` ou no Traefik.
 
 ### Risco
+
 **Médio**. Mudança de URL visível. Requer validação de links internos.
 
 ### Rollback
+
 Remover aliases ou redirecionamentos.
 
 ### Validação
+
 - `curl -I https://rbxsystems.ch/solutions` → 200
 - `curl -I https://rbxsystems.ch/products` → 200
 
@@ -151,28 +176,34 @@ Remover aliases ou redirecionamentos.
 ## 5. Páginas novas: `/sobre`, `/leandro-damasio`, `/contato`
 
 ### `/sobre`
+
 - Conteúdo carregado de S3: `site/{locale}/about/index.md`.
 - Schema: `Organization`, `AboutPage`.
 - CTA: contato, serviços, produtos.
 
 ### `/leandro-damasio`
+
 - Página do fundador.
 - Schema: `Person`, `ProfilePage`.
 - Links para LinkedIn, GitHub, outros projetos.
 - Foto otimizada.
 
 ### `/contato`
+
 - Página de contato.
 - Schema: `ContactPage`, `Organization`.
 - Formulário integrado ao `rbx-comms`.
 
 ### Risco
+
 **Baixo**. Novas páginas, nenhuma URL existente é quebrada.
 
 ### Rollback
+
 Remover rotas e conteúdo S3.
 
 ### Validação
+
 - Acessar as URLs em pt-BR e en.
 - Verificar schemas no Rich Results Test.
 
@@ -181,6 +212,7 @@ Remover rotas e conteúdo S3.
 ## 6. JSON-LD em todas as páginas
 
 ### Página inicial
+
 ```json
 {
   "@context": "https://schema.org",
@@ -193,21 +225,27 @@ Remover rotas e conteúdo S3.
 ```
 
 ### Página de serviço
+
 Incluir `Service` + `WebPage`.
 
 ### Página de produto
+
 Incluir `SoftwareApplication` + `WebPage`.
 
 ### Post de blog
+
 Incluir `BlogPosting` + `WebPage`.
 
 ### Risco
+
 **Baixo**.
 
 ### Rollback
+
 Remover script JSON-LD do componente Seo.
 
 ### Validação
+
 - Rich Results Test
 - Schema Markup Validator
 
@@ -216,18 +254,22 @@ Remover script JSON-LD do componente Seo.
 ## 7. Open Graph e Twitter Cards
 
 Adicionar no componente Seo:
+
 - `og:title`, `og:description`, `og:url`, `og:type`, `og:site_name`, `og:image`, `og:locale`.
 - `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`.
 
 Imagem padrão OG: 1200×630 JPEG, armazenada em S3 e servida via `/api/assets/`.
 
 ### Risco
+
 **Baixo**.
 
 ### Rollback
+
 Remover meta tags.
 
 ### Validação
+
 - OpenGraph.xyz
 - Twitter Card Validator
 
@@ -236,6 +278,7 @@ Remover meta tags.
 ## 8. Headers de segurança e performance
 
 Adicionar via `hooks.server.ts` ou Traefik middleware:
+
 - `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload`
 - `X-Frame-Options: DENY`
 - `X-Content-Type-Options: nosniff`
@@ -243,16 +286,20 @@ Adicionar via `hooks.server.ts` ou Traefik middleware:
 - `Content-Security-Policy` (avançado, testar antes)
 
 Cache:
+
 - HTML: `public, max-age=60` (já existe)
 - Assets: `public, max-age=31536000, immutable` (já existe)
 
 ### Risco
+
 **Médio** (HSTS irreversível por 2 anos; CSP pode quebrar scripts).
 
 ### Rollback
+
 Remover headers no Traefik ou hooks.
 
 ### Validação
+
 - `curl -I https://rbx.ia.br/`
 - securityheaders.com
 
@@ -261,7 +308,9 @@ Remover headers no Traefik ou hooks.
 ## 9. DNS, e-mail e Search Console
 
 ### rbx.ia.br
+
 Ações que exigem confirmação humana:
+
 - Adicionar MX para `mail.rbxsystems.ch` ou provedor de e-mail.
 - Adicionar SPF: `v=spf1 include:spf.mtasv.net ~all`.
 - Configurar DKIM com chave do Postmark.
@@ -269,6 +318,7 @@ Ações que exigem confirmação humana:
 - Adicionar TXT de verificação do Google Search Console.
 
 ### Search Console
+
 - ✅ Verificar `rbx.ia.br` e `rbxsystems.ch` via meta tag HTML (`google-site-verification`).
 - ✅ Sitemaps dinâmicos por domínio implementados (`/src/routes/sitemap.xml/+server.ts`).
 - ⬜ Confirmar submissão dos sitemaps no Search Console:
@@ -278,12 +328,15 @@ Ações que exigem confirmação humana:
 - Nota: optamos por propriedades de **prefixo de URL** para evitar alterações de DNS nos domínios principais.
 
 ### Risco
+
 **Alto** (e-mail). Qualquer erro pode quebrar entrega.
 
 ### Rollback
+
 Restaurar registros DNS anteriores (requer backup).
 
 ### Validação
+
 - `dig TXT rbx.ia.br`
 - Teste de envio/recebimento de e-mail.
 - Search Console confirmando propriedade.
@@ -293,6 +346,7 @@ Restaurar registros DNS anteriores (requer backup).
 ## 10. Validação contínua no CI
 
 Adicionar script `scripts/seo-check.js` que:
+
 - Valida que cada página tem title, description, canonical, H1.
 - Valida que não há title/description duplicados.
 - Valida que robots.txt e sitemap.xml existem.
@@ -301,12 +355,15 @@ Adicionar script `scripts/seo-check.js` que:
 Executar no GitHub Actions em PRs.
 
 ### Risco
+
 **Baixo**.
 
 ### Rollback
+
 Remover step do workflow.
 
 ### Validação
+
 - CI passando.
 
 ---
