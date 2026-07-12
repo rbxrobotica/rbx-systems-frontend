@@ -7,6 +7,7 @@
   import Footer from '$components/Footer.svelte';
   import WhatsAppFloat from '$components/WhatsAppFloat.svelte';
   import AIChatFloat from '$components/AIChatFloat.svelte';
+  import Analytics from '$lib/analytics/Analytics.svelte';
   import type { LayoutData } from './$types';
 
   interface Props {
@@ -25,6 +26,7 @@
   <Footer />
   <AIChatFloat />
   <WhatsAppFloat />
+  <Analytics />
 </div>
 
 <style>
