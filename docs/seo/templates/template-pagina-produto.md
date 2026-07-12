@@ -1,6 +1,6 @@
 ---
-title: "Nome do Produto — RBX Systems"
-description: "Descrição do produto em 120-160 caracteres. Inclua palavras-chave principais."
+title: 'Nome do Produto — RBX Systems'
+description: 'Descrição do produto em 120-160 caracteres. Inclua palavras-chave principais.'
 ---
 
 # H1: Nome do Produto
@@ -38,6 +38,7 @@ CTA: solicitar acesso, agendar demo ou ver documentação.
 **Schema:** `SoftwareApplication` + `WebPage`
 
 **Links internos sugeridos:**
+
 - [/sobre](/sobre)
 - [/servicos/engenharia-de-ia](/servicos/engenharia-de-ia)
 - [/contato](/contato)

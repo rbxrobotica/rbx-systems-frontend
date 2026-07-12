@@ -2,7 +2,6 @@
   import { _ } from 'svelte-i18n';
   import ContactForm from './ContactForm.svelte';
   import WhatsAppDrawer from './WhatsAppDrawer.svelte';
-
 </script>
 
 <section id="contact" class="contact">

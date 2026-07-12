@@ -31,9 +31,7 @@
   const ogImage = $derived(image ?? `${siteUrl}/brand/rbx-og.jpg`);
   const ogLocale = $derived(locale === 'pt-BR' ? 'pt_BR' : 'en_US');
 
-  const inferredAlternate = $derived(
-    alternate ?? getAlternates(locale, $page.url.pathname)
-  );
+  const inferredAlternate = $derived(alternate ?? getAlternates(locale, $page.url.pathname));
 
   const structuredData = $derived(
     schema
@@ -81,6 +79,6 @@
 
   <!-- JSON-LD -->
   {#if structuredData}
-    {@html `<script type="application/ld+json">${structuredData}</script>`}
+    {@html '\u003cscript type="application/ld+json"\u003e' + structuredData + '\u003c/script\u003e'}
   {/if}
 </svelte:head>

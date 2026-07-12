@@ -182,7 +182,7 @@ Dark background, minimal, tech-abstract, cinematic lighting, no text,
 
 | Script                                                      | Uso                                                                   |
 | ----------------------------------------------------------- | --------------------------------------------------------------------- |
-| `./scripts/blog-publish.sh <arquivo.md>`                   | Faz upload do post para o S3                                          |
+| `./scripts/blog-publish.sh <arquivo.md>`                    | Faz upload do post para o S3                                          |
 | `./scripts/blog-publish.sh --all-locales <slug-ou-arquivo>` | Faz upload do post base e de todas as variantes de locale encontradas |
 | `./scripts/blog-cover-upload.sh <imagem.jpg> <slug>`        | Faz upload da capa para o S3                                          |
 

@@ -1,6 +1,6 @@
 ---
-title: "Título da Página — RBX Systems"
-description: "Descrição da página em 120-160 caracteres."
+title: 'Título da Página — RBX Systems'
+description: 'Descrição da página em 120-160 caracteres.'
 ---
 
 # H1: Título da Página
@@ -28,6 +28,7 @@ CTA para contato, serviços ou produtos.
 **Schema:** `WebPage` + `Organization` / `Person` / `AboutPage` / `ContactPage`
 
 **Links internos sugeridos:**
+
 - [/sobre](/sobre)
 - [/leandro-damasio](/leandro-damasio)
 - [/servicos](/servicos)

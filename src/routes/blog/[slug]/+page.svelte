@@ -36,7 +36,14 @@
   );
 </script>
 
-<Seo title={pageTitle} description={pageDescription} locale={data.locale} canonical={pageUrl} type="article" {schema} />
+<Seo
+  title={pageTitle}
+  description={pageDescription}
+  locale={data.locale}
+  canonical={pageUrl}
+  type="article"
+  {schema}
+/>
 
 {#if data.post}
   <article>
