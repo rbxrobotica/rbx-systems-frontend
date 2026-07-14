@@ -8,7 +8,7 @@
 
 <ContentPage
   page={data.page}
-  fallbackTitle={t(data.locale, 'caueSouza.headline')}
-  fallbackLead={t(data.locale, 'caueSouza.body')}
+  fallbackTitle={t(data.locale, 'caueAlencar.headline')}
+  fallbackLead={t(data.locale, 'caueAlencar.body')}
   locale={data.locale}
 />

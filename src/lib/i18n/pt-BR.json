@@ -13,7 +13,7 @@
     "about": "Sobre",
     "team": "Equipe",
     "leandroDamasio": "Leandro Damasio",
-    "caueSouza": "Cauê Souza"
+    "caueAlencar": "Cauê Alencar"
   },
   "footer": {
     "description": "Engenharia de sistemas, automação e infraestrutura para operações de alta exigência.",
@@ -48,10 +48,10 @@
     "headline": "Leandro Damasio",
     "body": "AI Engineer, Platform & Backend Systems, Technical Leadership. Fundador e CEO da RBX Systems."
   },
-  "caueSouza": {
-    "metaTitle": "Cauê Souza — CFO da RBX Systems",
-    "metaDescription": "Cauê Souza é Chief Financial Officer da RBX Systems. Liderança financeira e estratégia para operações de alta exigência.",
-    "headline": "Cauê Souza",
+  "caueAlencar": {
+    "metaTitle": "Cauê Alencar — CFO da RBX Systems",
+    "metaDescription": "Cauê Alencar é Chief Financial Officer da RBX Systems. Liderança financeira e estratégia para operações de alta exigência.",
+    "headline": "Cauê Alencar",
     "body": "Chief Financial Officer. Liderança financeira e estratégia para operações de alta exigência."
   },
   "solutions": {
