@@ -625,7 +625,7 @@ A RBX projeta e opera plataformas, automações e infraestrutura para ambientes 
 ## Liderança
 
 - **Leandro Damasio** — Fundador & CEO. AI Engineer, Platform & Backend Systems, Technical Leadership. Criador de produtos como Strategos, Robson e Verentir.
-- **Cauê Souza** — CFO. Liderança financeira e estratégia para operações de alta exigência.
+- **Cauê Alencar** — CFO. Liderança financeira e estratégia para operações de alta exigência.
 `,
   `---
 title: About us
@@ -639,7 +639,7 @@ RBX designs and operates platforms, automations and infrastructure for environme
 ## Leadership
 
 - **Leandro Damasio** — Founder & CEO. AI Engineer, Platform & Backend Systems, Technical Leadership. Creator of products such as Strategos, Robson and Verentir.
-- **Cauê Souza** — CFO. Financial leadership and strategy for high-demand operations.
+- **Cauê Alencar** — CFO. Financial leadership and strategy for high-demand operations.
 `
 );
 
@@ -689,26 +689,26 @@ Leandro Damasio is an AI Engineer and founder of RBX Systems. He created product
 `
 );
 
-// Cauê Souza
+// Cauê Alencar
 addPage(
-  'caue-souza',
+  'caue-alencar',
   `---
-title: Cauê Souza
+title: Cauê Alencar
 description: CFO da RBX Systems.
 eyebrow: Chief Financial Officer
 lead: Liderança financeira e estratégia para operações de alta exigência.
 ---
 
-Cauê Souza é Chief Financial Officer da RBX Systems. Lidera a estratégia financeira e operacional para plataformas críticas.
+Cauê Alencar é Chief Financial Officer da RBX Systems. Lidera a estratégia financeira e operacional para plataformas críticas.
 `,
   `---
-title: Cauê Souza
+title: Cauê Alencar
 description: CFO of RBX Systems.
 eyebrow: Chief Financial Officer
 lead: Financial leadership and strategy for high-demand operations.
 ---
 
-Cauê Souza is Chief Financial Officer of RBX Systems. He leads financial and operational strategy for mission-critical platforms.
+Cauê Alencar is Chief Financial Officer of RBX Systems. He leads financial and operational strategy for mission-critical platforms.
 `
 );
 

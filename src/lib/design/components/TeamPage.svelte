@@ -31,14 +31,14 @@
       href: '/leandro-damasio'
     },
     {
-      key: 'caue-souza',
-      name: 'Cauê Souza',
+      key: 'caue-alencar',
+      name: 'Cauê Alencar',
       role: locale === 'pt-BR' ? 'CFO' : 'CFO',
       bio:
         locale === 'pt-BR'
           ? 'Chief Financial Officer. Liderança financeira e estratégia para operações de alta exigência.'
           : 'Chief Financial Officer. Financial leadership and strategy for high-demand operations.',
-      href: '/caue-souza'
+      href: '/caue-alencar'
     }
   ]);
 </script>

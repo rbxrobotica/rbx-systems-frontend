@@ -4,6 +4,6 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url }) => {
   const locale = detectLocaleFromUrl(url);
-  const page = await loadPage('caue-souza', locale);
+  const page = await loadPage('caue-alencar', locale);
   return { locale, page };
 };
