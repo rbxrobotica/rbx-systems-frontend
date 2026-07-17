@@ -1,6 +1,7 @@
 <script lang="ts">
   import Seo from '$components/Seo.svelte';
   import LandingOffer from '$components/LandingOffer.svelte';
+  import CheckoutForm from '$components/CheckoutForm.svelte';
   import { buildGraph, websiteSchema } from '$lib/seo/schema';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
@@ -32,4 +33,22 @@
   benefitsKey="landing.briefingBtc.benefits"
   ctaKey="landing.briefingBtc.cta"
   formTitleKey="landing.briefingBtc.formTitle"
-/>
+>
+  {#snippet checkout()}
+    <CheckoutForm locale={data.locale} />
+    <p class="or-divider">
+      {data.locale === 'pt-BR' ? 'ou fale com a gente antes' : 'or talk to us first'}
+    </p>
+  {/snippet}
+</LandingOffer>
+
+<style>
+  .or-divider {
+    text-align: center;
+    font-size: var(--text-xs);
+    color: var(--fg-3);
+    text-transform: uppercase;
+    letter-spacing: var(--track-label);
+    padding: var(--s-4) 0 0;
+  }
+</style>

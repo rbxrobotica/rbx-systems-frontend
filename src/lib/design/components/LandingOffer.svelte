@@ -13,6 +13,10 @@
     ctaKey: string;
     formTitleKey: string;
     children?: import('svelte').Snippet;
+    // Optional — when provided, renders above the lead-capture form so the
+    // page can offer a real checkout instead of (or alongside) a lead form.
+    // Undefined by default: every other LandingOffer-based LP is unaffected.
+    checkout?: import('svelte').Snippet;
   }
 
   let {
@@ -24,7 +28,8 @@
     benefitsKey,
     ctaKey,
     formTitleKey,
-    children
+    children,
+    checkout
   }: Props = $props();
 
   const tr = (key: string) => t(dictionary, key);
@@ -76,6 +81,9 @@
   </div>
 
   <div class="form-card" id="lead-form">
+    {#if checkout}
+      {@render checkout()}
+    {/if}
     <div class="hairline"></div>
     <div class="corners" aria-hidden="true"></div>
     <div class="form-inner">
