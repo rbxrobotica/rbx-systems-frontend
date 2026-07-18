@@ -3,6 +3,12 @@
   import { getCommsBaseUrl } from '$lib/api/comms';
   import AltchaWidget from './AltchaWidget.svelte';
 
+  interface Props {
+    source?: string;
+  }
+
+  let { source = 'site' }: Props = $props();
+
   type Status = 'idle' | 'submitting' | 'success' | 'error';
 
   let name = $state('');
@@ -42,7 +48,7 @@
           whatsapp_opt_in: whatsappOptIn,
           altcha: payload,
           website,
-          source: 'site',
+          source,
           language: $_('common.languageCode') ?? 'pt'
         })
       });
