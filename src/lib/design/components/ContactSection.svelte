@@ -2,12 +2,20 @@
   import { _ } from 'svelte-i18n';
   import ContactForm from './ContactForm.svelte';
   import WhatsAppDrawer from './WhatsAppDrawer.svelte';
+
+  interface Props {
+    source?: string;
+    heading?: string;
+    body?: string;
+  }
+
+  let { source = 'site', heading, body }: Props = $props();
 </script>
 
 <section id="contact" class="contact">
   <div class="intro">
-    <h2>{$_('contact.heading')}</h2>
-    <p>{$_('contact.body')}</p>
+    <h2>{heading ?? $_('contact.heading')}</h2>
+    <p>{body ?? $_('contact.body')}</p>
   </div>
 
   <div class="grid">
@@ -18,7 +26,7 @@
         <div class="body">
           <div>
             <h3>{$_('contact.whatsappLabel')}</h3>
-            <p class="note">{$_('contact.body')}</p>
+            <p class="note">{body ?? $_('contact.body')}</p>
             {#snippet waTrigger(open: () => void)}
               <button type="button" class="wa-button" onclick={open}>
                 <svg viewBox="0 0 24 24" fill="currentColor" class="icon-small">
@@ -29,14 +37,14 @@
                 {$_('contact.whatsappCta')}
               </button>
             {/snippet}
-            <WhatsAppDrawer trigger={waTrigger} />
+            <WhatsAppDrawer trigger={waTrigger} {source} />
           </div>
         </div>
       </div>
     </div>
 
     <div class="form-col">
-      <ContactForm />
+      <ContactForm {source} />
     </div>
   </div>
 </section>

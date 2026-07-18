@@ -8,9 +8,10 @@
   interface Props {
     trigger: Snippet<[() => void]>;
     initialMessage?: string;
+    source?: string;
   }
 
-  let { trigger, initialMessage = '' }: Props = $props();
+  let { trigger, initialMessage = '', source = 'whatsapp' }: Props = $props();
 
   type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -61,7 +62,7 @@
           message: message || 'Contato solicitado via WhatsApp',
           whatsapp_opt_in: true,
           altcha: payload,
-          source: 'whatsapp',
+          source,
           language: $_('common.languageCode') ?? 'pt'
         })
       });
