@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getCommerceBaseUrl } from '$lib/api/commerce';
   import { trackEvent, FORM_SUBMIT, FORM_SUCCESS, FORM_ERROR } from '$lib/analytics/events';
+  import { getAttributionPayload } from '$lib/analytics/utm';
   import AltchaWidget from './AltchaWidget.svelte';
   import type { Locale } from '$types/content';
 
@@ -106,7 +107,11 @@
           customer_doc: doc,
           customer_phone: phone,
           altcha: payload,
-          website
+          website,
+          // Attribution (slice S2): optional server-side; first-touch UTMs win,
+          // last_touch_utm (JSON string) rides along when it differs.
+          source,
+          ...getAttributionPayload()
         })
       });
 
