@@ -97,6 +97,10 @@
       "submitting": "Sending...",
       "success": "Message sent. We'll get back to you soon.",
       "error": "Could not send. Please check the fields and try again."
+    },
+    "strategos": {
+      "metaTitle": "Strategos Founder Plan — Early Access",
+      "metaDescription": "Request early access to the Strategos Founder Plan: a situation room for founders working through strategic decisions with disciplined, auditable analysis."
     }
   },
   "services": {

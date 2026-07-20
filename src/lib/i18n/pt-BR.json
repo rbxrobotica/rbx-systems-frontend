@@ -97,6 +97,10 @@
       "submitting": "Enviando...",
       "success": "Mensagem enviada. Entraremos em contato em breve.",
       "error": "Não foi possível enviar. Verifique os campos e tente novamente."
+    },
+    "strategos": {
+      "metaTitle": "Strategos Founder Plan — Acesso Antecipado",
+      "metaDescription": "Solicite acesso antecipado ao Strategos Founder Plan: uma situation room para founders trabalharem decisões estratégicas com análise disciplinada e auditável."
     }
   },
   "services": {
