@@ -152,7 +152,8 @@
 
     {#if showCta && !loading}
       <div class="cta-row">
-        <a href="/#contact" class="cta-btn primary" onclick={onclose}>{ctaForm}</a>
+        <!-- /contato, not /#contact: the home page no longer carries the contact section. -->
+        <a href="/contato" class="cta-btn primary" onclick={onclose}>{ctaForm}</a>
         {#if onwhatsapp}
           <button type="button" class="cta-btn secondary" disabled={loading} onclick={onwhatsapp}>
             {ctaWhatsApp}

@@ -1,7 +1,6 @@
 <script lang="ts">
   import PageHeader from '$components/PageHeader.svelte';
   import Prose from '$components/Prose.svelte';
-  import ContactSection from '$components/ContactSection.svelte';
   import Seo from '$components/Seo.svelte';
   import { buildGraph } from '$lib/seo/schema';
   import { t } from '$lib/i18n/translate';
@@ -38,8 +37,6 @@
   <a href="/solucoes" class="rbx-cta">{t(data.locale, 'home.ctaServices')}</a>
   <a href="/produtos" class="rbx-cta">{t(data.locale, 'home.ctaProducts')}</a>
 </div>
-
-<ContactSection />
 
 <style>
   .actions {
