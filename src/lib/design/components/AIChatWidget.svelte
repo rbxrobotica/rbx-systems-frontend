@@ -4,9 +4,11 @@
 
   interface Props {
     onclose: () => void;
+    /** Hands the visitor over to the WhatsApp drawer. CTA is hidden when absent. */
+    onwhatsapp?: () => void;
   }
 
-  let { onclose }: Props = $props();
+  let { onclose, onwhatsapp }: Props = $props();
 
   type Role = 'user' | 'assistant';
   interface Message {
@@ -151,17 +153,11 @@
     {#if showCta && !loading}
       <div class="cta-row">
         <a href="/#contact" class="cta-btn primary" onclick={onclose}>{ctaForm}</a>
-        <button
-          type="button"
-          class="cta-btn secondary"
-          disabled={loading}
-          onclick={() => {
-            onclose();
-            document.querySelector<HTMLButtonElement>('.float[aria-label="WhatsApp"]')?.click();
-          }}
-        >
-          {ctaWhatsApp}
-        </button>
+        {#if onwhatsapp}
+          <button type="button" class="cta-btn secondary" disabled={loading} onclick={onwhatsapp}>
+            {ctaWhatsApp}
+          </button>
+        {/if}
       </div>
     {/if}
   </div>

@@ -6,16 +6,27 @@
   import AltchaWidget from './AltchaWidget.svelte';
 
   interface Props {
-    trigger: Snippet<[() => void]>;
+    /** Renders the element that opens the drawer. Omit when the parent drives `open`. */
+    trigger?: Snippet<[() => void]>;
     initialMessage?: string;
     source?: string;
+    /** Start open, for parents that mount the drawer on demand (e.g. ContactMenu). */
+    startOpen?: boolean;
+    /** Called when the drawer closes itself, so a parent can drop it. */
+    onclose?: () => void;
   }
 
-  let { trigger, initialMessage = '', source = 'whatsapp' }: Props = $props();
+  let {
+    trigger,
+    initialMessage = '',
+    source = 'whatsapp',
+    startOpen = false,
+    onclose
+  }: Props = $props();
 
   type Status = 'idle' | 'submitting' | 'success' | 'error';
 
-  let open = $state(false);
+  let open = $state(untrack(() => startOpen));
   let name = $state('');
   let phone = $state('');
   let message = $state(untrack(() => initialMessage));
@@ -29,7 +40,7 @@
   function reset() {
     name = '';
     phone = '';
-    message = '';
+    message = initialMessage;
     altchaPayload = null;
     status = 'idle';
   }
@@ -37,6 +48,7 @@
   function close() {
     open = false;
     reset();
+    onclose?.();
   }
 
   async function handleSubmit(ev: SubmitEvent) {
@@ -75,17 +87,16 @@
   }
 </script>
 
-{@render trigger(() => (open = true))}
+{#if trigger}
+  {@render trigger(() => (open = true))}
+{/if}
+
+<!-- Escape is bound on the window: the overlay div never receives the keydown. -->
+<svelte:window onkeydown={(e) => open && e.key === 'Escape' && close()} />
 
 {#if open}
   <!-- svelte-ignore a11y_click_events_have_key_events -->
-  <div
-    class="overlay"
-    role="presentation"
-    tabindex="-1"
-    onclick={close}
-    onkeydown={(e) => e.key === 'Escape' && close()}
-  >
+  <div class="overlay" role="presentation" onclick={close}>
     <div
       class="drawer"
       role="dialog"

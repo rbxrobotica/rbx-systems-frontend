@@ -75,16 +75,34 @@
 
 <!-- AI Chat Drawer -->
 {#if aiChatOpen}
-  <AIChatWidget onclose={() => (aiChatOpen = false)} />
+  <AIChatWidget
+    onclose={() => (aiChatOpen = false)}
+    onwhatsapp={() => {
+      aiChatOpen = false;
+      whatsappOpen = true;
+    }}
+  />
 {/if}
 
-<!-- WhatsApp Drawer -->
-{#snippet whatsappTrigger(open: () => void)}
-  <button style="display: contents;" onclick={open}></button>
-{/snippet}
-
+<!-- WhatsApp Drawer: mounted on demand (no trigger snippet here, the menu item is
+     the trigger) so every open starts from the current page's context message. -->
 {#if whatsappOpen}
-  <WhatsAppDrawer trigger={whatsappTrigger} {initialMessage} />
+  <WhatsAppDrawer
+    startOpen
+    {initialMessage}
+    source="contact-menu"
+    onclose={() => (whatsappOpen = false)}
+  />
+{/if}
+
+<!-- Escape closes the menu. Bound on the window because a div never receives the keydown itself. -->
+<svelte:window onkeydown={(e) => expanded && e.key === 'Escape' && closeMenu()} />
+
+<!-- Click-outside overlay: a sibling of the menu, not a child, so it never covers
+     the menu items (as a child it would paint over them inside the menu's own
+     stacking context, swallowing every click). -->
+{#if expanded}
+  <div class="menu-overlay" role="presentation" onclick={closeMenu}></div>
 {/if}
 
 <!-- Contact Menu -->
@@ -106,51 +124,50 @@
     </svg>
   </button>
 
-  <!-- Expanded menu items -->
+  <!-- Expanded menu items: stacked above the toggle so nothing overlaps it -->
   {#if expanded}
-    <!-- Robson (AI) -->
-    <button
-      type="button"
-      class="menu-item robson"
-      aria-label="Talk to Robson AI Assistant"
-      onclick={openRobson}
-    >
-      <div class="item-icon">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <circle cx="12" cy="12" r="10" />
-          <text x="12" y="15" text-anchor="middle" font-size="10" font-weight="bold" fill="white"
-            >R</text
-          >
-        </svg>
-      </div>
-      <div class="item-label">
-        <span class="item-name">Robson</span>
-        <span class="item-desc">AI Assistant</span>
-      </div>
-    </button>
+    <div class="menu-items">
+      <!-- Robson (AI) -->
+      <button
+        type="button"
+        class="menu-item robson"
+        aria-label="Talk to Robson AI Assistant"
+        onclick={openRobson}
+      >
+        <div class="item-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="12" r="10" />
+            <text x="12" y="15" text-anchor="middle" font-size="10" font-weight="bold" fill="white"
+              >R</text
+            >
+          </svg>
+        </div>
+        <div class="item-label">
+          <span class="item-name">Robson</span>
+          <span class="item-desc">AI Assistant</span>
+        </div>
+      </button>
 
-    <!-- Ouvidoria (WhatsApp) -->
-    <button
-      type="button"
-      class="menu-item ouvidoria"
-      aria-label="Contact RBX via WhatsApp"
-      onclick={openOuvidoria}
-    >
-      <div class="item-icon whatsapp">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M17.6 6.32A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.88 12.15l-1.08 3.94 4.03-1.06A7.93 7.93 0 0 0 20 12a7.85 7.85 0 0 0-2.4-5.68ZM12 17.5a5.46 5.46 0 0 1-2.8-.77l-.2-.12-1.66.44.44-1.62-.14-.22a5.5 5.5 0 1 1 4.36 2.29Z"
-          />
-        </svg>
-      </div>
-      <div class="item-label">
-        <span class="item-name">Ouvidoria</span>
-        <span class="item-desc">WhatsApp Institucional</span>
-      </div>
-    </button>
-
-    <!-- Close overlay -->
-    <div class="menu-overlay" onclick={closeMenu}></div>
+      <!-- Ouvidoria (WhatsApp) -->
+      <button
+        type="button"
+        class="menu-item ouvidoria"
+        aria-label="Contact RBX via WhatsApp"
+        onclick={openOuvidoria}
+      >
+        <div class="item-icon whatsapp">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M17.6 6.32A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.88 12.15l-1.08 3.94 4.03-1.06A7.93 7.93 0 0 0 20 12a7.85 7.85 0 0 0-2.4-5.68ZM12 17.5a5.46 5.46 0 0 1-2.8-.77l-.2-.12-1.66.44.44-1.62-.14-.22a5.5 5.5 0 1 1 4.36 2.29Z"
+            />
+          </svg>
+        </div>
+        <div class="item-label">
+          <span class="item-name">Ouvidoria</span>
+          <span class="item-desc">WhatsApp Institucional</span>
+        </div>
+      </button>
+    </div>
   {/if}
 </div>
 
@@ -214,12 +231,24 @@
   .menu-overlay {
     position: fixed;
     inset: 0;
+    /* Below .contact-menu (40) so it only catches clicks outside the menu. */
     z-index: 39;
   }
 
-  .menu-item {
+  /* Stacked above the toggle: a flex column instead of per-item `bottom` offsets,
+     so the rows never overlap the toggle regardless of label length or viewport. */
+  .menu-items {
     position: absolute;
     right: 0;
+    bottom: calc(3.5rem + 0.5rem);
+    z-index: 41;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .menu-item {
     width: auto;
     padding: 0.75rem 1rem 0.75rem 0.75rem;
     border: 1px solid var(--border, #30363d);
@@ -254,14 +283,6 @@
 
   .menu-item:active {
     transform: scale(0.98);
-  }
-
-  .robson {
-    bottom: 4.5rem;
-  }
-
-  .ouvidoria {
-    bottom: 1.5rem;
   }
 
   .item-icon {
