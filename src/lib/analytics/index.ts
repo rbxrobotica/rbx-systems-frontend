@@ -4,8 +4,13 @@
  * Current provider: Plausible (privacy-friendly, script-based).
  * Configured via environment variables (per-domain pods):
  *   - VITE_PLAUSIBLE_DOMAIN      (e.g. rbx.ia.br or rbxsystems.ch)
- *   - VITE_PLAUSIBLE_SCRIPT_SRC  (e.g. https://plausible.rbxsystems.ch/js/script.js)
+ *   - VITE_PLAUSIBLE_SCRIPT_SRC  per-site script, e.g.
+ *                                https://plausible.rbxsystems.ch/js/pa-<id>.js
  *   - VITE_PLAUSIBLE_API_HOST    (optional, self-hosted event endpoint)
+ *
+ * The script is per site: it embeds the domain and the event endpoint, and it
+ * sends nothing until `plausible.init()` runs. The `data-domain` attribute the
+ * older snippet used is not a bootstrap on this version.
  *
  * In production these are runtime pod envs surfaced through layout data
  * (see +layout.server.ts); VITE_* build-time values only apply in local dev.
@@ -48,6 +53,43 @@ export function getAnalyticsConfig(): AnalyticsConfig | null {
   const apiHost = import.meta.env?.VITE_PLAUSIBLE_API_HOST as string | undefined;
   if (!domain || !scriptSrc) return runtimeConfig;
   return { domain, scriptSrc, apiHost };
+}
+
+interface PlausibleGlobal {
+  (name: string, options?: { u?: string; props?: EventProps }): void;
+  q?: IArguments[];
+  init?: (options?: Record<string, unknown>) => void;
+  o?: Record<string, unknown>;
+}
+
+/**
+ * Install the queue stub and start the tracker.
+ *
+ * Verbatim behaviour of Plausible's install snippet: calls made before the
+ * async script lands are pushed onto `plausible.q` and replayed once it loads,
+ * and `init()` marks the tracker as started. Without this call the script loads
+ * and does nothing, which is exactly how this site silently recorded zero
+ * pageviews while looking correctly instrumented.
+ *
+ * Idempotent: a second call reuses the stub the first one installed.
+ */
+export function bootstrapPlausible(): void {
+  if (!browser) return;
+  const w = window as unknown as { plausible?: PlausibleGlobal };
+
+  if (!w.plausible) {
+    const stub = function (this: unknown, ...args: unknown[]) {
+      (stub.q = stub.q || []).push(args as unknown as IArguments);
+    } as unknown as PlausibleGlobal;
+    w.plausible = stub;
+  }
+  const p = w.plausible;
+  if (!p.init) {
+    p.init = (options?: Record<string, unknown>) => {
+      p.o = options ?? {};
+    };
+  }
+  p.init();
 }
 
 export function trackPageview(url?: string): void {
