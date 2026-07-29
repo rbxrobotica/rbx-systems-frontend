@@ -3,6 +3,7 @@
   import { locale } from 'svelte-i18n';
   import WhatsAppDrawer from './WhatsAppDrawer.svelte';
   import AIChatWidget from './AIChatWidget.svelte';
+  import { trackEvent, CHAT_OPEN, WHATSAPP_CLICK } from '$lib/analytics/events';
 
   const contextMessages: Record<string, { pt: string; en: string }> = {
     '/solucoes': {
@@ -58,14 +59,20 @@
     expanded = !expanded;
   }
 
+  // Both entry points are instrumented at the point of intent, not at the point
+  // of submission: opening the assistant or the drawer is the signal that the
+  // visitor wanted to talk. The form's own form_submit / form_success events
+  // cover what happens afterwards.
   function openRobson() {
     expanded = false;
     aiChatOpen = true;
+    trackEvent(CHAT_OPEN, { path: $page.url.pathname, entry: 'contact-menu' });
   }
 
   function openOuvidoria() {
     expanded = false;
     whatsappOpen = true;
+    trackEvent(WHATSAPP_CLICK, { path: $page.url.pathname, entry: 'contact-menu' });
   }
 
   function closeMenu() {

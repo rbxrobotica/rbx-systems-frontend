@@ -8,11 +8,11 @@ Infrastructure, bring-up and rebuild: `docs/runbooks/PLAUSIBLE-BRINGUP.md` in
 
 ## How it is wired
 
-| File | Role |
-| --- | --- |
-| `src/routes/+layout.server.ts` | Reads `VITE_PLAUSIBLE_*` from the pod env and puts them in layout data |
-| `src/lib/analytics/Analytics.svelte` | Emits the script tag and starts the tracker |
-| `src/lib/analytics/index.ts` | `bootstrapPlausible`, `trackPageview`, `trackEvent` |
+| File                                 | Role                                                                   |
+| ------------------------------------ | ---------------------------------------------------------------------- |
+| `src/routes/+layout.server.ts`       | Reads `VITE_PLAUSIBLE_*` from the pod env and puts them in layout data |
+| `src/lib/analytics/Analytics.svelte` | Emits the script tag and starts the tracker                            |
+| `src/lib/analytics/index.ts`         | `bootstrapPlausible`, `trackPageview`, `trackEvent`                    |
 
 The `VITE_` prefix is historical. These are **runtime** values read from the
 pod's environment through `$env/dynamic/private`; `import.meta.env` is baked at
@@ -78,6 +78,17 @@ proves the tracker initialised and reached the send decision.
 ## Custom events
 
 `trackEvent(name, props)` takes a name from the `EventName` union in
-`src/lib/analytics/index.ts`. Calls made before the async script lands are
+`src/lib/analytics/index.ts`. What is instrumented today:
+
+| Event                                       | Where                                                                                             |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `chat_open`                                 | `ContactMenu`, Robson entry                                                                       |
+| `whatsapp_click`                            | `ContactMenu` (Ouvidoria) and `ContactSection` (in-page card), told apart by the `entry` property |
+| `cta_click`                                 | `LandingOffer`                                                                                    |
+| `form_submit`, `form_success`, `form_error` | `CheckoutForm`, `LeadForm`                                                                        |
+
+`form_start` exists as a constant with no call site. The canonical taxonomy,
+shared with rbx-commerce, is `marketing/2026-h2-growth/analytics/event-taxonomy.yaml`
+in `rbx-growth`, which carries a `status` per event. Calls made before the async script lands are
 queued and replayed, so ordering is not a concern. Events for a domain that is
 not registered in Plausible are accepted with 202 and dropped.
