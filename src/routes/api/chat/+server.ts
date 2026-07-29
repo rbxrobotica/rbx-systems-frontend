@@ -1,5 +1,6 @@
 import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
+import { runRagShadow } from '$lib/server/ragShadow';
 import type { RequestHandler } from './$types';
 
 const SYSTEM_PROMPT = `You are the digital assistant for RBX Systems — a precision engineering company that builds governed AI platforms for high-demand operations. RBX is headquartered in Brazil and Switzerland (Zug).
@@ -119,20 +120,31 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
   }
 
   const recent = messages.slice(-12);
+  const latestUserQuery = recent
+    .toReversed()
+    .find((message) => message?.role === 'user' && typeof message.content === 'string')?.content;
+  const shadowPromise = latestUserQuery
+    ? runRagShadow({ query: latestUserQuery, environment: env }).catch(() => {
+        console.warn('[rag-shadow] unexpected failure', { reason: 'unexpected_error' });
+      })
+    : Promise.resolve();
 
-  const res = await fetch(target.url, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${target.key}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      model: target.model,
-      messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...recent],
-      max_tokens: 320,
-      temperature: 0.65
-    })
-  });
+  const [res] = await Promise.all([
+    fetch(target.url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${target.key}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: target.model,
+        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...recent],
+        max_tokens: 320,
+        temperature: 0.65
+      })
+    }),
+    shadowPromise
+  ]);
 
   if (!res.ok) {
     const detail = await res.text().catch(() => '');
