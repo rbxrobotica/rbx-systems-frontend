@@ -2,6 +2,7 @@
   import { _ } from 'svelte-i18n';
   import ContactForm from './ContactForm.svelte';
   import WhatsAppDrawer from './WhatsAppDrawer.svelte';
+  import { trackEvent, WHATSAPP_CLICK } from '$lib/analytics/events';
 
   interface Props {
     source?: string;
@@ -28,7 +29,14 @@
             <h3>{$_('contact.whatsappLabel')}</h3>
             <p class="note">{body ?? $_('contact.body')}</p>
             {#snippet waTrigger(open: () => void)}
-              <button type="button" class="wa-button" onclick={open}>
+              <button
+                type="button"
+                class="wa-button"
+                onclick={() => {
+                  trackEvent(WHATSAPP_CLICK, { source, entry: 'contact-section' });
+                  open();
+                }}
+              >
                 <svg viewBox="0 0 24 24" fill="currentColor" class="icon-small">
                   <path
                     d="M17.6 6.32A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.88 12.15l-1.08 3.94 4.03-1.06A7.93 7.93 0 0 0 20 12a7.85 7.85 0 0 0-2.4-5.68ZM12 17.5a5.46 5.46 0 0 1-2.8-.77l-.2-.12-1.66.44.44-1.62-.14-.22a5.5 5.5 0 1 1 4.36 2.29Z"
