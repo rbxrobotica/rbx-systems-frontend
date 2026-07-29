@@ -5,6 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [rag, ai-engineering, rust, governance, retrieval]
 excerpt: 'Como separamos retrieval, controle, memória e avaliação em um assistente público preparado para shadow, com Rust, Thalamus e evidência auditável.'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-29-governed-public-rag.png'
 ---
 
 # RAG público com controle e evidência
