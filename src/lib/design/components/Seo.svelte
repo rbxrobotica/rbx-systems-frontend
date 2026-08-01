@@ -28,7 +28,11 @@
   const siteUrl = $derived(locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
   const pageUrl = $derived(canonical ?? `${siteUrl}${$page.url.pathname}`);
   const fullTitle = $derived(`${title} · ${locale === 'pt-BR' ? 'RBX Systems' : 'RBX Systems'}`);
-  const ogImage = $derived(image ?? `${siteUrl}/brand/rbx-og.jpg`);
+  // Crawlers require an absolute og:image; covers arrive as site-relative
+  // proxy paths (/api/blog/cover/...), same absolutization as the schema.
+  const ogImage = $derived(
+    image ? (image.startsWith('http') ? image : `${siteUrl}${image}`) : `${siteUrl}/brand/rbx-og.jpg`
+  );
   const ogLocale = $derived(locale === 'pt-BR' ? 'pt_BR' : 'en_US');
 
   const inferredAlternate = $derived(alternate ?? getAlternates(locale, $page.url.pathname));
