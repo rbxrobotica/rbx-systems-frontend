@@ -77,7 +77,7 @@ export const GET: RequestHandler = async ({ url }) => {
   try {
     const posts = await loadAllPosts(locale);
     postEntries = posts.map((post) => ({
-      path: `/journal/${post.slug}`,
+      path: `/blog/${post.slug}`,
       changefreq: 'monthly',
       priority: '0.6'
     }));
