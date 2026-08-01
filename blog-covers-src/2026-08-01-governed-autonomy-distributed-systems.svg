@@ -1,0 +1,116 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07080a"/>
+      <stop offset="1" stop-color="#0b0d12"/>
+    </linearGradient>
+    <radialGradient id="coreGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#22e5e5" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#22e5e5" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sigCyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22e5e5" stop-opacity="0"/>
+      <stop offset="0.55" stop-color="#22e5e5" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#22e5e5" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="sigViolet" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0"/>
+      <stop offset="0.55" stop-color="#8b5cf6" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="outCyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22e5e5" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#22e5e5" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="outViolet" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0.08"/>
+    </linearGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.2"/>
+    </filter>
+    <filter id="softer" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- faint engineering grid, right half only, suggesting ordered layers -->
+  <g stroke="#141920" stroke-width="1">
+    <line x1="60" y1="140" x2="1140" y2="140" opacity="0.35"/>
+    <line x1="60" y1="315" x2="1140" y2="315" opacity="0.45"/>
+    <line x1="60" y1="490" x2="1140" y2="490" opacity="0.35"/>
+  </g>
+  <g fill="#1a2129">
+    <circle cx="120" cy="90" r="1.4"/><circle cx="300" cy="560" r="1.4"/>
+    <circle cx="980" cy="80" r="1.4"/><circle cx="1100" cy="540" r="1.4"/>
+    <circle cx="200" cy="380" r="1.2"/><circle cx="860" cy="590" r="1.2"/>
+  </g>
+
+  <!-- incoming signals: many, disordered, probabilistic -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M -20 90 C 220 130, 380 240, 560 292" stroke="url(#sigCyan)" stroke-width="2.4" filter="url(#soft)"/>
+    <path d="M -20 180 C 200 200, 400 270, 560 305" stroke="url(#sigViolet)" stroke-width="2" filter="url(#soft)"/>
+    <path d="M -20 320 C 220 318, 420 316, 560 315" stroke="url(#sigCyan)" stroke-width="2.8" filter="url(#soft)"/>
+    <path d="M -20 450 C 210 430, 400 360, 560 325" stroke="url(#sigCyan)" stroke-width="2" filter="url(#soft)"/>
+    <path d="M -20 560 C 240 520, 410 400, 560 338" stroke="url(#sigViolet)" stroke-width="2.2" filter="url(#soft)"/>
+  </g>
+
+  <!-- particles on incoming paths -->
+  <g fill="#22e5e5">
+    <circle cx="300" cy="199" r="2.6" opacity="0.9"/>
+    <circle cx="430" cy="316" r="2.2" opacity="0.8"/>
+    <circle cx="330" cy="404" r="2.4" opacity="0.85"/>
+  </g>
+  <g fill="#8b5cf6">
+    <circle cx="255" cy="221" r="2.2" opacity="0.8"/>
+    <circle cx="365" cy="452" r="2.4" opacity="0.75"/>
+  </g>
+
+  <!-- central control structure: precise, deterministic gate -->
+  <circle cx="600" cy="315" r="170" fill="url(#coreGlow)"/>
+  <g>
+    <rect x="572" y="175" width="56" height="280" rx="6" fill="#0a0f14" stroke="#24303a" stroke-width="1.5"/>
+    <rect x="572" y="175" width="56" height="280" rx="6" fill="none" stroke="#22e5e5" stroke-opacity="0.55" stroke-width="1.5" filter="url(#softer)"/>
+    <!-- internal decision slits -->
+    <line x1="600" y1="196" x2="600" y2="240" stroke="#22e5e5" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+    <line x1="600" y1="258" x2="600" y2="288" stroke="#22e5e5" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+    <line x1="600" y1="306" x2="600" y2="324" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    <line x1="600" y1="342" x2="600" y2="372" stroke="#22e5e5" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+    <line x1="600" y1="390" x2="600" y2="434" stroke="#22e5e5" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+    <!-- registry ticks flanking the gate: evidence marks -->
+    <g stroke="#3a4a56" stroke-width="1.4">
+      <line x1="556" y1="205" x2="564" y2="205"/><line x1="556" y1="245" x2="564" y2="245"/>
+      <line x1="556" y1="285" x2="564" y2="285"/><line x1="556" y1="345" x2="564" y2="345"/>
+      <line x1="556" y1="385" x2="564" y2="385"/><line x1="556" y1="425" x2="564" y2="425"/>
+      <line x1="636" y1="205" x2="644" y2="205"/><line x1="636" y1="245" x2="644" y2="245"/>
+      <line x1="636" y1="285" x2="644" y2="285"/><line x1="636" y1="345" x2="644" y2="345"/>
+      <line x1="636" y1="385" x2="644" y2="385"/><line x1="636" y1="425" x2="644" y2="425"/>
+    </g>
+  </g>
+
+  <!-- governed outputs: three separated, ordered layers -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M 628 290 C 760 250, 900 210, 1090 200" stroke="url(#outCyan)" stroke-width="2.6" filter="url(#soft)"/>
+    <path d="M 628 315 C 780 315, 940 315, 1090 315" stroke="url(#outCyan)" stroke-width="2.6" filter="url(#soft)"/>
+    <path d="M 628 340 C 760 380, 900 424, 1090 432" stroke="url(#outViolet)" stroke-width="2.4" filter="url(#soft)"/>
+  </g>
+
+  <!-- effect nodes in separate layers -->
+  <g>
+    <circle cx="1090" cy="200" r="5" fill="#0a0f14" stroke="#22e5e5" stroke-width="1.6"/>
+    <circle cx="1090" cy="315" r="5" fill="#0a0f14" stroke="#22e5e5" stroke-width="1.6"/>
+    <circle cx="1090" cy="432" r="5" fill="#0a0f14" stroke="#8b5cf6" stroke-width="1.6"/>
+    <circle cx="1090" cy="200" r="11" fill="none" stroke="#22e5e5" stroke-opacity="0.25" stroke-width="1"/>
+    <circle cx="1090" cy="315" r="11" fill="none" stroke="#22e5e5" stroke-opacity="0.25" stroke-width="1"/>
+    <circle cx="1090" cy="432" r="11" fill="none" stroke="#8b5cf6" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <!-- one rejected signal: enters, does not cross -->
+  <path d="M -20 620 C 260 600, 430 520, 552 452" stroke="url(#sigViolet)" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.7" filter="url(#soft)"/>
+  <circle cx="552" cy="452" r="3" fill="none" stroke="#8b5cf6" stroke-width="1.4" opacity="0.8"/>
+
+  <!-- subtle vignette -->
+  <rect width="1200" height="630" fill="none" stroke="#000000" stroke-opacity="0.35" stroke-width="60" filter="url(#softer)"/>
+</svg>

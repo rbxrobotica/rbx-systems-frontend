@@ -93,7 +93,14 @@ The post is now live at:
 
 The header locale toggle may override either default via cookie.
 
-### Step 3 — Output the Nano Banana cover image prompt
+### Step 3 — Choose the cover pattern
+
+Two cover patterns are supported (full reference: `docs/AGENT-BLOG-PUBLISHING.md`, "Cover Generation Patterns"). **Ask the user which one they prefer** unless they already chose. If the user is in a hurry, default to Pattern A: one manual step fewer.
+
+- **Pattern A — Deterministic SVG-as-code:** the agent authors the cover as SVG XML (abstract, dark, no text), rasterizes it to 1200 × 630 (`rsvg-convert`, or headless Chromium with a zero-margin HTML wrapper), commits the source to `blog-covers-src/{slug}.svg`, and jumps straight to Step 5. No user round-trip.
+- **Pattern B — Nano Banana (LLM image):** follow Steps 3b and 4 below. Requires one user round-trip.
+
+### Step 3b — Output the Nano Banana cover image prompt (Pattern B only)
 
 After uploading the post, output the following block verbatim for the user to copy into Nano Banana:
 
@@ -108,7 +115,7 @@ Prompt: [generate a Nano Banana prompt that visually represents the post topic �
 
 Then tell the user: "Generate the image in Nano Banana and provide the file path. I will upload it to S3 and add it to the post."
 
-### Step 4 — User provides the image file
+### Step 4 — User provides the image file (Pattern B only)
 
 Wait for the user to provide the local file path of the generated cover image.
 

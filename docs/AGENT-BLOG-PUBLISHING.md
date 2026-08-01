@@ -66,6 +66,25 @@ The public URL must stay the same across locales:
 - Never transliterate `pt-BR` prose to ASCII forms such as `nao`, `producao`, or `configuracao`
 - Do not include sensitive security details
 
+## Cover Generation Patterns
+
+Two supported ways exist to produce the shared cover image (1200 × 630, JPEG or PNG). Before creating the cover, **ask the user which pattern they prefer**, unless they already chose or the choice is implied by the prompt. If the user is in a hurry or asked for end-to-end agentic publishing, default to Pattern A: it removes the only manual step in the workflow.
+
+### Pattern A — Deterministic SVG-as-code (zero manual steps)
+
+The agent authors the cover as SVG XML (abstract, dark, brand-consistent, no text), rasterizes it at 1200 × 630, and uploads it with `./scripts/blog-cover-upload.sh`. Fully agentic and reproducible.
+
+- Rasterize with `rsvg-convert -w 1200 -h 630 cover.svg -o cover.png`, or fall back to headless Chromium, the same renderer used by the creatives pipeline. With Chromium, wrap the SVG in an HTML file with `html,body{margin:0;padding:0}` first, otherwise the default document margin leaves a white band in the screenshot:
+  `chromium --headless --screenshot=cover.png --window-size=1200,630 --hide-scrollbars wrapper.html`
+- Commit the SVG source to `blog-covers-src/{slug}.svg` so the asset stays reproducible and reviewable in diffs.
+- First example: `blog-covers-src/2026-08-01-governed-autonomy-distributed-systems.svg`.
+
+### Pattern B — LLM image generation (one manual round-trip)
+
+The agent outputs a Nano Banana prompt block (see CLAUDE.md, cover step), the user generates the image externally and returns a local file path, and the agent uploads it. Richer generated visuals, but the workflow blocks on the user. Use when the user wants a generated or photographic look, or explicitly asks for it.
+
+Both patterns converge on the same tail: upload via `./scripts/blog-cover-upload.sh`, add the same `cover:` URL to both locale variants, re-publish with `blog-publish.sh --all-locales`.
+
 ## Publishing Steps
 
 ### 1. Write both locale files
