@@ -42,6 +42,7 @@
   locale={data.locale}
   canonical={pageUrl}
   type="article"
+  image={data.post?.cover}
   {schema}
 />
 
