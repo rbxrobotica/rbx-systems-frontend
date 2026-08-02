@@ -25,4 +25,4 @@ There is also an engineering detail we enjoy: the feed is served by the same sov
 
 The Journal publishes field notes from real systems in production: what we learned operating [governed agentic autonomy](/blog/2026-08-01-governed-autonomy-distributed-systems), what a 17 GB event log taught us about [audit versus telemetry](/blog/2026-08-01-auditoria-ou-telemetria), and what turns red when [a pipeline dies silently](/blog/2026-08-02-o-painel-dizia-synced). Engineering as it actually happens, mistakes included.
 
-Subscribe, read on your own time, and if an article sparks a conversation, [talk to RBX](/contato).
+Subscribe, read on your own time, and if an article sparks a conversation, [talk to RBX](/contact).
