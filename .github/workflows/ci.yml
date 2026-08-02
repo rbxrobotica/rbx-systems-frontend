@@ -12,9 +12,11 @@ permissions:
 env:
   IMAGE_NAME: ghcr.io/rbxrobotica/rbx-ia-br
 
-# Pattern R: build + push only. Image tag promotion into rbx-infra is owned by
-# ArgoCD Image Updater (annotations on the rbx-ia-br + rbxsystems-ch Applications),
-# replacing the legacy CI self-push (INFRA_DEPLOY_KEY) promotion.
+# Pattern R: build + push + promote. Image tag promotion into rbx-infra is done
+# by this workflow (INFRA_DEPLOY_KEY self-push, fleet-standard robson pattern).
+# The ArgoCD Image Updater path was retired: the CRD-based controller ignored
+# the legacy Application annotations and promotion silently died 2026-07-28
+# (rbx-infra issue #168).
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -69,3 +71,43 @@ jobs:
             ${{ env.IMAGE_NAME }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Promote image tag to rbx-infra
+        env:
+          INFRA_DEPLOY_KEY: ${{ secrets.INFRA_DEPLOY_KEY }}
+          SHA_TAG: ${{ steps.meta.outputs.sha }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$INFRA_DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+          git clone --depth 1 git@github.com:rbxrobotica/rbx-infra.git /tmp/rbx-infra
+          cd /tmp/rbx-infra
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          sed -i "s|newTag: sha-[0-9a-f]*|newTag: ${SHA_TAG}|" \
+            apps/prod/rbx-ia-br/kustomization.yml \
+            apps/prod/rbxsystems-ch/kustomization.yml
+
+          git add apps/prod/rbx-ia-br/kustomization.yml \
+                  apps/prod/rbxsystems-ch/kustomization.yml
+
+          if git diff --staged --quiet; then
+            echo "No promotion needed (already at ${SHA_TAG})"
+            exit 0
+          fi
+
+          git commit -m "chore(site): update rbx-ia-br image tag to ${SHA_TAG}" \
+            -m "Automated promotion by rbx-systems-frontend CI." \
+            -m "Triggered by: ${{ github.repository }}@${{ github.sha }}" \
+            -m "[skip ci]"
+
+          for attempt in 1 2 3; do
+            if git push origin main; then
+              exit 0
+            fi
+            git pull --rebase origin main
+          done
+          echo "Failed to push promotion after 3 attempts" >&2
+          exit 1
