@@ -1,0 +1,70 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cover: "O painel dizia Synced". A monotonous field of green status
+       lights, every one reporting fine, above a delivery pipe that is
+       visibly severed. Abstract, dark, no text. -->
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="85%">
+      <stop offset="0%" stop-color="#1c1815"/>
+      <stop offset="60%" stop-color="#141110"/>
+      <stop offset="100%" stop-color="#0c0a09"/>
+    </radialGradient>
+    <radialGradient id="dotglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3ddc97" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#2f9e6e" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#2f9e6e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pipe" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0"/>
+      <stop offset="12%" stop-color="#22d3ee" stop-opacity="0.75"/>
+      <stop offset="88%" stop-color="#22d3ee" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Status grid: 14 x 7 identical green lights, all "fine" -->
+  <g>
+    <!-- generated grid -->
+    <g fill="#2c7a57">
+      <!-- rows y=90..390 step 50, cols x=115..1085 step 74.6 -->
+      <g id="row">
+        <circle cx="115" cy="90" r="6"/><circle cx="190" cy="90" r="6"/><circle cx="265" cy="90" r="6"/><circle cx="340" cy="90" r="6"/><circle cx="415" cy="90" r="6"/><circle cx="490" cy="90" r="6"/><circle cx="565" cy="90" r="6"/><circle cx="640" cy="90" r="6"/><circle cx="715" cy="90" r="6"/><circle cx="790" cy="90" r="6"/><circle cx="865" cy="90" r="6"/><circle cx="940" cy="90" r="6"/><circle cx="1015" cy="90" r="6"/><circle cx="1085" cy="90" r="6"/>
+      </g>
+      <use href="#row" y="50"/>
+      <use href="#row" y="100"/>
+      <use href="#row" y="150"/>
+      <use href="#row" y="200"/>
+      <use href="#row" y="250"/>
+      <use href="#row" y="300"/>
+    </g>
+    <!-- a few lights carry a soft glow, reinforcing "healthy" -->
+    <circle cx="340" cy="140" r="26" fill="url(#dotglow)"/>
+    <circle cx="790" cy="240" r="26" fill="url(#dotglow)"/>
+    <circle cx="565" cy="340" r="26" fill="url(#dotglow)"/>
+    <circle cx="1015" cy="90" r="26" fill="url(#dotglow)"/>
+    <circle cx="190" cy="290" r="26" fill="url(#dotglow)"/>
+  </g>
+
+  <!-- The pipeline beneath: severed in the middle -->
+  <g>
+    <rect x="60" y="497" width="455" height="6" rx="3" fill="url(#pipe)"/>
+    <rect x="685" y="497" width="455" height="6" rx="3" fill="url(#pipe)"/>
+    <!-- severed ends, slightly offset vertically -->
+    <rect x="470" y="495" width="46" height="10" rx="5" fill="#22d3ee" opacity="0.9" filter="url(#soft)"/>
+    <rect x="684" y="499" width="46" height="10" rx="5" fill="#0e7490" opacity="0.8" filter="url(#soft)"/>
+    <!-- debris drifting in the gap -->
+    <circle cx="556" cy="492" r="3" fill="#22d3ee" opacity="0.75"/>
+    <circle cx="583" cy="507" r="2.2" fill="#22d3ee" opacity="0.5"/>
+    <circle cx="611" cy="496" r="1.8" fill="#67e8f9" opacity="0.6"/>
+    <circle cx="637" cy="510" r="2.6" fill="#0e7490" opacity="0.55"/>
+    <!-- faint reflection of the break -->
+    <rect x="470" y="540" width="270" height="2" rx="1" fill="#22d3ee" opacity="0.07"/>
+  </g>
+
+  <!-- ground shadow separating grid from pipe -->
+  <rect x="0" y="430" width="1200" height="2" fill="#0c0a09" opacity="0.6"/>
+</svg>
