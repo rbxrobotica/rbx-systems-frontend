@@ -70,7 +70,9 @@
     "metaTitle": "RBX Journal — Engenharia, IA e Notas de Campo",
     "metaDescription": "Ideias, engenharia e notas de campo da RBX Systems. Artigos técnicos sobre IA, LLMOps, agentes, software e infraestrutura.",
     "headline": "RBX Journal",
-    "body": "Ideias, engenharia e notas de campo da RBX Systems."
+    "body": "Ideias, engenharia e notas de campo da RBX Systems.",
+    "rssCta": "Assine de graça via RSS",
+    "rssNew": "Novo"
   },
   "cases": {
     "metaTitle": "Cases RBX Systems — Prova de Trabalho e Sistemas em Produção",
