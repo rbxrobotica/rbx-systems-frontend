@@ -5,7 +5,7 @@ author: 'Leandro Damasio'
 authorRole: 'Fundador e CEO, RBX Systems'
 tags: [agentes, governança, sistemas-distribuídos, observabilidade, engenharia]
 excerpt: 'Por que idempotência, proveniência, resultados desconhecidos e observabilidade vendor-neutral são o centro da arquitetura agêntica, não a margem do prompt.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-01-autonomia-governada-sistemas-distribuidos.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-01-governed-autonomy-distributed-systems.png'
 ---
 
 Há um momento, em toda organização que leva agentes de IA a sério, em que a pergunta muda. Ela deixa de ser "o que o modelo consegue fazer?" e passa a ser "o que este sistema acabou de fazer, e quem autorizou?". Esse momento chega mais cedo do que a maioria espera: basta um agente com acesso a ferramentas reais para que um efeito seja produzido no mundo antes que alguém consiga reconstruir por que ele ocorreu.
