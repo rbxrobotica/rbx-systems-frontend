@@ -20,6 +20,11 @@
 
 <PageHeader title={t(data.locale, 'journal.headline')} lead={t(data.locale, 'journal.body')} />
 
+<p class="rss-cta">
+  <span class="rss-badge">{t(data.locale, 'journal.rssNew')}</span>
+  <a href="/rss.xml" type="application/rss+xml">{t(data.locale, 'journal.rssCta')}</a>
+</p>
+
 {#if data.posts.length === 0}
   <p class="rbx-caption">{t(data.locale, 'common.empty')}</p>
 {:else}
@@ -37,6 +42,29 @@
 {/if}
 
 <style>
+  .rss-cta {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    margin: calc(-1 * var(--s-3)) 0 var(--s-5);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--track-label);
+  }
+  .rss-badge {
+    color: var(--cyan-brand);
+    border: 1px solid var(--cyan-brand);
+    border-radius: var(--radius-sm);
+    padding: 0 var(--s-1);
+  }
+  .rss-cta a {
+    color: var(--fg-2);
+    transition: color var(--dur) var(--ease);
+  }
+  .rss-cta a:hover {
+    color: var(--cyan-brand);
+  }
   .post-list {
     list-style: none;
     margin: 0;

@@ -70,7 +70,9 @@
     "metaTitle": "RBX Journal — Engineering, AI & Field Notes",
     "metaDescription": "Ideas, engineering and field notes from RBX Systems. Technical articles on AI, LLMOps, agents, software and infrastructure.",
     "headline": "RBX Journal",
-    "body": "Ideas, engineering and field notes from RBX Systems."
+    "body": "Ideas, engineering and field notes from RBX Systems.",
+    "rssCta": "Subscribe free via RSS",
+    "rssNew": "New"
   },
   "cases": {
     "metaTitle": "RBX Systems Cases — Proof of Work & Production Systems",

@@ -25,7 +25,13 @@
   $effect(() => {
     if (browser) captureUtm($page.url.search);
   });
+
+  const rssBase = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
 </script>
+
+<svelte:head>
+  <link rel="alternate" type="application/rss+xml" title="RBX Journal" href="{rssBase}/rss.xml" />
+</svelte:head>
 
 <div class="rbx-root">
   <NavBar locale={data.locale} />
