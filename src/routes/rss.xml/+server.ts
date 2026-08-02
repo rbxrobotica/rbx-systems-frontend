@@ -49,6 +49,7 @@ export const GET: RequestHandler = async ({ url }) => {
   const lastBuildDate = posts.length > 0 ? rfc822(posts[0].date) : new Date().toUTCString();
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/rss-style.xsl"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml(t(locale, 'journal.metaTitle'))}</title>
@@ -63,7 +64,9 @@ ${items}
 
   return new Response(body, {
     headers: {
-      'Content-Type': 'application/rss+xml; charset=utf-8',
+      // application/xml (not rss+xml) so browsers apply the xml-stylesheet
+      // and render the subscribe page; readers accept either type.
+      'Content-Type': 'application/xml; charset=utf-8',
       'Cache-Control': 'public, max-age=3600'
     }
   });

@@ -28,6 +28,7 @@
         <h3 class="rbx-label">{$_('footer.resourcesTitle')}</h3>
         <ul>
           <li><a href="/journal">{$_('nav.journal')}</a></li>
+          <li><a href="/rss.xml" type="application/rss+xml">RSS</a></li>
           <li><a href="/changelog">{$_('nav.changelog')}</a></li>
           <li><a href="/cases">{$_('nav.cases')}</a></li>
           <li><a href="/newsroom">{$_('nav.newsroom')}</a></li>
