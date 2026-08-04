@@ -12,6 +12,12 @@ export interface PageContent {
 
 export interface PostMeta {
   slug: string;
+  /**
+   * Public URL slug for the active locale (`slugAlias` frontmatter).
+   * Falls back to the canonical storage slug. Storage keys (S3 objects,
+   * covers) always use the canonical slug.
+   */
+  publicSlug: string;
   title: string;
   date: string;
   author: string;
@@ -19,6 +25,11 @@ export interface PostMeta {
   tags: string[];
   excerpt: string;
   cover?: string;
+}
+
+export interface PostAlternate {
+  locale: Locale;
+  publicSlug: string;
 }
 
 export interface Post extends PostMeta {

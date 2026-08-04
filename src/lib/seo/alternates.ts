@@ -15,6 +15,55 @@ const LOCALE_PATH_MAP: Record<string, { 'pt-BR': string; en: string }> = {
   '/solutions': { 'pt-BR': '/solucoes', en: '/solutions' },
   '/produtos': { 'pt-BR': '/produtos', en: '/products' },
   '/products': { 'pt-BR': '/produtos', en: '/products' },
+  '/equipe': { 'pt-BR': '/equipe', en: '/team' },
+  '/team': { 'pt-BR': '/equipe', en: '/team' },
+  '/parceria': { 'pt-BR': '/parceria', en: '/partnership' },
+  '/partnership': { 'pt-BR': '/parceria', en: '/partnership' },
+  '/diagnostico': { 'pt-BR': '/diagnostico', en: '/diagnostic' },
+  '/diagnostic': { 'pt-BR': '/diagnostico', en: '/diagnostic' },
+  '/briefing-btc': { 'pt-BR': '/briefing-btc', en: '/briefing-btc' },
+  '/produtos/robson': { 'pt-BR': '/produtos/robson', en: '/products/robson' },
+  '/products/robson': { 'pt-BR': '/produtos/robson', en: '/products/robson' },
+  '/produtos/briefing-btc': { 'pt-BR': '/produtos/briefing-btc', en: '/products/briefing-btc' },
+  '/products/briefing-btc': { 'pt-BR': '/produtos/briefing-btc', en: '/products/briefing-btc' },
+  '/servicos/engenharia-de-ia': {
+    'pt-BR': '/servicos/engenharia-de-ia',
+    en: '/services/ai-engineering'
+  },
+  '/services/ai-engineering': {
+    'pt-BR': '/servicos/engenharia-de-ia',
+    en: '/services/ai-engineering'
+  },
+  '/servicos/llmops': { 'pt-BR': '/servicos/llmops', en: '/services/llmops' },
+  '/services/llmops': { 'pt-BR': '/servicos/llmops', en: '/services/llmops' },
+  '/servicos/agentes-de-ia': { 'pt-BR': '/servicos/agentes-de-ia', en: '/services/ai-agents' },
+  '/services/ai-agents': { 'pt-BR': '/servicos/agentes-de-ia', en: '/services/ai-agents' },
+  '/servicos/devops-cloud': { 'pt-BR': '/servicos/devops-cloud', en: '/services/devops-cloud' },
+  '/services/devops-cloud': { 'pt-BR': '/servicos/devops-cloud', en: '/services/devops-cloud' },
+  '/servicos/software-financeiro': {
+    'pt-BR': '/servicos/software-financeiro',
+    en: '/services/financial-software'
+  },
+  '/services/financial-software': {
+    'pt-BR': '/servicos/software-financeiro',
+    en: '/services/financial-software'
+  },
+  '/servicos/software-para-logistica': {
+    'pt-BR': '/servicos/software-para-logistica',
+    en: '/services/logistics-software'
+  },
+  '/services/logistics-software': {
+    'pt-BR': '/servicos/software-para-logistica',
+    en: '/services/logistics-software'
+  },
+  '/servicos/observabilidade': {
+    'pt-BR': '/servicos/observabilidade',
+    en: '/services/observability'
+  },
+  '/services/observability': {
+    'pt-BR': '/servicos/observabilidade',
+    en: '/services/observability'
+  },
   '/journal': { 'pt-BR': '/journal', en: '/journal' },
   '/cases': { 'pt-BR': '/cases', en: '/cases' },
   '/contato': { 'pt-BR': '/contato', en: '/contact' },

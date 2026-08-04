@@ -31,7 +31,11 @@
   // Crawlers require an absolute og:image; covers arrive as site-relative
   // proxy paths (/api/blog/cover/...), same absolutization as the schema.
   const ogImage = $derived(
-    image ? (image.startsWith('http') ? image : `${siteUrl}${image}`) : `${siteUrl}/brand/rbx-og.jpg`
+    image
+      ? image.startsWith('http')
+        ? image
+        : `${siteUrl}${image}`
+      : `${siteUrl}/brand/rbx-og.jpg`
   );
   const ogLocale = $derived(locale === 'pt-BR' ? 'pt_BR' : 'en_US');
 

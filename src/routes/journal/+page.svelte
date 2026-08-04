@@ -31,7 +31,7 @@
   <ul class="post-list">
     {#each data.posts as post}
       <li class="post-item">
-        <a href="/blog/{post.slug}">
+        <a href="/blog/{post.publicSlug}">
           <span class="post-date">{formatDate(post.date, data.locale)}</span>
           <h2 class="post-title">{post.title}</h2>
           <p class="rbx-caption">{post.excerpt}</p>

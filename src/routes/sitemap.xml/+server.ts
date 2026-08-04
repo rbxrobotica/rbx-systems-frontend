@@ -7,6 +7,7 @@ interface SitemapEntry {
   path: string;
   changefreq: 'daily' | 'weekly' | 'monthly';
   priority: string;
+  alternates?: { hreflang: string; href: string }[];
 }
 
 const entriesByLocale: Record<Locale, SitemapEntry[]> = {
@@ -76,11 +77,34 @@ export const GET: RequestHandler = async ({ url }) => {
   let postEntries: SitemapEntry[] = [];
   try {
     const posts = await loadAllPosts(locale);
-    postEntries = posts.map((post) => ({
-      path: `/blog/${post.slug}`,
-      changefreq: 'monthly',
-      priority: '0.6'
-    }));
+    // Alternate-locale public slugs for xhtml:link alternates. A failure
+    // here degrades to entries without alternates, never to a missing map.
+    const otherLocale: Locale = locale === 'pt-BR' ? 'en' : 'pt-BR';
+    let otherByCanonical = new Map<string, string>();
+    try {
+      const otherPosts = await loadAllPosts(otherLocale);
+      otherByCanonical = new Map(otherPosts.map((post) => [post.slug, post.publicSlug]));
+    } catch {
+      // Keep the primary locale's entries.
+    }
+    postEntries = posts.map((post) => {
+      const alternates = [
+        { hreflang: locale, href: `${siteUrlByLocale[locale]}/blog/${post.publicSlug}` }
+      ];
+      const otherSlug = otherByCanonical.get(post.slug);
+      if (otherSlug) {
+        alternates.push({
+          hreflang: otherLocale,
+          href: `${siteUrlByLocale[otherLocale]}/blog/${otherSlug}`
+        });
+      }
+      return {
+        path: `/blog/${post.publicSlug}`,
+        changefreq: 'monthly' as const,
+        priority: '0.6',
+        alternates
+      };
+    });
   } catch {
     // If the post list is unavailable, emit the static sitemap only.
   }
@@ -88,16 +112,21 @@ export const GET: RequestHandler = async ({ url }) => {
   const allEntries = [...entries, ...postEntries];
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${allEntries
-  .map(
-    (entry) => `  <url>
-    <loc>${siteUrl}${entry.path}</loc>
+  .map((entry) => {
+    const alternateLinks = (entry.alternates ?? [])
+      .map(
+        (alt) => `\n    <xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${alt.href}"/>`
+      )
+      .join('');
+    return `  <url>
+    <loc>${siteUrl}${entry.path}</loc>${alternateLinks}
     <lastmod>${today}</lastmod>
     <changefreq>${entry.changefreq}</changefreq>
     <priority>${entry.priority}</priority>
-  </url>`
-  )
+  </url>`;
+  })
   .join('\n')}
 </urlset>`;
 

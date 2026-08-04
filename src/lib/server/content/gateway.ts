@@ -9,7 +9,7 @@ import { load as parseYaml } from 'js-yaml';
 import { marked } from 'marked';
 import { getTextObject, getByteObject, listObjectKeys, type ByteObject } from './store';
 import { SwrCache } from './cache';
-import type { Locale, PageContent, Post, PostMeta } from '$types/content';
+import type { Locale, PageContent, Post, PostAlternate, PostMeta } from '$types/content';
 
 const SITE_PREFIX = 'site/';
 const BLOG_PREFIX = 'blog/posts/';
@@ -62,6 +62,54 @@ export async function loadPost(slug: string, locale: Locale): Promise<Post> {
     if (!post) throw error(404, `Post not found: ${slug}`);
     return post;
   });
+}
+
+/**
+ * Resolve a requested URL slug (canonical or per-locale alias, in any locale)
+ * to the post it identifies. Returns the canonical storage slug, the public
+ * slug for the active locale, and the hreflang alternates across locales.
+ * Returns null when no post matches.
+ */
+export async function resolvePostSlug(
+  requested: string,
+  locale: Locale
+): Promise<{ canonicalSlug: string; publicSlug: string; alternates: PostAlternate[] } | null> {
+  const locales: Locale[] = ['pt-BR', 'en'];
+  const lists = new Map<Locale, PostMeta[]>();
+  for (const loc of locales) {
+    try {
+      lists.set(loc, await loadAllPosts(loc));
+    } catch {
+      // One locale's list being unavailable must not take the other down.
+      lists.set(loc, []);
+    }
+  }
+
+  // Match the active locale first so ambiguous slugs stay on the host's locale.
+  let canonicalSlug: string | null = null;
+  for (const loc of [locale, ...locales.filter((l) => l !== locale)]) {
+    const match = lists
+      .get(loc)
+      ?.find((post) => post.slug === requested || post.publicSlug === requested);
+    if (match) {
+      canonicalSlug = match.slug;
+      break;
+    }
+  }
+  if (!canonicalSlug) return null;
+
+  const alternates: PostAlternate[] = [];
+  for (const loc of locales) {
+    const meta = lists.get(loc)?.find((post) => post.slug === canonicalSlug);
+    if (meta) alternates.push({ locale: loc, publicSlug: meta.publicSlug });
+  }
+
+  const active = alternates.find((alt) => alt.locale === locale);
+  return {
+    canonicalSlug,
+    publicSlug: active?.publicSlug ?? canonicalSlug,
+    alternates
+  };
 }
 
 /** Resolve a binary asset (cover / UI asset) for the server-side proxy routes. */
@@ -150,6 +198,7 @@ async function parsePost(key: string, slug: string): Promise<Post | null> {
     const { data, content } = parseFrontmatter(obj.body);
     return {
       slug,
+      publicSlug: sanitizeSlugAlias(data.slugAlias) ?? slug,
       title: (data.title as string) ?? slug,
       date: (data.date as string) ?? '',
       author: (data.author as string) ?? 'RBX Systems',
@@ -163,6 +212,16 @@ async function parsePost(key: string, slug: string): Promise<Post | null> {
   } catch {
     throw error(503, 'Blog content unavailable');
   }
+}
+
+/**
+ * A slug alias is operator-authored frontmatter, but it becomes part of a URL:
+ * accept only lowercase slug shape so a typo cannot produce a broken or
+ * unsafe path segment.
+ */
+function sanitizeSlugAlias(value: unknown): string | null {
+  if (typeof value !== 'string') return null;
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) ? value : null;
 }
 
 function parsePostKey(key: string): { slug: string; locale: Locale } | null {
