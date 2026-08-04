@@ -35,7 +35,7 @@ export const GET: RequestHandler = async ({ url }) => {
 
   const items = posts
     .map((post) => {
-      const link = `${siteUrl}/blog/${post.slug}`;
+      const link = `${siteUrl}/blog/${post.publicSlug}`;
       return `    <item>
       <title>${escapeXml(post.title)}</title>
       <link>${link}</link>

@@ -62,6 +62,8 @@ Use locale-specific variants when needed:
 
 The public URL slug remains `YYYY-MM-DD-slug`. The site serves the locale-specific variant that matches the current site language and falls back to the base file if needed.
 
+**Per-locale public slug (optional):** a locale variant may declare `slugAlias: 'YYYY-MM-DD-localized-slug'` in its frontmatter (lowercase slug shape only) to localize the public URL on its host. Storage keys, cover keys, and git filenames keep the canonical slug; the site 301-redirects the canonical slug (and other-locale aliases) to the active locale's public slug and emits hreflang alternates. See `docs/AGENT-BLOG-PUBLISHING.md`.
+
 For all **new** agent-published posts, prefer creating both locale files and skip the base fallback file unless there is a specific reason to keep a single-language post.
 
 **Tone:** institutional, clear, and direct — similar to Cursor or Anthropic blog posts. Match the active locale. See `docs/WRITING-STYLE.md` for editorial guidelines (no em-dashes, no arrows, natural prose).

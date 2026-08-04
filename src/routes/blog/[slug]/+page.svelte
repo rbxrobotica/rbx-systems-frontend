@@ -9,9 +9,25 @@
   let { data }: { data: PageData } = $props();
 
   const siteUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
-  const pageUrl = $derived(data.post ? `${siteUrl}/blog/${data.post.slug}` : `${siteUrl}/journal`);
+  const pageUrl = $derived(
+    data.post ? `${siteUrl}/blog/${data.publicSlug ?? data.post.slug}` : `${siteUrl}/journal`
+  );
   const pageTitle = $derived(data.post?.title ?? t(data.locale, 'common.empty'));
   const pageDescription = $derived(data.post?.excerpt ?? '');
+
+  const localeBase: Record<string, string> = {
+    'pt-BR': 'https://rbx.ia.br',
+    en: 'https://rbxsystems.ch'
+  };
+  const alternate = $derived.by(() => {
+    if (!data.alternates || data.alternates.length === 0) return undefined;
+    const links = data.alternates.map((alt) => ({
+      hreflang: alt.locale,
+      href: `${localeBase[alt.locale]}/blog/${alt.publicSlug}`
+    }));
+    const xDefault = links.find((l) => l.hreflang === 'en') ?? links[0];
+    return [...links, { hreflang: 'x-default', href: xDefault.href }];
+  });
 
   const schema = $derived(
     data.post
@@ -43,6 +59,7 @@
   canonical={pageUrl}
   type="article"
   image={data.post?.cover}
+  {alternate}
   {schema}
 />
 

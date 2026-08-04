@@ -51,16 +51,35 @@ The site behavior is:
 - `rbxsystems.ch` defaults to `en`
 - the header locale toggle may override either default via the `rbx-locale-override` cookie
 
-The public URL must stay the same across locales:
+The canonical storage slug stays the same across locales (S3 keys, covers,
+git filenames):
 
 - `rbx.ia.br/blog/YYYY-MM-DD-slug`
 - `rbxsystems.ch/blog/YYYY-MM-DD-slug`
+
+### Per-locale public slug (`slugAlias`)
+
+A locale variant may declare an optional `slugAlias` frontmatter field with a
+localized public URL slug (lowercase letters, digits, hyphens only):
+
+```yaml
+slugAlias: 'YYYY-MM-DD-localized-slug'
+```
+
+When present, that locale's public URL becomes `/blog/YYYY-MM-DD-localized-slug`
+on its host. The storage slug (canonical filename), the S3 keys, and the cover
+key do not change. The site 301-redirects the storage slug, and any other
+locale's alias, to the active locale's public slug, and emits hreflang
+alternates linking both hosts. Typical use: a Portuguese storage slug with an
+English `slugAlias` in the `.en.md` variant so `rbxsystems.ch` gets an English
+URL.
 
 ## Authoring Rules
 
 - Preserve the same meaning across both locale variants
 - Reuse the same `date`, `tags`, `author`, `authorRole`, and `cover`
-- Keep the same slug across locales
+- Keep the same storage slug across locales; localize the public URL only via
+  `slugAlias`
 - Follow the writing rules in `docs/WRITING-STYLE.md`
 - For `pt-BR`, write natural Portuguese with UTF-8 accents and cedilha
 - Never transliterate `pt-BR` prose to ASCII forms such as `nao`, `producao`, or `configuracao`
