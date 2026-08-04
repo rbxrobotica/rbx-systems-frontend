@@ -14,6 +14,13 @@ export const GET: RequestHandler = async ({ url }) => {
   const body = `User-agent: *
 Allow: /
 
+# Public media proxies must stay crawlable: og:image points at
+# /api/blog/cover/ and social crawlers (facebookexternalhit / WhatsApp)
+# honor robots.txt for image fetches. More-specific Allow beats the
+# broader Disallow below.
+Allow: /api/blog/cover/
+Allow: /api/assets/
+
 # Private / internal surfaces
 Disallow: /api/
 Disallow: /console
