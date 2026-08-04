@@ -71,6 +71,10 @@
   <meta property="og:url" content={pageUrl} />
   <meta property="og:locale" content={ogLocale} />
   <meta property="og:image" content={ogImage} />
+  <!-- WhatsApp/Facebook render previews faster (and more reliably) when
+       dimensions are declared; all covers and the brand og image are 1200x630. -->
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
