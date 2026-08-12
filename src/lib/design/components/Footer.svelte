@@ -57,7 +57,10 @@
   </div>
 
   <div class="footer-bottom">
-    <p class="rbx-caption">&copy; {year} RBX Systems. {$_('footer.rights')}</p>
+    <p class="rbx-caption">
+      &copy; {year} RBX Systems. {$_('footer.rights')}
+      <a href="/legal">{$_('nav.legal')}</a>
+    </p>
   </div>
 </footer>
 

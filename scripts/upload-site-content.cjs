@@ -735,6 +735,77 @@ Send an email to **contact@rbxsystems.ch** or use the form soon available on thi
 `
 );
 
+// Legal
+addPage(
+  'legal',
+  `---
+title: Aviso Legal
+description: Identificação do operador, propriedade intelectual, aviso de risco e privacidade dos sites da RBX Systems.
+eyebrow: RBX Systems
+lead: Este aviso identifica quem opera os sites da RBX Systems e as condições que regem o uso do conteúdo.
+---
+
+## Identificação
+
+Os sites rbx.ia.br e rbxsystems.ch são operados pela RBX Systems.
+<!-- OPERATOR: inserir razão social, CNPJ e endereço registrado antes da divulgação externa deste aviso. -->
+Contato: [contact@rbxsystems.ch](mailto:contact@rbxsystems.ch) ou a [página de contato](/contato).
+
+## Propriedade intelectual
+
+O conteúdo destes sites (textos, marcas, material visual e exemplos de código) pertence à RBX Systems. Reprodução integral sem autorização prévia não é permitida. Citação com atribuição e link é permitida.
+
+## Aviso de risco
+
+Robson e o Briefing Diário BTC são produtos de tecnologia e informação. Nada nestes sites constitui recomendação de investimento, oferta de valores mobiliários ou consultoria financeira. Mercados de criptoativos envolvem risco elevado, incluindo a perda integral do capital. Resultados passados não garantem resultados futuros. Decisões de investimento são responsabilidade exclusiva de quem as toma.
+
+## Privacidade
+
+Estes sites usam medição de audiência sem cookies (Plausible, operado em infraestrutura própria). Não vendemos dados pessoais. Dados enviados pelo formulário de contato são usados exclusivamente para responder à solicitação. Pedidos de acesso, correção ou exclusão de dados podem ser feitos pelos canais de contato acima, conforme a Lei 13.709/2018 (LGPD).
+
+## Sem garantias
+
+O conteúdo é publicado no estado em que se encontra, sem garantia de exatidão, completude ou adequação a um propósito específico. A RBX Systems pode alterar ou remover conteúdo sem aviso prévio.
+
+## Alterações
+
+Este aviso pode ser atualizado. Versão de 12 de agosto de 2026.
+`,
+  `---
+title: Legal Notice
+description: Operator identification, intellectual property, risk notice and privacy for the RBX Systems websites.
+eyebrow: RBX Systems
+lead: This notice identifies who operates the RBX Systems websites and the terms governing use of their content.
+---
+
+## Identification
+
+The websites rbx.ia.br and rbxsystems.ch are operated by RBX Systems.
+<!-- OPERATOR: insert registered legal entity name, registration number and address before external distribution of this notice. -->
+Contact: [contact@rbxsystems.ch](mailto:contact@rbxsystems.ch) or the [contact page](/contact).
+
+## Intellectual property
+
+The content of these websites (texts, marks, visual material and code examples) belongs to RBX Systems. Full reproduction without prior authorization is not permitted. Quotation with attribution and a link is permitted.
+
+## Risk notice
+
+Robson and the Briefing Diário BTC are technology and information products. Nothing on these websites constitutes investment advice, an offer of securities or financial consulting. Cryptoasset markets carry high risk, including total loss of capital. Past results do not guarantee future results. Investment decisions are the sole responsibility of the person making them.
+
+## Privacy
+
+These websites use cookieless audience measurement (Plausible, operated on our own infrastructure). We do not sell personal data. Data submitted through the contact form is used exclusively to answer the request. Requests for access, correction or deletion of data can be made through the contact channels above, under applicable data protection law, including the Brazilian LGPD (Law 13.709/2018).
+
+## No warranties
+
+Content is published as is, without warranty of accuracy, completeness or fitness for a particular purpose. RBX Systems may change or remove content without prior notice.
+
+## Changes
+
+This notice may be updated. Version of 2026-08-12.
+`
+);
+
 async function main() {
   for (const { key, body } of pages) {
     await put(key, body);
