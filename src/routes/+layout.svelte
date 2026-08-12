@@ -38,7 +38,7 @@
   <main class="page">
     {@render children()}
   </main>
-  <Footer />
+  <Footer locale={data.locale} />
   <ContactMenu />
   <Analytics />
 </div>

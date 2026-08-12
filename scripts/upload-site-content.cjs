@@ -761,7 +761,7 @@ Robson e o Briefing Diário BTC são produtos de tecnologia e informação. Nada
 
 ## Privacidade
 
-Estes sites usam medição de audiência sem cookies (Plausible, operado em infraestrutura própria). Não vendemos dados pessoais. Dados enviados pelo formulário de contato são usados exclusivamente para responder à solicitação. Pedidos de acesso, correção ou exclusão de dados podem ser feitos pelos canais de contato acima, conforme a Lei 13.709/2018 (LGPD).
+Estes sites usam medição de audiência sem cookies (Plausible, operado em infraestrutura própria). Parâmetros de origem de campanha (UTM) são guardados no navegador para atribuição de assinaturas. No checkout do Briefing Diário BTC, nome, e-mail e CPF ou CNPJ são coletados para execução do contrato e processados pelo provedor de pagamento. Mensagens enviadas ao assistente do site são processadas por um provedor de modelo de linguagem para gerar a resposta. Dados do formulário de contato são usados para responder à solicitação. Não vendemos dados pessoais. Pedidos de acesso, correção ou exclusão podem ser feitos pelos canais de contato acima, conforme o artigo 18 da Lei 13.709/2018 (LGPD). Este aviso resume os fluxos de dados atuais destes sites.
 
 ## Sem garantias
 
@@ -794,7 +794,7 @@ Robson and the Briefing Diário BTC are technology and information products. Not
 
 ## Privacy
 
-These websites use cookieless audience measurement (Plausible, operated on our own infrastructure). We do not sell personal data. Data submitted through the contact form is used exclusively to answer the request. Requests for access, correction or deletion of data can be made through the contact channels above, under applicable data protection law, including the Brazilian LGPD (Law 13.709/2018).
+These websites use cookieless audience measurement (Plausible, operated on our own infrastructure). Campaign origin parameters (UTM) are stored in the browser for subscription attribution. The Briefing Diário BTC checkout collects name, email and Brazilian tax id (CPF or CNPJ) for contract execution, processed by the payment provider. Messages sent to the site assistant are processed by a language-model provider to generate the reply. Contact form data is used to answer the request. We do not sell personal data. Requests for access, correction or deletion can be made through the contact channels above, under applicable data protection law, including Article 18 of the Brazilian LGPD (Law 13.709/2018). This notice summarizes the current data flows of these websites.
 
 ## No warranties
 
@@ -807,7 +807,17 @@ This notice may be updated. Version of 2026-08-12.
 );
 
 async function main() {
-  for (const { key, body } of pages) {
+  // --only=<page> publishes a single page's locale objects (e.g. --only=legal)
+  // instead of rewriting every site page, which would clobber content
+  // published via CMS after this script's snapshot.
+  const onlyArg = process.argv.find((arg) => arg.startsWith('--only='));
+  const only = onlyArg ? onlyArg.split('=')[1] : null;
+  const selected = only ? pages.filter((page) => page.key.includes(`/${only}/`)) : pages;
+  if (only && selected.length === 0) {
+    console.error(`no pages match --only=${only}`);
+    process.exit(1);
+  }
+  for (const { key, body } of selected) {
     await put(key, body);
     console.log('uploaded', key);
   }
