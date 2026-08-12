@@ -39,6 +39,8 @@ The chat BFF can duplicate only the latest user question to the governed Thalamu
 retrieved hits to construct or modify the public answer. Enable it only with
 `THALAMUS_RAG_SHADOW_ENABLED=true`, `THALAMUS_URL`, and a
 `THALAMUS_RAG_TOKEN` service credential limited to `thalamus:rag:retrieve`.
+`THALAMUS_URL` must use HTTPS outside loopback development. Redirects are
+rejected so the bearer credential is never forwarded to another origin.
 
 When enabled, each chat operation adds exactly one bounded HTTP request, started in
 parallel with the existing completion. It has a 1500 ms default timeout, no retry,

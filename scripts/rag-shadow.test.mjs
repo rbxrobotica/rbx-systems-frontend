@@ -83,6 +83,64 @@ test('disabled shadow mode performs no request', async () => {
   assert.equal(calls, 0);
 });
 
+test('rejects remote plaintext HTTP before reading or sending the token', async () => {
+  let calls = 0;
+  const outcome = await runRagShadow({
+    query: 'What is RBX?',
+    environment: {
+      ...enabledEnvironment,
+      THALAMUS_URL: 'http://thalamus.example'
+    },
+    fetchImpl: async () => {
+      calls += 1;
+      return response();
+    }
+  });
+
+  assert.deepEqual(outcome, { status: 'failed', reason: 'invalid_configuration' });
+  assert.equal(calls, 0);
+});
+
+test('rejects empty query or fragment delimiters before sending the token', async () => {
+  for (const baseUrl of ['https://thalamus.example?', 'https://thalamus.example#']) {
+    let calls = 0;
+    const outcome = await runRagShadow({
+      query: 'What is RBX?',
+      environment: {
+        ...enabledEnvironment,
+        THALAMUS_URL: baseUrl
+      },
+      fetchImpl: async () => {
+        calls += 1;
+        return response();
+      }
+    });
+
+    assert.deepEqual(outcome, { status: 'failed', reason: 'invalid_configuration' });
+    assert.equal(calls, 0);
+  }
+});
+
+test('permits plaintext HTTP only for loopback development', async () => {
+  for (const baseUrl of ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://[::1]:8080']) {
+    const requests = [];
+    const outcome = await runRagShadow({
+      query: 'What is RBX?',
+      environment: {
+        ...enabledEnvironment,
+        THALAMUS_URL: baseUrl
+      },
+      fetchImpl: async (url, init) => {
+        requests.push({ url: String(url), init });
+        return response();
+      }
+    });
+
+    assert.equal(outcome.status, 'success');
+    assert.equal(requests[0].url, `${baseUrl}/rbx/v1/rag/shadow/retrieve`);
+  }
+});
+
 test('sends one exact governed shadow request and logs only safe correlation metadata', async () => {
   const requests = [];
   const { records, logger } = recordingLogger();
@@ -100,6 +158,7 @@ test('sends one exact governed shadow request and logs only safe correlation met
   assert.equal(requests.length, 1);
   assert.equal(requests[0].url, 'https://thalamus.example/rbx/v1/rag/shadow/retrieve');
   assert.equal(requests[0].init.method, 'POST');
+  assert.equal(requests[0].init.redirect, 'error');
   assert.equal(requests[0].init.headers.Authorization, 'Bearer test-token');
   assert.deepEqual(JSON.parse(requests[0].init.body), {
     tenant: 'public',

@@ -1,13 +1,14 @@
 name: build-image
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  packages: write
 
 env:
   IMAGE_NAME: ghcr.io/rbxrobotica/rbx-ia-br
@@ -41,9 +42,16 @@ jobs:
       - name: Run svelte-check
         run: pnpm check
 
+      - name: Run unit tests
+        run: pnpm test
+
   image:
+    if: github.event_name != 'pull_request'
     needs: verify
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
 
