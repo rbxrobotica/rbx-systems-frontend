@@ -1,5 +1,13 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
+  import { t } from '$lib/i18n/translate';
+  import type { Locale } from '$types/content';
+
+  interface Props {
+    locale: Locale;
+  }
+
+  let { locale }: Props = $props();
 
   const year = new Date().getFullYear();
 </script>
@@ -57,7 +65,10 @@
   </div>
 
   <div class="footer-bottom">
-    <p class="rbx-caption">&copy; {year} RBX Systems. {$_('footer.rights')}</p>
+    <p class="rbx-caption">
+      &copy; {year} RBX Systems. {$_('footer.rights')}
+      <a href="/legal">{t(locale, 'nav.legal')}</a>
+    </p>
   </div>
 </footer>
 

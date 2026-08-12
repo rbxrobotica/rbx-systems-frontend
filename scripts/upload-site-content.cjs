@@ -735,8 +735,98 @@ Send an email to **contact@rbxsystems.ch** or use the form soon available on thi
 `
 );
 
+// Legal
+addPage(
+  'legal',
+  `---
+title: Aviso Legal
+description: Identificação do operador, propriedade intelectual, aviso de risco e privacidade dos sites da RBX Systems.
+eyebrow: RBX Systems
+lead: Este aviso identifica quem opera os sites da RBX Systems e as condições que regem o uso do conteúdo.
+---
+
+## Identificação
+
+Os sites rbx.ia.br e rbxsystems.ch são operados pela RBX Systems.
+<!-- OPERATOR: inserir razão social, CNPJ e endereço registrado antes da divulgação externa deste aviso. -->
+Contato: [contact@rbxsystems.ch](mailto:contact@rbxsystems.ch) ou a [página de contato](/contato).
+
+## Propriedade intelectual
+
+O conteúdo destes sites (textos, marcas, material visual e exemplos de código) pertence à RBX Systems. Reprodução integral sem autorização prévia não é permitida. Citação com atribuição e link é permitida.
+
+## Aviso de risco
+
+Robson e o Briefing Diário BTC são produtos de tecnologia e informação. Nada nestes sites constitui recomendação de investimento, oferta de valores mobiliários ou consultoria financeira. Mercados de criptoativos envolvem risco elevado, incluindo a perda integral do capital. Resultados passados não garantem resultados futuros. Decisões de investimento são responsabilidade exclusiva de quem as toma.
+
+## Privacidade
+
+Estes sites usam medição de audiência sem cookies (Plausible, operado em infraestrutura própria). Parâmetros de origem de campanha (UTM) são guardados no navegador e acompanham o pedido de assinatura para atribuição. No checkout do Briefing Diário BTC, nome, e-mail, WhatsApp e CPF ou CNPJ são coletados para execução do contrato e processados pelo provedor de pagamento. Mensagens enviadas ao assistente do site são processadas por um provedor de modelo de linguagem para gerar a resposta e registradas para auditoria de qualidade. Dados do formulário de contato são usados para responder à solicitação. Não vendemos dados pessoais. Pedidos de acesso, correção ou exclusão podem ser feitos pelos canais de contato acima, conforme o artigo 18 da Lei 13.709/2018 (LGPD). Este aviso resume os fluxos de dados atuais destes sites.
+
+## Sem garantias
+
+O conteúdo é publicado no estado em que se encontra, sem garantia de exatidão, completude ou adequação a um propósito específico. A RBX Systems pode alterar ou remover conteúdo sem aviso prévio.
+
+## Alterações
+
+Este aviso pode ser atualizado. Versão de 12 de agosto de 2026.
+`,
+  `---
+title: Legal Notice
+description: Operator identification, intellectual property, risk notice and privacy for the RBX Systems websites.
+eyebrow: RBX Systems
+lead: This notice identifies who operates the RBX Systems websites and the terms governing use of their content.
+---
+
+## Identification
+
+The websites rbx.ia.br and rbxsystems.ch are operated by RBX Systems.
+<!-- OPERATOR: insert registered legal entity name, registration number and address before external distribution of this notice. -->
+Contact: [contact@rbxsystems.ch](mailto:contact@rbxsystems.ch) or the [contact page](/contact).
+
+## Intellectual property
+
+The content of these websites (texts, marks, visual material and code examples) belongs to RBX Systems. Full reproduction without prior authorization is not permitted. Quotation with attribution and a link is permitted.
+
+## Risk notice
+
+Robson and the Briefing Diário BTC are technology and information products. Nothing on these websites constitutes investment advice, an offer of securities or financial consulting. Cryptoasset markets carry high risk, including total loss of capital. Past results do not guarantee future results. Investment decisions are the sole responsibility of the person making them.
+
+## Privacy
+
+These websites use cookieless audience measurement (Plausible, operated on our own infrastructure). Campaign origin parameters (UTM) are stored in the browser and accompany the subscription order for attribution. The Briefing Diário BTC checkout collects name, email, WhatsApp number and Brazilian tax id (CPF or CNPJ) for contract execution, processed by the payment provider. Messages sent to the site assistant are processed by a language-model provider to generate the reply and recorded for quality audit. Contact form data is used to answer the request. We do not sell personal data. Requests for access, correction or deletion can be made through the contact channels above, under applicable data protection law, including Article 18 of the Brazilian LGPD (Law 13.709/2018). This notice summarizes the current data flows of these websites.
+
+## No warranties
+
+Content is published as is, without warranty of accuracy, completeness or fitness for a particular purpose. RBX Systems may change or remove content without prior notice.
+
+## Changes
+
+This notice may be updated. Version of 2026-08-12.
+`
+);
+
 async function main() {
-  for (const { key, body } of pages) {
+  // --only=<page> publishes a single page's locale objects (e.g. --only=legal)
+  // instead of rewriting every site page, which would clobber content
+  // published via CMS after this script's snapshot. The match is exact on the
+  // page path segment; an empty or unmatched value aborts instead of falling
+  // back to a bulk upload.
+  const onlyArg = process.argv.find((arg) => arg.startsWith('--only='));
+  let selected = pages;
+  if (onlyArg) {
+    const only = onlyArg.slice('--only='.length);
+    if (!only) {
+      console.error('usage: --only=<page-path> (e.g. --only=legal)');
+      process.exit(1);
+    }
+    selected = pages.filter((page) => page.key.endsWith(`/${only}/index.md`));
+    if (selected.length !== 2) {
+      console.error(`--only=${only} matched ${selected.length} objects, expected 2 (pt-BR + en)`);
+      process.exit(1);
+    }
+  }
+  for (const { key, body } of selected) {
     await put(key, body);
     console.log('uploaded', key);
   }

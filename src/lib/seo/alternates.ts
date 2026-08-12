@@ -71,7 +71,8 @@ const LOCALE_PATH_MAP: Record<string, { 'pt-BR': string; en: string }> = {
   '/newsroom': { 'pt-BR': '/newsroom', en: '/newsroom' },
   '/changelog': { 'pt-BR': '/changelog', en: '/changelog' },
   '/atelier': { 'pt-BR': '/atelier', en: '/atelier' },
-  '/trust': { 'pt-BR': '/trust', en: '/trust' }
+  '/trust': { 'pt-BR': '/trust', en: '/trust' },
+  '/legal': { 'pt-BR': '/legal', en: '/legal' }
 };
 
 export interface Alternate {
