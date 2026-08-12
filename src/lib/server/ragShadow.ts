@@ -74,6 +74,8 @@ function resolveConfig(environment: Environment): ConfigResolution {
   if (
     !rawUrl ||
     !token ||
+    rawUrl.includes('?') ||
+    rawUrl.includes('#') ||
     !Number.isInteger(timeoutMs) ||
     timeoutMs < 1 ||
     timeoutMs > MAX_TIMEOUT_MS
@@ -83,8 +85,11 @@ function resolveConfig(environment: Environment): ConfigResolution {
 
   try {
     const url = new URL(rawUrl);
+    const loopbackHttp =
+      url.protocol === 'http:' &&
+      (url.hostname === 'localhost' || url.hostname === '127.0.0.1' || url.hostname === '[::1]');
     if (
-      !['http:', 'https:'].includes(url.protocol) ||
+      (url.protocol !== 'https:' && !loopbackHttp) ||
       url.username ||
       url.password ||
       url.search ||
@@ -226,6 +231,7 @@ export async function runRagShadow({
         query: normalizedQuery,
         limit: RESULT_LIMIT
       }),
+      redirect: 'error',
       signal: controller.signal
     });
 
