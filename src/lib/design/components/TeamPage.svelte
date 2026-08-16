@@ -42,7 +42,7 @@
     },
     {
       key: 'flavia-ribeiro',
-      name: 'Flávia Ribeiro',
+      name: 'Flavia Ribeiro',
       role: locale === 'pt-BR' ? 'Fundadora SDR' : 'Founding SDR',
       bio:
         locale === 'pt-BR'
