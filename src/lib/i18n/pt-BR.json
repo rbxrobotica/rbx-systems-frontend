@@ -14,6 +14,7 @@
     "team": "Equipe",
     "leandroDamasio": "Leandro Damasio",
     "caueAlencar": "Cauê Alencar",
+    "flaviaRibeiro": "Flávia Ribeiro",
     "legal": "Aviso Legal"
   },
   "footer": {
@@ -54,6 +55,12 @@
     "metaDescription": "Cauê Alencar é Chief Financial Officer da RBX Systems. Liderança financeira e estratégia para operações de alta exigência.",
     "headline": "Cauê Alencar",
     "body": "Chief Financial Officer. Liderança financeira e estratégia para operações de alta exigência."
+  },
+  "flaviaRibeiro": {
+    "metaTitle": "Flávia Ribeiro · Fundadora SDR da RBX Systems",
+    "metaDescription": "Flávia Ribeiro é Fundadora SDR da RBX Systems. Desenvolvimento de vendas, suporte ao cliente e customer care para operações de alta exigência.",
+    "headline": "Flávia Ribeiro",
+    "body": "Sales Development, Client Support e Customer Care. Fundadora SDR da RBX Systems."
   },
   "solutions": {
     "metaTitle": "Soluções RBX Systems — Engenharia de IA, LLMOps, Agentes e Cloud",

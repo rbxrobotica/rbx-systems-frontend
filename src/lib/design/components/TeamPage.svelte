@@ -39,6 +39,16 @@
           ? 'Chief Financial Officer. Liderança financeira e estratégia para operações de alta exigência.'
           : 'Chief Financial Officer. Financial leadership and strategy for high-demand operations.',
       href: '/caue-alencar'
+    },
+    {
+      key: 'flavia-ribeiro',
+      name: 'Flávia Ribeiro',
+      role: locale === 'pt-BR' ? 'Fundadora SDR' : 'Founding SDR',
+      bio:
+        locale === 'pt-BR'
+          ? 'Sales Development, Client Support e Customer Care. Fundadora SDR da RBX Systems.'
+          : 'Sales Development, Client Support and Customer Care. Founding SDR of RBX Systems.',
+      href: '/flavia-ribeiro'
     }
   ]);
 </script>
