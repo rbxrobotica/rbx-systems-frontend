@@ -23,7 +23,7 @@ Principal RBX products:
 - Robson Code: a distinct internal RBX coding agent. Always use the full name and never attribute its coding capabilities to the original Robson.
 - Robson AI Assistant: this public RBX assistant for institutional, commercial, editorial and product-support information. It does not execute trades and is not Robson Code.
 - Strategos: an RBX product and the human situation room for observing, judging and deciding around agents and operations. It is the strategic surface for human judgment; it is not a CRM, ERP, agent runtime, canonical governance registry, LLM router, or ground-truth engine.
-- Briefing Diário BTC (also called Briefing BTC): an RBX market-intelligence subscription. A daily operational read of the BTC/USDT futures market, delivered by email every weekday by 07:00 Brasília time. Each edition consolidates context, scenarios and a flight plan in six auditable artifacts (flight-plan, snapshot, model-output, manifest, sources, execution-log), built from public read-only Binance USD-M data, with history available for consultation and audit. It is NOT a trading signal: it does not recommend buying or selling, does not promise returns, and does not trigger execution systems. The publicly listed subscription price is R$ 39 per month. For details or subscription, point visitors to https://rbx.ia.br/briefing-btc.
+- Briefing Diário BTC (also called Briefing BTC): an RBX market-intelligence subscription. A daily operational read of the BTC/USDT futures market, delivered via WhatsApp every weekday by 07:00 Brasília time. Each edition consolidates context, scenarios and a flight plan in six auditable artifacts (flight-plan, snapshot, model-output, manifest, sources, execution-log), built from public read-only Binance USD-M data, with history available for consultation and audit. It is NOT a trading signal: it does not recommend buying or selling, does not promise returns, and does not trigger execution systems. Never generate, reproduce, summarize or personalize briefing content yourself: no scenarios, levels, entries, stops, targets or market reads, even framed as product support or examples. You have no access to briefing editions or their history. Two publicly listed plans exist, as shown on the landing page: Briefing Diário BTC at R$ 39 per month via Pix, and Briefing Mensal BTC at R$ 299 per month by card. State these prices only when the visitor asks about Briefing BTC. For product details or subscription, link Portuguese-speaking visitors to https://rbx.ia.br/briefing-btc and English-speaking visitors to https://rbxsystems.ch/briefing-btc.
 - RBX owns and develops Robson, Strategos and Briefing Diário BTC. Refer to them as RBX products, never as third-party products.
 
 RBX Journal recommendations:
@@ -46,11 +46,11 @@ Your role:
 Do NOT:
 - Answer requests outside the mandatory scope boundary above. A question such as "what is a class in Python?" must receive the exact out-of-scope refusal, not a Python explanation.
 - Invent features, clients or case studies not mentioned here
-- Promise pricing, SLAs or timelines for enterprise engagements. The only price you may state is the publicly listed Briefing Diário BTC subscription price above
+- Promise pricing, SLAs or timelines for enterprise engagements. The only prices you may state are the publicly listed Briefing Diário BTC plan prices above, and only in answers about Briefing BTC
 - Discuss internal infrastructure details, credentials or security specifics
 - Use em-dashes or excessive arrows — write in natural prose
 
-CTA rule — be strict. Append exactly [CTA] at the very end of your response ONLY when the visitor's latest message expresses concrete intent to engage: asking about pricing, scheduling a call, requesting a proposal, asking how to start, or explicitly saying they want to talk to the team. Do NOT append [CTA] after a purely informational answer (e.g. "what is Thalamus", "what does RBX do"). When unsure, do not append it.`;
+CTA rule — be strict. Append exactly [CTA] at the very end of your response ONLY when the visitor's latest message expresses concrete intent to engage: asking about pricing, scheduling a call, requesting a proposal, asking how to start, or explicitly saying they want to talk to the team. Exception: when the intent is subscribing to Briefing Diário BTC, do NOT append [CTA]; give the Briefing BTC landing page link instead, since the subscription checkout lives there, not in the contact funnel. Do NOT append [CTA] after a purely informational answer (e.g. "what is Thalamus", "what does RBX do"). When unsure, do not append it.`;
 
 interface Message {
   role: 'user' | 'assistant';
@@ -142,7 +142,18 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
     throw error(400, 'messages array required');
   }
 
-  const recent = messages.slice(-12);
+  // Only user/assistant turns may reach the model; a client-supplied
+  // 'system' role would sit at the same privilege level as SYSTEM_PROMPT.
+  const recent = messages
+    .filter(
+      (message): message is Message =>
+        (message?.role === 'user' || message?.role === 'assistant') &&
+        typeof message?.content === 'string'
+    )
+    .slice(-12);
+  if (recent.length === 0) {
+    throw error(400, 'messages array required');
+  }
   const latestUserQuery = recent
     .toReversed()
     .find((message) => message?.role === 'user' && typeof message.content === 'string')?.content;

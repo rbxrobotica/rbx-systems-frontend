@@ -34,3 +34,24 @@ test('the three Robson product identities remain distinct', () => {
   assert.match(route, /It does not execute trades and is not Robson Code/);
   assert.match(route, /Do not claim precision, returns or financial performance/);
 });
+
+test('Briefing Diário BTC facts and boundaries are pinned', () => {
+  assert.match(route, /Briefing Diário BTC \(also called Briefing BTC\)/);
+  assert.match(route, /delivered via WhatsApp every weekday by 07:00 Brasília time/);
+  assert.match(route, /R\$ 39 per month via Pix/);
+  assert.match(route, /R\$ 299 per month by card/);
+  assert.match(route, /State these prices only when the visitor asks about Briefing BTC/);
+  assert.match(route, /https:\/\/rbx\.ia\.br\/briefing-btc/);
+  assert.match(route, /https:\/\/rbxsystems\.ch\/briefing-btc/);
+  assert.match(route, /Never generate, reproduce, summarize or personalize briefing content/);
+  assert.match(route, /does not recommend buying or selling, does not promise returns/);
+  assert.match(
+    route,
+    /when the intent is subscribing to Briefing Diário BTC, do NOT append \[CTA\]/
+  );
+});
+
+test('the chat endpoint forwards only user and assistant roles', () => {
+  assert.match(route, /message\?\.role === 'user' \|\| message\?\.role === 'assistant'/);
+  assert.match(route, /typeof message\?\.content === 'string'/);
+});
