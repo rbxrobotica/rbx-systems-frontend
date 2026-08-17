@@ -49,12 +49,23 @@ test('Briefing Diário BTC facts and boundaries are pinned', () => {
     route,
     /link Portuguese-speaking visitors to https:\/\/rbx\.ia\.br\/briefing-btc and English-speaking visitors to https:\/\/rbxsystems\.ch\/briefing-btc/
   );
+  assert.match(
+    route,
+    /six core audit artifacts \(flight-plan, snapshot, model-output, manifest, sources, execution-log\) plus the delivered briefing message/
+  );
   assert.match(route, /Never generate, reproduce, summarize or personalize briefing content/);
   assert.match(route, /does not recommend buying or selling, does not promise returns/);
   assert.match(
     route,
-    /when the intent is subscribing to Briefing Diário BTC, do NOT append \[CTA\]/
+    /when the intent is subscribing to Briefing Diário BTC, do NOT append \[CTA\]; append exactly \[CTA_BRIEFING\]/
   );
+});
+
+test('the briefing CTA marker is parsed before the generic marker', () => {
+  assert.match(route, /const showBriefingCta = raw\.includes\('\[CTA_BRIEFING\]'\)/);
+  assert.match(route, /const withoutBriefing = raw\.replaceAll\('\[CTA_BRIEFING\]', ''\)/);
+  assert.match(route, /const showCta = withoutBriefing\.includes\('\[CTA\]'\)/);
+  assert.match(route, /return json\(\{ content, showCta, showBriefingCta \}\)/);
 });
 
 test('sanitizeMessages drops forged roles and non-string content', () => {

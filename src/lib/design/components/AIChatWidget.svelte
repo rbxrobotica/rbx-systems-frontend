@@ -26,6 +26,7 @@
   let input = $state('');
   let loading = $state(false);
   let showCta = $state(false);
+  let showBriefingCta = $state(false);
   let messagesEl = $state<HTMLDivElement | undefined>();
 
   async function scrollBottom() {
@@ -41,6 +42,7 @@
     messages = [...messages, { role: 'user', content: text }];
     loading = true;
     showCta = false;
+    showBriefingCta = false;
     await scrollBottom();
 
     try {
@@ -62,9 +64,11 @@
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-      const data: { content: string; showCta: boolean } = await res.json();
+      const data: { content: string; showCta: boolean; showBriefingCta?: boolean } =
+        await res.json();
       messages = [...messages, { role: 'assistant', content: data.content }];
       showCta = data.showCta;
+      showBriefingCta = data.showBriefingCta ?? false;
     } catch {
       const errMsg = $locale?.startsWith('en')
         ? 'Sorry, I could not connect right now. Please try again in a moment.'
@@ -93,6 +97,9 @@
     $locale?.startsWith('en') ? 'Talk on WhatsApp' : 'Falar no WhatsApp'
   );
   const ctaForm = $derived($locale?.startsWith('en') ? 'Send a message' : 'Enviar mensagem');
+  const ctaBriefing = $derived(
+    $locale?.startsWith('en') ? 'Subscribe to the BTC Briefing' : 'Assinar o Briefing BTC'
+  );
 </script>
 
 <div class="panel" class:pending={loading} role="dialog" aria-modal="true" aria-label={label}>
@@ -150,7 +157,12 @@
       </div>
     {/if}
 
-    {#if showCta && !loading}
+    {#if showBriefingCta && !loading}
+      <div class="cta-row">
+        <!-- Subscription checkout lives on the landing page, not in the contact funnel. -->
+        <a href="/briefing-btc" class="cta-btn primary" onclick={onclose}>{ctaBriefing}</a>
+      </div>
+    {:else if showCta && !loading}
       <div class="cta-row">
         <!-- /contato, not /#contact: the home page no longer carries the contact section. -->
         <a href="/contato" class="cta-btn primary" onclick={onclose}>{ctaForm}</a>
