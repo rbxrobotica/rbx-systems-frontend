@@ -1,5 +1,6 @@
 import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
+import { sanitizeMessages } from '$lib/server/chatMessages.js';
 import { runRagShadow } from '$lib/server/ragShadow';
 import type { RequestHandler } from './$types';
 
@@ -142,15 +143,7 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
     throw error(400, 'messages array required');
   }
 
-  // Only user/assistant turns may reach the model; a client-supplied
-  // 'system' role would sit at the same privilege level as SYSTEM_PROMPT.
-  const recent = messages
-    .filter(
-      (message): message is Message =>
-        (message?.role === 'user' || message?.role === 'assistant') &&
-        typeof message?.content === 'string'
-    )
-    .slice(-12);
+  const recent: Message[] = sanitizeMessages(messages);
   if (recent.length === 0) {
     throw error(400, 'messages array required');
   }
