@@ -52,6 +52,20 @@ export async function loadPage(path: string, locale: Locale): Promise<PageConten
   });
 }
 
+/**
+ * Like loadPage, but resolves to null when the CMS object does not exist,
+ * letting routes with i18n fallback copy render instead of 404ing. Any
+ * failure other than the gateway's own 404 still propagates.
+ */
+export async function loadPageOrNull(path: string, locale: Locale): Promise<PageContent | null> {
+  try {
+    return await loadPage(path, locale);
+  } catch (err) {
+    if ((err as { status?: number } | null)?.status === 404) return null;
+    throw err;
+  }
+}
+
 export async function loadAllPosts(locale: Locale): Promise<PostMeta[]> {
   return listCache.get(`posts:${locale}`, () => fetchPostList(locale));
 }
