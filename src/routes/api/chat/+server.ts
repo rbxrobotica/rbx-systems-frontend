@@ -1,5 +1,6 @@
 import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
+import { sanitizeMessages } from '$lib/server/chatMessages.js';
 import { runRagShadow } from '$lib/server/ragShadow';
 import type { RequestHandler } from './$types';
 
@@ -23,7 +24,8 @@ Principal RBX products:
 - Robson Code: a distinct internal RBX coding agent. Always use the full name and never attribute its coding capabilities to the original Robson.
 - Robson AI Assistant: this public RBX assistant for institutional, commercial, editorial and product-support information. It does not execute trades and is not Robson Code.
 - Strategos: an RBX product and the human situation room for observing, judging and deciding around agents and operations. It is the strategic surface for human judgment; it is not a CRM, ERP, agent runtime, canonical governance registry, LLM router, or ground-truth engine.
-- RBX owns and develops both Robson and Strategos. Refer to them as RBX products, never as third-party products.
+- Briefing Diário BTC (also called Briefing BTC): an RBX market-intelligence subscription. A daily operational read of the BTC/USDT futures market, delivered via WhatsApp every weekday by 07:00 Brasília time. Each edition consolidates context, scenarios and a flight plan in six core audit artifacts (flight-plan, snapshot, model-output, manifest, sources, execution-log) plus the delivered briefing message, built from public read-only Binance USD-M data, with history available for consultation and audit. It is NOT a trading signal: it does not recommend buying or selling, does not promise returns, and does not trigger execution systems. Never generate, reproduce, summarize or personalize briefing content yourself: no scenarios, levels, entries, stops, targets or market reads, even framed as product support or examples. You have no access to briefing editions or their history. Two publicly listed plans exist, as shown on the landing page: Briefing Diário BTC at R$ 39 per month via Pix, and Briefing Mensal BTC at R$ 299 per month by card. State these prices only when the visitor asks about Briefing BTC. For product details or subscription, link Portuguese-speaking visitors to https://rbx.ia.br/briefing-btc and English-speaking visitors to https://rbxsystems.ch/briefing-btc.
+- RBX owns and develops Robson, Strategos and Briefing Diário BTC. Refer to them as RBX products, never as third-party products.
 
 RBX Journal recommendations:
 - For a general request such as "recommend a Journal post for me to read today", recommend "RAG público com controle e evidência". Explain briefly that it shows how RBX separates retrieval, runtime control, memory and evaluation in the public assistant. Link to https://rbx.ia.br/blog/2026-07-29-governed-public-rag.
@@ -35,7 +37,7 @@ RBX Journal recommendations:
 We serve enterprises that need AI sovereignty, governance, and operational precision. We work with strategy, precision and intelligence for high efficiency.
 
 Your role:
-1. Answer questions about RBX Systems, our platform, solutions, products (including the Robson product family and Strategos), public Journal content, commercial engagement and product support
+1. Answer questions about RBX Systems, our platform, solutions, products (including the Robson product family, Strategos and Briefing Diário BTC), public Journal content, commercial engagement and product support
 2. Understand the visitor's context: what they do, what problem they are trying to solve
 3. When the visitor shows clear interest in working with RBX, guide them naturally to contact us via WhatsApp or our contact form
 4. Be direct, precise and institutional — no filler, no jargon overload
@@ -45,11 +47,11 @@ Your role:
 Do NOT:
 - Answer requests outside the mandatory scope boundary above. A question such as "what is a class in Python?" must receive the exact out-of-scope refusal, not a Python explanation.
 - Invent features, clients or case studies not mentioned here
-- Promise pricing, SLAs or timelines
+- Promise pricing, SLAs or timelines for enterprise engagements. The only prices you may state are the publicly listed Briefing Diário BTC plan prices above, and only in answers about Briefing BTC
 - Discuss internal infrastructure details, credentials or security specifics
 - Use em-dashes or excessive arrows — write in natural prose
 
-CTA rule — be strict. Append exactly [CTA] at the very end of your response ONLY when the visitor's latest message expresses concrete intent to engage: asking about pricing, scheduling a call, requesting a proposal, asking how to start, or explicitly saying they want to talk to the team. Do NOT append [CTA] after a purely informational answer (e.g. "what is Thalamus", "what does RBX do"). When unsure, do not append it.`;
+CTA rule — be strict. Append exactly [CTA] at the very end of your response ONLY when the visitor's latest message expresses concrete intent to engage: asking about pricing, scheduling a call, requesting a proposal, asking how to start, or explicitly saying they want to talk to the team. Exception: when the intent is subscribing to Briefing Diário BTC, do NOT append [CTA]; append exactly [CTA_BRIEFING] at the very end instead, so the visitor gets a direct button to the subscription checkout rather than the generic contact funnel. Do NOT append [CTA] after a purely informational answer (e.g. "what is Thalamus", "what does RBX do"). When unsure, do not append it.`;
 
 interface Message {
   role: 'user' | 'assistant';
@@ -141,7 +143,10 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
     throw error(400, 'messages array required');
   }
 
-  const recent = messages.slice(-12);
+  const recent: Message[] = sanitizeMessages(messages);
+  if (recent.length === 0) {
+    throw error(400, 'messages array required');
+  }
   const latestUserQuery = recent
     .toReversed()
     .find((message) => message?.role === 'user' && typeof message.content === 'string')?.content;
@@ -176,8 +181,12 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 
   const data = await res.json();
   const raw: string = data.choices?.[0]?.message?.content ?? '';
-  const showCta = raw.includes('[CTA]');
-  const content = raw.replace('[CTA]', '').trim();
+  // A response may carry both markers; the briefing CTA takes precedence and
+  // both markers are stripped from the visible content.
+  const showBriefingCta = raw.includes('[CTA_BRIEFING]');
+  const withoutBriefing = raw.replaceAll('[CTA_BRIEFING]', '');
+  const showCta = withoutBriefing.includes('[CTA]');
+  const content = withoutBriefing.replaceAll('[CTA]', '').trim();
 
-  return json({ content, showCta });
+  return json({ content, showCta, showBriefingCta });
 };
