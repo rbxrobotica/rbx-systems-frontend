@@ -181,8 +181,8 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 
   const data = await res.json();
   const raw: string = data.choices?.[0]?.message?.content ?? '';
-  // Strip the briefing marker first: '[CTA_BRIEFING]' contains '[CTA]', so
-  // checking the generic marker on the raw text would double-trigger.
+  // A response may carry both markers; the briefing CTA takes precedence and
+  // both markers are stripped from the visible content.
   const showBriefingCta = raw.includes('[CTA_BRIEFING]');
   const withoutBriefing = raw.replaceAll('[CTA_BRIEFING]', '');
   const showCta = withoutBriefing.includes('[CTA]');
