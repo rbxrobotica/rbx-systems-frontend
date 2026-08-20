@@ -15,7 +15,8 @@
     "leandroDamasio": "Leandro Damasio",
     "caueAlencar": "Cauê Alencar",
     "flaviaRibeiro": "Flavia Ribeiro",
-    "legal": "Aviso Legal"
+    "legal": "Aviso Legal",
+    "manifesto": "Manifesto"
   },
   "footer": {
     "description": "Engenharia de sistemas, automação e infraestrutura para operações de alta exigência.",
@@ -23,6 +24,10 @@
     "resourcesTitle": "Recursos",
     "contactTitle": "Contato",
     "rights": "Todos os direitos reservados."
+  },
+  "manifesto": {
+    "headline": "Manifesto de IA Governada",
+    "body": "Confiança em IA não é propriedade de um modelo. É propriedade de arquitetura."
   },
   "home": {
     "metaTitle": "RBX Systems — Engenharia de Sistemas & Infraestrutura",

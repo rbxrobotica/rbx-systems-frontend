@@ -806,6 +806,65 @@ This notice may be updated. Version of 2026-08-12.
 `
 );
 
+// Manifesto
+addPage(
+  'manifesto',
+  `---
+title: Manifesto de IA Governada
+description: A arquitetura de IA governada da RBX Systems em seis responsabilidades separadas, auditáveis e combináveis.
+eyebrow: Manifesto
+lead: Confiança em IA não é propriedade de um modelo. É propriedade de arquitetura.
+---
+
+Organizações que constroem produtos de IA descobrem que sistemas de agentes sem governança não sobrevivem ao contato com produção, auditoria ou regulação. Nossa resposta é uma arquitetura em que seis responsabilidades permanecem separadas, auditáveis e combináveis. Nunca fundidas.
+
+## As seis responsabilidades
+
+- **TruthMetal** define e versiona a verdade esperada e as evidências: oráculos, golden cases, especificações de avaliação, proveniência e revogação.
+- **Verentir** mede e julga de forma independente: executa avaliações, atribui falhas e detecta regressão. Recomenda; nunca impõe o próprio veredito.
+- **Thalamus** aplica o controle de runtime de IA: políticas, roteamento de modelos, limites, guardrails e interrupção. Toda chamada governada passa por ele.
+- **Orquestração de Agentes** coordena a execução: missões, papéis, sequências, retries e critérios de parada explícitos.
+- **RBX Governance** preserva a memória institucional: decisões registradas com racional, ownership e impacto. O git escreve e aprova; sistemas e interfaces são projeções de leitura.
+- **Strategos** apresenta a situação e sustenta o julgamento humano: projeções, dossiês e gatilhos estratégicos sempre autorizados por pessoas.
+
+## Os invariantes
+
+1. Recomendação e enforcement são poderes distintos. O plano que mede nunca impõe; o plano que controla nunca avalia a si mesmo.
+2. Ação consequente tem gate humano: gastos, compromissos, afirmações externas e gatilhos estratégicos.
+3. Evidência acima de afirmação. Um trace ou um dashboard, sozinho, não é registro de auditoria.
+4. Um resultado indeterminado nunca é reexecutado às cegas; é reconciliado antes.
+
+A versão canônica deste manifesto é versionada em nosso repositório de governança, com controle de mudanças por decisão registrada. Nada aqui muda em silêncio.
+`,
+  `---
+title: Governed AI Manifesto
+description: The RBX Systems governed AI architecture as six separate, auditable and combinable responsibilities.
+eyebrow: Manifesto
+lead: Trust in AI is not a model property. It is an architectural property.
+---
+
+Organizations building AI products discover that ungoverned agent systems do not survive contact with production, audit or regulation. Our answer is an architecture in which six responsibilities remain separate, auditable and combinable. Never merged.
+
+## The six responsibilities
+
+- **TruthMetal** defines and versions expected truth and evidence: oracles, golden cases, evaluation specifications, provenance and revocation.
+- **Verentir** measures and judges independently: it runs evaluations, attributes failures and detects regression. It recommends; it never enforces its own verdict.
+- **Thalamus** applies AI runtime control: policies, model routing, limits, guardrails and interruption. Every governed call passes through it.
+- **Agent Orchestration** coordinates execution: missions, roles, sequencing, retries and explicit stop criteria.
+- **RBX Governance** preserves institutional memory: decisions recorded with rationale, ownership and impact. Git writes and approves; systems and interfaces are read projections.
+- **Strategos** presents the situation and supports human judgment: projections, dossiers and strategic triggers always authorized by people.
+
+## The invariants
+
+1. Recommendation and enforcement are distinct powers. The plane that measures never enforces; the plane that controls never grades itself.
+2. Consequential action is human-gated: spend, commitments, external claims and strategic triggers.
+3. Evidence over assertion. A trace or a dashboard, alone, is not an audit record.
+4. An indeterminate outcome is never blindly retried; it is reconciled first.
+
+The canonical version of this manifesto is versioned in our governance repository, with change control by recorded decision. Nothing here changes silently.
+`
+);
+
 async function main() {
   // --only=<page> publishes a single page's locale objects (e.g. --only=legal)
   // instead of rewriting every site page, which would clobber content
