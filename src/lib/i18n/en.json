@@ -15,7 +15,8 @@
     "leandroDamasio": "Leandro Damasio",
     "caueAlencar": "Cauê Alencar",
     "flaviaRibeiro": "Flavia Ribeiro",
-    "legal": "Legal Notice"
+    "legal": "Legal Notice",
+    "manifesto": "Manifesto"
   },
   "footer": {
     "description": "Systems engineering, automation and infrastructure for high-demand operations.",
@@ -23,6 +24,10 @@
     "resourcesTitle": "Resources",
     "contactTitle": "Contact",
     "rights": "All rights reserved."
+  },
+  "manifesto": {
+    "headline": "Governed AI Manifesto",
+    "body": "Trust in AI is not a model property. It is an architectural property."
   },
   "home": {
     "metaTitle": "RBX Systems — Systems Engineering & Infrastructure",

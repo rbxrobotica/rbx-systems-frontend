@@ -34,6 +34,7 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
     { path: '/cases', changefreq: 'weekly', priority: '0.8' },
     { path: '/newsroom', changefreq: 'weekly', priority: '0.7' },
     { path: '/changelog', changefreq: 'weekly', priority: '0.7' },
+    { path: '/manifesto', changefreq: 'monthly', priority: '0.6' },
     { path: '/contato', changefreq: 'monthly', priority: '0.7' },
     { path: '/legal', changefreq: 'monthly', priority: '0.5' }
   ],
@@ -60,6 +61,7 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
     { path: '/cases', changefreq: 'weekly', priority: '0.8' },
     { path: '/newsroom', changefreq: 'weekly', priority: '0.7' },
     { path: '/changelog', changefreq: 'weekly', priority: '0.7' },
+    { path: '/manifesto', changefreq: 'monthly', priority: '0.6' },
     { path: '/contact', changefreq: 'monthly', priority: '0.7' },
     { path: '/legal', changefreq: 'monthly', priority: '0.5' }
   ]

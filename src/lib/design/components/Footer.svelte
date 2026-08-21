@@ -42,6 +42,7 @@
           <li><a href="/cases">{$_('nav.cases')}</a></li>
           <li><a href="/newsroom">{$_('nav.newsroom')}</a></li>
           <li><a href="/atelier">{$_('nav.atelier')}</a></li>
+          <li><a href="/manifesto">{$_('nav.manifesto')}</a></li>
         </ul>
       </div>
       <div>
