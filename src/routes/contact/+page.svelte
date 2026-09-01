@@ -10,7 +10,7 @@
   const title = $derived(t(data.locale, 'contact.metaTitle'));
   const description = $derived(t(data.locale, 'contact.metaDescription'));
   const pageUrl = $derived(
-    data.locale === 'pt-BR' ? 'https://rbx.ia.br/contact' : 'https://rbxsystems.ch/contact'
+    data.locale === 'pt-BR' ? 'https://rbx.ia.br/contato' : 'https://rbxsystems.ch/contact'
   );
   const schema = $derived(buildGraph(data.locale, pageUrl, title, description));
 </script>

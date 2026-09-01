@@ -80,4 +80,4 @@ With the architecture checkpoint closed, the mission moves into implementation u
 
 Two models set against each other, a human on triage, and the rule that nothing passes until it becomes executable text. The rest is cheap repetition. That is Loop Engineering.
 
-If this kind of process sounds useful for your systems, [talk to RBX](/contato). And to follow the next field notes, the [Journal](/journal) has RSS.
+If this kind of process sounds useful for your systems, [talk to RBX](/contact). And to follow the next field notes, the [Journal](/journal) has RSS.
