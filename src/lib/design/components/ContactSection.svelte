@@ -96,7 +96,9 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     background: var(--bg-1);
-    backdrop-filter: blur(8px);
+    /* no backdrop-filter here: it would make this card the containing
+       block for the WhatsAppDrawer's position:fixed overlay, clipping
+       the drawer inside the card (and --bg-1 is opaque anyway) */
   }
 
   .hairline {
