@@ -108,6 +108,7 @@
       "namePlaceholder": "Seu nome",
       "emailPlaceholder": "seu@email.com",
       "phonePlaceholder": "+55 11 99999-9999",
+      "phoneRequiredForWhatsapp": "Informe seu número de WhatsApp para receber a resposta por lá.",
       "messagePlaceholder": "Como podemos ajudar?",
       "whatsappOptIn": "Aceito receber resposta pelo WhatsApp.",
       "submit": "Enviar mensagem",

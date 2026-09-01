@@ -20,6 +20,12 @@
   let altchaPayload = $state<string | null>(null);
   let status = $state<Status>('idle');
   let altchaWidget: AltchaWidget | undefined = $state();
+  let phoneInput: HTMLInputElement | undefined = $state();
+
+  // Phone is only required when the visitor asked for a WhatsApp reply:
+  // without a number we cannot honor the opt-in, but a plain message
+  // may be sent without any phone at all.
+  const phoneRequired = $derived(whatsappOptIn);
 
   const commsBase = getCommsBaseUrl();
   const challengeUrl = `${commsBase}/api/altcha-challenge`;
@@ -27,6 +33,12 @@
   async function handleSubmit(ev: SubmitEvent) {
     ev.preventDefault();
     if (status === 'submitting') return;
+
+    if (whatsappOptIn && !phone.trim()) {
+      phoneInput?.focus();
+      phoneInput?.reportValidity();
+      return;
+    }
 
     const payload = altchaWidget?.getValue() ?? altchaPayload;
     if (!payload) {
@@ -130,14 +142,19 @@
     </div>
 
     <div class="field">
-      <label for="contact-phone">{$_('contact.form.phone')}</label>
+      <label for="contact-phone">{$_('contact.form.phone')}{phoneRequired ? ' *' : ''}</label>
       <input
         id="contact-phone"
         type="tel"
+        required={phoneRequired}
         bind:value={phone}
+        bind:this={phoneInput}
         placeholder={$_('contact.form.phonePlaceholder')}
         disabled={status === 'submitting'}
       />
+      {#if phoneRequired && !phone.trim()}
+        <p class="field-hint">{$_('contact.form.phoneRequiredForWhatsapp')}</p>
+      {/if}
     </div>
 
     <div class="field">
@@ -438,5 +455,11 @@
   .icon {
     width: 1.5rem;
     height: 1.5rem;
+  }
+
+  .field-hint {
+    margin-top: var(--s-1);
+    font-size: var(--text-xs);
+    color: var(--cyan-muted);
   }
 </style>
