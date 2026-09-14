@@ -626,6 +626,7 @@ A RBX projeta e opera plataformas, automações e infraestrutura para ambientes 
 
 - **Leandro Damasio** — Fundador & CEO. AI Engineer, Platform & Backend Systems, Technical Leadership. Criador de produtos como Strategos, Robson e Verentir.
 - **Cauê Alencar** — CFO. Liderança financeira e estratégia para operações de alta exigência.
+- **Flavia Ribeiro** — Fundadora SDR. Sales Development, Client Support e Customer Care, conectando clientes às soluções da RBX desde a primeira conversa.
 `,
   `---
 title: About us
@@ -640,6 +641,7 @@ RBX designs and operates platforms, automations and infrastructure for environme
 
 - **Leandro Damasio** — Founder & CEO. AI Engineer, Platform & Backend Systems, Technical Leadership. Creator of products such as Strategos, Robson and Verentir.
 - **Cauê Alencar** — CFO. Financial leadership and strategy for high-demand operations.
+- **Flavia Ribeiro** — Founding SDR. Sales Development, Client Support and Customer Care, connecting clients to RBX solutions from the first conversation.
 `
 );
 
