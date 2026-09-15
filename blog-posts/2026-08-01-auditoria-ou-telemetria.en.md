@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [engineering, event-sourcing, postgres, audit, robson]
 excerpt: 'Our trading system database weighed 17 GB. The genuine audit trail fit in under 1 MB. How 96% of an event log became noise, how we cleaned it without losing a single line of evidence, and the rule we adopted so it never happens again.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-01-auditoria-ou-telemetria.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-01-auditoria-ou-telemetria-v2.png'
 ---
 
 The database behind Robson, our trading system, weighed 17 gigabytes. When we measured what inside it was genuine audit material, every armed position, every executed entry, every stop move, every monthly close, the total fit in under 1 megabyte.

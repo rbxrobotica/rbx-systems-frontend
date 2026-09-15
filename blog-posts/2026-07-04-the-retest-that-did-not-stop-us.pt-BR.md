@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, execução, risco, stops, trading]
 excerpt: 'Duas shorts no mesmo símbolo, com horas de diferença. Uma saiu acima da máxima recente exatamente como projetado. A outra viu o preço tocar 63.450 — além do nível que antes era o stop — e continuou viva. Entre as duas, encontramos um número que mentia e uma regra de risco que ninguém jamais adotou.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-04-the-retest-that-did-not-stop-us.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-04-the-retest-that-did-not-stop-us-v2.jpg'
 ---
 
 Ontem publicamos o invalidation guard e passamos uma noite extraindo quatro bugs dos caminhos de sizing e de reposição de stop. Este é o follow-up: hoje o stop em camadas encontrou o mercado duas vezes, e os dois encontros saíram exatamente como o projeto diz que deveriam. Chegar lá exigiu corrigir um número que mentia no dashboard, apagar uma regra de risco que nenhum documento de política jamais adotou, e matar nosso segundo hot loop em dois dias.

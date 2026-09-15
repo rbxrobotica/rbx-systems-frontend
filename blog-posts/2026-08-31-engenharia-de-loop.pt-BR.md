@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [engenharia, processo, agentes, flightdeck]
 excerpt: '58 rodadas de revisão adversarial entre dois modelos, com um humano na triagem, levaram um plano de migração de runtime de 12 achados a zero.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-31-engenharia-de-loop.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-31-engenharia-de-loop-v2.png'
 ---
 
 # Engenharia de Loop

@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, engineering, reliability, agents, trading]
 excerpt: 'A reconciliation fix led to a second bug nobody asked to find, and the next chapter shipped as a brief written for an agent with zero memory of the day. It ran anyway.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-07-the-brief-a-stranger-could-run.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-07-the-brief-a-stranger-could-run-v2.jpg'
 ---
 
 Sunday's post [closed with a promise](/blog/2026-07-06-fallback-debuts-in-production): the typed income ledger, completing the rule that money without an explanation never enters the books on its own again. This is the update on how that promise shipped, and it starts somewhere else entirely.

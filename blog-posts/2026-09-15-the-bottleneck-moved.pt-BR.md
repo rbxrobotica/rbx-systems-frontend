@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [ai, agents, governance, distributed-systems, engineering]
 excerpt: 'A capacidade da IA continua avançando. A restrição migrou para a confiabilidade do sistema, o ground truth e a engenharia ao redor do modelo.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-09-15-the-bottleneck-moved.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-09-15-the-bottleneck-moved-v2.jpg'
 slugAlias: '2026-09-15-o-gargalo-mudou'
 ---
 

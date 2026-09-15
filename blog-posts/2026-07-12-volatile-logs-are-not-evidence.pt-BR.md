@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, engenharia, confiabilidade, governanca, recovery]
 excerpt: 'Recovery em sistemas críticos precisa emitir evento, métrica ou estado auditável. Logs ajudam no diagnóstico, mas não bastam como prova.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-12-volatile-logs-are-not-evidence.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-12-volatile-logs-are-not-evidence-v2.png'
 ---
 
 # Logs voláteis não são evidência

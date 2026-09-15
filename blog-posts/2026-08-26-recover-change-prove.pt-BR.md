@@ -6,7 +6,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [resiliência, infraestrutura, IA, observabilidade, governança]
 excerpt: 'Resiliência não é uptime. É a capacidade testada de recuperar, mudar dependências e produzir evidência de que funções críticas seguem dentro dos limites.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-26-recover-change-prove.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-26-recover-change-prove-v2.png'
 ---
 
 Um sistema pode responder `HTTP 200` e ainda estar operacionalmente quebrado. A latência pode tornar o checkout impraticável. Um pagamento pode ser duplicado. Uma fila pode crescer mais rápido do que o consumo. Um agente pode continuar respondendo enquanto perde a capacidade de usar ferramentas. Um modelo pode permanecer disponível e mudar o comportamento que sustentava o produto.

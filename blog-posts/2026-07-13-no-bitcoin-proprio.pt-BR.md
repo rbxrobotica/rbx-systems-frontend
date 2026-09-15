@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [bitcoin, infraestrutura, pagamentos, soberania, engenharia]
 excerpt: 'Em vez de confiar numa API de terceiro, a RBX verifica cada pagamento em Bitcoin com seu próprio nó, dentro do próprio cluster.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-13-no-bitcoin-proprio.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-13-no-bitcoin-proprio-v2.png'
 ---
 
 Toda vez que alguém aceita pagamento em Bitcoin, existe uma pergunta que quase ninguém faz: quem está confirmando que aquele pagamento realmente aconteceu?

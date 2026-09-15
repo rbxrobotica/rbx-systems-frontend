@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, risk, reliability, engineering, trading]
 excerpt: 'A profitable stop that fired during a deploy exposed two invisible failure modes and changed Robson risk policy. The story and the decisions are here.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-05-stop-gain-that-audited-the-system.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-05-stop-gain-that-audited-the-system-v2.jpg'
 ---
 
 At 07:50 UTC today, a BTCUSDT short closed in profit. The order that closed it did not come from Robson's daemon: it came from the insurance stop resting on the exchange, executing alone while the software was in the middle of a deploy window. The two-layer design born from the [June incident](/blog/2026-07-03-stops-that-survive-failures) worked in the profit direction for the first time. Entry at 63,145.20, exit at 62,935, a small and clean net gain.

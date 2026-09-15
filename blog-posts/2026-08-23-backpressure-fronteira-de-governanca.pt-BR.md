@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [agentes, governança, sistemas-distribuídos, operator-edge, engenharia]
 excerpt: 'Um agente que opera através do navegador é cliente de um sistema que não controla. Os limites de taxa e os avisos de comportamento automatizado não são obstáculos a contornar — são backpressure, e a resposta de engenharia correta é parar, não acelerar disfarçado.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-23-backpressure-fronteira-de-governanca.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-23-backpressure-fronteira-de-governanca-v2.png'
 ---
 
 Há uma tentação específica que aparece quando um agente autônomo começa a operar através de um navegador, contra um sistema que não é seu. O agente executa uma tarefa repetitiva — ler uma lista longa, aplicar uma ação em série — e, a certa altura, o sistema do outro lado responde com um limite: "aguarde alguns minutos", um código de erro, mais tarde um aviso de que detectou comportamento automatizado. A tentação é tratar esse sinal como um bug a ser roteado: aleatorizar os intervalos, trocar de rota, distribuir a carga até que a detecção não perceba. É a leitura errada, e ela custa caro.

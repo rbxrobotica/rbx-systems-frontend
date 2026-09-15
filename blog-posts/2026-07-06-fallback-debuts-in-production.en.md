@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, engineering, reliability, risk, trading]
 excerpt: 'Less than 24 hours after merge, the market-data fallback protected a real entry. And the root-cause hunt ended somewhere unexpected. The full update.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-06-fallback-debuts-in-production.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-06-fallback-debuts-in-production-v2.jpg'
 ---
 
 On Saturday we published [the story of the stop gain that audited the system](/blog/2026-07-05-stop-gain-that-audited-the-system). This is the Sunday update, and it opens with a debut none of us scheduled this early.

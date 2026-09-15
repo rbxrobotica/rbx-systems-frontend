@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, execution, risk, stops, trading]
 excerpt: 'Two shorts on the same symbol, hours apart. One exited above the recent high exactly as designed. The other watched price tag 63,450 — past the level that used to be the stop — and stayed alive. Between them we found a number that lied and a risk rule nobody had ever adopted.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-04-the-retest-that-did-not-stop-us.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-04-the-retest-that-did-not-stop-us-v2.jpg'
 ---
 
 Yesterday we shipped the invalidation guard and spent a night pulling four bugs out of the sizing and stop-replacement paths. This is the follow-up: today the layered stop met the market twice, and both encounters went exactly the way the design says they should. Getting there required fixing a number that lied on the dashboard, deleting a risk rule that no policy document had ever adopted, and killing our second hot loop in two days.

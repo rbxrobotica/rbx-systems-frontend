@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [engenharia, gitops, kubernetes, argocd, deploy, confiabilidade]
 excerpt: 'Nosso pipeline de deploy morreu e ficou quatro dias morto enquanto todos os painéis diziam Synced e Healthy. A anatomia de uma falha silenciosa, o que estava represado sem ninguém saber, e o critério que passamos a exigir de qualquer automação: quando ela quebrar, o que fica vermelho?'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-02-o-painel-dizia-synced.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-02-o-painel-dizia-synced-v2.png'
 ---
 
 Durante quatro dias, dez aplicações da nossa frota não receberam nenhum deploy. Merges aconteciam, imagens eram construídas e publicadas no registry, e nada chegava ao cluster. Nenhum alerta disparou. Nenhum job falhou. Todos os painéis do ArgoCD diziam a mesma coisa: Synced, Healthy.

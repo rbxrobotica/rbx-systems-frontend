@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [journal, rss, engenharia]
 excerpt: 'O Journal agora pode ser assinado de graça por RSS: todos os artigos de engenharia da RBX, direto no seu leitor, sem algoritmo e sem e-mail no meio.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-02-rbx-journal-rss.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-02-rbx-journal-rss-v2.png'
 ---
 
 A partir de hoje, o [RBX Journal](/journal) pode ser assinado por RSS, de graça. O feed oficial está em:

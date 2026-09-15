@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [engineering, gitops, kubernetes, argocd, deploy, reliability]
 excerpt: 'Our deploy pipeline died and stayed dead for four days while every dashboard said Synced and Healthy. The anatomy of a silent failure, what was stuck without anyone knowing, and the criterion we now demand of any automation: when it breaks, what turns red?'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-02-o-painel-dizia-synced.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-02-o-painel-dizia-synced-v2.png'
 ---
 
 For four days, ten applications in our fleet received no deploys. Merges happened, images were built and published to the registry, and nothing reached the cluster. No alert fired. No job failed. Every ArgoCD dashboard said the same thing: Synced, Healthy.

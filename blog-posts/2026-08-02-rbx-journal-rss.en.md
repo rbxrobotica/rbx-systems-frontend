@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [journal, rss, engineering]
 excerpt: 'The Journal can now be followed free via RSS: every RBX engineering article, straight to your reader, with no algorithm and no email in between.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-02-rbx-journal-rss.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-02-rbx-journal-rss-v2.png'
 ---
 
 Starting today, the [RBX Journal](/journal) can be followed via RSS, free. The official feed lives at:

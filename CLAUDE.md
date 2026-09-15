@@ -35,7 +35,9 @@ Required outcome for every new post:
 - Same cover image for both variants
 - Upload all available variants with `./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug`
 
-If the user sends the cover image path in the same prompt, use it directly. No second round-trip is required unless the file is missing or invalid.
+If the user sends a cover path, validate it against the deterministic cover
+contract in `docs/AGENT-BLOG-PUBLISHING.md`. A standalone bitmap requires an
+explicit operator exception because it has no reproducible source.
 
 ### Step 1 — Write the Markdown file
 
@@ -95,36 +97,32 @@ The post is now live at:
 
 The header locale toggle may override either default via cookie.
 
-### Step 3 — Choose the cover pattern
+### Step 3 — Specify and generate the deterministic cover
 
-Two cover patterns are supported (full reference: `docs/AGENT-BLOG-PUBLISHING.md`, "Cover Generation Patterns"). **Ask the user which one they prefer** unless they already chose. If the user is in a hurry, default to Pattern A: one manual step fewer.
+The standard cover is dark, abstract, content-focused and contains no text.
+It is the article image and the `og:image` used by link previews such as
+WhatsApp. Do not ask the user to choose a generation pattern.
 
-- **Pattern A — Deterministic SVG-as-code:** the agent authors the cover as SVG XML (abstract, dark, no text), rasterizes it to 1200 × 630 (`rsvg-convert`, or headless Chromium with a zero-margin HTML wrapper), commits the source to `blog-covers-src/{slug}.svg`, and jumps straight to Step 5. No user round-trip.
-- **Pattern B — Nano Banana (LLM image):** follow Steps 3b and 4 below. Requires one user round-trip.
+Add one declarative entry to `blog-covers-src/covers.json`; do not create a
+full script per post. Start at `revision: 1` and increment it whenever the
+published pixels change. Use the shared renderer:
 
-### Step 3b — Output the Nano Banana cover image prompt (Pattern B only)
-
-After uploading the post, output the following block verbatim for the user to copy into Nano Banana:
-
-```
---- COVER IMAGE PROMPT ---
-Dimensions: 1200 × 630 px
-Format: JPEG
-Style: dark background, minimal, tech-abstract, cinematic lighting, no text
-Prompt: [generate a Nano Banana prompt that visually represents the post topic — keep it abstract and brand-consistent with RBX Systems: dark, precise, mechanical, digital]
---- END ---
+```bash
+python3 scripts/generate-cover.py --slug YYYY-MM-DD-slug \
+  --raster-dir /tmp/rbx-journal-covers
 ```
 
-Then tell the user: "Generate the image in Nano Banana and provide the file path. I will upload it to S3 and add it to the post."
-
-### Step 4 — User provides the image file (Pattern B only)
-
-Wait for the user to provide the local file path of the generated cover image.
+Review the resulting raster and commit both the catalog change and
+`blog-covers-src/YYYY-MM-DD-slug.svg`. A probabilistic or photographic cover
+requires an explicit operator exception and is not the normal Journal flow.
+The raster uses the immutable key `YYYY-MM-DD-slug-v{revision}.{ext}`; keep an
+explicit `cover:` URL and never overwrite a published asset revision.
 
 ### Step 5 — Upload the cover image to S3
 
 ```bash
-./scripts/blog-cover-upload.sh /path/to/user/image.jpg YYYY-MM-DD-slug
+./scripts/blog-cover-upload.sh \
+  /tmp/rbx-journal-covers/YYYY-MM-DD-slug-v1.jpg YYYY-MM-DD-slug
 ```
 
 ### Step 6 — Add the cover field to the Markdown and re-upload
@@ -132,10 +130,11 @@ Wait for the user to provide the local file path of the generated cover image.
 Edit both locale variants to add the same `cover` field to frontmatter. The Content Gateway normalizes this S3 URL to the server-side proxy (`/api/blog/cover/...`), so the bucket stays private:
 
 ```yaml
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/YYYY-MM-DD-slug.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/YYYY-MM-DD-slug-v1.jpg'
 ```
 
-For `.jpg` covers you may instead **omit** `cover` — it defaults to `/api/blog/cover/YYYY-MM-DD-slug.jpg` automatically.
+Do not omit `cover`: the explicit, versioned URL is required for immutable
+cache safety.
 
 Then re-upload:
 
@@ -178,7 +177,7 @@ s3://rbx-content/                       (PRIVATE — server-side reads only)
       YYYY-MM-DD-slug.pt-BR.md          ← Brazilian Portuguese variant
       YYYY-MM-DD-slug.en.md             ← English variant
     covers/
-      YYYY-MM-DD-slug.jpg               ← cover image (1200×630 JPEG)
+      YYYY-MM-DD-slug-v1.jpg            ← versioned cover image (1200×630)
   assets/
     ui/
       bitmap.svg, bitmap_bg.svg, polka-dots.svg, diamond-sunset.svg
@@ -208,13 +207,13 @@ To upload a single asset:
 
 ## Cover Image Specifications
 
-| Property     | Value                                                               |
-| ------------ | ------------------------------------------------------------------- |
-| Dimensions   | 1200 × 630 px                                                       |
-| Format       | JPEG (or PNG)                                                       |
-| Aspect ratio | 16:9                                                                |
-| S3 key       | `blog/covers/{slug}.jpg`                                            |
-| Served via   | `/api/blog/cover/{slug}.jpg` (server-side proxy; bucket is private) |
+| Property     | Value                                                             |
+| ------------ | ----------------------------------------------------------------- |
+| Dimensions   | 1200 × 630 px                                                     |
+| Format       | JPEG (or PNG)                                                     |
+| Aspect ratio | 1.91:1                                                            |
+| S3 key       | `blog/covers/{slug}-v{revision}.{jpg,png}`                        |
+| Served via   | `/api/blog/cover/{slug}-v{revision}.{ext}` (private-bucket proxy) |
 
 ---
 
@@ -223,5 +222,6 @@ To upload a single asset:
 - **Match the current locale** for localized blog content
 - **No sensitive security details** (IPs, credentials, internal topology)
 - **No cover field without an uploaded image** — omit it if the image isn't uploaded yet
+- **Every cover needs a catalog entry and generated SVG source** — `pnpm test` enforces the contract
 - **Commit Markdown files to git** after publishing — S3 is live storage, git is the backup
 - **Never `git push` (or any remote write) without explicit per-operation operator authorization**

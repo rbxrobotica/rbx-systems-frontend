@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [engenharia, processo, agentes, flightdeck]
 excerpt: '58 rounds of adversarial review between two models, with a human on triage, took a runtime migration plan from 12 findings to zero.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-31-engenharia-de-loop.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-31-engenharia-de-loop-v2.png'
 slugAlias: '2026-08-31-loop-engineering'
 ---
 

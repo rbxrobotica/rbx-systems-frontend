@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [ai, agents, governance, distributed-systems, engineering]
 excerpt: 'AI capability is still advancing. The constraint has moved to system reliability, ground truth and the engineering around the model.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-09-15-the-bottleneck-moved.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-09-15-the-bottleneck-moved-v2.jpg'
 ---
 
 # The Bottleneck Moved
