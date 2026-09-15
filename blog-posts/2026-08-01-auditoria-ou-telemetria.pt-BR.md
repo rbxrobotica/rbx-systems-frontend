@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [engenharia, event-sourcing, postgres, auditoria, robson]
 excerpt: 'O banco do nosso sistema de trading pesava 17 GB. A auditoria real cabia em menos de 1 MB. A história de como 96% de um event log virou ruído, o que fizemos para limpar sem perder uma linha de evidência, e a regra que adotamos para o problema nunca voltar.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-01-auditoria-ou-telemetria.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-01-auditoria-ou-telemetria-v2.png'
 ---
 
 O banco de dados do Robson, nosso sistema de trading, pesava 17 gigabytes. Quando medimos o que ali dentro era auditoria de verdade, cada posição armada, cada entrada executada, cada stop movido, cada fechamento de mês, o total coube em menos de 1 megabyte.

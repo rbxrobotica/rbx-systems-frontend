@@ -26,7 +26,7 @@ s3://rbx-content/
       YYYY-MM-DD-slug.pt-BR.md     ← variante pt-BR opcional
       YYYY-MM-DD-slug.en.md        ← variante en opcional
     covers/
-      YYYY-MM-DD-slug.jpg     ← capa (1200×630 JPEG, mesmo slug)
+      YYYY-MM-DD-slug-v1.jpg  ← capa versionada (1200×630)
 ```
 
 ---
@@ -41,11 +41,12 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [tag1, tag2]
 excerpt: 'Uma frase que resume o post. Aparece na listagem e no topo da página.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/YYYY-MM-DD-slug.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/YYYY-MM-DD-slug-v1.jpg'
 ---
 ```
 
-> **Importante:** só inclua `cover` depois de fazer o upload da imagem. Se a imagem não existir no S3, o campo deve ser omitido.
+> **Importante:** só inclua `cover` depois de fazer o upload da imagem. A URL
+> explícita e versionada é obrigatória; não sobrescreva uma revisão publicada.
 
 ---
 
@@ -102,10 +103,14 @@ O script procura, nesta ordem, por:
 
 ### 3. Imagem de capa
 
-Gere a imagem no Nano Banana com as especificações abaixo e faça upload:
+Adicione a especificação a `blog-covers-src/covers.json`, gere a capa com o
+renderer compartilhado e faça upload:
 
 ```bash
-./scripts/blog-cover-upload.sh /caminho/para/capa.jpg YYYY-MM-DD-slug
+python3 scripts/generate-cover.py --slug YYYY-MM-DD-slug \
+  --raster-dir /tmp/rbx-journal-covers
+./scripts/blog-cover-upload.sh \
+  /tmp/rbx-journal-covers/YYYY-MM-DD-slug-v1.jpg YYYY-MM-DD-slug
 ```
 
 Adicione o campo `cover` no frontmatter do Markdown e republique:
@@ -140,16 +145,18 @@ Se o usuário enviar um texto em **português** ou **inglês**, o agente deve:
 4. Reutilizar a mesma capa para ambas as variantes
 5. Publicar tudo com `./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug`
 
-Se o caminho da imagem de capa vier no mesmo prompt, o agente deve usar esse arquivo diretamente.
+Se o caminho de uma capa vier no mesmo prompt, o agente deve primeiro validá-la
+contra o contrato determinístico. Um bitmap sem fonte reproduzível exige uma
+exceção explícita do operador.
 
 ### Passos
 
 1. Escreve os Markdown de locale em `blog-posts/` — sem `cover` ainda
 2. Obtém as credenciais do secret `contabo-s3-credentials` via kubectl
 3. Faz upload de todas as variantes com `./scripts/blog-publish.sh --all-locales`
-4. Gera e exibe um **prompt para o Nano Banana** (ver especificações abaixo)
-5. Aguarda o usuário fornecer o caminho do arquivo gerado (sugerido: `/tmp/cover-slug.jpg`)
-6. Faz upload da capa: `./scripts/blog-cover-upload.sh`
+4. Adiciona a especificação da capa ao catálogo e executa `scripts/generate-cover.py`
+5. Revisa visualmente o SVG/raster abstrato, escuro e sem texto
+6. Faz upload da revisão versionada com `./scripts/blog-cover-upload.sh`
 7. Adiciona `cover:` no frontmatter das duas variantes e republica tudo
 8. Verifica os objetos no S3
 9. Commita os Markdown no git
@@ -160,21 +167,19 @@ Se o caminho da imagem de capa vier no mesmo prompt, o agente deve usar esse arq
 
 ## Especificações da imagem de capa
 
-| Propriedade  | Valor                                                                              |
-| ------------ | ---------------------------------------------------------------------------------- |
-| Dimensões    | 1200 × 630 px                                                                      |
-| Formato      | JPEG ou PNG (PNG é preferível para imagens geradas por IA com estilo minimal/dark) |
-| Aspect ratio | 16:9                                                                               |
-| Estilo       | Fundo escuro, minimal, tech-abstract, sem texto                                    |
-| Chave S3     | `blog/covers/{slug}.jpg` ou `blog/covers/{slug}.png`                               |
-| URL pública  | `https://eu2.contabostorage.com/rbx-content/blog/covers/{slug}.{ext}`              |
+| Propriedade  | Valor                                                                     |
+| ------------ | ------------------------------------------------------------------------- |
+| Dimensões    | 1200 × 630 px                                                             |
+| Formato      | JPEG ou PNG                                                               |
+| Aspect ratio | 1.91:1                                                                    |
+| Estilo       | Fundo escuro, abstrato, focado no tema e sem texto                        |
+| Fonte        | `covers.json` + `blog-covers-src/{slug}.svg`, gerados deterministicamente |
+| Chave S3     | `blog/covers/{slug}-v{revision}.{ext}`                                    |
+| Uso          | Capa do artigo e `og:image` para WhatsApp/redes sociais                   |
 
-**Prompt base para Nano Banana:**
-
-```
-Dark background, minimal, tech-abstract, cinematic lighting, no text,
-16:9, 1200x630 — [descrição visual do tema do post]
-```
+A revisão começa em 1 e é incrementada sempre que os pixels publicados mudam.
+Uma capa gerada por modelo ou fotográfica não pertence ao fluxo canônico e
+exige exceção explícita do operador.
 
 ---
 

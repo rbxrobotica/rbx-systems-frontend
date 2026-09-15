@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, risk, product, policy, trading]
 excerpt: 'Robson guaranteed 4 operations per month. Now each entry is charged its actual risk, and leftover budget becomes another chance to trade. Here is the math.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-05-saved-risk-extra-operation.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-05-saved-risk-extra-operation-v2.jpg'
 ---
 
 Since the first version of its risk policy, Robson promised 4 new operations per month. The number was not arbitrary: the monthly loss budget is 4% of the capital base, and every operation carries a 1% maximum-loss cap. Four is one divided by the other.

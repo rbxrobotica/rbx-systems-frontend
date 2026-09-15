@@ -1,72 +1,80 @@
-<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#07080a"/>
-      <stop offset="1" stop-color="#0b0d12"/>
-    </linearGradient>
-    <radialGradient id="srcGlow" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#22e5e5" stop-opacity="0.22"/>
-      <stop offset="1" stop-color="#22e5e5" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="2"/>
-    </filter>
-    <filter id="softer" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="6"/>
-    </filter>
-  </defs>
-
-  <rect width="1200" height="630" fill="url(#bg)"/>
-
-  <!-- faint grid dots -->
-  <g fill="#1a2129">
-    <circle cx="150" cy="110" r="1.4"/><circle cx="1050" cy="90" r="1.4"/>
-    <circle cx="980" cy="560" r="1.4"/><circle cx="480" cy="80" r="1.2"/>
-    <circle cx="720" cy="590" r="1.2"/><circle cx="1130" cy="330" r="1.2"/>
-  </g>
-
-  <!-- source: luminous origin lower-left -->
-  <circle cx="285" cy="430" r="150" fill="url(#srcGlow)"/>
-  <circle cx="285" cy="430" r="9" fill="#0a0f14" stroke="#22e5e5" stroke-width="2.4"/>
-  <circle cx="285" cy="430" r="18" fill="none" stroke="#22e5e5" stroke-opacity="0.35" stroke-width="1.2"/>
-
-  <!-- expanding broadcast arcs, precise and concentric -->
-  <g fill="none" stroke-linecap="round">
-    <path d="M 285 350 A 80 80 0 0 1 365 430" stroke="#22e5e5" stroke-width="3" opacity="0.95" filter="url(#soft)"/>
-    <path d="M 285 285 A 145 145 0 0 1 430 430" stroke="#22e5e5" stroke-width="2.6" opacity="0.65" filter="url(#soft)"/>
-    <path d="M 285 215 A 215 215 0 0 1 500 430" stroke="#22e5e5" stroke-width="2.2" opacity="0.42" filter="url(#soft)"/>
-    <path d="M 285 140 A 290 290 0 0 1 575 430" stroke="#8b5cf6" stroke-width="2" opacity="0.3" filter="url(#soft)"/>
-  </g>
-
-  <!-- signal travelling to independent readers: three clean rays -->
-  <g fill="none" stroke-linecap="round">
-    <path d="M 390 325 C 560 240, 760 200, 950 190" stroke="#22e5e5" stroke-opacity="0.5" stroke-width="2" filter="url(#soft)"/>
-    <path d="M 455 385 C 640 350, 800 335, 985 330" stroke="#22e5e5" stroke-opacity="0.62" stroke-width="2.2" filter="url(#soft)"/>
-    <path d="M 500 455 C 670 480, 810 495, 960 500" stroke="#8b5cf6" stroke-opacity="0.45" stroke-width="2" filter="url(#soft)"/>
-  </g>
-
-  <!-- particles en route -->
-  <g fill="#22e5e5">
-    <circle cx="640" cy="262" r="2.6" opacity="0.9"/>
-    <circle cx="760" cy="341" r="2.4" opacity="0.85"/>
-  </g>
-  <circle cx="700" cy="483" r="2.4" fill="#8b5cf6" opacity="0.75"/>
-
-  <!-- independent receivers: separate, self-contained frames -->
-  <g>
-    <rect x="950" y="165" width="50" height="50" rx="6" fill="#0a0f14" stroke="#24303a" stroke-width="1.5"/>
-    <rect x="950" y="165" width="50" height="50" rx="6" fill="none" stroke="#22e5e5" stroke-opacity="0.4" stroke-width="1.2" filter="url(#softer)"/>
-    <circle cx="975" cy="190" r="4" fill="none" stroke="#22e5e5" stroke-width="1.6"/>
-
-    <rect x="985" y="305" width="50" height="50" rx="6" fill="#0a0f14" stroke="#24303a" stroke-width="1.5"/>
-    <rect x="985" y="305" width="50" height="50" rx="6" fill="none" stroke="#22e5e5" stroke-opacity="0.4" stroke-width="1.2" filter="url(#softer)"/>
-    <circle cx="1010" cy="330" r="4" fill="none" stroke="#22e5e5" stroke-width="1.6"/>
-
-    <rect x="960" y="475" width="50" height="50" rx="6" fill="#0a0f14" stroke="#24303a" stroke-width="1.5"/>
-    <rect x="960" y="475" width="50" height="50" rx="6" fill="none" stroke="#8b5cf6" stroke-opacity="0.35" stroke-width="1.2" filter="url(#softer)"/>
-    <circle cx="985" cy="500" r="4" fill="none" stroke="#8b5cf6" stroke-width="1.6"/>
-  </g>
-
-  <!-- subtle vignette -->
-  <rect width="1200" height="630" fill="none" stroke="#000000" stroke-opacity="0.35" stroke-width="60" filter="url(#softer)"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs>
+  <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#05070a"/>
+    <stop offset="0.55" stop-color="#0a0e14"/>
+    <stop offset="1" stop-color="#07090d"/>
+  </linearGradient>
+  <radialGradient id="accentGlow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#22e5e5" stop-opacity="0.28"/>
+    <stop offset="0.55" stop-color="#22e5e5" stop-opacity="0.08"/>
+    <stop offset="1" stop-color="#22e5e5" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="blur" x="-100%" y="-100%" width="300%" height="300%">
+    <feGaussianBlur stdDeviation="8"/>
+  </filter>
+  <radialGradient id="vignette" cx="0.5" cy="0.48" r="0.72">
+    <stop offset="0.58" stop-color="#000000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#000000" stop-opacity="0.55"/>
+  </radialGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#background)"/>
+<g >
+<line x1="75" y1="50" x2="75" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="225" y1="50" x2="225" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="375" y1="50" x2="375" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="525" y1="50" x2="525" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="675" y1="50" x2="675" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="825" y1="50" x2="825" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="975" y1="50" x2="975" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="1125" y1="50" x2="1125" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="45" y1="75" x2="1155" y2="75" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="45" y1="195" x2="1155" y2="195" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="45" y1="315" x2="1155" y2="315" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="45" y1="435" x2="1155" y2="435" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="45" y1="555" x2="1155" y2="555" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<circle cx="75" cy="197" r="1.25" fill="#22e5e5" opacity="0.28"/>
+<circle cx="431" cy="492" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="81" cy="581" r="1.7000000000000002" fill="#34414d" opacity="0.28"/>
+<circle cx="164" cy="451" r="0.8" fill="#34414d" opacity="0.28"/>
+<circle cx="547" cy="100" r="0.8" fill="#34414d" opacity="0.28"/>
+<circle cx="945" cy="460" r="1.25" fill="#22e5e5" opacity="0.28"/>
+<circle cx="621" cy="354" r="0.8" fill="#34414d" opacity="0.28"/>
+<circle cx="901" cy="533" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="810" cy="203" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="1045" cy="527" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="226" cy="296" r="1.25" fill="#22e5e5" opacity="0.28"/>
+<circle cx="134" cy="184" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="274" cy="242" r="1.7000000000000002" fill="#34414d" opacity="0.28"/>
+<circle cx="59" cy="171" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="225" cy="505" r="1.7000000000000002" fill="#34414d" opacity="0.28"/>
+<circle cx="959" cy="525" r="0.8" fill="#22e5e5" opacity="0.28"/>
+<circle cx="537" cy="542" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="394" cy="434" r="0.8" fill="#34414d" opacity="0.28"/>
+<circle cx="567" cy="557" r="0.8" fill="#34414d" opacity="0.28"/>
+<circle cx="274" cy="462" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="220" cy="117" r="1.25" fill="#22e5e5" opacity="0.28"/>
+<circle cx="761" cy="80" r="1.7000000000000002" fill="#34414d" opacity="0.28"/>
+<circle cx="986" cy="223" r="0.8" fill="#34414d" opacity="0.28"/>
+<circle cx="1000" cy="150" r="0.8" fill="#34414d" opacity="0.28"/>
+</g>
+<g >
+<g >
+<circle cx="285" cy="430" r="40" fill="#22e5e5" opacity="0.09" filter="url(#blur)"/>
+<circle cx="285" cy="430" r="14" fill="#071014" stroke="#263642" stroke-width="1"/>
+<circle cx="285" cy="430" r="10" fill="#22e5e5" opacity="0.92"/>
+</g>
+<path d="M285 340A90 90 0 0 1 375 430" fill="none" stroke="#22e5e5" stroke-width="3" opacity="0.9"/>
+<path d="M285 275A155 155 0 0 1 440 430" fill="none" stroke="#22e5e5" stroke-width="3" opacity="0.65"/>
+<path d="M285 205A225 225 0 0 1 510 430" fill="none" stroke="#22e5e5" stroke-width="3" opacity="0.45"/>
+<path d="M285 130A300 300 0 0 1 585 430" fill="none" stroke="#0e7490" stroke-width="3" opacity="0.3"/>
+<path d="M390 390C600 170 760 170 920 170" fill="none" stroke="#22e5e5" stroke-width="2" opacity="0.5"/>
+<rect x="925" y="145" width="50" height="50" rx="10" fill="#091018" stroke="#22e5e5" stroke-width="2" opacity="0.98"/>
+<path d="M390 390C600 315 760 315 970 315" fill="none" stroke="#22e5e5" stroke-width="2" opacity="0.5"/>
+<rect x="975" y="290" width="50" height="50" rx="10" fill="#091018" stroke="#22e5e5" stroke-width="2" opacity="0.98"/>
+<path d="M390 390C600 480 760 480 920 480" fill="none" stroke="#0e7490" stroke-width="2" opacity="0.5"/>
+<rect x="925" y="455" width="50" height="50" rx="10" fill="#091018" stroke="#0e7490" stroke-width="2" opacity="0.98"/>
+</g>
+<rect width="1200" height="630" fill="url(#vignette)" pointer-events="none"/>
+<rect x="1" y="1" width="1198" height="628" fill="none" stroke="#1a222b" stroke-width="2"/>
 </svg>

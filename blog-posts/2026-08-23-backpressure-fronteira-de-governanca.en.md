@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [agents, governance, distributed-systems, operator-edge, engineering]
 excerpt: 'An agent operating through a browser is a client of a system it does not control. Rate limits and automated-behavior warnings are not obstacles to route around — they are backpressure, and the correct engineering response is to stop, not to accelerate in disguise.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-23-backpressure-fronteira-de-governanca.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-23-backpressure-fronteira-de-governanca-v2.png'
 ---
 
 There is a specific temptation that shows up when an autonomous agent starts operating through a browser, against a system that is not its own. The agent runs a repetitive task — reading a long list, applying an action in series — and at some point the system on the other side answers with a limit: "please wait a few minutes," an error code, and later a warning that it has detected automated behavior. The temptation is to treat that signal as a bug to be routed around: randomize the intervals, switch paths, spread the load until detection stops noticing. It is the wrong reading, and it is expensive.

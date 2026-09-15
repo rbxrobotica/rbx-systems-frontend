@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs>
+  <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#05070a"/>
+    <stop offset="0.55" stop-color="#0a0e14"/>
+    <stop offset="1" stop-color="#07090d"/>
+  </linearGradient>
+  <radialGradient id="accentGlow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#f2b84b" stop-opacity="0.28"/>
+    <stop offset="0.55" stop-color="#f2b84b" stop-opacity="0.08"/>
+    <stop offset="1" stop-color="#f2b84b" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="blur" x="-100%" y="-100%" width="300%" height="300%">
+    <feGaussianBlur stdDeviation="8"/>
+  </filter>
+  <radialGradient id="vignette" cx="0.5" cy="0.48" r="0.72">
+    <stop offset="0.58" stop-color="#000000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#000000" stop-opacity="0.55"/>
+  </radialGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#background)"/>
+<g >
+<line x1="75" y1="50" x2="75" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="225" y1="50" x2="225" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="375" y1="50" x2="375" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="525" y1="50" x2="525" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="675" y1="50" x2="675" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="825" y1="50" x2="825" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="975" y1="50" x2="975" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="1125" y1="50" x2="1125" y2="580" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="45" y1="75" x2="1155" y2="75" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="45" y1="195" x2="1155" y2="195" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="45" y1="315" x2="1155" y2="315" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="45" y1="435" x2="1155" y2="435" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<line x1="45" y1="555" x2="1155" y2="555" stroke="#141b22" stroke-width="1" opacity="0.4"/>
+<circle cx="451" cy="128" r="1.25" fill="#f2b84b" opacity="0.28"/>
+<circle cx="392" cy="96" r="0.8" fill="#34414d" opacity="0.28"/>
+<circle cx="470" cy="300" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="504" cy="579" r="1.7000000000000002" fill="#34414d" opacity="0.28"/>
+<circle cx="409" cy="587" r="1.7000000000000002" fill="#34414d" opacity="0.28"/>
+<circle cx="771" cy="546" r="1.25" fill="#f2b84b" opacity="0.28"/>
+<circle cx="378" cy="93" r="0.8" fill="#34414d" opacity="0.28"/>
+<circle cx="343" cy="467" r="0.8" fill="#34414d" opacity="0.28"/>
+<circle cx="292" cy="583" r="1.7000000000000002" fill="#34414d" opacity="0.28"/>
+<circle cx="65" cy="124" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="343" cy="490" r="1.25" fill="#f2b84b" opacity="0.28"/>
+<circle cx="873" cy="68" r="1.7000000000000002" fill="#34414d" opacity="0.28"/>
+<circle cx="628" cy="106" r="1.7000000000000002" fill="#34414d" opacity="0.28"/>
+<circle cx="203" cy="417" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="426" cy="486" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="331" cy="113" r="1.7000000000000002" fill="#f2b84b" opacity="0.28"/>
+<circle cx="832" cy="121" r="1.7000000000000002" fill="#34414d" opacity="0.28"/>
+<circle cx="486" cy="180" r="1.7000000000000002" fill="#34414d" opacity="0.28"/>
+<circle cx="138" cy="441" r="0.8" fill="#34414d" opacity="0.28"/>
+<circle cx="916" cy="520" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="587" cy="402" r="0.8" fill="#f2b84b" opacity="0.28"/>
+<circle cx="579" cy="96" r="1.25" fill="#34414d" opacity="0.28"/>
+<circle cx="923" cy="285" r="0.8" fill="#34414d" opacity="0.28"/>
+<circle cx="283" cy="231" r="1.7000000000000002" fill="#34414d" opacity="0.28"/>
+</g>
+<g >
+<line x1="75" y1="85" x2="330" y2="85" stroke="#a65f24" stroke-width="3" opacity="0.55"/>
+<g >
+<circle cx="75" cy="85" r="9" fill="#071014" stroke="#263642" stroke-width="1"/>
+<circle cx="75" cy="85" r="5" fill="#f2b84b" opacity="0.92"/>
+</g>
+<line x1="75" y1="150" x2="330" y2="150" stroke="#f2b84b" stroke-width="3" opacity="0.55"/>
+<g >
+<circle cx="75" cy="150" r="9" fill="#071014" stroke="#263642" stroke-width="1"/>
+<circle cx="75" cy="150" r="5" fill="#f2b84b" opacity="0.92"/>
+</g>
+<line x1="75" y1="215" x2="330" y2="215" stroke="#f2b84b" stroke-width="3" opacity="0.55"/>
+<g >
+<circle cx="75" cy="215" r="9" fill="#071014" stroke="#263642" stroke-width="1"/>
+<circle cx="75" cy="215" r="5" fill="#f2b84b" opacity="0.92"/>
+</g>
+<line x1="75" y1="280" x2="330" y2="280" stroke="#a65f24" stroke-width="3" opacity="0.55"/>
+<g >
+<circle cx="75" cy="280" r="9" fill="#071014" stroke="#263642" stroke-width="1"/>
+<circle cx="75" cy="280" r="5" fill="#f2b84b" opacity="0.92"/>
+</g>
+<line x1="75" y1="345" x2="330" y2="345" stroke="#f2b84b" stroke-width="3" opacity="0.55"/>
+<g >
+<circle cx="75" cy="345" r="9" fill="#071014" stroke="#263642" stroke-width="1"/>
+<circle cx="75" cy="345" r="5" fill="#f2b84b" opacity="0.92"/>
+</g>
+<line x1="75" y1="410" x2="330" y2="410" stroke="#f2b84b" stroke-width="3" opacity="0.55"/>
+<g >
+<circle cx="75" cy="410" r="9" fill="#071014" stroke="#263642" stroke-width="1"/>
+<circle cx="75" cy="410" r="5" fill="#f2b84b" opacity="0.92"/>
+</g>
+<line x1="75" y1="475" x2="330" y2="475" stroke="#a65f24" stroke-width="3" opacity="0.55"/>
+<g >
+<circle cx="75" cy="475" r="9" fill="#071014" stroke="#263642" stroke-width="1"/>
+<circle cx="75" cy="475" r="5" fill="#f2b84b" opacity="0.92"/>
+</g>
+<line x1="75" y1="540" x2="330" y2="540" stroke="#f2b84b" stroke-width="3" opacity="0.55"/>
+<g >
+<circle cx="75" cy="540" r="9" fill="#071014" stroke="#263642" stroke-width="1"/>
+<circle cx="75" cy="540" r="5" fill="#f2b84b" opacity="0.92"/>
+</g>
+<polygon points="350,70 850,235 850,395 350,560" fill="#110d09" stroke="#a65f24" stroke-width="2" opacity="0.9"/>
+<rect x="820" y="245" width="100" height="140" rx="18" fill="#091018" stroke="#f2b84b" stroke-width="3"/>
+<line x1="920" y1="315" x2="1090" y2="315" stroke="#f2b84b" stroke-width="4"/>
+<polygon points="1095,305 1110,315 1095,325" fill="#f2b84b" opacity="0.9"/>
+</g>
+<rect width="1200" height="630" fill="url(#vignette)" pointer-events="none"/>
+<rect x="1" y="1" width="1198" height="628" fill="none" stroke="#1a222b" stroke-width="2"/>
+</svg>

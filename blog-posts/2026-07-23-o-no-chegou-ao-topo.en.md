@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [bitcoin, infrastructure, payments, sovereignty, engineering]
 excerpt: 'Ten days later, our Bitcoin node validated the last block in the chain. The final sync numbers, what the curve confirmed, and what is still missing before the first real payment.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-23-o-no-chegou-ao-topo.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-23-o-no-chegou-ao-topo-v2.png'
 ---
 
 On July 13 we explained here why RBX decided to run its own Bitcoin node. At that moment the node was at 34.8% of the sync, validating blocks from January 2020, and the article ended with a promise: when it reached the tip, we would tell the next part.

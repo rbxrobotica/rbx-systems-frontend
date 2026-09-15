@@ -25,7 +25,39 @@ case "$EXT" in
   *)        echo "Unsupported format: .$EXT (use jpg or png)" >&2; exit 1 ;;
 esac
 
-DEST="blog/covers/${SLUG}.${EXT}"
+# Catalogued covers use immutable, versioned object names. This matters because
+# the public proxy sends a one-year immutable cache header: overwriting a key
+# would leave browsers and social previews on stale pixels. Legacy, uncatalogued
+# uploads retain the historical unversioned behavior.
+CATALOG="$(dirname "$0")/../blog-covers-src/covers.json"
+REVISION=""
+if [[ -f "$CATALOG" ]]; then
+  REVISION="$(python3 - "$CATALOG" "$SLUG" <<'PY'
+import json
+import sys
+
+catalog_path, slug = sys.argv[1:]
+for spec in json.load(open(catalog_path, encoding="utf-8")).get("posts", []):
+    if spec.get("slug") == slug:
+        print(spec.get("revision", ""))
+        break
+PY
+)"
+fi
+
+if [[ -n "$REVISION" ]]; then
+  EXPECTED_BASENAME="${SLUG}-v${REVISION}.${EXT}"
+  if [[ "$(basename "$FILE")" != "$EXPECTED_BASENAME" ]]; then
+    echo "Catalogued cover filename must be: $EXPECTED_BASENAME" >&2
+    echo "Generate it with: python3 scripts/generate-cover.py --slug $SLUG" >&2
+    exit 1
+  fi
+  DEST_STEM="${SLUG}-v${REVISION}"
+else
+  DEST_STEM="$SLUG"
+fi
+
+DEST="blog/covers/${DEST_STEM}.${EXT}"
 
 echo "Uploading cover: $FILE → s3://$BUCKET/$DEST"
 aws s3 cp "$FILE" "s3://$BUCKET/$DEST" \
@@ -34,9 +66,7 @@ aws s3 cp "$FILE" "s3://$BUCKET/$DEST" \
 
 cat <<EOF
 Cover object:  s3://$BUCKET/$DEST
-Served at:     /api/blog/cover/${SLUG}.${EXT}   (server-side proxy; bucket is private)
+Served at:     /api/blog/cover/${DEST_STEM}.${EXT}   (server-side proxy; bucket is private)
 Frontmatter:   cover: "${ENDPOINT}/${BUCKET}/${DEST}"
                (the gateway normalizes this S3 URL to the /api/blog/cover/ proxy)
-               For .jpg covers you may instead omit 'cover' — it defaults to
-               /api/blog/cover/${SLUG}.jpg automatically.
 EOF

@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, engenharia, confiabilidade, agentes, trading]
 excerpt: 'Uma correção de reconciliação levou a um segundo bug que ninguém pediu para encontrar, e o próximo capítulo saiu como um briefing escrito para um agente sem memória do dia. Rodou mesmo assim.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-07-the-brief-a-stranger-could-run.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-07-the-brief-a-stranger-could-run-v2.jpg'
 ---
 
 O post de domingo [fechou com uma promessa](/blog/2026-07-06-fallback-debuts-in-production): o ledger de income tipado, completando a regra de que dinheiro sem explicação nunca mais entra nos livros sozinho. Esta é a atualização de como essa promessa saiu do papel, e ela começa em outro lugar completamente diferente.

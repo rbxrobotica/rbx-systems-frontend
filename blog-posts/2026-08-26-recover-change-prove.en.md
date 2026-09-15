@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [resilience, infrastructure, AI, observability, governance]
 excerpt: 'Resilience is not uptime. It is the tested ability to recover, change dependencies and produce evidence that critical functions remain within bounds.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-26-recover-change-prove.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-08-26-recover-change-prove-v2.png'
 ---
 
 A system can return `HTTP 200` and still be operationally broken. Latency can make checkout unusable. A payment can be duplicated. A queue can grow faster than it is consumed. An agent can keep responding while losing the ability to use tools. A model can remain available while changing the behavior that made the product work.

@@ -22,7 +22,8 @@ Every new post published agentically must produce:
 - one `pt-BR` Markdown variant
 - one `en` Markdown variant
 - one shared cover image
-- one git commit containing the post sources
+- one entry in `blog-covers-src/covers.json` and its generated SVG source
+- one git commit containing the post and cover sources
 
 For a slug `YYYY-MM-DD-slug`, the expected files are:
 
@@ -41,7 +42,10 @@ The user may send:
 
 If the user sends only one language, the agent must generate the missing locale variant automatically before publishing.
 
-If the user sends a valid cover path in the same prompt, the agent should use it directly. Do not require an extra round-trip unless the file is missing, unreadable, or invalid.
+If the user sends a cover path in the same prompt, validate it against the cover
+contract below. A standalone bitmap is not a deterministic source and therefore
+requires an explicit operator exception; a supplied SVG may be integrated into
+the catalogued renderer if it satisfies the contract.
 
 ## Locale Behavior
 
@@ -85,24 +89,45 @@ URL.
 - Never transliterate `pt-BR` prose to ASCII forms such as `nao`, `producao`, or `configuracao`
 - Do not include sensitive security details
 
-## Cover Generation Patterns
+## Cover Generation Contract
 
-Two supported ways exist to produce the shared cover image (1200 × 630, JPEG or PNG). Before creating the cover, **ask the user which pattern they prefer**, unless they already chose or the choice is implied by the prompt. If the user is in a hurry or asked for end-to-end agentic publishing, default to Pattern A: it removes the only manual step in the workflow.
+The canonical cover is deterministic SVG-as-code, rasterized to exactly
+1200 × 630 as JPEG or PNG. It must be dark, abstract, brand-consistent,
+focused on the post's argument, and contain no letters, words, logos rendered
+as text, photographs, or generated-image assets. The same raster is used in
+the article and as `og:image`, including link previews in WhatsApp.
 
-### Pattern A — Deterministic SVG-as-code (zero manual steps)
+Do not create a full renderer script per post. Add one declarative entry to
+`blog-covers-src/covers.json`; `scripts/generate-cover.py` is the shared
+renderer. A post-specific script is allowed only when a genuinely unique
+algorithmic composition cannot be expressed by the shared renderer.
 
-The agent authors the cover as SVG XML (abstract, dark, brand-consistent, no text), rasterizes it at 1200 × 630, and uploads it with `./scripts/blog-cover-upload.sh`. Fully agentic and reproducible.
+For a new cover:
 
-- Rasterize with `rsvg-convert -w 1200 -h 630 cover.svg -o cover.png`, or fall back to headless Chromium, the same renderer used by the creatives pipeline. With Chromium, wrap the SVG in an HTML file with `html,body{margin:0;padding:0}` first, otherwise the default document margin leaves a white band in the screenshot:
-  `chromium --headless --screenshot=cover.png --window-size=1200,630 --hide-scrollbars wrapper.html`
-- Commit the SVG source to `blog-covers-src/{slug}.svg` so the asset stays reproducible and reviewable in diffs.
-- First example: `blog-covers-src/2026-08-01-governed-autonomy-distributed-systems.svg`.
+1. Choose or add a content-specific motif in the shared renderer.
+2. Add the slug, published extension, title, motif, palette and visual alt
+   description to `blog-covers-src/covers.json`. Start a new asset at
+   `revision: 1`; increment the revision whenever published pixels change.
+3. Generate the source and raster:
 
-### Pattern B — LLM image generation (one manual round-trip)
+   ```bash
+   python3 scripts/generate-cover.py --slug YYYY-MM-DD-slug \
+     --raster-dir /tmp/rbx-journal-covers
+   ```
 
-The agent outputs a Nano Banana prompt block (see CLAUDE.md, cover step), the user generates the image externally and returns a local file path, and the agent uploads it. Richer generated visuals, but the workflow blocks on the user. Use when the user wants a generated or photographic look, or explicitly asks for it.
+4. Review the raster visually, then upload it with
+   `./scripts/blog-cover-upload.sh`.
+5. Commit `covers.json`, `blog-covers-src/{slug}.svg`, and any shared renderer
+   change. `pnpm test` verifies completeness, dimensions, prohibited SVG
+   elements and byte-for-byte source reproducibility.
 
-Both patterns converge on the same tail: upload via `./scripts/blog-cover-upload.sh`, add the same `cover:` URL to both locale variants, re-publish with `blog-publish.sh --all-locales`.
+LLM-generated or photographic covers are not part of the standard workflow.
+They require an explicit operator exception and must not silently replace the
+deterministic source contract.
+
+Published asset keys are versioned as `{slug}-v{revision}.{ext}` because the
+cover proxy uses a one-year immutable browser cache. Always keep an explicit
+`cover:` URL in every locale variant; never overwrite an already published key.
 
 ## Publishing Steps
 
@@ -125,12 +150,15 @@ Use:
 
 This is the canonical publish command for multilingual posts.
 
-### 3. Upload the cover
+### 3. Generate and upload the cover
 
 Use:
 
 ```bash
-./scripts/blog-cover-upload.sh /path/to/cover.png YYYY-MM-DD-slug
+python3 scripts/generate-cover.py --slug YYYY-MM-DD-slug \
+  --raster-dir /tmp/rbx-journal-covers
+./scripts/blog-cover-upload.sh \
+  /tmp/rbx-journal-covers/YYYY-MM-DD-slug-v1.png YYYY-MM-DD-slug
 ```
 
 The same cover URL must be added to both locale variants.
@@ -184,6 +212,8 @@ Before finishing, confirm:
 - the two locale files exist locally
 - the translated meaning is aligned across locales
 - the cover URL matches in both files
+- the catalog entry and generated SVG source exist and `pnpm test` accepts them
+- the raster is 1200 × 630, abstract, content-focused and contains no text
 - the variants were uploaded to S3
 - the changes were committed and pushed
 - no rebuild/deploy is needed — the gateway cache (~60s TTL) picks up the S3 write

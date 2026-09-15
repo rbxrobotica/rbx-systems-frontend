@@ -1,0 +1,322 @@
+{
+  "version": 1,
+  "width": 1200,
+  "height": 630,
+  "posts": [
+    {
+      "slug": "2026-03-25-truthmetal-launch",
+      "title": "TruthMetal: distributed parameters with guaranteed immutability",
+      "extension": "jpg",
+      "revision": 2,
+      "motif": "immutable-ledger",
+      "accent": "cyan",
+      "alt": "Abstract immutable ledger with distributed nodes converging on a sealed record"
+    },
+    {
+      "slug": "2026-03-29-infrastructure-update",
+      "title": "Infrastructure Update: GitOps Maturity, Resilient Databases, and a Healthier Cluster",
+      "extension": "jpg",
+      "revision": 2,
+      "motif": "resilient-layers",
+      "accent": "green",
+      "alt": "Abstract resilient infrastructure layers joined by redundant paths"
+    },
+    {
+      "slug": "2026-04-01-the-model-is-not-the-system",
+      "title": "The Model Is Not the System",
+      "extension": "png",
+      "revision": 2,
+      "motif": "system-boundary",
+      "accent": "violet",
+      "alt": "Abstract model core contained within wider system boundaries"
+    },
+    {
+      "slug": "2026-04-04-the-unit-is-not-the-prompt",
+      "title": "The Unit Is Not the Prompt",
+      "extension": "png",
+      "revision": 2,
+      "motif": "execution-unit",
+      "accent": "cyan",
+      "alt": "Abstract prompt signals assembled into a governed execution unit"
+    },
+    {
+      "slug": "2026-04-05-robson-v2-finds-its-missing-execution-glue",
+      "title": "Robson v2 finds its missing execution glue",
+      "extension": "png",
+      "revision": 2,
+      "motif": "execution-glue",
+      "accent": "amber",
+      "alt": "Abstract execution graph connected by a central control bridge"
+    },
+    {
+      "slug": "2026-04-16-testnet-validation-architecture",
+      "title": "How we validate Robson before enabling real capital",
+      "extension": "png",
+      "revision": 2,
+      "motif": "validation-gates",
+      "accent": "green",
+      "alt": "Abstract test signal passing through successive validation gates"
+    },
+    {
+      "slug": "2026-04-22-robson-first-real-capital",
+      "title": "Robson executes its first real-capital trade",
+      "extension": "png",
+      "revision": 2,
+      "motif": "capital-flow",
+      "accent": "amber",
+      "alt": "Abstract controlled flow entering a guarded live-capital channel"
+    },
+    {
+      "slug": "2026-05-15-ia-corporativa-como-infraestrutura",
+      "title": "Corporate AI with Method: Diagnosis, Architecture, and Governance for Organizations That Operate Seriously",
+      "extension": "png",
+      "revision": 2,
+      "motif": "control-stack",
+      "accent": "violet",
+      "alt": "Abstract corporate AI stack organized around a central governance plane"
+    },
+    {
+      "slug": "2026-07-03-stops-that-survive-failures",
+      "title": "Stops that survive failures: redesigning the execution layer of Robson",
+      "extension": "jpg",
+      "revision": 2,
+      "motif": "persistent-stop",
+      "accent": "red",
+      "alt": "Abstract falling execution paths arrested by a persistent safety boundary"
+    },
+    {
+      "slug": "2026-07-04-one-entry-four-bugs",
+      "title": "One entry, four bugs: a night of production debugging on Robson",
+      "extension": "jpg",
+      "revision": 2,
+      "motif": "four-failures",
+      "accent": "red",
+      "alt": "Abstract single input splitting into four distinct failure paths"
+    },
+    {
+      "slug": "2026-07-04-the-retest-that-did-not-stop-us",
+      "title": "The retest that did not stop us: live-fire validation of the stop buffer",
+      "extension": "jpg",
+      "revision": 2,
+      "motif": "retest-buffer",
+      "accent": "amber",
+      "alt": "Abstract retest arc crossing a buffered stop boundary under controlled conditions"
+    },
+    {
+      "slug": "2026-07-05-cost-of-innovation-startups",
+      "title": "The cost of innovation: how economics shapes the future of Brazilian startups",
+      "extension": "png",
+      "revision": 2,
+      "motif": "economic-pressure",
+      "accent": "amber",
+      "alt": "Abstract field of innovation compressed by narrowing economic constraints"
+    },
+    {
+      "slug": "2026-07-05-saved-risk-extra-operation",
+      "title": "Saved risk becomes an extra operation",
+      "extension": "jpg",
+      "revision": 2,
+      "motif": "risk-reserve",
+      "accent": "green",
+      "alt": "Abstract reserved risk fragments recombining into an additional operation"
+    },
+    {
+      "slug": "2026-07-05-stop-gain-that-audited-the-system",
+      "title": "The stop gain that audited the system",
+      "extension": "jpg",
+      "revision": 2,
+      "motif": "audit-trigger",
+      "accent": "green",
+      "alt": "Abstract gain curve triggering a durable audit trail"
+    },
+    {
+      "slug": "2026-07-06-fallback-debuts-in-production",
+      "title": "Engineering update: the fallback debuts in production",
+      "extension": "jpg",
+      "revision": 2,
+      "motif": "fallback-route",
+      "accent": "cyan",
+      "alt": "Abstract broken primary path bypassed by a healthy fallback route"
+    },
+    {
+      "slug": "2026-07-07-the-brief-a-stranger-could-run",
+      "title": "Engineering update: the brief a stranger could run",
+      "extension": "jpg",
+      "revision": 2,
+      "motif": "executable-brief",
+      "accent": "violet",
+      "alt": "Abstract self-contained instruction packet connected to an executable circuit"
+    },
+    {
+      "slug": "2026-07-12-volatile-logs-are-not-evidence",
+      "title": "Volatile logs are not evidence",
+      "extension": "png",
+      "revision": 2,
+      "motif": "evidence-ledger",
+      "accent": "amber",
+      "alt": "Abstract volatile event stream contrasted with an anchored evidence ledger"
+    },
+    {
+      "slug": "2026-07-13-no-bitcoin-proprio",
+      "title": "Why RBX Runs Its Own Bitcoin Node",
+      "extension": "png",
+      "revision": 2,
+      "motif": "verified-node",
+      "accent": "amber",
+      "alt": "Abstract independent node verifying a chain of blocks"
+    },
+    {
+      "slug": "2026-07-23-o-no-chegou-ao-topo",
+      "title": "The Node Reached the Tip",
+      "extension": "png",
+      "revision": 2,
+      "motif": "chain-tip",
+      "accent": "amber",
+      "alt": "Abstract rising chain reaching a luminous verified tip"
+    },
+    {
+      "slug": "2026-07-29-governed-public-rag",
+      "title": "Public RAG with control and evidence",
+      "extension": "png",
+      "revision": 2,
+      "motif": "governed-rag",
+      "accent": "cyan",
+      "alt": "Abstract retrieval streams passing through a governance gate into evidence"
+    },
+    {
+      "slug": "2026-08-01-auditoria-ou-telemetria",
+      "title": "An audit trail is not a telemetry sink",
+      "extension": "png",
+      "revision": 2,
+      "motif": "audit-v-telemetry",
+      "accent": "violet",
+      "alt": "Abstract noisy telemetry field separated from a precise append-only audit trail"
+    },
+    {
+      "slug": "2026-08-01-governed-autonomy-distributed-systems",
+      "title": "Governed autonomy is a distributed systems problem",
+      "extension": "png",
+      "revision": 2,
+      "motif": "governed-autonomy",
+      "accent": "cyan",
+      "alt": "Abstract autonomous signals passing through a deterministic governance boundary"
+    },
+    {
+      "slug": "2026-08-02-o-painel-dizia-synced",
+      "title": "The dashboard said Synced",
+      "extension": "png",
+      "revision": 2,
+      "motif": "false-synced",
+      "accent": "green",
+      "alt": "Abstract healthy status field above a visibly severed delivery path"
+    },
+    {
+      "slug": "2026-08-02-rbx-journal-rss",
+      "title": "The RBX Journal now has RSS",
+      "extension": "png",
+      "revision": 2,
+      "motif": "broadcast",
+      "accent": "cyan",
+      "alt": "Abstract source broadcasting controlled concentric signals to independent readers"
+    },
+    {
+      "slug": "2026-08-04-o-slot-que-sumiu",
+      "title": "The missing slot",
+      "extension": "png",
+      "revision": 2,
+      "motif": "missing-slot",
+      "accent": "red",
+      "alt": "Abstract execution timeline interrupted by one missing slot"
+    },
+    {
+      "slug": "2026-08-04-uma-regua-so",
+      "title": "One ruler",
+      "extension": "png",
+      "revision": 2,
+      "motif": "common-ruler",
+      "accent": "cyan",
+      "alt": "Abstract unequal measurements converging on one shared baseline"
+    },
+    {
+      "slug": "2026-08-05-o-primeiro-palmo",
+      "title": "The first span",
+      "extension": "png",
+      "revision": 2,
+      "motif": "first-span",
+      "accent": "cyan",
+      "alt": "Abstract first measured span held between two precise endpoints"
+    },
+    {
+      "slug": "2026-08-06-o-plano-que-encolheu",
+      "title": "The plan that shrank",
+      "extension": "png",
+      "revision": 2,
+      "motif": "pruned-plan",
+      "accent": "green",
+      "alt": "Abstract oversized plan pruned down to a small executable core"
+    },
+    {
+      "slug": "2026-08-07-evidence-authority-boundaries",
+      "title": "Evidence Is Not Authority",
+      "extension": "png",
+      "revision": 2,
+      "motif": "evidence-authority",
+      "accent": "violet",
+      "alt": "Abstract evidence plane separated from an authority boundary"
+    },
+    {
+      "slug": "2026-08-08-o-revisor-que-rejeitou-a-si-mesmo",
+      "title": "The reviewer who rejected itself",
+      "extension": "png",
+      "revision": 2,
+      "motif": "self-review",
+      "accent": "red",
+      "alt": "Abstract review loop folding back to reject its own source"
+    },
+    {
+      "slug": "2026-08-08-rigor-demais-tambem-e-um-bug",
+      "title": "Too much rigor is also a bug",
+      "extension": "png",
+      "revision": 2,
+      "motif": "over-rigorous",
+      "accent": "amber",
+      "alt": "Abstract signal obstructed by excessive validation gates"
+    },
+    {
+      "slug": "2026-08-23-backpressure-fronteira-de-governanca",
+      "title": "When the environment says stop: backpressure as a governance boundary",
+      "extension": "png",
+      "revision": 2,
+      "motif": "backpressure",
+      "accent": "red",
+      "alt": "Abstract flow compressing against a narrow governance boundary"
+    },
+    {
+      "slug": "2026-08-26-recover-change-prove",
+      "title": "Recover, change and prove it",
+      "extension": "png",
+      "revision": 2,
+      "motif": "recovery-cycle",
+      "accent": "green",
+      "alt": "Abstract three-part recovery loop anchored by proof checkpoints"
+    },
+    {
+      "slug": "2026-08-31-engenharia-de-loop",
+      "title": "Loop Engineering",
+      "extension": "png",
+      "revision": 2,
+      "motif": "loop-decay",
+      "accent": "green",
+      "alt": "Abstract iterative findings descending through repeated review rounds to zero"
+    },
+    {
+      "slug": "2026-09-15-the-bottleneck-moved",
+      "title": "The Bottleneck Moved",
+      "extension": "jpg",
+      "revision": 2,
+      "motif": "moved-bottleneck",
+      "accent": "cyan",
+      "alt": "Abstract capability flow narrowing at a moved system boundary beside an independent ground-truth anchor"
+    }
+  ]
+}

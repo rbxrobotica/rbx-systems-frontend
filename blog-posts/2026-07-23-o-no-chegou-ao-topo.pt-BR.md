@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [bitcoin, infraestrutura, pagamentos, soberania, engenharia]
 excerpt: 'Dez dias depois, nosso nó Bitcoin validou o último bloco da cadeia. Os números finais da sincronização, o que a curva confirmou e o que ainda falta antes do primeiro pagamento real.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-23-o-no-chegou-ao-topo.png'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-23-o-no-chegou-ao-topo-v2.png'
 ---
 
 No dia 13 de julho, contamos aqui por que a RBX decidiu rodar seu próprio nó Bitcoin. Naquele momento, o nó estava em 34,8% da sincronização, validando blocos de janeiro de 2020, e o texto terminava com uma promessa: quando ele alcançasse o topo, contaríamos a próxima parte.

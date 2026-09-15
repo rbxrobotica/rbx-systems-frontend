@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, risco, confiabilidade, engenharia, trading]
 excerpt: 'Um stop de lucro executado durante um deploy expôs dois modos de falha invisíveis e mudou a política de risco do Robson. O relato e as decisões estão aqui.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-05-stop-gain-that-audited-the-system.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-05-stop-gain-that-audited-the-system-v2.jpg'
 ---
 
 Às 07h50 UTC de hoje, um short em BTCUSDT fechou com lucro. A ordem que fechou não veio do daemon do Robson: veio do stop de seguro que descansa na exchange, executando sozinho enquanto o software estava no meio de uma janela de deploy. O desenho de duas camadas que nasceu do [incidente de junho](/blog/2026-07-03-stops-that-survive-failures) funcionou pela primeira vez na direção do lucro. Entrada a 63.145,20, saída a 62.935, ganho líquido pequeno e limpo.

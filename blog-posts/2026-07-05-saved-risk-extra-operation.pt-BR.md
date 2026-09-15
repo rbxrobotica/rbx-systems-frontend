@@ -5,7 +5,7 @@ author: 'RBX Systems'
 authorRole: 'Engineering Team'
 tags: [robson, risco, produto, política, trading]
 excerpt: 'O Robson garantia 4 operações por mês. Agora cada entrada é cobrada pelo risco real, e o orçamento que sobra vira nova chance de operar. A matemática está aqui.'
-cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-05-saved-risk-extra-operation.jpg'
+cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-05-saved-risk-extra-operation-v2.jpg'
 ---
 
 Desde a primeira versão da política de risco, o Robson prometia 4 operações novas por mês. O número não era arbitrário: o orçamento mensal de perda é 4% do capital base, e cada operação carrega um teto de perda de 1%. Quatro é a divisão de um pelo outro.
