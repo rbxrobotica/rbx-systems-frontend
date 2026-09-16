@@ -25,6 +25,7 @@
 
 <LandingOffer
   {dictionary}
+  locale={data.locale}
   source="robson"
   titleKey="landing.robson.title"
   subtitleKey="landing.robson.subtitle"

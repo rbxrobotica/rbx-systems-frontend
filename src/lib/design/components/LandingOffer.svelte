@@ -2,9 +2,11 @@
   import { t } from '$lib/i18n/translate';
   import { trackEvent, LANDING_OFFER_CTA } from '$lib/analytics/events';
   import LeadForm from './LeadForm.svelte';
+  import type { Locale } from '$types/content';
 
   interface Props {
     dictionary: Record<string, unknown>;
+    locale: Locale;
     source: string;
     titleKey: string;
     subtitleKey: string;
@@ -24,6 +26,7 @@
 
   let {
     dictionary,
+    locale,
     source,
     titleKey,
     subtitleKey,
@@ -105,7 +108,7 @@
     <div class="corners" aria-hidden="true"></div>
     <div class="form-inner">
       <h2>{tr(formTitleKey)}</h2>
-      <LeadForm {dictionary} {source} offer={source} compact={true} />
+      <LeadForm {locale} {source} offer={source} compact={true} />
     </div>
   </div>
 </section>

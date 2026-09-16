@@ -31,6 +31,7 @@
 
 <LandingOffer
   {dictionary}
+  locale={data.locale}
   source="briefing-btc"
   titleKey="landing.briefingBtc.title"
   subtitleKey="landing.briefingBtc.subtitle"
