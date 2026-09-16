@@ -3,17 +3,21 @@
   import { getCommsBaseUrl } from '$lib/api/comms';
   import { trackEvent, FORM_SUBMIT, FORM_SUCCESS, FORM_ERROR } from '$lib/analytics/events';
   import AltchaWidget from './AltchaWidget.svelte';
+  import type { Locale } from '$types/content';
 
   interface Props {
-    dictionary: Record<string, unknown>;
+    locale: Locale;
     source: string;
     offer?: string;
     compact?: boolean;
   }
 
-  let { dictionary, source, offer = source, compact = false }: Props = $props();
+  let { locale, source, offer = source, compact = false }: Props = $props();
 
-  const tr = (key: string) => t(dictionary, key);
+  // Every key this component resolves (contact.form.*, altcha.*,
+  // common.languageCode) is a shared string from the static locale bundle,
+  // not page-specific CMS content — hence locale, not a dictionary prop.
+  const tr = (key: string) => t(locale, key);
   const languageCode = $derived((tr('common.languageCode') as string | undefined) ?? 'pt');
 
   type Status = 'idle' | 'submitting' | 'success' | 'error';
@@ -309,6 +313,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--s-2);
+    min-width: 0;
   }
 
   .field label,
@@ -355,6 +360,10 @@
     display: flex;
     align-items: flex-start;
     gap: var(--s-2);
+  }
+
+  .checkbox label {
+    min-width: 0;
   }
 
   .checkbox input {
