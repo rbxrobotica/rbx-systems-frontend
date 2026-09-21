@@ -21,7 +21,6 @@ const LOCALE_PATH_MAP: Record<string, { 'pt-BR': string; en: string }> = {
   '/partnership': { 'pt-BR': '/parceria', en: '/partnership' },
   '/diagnostico': { 'pt-BR': '/diagnostico', en: '/diagnostic' },
   '/diagnostic': { 'pt-BR': '/diagnostico', en: '/diagnostic' },
-  '/briefing-btc': { 'pt-BR': '/briefing-btc', en: '/briefing-btc' },
   '/produtos/robson': { 'pt-BR': '/produtos/robson', en: '/products/robson' },
   '/products/robson': { 'pt-BR': '/produtos/robson', en: '/products/robson' },
   '/produtos/briefing-btc': { 'pt-BR': '/produtos/briefing-btc', en: '/products/briefing-btc' },

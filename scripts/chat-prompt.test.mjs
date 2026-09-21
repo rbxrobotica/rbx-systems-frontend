@@ -53,7 +53,7 @@ test('Briefing Diário BTC facts and boundaries are pinned', () => {
   assert.match(route, /State these prices only when the visitor asks about Briefing BTC/);
   assert.match(
     route,
-    /link Portuguese-speaking visitors to https:\/\/rbx\.ia\.br\/briefing-btc and English-speaking visitors to https:\/\/rbxsystems\.ch\/briefing-btc/
+    /link Portuguese-speaking visitors to https:\/\/briefingbtc\.merovelis\.com and English-speaking visitors to https:\/\/rbxsystems\.ch\/products\/briefing-btc/
   );
   assert.match(
     route,

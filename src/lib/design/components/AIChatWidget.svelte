@@ -161,7 +161,7 @@
       <div class="cta-row">
         <!-- Subscription lives on the landing page, not in the contact funnel;
              ?subscribe=1 opens the plan modal on arrival. -->
-        <a href="/briefing-btc?subscribe=1" class="cta-btn primary" onclick={onclose}
+        <a href="https://briefingbtc.merovelis.com" class="cta-btn primary" onclick={onclose}
           >{ctaBriefing}</a
         >
       </div>
