@@ -6,11 +6,13 @@ import type { Locale } from '$types/content';
 const PT_BASE = 'https://rbx.ia.br';
 const EN_BASE = 'https://rbxsystems.ch';
 
-const LOCALE_PATH_MAP: Record<string, { 'pt-BR': string; en: string }> = {
+export const LOCALE_PATH_MAP: Record<string, { 'pt-BR': string; en: string }> = {
   '/': { 'pt-BR': '/', en: '/' },
   '/sobre': { 'pt-BR': '/sobre', en: '/about' },
   '/about': { 'pt-BR': '/sobre', en: '/about' },
   '/leandro-damasio': { 'pt-BR': '/leandro-damasio', en: '/leandro-damasio' },
+  '/caue-alencar': { 'pt-BR': '/caue-alencar', en: '/caue-alencar' },
+  '/flavia-ribeiro': { 'pt-BR': '/flavia-ribeiro', en: '/flavia-ribeiro' },
   '/solucoes': { 'pt-BR': '/solucoes', en: '/solutions' },
   '/solutions': { 'pt-BR': '/solucoes', en: '/solutions' },
   '/produtos': { 'pt-BR': '/produtos', en: '/products' },

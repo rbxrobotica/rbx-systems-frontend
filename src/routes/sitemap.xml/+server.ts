@@ -7,6 +7,9 @@ interface SitemapEntry {
   path: string;
   changefreq: 'daily' | 'weekly' | 'monthly';
   priority: string;
+  // Omitted for static pages: a fabricated lastmod is ignored by Google, so
+  // only posts carry one (their frontmatter date).
+  lastmod?: string;
   alternates?: { hreflang: string; href: string }[];
 }
 
@@ -16,6 +19,8 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
     { path: '/sobre', changefreq: 'monthly', priority: '0.9' },
     { path: '/equipe', changefreq: 'monthly', priority: '0.9' },
     { path: '/leandro-damasio', changefreq: 'monthly', priority: '0.9' },
+    { path: '/caue-alencar', changefreq: 'monthly', priority: '0.9' },
+    { path: '/flavia-ribeiro', changefreq: 'monthly', priority: '0.9' },
     { path: '/solucoes', changefreq: 'weekly', priority: '0.9' },
     { path: '/produtos', changefreq: 'weekly', priority: '0.9' },
     { path: '/parceria', changefreq: 'monthly', priority: '0.9' },
@@ -36,6 +41,7 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
     { path: '/changelog', changefreq: 'weekly', priority: '0.7' },
     { path: '/manifesto', changefreq: 'monthly', priority: '0.6' },
     { path: '/contato', changefreq: 'monthly', priority: '0.7' },
+    { path: '/trust', changefreq: 'monthly', priority: '0.6' },
     { path: '/legal', changefreq: 'monthly', priority: '0.5' }
   ],
   en: [
@@ -43,6 +49,8 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
     { path: '/about', changefreq: 'monthly', priority: '0.9' },
     { path: '/team', changefreq: 'monthly', priority: '0.9' },
     { path: '/leandro-damasio', changefreq: 'monthly', priority: '0.9' },
+    { path: '/caue-alencar', changefreq: 'monthly', priority: '0.9' },
+    { path: '/flavia-ribeiro', changefreq: 'monthly', priority: '0.9' },
     { path: '/solutions', changefreq: 'weekly', priority: '0.9' },
     { path: '/products', changefreq: 'weekly', priority: '0.9' },
     { path: '/partnership', changefreq: 'monthly', priority: '0.9' },
@@ -63,6 +71,7 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
     { path: '/changelog', changefreq: 'weekly', priority: '0.7' },
     { path: '/manifesto', changefreq: 'monthly', priority: '0.6' },
     { path: '/contact', changefreq: 'monthly', priority: '0.7' },
+    { path: '/trust', changefreq: 'monthly', priority: '0.6' },
     { path: '/legal', changefreq: 'monthly', priority: '0.5' }
   ]
 };
@@ -76,7 +85,6 @@ export const GET: RequestHandler = async ({ url }) => {
   const locale = detectLocaleFromUrl(url);
   const siteUrl = siteUrlByLocale[locale];
   const entries = entriesByLocale[locale];
-  const today = new Date().toISOString().split('T')[0];
 
   let postEntries: SitemapEntry[] = [];
   try {
@@ -106,6 +114,7 @@ export const GET: RequestHandler = async ({ url }) => {
         path: `/blog/${post.publicSlug}`,
         changefreq: 'monthly' as const,
         priority: '0.6',
+        lastmod: post.date || undefined,
         alternates
       };
     });
@@ -124,9 +133,9 @@ ${allEntries
         (alt) => `\n    <xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${alt.href}"/>`
       )
       .join('');
+    const lastmod = entry.lastmod ? `\n    <lastmod>${entry.lastmod}</lastmod>` : '';
     return `  <url>
-    <loc>${siteUrl}${entry.path}</loc>${alternateLinks}
-    <lastmod>${today}</lastmod>
+    <loc>${siteUrl}${entry.path}</loc>${alternateLinks}${lastmod}
     <changefreq>${entry.changefreq}</changefreq>
     <priority>${entry.priority}</priority>
   </url>`;
