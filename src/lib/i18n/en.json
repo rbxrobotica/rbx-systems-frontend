@@ -59,13 +59,15 @@
     "metaTitle": "Cauê Alencar · CFO of RBX Systems",
     "metaDescription": "Cauê Alencar is Chief Financial Officer of RBX Systems. Financial leadership and strategy for high-demand operations.",
     "headline": "Cauê Alencar",
-    "body": "Chief Financial Officer. Financial leadership and strategy for high-demand operations."
+    "body": "Chief Financial Officer. Financial leadership and strategy for high-demand operations.",
+    "jobTitle": "Chief Financial Officer, RBX Systems"
   },
   "flaviaRibeiro": {
     "metaTitle": "Flavia Ribeiro · Founding SDR at RBX Systems",
     "metaDescription": "Flavia Ribeiro is Founding SDR at RBX Systems. Sales development, client support and customer care for high-demand operations.",
     "headline": "Flavia Ribeiro",
-    "body": "Sales Development, Client Support and Customer Care. Founding SDR at RBX Systems."
+    "body": "Sales Development, Client Support and Customer Care. Founding SDR at RBX Systems.",
+    "jobTitle": "Founding SDR, RBX Systems"
   },
   "solutions": {
     "metaTitle": "RBX Systems Solutions · AI Engineering, LLMOps, Agents & Cloud",
@@ -332,6 +334,31 @@
         "governance": "Subscription managed by RBX Systems. Cancellation and refunds:",
         "legal": "Legal Notice"
       }
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "q": "What is the Daily BTC Briefing?",
+          "a": "A daily operational read of the BTC futures market (BTC/USDT), produced by RBX Systems. Each edition consolidates context, scenarios and a flight plan into six auditable artifacts. It is not buy or sell signals and it is not investment advice."
+        },
+        {
+          "q": "When and how do I receive the briefing?",
+          "a": "Every business day, by 07h00 Brasília time. On the Pro plan it is delivered to your WhatsApp; on the Free plan you read the day's edition and the last 7 days in the logged-in area with your Google account."
+        },
+        {
+          "q": "How much does it cost?",
+          "a": "Free: $0, with reading in the logged-in area. Pro: $12 per month billed monthly or $120 per year billed annually, paid in USDT through the RBX BTCPay Server or by card. The Team plan charges the Pro per-seat price for 2 to 50 seats on a single invoice."
+        },
+        {
+          "q": "How do I cancel my subscription?",
+          "a": "You can cancel any time, with no lock-in. The subscription is managed by RBX Systems; talk to the team through the contact form or the email listed in the Legal Notice."
+        },
+        {
+          "q": "Who is the BTC Briefing for?",
+          "a": "For people who follow the BTC futures market and want a daily, auditable operational read with no promise of returns. It is not for anyone looking for buy and sell signals or investment recommendations."
+        }
+      ]
     }
   }
 }

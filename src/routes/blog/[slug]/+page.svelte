@@ -2,7 +2,7 @@
   import { formatDate } from '$api/content';
   import Prose from '$components/Prose.svelte';
   import Seo from '$components/Seo.svelte';
-  import { buildGraph, blogPostingSchema } from '$lib/seo/schema';
+  import { buildGraph, blogPostingSchema, breadcrumbSchema } from '$lib/seo/schema';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
@@ -44,7 +44,12 @@
               author: data.post.author,
               authorRole: data.post.authorRole,
               cover: data.post.cover
-            })
+            }),
+            breadcrumbSchema(data.locale, pageUrl, [
+              { name: t(data.locale, 'nav.home'), path: '/' },
+              { name: t(data.locale, 'nav.journal'), path: '/journal' },
+              { name: data.post.title, path: `/blog/${data.publicSlug ?? data.post.slug}` }
+            ])
           ],
           `${pageUrl}#article`
         )

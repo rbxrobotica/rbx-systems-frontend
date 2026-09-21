@@ -103,6 +103,33 @@ export function personSchema(locale: Locale = 'pt-BR'): Record<string, unknown> 
   };
 }
 
+/**
+ * Data-driven Person node for team pages other than the founder's. The @id
+ * follows the same site-level fragment convention as personSchema, so every
+ * locale host mints its own stable entity id.
+ */
+export function personSchemaFor(
+  locale: Locale,
+  slug: string,
+  name: string,
+  jobTitle: string,
+  sameAs: string[] = []
+): Record<string, unknown> {
+  const url = siteUrl(locale);
+  const schema: Record<string, unknown> = {
+    '@type': 'Person',
+    '@id': `${url}/#${slug}`,
+    name,
+    jobTitle,
+    url: `${url}/${slug}`,
+    worksFor: { '@id': orgId(locale) }
+  };
+  if (sameAs.length > 0) {
+    schema.sameAs = sameAs;
+  }
+  return schema;
+}
+
 export function websiteSchema(locale: Locale = 'pt-BR'): Record<string, unknown> {
   const url = siteUrl(locale);
   return {
@@ -209,6 +236,87 @@ export function blogPostingSchema(
     url: pageUrl,
     inLanguage: locale === 'pt-BR' ? 'pt-BR' : 'en',
     articleSection: 'Journal'
+  };
+}
+
+export interface BreadcrumbItem {
+  name: string;
+  /** Site-relative path (e.g. '/journal'); absolutized against the locale host. */
+  path: string;
+}
+
+/**
+ * BreadcrumbList for a page. Every item, including the current page, carries
+ * its absolute URL; the item paths must be real URLs on the site.
+ */
+export function breadcrumbSchema(
+  locale: Locale,
+  pageUrl: string,
+  items: BreadcrumbItem[]
+): Record<string, unknown> {
+  const base = siteUrl(locale);
+  return {
+    '@type': 'BreadcrumbList',
+    '@id': `${pageUrl}#breadcrumb`,
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: `${base}${item.path}`
+    }))
+  };
+}
+
+/**
+ * CollectionPage for listing pages. When the listed entries are known at
+ * load time, pass them as items to emit an ItemList as mainEntity.
+ */
+export function collectionPageSchema(
+  locale: Locale,
+  pageUrl: string,
+  name: string,
+  description: string,
+  items: { name: string; url: string }[] = []
+): Record<string, unknown> {
+  const schema: Record<string, unknown> = {
+    '@type': 'CollectionPage',
+    '@id': `${pageUrl}#collection`,
+    url: pageUrl,
+    name,
+    description,
+    isPartOf: { '@id': websiteId(locale) },
+    inLanguage: locale === 'pt-BR' ? 'pt-BR' : 'en'
+  };
+  if (items.length > 0) {
+    schema.mainEntity = {
+      '@type': 'ItemList',
+      itemListElement: items.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: item.url,
+        name: item.name
+      }))
+    };
+  }
+  return schema;
+}
+
+/**
+ * FAQPage for a page with a visible FAQ section. The questions and answers
+ * must be rendered on the page itself; this only mirrors them for crawlers.
+ */
+export function faqPageSchema(
+  pageUrl: string,
+  faqs: { question: string; answer: string }[]
+): Record<string, unknown> {
+  return {
+    '@type': 'FAQPage',
+    '@id': `${pageUrl}#faq`,
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer }
+    }))
   };
 }
 
