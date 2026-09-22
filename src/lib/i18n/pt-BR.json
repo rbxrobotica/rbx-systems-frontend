@@ -87,7 +87,11 @@
     "headline": "RBX Journal",
     "body": "Ideias, engenharia e notas de campo da RBX Systems.",
     "rssCta": "Assine de graça via RSS",
-    "rssNew": "Novo"
+    "rssNew": "Novo",
+    "tagTitle": "Tag",
+    "tagMetaDescription": "Artigos do RBX Journal marcados com esta tag.",
+    "authorTitle": "Autor",
+    "authorMetaDescription": "Artigos publicados por este autor no RBX Journal."
   },
   "cases": {
     "metaTitle": "Cases RBX Systems · Prova de Trabalho e Sistemas em Produção",

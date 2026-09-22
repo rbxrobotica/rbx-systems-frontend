@@ -36,6 +36,8 @@ Disallow: /solucoes/*?*
 Disallow: /produtos/*?*
 Disallow: /servicos/*?*
 
+# LLM-readable site index available at ${siteUrl}/llms.txt
+
 Sitemap: ${siteUrl}/sitemap.xml
 `;
 

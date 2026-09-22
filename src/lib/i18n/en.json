@@ -87,7 +87,11 @@
     "headline": "RBX Journal",
     "body": "Ideas, engineering and field notes from RBX Systems.",
     "rssCta": "Subscribe free via RSS",
-    "rssNew": "New"
+    "rssNew": "New",
+    "tagTitle": "Tag",
+    "tagMetaDescription": "RBX Journal articles filed under this tag.",
+    "authorTitle": "Author",
+    "authorMetaDescription": "Articles by this author in the RBX Journal."
   },
   "cases": {
     "metaTitle": "RBX Systems Cases · Proof of Work & Production Systems",

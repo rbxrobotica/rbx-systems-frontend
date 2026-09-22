@@ -1,6 +1,8 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { detectLocaleFromUrl } from '$lib/i18n/locale';
 import { loadAllPosts } from '$lib/server/content/gateway';
+import { authorSlugFor } from '$lib/journal/authors';
+import { collectCanonicalTags } from '$lib/journal/tags';
 import type { Locale } from '$types/content';
 
 interface SitemapEntry {
@@ -87,6 +89,7 @@ export const GET: RequestHandler = async ({ url }) => {
   const entries = entriesByLocale[locale];
 
   let postEntries: SitemapEntry[] = [];
+  let taxonomyEntries: SitemapEntry[] = [];
   try {
     const posts = await loadAllPosts(locale);
     // Alternate-locale public slugs for xhtml:link alternates. A failure
@@ -118,11 +121,31 @@ export const GET: RequestHandler = async ({ url }) => {
         alternates
       };
     });
+
+    // Tag and author listing pages, derived from what the posts actually use.
+    const tagEntries: SitemapEntry[] = collectCanonicalTags(posts).map((tag) => ({
+      path: `/journal/tag/${tag}`,
+      changefreq: 'weekly',
+      priority: '0.4'
+    }));
+    const authorSlugs = [
+      ...new Set(
+        posts
+          .map((post) => authorSlugFor(post.author))
+          .filter((slug): slug is string => slug !== null)
+      )
+    ].sort();
+    const authorEntries: SitemapEntry[] = authorSlugs.map((slug) => ({
+      path: `/journal/autor/${slug}`,
+      changefreq: 'weekly',
+      priority: '0.4'
+    }));
+    taxonomyEntries = [...tagEntries, ...authorEntries];
   } catch {
     // If the post list is unavailable, emit the static sitemap only.
   }
 
-  const allEntries = [...entries, ...postEntries];
+  const allEntries = [...entries, ...postEntries, ...taxonomyEntries];
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
