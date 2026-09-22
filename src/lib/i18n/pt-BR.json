@@ -12,6 +12,8 @@
     "contact": "Contato",
     "about": "Sobre",
     "team": "Equipe",
+    "history": "História",
+    "careers": "Carreiras",
     "leandroDamasio": "Leandro Damasio",
     "caueAlencar": "Cauê Alencar",
     "flaviaRibeiro": "Flavia Ribeiro",
@@ -68,6 +70,18 @@
     "headline": "Flavia Ribeiro",
     "body": "Sales Development, Client Support e Customer Care. Fundadora SDR da RBX Systems.",
     "jobTitle": "Fundadora SDR, RBX Systems"
+  },
+  "history": {
+    "metaTitle": "História da RBX Robótica · Da automação à plataforma de IA governada",
+    "metaDescription": "Conheça a trajetória da RBX Robótica: de consultoria em automação e robótica a plataforma de sistemas governados por IA para operações de alta exigência.",
+    "fallbackTitle": "História",
+    "fallbackLead": "A RBX Robótica nasceu como consultoria de automação e robótica, ajudando empresas a tirar processos repetitivos do caminho. Com o tempo, o trabalho evoluiu para engenharia de sistemas e infraestrutura, e depois para plataformas operacionais completas. Hoje a RBX constrói sistemas governados por IA para operações de alta exigência, com o mesmo princípio de sempre: confiabilidade e controle acima de tudo."
+  },
+  "careers": {
+    "metaTitle": "Trabalhe na RBX Robótica · Carreiras em Engenharia de Sistemas e IA",
+    "metaDescription": "Carreiras na RBX Robótica: engenharia de sistemas, IA aplicada e infraestrutura para operações de alta exigência. Envie seu currículo pelo nosso contato.",
+    "fallbackTitle": "Carreiras",
+    "fallbackLead": "Trabalhe na RBX Robótica. Construímos plataformas operacionais com IA para empresas que exigem controle, e procuramos pessoas que levem engenharia a sério. Se você quer fazer parte desse time, envie seu currículo e uma breve apresentação pela nossa página de contato."
   },
   "solutions": {
     "metaTitle": "Soluções RBX Systems · Engenharia de IA, LLMOps, Agentes e Cloud",

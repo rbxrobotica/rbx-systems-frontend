@@ -7,11 +7,11 @@ import { LOCALE_PATH_MAP } from '$lib/seo/alternates';
  * rbx_frontend_new 2024) that still receive crawler and backlink traffic.
  * Keys are the pt-BR legacy paths; destinations resolve per locale through
  * LOCALE_PATH_MAP (e.g. /aboutus -> /sobre on .ia.br, /about on .ch). Live
- * English routes (/about, /team, /solutions, ...) are deliberately absent.
+ * routes that now exist for real (/about, /history, /careers, /team, ...) are
+ * deliberately absent.
  */
 const LEGACY_REDIRECTS: Record<string, string> = {
   '/aboutus': '/sobre',
-  '/history': '/sobre',
   '/corporate': '/sobre',
   '/privacy': '/legal',
   '/terms': '/legal',

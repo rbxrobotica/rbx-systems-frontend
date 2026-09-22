@@ -42,8 +42,10 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
     { path: '/newsroom', changefreq: 'weekly', priority: '0.7' },
     { path: '/changelog', changefreq: 'weekly', priority: '0.7' },
     { path: '/manifesto', changefreq: 'monthly', priority: '0.6' },
+    { path: '/historia', changefreq: 'monthly', priority: '0.6' },
     { path: '/contato', changefreq: 'monthly', priority: '0.7' },
     { path: '/trust', changefreq: 'monthly', priority: '0.6' },
+    { path: '/carreiras', changefreq: 'monthly', priority: '0.5' },
     { path: '/legal', changefreq: 'monthly', priority: '0.5' }
   ],
   en: [
@@ -72,8 +74,10 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
     { path: '/newsroom', changefreq: 'weekly', priority: '0.7' },
     { path: '/changelog', changefreq: 'weekly', priority: '0.7' },
     { path: '/manifesto', changefreq: 'monthly', priority: '0.6' },
+    { path: '/history', changefreq: 'monthly', priority: '0.6' },
     { path: '/contact', changefreq: 'monthly', priority: '0.7' },
     { path: '/trust', changefreq: 'monthly', priority: '0.6' },
+    { path: '/careers', changefreq: 'monthly', priority: '0.5' },
     { path: '/legal', changefreq: 'monthly', priority: '0.5' }
   ]
 };

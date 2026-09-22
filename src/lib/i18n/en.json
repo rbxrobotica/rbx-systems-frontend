@@ -12,6 +12,8 @@
     "contact": "Contact",
     "about": "About",
     "team": "Team",
+    "history": "History",
+    "careers": "Careers",
     "leandroDamasio": "Leandro Damasio",
     "caueAlencar": "Cauê Alencar",
     "flaviaRibeiro": "Flavia Ribeiro",
@@ -68,6 +70,18 @@
     "headline": "Flavia Ribeiro",
     "body": "Sales Development, Client Support and Customer Care. Founding SDR at RBX Systems.",
     "jobTitle": "Founding SDR, RBX Systems"
+  },
+  "history": {
+    "metaTitle": "RBX Systems History · From automation to a governed AI platform",
+    "metaDescription": "The trajectory of RBX Systems: from automation and robotics consulting to a platform of AI-governed systems for high-demand operations.",
+    "fallbackTitle": "History",
+    "fallbackLead": "RBX Systems began as an automation and robotics consultancy, helping companies remove repetitive processes from their operations. Over time the work evolved into systems engineering and infrastructure, and then into complete operational platforms. Today RBX builds AI-governed systems for high-demand operations, guided by the same principle as always: reliability and control above everything."
+  },
+  "careers": {
+    "metaTitle": "Work at RBX · Careers in Systems Engineering and AI",
+    "metaDescription": "Careers at RBX Systems: systems engineering, applied AI and infrastructure for high-demand operations. Send your resume through our contact page.",
+    "fallbackTitle": "Careers",
+    "fallbackLead": "Work at RBX. We build operational platforms with AI for companies that demand control, and we are looking for people who take engineering seriously. If you want to join this team, send your resume and a short introduction through our contact page."
   },
   "solutions": {
     "metaTitle": "RBX Systems Solutions · AI Engineering, LLMOps, Agents & Cloud",

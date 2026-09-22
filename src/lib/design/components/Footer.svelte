@@ -26,6 +26,8 @@
         <ul>
           <li><a href="/">{$_('nav.home')}</a></li>
           <li><a href="/sobre">{$_('nav.about')}</a></li>
+          <li><a href="/historia">{$_('nav.history')}</a></li>
+          <li><a href="/carreiras">{$_('nav.careers')}</a></li>
           <li><a href="/leandro-damasio">{$_('nav.leandroDamasio')}</a></li>
           <li><a href="/caue-alencar">{$_('nav.caueAlencar')}</a></li>
           <li><a href="/flavia-ribeiro">{$_('nav.flaviaRibeiro')}</a></li>
