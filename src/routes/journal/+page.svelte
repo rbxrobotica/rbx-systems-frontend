@@ -2,7 +2,7 @@
   import { formatDate } from '$api/content';
   import PageHeader from '$components/PageHeader.svelte';
   import Seo from '$components/Seo.svelte';
-  import { buildGraph } from '$lib/seo/schema';
+  import { buildGraph, collectionPageSchema } from '$lib/seo/schema';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
@@ -10,10 +10,22 @@
 
   const title = $derived(t(data.locale, 'journal.metaTitle'));
   const description = $derived(t(data.locale, 'journal.metaDescription'));
-  const pageUrl = $derived(
-    data.locale === 'pt-BR' ? 'https://rbx.ia.br/journal' : 'https://rbxsystems.ch/journal'
+  const siteUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
+  const pageUrl = $derived(`${siteUrl}/journal`);
+  const schema = $derived(
+    buildGraph(data.locale, pageUrl, title, description, [
+      collectionPageSchema(
+        data.locale,
+        pageUrl,
+        title,
+        description,
+        data.posts.map((post) => ({
+          name: post.title,
+          url: `${siteUrl}/blog/${post.publicSlug}`
+        }))
+      )
+    ])
   );
-  const schema = $derived(buildGraph(data.locale, pageUrl, title, description));
 </script>
 
 <Seo {title} {description} locale={data.locale} canonical={pageUrl} {schema} />

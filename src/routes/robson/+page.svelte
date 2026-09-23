@@ -14,6 +14,13 @@
   const pageUrl = $derived(
     data.locale === 'pt-BR' ? 'https://rbx.ia.br/robson' : 'https://rbxsystems.ch/robson'
   );
+  // This LP duplicates the /produtos/robson CMS page for campaign traffic;
+  // canonical points to the product page (same host) to avoid duplicate content.
+  const canonicalUrl = $derived(
+    data.locale === 'pt-BR'
+      ? 'https://rbx.ia.br/produtos/robson'
+      : 'https://rbxsystems.ch/products/robson'
+  );
   const schema = $derived(
     buildGraph(data.locale, pageUrl, title, description, [
       softwareApplicationSchema(data.locale, pageUrl, 'Robson', description, 'BusinessApplication')
@@ -21,7 +28,7 @@
   );
 </script>
 
-<Seo {title} {description} locale={data.locale} canonical={pageUrl} {schema} />
+<Seo {title} {description} locale={data.locale} canonical={canonicalUrl} {schema} />
 
 <LandingOffer
   {dictionary}

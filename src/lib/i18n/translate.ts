@@ -34,3 +34,14 @@ export function tl(locale: Locale, key: string): string[] {
   const value = lookup(messages[locale], key);
   return Array.isArray(value) ? value.filter((v): v is string => typeof v === 'string') : [];
 }
+
+/**
+ * Read a list of objects from a dictionary (e.g. FAQ entries). Returns an
+ * empty list when the key is missing or not a list of plain objects.
+ */
+export function tobjects<T extends Record<string, unknown>>(locale: Locale, key: string): T[] {
+  const value = lookup(messages[locale], key);
+  return Array.isArray(value)
+    ? value.filter((v): v is T => typeof v === 'object' && v !== null)
+    : [];
+}

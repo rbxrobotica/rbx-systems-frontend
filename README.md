@@ -53,7 +53,7 @@ live chat result. This latency trade-off is accepted only for shadow measurement
 ## SEO / Content
 
 - Metadata, Open Graph and JSON-LD are managed via `src/lib/design/components/Seo.svelte`.
-- `static/robots.txt` and `static/sitemap.xml` must be kept up to date.
+- `robots.txt` and `sitemap.xml` are dynamic per-host endpoints (`src/routes/robots.txt/+server.ts` and `src/routes/sitemap.xml/+server.ts`), not static files. The sitemap lists the static pages plus the Journal posts, tag pages and author pages derived from the CMS content.
 - See `docs/seo/` for the full SEO strategy, editorial plan and publishing checklist.
 
 ## Publishing a blog post

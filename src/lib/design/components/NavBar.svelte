@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { t } from '$lib/i18n/translate';
+  import { localizedPath } from '$lib/seo/alternates';
   import type { Locale } from '$types/content';
 
   interface Props {
@@ -10,6 +11,7 @@
   let { locale }: Props = $props();
 
   const tr = (key: string) => t(locale, key);
+  const href = (pathname: string) => localizedPath(locale, pathname);
 
   let currentPath = $derived($page.url.pathname);
 
@@ -32,14 +34,14 @@
 
 <nav class="navbar">
   <div class="nav-inner">
-    <a href="/" class="brand" aria-label={tr('nav.home')}>
+    <a href={href('/')} class="brand" aria-label={tr('nav.home')}>
       <img src="/brand/rbx-mark.svg" alt="" width="28" height="28" />
       <span class="brand-text">RBX</span>
     </a>
 
     <div class="nav-links">
       {#each navItems as item}
-        <a href={item.href} class="nav-link" class:active={isActive(item.href)}>
+        <a href={href(item.href)} class="nav-link" class:active={isActive(href(item.href))}>
           {tr(item.label)}
         </a>
       {/each}

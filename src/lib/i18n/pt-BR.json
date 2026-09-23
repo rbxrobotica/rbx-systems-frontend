@@ -12,6 +12,8 @@
     "contact": "Contato",
     "about": "Sobre",
     "team": "Equipe",
+    "history": "História",
+    "careers": "Carreiras",
     "leandroDamasio": "Leandro Damasio",
     "caueAlencar": "Cauê Alencar",
     "flaviaRibeiro": "Flavia Ribeiro",
@@ -59,13 +61,27 @@
     "metaTitle": "Cauê Alencar · CFO da RBX Systems",
     "metaDescription": "Cauê Alencar é Chief Financial Officer da RBX Systems. Liderança financeira e estratégia para operações de alta exigência.",
     "headline": "Cauê Alencar",
-    "body": "Chief Financial Officer. Liderança financeira e estratégia para operações de alta exigência."
+    "body": "Chief Financial Officer. Liderança financeira e estratégia para operações de alta exigência.",
+    "jobTitle": "Chief Financial Officer, RBX Systems"
   },
   "flaviaRibeiro": {
     "metaTitle": "Flavia Ribeiro · Fundadora SDR da RBX Systems",
     "metaDescription": "Flavia Ribeiro é Fundadora SDR da RBX Systems. Desenvolvimento de vendas, suporte ao cliente e customer care para operações de alta exigência.",
     "headline": "Flavia Ribeiro",
-    "body": "Sales Development, Client Support e Customer Care. Fundadora SDR da RBX Systems."
+    "body": "Sales Development, Client Support e Customer Care. Fundadora SDR da RBX Systems.",
+    "jobTitle": "Fundadora SDR, RBX Systems"
+  },
+  "history": {
+    "metaTitle": "História da RBX Robótica · Da automação à plataforma de IA governada",
+    "metaDescription": "Conheça a trajetória da RBX Robótica: de consultoria em automação e robótica a plataforma de sistemas governados por IA para operações de alta exigência.",
+    "fallbackTitle": "História",
+    "fallbackLead": "A RBX Robótica nasceu como consultoria de automação e robótica, ajudando empresas a tirar processos repetitivos do caminho. Com o tempo, o trabalho evoluiu para engenharia de sistemas e infraestrutura, e depois para plataformas operacionais completas. Hoje a RBX constrói sistemas governados por IA para operações de alta exigência, com o mesmo princípio de sempre: confiabilidade e controle acima de tudo."
+  },
+  "careers": {
+    "metaTitle": "Trabalhe na RBX Robótica · Carreiras em Engenharia de Sistemas e IA",
+    "metaDescription": "Carreiras na RBX Robótica: engenharia de sistemas, IA aplicada e infraestrutura para operações de alta exigência. Envie seu currículo pelo nosso contato.",
+    "fallbackTitle": "Carreiras",
+    "fallbackLead": "Trabalhe na RBX Robótica. Construímos plataformas operacionais com IA para empresas que exigem controle, e procuramos pessoas que levem engenharia a sério. Se você quer fazer parte desse time, envie seu currículo e uma breve apresentação pela nossa página de contato."
   },
   "solutions": {
     "metaTitle": "Soluções RBX Systems · Engenharia de IA, LLMOps, Agentes e Cloud",
@@ -85,7 +101,11 @@
     "headline": "RBX Journal",
     "body": "Ideias, engenharia e notas de campo da RBX Systems.",
     "rssCta": "Assine de graça via RSS",
-    "rssNew": "Novo"
+    "rssNew": "Novo",
+    "tagTitle": "Tag",
+    "tagMetaDescription": "Artigos do RBX Journal marcados com esta tag.",
+    "authorTitle": "Autor",
+    "authorMetaDescription": "Artigos publicados por este autor no RBX Journal."
   },
   "cases": {
     "metaTitle": "Cases RBX Systems · Prova de Trabalho e Sistemas em Produção",
@@ -156,6 +176,51 @@
       "metaTitle": "Observabilidade · RBX Systems",
       "metaDescription": "Observabilidade de sistemas e LLMs: traces, métricas, logs e alertas com redação de PII para operações reguladas.",
       "headline": "Observabilidade"
+    },
+    "webDevelopment": {
+      "metaTitle": "Desenvolvimento Web · RBX Systems",
+      "metaDescription": "Desenvolvimento de sites, portais e aplicações web rápidas, acessíveis e integradas aos sistemas da sua operação.",
+      "headline": "Desenvolvimento Web"
+    },
+    "mobileApps": {
+      "metaTitle": "Aplicativos Mobile · RBX Systems",
+      "metaDescription": "Aplicativos Android e iOS conectados ao seu backend, com operação offline, telemetria, segurança e publicação assistida.",
+      "headline": "Aplicativos Mobile"
+    },
+    "customSystems": {
+      "metaTitle": "Sistemas Personalizados · RBX Systems",
+      "metaDescription": "Sistemas sob medida para processos específicos, com integrações, controle de acesso, auditoria e operação de longo prazo.",
+      "headline": "Sistemas Personalizados"
+    },
+    "technicalConsulting": {
+      "metaTitle": "Consultoria Técnica · RBX Systems",
+      "metaDescription": "Diagnóstico de arquitetura, confiabilidade, segurança e produto para orientar decisões técnicas com evidências e prioridades claras.",
+      "headline": "Consultoria Técnica"
+    },
+    "processAutomation": {
+      "metaTitle": "Automação de Processos · RBX Systems",
+      "metaDescription": "Automação de processos empresariais com workflows auditáveis, integrações, gates humanos e tratamento seguro de exceções.",
+      "headline": "Automação de Processos"
+    },
+    "apiIntegration": {
+      "metaTitle": "Integração de APIs · RBX Systems",
+      "metaDescription": "Integração segura entre APIs, sistemas legados e plataformas SaaS, com contratos, retries, idempotência e observabilidade.",
+      "headline": "Integração de APIs"
+    },
+    "systemMaintenance": {
+      "metaTitle": "Manutenção de Sistemas · RBX Systems",
+      "metaDescription": "Manutenção evolutiva e sustentação de sistemas com correções, upgrades, observabilidade, segurança e redução de risco operacional.",
+      "headline": "Manutenção de Sistemas"
+    },
+    "uxUiDesign": {
+      "metaTitle": "Design UX/UI · RBX Systems",
+      "metaDescription": "UX/UI para produtos e ferramentas operacionais: fluxos claros, protótipos testáveis, acessibilidade e design systems implementáveis.",
+      "headline": "Design UX/UI"
+    },
+    "cloudSolutions": {
+      "metaTitle": "Soluções em Nuvem · RBX Systems",
+      "metaDescription": "Arquitetura, migração e operação em nuvem com infraestrutura como código, segurança, backups, observabilidade e controle de custos.",
+      "headline": "Soluções em Nuvem"
     }
   },
   "common": {
@@ -332,6 +397,31 @@
         "governance": "Assinatura gerida pela RBX Systems. Cancelamento e reembolso:",
         "legal": "Aviso Legal"
       }
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": [
+        {
+          "q": "O que é o Briefing Diário BTC?",
+          "a": "Uma leitura operacional diária do mercado de futuros de BTC (BTC/USDT), produzida pela RBX Systems. Cada edição consolida contexto, cenários e um plano de voo em seis artefatos auditáveis. Não são sinais de compra ou venda e não é recomendação de investimento."
+        },
+        {
+          "q": "Quando e como recebo o briefing?",
+          "a": "Todo dia útil, até as 07h de Brasília. No plano Pro a entrega acontece no seu WhatsApp; no plano Free você lê a edição do dia e os últimos 7 dias na área logada com a sua conta Google."
+        },
+        {
+          "q": "Quanto custa?",
+          "a": "Free: R$ 0, com leitura na área logada. Pro: R$ 39 por mês na cobrança mensal ou R$ 390 por ano na cobrança anual (equivalente a R$ 32,50 por mês), pagos via Pix. O plano Equipe cobra o valor do Pro por assento, de 2 a 50 assentos, em uma única fatura."
+        },
+        {
+          "q": "Como cancelo a assinatura?",
+          "a": "Você pode cancelar quando quiser, sem fidelidade. A assinatura é gerida pela RBX Systems; basta falar com o time pelo formulário de contato ou pelo e-mail indicado no Aviso Legal."
+        },
+        {
+          "q": "Para quem é o Briefing BTC?",
+          "a": "Para quem acompanha o mercado de futuros de BTC e quer uma leitura operacional diária, auditável e sem promessa de retorno. Não é indicado para quem procura sinais de compra e venda ou recomendação de investimento."
+        }
+      ]
     }
   }
 }

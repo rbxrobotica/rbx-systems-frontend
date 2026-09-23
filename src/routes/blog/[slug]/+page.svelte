@@ -2,7 +2,9 @@
   import { formatDate } from '$api/content';
   import Prose from '$components/Prose.svelte';
   import Seo from '$components/Seo.svelte';
-  import { buildGraph, blogPostingSchema } from '$lib/seo/schema';
+  import { authorSlugFor } from '$lib/journal/authors';
+  import { canonicalTag } from '$lib/journal/tags';
+  import { buildGraph, blogPostingSchema, breadcrumbSchema } from '$lib/seo/schema';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
@@ -14,6 +16,7 @@
   );
   const pageTitle = $derived(data.post?.title ?? t(data.locale, 'common.empty'));
   const pageDescription = $derived(data.post?.excerpt ?? '');
+  const authorSlug = $derived(data.post ? authorSlugFor(data.post.author) : null);
 
   const localeBase: Record<string, string> = {
     'pt-BR': 'https://rbx.ia.br',
@@ -44,7 +47,12 @@
               author: data.post.author,
               authorRole: data.post.authorRole,
               cover: data.post.cover
-            })
+            }),
+            breadcrumbSchema(data.locale, pageUrl, [
+              { name: t(data.locale, 'nav.home'), path: '/' },
+              { name: t(data.locale, 'nav.journal'), path: '/journal' },
+              { name: data.post.title, path: `/blog/${data.publicSlug ?? data.post.slug}` }
+            ])
           ],
           `${pageUrl}#article`
         )
@@ -73,8 +81,19 @@
       {/if}
       {#if data.post.author}
         <p class="rbx-caption">
-          {data.post.author}{data.post.authorRole ? ` | ${data.post.authorRole}` : ''}
+          {#if authorSlug}
+            <a href="/journal/autor/{authorSlug}" class="author-link">{data.post.author}</a>
+          {:else}
+            {data.post.author}
+          {/if}{data.post.authorRole ? ` | ${data.post.authorRole}` : ''}
         </p>
+      {/if}
+      {#if data.post.tags.length > 0}
+        <ul class="tag-list">
+          {#each data.post.tags as tag}
+            <li><a href="/journal/tag/{canonicalTag(tag)}">{tag}</a></li>
+          {/each}
+        </ul>
       {/if}
     </header>
 
@@ -96,6 +115,37 @@
   }
   .post-header h1 {
     margin: var(--s-2) 0 var(--s-3);
+  }
+  .author-link {
+    color: inherit;
+  }
+  .author-link:hover {
+    color: var(--cyan-brand);
+  }
+  .tag-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin: var(--s-3) 0 0;
+    padding: 0;
+  }
+  .tag-list a {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--track-label);
+    color: var(--fg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0 var(--s-1);
+    transition:
+      color var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
+  }
+  .tag-list a:hover {
+    color: var(--cyan-brand);
+    border-color: var(--cyan-brand);
   }
   .cover {
     width: 100%;

@@ -12,6 +12,8 @@
     "contact": "Contact",
     "about": "About",
     "team": "Team",
+    "history": "History",
+    "careers": "Careers",
     "leandroDamasio": "Leandro Damasio",
     "caueAlencar": "Cauê Alencar",
     "flaviaRibeiro": "Flavia Ribeiro",
@@ -59,13 +61,27 @@
     "metaTitle": "Cauê Alencar · CFO of RBX Systems",
     "metaDescription": "Cauê Alencar is Chief Financial Officer of RBX Systems. Financial leadership and strategy for high-demand operations.",
     "headline": "Cauê Alencar",
-    "body": "Chief Financial Officer. Financial leadership and strategy for high-demand operations."
+    "body": "Chief Financial Officer. Financial leadership and strategy for high-demand operations.",
+    "jobTitle": "Chief Financial Officer, RBX Systems"
   },
   "flaviaRibeiro": {
     "metaTitle": "Flavia Ribeiro · Founding SDR at RBX Systems",
     "metaDescription": "Flavia Ribeiro is Founding SDR at RBX Systems. Sales development, client support and customer care for high-demand operations.",
     "headline": "Flavia Ribeiro",
-    "body": "Sales Development, Client Support and Customer Care. Founding SDR at RBX Systems."
+    "body": "Sales Development, Client Support and Customer Care. Founding SDR at RBX Systems.",
+    "jobTitle": "Founding SDR, RBX Systems"
+  },
+  "history": {
+    "metaTitle": "RBX Systems History · From automation to a governed AI platform",
+    "metaDescription": "The trajectory of RBX Systems: from automation and robotics consulting to a platform of AI-governed systems for high-demand operations.",
+    "fallbackTitle": "History",
+    "fallbackLead": "RBX Systems began as an automation and robotics consultancy, helping companies remove repetitive processes from their operations. Over time the work evolved into systems engineering and infrastructure, and then into complete operational platforms. Today RBX builds AI-governed systems for high-demand operations, guided by the same principle as always: reliability and control above everything."
+  },
+  "careers": {
+    "metaTitle": "Work at RBX · Careers in Systems Engineering and AI",
+    "metaDescription": "Careers at RBX Systems: systems engineering, applied AI and infrastructure for high-demand operations. Send your resume through our contact page.",
+    "fallbackTitle": "Careers",
+    "fallbackLead": "Work at RBX. We build operational platforms with AI for companies that demand control, and we are looking for people who take engineering seriously. If you want to join this team, send your resume and a short introduction through our contact page."
   },
   "solutions": {
     "metaTitle": "RBX Systems Solutions · AI Engineering, LLMOps, Agents & Cloud",
@@ -85,7 +101,11 @@
     "headline": "RBX Journal",
     "body": "Ideas, engineering and field notes from RBX Systems.",
     "rssCta": "Subscribe free via RSS",
-    "rssNew": "New"
+    "rssNew": "New",
+    "tagTitle": "Tag",
+    "tagMetaDescription": "RBX Journal articles filed under this tag.",
+    "authorTitle": "Author",
+    "authorMetaDescription": "Articles by this author in the RBX Journal."
   },
   "cases": {
     "metaTitle": "RBX Systems Cases · Proof of Work & Production Systems",
@@ -156,6 +176,51 @@
       "metaTitle": "Observability · RBX Systems",
       "metaDescription": "System and LLM observability: traces, metrics, logs and alerts with PII redaction for regulated operations.",
       "headline": "Observability"
+    },
+    "webDevelopment": {
+      "metaTitle": "Web Development · RBX Systems",
+      "metaDescription": "Fast, accessible websites, portals and web applications integrated with the systems that run your operation.",
+      "headline": "Web Development"
+    },
+    "mobileApps": {
+      "metaTitle": "Mobile App Development · RBX Systems",
+      "metaDescription": "Android and iOS applications connected to your backend, with offline operation, telemetry, security and release support.",
+      "headline": "Mobile Apps"
+    },
+    "customSystems": {
+      "metaTitle": "Custom Systems · RBX Systems",
+      "metaDescription": "Purpose-built systems for specific workflows, with integrations, access control, auditability and long-term operation.",
+      "headline": "Custom Systems"
+    },
+    "technicalConsulting": {
+      "metaTitle": "Technical Consulting · RBX Systems",
+      "metaDescription": "Architecture, reliability, security and product diagnostics that turn technical evidence into clear priorities and decisions.",
+      "headline": "Technical Consulting"
+    },
+    "processAutomation": {
+      "metaTitle": "Process Automation · RBX Systems",
+      "metaDescription": "Business process automation with auditable workflows, integrations, human approval gates and safe exception handling.",
+      "headline": "Process Automation"
+    },
+    "apiIntegration": {
+      "metaTitle": "API Integration · RBX Systems",
+      "metaDescription": "Secure integration across APIs, legacy systems and SaaS platforms, with contracts, retries, idempotency and observability.",
+      "headline": "API Integration"
+    },
+    "systemMaintenance": {
+      "metaTitle": "System Maintenance · RBX Systems",
+      "metaDescription": "Software maintenance and evolution through fixes, upgrades, observability, security work and operational risk reduction.",
+      "headline": "System Maintenance"
+    },
+    "uxUiDesign": {
+      "metaTitle": "UX/UI Design · RBX Systems",
+      "metaDescription": "UX/UI for products and operational tools: clear flows, testable prototypes, accessibility and implementable design systems.",
+      "headline": "UX/UI Design"
+    },
+    "cloudSolutions": {
+      "metaTitle": "Cloud Solutions · RBX Systems",
+      "metaDescription": "Cloud architecture, migration and operations with infrastructure as code, security, backups, observability and cost control.",
+      "headline": "Cloud Solutions"
     }
   },
   "common": {
@@ -332,6 +397,31 @@
         "governance": "Subscription managed by RBX Systems. Cancellation and refunds:",
         "legal": "Legal Notice"
       }
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "q": "What is the Daily BTC Briefing?",
+          "a": "A daily operational read of the BTC futures market (BTC/USDT), produced by RBX Systems. Each edition consolidates context, scenarios and a flight plan into six auditable artifacts. It is not buy or sell signals and it is not investment advice."
+        },
+        {
+          "q": "When and how do I receive the briefing?",
+          "a": "Every business day, by 07h00 Brasília time. On the Pro plan it is delivered to your WhatsApp; on the Free plan you read the day's edition and the last 7 days in the logged-in area with your Google account."
+        },
+        {
+          "q": "How much does it cost?",
+          "a": "Free: $0, with reading in the logged-in area. Pro: $12 per month billed monthly or $120 per year billed annually, paid in USDT through the RBX BTCPay Server or by card. The Team plan charges the Pro per-seat price for 2 to 50 seats on a single invoice."
+        },
+        {
+          "q": "How do I cancel my subscription?",
+          "a": "You can cancel any time, with no lock-in. The subscription is managed by RBX Systems; talk to the team through the contact form or the email listed in the Legal Notice."
+        },
+        {
+          "q": "Who is the BTC Briefing for?",
+          "a": "For people who follow the BTC futures market and want a daily, auditable operational read with no promise of returns. It is not for anyone looking for buy and sell signals or investment recommendations."
+        }
+      ]
     }
   }
 }

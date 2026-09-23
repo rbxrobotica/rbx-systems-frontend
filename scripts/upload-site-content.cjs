@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const { load: parseYaml } = require('js-yaml');
 
 const s3 = new S3Client({
   endpoint: process.env.CONTABO_S3_ENDPOINT,
@@ -24,6 +25,18 @@ const pages = [];
 function addPage(path, pt, en) {
   pages.push({ key: `site/pt-BR/${path}/index.md`, body: pt });
   pages.push({ key: `site/en/${path}/index.md`, body: en });
+}
+
+function validatePage({ key, body }) {
+  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n/.exec(body);
+  if (!match) throw new Error(`${key}: missing YAML frontmatter`);
+  const data = parseYaml(match[1]);
+  if (!data || typeof data !== 'object') throw new Error(`${key}: invalid YAML frontmatter`);
+  for (const field of ['title', 'description', 'lead']) {
+    if (typeof data[field] !== 'string' || !data[field].trim()) {
+      throw new Error(`${key}: missing ${field}`);
+    }
+  }
 }
 
 // Home
@@ -110,6 +123,18 @@ Software that lasts beyond the first deploy.
 - Regression control and change management
 - Technical debt triage and modernization
 - Runbooks and operational documentation
+
+## Serviços especializados
+
+- [Desenvolvimento web](/servicos/desenvolvimento-web)
+- [Aplicativos mobile](/servicos/aplicativos-mobile)
+- [Sistemas personalizados](/servicos/sistemas-personalizados)
+- [Consultoria técnica](/servicos/consultoria-tecnica)
+- [Automação de processos](/servicos/automacao-de-processos)
+- [Integração de APIs](/servicos/integracao-de-apis)
+- [Manutenção de sistemas](/servicos/manutencao-de-sistemas)
+- [Design UX/UI](/servicos/design-ux-ui)
+- [Soluções em nuvem](/servicos/solucoes-em-nuvem)
 `,
   `---
 title: Solutions
@@ -173,6 +198,18 @@ Software that lasts beyond the first deploy.
 - Regression control and change management
 - Technical debt triage and modernization
 - Runbooks and operational documentation
+
+## Specialized services
+
+- [Web development](/services/web-development)
+- [Mobile apps](/services/mobile-apps)
+- [Custom systems](/services/custom-systems)
+- [Technical consulting](/services/technical-consulting)
+- [Process automation](/services/process-automation)
+- [API integration](/services/api-integration)
+- [System maintenance](/services/system-maintenance)
+- [UX/UI design](/services/ux-ui-design)
+- [Cloud solutions](/services/cloud-solutions)
 `
 );
 
@@ -886,6 +923,759 @@ Organizations building AI products discover that ungoverned agent systems do not
 The canonical version of this manifesto is versioned in our governance repository, with change control by recorded decision. Nothing here changes silently.
 `
 );
+
+// History
+addPage(
+  'history',
+  `---
+title: História da RBX Systems
+description: Da automação e robótica à engenharia de sistemas e IA governada. Conheça a trajetória, os princípios e o trabalho atual da RBX Systems.
+eyebrow: Empresa
+lead: "A RBX evoluiu da automação de processos para a construção e operação de sistemas de alta exigência. O princípio permaneceu o mesmo: tecnologia precisa funcionar no mundo real."
+---
+
+## Da RBX Robótica à engenharia de sistemas
+
+A empresa nasceu como RBX Robótica, uma consultoria voltada a automação, robótica e software personalizado. Os primeiros projetos tinham um objetivo direto: retirar trabalho repetitivo do caminho e conectar tecnologia a problemas operacionais concretos.
+
+O escopo cresceu com os problemas. Automatizar uma tarefa isolada raramente basta quando dados, pessoas, integrações e decisões precisam continuar funcionando juntos. A RBX passou a trabalhar com backend, infraestrutura em nuvem, integrações e plataformas completas.
+
+## A evolução para sistemas governados
+
+Com a adoção de modelos de linguagem e agentes de IA, a exigência ficou maior. Não bastava gerar uma resposta plausível. Era necessário medir qualidade, controlar custos, registrar decisões, limitar ações e manter pessoas responsáveis pelo resultado.
+
+Essa necessidade deu forma ao trabalho atual da RBX Systems: engenharia de IA, LLMOps, automação operacional, observabilidade, infraestrutura soberana e produtos open source para operações que exigem controle.
+
+## O que construímos hoje
+
+A RBX projeta e opera sistemas próprios e para clientes. Entre eles estão plataformas de decisão, motores de execução e risco, gateways de IA, camadas de avaliação, sistemas de memória e infraestrutura compartilhada.
+
+O portfólio funciona como prova de trabalho. Cada produto nasce de um problema operacional real e precisa ser observável, auditável e recuperável antes de ser tratado como concluído.
+
+## O que não mudou
+
+- Resolver problemas reais antes de perseguir tendências.
+- Projetar para operação, manutenção e falha, não apenas para a primeira entrega.
+- Manter evidência e responsabilidade humana em decisões consequentes.
+- Preferir sistemas compreensíveis a caixas-pretas difíceis de governar.
+- Registrar o que foi decidido, por que mudou e como recuperar.
+
+Conheça [a equipe](/equipe), veja [nossos cases](/cases) ou explore [as soluções da RBX](/solucoes). Para discutir um projeto, [entre em contato](/contato).
+`,
+  `---
+title: RBX Systems History
+description: From automation and robotics to systems engineering and governed AI. Explore the trajectory, principles and current work of RBX Systems.
+eyebrow: Company
+lead: "RBX evolved from process automation into building and operating high-demand systems. The principle stayed the same: technology must work in the real world."
+---
+
+## From RBX Robótica to systems engineering
+
+The company began as RBX Robótica, a consultancy focused on automation, robotics and custom software. Its early projects had a direct objective: remove repetitive work and connect technology to concrete operational problems.
+
+The scope grew with the problems. Automating one isolated task is rarely enough when data, people, integrations and decisions must keep working together. RBX expanded into backend engineering, cloud infrastructure, integrations and complete operational platforms.
+
+## The move to governed systems
+
+The adoption of language models and AI agents raised the standard. Producing a plausible answer was not enough. Quality had to be measured, costs controlled, decisions recorded, actions bounded and people kept accountable for outcomes.
+
+That need shaped the work RBX Systems does today: AI engineering, LLMOps, operational automation, observability, sovereign infrastructure and open-source products for operations that demand control.
+
+## What we build today
+
+RBX designs and operates systems for itself and for clients. These include decision platforms, execution and risk engines, AI gateways, evaluation layers, memory systems and shared infrastructure.
+
+The portfolio is proof of work. Each product starts with a real operational problem and must become observable, auditable and recoverable before we consider it complete.
+
+## What has not changed
+
+- Solve real problems before following trends.
+- Design for operation, maintenance and failure, not only the first release.
+- Keep evidence and human accountability around consequential decisions.
+- Prefer understandable systems over black boxes that are hard to govern.
+- Record what was decided, why it changed and how to recover.
+
+Meet [the team](/team), review [our cases](/cases) or explore [RBX solutions](/solutions). To discuss a project, [get in touch](/contact).
+`
+);
+
+// Careers
+addPage(
+  'careers',
+  `---
+title: Carreiras na RBX Systems
+description: Trabalhe com engenharia de sistemas, IA aplicada, cloud e produtos open source em uma equipe remota, técnica e orientada a evidências.
+eyebrow: Pessoas
+lead: Construímos sistemas que precisam funcionar em produção. Procuramos pessoas curiosas, responsáveis e confortáveis com problemas difíceis.
+---
+
+## Como é trabalhar na RBX
+
+A RBX é uma empresa remote-first, pequena e técnica. O trabalho combina engenharia de produto, infraestrutura, pesquisa aplicada e operação. Quem projeta uma solução também participa da validação, da documentação e do aprendizado depois que ela entra em produção.
+
+Autonomia aqui significa responsabilidade clara. Esperamos que decisões importantes tenham evidência, trade-offs explícitos e um caminho de recuperação. Não confundimos velocidade com pressa nem complexidade com qualidade.
+
+## Perfis que combinam com a equipe
+
+Temos interesse em pessoas que trabalham bem em uma ou mais destas áreas:
+
+- Engenharia de software, backend e sistemas distribuídos.
+- IA aplicada, avaliação de modelos, RAG, agentes e LLMOps.
+- DevOps, platform engineering, Kubernetes e observabilidade.
+- Produto, UX/UI e pesquisa para ferramentas operacionais complexas.
+- Operações, relacionamento com clientes e desenvolvimento de negócios técnicos.
+
+Experiência ajuda, mas capacidade de aprender, escrever com clareza e assumir responsabilidade importa tanto quanto uma lista de tecnologias.
+
+## Como avaliamos
+
+O processo depende da função, mas busca responder perguntas simples: você entende o problema, consegue tornar suas decisões legíveis e entrega algo que outra pessoa consegue operar? Preferimos conversas objetivas e amostras de trabalho a etapas artificiais.
+
+## Candidatura espontânea
+
+Nem sempre mantemos vagas abertas publicamente. Ainda assim, recebemos apresentações de pessoas que se identificam com o trabalho da RBX. Envie uma breve mensagem com a área de interesse, links relevantes e currículo pela [página de contato](/contato).
+
+Antes de escrever, conheça [nossa história](/historia), [a equipe](/equipe), [os produtos](/produtos) e o [Journal](/journal).
+`,
+  `---
+title: Careers at RBX Systems
+description: Work on systems engineering, applied AI, cloud and open-source products in a remote, technical and evidence-driven team.
+eyebrow: People
+lead: We build systems that must work in production. We look for curious, accountable people who are comfortable with difficult problems.
+---
+
+## Working at RBX
+
+RBX is a small, technical and remote-first company. The work combines product engineering, infrastructure, applied research and operations. People who design a solution also take part in validation, documentation and the learning that follows a production release.
+
+Autonomy here means clear accountability. Important decisions need evidence, explicit trade-offs and a recovery path. We do not confuse speed with haste or complexity with quality.
+
+## Profiles that fit the team
+
+We are interested in people who work well in one or more of these areas:
+
+- Software engineering, backend and distributed systems.
+- Applied AI, model evaluation, RAG, agents and LLMOps.
+- DevOps, platform engineering, Kubernetes and observability.
+- Product, UX/UI and research for complex operational tools.
+- Operations, client relationships and technical business development.
+
+Experience helps, but the ability to learn, write clearly and take responsibility matters as much as a list of technologies.
+
+## How we evaluate
+
+The process depends on the role, but it seeks to answer simple questions: do you understand the problem, can you make your decisions legible, and can you deliver something another person can operate? We prefer focused conversations and work samples over artificial stages.
+
+## Open applications
+
+We do not always maintain a public list of open positions. We still welcome introductions from people who identify with RBX's work. Send a short note with your area of interest, relevant links and resume through the [contact page](/contact).
+
+Before writing, explore [our history](/history), [the team](/team), [our products](/products) and the [Journal](/journal).
+`
+);
+
+// Web development
+addPage(
+  'services/web-development',
+  `---
+title: Desenvolvimento Web · RBX Systems
+description: Sites, portais e aplicações web rápidas, acessíveis e integradas ao seu negócio, com SEO técnico, observabilidade e operação confiável.
+eyebrow: Serviço
+lead: Desenvolvimento web para produtos e operações que precisam de desempenho, clareza e manutenção de longo prazo.
+---
+
+## O que entregamos
+
+A RBX projeta e desenvolve sites institucionais, portais, dashboards e aplicações web completas. O trabalho cobre a interface, o backend necessário, integrações, publicação e instrumentação em produção.
+
+- Arquitetura SSR, SSG ou SPA escolhida conforme conteúdo e operação.
+- Interfaces responsivas, acessíveis e eficientes em conexões reais.
+- SEO técnico, metadados, dados estruturados, sitemap e performance.
+- Integração com CMS, APIs, identidade, pagamentos e sistemas internos.
+- CI/CD, observabilidade, segurança e documentação de operação.
+
+## Quando contratar
+
+Este serviço faz sentido quando o site deixou de ser apenas uma apresentação e passou a participar da operação. Também atende equipes que precisam substituir uma base difícil de manter, melhorar Core Web Vitals, lançar um portal para clientes ou transformar um protótipo em produto confiável.
+
+## Como trabalhamos
+
+Começamos pelos objetivos, públicos e fluxos críticos. Definimos arquitetura, métricas e limites antes de escolher componentes. A entrega é incremental, com validação de conteúdo, acessibilidade, desempenho e comportamento em falhas.
+
+O resultado inclui código versionado, pipeline de publicação, ambientes reproduzíveis e instruções para manutenção. Quando o projeto exige backend ou integrações complexas, conectamos o trabalho a [sistemas personalizados](/servicos/sistemas-personalizados) e [integração de APIs](/servicos/integracao-de-apis).
+
+## Próximo passo
+
+Veja [nossos cases](/cases) ou [fale com a RBX](/contato) para avaliar escopo, riscos e uma primeira entrega útil.
+`,
+  `---
+title: Web Development · RBX Systems
+description: Fast, accessible websites, portals and web applications integrated with your business, with technical SEO, observability and reliable operations.
+eyebrow: Service
+lead: Web development for products and operations that need performance, clarity and long-term maintainability.
+---
+
+## What we deliver
+
+RBX designs and develops institutional websites, portals, dashboards and complete web applications. The work covers the interface, required backend, integrations, deployment and production instrumentation.
+
+- SSR, SSG or SPA architecture selected for the content and operating model.
+- Responsive, accessible interfaces that perform on real connections.
+- Technical SEO, metadata, structured data, sitemaps and performance work.
+- Integration with CMS platforms, APIs, identity, payments and internal systems.
+- CI/CD, observability, security and operations documentation.
+
+## When to hire us
+
+This service fits when a website has become part of the operation, not only a presentation layer. It also helps teams replace a hard-to-maintain codebase, improve Core Web Vitals, launch a customer portal or turn a prototype into a reliable product.
+
+## How we work
+
+We start with objectives, audiences and critical flows. Architecture, metrics and constraints come before component choices. Delivery is incremental, with validation of content, accessibility, performance and failure behavior.
+
+The result includes versioned code, a deployment pipeline, reproducible environments and maintenance instructions. When the project needs a substantial backend or complex integrations, we connect the work to [custom systems](/services/custom-systems) and [API integration](/services/api-integration).
+
+## Next step
+
+Review [our cases](/cases) or [talk to RBX](/contact) to evaluate scope, risks and the first useful release.
+`
+);
+
+// Mobile applications
+addPage(
+  'services/mobile-apps',
+  `---
+title: Aplicativos Mobile · RBX Systems
+description: Aplicativos Android e iOS integrados ao seu backend, com arquitetura segura, operação offline, telemetria e publicação assistida.
+eyebrow: Serviço
+lead: Aplicativos móveis projetados como parte do sistema, não como uma interface isolada.
+---
+
+## O que entregamos
+
+A RBX desenvolve aplicativos para Android e iOS conectados a APIs, identidade, pagamentos, notificações e dados operacionais. Escolhemos abordagem nativa ou multiplataforma conforme requisitos de desempenho, acesso ao dispositivo e manutenção.
+
+- Descoberta de produto e protótipos para validar os fluxos críticos.
+- Aplicação, backend e contratos de API tratados como um único sistema.
+- Autenticação, armazenamento seguro e proteção de dados sensíveis.
+- Sincronização, cache e modo offline quando a operação exige continuidade.
+- Métricas, logs, crash reporting e acompanhamento de releases.
+
+## Quando contratar
+
+O serviço é indicado para produtos digitais com uso recorrente, equipes de campo, atendimento, logística, coleta de dados ou experiências que precisam de recursos do dispositivo. Também assumimos modernização de aplicativos instáveis ou difíceis de publicar.
+
+## Como trabalhamos
+
+Mapeamos jornadas, condições de rede, permissões e riscos de sincronização antes da implementação. Cada mutação importante tem estado visível, proteção contra envio duplicado e tratamento de falha. Releases passam por testes, revisão das permissões e um plano de rollback compatível com as lojas.
+
+Quando o aplicativo depende de integrações ou dados específicos, combinamos o projeto com [integração de APIs](/servicos/integracao-de-apis), [sistemas personalizados](/servicos/sistemas-personalizados) e [soluções em nuvem](/servicos/solucoes-em-nuvem).
+
+## Próximo passo
+
+[Fale com a RBX](/contato) sobre o público, as plataformas e o fluxo que precisa funcionar primeiro.
+`,
+  `---
+title: Mobile App Development · RBX Systems
+description: Android and iOS applications integrated with your backend, with secure architecture, offline operation, telemetry and release support.
+eyebrow: Service
+lead: Mobile applications designed as part of the system, not as an isolated interface.
+---
+
+## What we deliver
+
+RBX develops Android and iOS applications connected to APIs, identity, payments, notifications and operational data. We choose a native or cross-platform approach based on performance, device access and maintenance requirements.
+
+- Product discovery and prototypes that validate critical flows.
+- Application, backend and API contracts treated as one system.
+- Authentication, secure storage and sensitive-data protection.
+- Synchronization, caching and offline operation when continuity matters.
+- Metrics, logs, crash reporting and release monitoring.
+
+## When to hire us
+
+The service fits digital products with recurring use, field teams, customer support, logistics, data collection or experiences that need device capabilities. We also modernize unstable applications or codebases that are difficult to release.
+
+## How we work
+
+We map journeys, network conditions, permissions and synchronization risks before implementation. Every important mutation gets visible state, duplicate-submit protection and failure handling. Releases go through tests, permission review and a rollback plan compatible with app stores.
+
+When the application depends on specialized integrations or data, we combine the project with [API integration](/services/api-integration), [custom systems](/services/custom-systems) and [cloud solutions](/services/cloud-solutions).
+
+## Next step
+
+[Talk to RBX](/contact) about the audience, target platforms and the first flow that must work.
+`
+);
+
+// Custom systems
+addPage(
+  'services/custom-systems',
+  `---
+title: Sistemas Personalizados · RBX Systems
+description: Software sob medida para processos específicos, com integrações, controle de acesso, trilha de auditoria e manutenção de longo prazo.
+eyebrow: Serviço
+lead: Sistemas construídos em torno da sua operação, dos dados existentes e das decisões que precisam permanecer sob controle.
+---
+
+## O que entregamos
+
+A RBX constrói software para operações que não cabem bem em ferramentas genéricas. Transformamos planilhas, tarefas manuais e sistemas desconectados em uma plataforma com regras explícitas, dados consistentes e responsabilidades claras.
+
+- Modelagem de domínio e dos fluxos reais da operação.
+- Backend, interfaces, APIs e automações no mesmo desenho arquitetural.
+- Perfis de acesso, aprovação humana e trilhas de auditoria.
+- Migração de dados e integração gradual com sistemas existentes.
+- Testes, telemetria, runbooks e plano de evolução.
+
+## Quando contratar
+
+Um sistema personalizado faz sentido quando processos críticos dependem de planilhas frágeis, retrabalho entre equipes ou adaptações caras em um produto de prateleira. Também é adequado quando segurança, rastreabilidade ou regras próprias são diferenciais do negócio.
+
+## Como trabalhamos
+
+Começamos pelo menor recorte que produz valor e reduz risco. Identificamos entidades, invariantes, integrações e modos de falha. A arquitetura mantém limites claros para que novos módulos possam ser adicionados sem reescrever o núcleo.
+
+Não desaparecemos depois do deploy. Documentamos operação, recuperação, ownership e mudanças de schema. Se necessário, o projeto continua com [manutenção de sistemas](/servicos/manutencao-de-sistemas), [automação de processos](/servicos/automacao-de-processos) ou [observabilidade](/servicos/observabilidade).
+
+## Próximo passo
+
+[Fale com a RBX](/contato) para transformar o processo atual em um escopo verificável.
+`,
+  `---
+title: Custom Systems · RBX Systems
+description: Purpose-built software for specific workflows, with integrations, access control, audit trails and long-term maintenance.
+eyebrow: Service
+lead: Systems built around your operation, existing data and the decisions that must remain under control.
+---
+
+## What we deliver
+
+RBX builds software for operations that do not fit generic tools. We turn spreadsheets, manual tasks and disconnected systems into a platform with explicit rules, consistent data and clear responsibilities.
+
+- Domain modeling based on the real operational flow.
+- Backend, interfaces, APIs and automation in one architectural design.
+- Access roles, human approvals and audit trails.
+- Data migration and gradual integration with existing systems.
+- Tests, telemetry, runbooks and an evolution plan.
+
+## When to hire us
+
+A custom system makes sense when critical processes depend on fragile spreadsheets, handoffs between teams or expensive workarounds in off-the-shelf software. It also fits operations where security, traceability or proprietary rules are business differentiators.
+
+## How we work
+
+We start with the smallest scope that creates value and reduces risk. We identify entities, invariants, integrations and failure modes. The architecture keeps boundaries clear so new modules can be added without rewriting the core.
+
+We do not disappear after deployment. We document operations, recovery, ownership and schema changes. When needed, the project continues through [system maintenance](/services/system-maintenance), [process automation](/services/process-automation) or [observability](/services/observability).
+
+## Next step
+
+[Talk to RBX](/contact) to turn the current process into a verifiable scope.
+`
+);
+
+// Technical consulting
+addPage(
+  'services/technical-consulting',
+  `---
+title: Consultoria Técnica · RBX Systems
+description: Diagnóstico independente de arquitetura, confiabilidade, segurança e produto para transformar evidências técnicas em decisões e prioridades claras.
+eyebrow: Serviço
+lead: Uma leitura técnica independente para decisões que não devem depender de opinião, urgência ou preferência de ferramenta.
+---
+
+## O que entregamos
+
+A consultoria técnica da RBX ajuda founders, lideranças e equipes de engenharia a entender o estado real de um produto. O trabalho pode ser um diagnóstico pontual, uma revisão de arquitetura ou o acompanhamento de uma decisão complexa.
+
+- Mapa da arquitetura, dependências e fluxos críticos.
+- Avaliação de confiabilidade, segurança, desempenho e manutenibilidade.
+- Identificação de riscos, gargalos e dívida técnica com evidências.
+- Opções de solução, trade-offs e ordem recomendada de execução.
+- Relatório executivo, backlog priorizado e sessão de transferência.
+
+## Quando contratar
+
+Este serviço é útil antes de uma modernização, aquisição, mudança de fornecedor, aumento de escala ou investimento relevante. Também funciona quando incidentes se repetem, entregas ficam imprevisíveis ou a equipe precisa de uma segunda opinião independente.
+
+## Como trabalhamos
+
+O diagnóstico começa read-only. Analisamos código, arquitetura, pipelines, métricas e documentação sem interferir na operação. Entrevistas curtas ajudam a comparar o desenho formal com o sistema que realmente existe.
+
+As recomendações distinguem correções urgentes, melhorias estruturais e escolhas que podem esperar. Cada proposta registra benefício, custo, risco e o que fica de fora. A implementação pode permanecer com sua equipe ou continuar com a RBX em [sistemas personalizados](/servicos/sistemas-personalizados), [DevOps e cloud](/servicos/devops-cloud) ou [manutenção](/servicos/manutencao-de-sistemas).
+
+## Próximo passo
+
+Veja também o [Technical Product Review](/diagnostico) ou [fale com a RBX](/contato) para definir a pergunta que a revisão precisa responder.
+`,
+  `---
+title: Technical Consulting · RBX Systems
+description: Independent architecture, reliability, security and product diagnostics that turn technical evidence into clear decisions and priorities.
+eyebrow: Service
+lead: An independent technical view for decisions that should not depend on opinion, urgency or tool preference.
+---
+
+## What we deliver
+
+RBX technical consulting helps founders, leaders and engineering teams understand the real state of a product. The engagement can be a focused diagnostic, an architecture review or support for a complex decision.
+
+- A map of architecture, dependencies and critical flows.
+- Reliability, security, performance and maintainability assessment.
+- Evidence-backed identification of risks, bottlenecks and technical debt.
+- Solution options, trade-offs and a recommended order of execution.
+- Executive report, prioritized backlog and handover session.
+
+## When to hire us
+
+This service is useful before modernization, acquisition, vendor changes, significant scaling or a major investment. It also helps when incidents repeat, delivery becomes unpredictable or the team needs an independent second opinion.
+
+## How we work
+
+The diagnostic starts read-only. We analyze code, architecture, pipelines, metrics and documentation without interfering with operations. Short interviews help compare the formal design with the system that actually exists.
+
+Recommendations distinguish urgent fixes, structural improvements and choices that can wait. Each proposal records benefit, cost, risk and what it leaves out. Implementation can remain with your team or continue with RBX through [custom systems](/services/custom-systems), [DevOps and cloud](/services/devops-cloud) or [maintenance](/services/system-maintenance).
+
+## Next step
+
+See the [Technical Product Review](/diagnostic) or [talk to RBX](/contact) to define the question the review must answer.
+`
+);
+
+// Process automation
+addPage(
+  'services/process-automation',
+  `---
+title: Automação de Processos · RBX Systems
+description: Workflows auditáveis para reduzir trabalho manual, integrar sistemas e manter pessoas no controle das exceções e decisões importantes.
+eyebrow: Serviço
+lead: Automação que reduz trabalho repetitivo sem esconder o estado da operação nem remover os controles necessários.
+---
+
+## O que entregamos
+
+A RBX transforma processos manuais em workflows explícitos, mensuráveis e recuperáveis. A automação pode coordenar APIs, documentos, filas, aprovações humanas e sistemas legados sem depender de uma sequência frágil de scripts.
+
+- Mapeamento do processo atual, tempos de espera e pontos de erro.
+- Máquina de estados com regras, ownership e critérios de conclusão.
+- Integrações com ERP, CRM, atendimento, pagamentos e ferramentas internas.
+- Gates humanos para ações financeiras, contratuais ou irreversíveis.
+- Alertas, auditoria e painéis para exceções e desempenho.
+
+## Quando contratar
+
+O serviço atende operações que repetem tarefas entre sistemas, copiam dados manualmente, perdem solicitações em caixas de entrada ou dependem de uma pessoa para saber o estado de cada caso. Também é útil quando uma automação existente falha em silêncio.
+
+## Como trabalhamos
+
+Primeiro medimos o processo e removemos ambiguidades. Depois automatizamos um fluxo limitado, com idempotência, retries controlados e reconciliação para resultados indeterminados. Nenhuma falha importante deve desaparecer em logs; ela precisa gerar um estado visível e uma ação de recuperação.
+
+Integrações ficam atrás de contratos claros e podem evoluir sem acoplar todo o workflow a um fornecedor. Veja também [integração de APIs](/servicos/integracao-de-apis), [sistemas personalizados](/servicos/sistemas-personalizados) e [agentes de IA](/servicos/agentes-de-ia).
+
+## Próximo passo
+
+[Fale com a RBX](/contato) com um exemplo do processo, o volume atual e as exceções que mais consomem tempo.
+`,
+  `---
+title: Process Automation · RBX Systems
+description: Auditable workflows that reduce manual work, integrate systems and keep people in control of exceptions and important decisions.
+eyebrow: Service
+lead: Automation that removes repetitive work without hiding operational state or removing necessary controls.
+---
+
+## What we deliver
+
+RBX turns manual processes into explicit, measurable and recoverable workflows. Automation can coordinate APIs, documents, queues, human approvals and legacy systems without relying on a fragile sequence of scripts.
+
+- Mapping of the current process, wait times and error points.
+- State machine with rules, ownership and completion criteria.
+- Integration with ERP, CRM, support, payments and internal tools.
+- Human gates for financial, contractual or irreversible actions.
+- Alerts, audit records and dashboards for exceptions and performance.
+
+## When to hire us
+
+The service fits operations that repeat tasks across systems, copy data manually, lose requests in inboxes or depend on one person to know the state of each case. It is also useful when an existing automation can fail silently.
+
+## How we work
+
+We first measure the process and remove ambiguity. Then we automate a bounded flow with idempotency, controlled retries and reconciliation for indeterminate outcomes. Important failures cannot disappear into logs; they must produce visible state and a recovery action.
+
+Integrations sit behind clear contracts and can evolve without coupling the whole workflow to one vendor. See also [API integration](/services/api-integration), [custom systems](/services/custom-systems) and [AI agents](/services/ai-agents).
+
+## Next step
+
+[Talk to RBX](/contact) with an example of the process, current volume and the exceptions that consume the most time.
+`
+);
+
+// API integration
+addPage(
+  'services/api-integration',
+  `---
+title: Integração de APIs · RBX Systems
+description: Integração segura entre APIs, SaaS e sistemas legados, com contratos versionados, idempotência, observabilidade e recuperação de falhas.
+eyebrow: Serviço
+lead: Integrações projetadas para continuar corretas quando fornecedores, redes e dados não se comportam como o cenário ideal.
+---
+
+## O que entregamos
+
+A RBX conecta sistemas internos, plataformas SaaS, parceiros e serviços de nuvem por APIs síncronas, eventos ou processamento em lote. O objetivo não é apenas mover dados, mas preservar significado, segurança e rastreabilidade entre as pontas.
+
+- Contratos de API, schemas e estratégia de versionamento.
+- Adaptadores para REST, GraphQL, webhooks, filas e sistemas legados.
+- Autenticação, autorização, gestão de secrets e limites de acesso.
+- Idempotência, deduplicação, retries e reconciliação.
+- Métricas de latência, erro, volume e idade dos dados.
+
+## Quando contratar
+
+O serviço ajuda quando equipes copiam informações entre ferramentas, webhooks se perdem, integrações quebram a cada mudança de fornecedor ou um fluxo crítico não tem owner. Também atende projetos que precisam expor uma API estável sobre um sistema existente.
+
+## Como trabalhamos
+
+Documentamos a fonte de verdade, o contrato e o comportamento esperado em falhas antes de implementar. Cada dependência externa recebe timeout, orçamento de retry, modo degradado e sinal visível de indisponibilidade. Quando os dois lados podem atualizar o mesmo dado, definimos ownership e regras de conflito.
+
+Testes de contrato e ambientes de homologação reduzem surpresas. A operação recebe runbooks e dashboards para distinguir problema local, dado inválido e falha do fornecedor. Para fluxos completos, combinamos com [automação de processos](/servicos/automacao-de-processos) e [observabilidade](/servicos/observabilidade).
+
+## Próximo passo
+
+[Fale com a RBX](/contato) informando os sistemas envolvidos, o volume e o que acontece hoje quando a integração falha.
+`,
+  `---
+title: API Integration · RBX Systems
+description: Secure integration across APIs, SaaS and legacy systems, with versioned contracts, idempotency, observability and failure recovery.
+eyebrow: Service
+lead: Integrations designed to remain correct when vendors, networks and data do not follow the ideal scenario.
+---
+
+## What we deliver
+
+RBX connects internal systems, SaaS platforms, partners and cloud services through synchronous APIs, events or batch processing. The goal is not only to move data, but to preserve meaning, security and traceability across endpoints.
+
+- API contracts, schemas and a versioning strategy.
+- Adapters for REST, GraphQL, webhooks, queues and legacy systems.
+- Authentication, authorization, secret management and access limits.
+- Idempotency, deduplication, retries and reconciliation.
+- Metrics for latency, errors, volume and data age.
+
+## When to hire us
+
+The service helps when teams copy information between tools, webhooks disappear, integrations break on every vendor change or a critical flow has no owner. It also supports projects that need a stable API over an existing system.
+
+## How we work
+
+We document the source of truth, contract and expected failure behavior before implementation. Every external dependency gets a timeout, retry budget, degraded mode and visible unavailability signal. When both sides can update the same data, we define ownership and conflict rules.
+
+Contract tests and staging environments reduce surprises. Operations receive runbooks and dashboards that distinguish a local problem, invalid data and a vendor failure. For complete flows, we combine this service with [process automation](/services/process-automation) and [observability](/services/observability).
+
+## Next step
+
+[Talk to RBX](/contact) with the systems involved, expected volume and what currently happens when the integration fails.
+`
+);
+
+// System maintenance
+addPage(
+  'services/system-maintenance',
+  `---
+title: Manutenção de Sistemas · RBX Systems
+description: Sustentação e evolução de software com correções, upgrades, segurança, observabilidade e redução contínua do risco operacional.
+eyebrow: Serviço
+lead: Manutenção orientada por risco para sistemas que precisam continuar úteis, seguros e compreensíveis depois da primeira entrega.
+---
+
+## O que entregamos
+
+A RBX assume a sustentação de sistemas existentes ou continua operando o que construiu. O serviço combina resposta a incidentes, manutenção preventiva e evolução planejada, com prioridades definidas pelo impacto na operação.
+
+- Diagnóstico inicial de código, infraestrutura, dependências e riscos.
+- Correção de defeitos e investigação de causa raiz.
+- Atualizações de runtime, bibliotecas, banco de dados e pipelines.
+- Observabilidade, alertas, backups e testes de recuperação.
+- Backlog técnico priorizado e documentação atualizada.
+
+## Quando contratar
+
+Este serviço é indicado quando o sistema depende de poucas pessoas, acumula versões vulneráveis, apresenta incidentes repetidos ou não tem uma rotina segura de deploy. Também ajuda equipes que precisam recuperar previsibilidade antes de adicionar funcionalidades.
+
+## Como trabalhamos
+
+A transição começa com acesso read-only, inventário e critérios de severidade. Mudanças entram por versionamento, revisão e pipeline reproduzível. Incidentes geram evidência, correção e ação preventiva, não apenas um ajuste emergencial.
+
+Definimos escopo e nível de atendimento de forma explícita. Manutenção não significa disponibilidade ilimitada nem promessa de ausência de falhas. Significa tornar riscos visíveis, reduzir recorrência e manter um caminho testado de recuperação. Quando a base precisa mudar, conectamos o trabalho a [consultoria técnica](/servicos/consultoria-tecnica) e [soluções em nuvem](/servicos/solucoes-em-nuvem).
+
+## Próximo passo
+
+[Fale com a RBX](/contato) sobre o sistema, a stack, os incidentes recentes e a expectativa de operação.
+`,
+  `---
+title: System Maintenance · RBX Systems
+description: Software support and evolution through fixes, upgrades, security work, observability and continuous operational risk reduction.
+eyebrow: Service
+lead: Risk-driven maintenance for systems that must remain useful, secure and understandable after the first release.
+---
+
+## What we deliver
+
+RBX takes over existing systems or continues operating what it builds. The service combines incident response, preventive maintenance and planned evolution, with priorities driven by operational impact.
+
+- Initial assessment of code, infrastructure, dependencies and risks.
+- Defect correction and root-cause investigation.
+- Runtime, library, database and pipeline upgrades.
+- Observability, alerts, backups and recovery tests.
+- Prioritized technical backlog and updated documentation.
+
+## When to hire us
+
+This service fits systems that depend on a few people, carry vulnerable versions, suffer repeated incidents or lack a safe deployment routine. It also helps teams restore predictability before adding features.
+
+## How we work
+
+The transition starts with read-only access, an inventory and severity criteria. Changes move through version control, review and a reproducible pipeline. Incidents produce evidence, a correction and a preventive action, not only an emergency patch.
+
+We define scope and service level explicitly. Maintenance does not mean unlimited availability or a promise of no failures. It means making risk visible, reducing recurrence and maintaining a tested recovery path. When the foundation needs to change, we connect the work to [technical consulting](/services/technical-consulting) and [cloud solutions](/services/cloud-solutions).
+
+## Next step
+
+[Talk to RBX](/contact) about the system, stack, recent incidents and operating expectations.
+`
+);
+
+// UX/UI design
+addPage(
+  'services/ux-ui-design',
+  `---
+title: Design UX/UI · RBX Systems
+description: UX/UI para produtos e ferramentas operacionais, com pesquisa, fluxos claros, protótipos testáveis, acessibilidade e design systems.
+eyebrow: Serviço
+lead: Interfaces que tornam estado, risco e próxima ação compreensíveis para quem realmente opera o sistema.
+---
+
+## O que entregamos
+
+A RBX projeta experiências para produtos digitais, dashboards e ferramentas internas. Nosso foco está em fluxos complexos, decisões frequentes e interfaces em que clareza operacional importa mais do que decoração.
+
+- Entrevistas, análise de tarefas e mapa da jornada atual.
+- Arquitetura de informação e fluxos de navegação.
+- Wireframes e protótipos para testar hipóteses cedo.
+- Interface responsiva, acessível e consistente.
+- Design system com componentes e estados implementáveis.
+
+## Quando contratar
+
+O serviço faz sentido quando usuários se perdem, tarefas exigem treinamento excessivo, erros de interface afetam a operação ou o produto cresceu sem uma linguagem visual consistente. Também atende novos produtos que precisam validar o fluxo antes de investir na implementação completa.
+
+## Como trabalhamos
+
+Começamos pelas tarefas, contexto e restrições. Estados de loading, vazio, erro, sucesso, permissão e operação degradada fazem parte do desenho desde o início. A interface bloqueia envios duplicados e deixa visível quando uma ação ainda está em andamento.
+
+Protótipos são testados com cenários realistas. O handoff inclui tokens, componentes, regras de comportamento e prioridades, reduzindo a distância entre design e código. Quando desejado, a RBX também implementa a experiência em [desenvolvimento web](/servicos/desenvolvimento-web) ou [aplicativos mobile](/servicos/aplicativos-mobile).
+
+## Próximo passo
+
+[Fale com a RBX](/contato) sobre o produto, os usuários e a tarefa que hoje causa mais atrito.
+`,
+  `---
+title: UX/UI Design · RBX Systems
+description: UX/UI for products and operational tools, with research, clear flows, testable prototypes, accessibility and design systems.
+eyebrow: Service
+lead: Interfaces that make state, risk and the next action understandable to the people who operate the system.
+---
+
+## What we deliver
+
+RBX designs experiences for digital products, dashboards and internal tools. We focus on complex flows, frequent decisions and interfaces where operational clarity matters more than decoration.
+
+- Interviews, task analysis and a map of the current journey.
+- Information architecture and navigation flows.
+- Wireframes and prototypes that test assumptions early.
+- Responsive, accessible and consistent interface design.
+- Design system with implementable components and states.
+
+## When to hire us
+
+The service fits products where users get lost, tasks require excessive training, interface mistakes affect operations or growth has produced an inconsistent visual language. It also supports new products that need to validate the flow before investing in full implementation.
+
+## How we work
+
+We start with tasks, context and constraints. Loading, empty, error, success, permission and degraded-operation states are part of the design from the beginning. The interface prevents duplicate submissions and makes pending actions visible.
+
+Prototypes are tested with realistic scenarios. Handoff includes tokens, components, behavior rules and priorities, reducing the gap between design and code. When useful, RBX also implements the experience through [web development](/services/web-development) or [mobile apps](/services/mobile-apps).
+
+## Next step
+
+[Talk to RBX](/contact) about the product, its users and the task that causes the most friction today.
+`
+);
+
+// Cloud solutions
+addPage(
+  'services/cloud-solutions',
+  `---
+title: Soluções em Nuvem · RBX Systems
+description: Arquitetura, migração e operação em nuvem com infraestrutura como código, segurança, backups, observabilidade e controle de custos.
+eyebrow: Serviço
+lead: Infraestrutura em nuvem reproduzível, observável e preparada para falhas, sem esconder custos ou dependências críticas.
+---
+
+## O que entregamos
+
+A RBX projeta, migra e opera ambientes em nuvem para aplicações, dados e serviços de IA. Trabalhamos com cloud pública, infraestrutura dedicada e modelos híbridos conforme requisitos de soberania, escala, latência e custo.
+
+- Arquitetura de contas, redes, identidade e ambientes.
+- Infraestrutura como código e GitOps com revisão de mudanças.
+- Containers, Kubernetes ou serviços gerenciados quando adequados.
+- Backups, restauração, continuidade e testes de recuperação.
+- Observabilidade, segurança, gestão de secrets e orçamento de custos.
+
+## Quando contratar
+
+O serviço atende migrações de servidores manuais, ambientes que não podem ser reproduzidos, crescimento sem visibilidade de custo ou aplicações que precisam de uma base mais confiável. Também ajuda a reduzir dependência de um único fornecedor quando isso é um requisito real.
+
+## Como trabalhamos
+
+Começamos pelo inventário de workloads, dados, integrações e objetivos de recuperação. Cada componente recebe owner, limite de acesso e comportamento esperado quando uma dependência falha. A migração ocorre em etapas verificáveis, com rollback e sem big bang desnecessário.
+
+Não tratamos um painel de cloud como arquitetura. O resultado precisa estar versionado, documentado e observável. Operação continuada pode ser combinada com [DevOps e cloud](/servicos/devops-cloud), [observabilidade](/servicos/observabilidade) e [manutenção de sistemas](/servicos/manutencao-de-sistemas).
+
+## Próximo passo
+
+[Fale com a RBX](/contato) sobre o ambiente atual, requisitos de disponibilidade, restrições de dados e custos que precisam ser controlados.
+`,
+  `---
+title: Cloud Solutions · RBX Systems
+description: Cloud architecture, migration and operations with infrastructure as code, security, backups, observability and cost control.
+eyebrow: Service
+lead: Reproducible, observable cloud infrastructure designed for failure without hiding costs or critical dependencies.
+---
+
+## What we deliver
+
+RBX designs, migrates and operates cloud environments for applications, data and AI services. We work with public cloud, dedicated infrastructure and hybrid models according to sovereignty, scale, latency and cost requirements.
+
+- Account, network, identity and environment architecture.
+- Infrastructure as code and GitOps with reviewed changes.
+- Containers, Kubernetes or managed services where appropriate.
+- Backups, restoration, continuity and recovery tests.
+- Observability, security, secret management and cost budgets.
+
+## When to hire us
+
+The service supports migrations from manually managed servers, environments that cannot be reproduced, growth without cost visibility or applications that need a more reliable foundation. It also helps reduce dependence on one vendor when portability is a real requirement.
+
+## How we work
+
+We start with an inventory of workloads, data, integrations and recovery objectives. Every component gets an owner, access boundary and expected behavior when a dependency fails. Migration happens in verifiable stages with rollback, avoiding an unnecessary big-bang change.
+
+We do not treat a cloud console as architecture. The result must be versioned, documented and observable. Continued operations can combine with [DevOps and cloud](/services/devops-cloud), [observability](/services/observability) and [system maintenance](/services/system-maintenance).
+
+## Next step
+
+[Talk to RBX](/contact) about the current environment, availability targets, data constraints and the costs that need control.
+`
+);
 // Briefing BTC landing page (offer copy; the modal and checkout live in the app, see src/lib/briefing)
 addPage(
   'briefing-btc',
@@ -979,6 +1769,11 @@ async function main() {
       console.error(`--only=${only} matched ${selected.length} objects, expected 2 (pt-BR + en)`);
       process.exit(1);
     }
+  }
+  selected.forEach(validatePage);
+  if (process.argv.includes('--validate-only')) {
+    console.log(`validated ${selected.length} objects`);
+    return;
   }
   for (const { key, body } of selected) {
     await put(key, body);
