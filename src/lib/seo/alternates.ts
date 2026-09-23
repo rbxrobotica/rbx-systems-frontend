@@ -2,9 +2,23 @@
  * Generate hreflang alternate links between pt-BR (rbx.ia.br) and en (rbxsystems.ch).
  */
 import type { Locale } from '$types/content';
+import { SERVICE_ROUTES, servicePublicPath } from '$lib/services/catalog';
 
 const PT_BASE = 'https://rbx.ia.br';
 const EN_BASE = 'https://rbxsystems.ch';
+
+const SERVICE_PATH_MAP = Object.fromEntries(
+  SERVICE_ROUTES.flatMap((service) => {
+    const mapping = {
+      'pt-BR': servicePublicPath('pt-BR', service),
+      en: servicePublicPath('en', service)
+    };
+    return [
+      [mapping['pt-BR'], mapping],
+      [mapping.en, mapping]
+    ];
+  })
+) as Record<string, { 'pt-BR': string; en: string }>;
 
 export const LOCALE_PATH_MAP: Record<string, { 'pt-BR': string; en: string }> = {
   '/': { 'pt-BR': '/', en: '/' },
@@ -31,50 +45,14 @@ export const LOCALE_PATH_MAP: Record<string, { 'pt-BR': string; en: string }> = 
   '/products/robson': { 'pt-BR': '/produtos/robson', en: '/products/robson' },
   '/produtos/briefing-btc': { 'pt-BR': '/produtos/briefing-btc', en: '/products/briefing-btc' },
   '/products/briefing-btc': { 'pt-BR': '/produtos/briefing-btc', en: '/products/briefing-btc' },
-  '/servicos/engenharia-de-ia': {
-    'pt-BR': '/servicos/engenharia-de-ia',
-    en: '/services/ai-engineering'
-  },
-  '/services/ai-engineering': {
-    'pt-BR': '/servicos/engenharia-de-ia',
-    en: '/services/ai-engineering'
-  },
-  '/servicos/llmops': { 'pt-BR': '/servicos/llmops', en: '/services/llmops' },
-  '/services/llmops': { 'pt-BR': '/servicos/llmops', en: '/services/llmops' },
-  '/servicos/agentes-de-ia': { 'pt-BR': '/servicos/agentes-de-ia', en: '/services/ai-agents' },
-  '/services/ai-agents': { 'pt-BR': '/servicos/agentes-de-ia', en: '/services/ai-agents' },
-  '/servicos/devops-cloud': { 'pt-BR': '/servicos/devops-cloud', en: '/services/devops-cloud' },
-  '/services/devops-cloud': { 'pt-BR': '/servicos/devops-cloud', en: '/services/devops-cloud' },
-  '/servicos/software-financeiro': {
-    'pt-BR': '/servicos/software-financeiro',
-    en: '/services/financial-software'
-  },
-  '/services/financial-software': {
-    'pt-BR': '/servicos/software-financeiro',
-    en: '/services/financial-software'
-  },
-  '/servicos/software-para-logistica': {
-    'pt-BR': '/servicos/software-para-logistica',
-    en: '/services/logistics-software'
-  },
-  '/services/logistics-software': {
-    'pt-BR': '/servicos/software-para-logistica',
-    en: '/services/logistics-software'
-  },
-  '/servicos/observabilidade': {
-    'pt-BR': '/servicos/observabilidade',
-    en: '/services/observability'
-  },
-  '/services/observability': {
-    'pt-BR': '/servicos/observabilidade',
-    en: '/services/observability'
-  },
+  ...SERVICE_PATH_MAP,
   '/journal': { 'pt-BR': '/journal', en: '/journal' },
   '/cases': { 'pt-BR': '/cases', en: '/cases' },
   '/contato': { 'pt-BR': '/contato', en: '/contact' },
   '/contact': { 'pt-BR': '/contato', en: '/contact' },
   '/newsroom': { 'pt-BR': '/newsroom', en: '/newsroom' },
   '/changelog': { 'pt-BR': '/changelog', en: '/changelog' },
+  '/manifesto': { 'pt-BR': '/manifesto', en: '/manifesto' },
   '/atelier': { 'pt-BR': '/atelier', en: '/atelier' },
   '/trust': { 'pt-BR': '/trust', en: '/trust' },
   '/legal': { 'pt-BR': '/legal', en: '/legal' }

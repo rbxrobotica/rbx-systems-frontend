@@ -176,6 +176,51 @@
       "metaTitle": "Observability · RBX Systems",
       "metaDescription": "System and LLM observability: traces, metrics, logs and alerts with PII redaction for regulated operations.",
       "headline": "Observability"
+    },
+    "webDevelopment": {
+      "metaTitle": "Web Development · RBX Systems",
+      "metaDescription": "Fast, accessible websites, portals and web applications integrated with the systems that run your operation.",
+      "headline": "Web Development"
+    },
+    "mobileApps": {
+      "metaTitle": "Mobile App Development · RBX Systems",
+      "metaDescription": "Android and iOS applications connected to your backend, with offline operation, telemetry, security and release support.",
+      "headline": "Mobile Apps"
+    },
+    "customSystems": {
+      "metaTitle": "Custom Systems · RBX Systems",
+      "metaDescription": "Purpose-built systems for specific workflows, with integrations, access control, auditability and long-term operation.",
+      "headline": "Custom Systems"
+    },
+    "technicalConsulting": {
+      "metaTitle": "Technical Consulting · RBX Systems",
+      "metaDescription": "Architecture, reliability, security and product diagnostics that turn technical evidence into clear priorities and decisions.",
+      "headline": "Technical Consulting"
+    },
+    "processAutomation": {
+      "metaTitle": "Process Automation · RBX Systems",
+      "metaDescription": "Business process automation with auditable workflows, integrations, human approval gates and safe exception handling.",
+      "headline": "Process Automation"
+    },
+    "apiIntegration": {
+      "metaTitle": "API Integration · RBX Systems",
+      "metaDescription": "Secure integration across APIs, legacy systems and SaaS platforms, with contracts, retries, idempotency and observability.",
+      "headline": "API Integration"
+    },
+    "systemMaintenance": {
+      "metaTitle": "System Maintenance · RBX Systems",
+      "metaDescription": "Software maintenance and evolution through fixes, upgrades, observability, security work and operational risk reduction.",
+      "headline": "System Maintenance"
+    },
+    "uxUiDesign": {
+      "metaTitle": "UX/UI Design · RBX Systems",
+      "metaDescription": "UX/UI for products and operational tools: clear flows, testable prototypes, accessibility and implementable design systems.",
+      "headline": "UX/UI Design"
+    },
+    "cloudSolutions": {
+      "metaTitle": "Cloud Solutions · RBX Systems",
+      "metaDescription": "Cloud architecture, migration and operations with infrastructure as code, security, backups, observability and cost control.",
+      "headline": "Cloud Solutions"
     }
   },
   "common": {

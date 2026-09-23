@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { detectLocaleFromUrl } from '$lib/i18n/locale';
 import { loadPage } from '$lib/server/content/gateway';
+import { serviceContentSlug } from '$lib/services/catalog';
 import type { PageServerLoad } from './$types';
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -13,6 +14,6 @@ export const load: PageServerLoad = async ({ url, params }) => {
     throw error(404, 'Not found');
   }
 
-  const page = await loadPage(`services/${slug}`, locale);
+  const page = await loadPage(`services/${serviceContentSlug(locale, slug)}`, locale);
   return { page, locale, slug };
 };

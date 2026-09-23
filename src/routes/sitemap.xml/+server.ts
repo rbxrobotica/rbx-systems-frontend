@@ -3,6 +3,7 @@ import { detectLocaleFromUrl } from '$lib/i18n/locale';
 import { loadAllPosts } from '$lib/server/content/gateway';
 import { authorSlugFor } from '$lib/journal/authors';
 import { collectCanonicalTags } from '$lib/journal/tags';
+import { SERVICE_ROUTES, servicePublicPath } from '$lib/services/catalog';
 import type { Locale } from '$types/content';
 
 interface SitemapEntry {
@@ -13,6 +14,14 @@ interface SitemapEntry {
   // only posts carry one (their frontmatter date).
   lastmod?: string;
   alternates?: { hreflang: string; href: string }[];
+}
+
+function serviceEntries(locale: Locale): SitemapEntry[] {
+  return SERVICE_ROUTES.map((service) => ({
+    path: servicePublicPath(locale, service),
+    changefreq: 'monthly',
+    priority: '0.8'
+  }));
 }
 
 const entriesByLocale: Record<Locale, SitemapEntry[]> = {
@@ -29,13 +38,7 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
     { path: '/diagnostico', changefreq: 'monthly', priority: '0.9' },
     { path: '/produtos/robson', changefreq: 'monthly', priority: '0.8' },
     { path: '/produtos/briefing-btc', changefreq: 'monthly', priority: '0.8' },
-    { path: '/servicos/engenharia-de-ia', changefreq: 'monthly', priority: '0.8' },
-    { path: '/servicos/llmops', changefreq: 'monthly', priority: '0.8' },
-    { path: '/servicos/agentes-de-ia', changefreq: 'monthly', priority: '0.8' },
-    { path: '/servicos/devops-cloud', changefreq: 'monthly', priority: '0.8' },
-    { path: '/servicos/software-financeiro', changefreq: 'monthly', priority: '0.8' },
-    { path: '/servicos/software-para-logistica', changefreq: 'monthly', priority: '0.8' },
-    { path: '/servicos/observabilidade', changefreq: 'monthly', priority: '0.8' },
+    ...serviceEntries('pt-BR'),
     { path: '/journal', changefreq: 'weekly', priority: '0.8' },
     { path: '/cases', changefreq: 'weekly', priority: '0.8' },
     { path: '/newsroom', changefreq: 'weekly', priority: '0.7' },
@@ -60,13 +63,7 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
     { path: '/diagnostic', changefreq: 'monthly', priority: '0.9' },
     { path: '/products/robson', changefreq: 'monthly', priority: '0.8' },
     { path: '/products/briefing-btc', changefreq: 'monthly', priority: '0.8' },
-    { path: '/services/ai-engineering', changefreq: 'monthly', priority: '0.8' },
-    { path: '/services/llmops', changefreq: 'monthly', priority: '0.8' },
-    { path: '/services/ai-agents', changefreq: 'monthly', priority: '0.8' },
-    { path: '/services/devops-cloud', changefreq: 'monthly', priority: '0.8' },
-    { path: '/services/financial-software', changefreq: 'monthly', priority: '0.8' },
-    { path: '/services/logistics-software', changefreq: 'monthly', priority: '0.8' },
-    { path: '/services/observability', changefreq: 'monthly', priority: '0.8' },
+    ...serviceEntries('en'),
     { path: '/journal', changefreq: 'weekly', priority: '0.8' },
     { path: '/cases', changefreq: 'weekly', priority: '0.8' },
     { path: '/newsroom', changefreq: 'weekly', priority: '0.7' },

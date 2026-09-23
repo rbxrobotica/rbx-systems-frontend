@@ -1,6 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { detectLocaleFromUrl } from '$lib/i18n/locale';
 import { t } from '$lib/i18n/translate';
+import { SERVICE_ROUTES, servicePublicPath } from '$lib/services/catalog';
 import type { Locale } from '$types/content';
 
 const siteUrlByLocale: Record<Locale, string> = {
@@ -8,30 +9,17 @@ const siteUrlByLocale: Record<Locale, string> = {
   en: 'https://rbxsystems.ch'
 };
 
-const servicesByLocale: Record<Locale, { key: string; path: string }[]> = {
-  'pt-BR': [
-    { key: 'aiEngineering', path: '/servicos/engenharia-de-ia' },
-    { key: 'llmops', path: '/servicos/llmops' },
-    { key: 'aiAgents', path: '/servicos/agentes-de-ia' },
-    { key: 'devopsCloud', path: '/servicos/devops-cloud' },
-    { key: 'financialSoftware', path: '/servicos/software-financeiro' },
-    { key: 'logisticsSoftware', path: '/servicos/software-para-logistica' },
-    { key: 'observability', path: '/servicos/observabilidade' }
-  ],
-  en: [
-    { key: 'aiEngineering', path: '/services/ai-engineering' },
-    { key: 'llmops', path: '/services/llmops' },
-    { key: 'aiAgents', path: '/services/ai-agents' },
-    { key: 'devopsCloud', path: '/services/devops-cloud' },
-    { key: 'financialSoftware', path: '/services/financial-software' },
-    { key: 'logisticsSoftware', path: '/services/logistics-software' },
-    { key: 'observability', path: '/services/observability' }
-  ]
-};
+const servicesByLocale = (locale: Locale) =>
+  SERVICE_ROUTES.map((service) => ({
+    key: service.key,
+    path: servicePublicPath(locale, service)
+  }));
 
 const institutionalByLocale: Record<Locale, { label: string; path: string; note: string }[]> = {
   'pt-BR': [
     { label: 'Sobre', path: '/sobre', note: 'quem é a RBX Systems' },
+    { label: 'História', path: '/historia', note: 'trajetória da RBX Systems' },
+    { label: 'Carreiras', path: '/carreiras', note: 'como trabalhar com a RBX Systems' },
     { label: 'Equipe', path: '/equipe', note: 'time de engenharia e liderança' },
     {
       label: 'Leandro Damasio',
@@ -44,6 +32,8 @@ const institutionalByLocale: Record<Locale, { label: string; path: string; note:
   ],
   en: [
     { label: 'About', path: '/about', note: 'who RBX Systems is' },
+    { label: 'History', path: '/history', note: 'the RBX Systems trajectory' },
+    { label: 'Careers', path: '/careers', note: 'how to work with RBX Systems' },
     { label: 'Team', path: '/team', note: 'engineering and leadership team' },
     {
       label: 'Leandro Damasio',
@@ -87,7 +77,7 @@ export const GET: RequestHandler = async ({ url }) => {
   const link = (label: string, path: string, note: string) =>
     `- [${label}](${siteUrl}${path}): ${note}`;
 
-  const serviceLinks = servicesByLocale[locale].map((service) =>
+  const serviceLinks = servicesByLocale(locale).map((service) =>
     link(
       t(locale, `services.${service.key}.headline`),
       service.path,
