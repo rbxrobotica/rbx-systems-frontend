@@ -7,3 +7,5 @@ build/
 .svelte-kit/
 .aider*
 
+# Journal source is formatted by its publishing workflow; avoid content-only rewrites.
+blog-posts/

@@ -467,7 +467,6 @@
 <svelte:window onkeydown={onKeydown} onpageshow={onPageShow} />
 
 {#if open}
-  <!-- svelte-ignore a11y_click_events_have_key_events -->
   <div class="overlay" role="presentation" onclick={onOverlayClick}>
     <div
       class="modal"

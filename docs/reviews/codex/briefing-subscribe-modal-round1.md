@@ -44,6 +44,7 @@ REQUEST_CHANGES (4 findings; 1 to 3 resolved in df48e96, 4 accepted as a known g
    Concrete fix: add focused component/integration tests for modal open-source from `?subscribe=1`, close/reopen reset semantics, audience/billing preselect, duplicate submit prevention, Altcha token reset, and route-level deep-link prefill on both `/briefing-btc` and `/products/briefing-btc` (plus `/produtos/briefing-btc`).
 
 No additional correctness issues were identified in:
+
 - catalog/server contract drift checks (unit assertions cover id/amount/list/method),
 - analytics event typing usage,
 - i18n key parity (structural parity test included in `scripts/briefing-catalog.test.mjs`).
