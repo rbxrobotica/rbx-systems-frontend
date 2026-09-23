@@ -1,12 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import {
-  canonicalTag,
-  collectCanonicalTags,
-  normalizeTag,
-  postHasTag
-} from '../src/lib/journal/tags.ts';
-import { authorSlugFor, JOURNAL_AUTHORS, journalAuthorBySlug } from '../src/lib/journal/authors.ts';
+import { importTypeScriptModule } from './test-support/import-typescript-module.mjs';
+
+const { canonicalTag, collectCanonicalTags, normalizeTag, postHasTag } =
+  await importTypeScriptModule(new URL('../src/lib/journal/tags.ts', import.meta.url));
+const { authorSlugFor, JOURNAL_AUTHORS, journalAuthorBySlug } = await importTypeScriptModule(
+  new URL('../src/lib/journal/authors.ts', import.meta.url)
+);
 
 test('normalizeTag lowercases and strips diacritics', () => {
   assert.equal(normalizeTag('Governança'), 'governanca');

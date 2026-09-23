@@ -1,12 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import {
-  breadcrumbSchema,
-  collectionPageSchema,
-  faqPageSchema,
-  personSchemaFor,
-  serviceSchema
-} from '../src/lib/seo/schema.ts';
+import { importTypeScriptModule } from './test-support/import-typescript-module.mjs';
+
+const { breadcrumbSchema, collectionPageSchema, faqPageSchema, personSchemaFor, serviceSchema } =
+  await importTypeScriptModule(new URL('../src/lib/seo/schema.ts', import.meta.url));
 
 test('breadcrumbSchema emits ordered ListItems with absolute URLs', () => {
   const schema = breadcrumbSchema('pt-BR', 'https://rbx.ia.br/blog/post', [
