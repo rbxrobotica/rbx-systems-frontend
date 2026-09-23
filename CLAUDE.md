@@ -4,6 +4,8 @@
 
 This is the public-facing website for RBX Systems (`rbx.ia.br` / `rbxsystems.ch`). It is a **SvelteKit (adapter-node) SSR** application. Blog posts are **Markdown** (rendered with `marked`; YAML frontmatter parsed with `js-yaml` 4) stored in Contabo Object Storage (S3-compatible, **private bucket**). Covers and UI assets are served through server-side proxies (`/api/blog/cover/...`, `/api/assets/...`); the bucket is never read from the client.
 
+> **Conversion landing lives elsewhere (2026-09-20):** `/briefing-btc` is a 301 (in `src/hooks.server.ts`) to `https://briefingbtc.merovelis.com`, the isolated landing in the `rbxrobotica/rbx-landing-briefing-btc` repository — do not recreate that route here. The institutional product pages remain `/produtos/briefing-btc` and `/products/briefing-btc`.
+
 > **Canonical publishing workflow:** see `~/docs/rbx-content-publish-workflow.md` (agnostic source of truth). Publishing writes one Markdown object to S3; the site reflects it within ~60s via the Content Gateway cache TTL — **no rebuild, no redeploy**.
 
 ## Engineering Guardrails (binding)
