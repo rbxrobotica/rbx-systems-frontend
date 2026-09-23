@@ -85,6 +85,12 @@ export interface Alternate {
   href: string;
 }
 
+/** Resolve a canonical internal path to the route used by the active locale. */
+export function localizedPath(locale: Locale, pathname: string): string {
+  const normalized = pathname.replace(/\/$/, '') || '/';
+  return LOCALE_PATH_MAP[normalized]?.[locale] ?? pathname;
+}
+
 export function getAlternates(locale: Locale, pathname: string): Alternate[] | undefined {
   const normalized = pathname.replace(/\/$/, '') || '/';
   const mapping = LOCALE_PATH_MAP[normalized];

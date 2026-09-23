@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
   import { t } from '$lib/i18n/translate';
+  import { localizedPath } from '$lib/seo/alternates';
   import type { Locale } from '$types/content';
 
   interface Props {
@@ -9,6 +9,8 @@
 
   let { locale }: Props = $props();
 
+  const tr = (key: string) => t(locale, key);
+  const href = (pathname: string) => localizedPath(locale, pathname);
   const year = new Date().getFullYear();
 </script>
 
@@ -17,40 +19,40 @@
     <div class="footer-brand">
       <img src="/brand/rbx-mark.svg" alt="" width="28" height="28" />
       <span class="footer-name">RBX Systems</span>
-      <p class="rbx-caption">{$_('footer.description')}</p>
+      <p class="rbx-caption">{tr('footer.description')}</p>
     </div>
 
     <div class="footer-columns">
       <div>
-        <h3 class="rbx-label">{$_('footer.companyTitle')}</h3>
+        <h3 class="rbx-label">{tr('footer.companyTitle')}</h3>
         <ul>
-          <li><a href="/">{$_('nav.home')}</a></li>
-          <li><a href="/sobre">{$_('nav.about')}</a></li>
-          <li><a href="/historia">{$_('nav.history')}</a></li>
-          <li><a href="/carreiras">{$_('nav.careers')}</a></li>
-          <li><a href="/leandro-damasio">{$_('nav.leandroDamasio')}</a></li>
-          <li><a href="/caue-alencar">{$_('nav.caueAlencar')}</a></li>
-          <li><a href="/flavia-ribeiro">{$_('nav.flaviaRibeiro')}</a></li>
-          <li><a href="/solucoes">{$_('nav.solutions')}</a></li>
-          <li><a href="/produtos">{$_('nav.products')}</a></li>
+          <li><a href={href('/')}>{tr('nav.home')}</a></li>
+          <li><a href={href('/sobre')}>{tr('nav.about')}</a></li>
+          <li><a href={href('/historia')}>{tr('nav.history')}</a></li>
+          <li><a href={href('/carreiras')}>{tr('nav.careers')}</a></li>
+          <li><a href={href('/leandro-damasio')}>{tr('nav.leandroDamasio')}</a></li>
+          <li><a href={href('/caue-alencar')}>{tr('nav.caueAlencar')}</a></li>
+          <li><a href={href('/flavia-ribeiro')}>{tr('nav.flaviaRibeiro')}</a></li>
+          <li><a href={href('/solucoes')}>{tr('nav.solutions')}</a></li>
+          <li><a href={href('/produtos')}>{tr('nav.products')}</a></li>
         </ul>
       </div>
       <div>
-        <h3 class="rbx-label">{$_('footer.resourcesTitle')}</h3>
+        <h3 class="rbx-label">{tr('footer.resourcesTitle')}</h3>
         <ul>
-          <li><a href="/journal">{$_('nav.journal')}</a></li>
+          <li><a href={href('/journal')}>{tr('nav.journal')}</a></li>
           <li><a href="/rss.xml" type="application/rss+xml">RSS</a></li>
-          <li><a href="/changelog">{$_('nav.changelog')}</a></li>
-          <li><a href="/cases">{$_('nav.cases')}</a></li>
-          <li><a href="/newsroom">{$_('nav.newsroom')}</a></li>
-          <li><a href="/atelier">{$_('nav.atelier')}</a></li>
-          <li><a href="/manifesto">{$_('nav.manifesto')}</a></li>
+          <li><a href={href('/changelog')}>{tr('nav.changelog')}</a></li>
+          <li><a href={href('/cases')}>{tr('nav.cases')}</a></li>
+          <li><a href={href('/newsroom')}>{tr('nav.newsroom')}</a></li>
+          <li><a href={href('/atelier')}>{tr('nav.atelier')}</a></li>
+          <li><a href={href('/manifesto')}>{tr('nav.manifesto')}</a></li>
         </ul>
       </div>
       <div>
-        <h3 class="rbx-label">{$_('footer.contactTitle')}</h3>
+        <h3 class="rbx-label">{tr('footer.contactTitle')}</h3>
         <ul>
-          <li><a href="/contato">{$_('nav.contact')}</a></li>
+          <li><a href={href('/contato')}>{tr('nav.contact')}</a></li>
           <li>
             <a href="https://github.com/rbxrobotica" target="_blank" rel="noopener noreferrer"
               >GitHub</a
@@ -70,8 +72,8 @@
 
   <div class="footer-bottom">
     <p class="rbx-caption">
-      &copy; {year} RBX Systems. {$_('footer.rights')}
-      <a href="/legal">{t(locale, 'nav.legal')}</a>
+      &copy; {year} RBX Systems. {tr('footer.rights')}
+      <a href={href('/legal')}>{tr('nav.legal')}</a>
     </p>
   </div>
 </footer>
