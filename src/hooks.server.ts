@@ -57,6 +57,18 @@ export const handle: Handle = async ({ event, resolve }) => {
     });
   }
 
+  // The conversion landing moved to its own host (rbx-landing-briefing-btc).
+  // Legacy links (W01 campaign posts, chat deep-links, bookmarks) keep their
+  // attribution: the query string travels with the redirect.
+  if (url.pathname === '/briefing-btc') {
+    const landing = new URL('https://briefingbtc.merovelis.com/');
+    landing.search = url.search;
+    return new Response(null, {
+      status: 301,
+      headers: { Location: landing.toString() }
+    });
+  }
+
   const response = await resolve(event, {
     // app.html ships %sveltekit.lang%; fill it with the host-detected locale.
     transformPageChunk: ({ html }) => html.replaceAll('%sveltekit.lang%', locale)
