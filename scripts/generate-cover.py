@@ -538,6 +538,47 @@ def _moved_bottleneck(a: str, b: str) -> str:
     return group(items)
 
 
+def _deliberation_kernel(a: str, b: str) -> str:
+    items = []
+    # Left side: Converging deliberative streams / philosophical lenses
+    for i, y in enumerate([110, 180, 250, 320, 390, 460, 530]):
+        color = a if i % 2 == 0 else b
+        items += [
+            node(120, y, color, 6),
+            path(f"M130 {y}C280 {y} 380 315 480 315", fill="none", stroke=color, stroke_width="2", opacity=str(0.35 + (i % 3) * 0.15)),
+        ]
+    items.append(panel(290, 245, 90, 140, b, strong=False))
+
+    # Center: Concentric rings of the sovereign kernel around the central situation room
+    items += [
+        circle(600, 315, 145, fill="none", stroke="#25303b", stroke_width="2"),
+        circle(600, 315, 115, fill="none", stroke=b, stroke_width="2", stroke_dasharray="6 10", opacity="0.7"),
+        circle(600, 315, 80, fill="#091018", stroke=a, stroke_width="3"),
+        circle(600, 315, 45, fill="url(#accentGlow)", stroke=a, stroke_width="2", opacity="0.85"),
+        node(600, 315, a, 10, halo=True),
+    ]
+
+    # Right side: Sovereign ChatOps & IRC text streams emerging from the kernel
+    items += [
+        panel(740, 235, 130, 160, a, strong=True),
+        line(765, 275, 845, 275, stroke=a, stroke_width="3", opacity="0.8"),
+        line(765, 315, 830, 315, stroke=b, stroke_width="3", opacity="0.7"),
+        line(765, 355, 850, 355, stroke=a, stroke_width="3", opacity="0.8"),
+    ]
+    for i, y in enumerate([140, 210, 315, 420, 490]):
+        color = a if i % 2 == 0 else b
+        items += [
+            path(f"M870 315C930 315 960 {y} 1060 {y}", fill="none", stroke=color, stroke_width="2.5", opacity=str(0.45 + (i % 2) * 0.2)),
+            line(1060, y, 1120, y, stroke=color, stroke_width="2.5", opacity="0.6"),
+            node(1130, y, color, 6),
+        ]
+    items += [
+        line(870, 315, 1070, 315, stroke=a, stroke_width="4"),
+        arrow_head(1085, 315, a, "right"),
+    ]
+    return group(items)
+
+
 MOTIFS = {
     "immutable-ledger": _immutable_ledger,
     "resilient-layers": _resilient_layers,
@@ -574,6 +615,7 @@ MOTIFS = {
     "recovery-cycle": _recovery_cycle,
     "loop-decay": _loop_decay,
     "moved-bottleneck": _moved_bottleneck,
+    "deliberation-kernel": _deliberation_kernel,
 }
 
 
