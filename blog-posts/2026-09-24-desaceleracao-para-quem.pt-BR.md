@@ -6,7 +6,6 @@ authorRole: 'Engineering Team'
 tags: [ai, agents, governance, distributed-systems, engineering]
 excerpt: 'O gargalo da IA não é o próximo modelo, mas a arquitetura e a governança de fronteiras. O Strategos volta ao centro, o Public Presence emerge como Kernel e o IRC ancora o ChatOps soberano.'
 cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-09-24-desaceleracao-para-quem-v1.png'
-slugAlias: '2026-09-24-ai-slowdown-for-whom'
 ---
 
 # Desaceleração de IA para quem?

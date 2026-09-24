@@ -6,7 +6,7 @@ authorRole: 'Engineering Team'
 tags: [ai, agents, governance, distributed-systems, engineering]
 excerpt: 'The bottleneck in AI is not model capacity, but architecture and boundary governance. Strategos returns to the center, Public Presence emerges as the Kernel, and IRC anchors sovereign ChatOps.'
 cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-09-24-desaceleracao-para-quem-v1.png'
-slugAlias: '2026-09-24-desaceleracao-para-quem'
+slugAlias: '2026-09-24-ai-slowdown-for-whom'
 ---
 
 # AI Slowdown for Whom?
