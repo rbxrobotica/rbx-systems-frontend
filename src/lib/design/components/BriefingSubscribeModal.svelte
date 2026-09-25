@@ -14,6 +14,7 @@
     AUDIENCE_TOGGLE
   } from '$lib/analytics/events';
   import { getAttributionPayload } from '$lib/analytics/utm';
+  import { checkoutAttemptID, clearCheckoutAttempt } from '$lib/briefing/checkout-attempt';
   import { browser } from '$app/environment';
   import { replaceState } from '$app/navigation';
   import {
@@ -38,7 +39,13 @@
   type Tier = 'free' | 'pro' | 'team';
   type Step = 1 | 2 | 3;
   type Status = 'idle' | 'submitting' | 'redirecting' | 'done';
-  type Outcome = 'paid-redirect' | 'paid-no-url' | null;
+  type Outcome =
+    | 'paid-redirect'
+    | 'paid-confirmed'
+    | 'paid-ended'
+    | 'paid-price-review'
+    | 'paid-no-url'
+    | null;
   type Problem =
     | 'duplicate'
     | 'rate-limit'
@@ -391,8 +398,19 @@
   async function submitPaid(altcha: string): Promise<Outcome> {
     const plan = selectedPlan;
     if (!plan) throw new CheckoutError('error');
+    const normalizedDoc = doc.replace(/\D/g, '');
     const body: Record<string, unknown> = {
       plan_id: plan.id,
+      checkout_attempt_id: await checkoutAttemptID({
+        email: email.trim(),
+        name: name.trim(),
+        doc: isBRL ? normalizedDoc : '',
+        phone: normalizedPhone ?? '',
+        company: plan.audience === 'team' ? company.trim() : '',
+        planID: plan.id,
+        method,
+        seats: plan.audience === 'team' ? clampSeats(seats) : 1
+      }),
       customer_name: name,
       customer_email: email,
       customer_phone: normalizedPhone,
@@ -402,7 +420,7 @@
       source,
       ...getAttributionPayload()
     };
-    if (isBRL) body.customer_doc = doc;
+    if (isBRL) body.customer_doc = normalizedDoc;
     if (plan.audience === 'team') {
       body.seats = clampSeats(seats);
       if (company.trim()) body.company_name = company.trim();
@@ -417,15 +435,59 @@
     if (res.status === 403) throw new CheckoutError('anti-abuse');
     if (res.status === 400) throw new CheckoutError('invalid-fields');
     if (!res.ok) throw new CheckoutError('error');
-    const data = (await res.json()) as { checkout_url?: string; provisioning?: string };
+    const data = (await res.json()) as {
+      checkout_url?: string;
+      provisioning?: string;
+      status_token?: string;
+      plan_id?: string;
+      amount?: number;
+      currency?: string;
+    };
     if (data.checkout_url) {
-      window.location.assign(data.checkout_url);
+      let paymentURL: URL;
+      try {
+        paymentURL = new URL(data.checkout_url);
+      } catch {
+        return 'paid-no-url';
+      }
+      if (paymentURL.protocol !== 'https:') return 'paid-no-url';
+      const expectedAmount = totalAmount(plan, plan.audience === 'team' ? clampSeats(seats) : 1);
+      if (
+        data.plan_id !== plan.id ||
+        data.amount !== expectedAmount ||
+        data.currency !== plan.currency
+      ) {
+        return 'paid-price-review';
+      }
+      window.location.assign(paymentURL.toString());
       return 'paid-redirect';
     }
     // The provider refused the request: the subscription exists locally but
     // no invoice was produced, so the visitor is told to try again rather
     // than to wait for a link that will not come.
-    if (data.provisioning === 'failed') throw new CheckoutError('provider-failed');
+    if (data.provisioning === 'failed') {
+      // Support must resolve the failed pending row before a fresh attempt.
+      clearCheckoutAttempt();
+      throw new CheckoutError('provider-failed');
+    }
+    if (data.status_token) {
+      try {
+        const statusRes = await fetch(`${commerceBase}/api/public/briefing-btc/checkout/status`, {
+          headers: { Authorization: `Bearer ${data.status_token}` },
+          cache: 'no-store'
+        });
+        if (statusRes.ok) {
+          const checkoutStatus = (await statusRes.json()) as { payment_status?: string };
+          if (checkoutStatus.payment_status === 'confirmed') return 'paid-confirmed';
+          if (checkoutStatus.payment_status === 'ended') {
+            clearCheckoutAttempt();
+            return 'paid-ended';
+          }
+        }
+      } catch {
+        // The status service may be temporarily unavailable; show support.
+      }
+    }
     return 'paid-no-url';
   }
 
@@ -456,9 +518,15 @@
   const doneText = $derived(
     outcome === 'paid-redirect'
       ? tr('done.paidRedirect')
-      : outcome === 'paid-no-url'
-        ? tr('done.paidNoUrl')
-        : ''
+      : outcome === 'paid-confirmed'
+        ? tr('done.paidConfirmed')
+        : outcome === 'paid-ended'
+          ? tr('done.paidEnded')
+          : outcome === 'paid-price-review'
+            ? tr('done.paidPriceReview')
+            : outcome === 'paid-no-url'
+              ? tr('done.paidNoUrl')
+              : ''
   );
 
   const submitLabel = $derived(tr('details.submitPay'));
