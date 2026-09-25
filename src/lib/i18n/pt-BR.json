@@ -371,6 +371,22 @@
         "methodUsdt": "USDT, via BTCPay Server",
         "methodLabel": "Forma de pagamento"
       },
+      "email": {
+        "checkoutIntro": "Enviamos um código para confirmar seu e-mail. Digite o código e conclua a verificação anti-robô para criar o pedido Pix.",
+        "recoveryIntro": "Confirme seu e-mail para procurar um pedido Pix pendente deste plano e recuperar os dados originais do pagamento.",
+        "recoveryCodeIntro": "Enviamos um código para recuperar o pedido pendente. Digite-o para consultar os termos originais.",
+        "directRecovery": "Já tem um pedido Pix? Recuperar pelo e-mail",
+        "codeLabel": "Código de seis dígitos",
+        "verifyAndContinue": "Confirmar e continuar",
+        "sendRecoveryCode": "Enviar código de recuperação",
+        "recover": "Consultar pedido original",
+        "invalidCode": "Código inválido ou expirado. Confira o e-mail e tente novamente.",
+        "unavailable": "Não foi possível verificar o e-mail agora. Tente novamente ou fale com o suporte.",
+        "help": "Não recebeu o código ou precisa de ajuda?",
+        "support": "Fale com o suporte",
+        "originalTerms": "Confira os termos do pedido original antes de abrir o pagamento:",
+        "confirmOriginalPayment": "Confirmar valor e abrir pagamento"
+      },
       "done": {
         "title": "Confirmação",
         "paidRedirect": "Assinatura registrada. Redirecionando para o pagamento.",
@@ -378,6 +394,7 @@
         "paidEnded": "O pedido anterior terminou. Feche e reabra o formulário para iniciar uma nova assinatura.",
         "paidPriceReview": "O valor retornado pelo servidor difere da oferta exibida. Não abra o link de pagamento; fale com o suporte para conferir o pedido.",
         "paidNoUrl": "Pedido pendente sem link de pagamento disponível. Entre em contato com o suporte para continuar.",
+        "paidRecovered": "Encontramos seu pedido pendente. Confira o valor e confirme para abrir o pagamento original.",
         "duplicate": "Este contato já tem uma assinatura ativa do Briefing BTC. Para alterar o plano, fale com o time.",
         "rateLimit": "Muitas tentativas a partir desta conexão. Tente novamente em uma hora.",
         "error": "Não foi possível concluir. Verifique os campos e tente novamente.",

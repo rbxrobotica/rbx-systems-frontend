@@ -371,6 +371,22 @@
         "methodUsdt": "USDT, via BTCPay Server",
         "methodLabel": "Payment method"
       },
+      "email": {
+        "checkoutIntro": "We sent a code to confirm your email. Enter it and complete the anti-robot check to create the Pix order.",
+        "recoveryIntro": "Confirm your email to look for a pending Pix order for this plan and recover its original payment details.",
+        "recoveryCodeIntro": "We sent a code to recover the pending order. Enter it to view the original terms.",
+        "directRecovery": "Have a Pix order? Recover by email",
+        "codeLabel": "Six-digit code",
+        "verifyAndContinue": "Confirm and continue",
+        "sendRecoveryCode": "Send recovery code",
+        "recover": "View original order",
+        "invalidCode": "Invalid or expired code. Check your email and try again.",
+        "unavailable": "We could not verify your email right now. Try again or contact support.",
+        "help": "No code or need help?",
+        "support": "Contact support",
+        "originalTerms": "Review the original order terms before opening payment:",
+        "confirmOriginalPayment": "Confirm amount and open payment"
+      },
       "done": {
         "title": "Confirmation",
         "paidRedirect": "Subscription recorded. Redirecting to payment.",
@@ -378,6 +394,7 @@
         "paidEnded": "The previous order ended. Close and reopen the form to start a new subscription.",
         "paidPriceReview": "The server price differs from the displayed offer. Do not open the payment link; contact support to review the order.",
         "paidNoUrl": "Order pending without an available payment link. Contact support to continue.",
+        "paidRecovered": "We found your pending order. Review the amount and confirm to open the original payment.",
         "duplicate": "This contact already holds an active Briefing BTC subscription. To change plans, talk to the team.",
         "rateLimit": "Too many attempts from this connection. Try again in one hour.",
         "error": "Could not complete. Check the fields and try again.",

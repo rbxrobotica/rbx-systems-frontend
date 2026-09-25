@@ -15,6 +15,7 @@
   } from '$lib/analytics/events';
   import { getAttributionPayload } from '$lib/analytics/utm';
   import { checkoutAttemptID, clearCheckoutAttempt } from '$lib/briefing/checkout-attempt';
+  import { originalRecoveredPaymentURL } from '$lib/briefing/recovery-terms';
   import { browser } from '$app/environment';
   import { replaceState } from '$app/navigation';
   import {
@@ -45,7 +46,23 @@
     | 'paid-ended'
     | 'paid-price-review'
     | 'paid-no-url'
+    | 'paid-recovered'
     | null;
+  type EmailStage = 'none' | 'checkout-code' | 'recovery-start' | 'recovery-code';
+  type CheckoutReply = {
+    checkout_url?: string;
+    provisioning?: string;
+    status_token?: string;
+    plan_id?: string;
+    amount?: number;
+    currency?: string;
+    billing_cycle?: string;
+    seats?: number;
+    payment_method?: string;
+    status?: string;
+    reused?: boolean;
+    email_recovered?: boolean;
+  };
   type Problem =
     | 'duplicate'
     | 'rate-limit'
@@ -57,6 +74,8 @@
     | 'invalid-phone'
     | 'anti-abuse'
     | 'provider-failed'
+    | 'email-code'
+    | 'email-unavailable'
     | null;
 
   interface Props {
@@ -106,6 +125,15 @@
   let website = $state(''); // honeypot
   let altchaPayload = $state<string | null>(null);
   let altchaWidget: AltchaWidget | undefined = $state();
+  let emailAltchaPayload = $state<string | null>(null);
+  let emailAltchaWidget: AltchaWidget | undefined = $state();
+  let emailStage = $state<EmailStage>('none');
+  let emailCode = $state('');
+  let emailChallengeID = $state('');
+  let emailCodeVerified = false;
+  let pendingCheckout: Record<string, unknown> | null = null;
+  let recoveredTerms = $state<CheckoutReply | null>(null);
+  let recoveredURL = $state('');
 
   let status = $state<Status>('idle');
   let outcome = $state<Outcome>(null);
@@ -172,6 +200,7 @@
 
   const commerceBase = getCommerceBaseUrl();
   const challengeUrl = `${commerceBase}/api/public/altcha-challenge`;
+  const supportPath = $derived(locale === 'pt-BR' ? '/contato' : '/contact');
 
   // Scroll lock, focus and the open event. Cleanup restores the page and the
   // element that opened the modal.
@@ -204,6 +233,11 @@
       step = 1;
       status = 'idle';
       problem = null;
+      emailStage = 'none';
+      pendingCheckout = null;
+      emailChallengeID = '';
+      emailCode = '';
+      emailCodeVerified = false;
       resetAntiAbuse();
     }
     stripDeepLink();
@@ -236,6 +270,8 @@
   function resetAntiAbuse() {
     altchaWidget?.reset();
     altchaPayload = null;
+    emailAltchaWidget?.reset();
+    emailAltchaPayload = null;
   }
 
   function reset() {
@@ -244,6 +280,13 @@
     outcome = null;
     problem = null;
     altchaPayload = null;
+    emailStage = 'none';
+    emailChallengeID = '';
+    emailCode = '';
+    emailCodeVerified = false;
+    pendingCheckout = null;
+    recoveredTerms = null;
+    recoveredURL = '';
   }
 
   function onOverlayClick(e: MouseEvent) {
@@ -370,7 +413,19 @@
     trackEvent(FORM_SUBMIT, { source, offer, method });
 
     try {
-      outcome = await submitPaid(payload);
+      const body = await checkoutBody(payload);
+      if (isBRL && method === 'pix') {
+        pendingCheckout = body;
+        emailChallengeID = await startEmailChallenge(body, 'checkout');
+        emailCode = '';
+        emailCodeVerified = false;
+        emailStage = 'checkout-code';
+        status = 'idle';
+        resetAntiAbuse();
+        return;
+      }
+      const result = await submitPaid(body);
+      outcome = result === 'needs-recovery' ? 'paid-no-url' : result;
       trackEvent(FORM_SUCCESS, { source, offer, method });
       if (outcome === 'paid-redirect') {
         status = 'redirecting';
@@ -395,7 +450,7 @@
     }
   }
 
-  async function submitPaid(altcha: string): Promise<Outcome> {
+  async function checkoutBody(altcha: string): Promise<Record<string, unknown>> {
     const plan = selectedPlan;
     if (!plan) throw new CheckoutError('error');
     const normalizedDoc = doc.replace(/\D/g, '');
@@ -425,9 +480,173 @@
       body.seats = clampSeats(seats);
       if (company.trim()) body.company_name = company.trim();
     }
+    return body;
+  }
+
+  function startDirectRecovery() {
+    const plan = selectedPlan;
+    if (!plan || !isBRL || method !== 'pix') return;
+    if (!emailRE.test(email.trim())) {
+      problem = 'invalid-email';
+      return;
+    }
+    pendingCheckout = {
+      plan_id: plan.id,
+      customer_email: email.trim(),
+      checkout_attempt_id: crypto.randomUUID()
+    };
+    emailStage = 'recovery-start';
+    emailChallengeID = '';
+    emailCode = '';
+    emailCodeVerified = false;
+    problem = null;
+    resetAntiAbuse();
+  }
+
+  async function startEmailChallenge(
+    body: Record<string, unknown>,
+    purpose: 'checkout' | 'recovery'
+  ): Promise<string> {
+    const res = await fetch(`${commerceBase}/api/public/briefing-btc/checkout/email/start`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      cache: 'no-store',
+      body: JSON.stringify({ ...body, purpose })
+    });
+    if (res.status === 429) throw new CheckoutError('rate-limit');
+    if (res.status === 403) throw new CheckoutError('anti-abuse');
+    if (res.status === 400) throw new CheckoutError('invalid-fields');
+    if (res.status !== 202) throw new CheckoutError('email-unavailable');
+    const data = (await res.json()) as { challenge_id?: string };
+    // The ID is an opaque signed string. Never parse or recreate it here.
+    if (!data.challenge_id) throw new CheckoutError('email-unavailable');
+    return data.challenge_id;
+  }
+
+  async function verifyEmailChallenge(code: string): Promise<void> {
+    const res = await fetch(`${commerceBase}/api/public/briefing-btc/checkout/email/verify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      cache: 'no-store',
+      body: JSON.stringify({ challenge_id: emailChallengeID, code })
+    });
+    if (res.status === 403 || res.status === 400) throw new CheckoutError('email-code');
+    if (res.status !== 204) throw new CheckoutError('email-unavailable');
+  }
+
+  async function submitEmailStage(ev: SubmitEvent) {
+    ev.preventDefault();
+    if (busy || !pendingCheckout) return;
+    const stage = emailStage;
+    if (!emailCodeVerified && (stage === 'checkout-code' || stage === 'recovery-code')) {
+      if (!/^\d{6}$/.test(emailCode.trim())) {
+        problem = 'email-code';
+        return;
+      }
+    }
+    let proof = '';
+    if (stage === 'checkout-code' || stage === 'recovery-start') {
+      proof = emailAltchaWidget?.getValue() ?? emailAltchaPayload ?? '';
+      if (!proof) {
+        problem = 'anti-abuse';
+        return;
+      }
+    }
+    problem = null;
+    status = 'submitting';
+    try {
+      if (stage === 'recovery-start') {
+        emailChallengeID = await startEmailChallenge(
+          { ...pendingCheckout, altcha: proof },
+          'recovery'
+        );
+        emailCode = '';
+        emailCodeVerified = false;
+        emailStage = 'recovery-code';
+        status = 'idle';
+        resetAntiAbuse();
+        return;
+      }
+      if (!emailCodeVerified) {
+        await verifyEmailChallenge(emailCode.trim());
+        emailCodeVerified = true;
+      }
+      if (stage === 'checkout-code') {
+        const result = await submitPaid({
+          ...pendingCheckout,
+          altcha: proof,
+          email_challenge_id: emailChallengeID
+        });
+        if (result === 'needs-recovery') {
+          emailStage = 'recovery-start';
+          emailChallengeID = '';
+          emailCode = '';
+          emailCodeVerified = false;
+          status = 'idle';
+          resetAntiAbuse();
+          return;
+        }
+        outcome = result;
+      } else if (stage === 'recovery-code') {
+        outcome = await recoverCheckout();
+      }
+      emailStage = 'none';
+      status = outcome === 'paid-redirect' ? 'redirecting' : 'done';
+      step = 3;
+      trackEvent(FORM_SUCCESS, { source, offer: selectedPlan?.id ?? tier, method });
+    } catch (err) {
+      status = 'idle';
+      problem = err instanceof CheckoutError ? err.problem : 'error';
+      if (stage === 'recovery-code' && emailCodeVerified && problem === 'email-code') {
+        emailStage = 'recovery-start';
+        emailCode = '';
+        emailChallengeID = '';
+        emailCodeVerified = false;
+      }
+      if (stage === 'checkout-code' && emailCodeVerified && problem === 'anti-abuse') {
+        emailStage = 'none';
+        pendingCheckout = null;
+        emailCode = '';
+        emailChallengeID = '';
+        emailCodeVerified = false;
+        problem = 'email-unavailable';
+      }
+      if (stage === 'checkout-code' || stage === 'recovery-start') resetAntiAbuse();
+      trackEvent(FORM_ERROR, {
+        source,
+        offer: selectedPlan?.id ?? tier,
+        reason: problem ?? 'error'
+      });
+    }
+  }
+
+  async function recoverCheckout(): Promise<Outcome> {
+    const body = pendingCheckout;
+    if (!body) throw new CheckoutError('email-unavailable');
+    const res = await fetch(`${commerceBase}/api/public/briefing-btc/checkout/email/recover`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      cache: 'no-store',
+      body: JSON.stringify({
+        email: body.customer_email,
+        plan_id: body.plan_id,
+        checkout_attempt_id: body.checkout_attempt_id,
+        email_challenge_id: emailChallengeID
+      })
+    });
+    if (res.status === 403) throw new CheckoutError('email-code');
+    if (!res.ok) throw new CheckoutError('email-unavailable');
+    const data = (await res.json()) as CheckoutReply;
+    if (!data.email_recovered) return 'paid-no-url';
+    const result = await handleCheckoutReply(data, false);
+    return result === 'needs-recovery' ? 'paid-no-url' : result;
+  }
+
+  async function submitPaid(body: Record<string, unknown>): Promise<Outcome | 'needs-recovery'> {
     const res = await fetch(`${commerceBase}/api/public/briefing-btc/checkout`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      cache: 'no-store',
       body: JSON.stringify(body)
     });
     if (res.status === 409) throw new CheckoutError('duplicate');
@@ -435,14 +654,23 @@
     if (res.status === 403) throw new CheckoutError('anti-abuse');
     if (res.status === 400) throw new CheckoutError('invalid-fields');
     if (!res.ok) throw new CheckoutError('error');
-    const data = (await res.json()) as {
-      checkout_url?: string;
-      provisioning?: string;
-      status_token?: string;
-      plan_id?: string;
-      amount?: number;
-      currency?: string;
-    };
+    const data = (await res.json()) as CheckoutReply;
+    return handleCheckoutReply(data, isBRL);
+  }
+
+  function originalTerms(data: CheckoutReply): string | null {
+    const plan = selectedPlan;
+    return plan
+      ? originalRecoveredPaymentURL(data, plan, method, TEAM_MIN_SEATS, TEAM_MAX_SEATS)
+      : null;
+  }
+
+  async function handleCheckoutReply(
+    data: CheckoutReply,
+    canRequestRecovery: boolean
+  ): Promise<Outcome | 'needs-recovery'> {
+    const plan = selectedPlan;
+    if (!plan) return 'paid-no-url';
     if (data.checkout_url) {
       let paymentURL: URL;
       try {
@@ -451,6 +679,13 @@
         return 'paid-no-url';
       }
       if (paymentURL.protocol !== 'https:') return 'paid-no-url';
+      if (data.reused || data.email_recovered) {
+        const originalURL = originalTerms(data);
+        if (!originalURL) return 'paid-no-url';
+        recoveredTerms = data;
+        recoveredURL = originalURL;
+        return 'paid-recovered';
+      }
       const expectedAmount = totalAmount(plan, plan.audience === 'team' ? clampSeats(seats) : 1);
       if (
         data.plan_id !== plan.id ||
@@ -488,7 +723,16 @@
         // The status service may be temporarily unavailable; show support.
       }
     }
+    if (canRequestRecovery && isBRL && data.status === 'pending' && data.reused) {
+      return 'needs-recovery';
+    }
     return 'paid-no-url';
+  }
+
+  function confirmRecoveredPayment() {
+    if (!recoveredTerms || !recoveredURL || status !== 'done') return;
+    status = 'redirecting';
+    window.location.assign(recoveredURL);
   }
 
   const problemText = $derived(
@@ -510,9 +754,13 @@
                     ? tr('details.invalidFields')
                     : problem === 'provider-failed'
                       ? tr('details.providerFailed')
-                      : problem === 'error'
-                        ? tr('done.error')
-                        : ''
+                      : problem === 'email-code'
+                        ? tr('email.invalidCode')
+                        : problem === 'email-unavailable'
+                          ? tr('email.unavailable')
+                          : problem === 'error'
+                            ? tr('done.error')
+                            : ''
   );
 
   const doneText = $derived(
@@ -526,7 +774,9 @@
             ? tr('done.paidPriceReview')
             : outcome === 'paid-no-url'
               ? tr('done.paidNoUrl')
-              : ''
+              : outcome === 'paid-recovered'
+                ? tr('done.paidRecovered')
+                : ''
   );
 
   const submitLabel = $derived(tr('details.submitPay'));
@@ -830,193 +1080,266 @@
             </p>
           {/if}
         {:else if step === 2}
-          <form class="details" class:pending={busy} aria-busy={busy} onsubmit={submit} novalidate>
-            <p class="sr-only" role="status" aria-live="polite">
-              {busy ? tr('details.submitting') : ''}
-            </p>
-            <div class="honeypot" aria-hidden="true">
-              <label for="bsm-website">Website</label>
-              <input
-                id="bsm-website"
-                type="text"
-                tabindex="-1"
-                autocomplete="off"
-                bind:value={website}
-              />
-            </div>
-
-            <fieldset class="fields" disabled={busy}>
-              <div class="row">
+          {#if emailStage !== 'none'}
+            <form class="email-verification" aria-busy={busy} onsubmit={submitEmailStage}>
+              <p class="email-intro">
+                {emailStage === 'recovery-start'
+                  ? tr('email.recoveryIntro')
+                  : emailStage === 'recovery-code'
+                    ? tr('email.recoveryCodeIntro')
+                    : tr('email.checkoutIntro')}
+              </p>
+              <p class="email-address">{email.trim()}</p>
+              {#if emailStage === 'checkout-code' || emailStage === 'recovery-code'}
                 <div class="field">
-                  <label for="bsm-name">{tr('details.name')} *</label>
+                  <label for="bsm-email-code">{tr('email.codeLabel')}</label>
                   <input
-                    id="bsm-name"
+                    id="bsm-email-code"
                     type="text"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    pattern="[0-9]{6}"
+                    maxlength="6"
                     required
-                    autocomplete="name"
-                    aria-invalid={problem === 'invalid-name' ? 'true' : undefined}
-                    bind:value={name}
+                    bind:value={emailCode}
+                    disabled={busy}
                   />
                 </div>
-                <div class="field">
-                  <label for="bsm-email">{tr('details.email')} *</label>
-                  <input
-                    id="bsm-email"
-                    type="email"
-                    required
-                    autocomplete="email"
-                    aria-invalid={problem === 'invalid-email' ? 'true' : undefined}
-                    bind:value={email}
-                  />
-                </div>
-              </div>
-
-              <div class="row">
-                {#if isBRL}
-                  <div class="field">
-                    <label for="bsm-doc">{tr('details.doc')} *</label>
-                    <input
-                      id="bsm-doc"
-                      type="text"
-                      required
-                      inputmode="numeric"
-                      autocomplete="off"
-                      bind:value={doc}
+              {/if}
+              {#if emailStage === 'checkout-code' || emailStage === 'recovery-start'}
+                <div class="verify">
+                  {#key emailStage}
+                    <AltchaWidget
+                      bind:this={emailAltchaWidget}
+                      challengeurl={challengeUrl}
+                      labels={altchaLabels}
+                      onstatechange={(payload) => (emailAltchaPayload = payload)}
+                      disabled={busy}
                     />
-                    <span class="hint">{tr('details.docHint')}</span>
-                  </div>
-                {/if}
-                <div class="field">
-                  <label for="bsm-phone">{tr('details.phone')} *</label>
-                  <input
-                    id="bsm-phone"
-                    type="tel"
-                    required
-                    autocomplete="tel"
-                    placeholder={tr('details.phonePlaceholder')}
-                    bind:value={phone}
-                  />
-                  <span class="hint">
-                    {#if phoneDisplay}
-                      {fill(tr('details.phoneNormalized'), { phone: phoneDisplay })}
-                    {:else}
-                      {tr('details.phoneHint')}
-                    {/if}
-                  </span>
+                  {/key}
                 </div>
+              {/if}
+              {#if problem}
+                <div class="error" role="alert">{problemText}</div>
+              {/if}
+              <div class="actions">
+                <button type="submit" class="btn primary" disabled={busy}>
+                  {#if busy}{tr('details.submitting')}{:else if emailStage === 'recovery-start'}{tr(
+                      'email.sendRecoveryCode'
+                    )}{:else if emailStage === 'recovery-code'}{tr('email.recover')}{:else}{tr(
+                      'email.verifyAndContinue'
+                    )}{/if}
+                </button>
+              </div>
+              <p class="email-help">
+                {tr('email.help')} <a href={supportPath}>{tr('email.support')}</a>
+              </p>
+            </form>
+          {:else}
+            <form
+              class="details"
+              class:pending={busy}
+              aria-busy={busy}
+              onsubmit={submit}
+              novalidate
+            >
+              <p class="sr-only" role="status" aria-live="polite">
+                {busy ? tr('details.submitting') : ''}
+              </p>
+              <div class="honeypot" aria-hidden="true">
+                <label for="bsm-website">Website</label>
+                <input
+                  id="bsm-website"
+                  type="text"
+                  tabindex="-1"
+                  autocomplete="off"
+                  bind:value={website}
+                />
               </div>
 
-              {#if tier === 'team'}
+              <fieldset class="fields" disabled={busy}>
                 <div class="row">
                   <div class="field">
-                    <label for="bsm-company"
-                      >{tr('details.company')}
-                      <span class="opt">({tr('details.optional')})</span></label
-                    >
+                    <label for="bsm-name">{tr('details.name')} *</label>
                     <input
-                      id="bsm-company"
+                      id="bsm-name"
                       type="text"
-                      autocomplete="organization"
-                      bind:value={company}
+                      required
+                      autocomplete="name"
+                      aria-invalid={problem === 'invalid-name' ? 'true' : undefined}
+                      bind:value={name}
                     />
-                    <span class="hint">{tr('details.adminHint')}</span>
+                  </div>
+                  <div class="field">
+                    <label for="bsm-email">{tr('details.email')} *</label>
+                    <input
+                      id="bsm-email"
+                      type="email"
+                      required
+                      autocomplete="email"
+                      aria-invalid={problem === 'invalid-email' ? 'true' : undefined}
+                      bind:value={email}
+                    />
                   </div>
                 </div>
-              {/if}
 
-              {#if methods.length > 1}
-                <fieldset class="methods">
-                  <legend>{tr('details.methodLabel')}</legend>
-                  {#each methods as m (m)}
-                    <label class="method" class:active={method === m}>
-                      <input type="radio" name="bsm-method" value={m} bind:group={method} />
-                      <span>{methodText(m)}</span>
-                    </label>
-                  {/each}
-                </fieldset>
-              {/if}
-            </fieldset>
-
-            <aside class="summary" aria-label={tr('details.summary')}>
-              <span class="eyebrow">{tr('details.summary')}</span>
-              <dl>
-                <div>
-                  <dt>{tr('details.plan')}</dt>
-                  <dd>{tier === 'team' ? tr('team.name') : tr('pro.name')}</dd>
+                <div class="row">
+                  {#if isBRL}
+                    <div class="field">
+                      <label for="bsm-doc">{tr('details.doc')} *</label>
+                      <input
+                        id="bsm-doc"
+                        type="text"
+                        required
+                        inputmode="numeric"
+                        autocomplete="off"
+                        bind:value={doc}
+                      />
+                      <span class="hint">{tr('details.docHint')}</span>
+                    </div>
+                  {/if}
+                  <div class="field">
+                    <label for="bsm-phone">{tr('details.phone')} *</label>
+                    <input
+                      id="bsm-phone"
+                      type="tel"
+                      required
+                      autocomplete="tel"
+                      placeholder={tr('details.phonePlaceholder')}
+                      bind:value={phone}
+                    />
+                    <span class="hint">
+                      {#if phoneDisplay}
+                        {fill(tr('details.phoneNormalized'), { phone: phoneDisplay })}
+                      {:else}
+                        {tr('details.phoneHint')}
+                      {/if}
+                    </span>
+                  </div>
                 </div>
-                {#if selectedPlan}
-                  <div>
-                    <dt>{tr('details.cycle')}</dt>
-                    <dd>
-                      {billing === 'annual'
-                        ? tr('details.cycleAnnual')
-                        : tr('details.cycleMonthly')}
-                    </dd>
-                  </div>
-                  {#if tier === 'team'}
-                    <div>
-                      <dt>{tr('details.seats')}</dt>
-                      <dd class="mono">{clampSeats(seats)}</dd>
+
+                {#if tier === 'team'}
+                  <div class="row">
+                    <div class="field">
+                      <label for="bsm-company"
+                        >{tr('details.company')}
+                        <span class="opt">({tr('details.optional')})</span></label
+                      >
+                      <input
+                        id="bsm-company"
+                        type="text"
+                        autocomplete="organization"
+                        bind:value={company}
+                      />
+                      <span class="hint">{tr('details.adminHint')}</span>
                     </div>
-                  {/if}
-                  <div>
-                    <dt>{tr('details.method')}</dt>
-                    <dd>{methodText(method)}</dd>
-                  </div>
-                  {#if phoneDisplay}
-                    <div>
-                      <dt>{tr('details.phone')}</dt>
-                      <dd class="mono">{phoneDisplay}</dd>
-                    </div>
-                  {/if}
-                  <div class="total">
-                    <dt>{tr('team.total')}</dt>
-                    <dd class="mono">{fmt(total)}</dd>
-                  </div>
-                {:else}
-                  <div class="total">
-                    <dt>{tr('team.total')}</dt>
-                    <dd class="mono">
-                      {formatAmount(0, currency, locale, { alwaysDecimals: true })}
-                    </dd>
                   </div>
                 {/if}
-              </dl>
-              <p class="legal">{tr('details.legal')}</p>
-            </aside>
 
-            <div class="verify">
-              {#key tier}
-                <AltchaWidget
-                  bind:this={altchaWidget}
-                  challengeurl={challengeUrl}
-                  labels={altchaLabels}
-                  onstatechange={(payload) => (altchaPayload = payload)}
+                {#if methods.length > 1}
+                  <fieldset class="methods">
+                    <legend>{tr('details.methodLabel')}</legend>
+                    {#each methods as m (m)}
+                      <label class="method" class:active={method === m}>
+                        <input type="radio" name="bsm-method" value={m} bind:group={method} />
+                        <span>{methodText(m)}</span>
+                      </label>
+                    {/each}
+                  </fieldset>
+                {/if}
+              </fieldset>
+
+              <aside class="summary" aria-label={tr('details.summary')}>
+                <span class="eyebrow">{tr('details.summary')}</span>
+                <dl>
+                  <div>
+                    <dt>{tr('details.plan')}</dt>
+                    <dd>{tier === 'team' ? tr('team.name') : tr('pro.name')}</dd>
+                  </div>
+                  {#if selectedPlan}
+                    <div>
+                      <dt>{tr('details.cycle')}</dt>
+                      <dd>
+                        {billing === 'annual'
+                          ? tr('details.cycleAnnual')
+                          : tr('details.cycleMonthly')}
+                      </dd>
+                    </div>
+                    {#if tier === 'team'}
+                      <div>
+                        <dt>{tr('details.seats')}</dt>
+                        <dd class="mono">{clampSeats(seats)}</dd>
+                      </div>
+                    {/if}
+                    <div>
+                      <dt>{tr('details.method')}</dt>
+                      <dd>{methodText(method)}</dd>
+                    </div>
+                    {#if phoneDisplay}
+                      <div>
+                        <dt>{tr('details.phone')}</dt>
+                        <dd class="mono">{phoneDisplay}</dd>
+                      </div>
+                    {/if}
+                    <div class="total">
+                      <dt>{tr('team.total')}</dt>
+                      <dd class="mono">{fmt(total)}</dd>
+                    </div>
+                  {:else}
+                    <div class="total">
+                      <dt>{tr('team.total')}</dt>
+                      <dd class="mono">
+                        {formatAmount(0, currency, locale, { alwaysDecimals: true })}
+                      </dd>
+                    </div>
+                  {/if}
+                </dl>
+                <p class="legal">{tr('details.legal')}</p>
+              </aside>
+
+              <div class="verify">
+                {#key tier}
+                  <AltchaWidget
+                    bind:this={altchaWidget}
+                    challengeurl={challengeUrl}
+                    labels={altchaLabels}
+                    onstatechange={(payload) => (altchaPayload = payload)}
+                    disabled={busy}
+                  />
+                {/key}
+              </div>
+
+              {#if problem}
+                {#key problem}
+                  <div class="error" role="alert">{problemText}</div>
+                {/key}
+              {/if}
+
+              <div class="actions">
+                <button type="button" class="btn ghost" onclick={() => goToStep(1)} disabled={busy}>
+                  {tr('details.back')}
+                </button>
+                <button type="submit" class="btn primary" disabled={busy}>
+                  {#if busy}
+                    <span class="spinner" aria-hidden="true"></span>
+                    <span>{tr('details.submitting')}</span>
+                  {:else}
+                    <span>{submitLabel}</span>
+                  {/if}
+                </button>
+              </div>
+              {#if isBRL && method === 'pix'}
+                <button
+                  type="button"
+                  class="btn ghost"
+                  onclick={startDirectRecovery}
                   disabled={busy}
-                />
-              {/key}
-            </div>
-
-            {#if problem}
-              {#key problem}
-                <div class="error" role="alert">{problemText}</div>
-              {/key}
-            {/if}
-
-            <div class="actions">
-              <button type="button" class="btn ghost" onclick={() => goToStep(1)} disabled={busy}>
-                {tr('details.back')}
-              </button>
-              <button type="submit" class="btn primary" disabled={busy}>
-                {#if busy}
-                  <span class="spinner" aria-hidden="true"></span>
-                  <span>{tr('details.submitting')}</span>
-                {:else}
-                  <span>{submitLabel}</span>
-                {/if}
-              </button>
-            </div>
-          </form>
+                >
+                  {tr('email.directRecovery')}
+                </button>
+              {/if}
+            </form>
+          {/if}
         {:else}
           <div class="confirmation" role="status">
             <div class="icon-wrap" aria-hidden="true">
@@ -1036,9 +1359,47 @@
               {/if}
             </div>
             <p>{doneText}</p>
+            {#if outcome === 'paid-recovered' && recoveredTerms}
+              <div class="recovered-order">
+                <p>{tr('email.originalTerms')}</p>
+                <dl>
+                  <div>
+                    <dt>{tr('details.plan')}</dt>
+                    <dd>{recoveredTerms.plan_id}</dd>
+                  </div>
+                  <div>
+                    <dt>{tr('details.cycle')}</dt>
+                    <dd>
+                      {recoveredTerms.billing_cycle === 'YEARLY'
+                        ? tr('details.cycleAnnual')
+                        : tr('details.cycleMonthly')}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>{tr('details.seats')}</dt>
+                    <dd>{recoveredTerms.seats}</dd>
+                  </div>
+                  <div>
+                    <dt>{tr('team.total')}</dt>
+                    <dd>{formatAmount(recoveredTerms.amount ?? 0, currency, locale)}</dd>
+                  </div>
+                </dl>
+                <button
+                  type="button"
+                  class="btn primary"
+                  onclick={confirmRecoveredPayment}
+                  disabled={busy}
+                >
+                  {tr('email.confirmOriginalPayment')}
+                </button>
+              </div>
+            {/if}
             {#if status !== 'redirecting'}
               <button type="button" class="btn secondary" onclick={close}>{tr('done.close')}</button
               >
+            {/if}
+            {#if outcome === 'paid-no-url' || outcome === 'paid-price-review'}
+              <a href={supportPath}>{tr('email.support')}</a>
             {/if}
           </div>
         {/if}
@@ -1623,6 +1984,45 @@
   .details.pending {
     opacity: 0.7;
     pointer-events: none;
+  }
+
+  .email-verification {
+    display: grid;
+    gap: var(--s-4);
+    max-width: 34rem;
+    margin-inline: auto;
+  }
+
+  .email-intro,
+  .email-help {
+    color: var(--fg-1);
+    line-height: var(--lead-body);
+  }
+
+  .email-address {
+    font-family: var(--font-mono);
+    overflow-wrap: anywhere;
+  }
+
+  .recovered-order {
+    display: grid;
+    gap: var(--s-4);
+    width: min(28rem, 100%);
+    padding: var(--s-4);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    text-align: left;
+  }
+
+  .recovered-order dl {
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  .recovered-order dl > div {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--s-3);
   }
 
   .fields {
