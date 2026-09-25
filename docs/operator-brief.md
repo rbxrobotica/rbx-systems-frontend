@@ -58,7 +58,7 @@ kubectl create secret generic rbx-contact-secrets -n rbx-ia-br \
 1. **Approve template** `contact_form_acknowledgment` in the 360dialog hub (24–48h SLA). Until approved, the WhatsApp acknowledgment call fails silently (fire-and-forget). Email still works.
 2. **Execute EP-001 (anti-abuse)** — Altcha anti-abuse + honeypot + rate limit. Hard prerequisite for any public announcement. Plan: `docs/implementation/contact-system-bidirectional.md` §EP-001.
 
-Image tag bumps are handled automatically by `.github/workflows/ci.yml` (builds, pushes to GHCR, commits the new tag to `rbx-infra`). **Do not manually bump the image tag.**
+`.github/workflows/ci.yml` builds and publishes the image to GHCR. To deploy it, verify the published image digest and open a separate `rbx-infra` PR updating the approved image pin in `apps/prod/rbx-ia-br/kustomization.yml` and `apps/prod/rbxsystems-ch/kustomization.yml`. The Infra merge is the deployment approval gate; ArgoCD then reconciles the change.
 
 ---
 
