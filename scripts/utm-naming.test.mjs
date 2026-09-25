@@ -15,11 +15,11 @@ const parseUtm = new Function(compiled.replace(/^export /gm, '') + '\nreturn par
 
 test('accepts the Satwake paid campaign taxonomy in the real parser', () => {
   assert.deepEqual(
-    parseUtm('?utm_source=instagram&utm_medium=social_paid&utm_campaign=satwake_h1_ritual07h&utm_content=satwake_h1_amostra_001&utm_term=btc_preparacao'),
+    parseUtm('?utm_source=instagram&utm_medium=social_paid&utm_campaign=satwake_h1_preparacao&utm_content=satwake_h1_amostra_001&utm_term=btc_preparacao'),
     {
       utm_source: 'instagram',
       utm_medium: 'social_paid',
-      utm_campaign: 'satwake_h1_ritual07h',
+      utm_campaign: 'satwake_h1_preparacao',
       utm_content: 'satwake_h1_amostra_001',
       utm_term: 'btc_preparacao'
     }
@@ -28,7 +28,11 @@ test('accepts the Satwake paid campaign taxonomy in the real parser', () => {
   assert.equal(parseUtm('?utm_source=google')?.utm_source, 'google');
 });
 
-test('retains a legacy campaign and rejects invalid values key by key', () => {
+test('retains earlier Satwake and taxonomy v2 legacy campaigns', () => {
+  assert.equal(
+    parseUtm('?utm_campaign=satwake_h1_ritual07h')?.utm_campaign,
+    'satwake_h1_ritual07h'
+  );
   assert.deepEqual(
     parseUtm('?utm_source=linkedin&utm_medium=social_organic&utm_campaign=2026h2_b2b_leads_001&utm_content=bad+content'),
     {
