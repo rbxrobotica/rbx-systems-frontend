@@ -3,8 +3,10 @@
  *
  * Implements slice S1/S2 of rbx-growth:
  *   marketing/2026-h2-growth/analytics/briefing-btc-measurement-slice.md
- * Validation rules come from marketing/2026-h2-growth/analytics/utm-taxonomy.yaml
- * (canonical). Values that fail validation are dropped silently, key by key.
+ * Validation rules come from the canonical Growth taxonomy v2
+ * (marketing/2026-h2-growth/analytics/utm-taxonomy.yaml), extended with the
+ * satwake campaign namespace (`satwake_h[12]_*`). Values that fail validation
+ * are dropped silently, key by key.
  *
  *   - First-touch: localStorage `rbx_utm_first` — written once, immutable.
  *   - Last-touch:  sessionStorage `rbx_utm_last` — overwritten whenever a new
@@ -27,8 +29,13 @@ const FIRST_TOUCH_KEY = 'rbx_utm_first';
 const LAST_TOUCH_KEY = 'rbx_utm_last';
 const MAX_VALUE_LENGTH = 120;
 
+// Growth taxonomy v2 sources: social/organic/paid platforms plus RBX-owned
+// channels (briefing, robson, newsletter, partner).
 const UTM_SOURCES = new Set([
   'linkedin',
+  'instagram',
+  'facebook',
+  'google',
   'referral',
   'outbound',
   'organic',
@@ -49,14 +56,21 @@ const UTM_MEDIUMS = new Set([
   'newsletter'
 ]);
 
-// utm-taxonomy.yaml validation regexes.
-const CAMPAIGN_RE = /^2026h2_(b2b|robson|briefing)_[a-z_]+_[0-9]{3}$/;
-const CONTENT_RE = /^(b2b|robson|briefing)_[a-z_]+_[a-z_]+_[0-9]{3}$/;
+// utm-taxonomy.yaml (Growth taxonomy v2) validation regexes: the legacy
+// 2026-h2 formats plus the satwake campaign namespace.
+const CAMPAIGN_RE =
+  /^(?:2026h2_(?:b2b|robson|briefing)_[a-z_]+_[0-9]{3}|satwake_h[12]_[a-z0-9_]+)$/;
+const CONTENT_RE =
+  /^(?:(?:b2b|robson|briefing)_[a-z_]+_[a-z_]+_[0-9]{3}|satwake_h[12]_[a-z0-9_]+_[0-9]{3})$/;
 // <audience>_<segment>, lowercase snake.
 const TERM_RE = /^[a-z0-9]+(_[a-z0-9]+)+$/;
+// Taxonomy rule: UTMs never contain PII. Reject email addresses, tel/mailto
+// schemes and phone-like digit runs before any format check.
+const PII_RE = /@|(?:mailto|tel):|[0-9]{7,}/;
 
 function isValid(key: keyof UtmParams, value: string): boolean {
   if (value.length === 0 || value.length > MAX_VALUE_LENGTH) return false;
+  if (PII_RE.test(value)) return false;
   switch (key) {
     case 'utm_source':
       return UTM_SOURCES.has(value);
