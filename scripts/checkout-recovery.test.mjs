@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { originalRecoveredPaymentURL } from '../src/lib/briefing/recovery-terms.ts';
+import { importTypeScriptModule } from './test-support/import-typescript-module.mjs';
+
+const { originalRecoveredPaymentURL } = await importTypeScriptModule(
+  new URL('../src/lib/briefing/recovery-terms.ts', import.meta.url)
+);
 
 const url = 'https://sandbox.asaas.com/i/original';
 const teamPlan = {
