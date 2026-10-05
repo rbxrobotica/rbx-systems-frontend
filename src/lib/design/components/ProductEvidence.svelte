@@ -1,9 +1,33 @@
 <script lang="ts">
-  import { productEvidence } from '$lib/content/product-evidence';
+  import { productEvidence, type ProductEvidence } from '$lib/content/product-evidence';
+  import { trackPartnershipEvent } from '$lib/analytics/partnership';
   import type { Locale } from '$types/content';
 
   let { locale }: { locale: Locale } = $props();
   let selected = $state('robson');
+  const viewedProducts = new Set<string>();
+  const openedCode = new Set<string>();
+
+  function observeEvidence(node: HTMLElement, product: ProductEvidence['id']) {
+    if (viewedProducts.has(product) || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          viewedProducts.add(product);
+          trackPartnershipEvent('evidence_view', {
+            locale,
+            surface: 'products',
+            entry: 'gallery',
+            product
+          });
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(node);
+    return { destroy: () => observer.disconnect() };
+  }
   const item = $derived(
     productEvidence.find((entry) => entry.id === selected) ?? productEvidence[0]
   );
@@ -38,7 +62,7 @@
   );
 </script>
 
-<section class="evidence" aria-labelledby="evidence-title">
+<section id="evidencias" class="evidence" aria-labelledby="evidence-title">
   <header>
     <p class="eyebrow">{copy.eyebrow}</p>
     <h2 id="evidence-title">{copy.title}</h2>
@@ -57,14 +81,31 @@
   {#if item}
     <p class="sr-only" aria-live="polite">{copy.selected}: {item.name}</p>
     {#key item.id}
-      <article id="product-evidence-panel" aria-labelledby="evidence-product-title">
+      <article
+        id="product-evidence-panel"
+        aria-labelledby="evidence-product-title"
+        use:observeEvidence={item.id}
+      >
         <div class="evidence-heading">
           <h3 id="evidence-product-title">{item.name}</h3>
           <span class="branch">main · {item.commit.slice(0, 7)}</span>
         </div>
         <p class="description">{item.description[locale]}</p>
         <figure>
-          <a class="capture-link" href={item.capture.src} target="_blank" rel="noreferrer">
+          <a
+            class="capture-link"
+            href={item.capture.src}
+            target="_blank"
+            rel="noreferrer"
+            onclick={() =>
+              trackPartnershipEvent('cta_click', {
+                locale,
+                surface: 'products',
+                entry: 'gallery',
+                product: item.id,
+                destination: 'capture'
+              })}
+          >
             <img
               src={item.capture.src}
               alt={item.capture.alt[locale]}
@@ -85,7 +126,19 @@
             >
           </figcaption>
         </figure>
-        <details>
+        <details
+          ontoggle={(event) => {
+            if (event.currentTarget.open && !openedCode.has(item.id)) {
+              openedCode.add(item.id);
+              trackPartnershipEvent('evidence_code_open', {
+                locale,
+                surface: 'products',
+                entry: 'gallery',
+                product: item.id
+              });
+            }
+          }}
+        >
           <summary>{copy.code} <span>{item.language}</span></summary>
           <div class="code-heading">
             <span class="source-path">{item.path}</span>
@@ -101,8 +154,28 @@
             ></pre>
           <div class="source-footer">
             <span>{copy.revision}: main · {item.commit.slice(0, 7)}</span>
-            {#if item.sourceUrl}<a href={item.sourceUrl}>{copy.source}</a>{/if}
-            {#if item.permalinkUrl}<a href={item.permalinkUrl}>{item.commit.slice(0, 7)}</a>{/if}
+            {#if item.sourceUrl}<a
+                href={item.sourceUrl}
+                onclick={() =>
+                  trackPartnershipEvent('cta_click', {
+                    locale,
+                    surface: 'products',
+                    entry: 'gallery',
+                    product: item.id,
+                    destination: 'source'
+                  })}>{copy.source}</a
+              >{/if}
+            {#if item.permalinkUrl}<a
+                href={item.permalinkUrl}
+                onclick={() =>
+                  trackPartnershipEvent('cta_click', {
+                    locale,
+                    surface: 'products',
+                    entry: 'gallery',
+                    product: item.id,
+                    destination: 'source'
+                  })}>{item.commit.slice(0, 7)}</a
+              >{/if}
           </div>
         </details>
       </article>
@@ -113,6 +186,7 @@
 <style>
   .evidence {
     margin-top: var(--s-8);
+    scroll-margin-top: calc(var(--header-h) + var(--s-6));
   }
   header {
     max-width: 46rem;

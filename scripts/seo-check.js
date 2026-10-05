@@ -57,19 +57,22 @@ for (const page of pages) {
     (source.includes('Seo') && source.includes('$components/Seo')) ||
     source.includes('ContentPage') ||
     source.includes('TeamPage') ||
-    source.includes('ProductsPage');
+    source.includes('ProductsPage') ||
+    source.includes('PartnershipPage');
   const hasTitle =
     source.includes('<title>') ||
     source.includes('metaTitle') ||
     source.includes('fallbackTitle') ||
     source.includes('TeamPage') ||
-    source.includes('ProductsPage');
+    source.includes('ProductsPage') ||
+    source.includes('PartnershipPage');
   const hasDescription =
     source.includes('metaDescription') ||
     source.includes('name="description"') ||
     source.includes('fallbackLead') ||
     source.includes('TeamPage') ||
-    source.includes('ProductsPage');
+    source.includes('ProductsPage') ||
+    source.includes('PartnershipPage');
 
   if (!hasSeo) {
     console.error(`✗ ${relative}: does not use Seo component`);

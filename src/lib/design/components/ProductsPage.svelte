@@ -3,6 +3,8 @@
   import Seo from './Seo.svelte';
   import ProductEvidence from './ProductEvidence.svelte';
   import { productsContent } from '$lib/content/products';
+  import { formatPartnershipPrice, partnershipTerms } from '$lib/content/partnership';
+  import { trackPartnershipEvent } from '$lib/analytics/partnership';
   import { buildGraph, collectionPageSchema } from '$lib/seo/schema';
   import type { Locale } from '$types/content';
 
@@ -43,6 +45,17 @@
     <ul class="disciplines">
       {#each content.disciplines as discipline}<li>{discipline}</li>{/each}
     </ul>
+    <a
+      class="partnership-link"
+      href={content.contactHref}
+      onclick={() =>
+        trackPartnershipEvent('cta_click', {
+          locale,
+          surface: 'products',
+          entry: 'hero',
+          destination: 'partnership'
+        })}>{content.contactLabel}</a
+    >
   </header>
 
   <section aria-labelledby="featured-title">
@@ -181,8 +194,24 @@
     <div>
       <h2 id="collaboration-title">{content.collaborationTitle}</h2>
       <p>{content.collaborationLead}</p>
+      <p class="partnership-price">
+        {formatPartnershipPrice(locale)}{locale === 'pt-BR' ? '/mês' : '/month'} · {partnershipTerms.monthlyHours}
+        {locale === 'pt-BR'
+          ? 'horas mensais de capacidade técnica'
+          : 'monthly hours of technical capacity'}
+      </p>
     </div>
-    <a class="rbx-cta" href={content.contactHref}>{content.contactLabel}</a>
+    <a
+      class="rbx-cta"
+      href={content.contactHref}
+      onclick={() =>
+        trackPartnershipEvent('cta_click', {
+          locale,
+          surface: 'products',
+          entry: 'footer',
+          destination: 'partnership'
+        })}>{content.contactLabel}</a
+    >
   </section>
 
   <aside class="portfolio-notes" aria-label={content.legalLabel}>
@@ -222,6 +251,15 @@
     color: var(--fg-1);
     font-size: var(--text-lg);
     line-height: var(--lead-loose);
+  }
+  .partnership-link {
+    display: inline-block;
+    margin-top: var(--s-5);
+    font-size: var(--text-sm);
+  }
+  .collaboration .partnership-price {
+    color: var(--cyan-brand);
+    font-size: var(--text-sm);
   }
   .disciplines,
   .capabilities {

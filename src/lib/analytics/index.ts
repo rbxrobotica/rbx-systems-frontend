@@ -25,6 +25,9 @@ export type EventName =
   | 'form_submit'
   | 'form_success'
   | 'form_error'
+  | 'offer_view'
+  | 'evidence_view'
+  | 'evidence_code_open'
   | 'whatsapp_click'
   | 'chat_open'
   | 'subscribe_open'
@@ -61,7 +64,7 @@ export function getAnalyticsConfig(): AnalyticsConfig | null {
 }
 
 interface PlausibleGlobal {
-  (name: string, options?: { u?: string; props?: EventProps }): void;
+  (name: string, options?: { u?: string; props?: EventProps; interactive?: boolean }): void;
   q?: IArguments[];
   init?: (options?: Record<string, unknown>) => void;
   o?: Record<string, unknown>;
@@ -94,7 +97,21 @@ export function bootstrapPlausible(): void {
       p.o = options ?? {};
     };
   }
-  p.init();
+  p.init({
+    transformRequest(payload: Record<string, unknown>) {
+      const props = payload.p as EventProps | undefined;
+      if (props?.offer !== 'engineering-partnership') return payload;
+      // Plausible supplies document.referrer independently of our event URL.
+      // Retain only its origin for this funnel, never a referrer query or path.
+      const sanitized = { ...payload };
+      try {
+        sanitized.r = typeof payload.r === 'string' ? new URL(payload.r).origin : null;
+      } catch {
+        sanitized.r = null;
+      }
+      return sanitized;
+    }
+  });
 }
 
 export function trackPageview(url?: string): void {
@@ -111,16 +128,24 @@ export function trackPageview(url?: string): void {
   }
 }
 
-export function trackEvent(name: EventName, props?: EventProps): void {
+export function trackEvent(
+  name: EventName,
+  props?: EventProps,
+  options?: { url?: string; interactive?: boolean }
+): void {
   if (!browser) return;
   const config = getAnalyticsConfig();
   if (!config) return;
 
   const plausible = (window as unknown as Record<string, unknown>).plausible as
-    | ((name: string, options?: { props?: EventProps }) => void)
+    | ((name: string, options?: { props?: EventProps; u?: string; interactive?: boolean }) => void)
     | undefined;
 
   if (typeof plausible === 'function') {
-    plausible(name, { props });
+    plausible(name, {
+      props,
+      ...(options?.url ? { u: options.url } : {}),
+      ...(options?.interactive === false ? { interactive: false } : {})
+    });
   }
 }

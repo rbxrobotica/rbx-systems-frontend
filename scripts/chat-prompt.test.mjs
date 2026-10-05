@@ -75,11 +75,46 @@ test('Satwake / Briefing BTC facts and boundaries are pinned without delivery gu
   );
 });
 
-test('the briefing CTA marker is parsed before the generic marker', () => {
-  assert.match(route, /const showBriefingCta = raw\.includes\('\[CTA_BRIEFING\]'\)/);
-  assert.match(route, /const withoutBriefing = raw\.replaceAll\('\[CTA_BRIEFING\]', ''\)/);
-  assert.match(route, /const showCta = withoutBriefing\.includes\('\[CTA\]'\)/);
-  assert.match(route, /return json\(\{ content, showCta, showBriefingCta \}\)/);
+test('CTA parsing removes markers and preserves Briefing, partnership, contact precedence', () => {
+  const parser = route.match(
+    /(const showBriefingCta = raw\.includes[\s\S]+?)return json\((\{ content, showCta, showBriefingCta, showPartnershipCta \})\);/
+  );
+  assert.ok(parser, 'test the actual endpoint parser without invoking its external services');
+  const parse = new Function('raw', `${parser[1]}return ${parser[2]};`);
+  const markers = ['[CTA_BRIEFING]', '[CTA_PARTNERSHIP]', '[CTA]'];
+
+  for (let mask = 0; mask < 8; mask++) {
+    const included = markers.filter((_, index) => mask & (1 << index));
+    for (const order of [included, [...included].reverse()]) {
+      const result = parse(`Resposta ${order.join('')}${order.join('')}`);
+      assert.deepEqual(result, {
+        content: 'Resposta',
+        showBriefingCta: Boolean(mask & 1),
+        showPartnershipCta: !(mask & 1) && Boolean(mask & 2),
+        showCta: !(mask & 3) && Boolean(mask & 4)
+      });
+    }
+  }
+});
+
+test('engineering intent offers an actionable localized qualification button', async () => {
+  assert.match(
+    route,
+    /For Engineering Partnership pricing, proposals or qualification, append exactly \[CTA_PARTNERSHIP\]/
+  );
+  assert.doesNotMatch(route, /append neither marker/);
+  const widget = await readFile(
+    path.join(root, 'src/lib/design/components/AIChatWidget.svelte'),
+    'utf8'
+  );
+  assert.match(widget, /showPartnershipCta = data\.showPartnershipCta \?\? false/);
+  assert.match(widget, /'\/partnership#qualificacao' : '\/parceria#qualificacao'/);
+  assert.match(widget, /href=\{partnershipHref\}[^>]*onclick=\{openPartnership\}/);
+  assert.match(widget, /entry: 'chat'/);
+  assert.ok(
+    widget.indexOf('{#if showBriefingCta') < widget.indexOf('{:else if showPartnershipCta')
+  );
+  assert.ok(widget.indexOf('{:else if showPartnershipCta') < widget.indexOf('{:else if showCta'));
 });
 
 test('sanitizeMessages drops forged roles and non-string content', () => {

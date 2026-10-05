@@ -66,7 +66,7 @@ test('Satwake retains the Briefing BTC name and existing localized destination',
 test('navigation uses reviewed public destinations and existing locale routes', () => {
   for (const [locale, content] of Object.entries(productsContent)) {
     const prefix = locale === 'pt-BR' ? '/produtos' : '/products';
-    const contact = locale === 'pt-BR' ? '/contato' : '/contact';
+    const contact = locale === 'pt-BR' ? '/parceria' : '/partnership';
     // Public CMS endpoints verified before adding these links. A matching
     // dynamic route alone would not detect an absent CMS object.
     const reviewedPaths = new Set([

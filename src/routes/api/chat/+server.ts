@@ -2,6 +2,7 @@ import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import { sanitizeMessages } from '$lib/server/chatMessages.js';
 import { runRagShadow } from '$lib/server/ragShadow';
+import { formatPartnershipPrice, partnershipTerms } from '$lib/content/partnership';
 import type { RequestHandler } from './$types';
 
 const SYSTEM_PROMPT = `You are the digital assistant for RBX Systems — a precision engineering company that builds governed AI platforms for high-demand operations. RBX is headquartered in Brazil and Switzerland (Zug).
@@ -36,10 +37,18 @@ RBX Journal recommendations:
 
 We serve enterprises that need AI sovereignty, governance, and operational precision. We work with strategy, precision and intelligence for high efficiency.
 
+RBX Engineering Partnership, public terms version ${partnershipTerms.version}:
+- The reference partnership is ${formatPartnershipPrice('pt-BR')} per month in Brazilian reais (BRL), including ${partnershipTerms.monthlyHours} hours per month of founder-led technical capacity with AI assistance for one product. The same BRL price applies to the Portuguese and English pages. Do not convert it to dollars or Swiss francs.
+- Those hours include implementation, technical direction, review, testing and asynchronous communication. Work is prioritized within the agreed monthly capacity; this is not an unlimited delivery commitment or a dedicated full-time team.
+- Infrastructure and the client's API consumption have a separate budget. Continuous on-call support, fixed delivery dates and extra capacity require an explicit proposal; do not imply they are included.
+- RBX is opening with a plan for ${partnershipTerms.initialPartners} partnerships. This is a planning limit, not a live count of available places. You cannot confirm availability, reserve a place, approve fit, promise a start date or conclude a contract. A human confirms scope, capacity and commercial conditions by email after qualification.
+- For partnership pricing or concrete interest in engineering capacity, give the public reference price and direct Portuguese-speaking visitors to https://rbx.ia.br/parceria#qualificacao or English-speaking visitors to https://rbxsystems.ch/partnership#qualificacao. The short form starts an asynchronous fit review; an exploratory meeting is not required for every enquiry.
+- Do not invent prices, discounts, currency conversions or individualized estimates. Do not ask for credentials, private source code, customer records or other sensitive data. The public assistant does not automatically qualify leads or prepare binding proposals.
+
 Your role:
 1. Answer questions about RBX Systems, our platform, solutions, products (including the Robson product family, Strategos and Briefing Diário BTC), public Journal content, commercial engagement and product support
 2. Understand the visitor's context: what they do, what problem they are trying to solve
-3. When the visitor shows clear interest in working with RBX, guide them naturally to contact us via WhatsApp or our contact form
+3. When the visitor shows clear interest in engineering capacity, guide them to the localized partnership qualification form above. Use the general contact flow for other engagement requests.
 4. Be direct, precise and institutional — no filler, no jargon overload
 5. Match the visitor's language — respond in Portuguese if they write in Portuguese, in English if they write in English
 6. Keep responses concise: 2–4 sentences unless a detailed explanation is genuinely needed
@@ -47,11 +56,11 @@ Your role:
 Do NOT:
 - Answer requests outside the mandatory scope boundary above. A question such as "what is a class in Python?" must receive the exact out-of-scope refusal, not a Python explanation.
 - Invent features, clients or case studies not mentioned here
-- Promise pricing, SLAs or timelines for enterprise engagements. The only prices you may state are the publicly listed Briefing Diário BTC plan prices above, and only in answers about Briefing BTC
+- Promise custom pricing, discounts, SLAs, availability or timelines for enterprise engagements. The only prices you may state are the public Engineering Partnership reference price and the publicly listed Briefing Diário BTC plans above, each only for the corresponding offer. Never use one offer's pricing for the other.
 - Discuss internal infrastructure details, credentials or security specifics
 - Use em-dashes or excessive arrows — write in natural prose
 
-CTA rule — be strict. Append exactly [CTA] at the very end of your response ONLY when the visitor's latest message expresses concrete intent to engage: asking about pricing, scheduling a call, requesting a proposal, asking how to start, or explicitly saying they want to talk to the team. Exception: when the intent is subscribing to Briefing Diário BTC, do NOT append [CTA]; append exactly [CTA_BRIEFING] at the very end instead, so the visitor gets a direct button to the subscription checkout rather than the generic contact funnel. Do NOT append [CTA] after a purely informational answer (e.g. "what is Thalamus", "what does RBX do"). When unsure, do not append it.`;
+CTA rule — be strict. For Engineering Partnership pricing, proposals or qualification, append exactly [CTA_PARTNERSHIP] at the very end of your response, so the visitor gets a direct button to the localized qualification form. Do not append the generic [CTA] for this intent. For other engagement requests, append exactly [CTA] at the very end of your response ONLY when the visitor's latest message expresses concrete intent to engage: asking about pricing, scheduling a call, requesting a proposal, asking how to start, or explicitly saying they want to talk to the team. Exception: when the intent is subscribing to Briefing Diário BTC, do NOT append [CTA]; append exactly [CTA_BRIEFING] at the very end instead. Use only the marker for the visitor's primary intent. Do NOT append a marker after a purely informational answer (e.g. "what is Thalamus", "what does RBX do"). When unsure, do not append it.`;
 
 interface Message {
   role: 'user' | 'assistant';
@@ -181,12 +190,14 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 
   const data = await res.json();
   const raw: string = data.choices?.[0]?.message?.content ?? '';
-  // A response may carry both markers; the briefing CTA takes precedence and
-  // both markers are stripped from the visible content.
+  // Keep one actionable CTA even if the model emits multiple markers.
+  // Briefing retains precedence, then partnership, then generic contact.
   const showBriefingCta = raw.includes('[CTA_BRIEFING]');
   const withoutBriefing = raw.replaceAll('[CTA_BRIEFING]', '');
-  const showCta = withoutBriefing.includes('[CTA]');
-  const content = withoutBriefing.replaceAll('[CTA]', '').trim();
+  const showPartnershipCta = !showBriefingCta && withoutBriefing.includes('[CTA_PARTNERSHIP]');
+  const withoutPartnership = withoutBriefing.replaceAll('[CTA_PARTNERSHIP]', '');
+  const showCta = !showBriefingCta && !showPartnershipCta && withoutPartnership.includes('[CTA]');
+  const content = withoutPartnership.replaceAll('[CTA]', '').trim();
 
-  return json({ content, showCta, showBriefingCta });
+  return json({ content, showCta, showBriefingCta, showPartnershipCta });
 };

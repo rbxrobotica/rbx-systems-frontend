@@ -1,9 +1,5 @@
-import { loadPage } from '$lib/server/content/gateway';
 import { detectLocaleFromUrl } from '$lib/i18n/locale';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ url }) => {
-  const locale = detectLocaleFromUrl(url);
-  const page = await loadPage('partnership', locale);
-  return { locale, page };
-};
+// Approved commercial terms are versioned with the frontend, without a CMS fetch.
+export const load: PageServerLoad = ({ url }) => ({ locale: detectLocaleFromUrl(url) });

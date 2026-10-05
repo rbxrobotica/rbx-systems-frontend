@@ -3,7 +3,7 @@ import type { Locale } from '$types/content';
 type Localized = Record<Locale, string>;
 
 export interface ProductEvidence {
-  id: string;
+  id: 'robson' | 'strategos' | 'verentir' | 'thalamus' | 'robson-code' | 'satwake';
   name: string;
   description: Localized;
   repository: string;

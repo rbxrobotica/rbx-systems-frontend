@@ -21,12 +21,13 @@ along with the unused `products.*` translations.
 
 Trade-off: listing edits require a frontend release instead of an S3 content
 update. Existing `site/{locale}/products/index.md` objects remain untouched and
-no longer supply these two listing routes. The listing makes zero content/API
+no longer supply these two listing routes. The listing makes zero CMS
 requests, so a CMS outage does not prevent it from rendering. The evidence gallery
 loads one selected local JPEG lazily, bounded to six images if every product is
 visited. Public evidence
-links are navigation, not render dependencies. There are no new dependencies,
-mutations, listeners or background jobs in this change.
+links are navigation, not render dependencies. Optional analytics requests measure
+interactions and bounded visibility observers are cleaned up on unmount. The
+portfolio adds no dependencies, business mutations or background jobs.
 
 The two Robson loaders use `loadPageOrNull`: a missing CMS object renders the
 existing localized fallback, while a CMS outage still propagates as an error.
@@ -55,11 +56,24 @@ commercial availability, availability guarantees or financial performance.
 
 The canonical register is
 `rbx-growth/marketing/2026-h2-growth/research/claims-register.md`; it identifies
-claims by section and text, not IDs. The CTA and commercial scope follow
-`rbx-growth/marketing/2026-h2-growth/strategy/offers.md`: an ongoing Engineering
-Partnership with agreed roadmap and responsibilities. No new ICP, standalone
-project offer, public pricing or financial outcome is introduced. Content
-subscriptions and the engineering partnership remain separate engagements.
+claims by section and text, not IDs. The ongoing Engineering Partnership retains
+the agreed roadmap and responsibilities described in
+`rbx-growth/marketing/2026-h2-growth/strategy/offers.md`.
+
+**Commercial policy superseded on 2026-10-05:** the earlier instruction to keep
+partnership pricing private was superseded for this frontend offer by the
+operator's explicit approval in this conversation. The approved reference is
+R$ 8,000 per month for 16 monthly hours of founder-led technical capacity with AI
+assistance for one product. The Portuguese and English pages publish the same
+price in BRL. This does not introduce a new ICP, a standalone project offer or a
+financial outcome claim. Content subscriptions and the engineering partnership
+remain separate engagements. See [Engineering Partnership](engineering-partnership.md)
+for the decision, capacity limits, qualification flow and architecture.
+
+The portfolio remains the evidence surface. Its partnership CTA links to the
+separate `/parceria` or `/partnership` offer page, which explains price, included
+capacity and boundaries before inviting asynchronous qualification. The portfolio
+does not embed a second lead form or require contact details to view evidence.
 
 ## B2B evolution requested by the operator
 
@@ -120,7 +134,7 @@ runtime repair is outside this frontend portfolio change.
 
 All six captures were inspected before inclusion. The metadata declares actual
 JPEG dimensions. Lazy loading bounds initial transfer to the selected capture;
-there are no timers, persistent gallery state or subscriptions. If an image
+there are no timers, persistent gallery state or subscriptions. Visibility observers are disconnected after their first event or on unmount; optional analytics requests are separate from content loading. If an image
 cannot load, its alt text, caption, code and source references remain available.
 The gallery is a versioned snapshot and requires an intentional refresh as the
 products evolve; it does not claim continuous synchronization with `main`.
@@ -145,7 +159,9 @@ is linked. The implemented member area informs the architecture, while the
 visitor receives public product and engineering references. `llms.txt` and the
 assistant identify the Satwake / Briefing BTC alias; the assistant’s unsupported
 delivery deadline, Free-window and complete-archive statements are also corrected.
-Existing sitemap paths are retained because no public route changed.
+Existing product sitemap paths are retained. The Engineering Partnership uses
+the existing localized `/parceria` and `/partnership` paths; the offer, assistant
+guidance and `llms.txt` now share the versioned public terms.
 
 ## Disclosure source and voice
 
@@ -159,7 +175,8 @@ contract without requiring another repository in CI. The upstream marketing
 source discrepancy is recorded rather than silently described as agreement.
 
 Destination: R1 institutional, R3 labels, R6 overlay; RBX Voice System v0.1.
-One partnership CTA. Product/source/article links are navigation. No financial
+Header and footer CTAs link to the same separate partnership offer page.
+Product/source/article links are navigation. No financial
 promises, invented metrics, private diagnostics or unsupported maturity claims.
 Existing editorial and production authorization rules remain applicable; this
 change does not approve financial copy, the draft Robson legal text or a release.
@@ -189,7 +206,8 @@ Use pnpm 9 and the committed lockfile. Run `pnpm check`, `pnpm test`,
 files. Inspect responsive desktop/mobile layout, PT-BR/EN metadata, ten
 CollectionPage items (excluding the external reference), and navigation.
 
-On 2026-10-05, Svelte check returned zero errors/warnings; all 64 tests, SEO,
+For the portfolio and gallery implementation on 2026-10-05, Svelte check returned
+zero errors/warnings; all 64 tests, SEO,
 ESLint, Prettier and the production build passed. Desktop and 390 px mobile
 inspection included the blockchain, metaverse and AI section without horizontal
 overflow. All six gallery selections loaded their matching captures; native code

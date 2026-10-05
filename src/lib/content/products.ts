@@ -276,8 +276,8 @@ export const productsContent: Record<Locale, ProductsContent> = {
     collaborationTitle: 'RBX Engineering Partnership',
     collaborationLead:
       'Parceria continuada de engenharia de produto, com roadmap, responsabilidades e critérios de aceite acordados. Arquitetura, implementação e operação entram no escopo conforme o contexto.',
-    contactLabel: 'Conversar sobre uma parceria de engenharia',
-    contactHref: '/contato',
+    contactLabel: 'Conhecer a parceria de engenharia',
+    contactHref: '/parceria',
     legalLabel: 'Aviso legal e condições de uso',
     financialNote:
       'Este briefing é material de preparação operacional e governança. Não constitui recomendação de investimento, sinal de trading ou orientação financeira. A decisão de operar é exclusiva do operador humano. Este produto não gera ordens, não recomenda compra/venda e não aciona sistemas de execução.'
@@ -500,8 +500,8 @@ export const productsContent: Record<Locale, ProductsContent> = {
     collaborationTitle: 'RBX Engineering Partnership',
     collaborationLead:
       'An ongoing product engineering partnership, with an agreed roadmap, responsibilities and acceptance criteria. Architecture, implementation and operations enter the scope according to the context.',
-    contactLabel: 'Discuss an engineering partnership',
-    contactHref: '/contact',
+    contactLabel: 'Explore the engineering partnership',
+    contactHref: '/partnership',
     legalLabel: 'Legal notice and terms of use',
     financialNote:
       'This briefing is operational preparation and governance material. It does not constitute investment advice, a trading signal or financial guidance. The decision to trade belongs exclusively to the human operator. This product does not generate orders, does not recommend buying or selling and does not trigger execution systems.'
