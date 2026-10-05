@@ -22,7 +22,9 @@ along with the unused `products.*` translations.
 Trade-off: listing edits require a frontend release instead of an S3 content
 update. Existing `site/{locale}/products/index.md` objects remain untouched and
 no longer supply these two listing routes. The listing makes zero content/API
-requests, so a CMS outage does not prevent it from rendering. Public evidence
+requests, so a CMS outage does not prevent it from rendering. The evidence gallery
+loads one selected local JPEG lazily, bounded to six images if every product is
+visited. Public evidence
 links are navigation, not render dependencies. There are no new dependencies,
 mutations, listeners or background jobs in this change.
 
@@ -80,6 +82,48 @@ and [IPFS privacy and encryption](https://docs.ipfs.tech/concepts/privacy-and-en
 These support the separation of chain records and content storage, not a claim
 that RBX has already deployed this combined experience. Any register updates or
 operational implementation remain separate from this requested frontend scope.
+
+## Product screenshots and main-branch excerpts
+
+The operator requested screenshots and selected code excerpts for Robson,
+Strategos, Verentir, Thalamus, Robson Code and Satwake. `ProductEvidence.svelte`
+presents them in a manually selected gallery. Code stays escaped text, inside
+native expandable details. Captures are versioned local assets; no external
+iframe, production API, live repository request or automatic carousel is used.
+The selected capture can be opened at its original size. Captions and code
+descriptions are available in PT-BR and EN.
+
+Main heads and selected source bytes were checked against GitHub on 2026-10-05.
+The page records both the code and capture revisions because a product can have
+separate interface and service repositories. Public code links point to `main`
+and to the captured commit; the latter preserves the quoted line range when
+`main` moves. Private repositories remain private. Only the operator-requested,
+reviewed excerpts are included, without inaccessible GitHub links, credentials,
+customer data, internal addresses or deployment configuration.
+
+| Product     | Code source and main revision                                                                                              | Capture source and scope                                                                                                                                                                                                                                   |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Robson      | `ldamasio/robson`, `0cef339b22f5c458fd73511238f75fabc527f899`, `robson-domain/src/policy.rs:225–237`                       | Same revision, actual dashboard components with synthetic fixtures from the repository tests. A local harness blocks external connections and mutations. The screenshot carries a synthetic-data banner; prices and balances are not performance evidence. |
+| Strategos   | `rbxrobotica/strategos-ui`, `ca6f6a7d157e7138a774bc35ff6c29e549097f59`, `src/types/agent.ts:78–90`                         | Same revision, cockpit with bundled demo data and synthetic local identity. No private plan or production account is shown.                                                                                                                                |
+| Verentir    | `rbxrobotica/verentir`, `7e37fa40ba961ab09482525738f3f5ecf9b3df13`, `src/domain.rs:199–210`                                | Same revision, exact embedded console HTML with local read-only fixtures marked DEMO. Scores are illustrative, not measured production outcomes.                                                                                                           |
+| Thalamus    | `rbxrobotica/thalamus-core`, `fd19dc4107a479ce9072c41a6f7de4805991d03c`, `crates/thalamus-core/src/policy.rs:7–18`         | Same revision's console components, disconnected with default demo values. An isolated preview bootstrap repair is disclosed below and in the caption. No request was submitted.                                                                           |
+| Robson Code | `rbxrobotica/robson-code`, `db646e02f1dcef0eb9dcac3afa743fa59d62017c`, `crates/robson-code-protocol/src/commands.rs:38–51` | Actual stdout of `robson-code query --help`, built from the same revision and shown in a neutral text viewer. This is a CLI capture, not a separate product UI or an active AI session.                                                                    |
+| Satwake     | `rbxrobotica/rbx-market-briefing`, `e05a6a077d8dfcfc8dded9a5a9b2101afb8cf4f1`, `src/pipeline/publisher.ts:130–140`         | Landing from `rbxrobotica/rbx-landing-briefing-btc` main `c6f6b58f8cec25a95b98166cac4d51861d858845`, explicitly showing a schematic edition sample. Analytics disabled; no payment, login or member content was accessed.                                  |
+
+Thalamus preview limitation: the exact console main plus its lockfile reproduced
+Svelte's `effect_orphan` error because `console/src/lib/config.svelte.ts` creates
+a module-level `$effect`. The temporary preview wraps that existing effect in
+`$effect.root`; all UI components and original checkouts are unchanged. The
+caption discloses the local initialization adjustment, so the capture is not
+presented as evidence of an unmodified working production service. The upstream
+runtime repair is outside this frontend portfolio change.
+
+All six captures were inspected before inclusion. The metadata declares actual
+JPEG dimensions. Lazy loading bounds initial transfer to the selected capture;
+there are no timers, persistent gallery state or subscriptions. If an image
+cannot load, its alt text, caption, code and source references remain available.
+The gallery is a versioned snapshot and requires an intentional refresh as the
+products evolve; it does not claim continuous synchronization with `main`.
 
 ## Navigation review
 
@@ -145,10 +189,14 @@ Use pnpm 9 and the committed lockfile. Run `pnpm check`, `pnpm test`,
 files. Inspect responsive desktop/mobile layout, PT-BR/EN metadata, ten
 CollectionPage items (excluding the external reference), and navigation.
 
-On 2026-10-05, Svelte check returned zero errors/warnings; all 59 tests, SEO,
+On 2026-10-05, Svelte check returned zero errors/warnings; all 64 tests, SEO,
 ESLint, Prettier and the production build passed. Desktop and 390 px mobile
 inspection included the blockchain, metaverse and AI section without horizontal
-overflow. A built-app smoke check with a local S3 stub confirmed localized
+overflow. All six gallery selections loaded their matching captures; native code
+expansion and horizontal keyboard scrolling were verified on mobile. The six
+JPEGs total 434,089 bytes; asset tests verify exact dimensions and transfer
+budgets. An independent review compared all six code excerpts with their recorded
+source revisions and found no mismatch. A built-app smoke check with a local S3 stub confirmed localized
 Robson fallback rendering for missing content, propagation of CMS failures,
 and both catalog routes rendering correct canonicals and ten structured items
 without CMS requests. The final independent content/markup review found no

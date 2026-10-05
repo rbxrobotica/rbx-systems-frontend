@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import Seo from './Seo.svelte';
+  import ProductEvidence from './ProductEvidence.svelte';
   import { productsContent } from '$lib/content/products';
   import { buildGraph, collectionPageSchema } from '$lib/seo/schema';
   import type { Locale } from '$types/content';
@@ -105,6 +106,8 @@
       {/each}
     </div>
   </section>
+
+  <ProductEvidence {locale} />
 
   <section class="platform" aria-labelledby="platform-title">
     <div class="section-heading">
