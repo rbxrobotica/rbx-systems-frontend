@@ -89,12 +89,6 @@
     "headline": "Solutions",
     "body": "Engineering capabilities for operations that demand control, governance and predictable scale."
   },
-  "products": {
-    "metaTitle": "RBX Systems Products · Strategos, Ledger, Yield, Maestro, Robson & Verentir",
-    "metaDescription": "Products and open-source software by RBX Systems: Strategos, RBX Ledger, RBX Yield, RBX Maestro, Robson, Verentir and Argos Radar. Systems for decisions, finance and operations.",
-    "headline": "Products",
-    "body": "Products and open-source systems built by RBX for high-demand operations."
-  },
   "journal": {
     "metaTitle": "RBX Journal · Engineering, AI & Field Notes",
     "metaDescription": "Ideas, engineering and field notes from RBX Systems. Technical articles on AI, LLMOps, agents, software and infrastructure.",

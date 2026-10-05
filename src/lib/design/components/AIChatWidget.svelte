@@ -1,6 +1,7 @@
 <script lang="ts">
   import { locale } from 'svelte-i18n';
   import { tick } from 'svelte';
+  import { trackPartnershipEvent } from '$lib/analytics/partnership';
 
   interface Props {
     onclose: () => void;
@@ -18,8 +19,8 @@
 
   function welcomeMessage(): string {
     return $locale?.startsWith('en')
-      ? "Hello! I'm the RBX Systems assistant. How can I help you today? I can tell you about our AI platform (TruthMetal, Thalamus, Orchestration, Governance), solutions and how we work with high-demand enterprises."
-      : 'Olá! Sou o assistente da RBX Systems. Como posso ajudar? Posso falar sobre nossa plataforma de IA (TruthMetal, Thalamus, Orquestração, Governança), soluções e como trabalhamos com empresas de alta exigência.';
+      ? "Hello, I'm the RBX Systems assistant. I can explain our products, AI platform and Engineering Partnership. How can I help?"
+      : 'Olá, sou o assistente da RBX Systems. Posso explicar nossos produtos, a plataforma de IA e a Engineering Partnership. Como posso ajudar?';
   }
 
   let messages = $state<Message[]>([{ role: 'assistant', content: welcomeMessage() }]);
@@ -27,6 +28,7 @@
   let loading = $state(false);
   let showCta = $state(false);
   let showBriefingCta = $state(false);
+  let showPartnershipCta = $state(false);
   let messagesEl = $state<HTMLDivElement | undefined>();
 
   async function scrollBottom() {
@@ -43,6 +45,7 @@
     loading = true;
     showCta = false;
     showBriefingCta = false;
+    showPartnershipCta = false;
     await scrollBottom();
 
     try {
@@ -64,11 +67,16 @@
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-      const data: { content: string; showCta: boolean; showBriefingCta?: boolean } =
-        await res.json();
+      const data: {
+        content: string;
+        showCta: boolean;
+        showBriefingCta?: boolean;
+        showPartnershipCta?: boolean;
+      } = await res.json();
       messages = [...messages, { role: 'assistant', content: data.content }];
       showCta = data.showCta;
       showBriefingCta = data.showBriefingCta ?? false;
+      showPartnershipCta = data.showPartnershipCta ?? false;
     } catch {
       const errMsg = $locale?.startsWith('en')
         ? 'Sorry, I could not connect right now. Please try again in a moment.'
@@ -100,6 +108,25 @@
   const ctaBriefing = $derived(
     $locale?.startsWith('en') ? 'Subscribe to the BTC Briefing' : 'Assinar o Briefing BTC'
   );
+  const partnershipLocale = $derived($locale?.startsWith('en') ? 'en' : 'pt-BR');
+  const partnershipHref = $derived(
+    partnershipLocale === 'en' ? '/partnership#qualificacao' : '/parceria#qualificacao'
+  );
+  const ctaPartnership = $derived(
+    partnershipLocale === 'en'
+      ? 'Check fit and availability'
+      : 'Verificar adequação e disponibilidade'
+  );
+
+  function openPartnership() {
+    trackPartnershipEvent('cta_click', {
+      locale: partnershipLocale,
+      surface: 'partnership',
+      entry: 'chat',
+      destination: 'qualification'
+    });
+    onclose();
+  }
 </script>
 
 <div class="panel" class:pending={loading} role="dialog" aria-modal="true" aria-label={label}>
@@ -163,6 +190,12 @@
              ?subscribe=1 opens the plan modal on arrival. -->
         <a href="https://briefingbtc.merovelis.com" class="cta-btn primary" onclick={onclose}
           >{ctaBriefing}</a
+        >
+      </div>
+    {:else if showPartnershipCta && !loading}
+      <div class="cta-row">
+        <a href={partnershipHref} class="cta-btn primary" onclick={openPartnership}
+          >{ctaPartnership}</a
         >
       </div>
     {:else if showCta && !loading}

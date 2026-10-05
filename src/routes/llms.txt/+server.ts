@@ -2,6 +2,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 import { detectLocaleFromUrl } from '$lib/i18n/locale';
 import { t } from '$lib/i18n/translate';
 import { SERVICE_ROUTES, servicePublicPath } from '$lib/services/catalog';
+import { formatPartnershipPrice, partnershipTerms } from '$lib/content/partnership';
 import type { Locale } from '$types/content';
 
 const siteUrlByLocale: Record<Locale, string> = {
@@ -48,16 +49,18 @@ const institutionalByLocale: Record<Locale, { label: string; path: string; note:
 
 const headings: Record<
   Locale,
-  Record<'services' | 'products' | 'institutional' | 'journal', string>
+  Record<'services' | 'partnership' | 'products' | 'institutional' | 'journal', string>
 > = {
   'pt-BR': {
     services: 'Serviços',
+    partnership: 'Parceria de engenharia',
     products: 'Produtos',
     institutional: 'Institucional',
     journal: 'Journal'
   },
   en: {
     services: 'Services',
+    partnership: 'Engineering partnership',
     products: 'Products',
     institutional: 'Institutional',
     journal: 'Journal'
@@ -89,12 +92,25 @@ export const GET: RequestHandler = async ({ url }) => {
     locale === 'pt-BR'
       ? [
           link('Robson', '/produtos/robson', t(locale, 'robson.headline')),
-          link('Briefing BTC', '/produtos/briefing-btc', t(locale, 'briefing.headline'))
+          link('Satwake / Briefing BTC', '/produtos/briefing-btc', t(locale, 'briefing.headline'))
         ]
       : [
           link('Robson', '/products/robson', t(locale, 'robson.headline')),
-          link('Briefing BTC', '/products/briefing-btc', t(locale, 'briefing.headline'))
+          link('Satwake / Briefing BTC', '/products/briefing-btc', t(locale, 'briefing.headline'))
         ];
+
+  const partnershipLink =
+    locale === 'pt-BR'
+      ? link(
+          'RBX Engineering Partnership',
+          '/parceria#qualificacao',
+          `${formatPartnershipPrice(locale)}/mês, em reais (BRL), por ${partnershipTerms.monthlyHours} horas mensais de capacidade técnica liderada pelo fundador com assistência de IA para um produto. Implementação, revisão, testes e comunicação assíncrona incluídos nessa capacidade. Infraestrutura e consumo de APIs do cliente têm orçamento separado. A qualificação inicia pelo formulário; escopo, disponibilidade e início são confirmados por uma pessoa da RBX por e-mail. Não é contratação automática. Condições de referência: ${partnershipTerms.version}.`
+        )
+      : link(
+          'RBX Engineering Partnership',
+          '/partnership#qualificacao',
+          `${formatPartnershipPrice(locale)}/month, in Brazilian reais (BRL), for ${partnershipTerms.monthlyHours} monthly hours of founder-led technical capacity with AI assistance for one product. Implementation, review, testing and asynchronous communication share that capacity. Infrastructure and the client's API consumption have a separate budget. Qualification starts with the form; an RBX team member confirms scope, availability and start date by email. This is not automatic contracting. Reference terms: ${partnershipTerms.version}.`
+        );
 
   const institutionalLinks = institutionalByLocale[locale].map((page) =>
     link(page.label, page.path, page.note)
@@ -118,6 +134,10 @@ export const GET: RequestHandler = async ({ url }) => {
 ## ${h.services}
 
 ${serviceLinks.join('\n')}
+
+## ${h.partnership}
+
+${partnershipLink}
 
 ## ${h.products}
 
