@@ -10,6 +10,7 @@ interface Product {
   note?: string;
   href?: string;
   linkLabel?: string;
+  secondaryLinks?: { href: string; label: string }[];
 }
 
 interface ProductsContent {
@@ -22,6 +23,14 @@ interface ProductsContent {
   featuredTitle: string;
   featuredLead: string;
   products: Product[];
+  externalTitle: string;
+  externalReference: Product;
+  additionalTitle: string;
+  additionalLead: string;
+  additionalProducts: Pick<
+    Product,
+    'id' | 'name' | 'description' | 'context' | 'href' | 'linkLabel'
+  >[];
   platformEyebrow: string;
   platformTitle: string;
   platformLead: string;
@@ -31,9 +40,13 @@ interface ProductsContent {
   sovereigntyTitle: string;
   sovereigntyLead: string;
   principles: { title: string; description: string }[];
+  evolutionTitle: string;
+  evolutionLead: string;
+  evolutionCards: { title: string; description: string }[];
+  evolutionNote: string;
   referencesTitle: string;
   referencesLead: string;
-  references: { name: string; title: string; description: string; href: string; label: string }[];
+  references: { name: string; title: string; description: string; href?: string; label?: string }[];
   collaborationTitle: string;
   collaborationLead: string;
   contactLabel: string;
@@ -48,14 +61,14 @@ export const productsContent: Record<Locale, ProductsContent> = {
   'pt-BR': {
     title: 'Produtos e plataformas',
     description:
-      'Robson, Strategos, Verentir, Satwake e o ecossistema Kulinaryos. Engenharia de produtos, plataformas de conteúdo pago e infraestrutura com soberania dos dados.',
-    eyebrow: 'Produtos & ecossistema',
-    headline: 'Da infraestrutura à experiência de quem usa.',
-    lead: 'Construímos produtos e a base que os sustenta: identidade, conteúdo, pagamentos e operação. Este portfólio reúne sistemas da RBX e projetos do nosso ecossistema.',
+      'Produtos e plataformas da RBX: Robson, Strategos, Verentir e Satwake / Briefing BTC. Capacidades de engenharia de conteúdo, identidade e infraestrutura soberana.',
+    eyebrow: 'Produtos & plataformas',
+    headline: 'Produtos e plataformas da RBX.',
+    lead: 'Conheça os produtos e componentes que desenvolvemos, seus estágios e as capacidades de engenharia que os sustentam: identidade, conteúdo, pagamentos e operação.',
     disciplines: ['Engenharia de produto', 'IA aplicada', 'Infraestrutura soberana'],
     featuredTitle: 'Projetos em destaque',
     featuredLead:
-      'Aplicações em execução financeira, decisão estratégica, avaliação de IA, conteúdo por assinatura e gestão gastronômica.',
+      'Execução e risco, decisão estratégica, avaliação de IA e conteúdo por assinatura. Cada produto tem seu próprio escopo e estágio de disponibilidade.',
     products: [
       {
         id: 'robson',
@@ -67,7 +80,8 @@ export const productsContent: Record<Locale, ProductsContent> = {
         capabilities: ['Execução determinística', 'Rastreabilidade'],
         note: 'Não é autotrader, não prevê preços e não gera sinais. Operar cripto envolve risco de perda.',
         href: '/produtos/robson',
-        linkLabel: 'Sobre o Robson'
+        linkLabel: 'Sobre o Robson',
+        secondaryLinks: [{ href: 'https://github.com/ldamasio/robson', label: 'Código-fonte' }]
       },
       {
         id: 'strategos',
@@ -91,33 +105,86 @@ export const productsContent: Record<Locale, ProductsContent> = {
       },
       {
         id: 'satwake',
-        name: 'Satwake',
+        name: 'Satwake / Briefing BTC',
         category: 'Conteúdo por assinatura',
-        context: 'Evolução do Briefing BTC',
+        context: 'Edições publicadas',
         description:
           'Leitura operacional do mercado BTC Futuros, com edições em área autenticada. O acesso por plano separa a leitura recente do histórico disponível e dos artefatos para download.',
-        capabilities: ['Área de membros', 'Acesso por plano', 'Artefatos verificáveis'],
+        capabilities: ['Área de membros', 'Acesso por plano', 'Artefatos auditáveis'],
         note: 'Material de preparação operacional. Não é recomendação de investimento.',
         href: '/produtos/briefing-btc',
         linkLabel: 'Sobre o Satwake / Briefing BTC'
+      }
+    ],
+    externalTitle: 'Referência externa · Food Process',
+    externalReference: {
+      id: 'kulinaryos',
+      name: 'Kulinaryos',
+      category: 'Gestão gastronômica',
+      context: 'Ecossistema Food Process',
+      description:
+        'Plataforma de gestão para cozinhas e restaurantes, de propriedade e operação da Food Process. Apresentada como referência externa de software gastronômico.',
+      capabilities: ['Software de gestão', 'Operação de restaurantes'],
+
+      href: 'https://kulinaryos.com',
+      linkLabel: 'Site do Kulinaryos'
+    },
+    additionalTitle: 'Outros produtos e componentes',
+    additionalLead:
+      'O portfólio também inclui estas linhas de desenvolvimento e componentes de plataforma.',
+    additionalProducts: [
+      {
+        id: 'ledger',
+        name: 'RBX Ledger',
+        context: 'Em desenvolvimento',
+        description: 'Registro de transações e relatórios financeiros com trilha de auditoria.',
+        href: '/blog/2026-08-07-evidence-authority-boundaries',
+        linkLabel: 'Arquitetura no Journal'
       },
       {
-        id: 'kulinaryos',
-        name: 'Kulinaryos',
-        category: 'Gestão gastronômica',
-        context: 'Ecossistema Food Process',
+        id: 'yield',
+        name: 'RBX Yield',
+        context: 'Capacidade proposta',
+        description: 'Relacionar custos e uso de IA a resultados de negócio.',
+        href: '/blog/2026-08-07-evidence-authority-boundaries',
+        linkLabel: 'Arquitetura no Journal'
+      },
+      {
+        id: 'maestro',
+        name: 'RBX Maestro',
+        context: 'Orquestração de agentes',
         description:
-          'Plataforma de gestão para operações de cozinha e restaurantes. Integra este portfólio como referência de atuação do fundador da RBX no ecossistema de software gastronômico.',
-        capabilities: ['Software de gestão', 'Operação de restaurantes'],
-        note: 'Produto de propriedade e operação da Food Process.',
-        href: 'https://kulinaryos.com',
-        linkLabel: 'Site do Kulinaryos'
+          'Coordenação de missões e agentes, com estados, sessões e controles de execução.',
+        href: '/produtos/maestro',
+        linkLabel: 'Sobre o Maestro'
+      },
+      {
+        id: 'argos-radar',
+        name: 'Argos Radar',
+        context: 'Experimental',
+        description: 'Projeto de monitoramento de oportunidades de financiamento sustentável.'
+      },
+      {
+        id: 'thalamus',
+        name: 'Thalamus',
+        context: 'Controle de IA',
+        description: 'Controle de chamadas de IA com políticas, roteamento e auditoria.',
+        href: '/blog/2026-07-29-governed-public-rag',
+        linkLabel: 'Arquitetura no Journal'
+      },
+      {
+        id: 'truthmetal',
+        name: 'TruthMetal',
+        context: 'Avaliação de IA',
+        description: 'Datasets e critérios de referência para avaliações de IA.',
+        href: '/blog/2026-07-29-governed-public-rag',
+        linkLabel: 'Arquitetura no Journal'
       }
     ],
     platformEyebrow: 'Capacidade de implementação',
-    platformTitle: 'Conteúdo pago. Dados sob seu controle.',
+    platformTitle: 'Engenharia para plataformas de conteúdo pago.',
     platformLead:
-      'Implementamos a plataforma e a infraestrutura para publicar conteúdo, gerir assinaturas e entregar acesso reservado. As capacidades de identidade, pagamento e publicação da RBX formam a base para um projeto sob medida.',
+      'Publicação, identidade e pagamentos compõem a arquitetura de uma plataforma de conteúdo pago. Na Engineering Partnership, o roadmap acordado define as integrações e responsabilidades de implementação.',
     layers: [
       {
         title: 'Publicar',
@@ -137,51 +204,79 @@ export const productsContent: Record<Locale, ProductsContent> = {
     ],
     foundationLabel: 'Infraestrutura da plataforma',
     foundation: 'Identidade · Armazenamento · APIs · Deploy · Observabilidade',
-    sovereigntyTitle: 'Soberania entra na arquitetura.',
+    sovereigntyTitle: 'Infraestrutura soberana. Decisões explícitas sobre os dados.',
     sovereigntyLead:
-      'Em cada implementação, definimos como o negócio e seus usuários controlam os dados: onde ficam, quem acessa e como podem ser recuperados ou transferidos.',
+      'A arquitetura trata a soberania dos dados do usuário como requisito a definir: hospedagem, permissões, formatos de exportação e recuperação entram no roadmap e nos critérios de aceite da parceria.',
     principles: [
       {
         title: 'Controle da infraestrutura',
         description:
-          'Hospedagem e armazenamento sob a governança do projeto, com limites claros para serviços externos.'
+          'Definir quem opera a hospedagem e o armazenamento e quais serviços externos participam da solução.'
       },
       {
         title: 'Controle de acesso',
         description:
-          'Conteúdo privado protegido por identidade e permissões, com separação entre usuários e projetos.'
+          'Projetar permissões e isolamento para que cada usuário acesse apenas o conteúdo autorizado.'
       },
       {
         title: 'Portabilidade planejada',
         description:
-          'Formatos de exportação, retenção e recuperação definidos no escopo, para preservar a autonomia sobre o acervo.'
+          'Definir formatos de exportação, retenção e recuperação antes da implementação, conforme os requisitos dos usuários.'
       }
     ],
-    referencesTitle: 'A experiência por trás da plataforma',
+    evolutionTitle: 'Blockchain, metaverso e IA',
+    evolutionLead:
+      'Frentes de evolução para plataformas de conteúdo na estratégia B2B da RBX. Cada uma pode integrar o roadmap da Engineering Partnership, conforme o modelo de negócio e os requisitos dos usuários.',
+    evolutionCards: [
+      {
+        title: 'Blockchain e proveniência',
+        description:
+          'Registros verificáveis da origem e integridade do conteúdo, conectados à identidade e às regras de acesso. Conteúdo privado e dados pessoais permanecem fora da cadeia, com armazenamento e permissões próprios.'
+      },
+      {
+        title: 'Metaverso e ambientes imersivos',
+        description:
+          'Espaços virtuais e experiências 3D para formação, eventos e comunidades, integrados à identidade e à assinatura da plataforma.'
+      },
+      {
+        title: 'IA na experiência',
+        description:
+          'Assistentes contextuais, descoberta de conteúdo e interação por texto ou voz para personalizar a experiência, com consentimento, controle de acesso e avaliação de qualidade.'
+      }
+    ],
+    evolutionNote:
+      'A soberania dos dados depende do conjunto: armazenamento, gestão de chaves, permissões e portabilidade. Blockchain contribui com registros verificáveis; o escopo de cada integração é definido e validado na parceria.',
+    referencesTitle: 'Referências de implementação',
     referencesLead:
-      'O Portal RBX e a área de conteúdo do ecossistema Merovelis mostram duas aplicações dessas capacidades.',
+      'O Portal e a área de membros orientam estas capacidades técnicas. As referências abaixo descrevem os mecanismos; a assinatura de conteúdo e a parceria de engenharia têm contratações próprias.',
     references: [
       {
         name: 'Portal RBX',
         title: 'Acompanhamento com acesso por projeto',
         description:
-          'Módulos, riscos, roadmap e evidências em uma área autenticada. Cada pessoa acessa os projetos para os quais recebeu permissão.',
-        href: 'https://portal.rbx.ia.br',
-        label: 'Portal RBX · acesso autenticado'
+          'Módulos, riscos, roadmap e evidências em uma área autenticada. Cada pessoa acessa os projetos para os quais recebeu permissão.'
       },
       {
-        name: 'Satwake no ecossistema Merovelis',
+        name: 'Satwake / Briefing BTC',
         title: 'Conteúdo com acesso por assinatura',
         description:
-          'Edições, histórico disponível e artefatos reunidos em uma área de membros. Uma referência concreta para a experiência de uma plataforma de conteúdo pago.',
-        href: 'https://app.merovelis.com/briefing-btc',
-        label: 'Área de membros · acesso autenticado'
+          'Edições, histórico disponível e artefatos reunidos em uma área de membros. A apresentação pública descreve os planos e o acesso ao conteúdo.',
+        href: '/produtos/briefing-btc',
+        label: 'Apresentação pública e planos'
+      },
+      {
+        name: 'Journal RBX',
+        title: 'Publicação e distribuição sob controle',
+        description:
+          'O próprio Journal usa a camada de conteúdo da RBX para publicar artigos e distribuí-los por RSS. O relato técnico público descreve esse fluxo.',
+        href: '/blog/2026-08-02-rbx-journal-rss',
+        label: 'Ler o relato de implementação'
       }
     ],
-    collaborationTitle: 'Um produto próprio, com a base técnica para operar.',
+    collaborationTitle: 'RBX Engineering Partnership',
     collaborationLead:
-      'Para criadores, empresas e parceiros de distribuição, conectamos a experiência do público à plataforma que sustenta o negócio.',
-    contactLabel: 'Conversar sobre um projeto',
+      'Parceria continuada de engenharia de produto, com roadmap, responsabilidades e critérios de aceite acordados. Arquitetura, implementação e operação entram no escopo conforme o contexto.',
+    contactLabel: 'Conversar sobre uma parceria de engenharia',
     contactHref: '/contato',
     legalLabel: 'Aviso legal e condições de uso',
     financialNote:
@@ -190,14 +285,14 @@ export const productsContent: Record<Locale, ProductsContent> = {
   en: {
     title: 'Products and platforms',
     description:
-      'Robson, Strategos, Verentir, Satwake and the Kulinaryos ecosystem. Product engineering, paid content platforms and infrastructure with data sovereignty.',
-    eyebrow: 'Products & ecosystem',
-    headline: 'From infrastructure to the user experience.',
-    lead: 'We build products and the foundations behind them: identity, content, payments and operations. This portfolio brings together RBX systems and projects from our ecosystem.',
+      'RBX products and platforms: Robson, Strategos, Verentir and Satwake / Briefing BTC. Engineering capabilities for content, identity and sovereign infrastructure.',
+    eyebrow: 'Products & platforms',
+    headline: 'RBX products and platforms.',
+    lead: 'Explore the products and components we develop, their stages and the engineering capabilities behind them: identity, content, payments and operations.',
     disciplines: ['Product engineering', 'Applied AI', 'Sovereign infrastructure'],
     featuredTitle: 'Featured projects',
     featuredLead:
-      'Applications in financial execution, strategic decisions, AI evaluation, subscription content and restaurant management.',
+      'Execution and risk, strategic decisions, AI evaluation and subscription content. Each product has its own scope and availability stage.',
     products: [
       {
         id: 'robson',
@@ -209,7 +304,8 @@ export const productsContent: Record<Locale, ProductsContent> = {
         capabilities: ['Deterministic execution', 'Traceability'],
         note: 'It is not an autotrader, does not predict prices and does not generate signals. Crypto trading involves risk of loss.',
         href: '/products/robson',
-        linkLabel: 'About Robson'
+        linkLabel: 'About Robson',
+        secondaryLinks: [{ href: 'https://github.com/ldamasio/robson', label: 'Source code' }]
       },
       {
         id: 'strategos',
@@ -233,33 +329,86 @@ export const productsContent: Record<Locale, ProductsContent> = {
       },
       {
         id: 'satwake',
-        name: 'Satwake',
+        name: 'Satwake / Briefing BTC',
         category: 'Subscription content',
-        context: 'The evolution of Briefing BTC',
+        context: 'Published editions',
         description:
           'Operational reading of the BTC Futures market, with editions in an authenticated area. Plan-based access separates recent reading from available history and downloadable artifacts.',
-        capabilities: ['Member area', 'Plan-based access', 'Verifiable artifacts'],
+        capabilities: ['Member area', 'Plan-based access', 'Auditable artifacts'],
         note: 'Operational preparation material. Not investment advice.',
         href: '/products/briefing-btc',
         linkLabel: 'About Satwake / Briefing BTC'
+      }
+    ],
+    externalTitle: 'External reference · Food Process',
+    externalReference: {
+      id: 'kulinaryos',
+      name: 'Kulinaryos',
+      category: 'Restaurant management',
+      context: 'Food Process ecosystem',
+      description:
+        'A management platform for kitchens and restaurants, owned and operated by Food Process. Presented as an external reference for restaurant software.',
+      capabilities: ['Management software', 'Restaurant operations'],
+
+      href: 'https://kulinaryos.com',
+      linkLabel: 'Kulinaryos website'
+    },
+    additionalTitle: 'Other products and components',
+    additionalLead:
+      'The portfolio also includes these development efforts and platform components.',
+    additionalProducts: [
+      {
+        id: 'ledger',
+        name: 'RBX Ledger',
+        context: 'In development',
+        description: 'Transaction records and financial reports with an audit trail.',
+        href: '/blog/2026-08-07-evidence-authority-boundaries',
+        linkLabel: 'Architecture in the Journal'
       },
       {
-        id: 'kulinaryos',
-        name: 'Kulinaryos',
-        category: 'Restaurant management',
-        context: 'Food Process ecosystem',
+        id: 'yield',
+        name: 'RBX Yield',
+        context: 'Proposed capability',
+        description: 'Connecting AI costs and usage to business outcomes.',
+        href: '/blog/2026-08-07-evidence-authority-boundaries',
+        linkLabel: 'Architecture in the Journal'
+      },
+      {
+        id: 'maestro',
+        name: 'RBX Maestro',
+        context: 'Agent orchestration',
         description:
-          'A management platform for kitchens and restaurants. It appears in this portfolio as a reference to the RBX founder’s work in the restaurant software ecosystem.',
-        capabilities: ['Management software', 'Restaurant operations'],
-        note: 'A product owned and operated by Food Process.',
-        href: 'https://kulinaryos.com',
-        linkLabel: 'Kulinaryos website'
+          'Coordination of missions and agents, with states, sessions and execution controls.',
+        href: '/products/maestro',
+        linkLabel: 'About Maestro'
+      },
+      {
+        id: 'argos-radar',
+        name: 'Argos Radar',
+        context: 'Experimental',
+        description: 'A project for monitoring sustainable funding opportunities.'
+      },
+      {
+        id: 'thalamus',
+        name: 'Thalamus',
+        context: 'AI control',
+        description: 'Control of AI calls through policies, routing and audit.',
+        href: '/blog/2026-07-29-governed-public-rag',
+        linkLabel: 'Architecture in the Journal'
+      },
+      {
+        id: 'truthmetal',
+        name: 'TruthMetal',
+        context: 'AI evaluation',
+        description: 'Reference datasets and criteria for AI evaluations.',
+        href: '/blog/2026-07-29-governed-public-rag',
+        linkLabel: 'Architecture in the Journal'
       }
     ],
     platformEyebrow: 'Implementation capabilities',
-    platformTitle: 'Paid content. Data under your control.',
+    platformTitle: 'Engineering for paid content platforms.',
     platformLead:
-      'We implement the platform and infrastructure to publish content, manage subscriptions and deliver restricted access. RBX’s identity, payment and publishing capabilities provide the foundation for a tailored project.',
+      'Publishing, identity and payments form the architecture of a paid content platform. Within the Engineering Partnership, the agreed roadmap defines the integrations and implementation responsibilities.',
     layers: [
       {
         title: 'Publish',
@@ -279,54 +428,82 @@ export const productsContent: Record<Locale, ProductsContent> = {
     ],
     foundationLabel: 'Platform infrastructure',
     foundation: 'Identity · Storage · APIs · Deployment · Observability',
-    sovereigntyTitle: 'Sovereignty starts with the architecture.',
+    sovereigntyTitle: 'Sovereign infrastructure. Explicit decisions about data.',
     sovereigntyLead:
-      'In each implementation, we define how the business and its users control their data: where it lives, who can access it and how it can be recovered or transferred.',
+      'The architecture treats user data sovereignty as a requirement to define: hosting, permissions, export formats and recovery become part of the partnership roadmap and acceptance criteria.',
     principles: [
       {
         title: 'Infrastructure control',
         description:
-          'Hosting and storage under the project’s governance, with clear boundaries for external services.'
+          'Define who operates hosting and storage and which external services participate in the solution.'
       },
       {
         title: 'Access control',
         description:
-          'Private content protected by identity and permissions, with separation between users and projects.'
+          'Design permissions and isolation so each user can access only authorized content.'
       },
       {
         title: 'Planned portability',
         description:
-          'Export formats, retention and recovery defined in the scope to preserve control over the content collection.'
+          'Define export formats, retention and recovery before implementation, according to user requirements.'
       }
     ],
-    referencesTitle: 'The experience behind the platform',
+    evolutionTitle: 'Blockchain, metaverse and AI',
+    evolutionLead:
+      'Development paths for content platforms within RBX’s B2B strategy. Each can enter the Engineering Partnership roadmap according to the business model and user requirements.',
+    evolutionCards: [
+      {
+        title: 'Blockchain and provenance',
+        description:
+          'Verifiable records of content origin and integrity, connected to identity and access rules. Private content and personal data remain off-chain, with their own storage and permissions.'
+      },
+      {
+        title: 'Metaverse and immersive environments',
+        description:
+          'Virtual spaces and 3D experiences for learning, events and communities, integrated with the platform’s identity and subscription system.'
+      },
+      {
+        title: 'AI in the experience',
+        description:
+          'Contextual assistants, content discovery and text or voice interaction to personalize the experience, with consent, access control and quality evaluation.'
+      }
+    ],
+    evolutionNote:
+      'Data sovereignty depends on the whole system: storage, key management, permissions and portability. Blockchain contributes verifiable records; the scope of each integration is defined and validated within the partnership.',
+    referencesTitle: 'Implementation references',
     referencesLead:
-      'The RBX Portal and the Merovelis ecosystem’s content area illustrate two applications of these capabilities.',
+      'The Portal and member area inform these technical capabilities. The references below describe the mechanisms; the content subscription and engineering partnership are separate engagements.',
     references: [
       {
         name: 'RBX Portal',
         title: 'Project tracking with controlled access',
         description:
-          'Modules, risks, roadmaps and evidence in an authenticated area. Each person can access the projects for which they have permission.',
-        href: 'https://portal.rbxsystems.ch',
-        label: 'RBX Portal · authenticated access'
+          'Modules, risks, roadmaps and evidence in an authenticated area. Each person can access the projects for which they have permission.'
       },
       {
-        name: 'Satwake in the Merovelis ecosystem',
+        name: 'Satwake / Briefing BTC',
         title: 'Content with subscription access',
         description:
-          'Editions, available history and artifacts in a member area. A concrete reference for the experience of a paid content platform.',
-        href: 'https://app.merovelis.com/briefing-btc',
-        label: 'Member area · authenticated access'
+          'Editions, available history and artifacts in a member area. The public presentation describes plans and content access.',
+        href: '/products/briefing-btc',
+        label: 'Public presentation and plans'
+      },
+      {
+        name: 'RBX Journal',
+        title: 'Controlled publishing and distribution',
+        description:
+          'The Journal itself uses the RBX content layer to publish articles and distribute them through RSS. The public technical report describes this flow.',
+        href: '/blog/2026-08-02-rbx-journal-rss',
+        label: 'Read the implementation report'
       }
     ],
-    collaborationTitle: 'Your own product, with the technical foundation to operate.',
+    collaborationTitle: 'RBX Engineering Partnership',
     collaborationLead:
-      'For creators, businesses and distribution partners, we connect the audience experience to the platform behind the business.',
-    contactLabel: 'Discuss a project',
+      'An ongoing product engineering partnership, with an agreed roadmap, responsibilities and acceptance criteria. Architecture, implementation and operations enter the scope according to the context.',
+    contactLabel: 'Discuss an engineering partnership',
     contactHref: '/contact',
     legalLabel: 'Legal notice and terms of use',
     financialNote:
-      'This briefing is operational preparation and governance material. It does not constitute investment advice, a trading signal, or financial guidance. The decision to trade belongs exclusively to the human operator. This product does not generate orders, does not recommend buying or selling, and does not trigger execution systems.'
+      'This briefing is operational preparation and governance material. It does not constitute investment advice, a trading signal or financial guidance. The decision to trade belongs exclusively to the human operator. This product does not generate orders, does not recommend buying or selling and does not trigger execution systems.'
   }
 };

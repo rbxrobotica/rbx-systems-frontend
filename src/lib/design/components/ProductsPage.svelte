@@ -17,7 +17,10 @@
         pageUrl,
         content.title,
         content.description,
-        content.products.map((product) => ({ name: product.name, url: `${pageUrl}#${product.id}` }))
+        [...content.products, ...content.additionalProducts].map((product) => ({
+          name: product.name,
+          url: `${pageUrl}#${product.id}`
+        }))
       )
     ])
   );
@@ -60,7 +63,44 @@
             {#each product.capabilities as capability}<li>{capability}</li>{/each}
           </ul>
           {#if product.note}<p class="product-note">{product.note}</p>{/if}
-          {#if product.href}<a class="product-link" href={product.href}>{product.linkLabel}</a>{/if}
+          {#if product.href}
+            <div class="product-links">
+              <a href={product.href}>{product.linkLabel}</a>
+              {#each product.secondaryLinks ?? [] as link}
+                <a href={link.href}>{link.label}</a>
+              {/each}
+            </div>
+          {/if}
+        </article>
+      {/each}
+    </div>
+  </section>
+
+  <section class="external-reference" aria-labelledby="external-title">
+    <div>
+      <p class="eyebrow">{content.externalTitle}</p>
+      <h2 id="external-title">{content.externalReference.name}</h2>
+    </div>
+    <div>
+      <p>{content.externalReference.description}</p>
+      {#if content.externalReference.href}
+        <a href={content.externalReference.href}>{content.externalReference.linkLabel}</a>
+      {/if}
+    </div>
+  </section>
+
+  <section aria-labelledby="additional-title">
+    <div class="section-heading">
+      <h2 id="additional-title">{content.additionalTitle}</h2>
+      <p>{content.additionalLead}</p>
+    </div>
+    <div class="additional-grid">
+      {#each content.additionalProducts as product}
+        <article id={product.id}>
+          <h3>{product.name}</h3>
+          <p class="product-context">{product.context}</p>
+          <p>{product.description}</p>
+          {#if product.href}<a href={product.href}>{product.linkLabel}</a>{/if}
         </article>
       {/each}
     </div>
@@ -100,6 +140,21 @@
         {/each}
       </dl>
     </div>
+    <div class="evolution">
+      <div class="section-heading">
+        <h3>{content.evolutionTitle}</h3>
+        <p>{content.evolutionLead}</p>
+      </div>
+      <div class="evolution-grid">
+        {#each content.evolutionCards as capability}
+          <article>
+            <h4>{capability.title}</h4>
+            <p>{capability.description}</p>
+          </article>
+        {/each}
+      </div>
+      <p class="evolution-note">{content.evolutionNote}</p>
+    </div>
   </section>
 
   <section aria-labelledby="references-title">
@@ -113,7 +168,7 @@
           <p class="eyebrow">{reference.name}</p>
           <h3>{reference.title}</h3>
           <p>{reference.description}</p>
-          <a href={reference.href}>{reference.label}</a>
+          {#if reference.href}<a href={reference.href}>{reference.label}</a>{/if}
         </article>
       {/each}
     </div>
@@ -214,11 +269,10 @@
   }
   .product-grid {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--s-4);
   }
   .product-card {
-    grid-column: span 2;
     display: flex;
     flex-direction: column;
     padding: var(--s-5);
@@ -226,9 +280,6 @@
     border-radius: var(--radius-md);
     background: var(--bg-1);
     scroll-margin-top: calc(var(--header-h) + var(--s-6));
-  }
-  .product-card:nth-last-child(-n + 2) {
-    grid-column: span 3;
   }
   .card-heading {
     display: flex;
@@ -271,11 +322,57 @@
     font-size: var(--text-sm);
     line-height: var(--lead-body);
   }
-  .product-link {
-    align-self: flex-start;
+  .product-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3) var(--s-5);
     margin-top: auto;
     font-size: var(--text-sm);
     padding: var(--s-1) 0;
+  }
+
+  .external-reference {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--s-5);
+    margin-top: var(--s-5);
+    padding: var(--s-5);
+    border-left: 2px solid var(--border-strong);
+    background: var(--bg-1);
+  }
+
+  .external-reference h2 {
+    margin-top: var(--s-3);
+    font-size: var(--text-2xl);
+  }
+
+  .external-reference p:not(.eyebrow),
+  .additional-grid p {
+    color: var(--fg-1);
+  }
+
+  .external-reference a,
+  .additional-grid a {
+    display: inline-block;
+    margin-top: var(--s-4);
+    font-size: var(--text-sm);
+  }
+
+  .additional-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-6);
+  }
+
+  .additional-grid article {
+    border-top: 1px solid var(--border);
+    padding-top: var(--s-4);
+    scroll-margin-top: calc(var(--header-h) + var(--s-6));
+  }
+
+  .additional-grid h3 {
+    font-size: var(--text-lg);
+    font-weight: 500;
   }
   .platform {
     padding: var(--s-7);
@@ -340,6 +437,35 @@
   .sovereignty {
     margin-top: var(--s-7);
   }
+
+  .evolution {
+    margin-top: var(--s-7);
+    padding-top: var(--s-6);
+    border-top: 1px solid var(--border-strong);
+  }
+
+  .evolution-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-5);
+  }
+
+  .evolution-grid h4 {
+    font-size: var(--text-base);
+    font-weight: 500;
+    margin-bottom: var(--s-3);
+  }
+
+  .evolution-grid p,
+  .evolution-note {
+    color: var(--fg-1);
+    font-size: var(--text-sm);
+    line-height: var(--lead-loose);
+  }
+
+  .evolution-note {
+    margin-top: var(--s-5);
+  }
   .principles {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -358,7 +484,7 @@
   }
   .reference-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--s-7);
   }
   .reference {
@@ -409,13 +535,6 @@
     .product-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .product-card,
-    .product-card:nth-last-child(-n + 2) {
-      grid-column: auto;
-    }
-    .product-card:last-child {
-      grid-column: 1 / -1;
-    }
     .platform {
       padding: var(--s-5);
     }
@@ -433,8 +552,11 @@
       padding-top: var(--s-3);
     }
     .product-grid,
+    .external-reference,
+    .additional-grid,
     .platform-layers,
     .principles,
+    .evolution-grid,
     .reference-grid {
       grid-template-columns: minmax(0, 1fr);
     }
@@ -443,9 +565,6 @@
     }
     .foundation {
       padding: var(--s-4);
-    }
-    .product-card:last-child {
-      grid-column: auto;
     }
   }
 </style>

@@ -37,12 +37,20 @@ test('the three Robson product identities remain distinct', () => {
   assert.match(route, /Do not claim precision, returns or financial performance/);
 });
 
-test('Briefing Diário BTC facts and boundaries are pinned', () => {
-  assert.match(route, /Briefing Diário BTC \(also called Briefing BTC\)/);
-  assert.match(route, /delivered via WhatsApp every weekday by 07:00 Brasília time/);
+test('Satwake / Briefing BTC facts and boundaries are pinned without delivery guarantees', () => {
+  assert.match(route, /Satwake \/ Briefing Diário BTC \(also called Briefing BTC;/);
   assert.match(
     route,
-    /Free at R\$ 0 \(reading the day's briefing and the last 7 days in the logged-in area at https:\/\/app\.merovelis\.com\/briefing-btc/
+    /Do not promise a new edition every day, a delivery deadline or a continuous archive/
+  );
+  assert.doesNotMatch(route, /by 07:00|last 7 days|full history/);
+  assert.match(
+    route,
+    /Free at R\$ 0 \(reading the seven most recent published editions in total, including the current edition when available, in the logged-in area at https:\/\/app\.merovelis\.com\/briefing-btc/
+  );
+  assert.match(
+    route,
+    /Pro with access to older available editions and the six downloadable artifacts/
   );
   assert.match(
     route,

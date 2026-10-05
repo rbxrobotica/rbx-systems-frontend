@@ -89,11 +89,11 @@ export const GET: RequestHandler = async ({ url }) => {
     locale === 'pt-BR'
       ? [
           link('Robson', '/produtos/robson', t(locale, 'robson.headline')),
-          link('Briefing BTC', '/produtos/briefing-btc', t(locale, 'briefing.headline'))
+          link('Satwake / Briefing BTC', '/produtos/briefing-btc', t(locale, 'briefing.headline'))
         ]
       : [
           link('Robson', '/products/robson', t(locale, 'robson.headline')),
-          link('Briefing BTC', '/products/briefing-btc', t(locale, 'briefing.headline'))
+          link('Satwake / Briefing BTC', '/products/briefing-btc', t(locale, 'briefing.headline'))
         ];
 
   const institutionalLinks = institutionalByLocale[locale].map((page) =>

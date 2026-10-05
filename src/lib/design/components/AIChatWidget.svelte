@@ -18,8 +18,8 @@
 
   function welcomeMessage(): string {
     return $locale?.startsWith('en')
-      ? "Hello! I'm the RBX Systems assistant. How can I help you today? I can tell you about our AI platform (TruthMetal, Thalamus, Orchestration, Governance), solutions and how we work with high-demand enterprises."
-      : 'Olá! Sou o assistente da RBX Systems. Como posso ajudar? Posso falar sobre nossa plataforma de IA (TruthMetal, Thalamus, Orquestração, Governança), soluções e como trabalhamos com empresas de alta exigência.';
+      ? "Hello, I'm the RBX Systems assistant. I can explain our products, AI platform and Engineering Partnership. How can I help?"
+      : 'Olá, sou o assistente da RBX Systems. Posso explicar nossos produtos, a plataforma de IA e a Engineering Partnership. Como posso ajudar?';
   }
 
   let messages = $state<Message[]>([{ role: 'assistant', content: welcomeMessage() }]);
