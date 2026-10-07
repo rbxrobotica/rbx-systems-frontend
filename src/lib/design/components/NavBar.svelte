@@ -22,6 +22,7 @@
 
   const navItems = [
     { href: '/', label: 'nav.home' },
+    { href: '/parceria', label: 'nav.partnership' },
     { href: '/sobre', label: 'nav.about' },
     { href: '/equipe', label: 'nav.team' },
     { href: '/solucoes', label: 'nav.solutions' },

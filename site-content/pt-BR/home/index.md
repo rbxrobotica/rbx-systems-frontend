@@ -1,37 +1,39 @@
 ---
-title: Engenharia para construir e evoluir seu software
-description: Parceria de engenharia para evoluir produtos digitais, integrar sistemas e aplicar IA com direção técnica, revisão humana e entregas verificáveis.
+title: Parceria mensal de engenharia para evoluir seu produto
+description: Parceria mensal de engenharia para produtos em operação ou piloto avançado. Uma prioridade por vez, com direção técnica e implementação.
 eyebrow: RBX Systems
-lead: Seu produto precisa de uma nova funcionalidade, de uma integração ou de uma base mais fácil de manter. A RBX combina direção técnica e implementação para evoluir software e aplicar IA quando ela resolve um problema definido.
+lead: Para empresas com um produto em operação ou em piloto avançado. A RBX combina direção técnica e implementação para cuidar de uma prioridade por vez. O primeiro contato começa por escrito, com resposta humana por e-mail.
 ---
 
-## Seu produto precisa avançar
+## Quando procurar a RBX
 
-Atendemos fundadores e equipes responsáveis por um produto digital em operação ou piloto avançado. A prioridade pode ser uma nova funcionalidade, uma integração ou a continuidade de uma base que ficou difícil de manter.
+A parceria faz sentido quando o produto já existe e uma mudança específica precisa avançar. Cada caso começa pelo problema e pelo resultado que será verificado.
 
-- O próximo fluxo depende de uma integração que ainda não saiu do papel.
-- Mudanças no produto esbarram em código acumulado, dependências antigas ou decisões sem registro.
-- A operação copia dados entre ferramentas e precisa de um processo com responsáveis e exceções claras.
-- Existe uma aplicação para IA, mas faltam critérios para avaliar as respostas e decidir onde a pessoa continua no controle.
+- **Uma integração trava o próximo fluxo.** Definimos os dados e conectamos os sistemas, com tratamento de falhas e testes no escopo acordado.
+- **Mudar o produto ficou lento e arriscado.** Revisamos dependências, testes e documentação para orientar as próximas alterações.
+- **A operação copia dados entre ferramentas.** Projetamos a automação da rotina, com regras, responsáveis e aprovação humana onde ela é necessária.
+- **Existe um caso para IA, mas faltam critérios.** Definimos a tarefa, como avaliar as respostas e onde a pessoa continua no controle antes de integrar o modelo ao produto.
 
-O trabalho começa com esse problema e com o resultado que precisa ser verificado.
+## Como a parceria funciona
 
-## Engenharia com continuidade
+A RBX Engineering Partnership é uma parceria mensal com capacidade definida. Um produto acompanhado, uma prioridade por vez. Direção técnica, implementação, revisão, testes e comunicação usam a mesma capacidade contratada. O escopo de cada ciclo é acordado antes da execução, com objetivos e critérios de aceite. Trabalhos maiores são divididos em etapas.
 
-A RBX Engineering Partnership reúne direção técnica, implementação, revisão e testes em uma parceria mensal. Acompanhamos um produto e uma frente prioritária por vez, com objetivos, critérios de entrega e responsabilidades acordados.
+O acompanhamento é assíncrono, com registros de entregas, riscos e próximos passos. Repositórios, ambientes e contas ficam sob controle da sua empresa sempre que aplicável, com acessos autorizados e documentação para quem continuar o trabalho.
 
-A comunicação começa por escrito. Compartilhamos entregas, riscos e próximos passos de forma assíncrona. Código, decisões relevantes e instruções de continuidade fazem parte do trabalho.
+IA apoia a execução com revisão humana. No produto, entra quando existe uma tarefa definida e critérios para avaliar as respostas. Os testes fazem parte dos dois usos.
 
-Usamos IA como apoio à execução e como capacidade do produto quando o caso pede. Integrações com modelos, assistentes e automações entram no escopo com avaliação e revisão humana.
+## O que a RBX publica
 
-## Trabalho público para conhecer a RBX
+O [RBX Journal](/journal) reúne artigos técnicos e notas de campo sobre decisões de engenharia, sistemas próprios e operação.
 
-O [RBX Journal](/journal) apresenta artigos técnicos e notas de campo sobre decisões de engenharia, sistemas e operação.
+O [portfólio de produtos e evidências](/produtos#evidencias) apresenta iniciativas próprias da RBX, seus estágios e referências de implementação identificadas. Esses produtos têm escopo próprio. Para evoluir o produto da sua empresa, o caminho é a parceria.
 
-O [portfólio de produtos](/produtos) apresenta iniciativas próprias da RBX, seus estágios e evidências de engenharia. Esses produtos têm escopo próprio; a Partnership é o caminho para trabalhar na evolução do produto da sua empresa.
+## Como começar
 
-## Comece pelo contexto do seu produto
+**Consulte as condições.** Preço mensal, capacidade em horas e limites estão na [página da parceria](/parceria).
 
-Descreva o que está em operação, a prioridade atual e o horizonte desejado. A página da parceria apresenta a capacidade mensal, o preço mensal e as condições antes do envio. Você pode enviar seu contexto sem agendar uma reunião. A RBX confirma adequação, disponibilidade e início na qualificação.
+**Conte o contexto.** Descreva o produto atual, a prioridade e quando pretende começar. Não é preciso agendar reunião. O contexto inicial não precisa incluir código privado, credenciais ou dados de clientes.
+
+**Receba uma resposta por e-mail.** Uma pessoa da RBX avalia a aderência e a disponibilidade. Perguntas ou proposta seguem conforme essa análise. Escopo, início e condições são confirmados antes da contratação; o envio não reserva vaga nem inicia trabalho.
 
 [Aviso legal e condições de uso](/legal).

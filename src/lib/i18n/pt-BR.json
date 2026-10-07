@@ -18,10 +18,11 @@
     "caueAlencar": "Cauê Alencar",
     "flaviaRibeiro": "Flavia Ribeiro",
     "legal": "Aviso Legal",
-    "manifesto": "Manifesto"
+    "manifesto": "Manifesto",
+    "partnership": "Parceria"
   },
   "footer": {
-    "description": "Engenharia de sistemas, automação e infraestrutura para operações de alta exigência.",
+    "description": "Engenharia de produto, integrações e IA aplicada, com parceria mensal para evoluir software existente.",
     "companyTitle": "Empresa",
     "resourcesTitle": "Recursos",
     "contactTitle": "Contato",
@@ -32,13 +33,13 @@
     "body": "Confiança em IA não é propriedade de um modelo. É propriedade de arquitetura."
   },
   "home": {
-    "metaTitle": "Engenharia para construir e evoluir seu software",
-    "metaDescription": "Parceria de engenharia para evoluir produtos digitais, integrar sistemas e aplicar IA com direção técnica, revisão humana e entregas verificáveis.",
-    "headline": "Engenharia para construir e evoluir seu software",
-    "body": "Seu produto precisa de uma nova funcionalidade, de uma integração ou de uma base mais fácil de manter. A RBX combina direção técnica e implementação para evoluir software e aplicar IA quando ela resolve um problema definido.",
+    "metaTitle": "Parceria mensal de engenharia para evoluir seu produto",
+    "metaDescription": "Parceria mensal de engenharia para produtos em operação ou piloto avançado. Uma prioridade por vez, com direção técnica e implementação.",
+    "headline": "Parceria mensal de engenharia para evoluir seu produto",
+    "body": "Para empresas com um produto em operação ou em piloto avançado. A RBX combina direção técnica e implementação para cuidar de uma prioridade por vez. O primeiro contato começa por escrito, com resposta humana por e-mail.",
     "ctaServices": "Nossas soluções",
-    "ctaProducts": "Explorar produtos",
-    "ctaPartnership": "Conhecer a parceria"
+    "ctaProducts": "Produtos e evidências",
+    "ctaPartnership": "Verificar aderência e disponibilidade"
   },
   "about": {
     "metaTitle": "Sobre a RBX Systems · Engenharia de IA, LLMOps e Infraestrutura",
@@ -85,10 +86,10 @@
     "fallbackLead": "Trabalhe na RBX Robótica. Construímos plataformas operacionais com IA para empresas que exigem controle, e procuramos pessoas que levem engenharia a sério. Se você quer fazer parte desse time, envie seu currículo e uma breve apresentação pela nossa página de contato."
   },
   "solutions": {
-    "metaTitle": "Soluções RBX Systems · Engenharia de IA, LLMOps, Agentes e Cloud",
-    "metaDescription": "Serviços de engenharia de IA, LLMOps, agentes inteligentes, DevOps, cloud, software financeiro e software para logística. Construído para operações críticas.",
-    "headline": "Soluções",
-    "body": "Capacidades de engenharia para operações que exigem controle, governança e escala previsível."
+    "metaTitle": "O que a RBX faz em um produto em operação",
+    "metaDescription": "Funcionalidades, integrações, automação, IA, manutenção e infraestrutura: exemplos de entregas para produtos que já operam.",
+    "headline": "O que a RBX faz em um produto em operação",
+    "body": "A prioridade do seu produto define o trabalho. Estes são exemplos de problemas e de entregas que podem compor um ciclo da parceria mensal, para produtos em operação ou em piloto avançado."
   },
   "journal": {
     "metaTitle": "RBX Journal · Engenharia, IA e Notas de Campo",

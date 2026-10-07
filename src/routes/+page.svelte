@@ -31,10 +31,16 @@
 {/if}
 
 <div class="actions">
-  <a href={data.locale === 'pt-BR' ? '/parceria' : '/partnership'} class="rbx-cta">
+  <a
+    href={data.locale === 'pt-BR' ? '/parceria#qualificacao' : '/partnership#qualificacao'}
+    class="rbx-cta"
+  >
     {t(data.locale, 'home.ctaPartnership')}
   </a>
-  <a href={data.locale === 'pt-BR' ? '/produtos' : '/products'} class="rbx-cta">
+  <a
+    href={data.locale === 'pt-BR' ? '/produtos#evidencias' : '/products#evidencias'}
+    class="evidence-link"
+  >
     {t(data.locale, 'home.ctaProducts')}
   </a>
 </div>
@@ -42,7 +48,10 @@
 {#if data.page?.html}
   <div class="home-copy"><Prose html={data.page.html} /></div>
   <div class="actions actions--final">
-    <a href={data.locale === 'pt-BR' ? '/parceria' : '/partnership'} class="rbx-cta">
+    <a
+      href={data.locale === 'pt-BR' ? '/parceria#qualificacao' : '/partnership#qualificacao'}
+      class="rbx-cta"
+    >
       {t(data.locale, 'home.ctaPartnership')}
     </a>
   </div>
@@ -51,9 +60,13 @@
 <style>
   .actions {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     gap: var(--s-3);
     margin-bottom: var(--s-8);
+  }
+  .evidence-link {
+    font-size: var(--text-sm);
   }
   .home-copy {
     max-width: var(--content-w);

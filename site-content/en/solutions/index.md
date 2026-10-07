@@ -1,50 +1,64 @@
 ---
-title: Engineering for your product's next steps
-description: Product development, integrations, automation, applied AI, maintenance and cloud, organized around your business priority.
+title: What RBX does for a live product
+description: 'Features, integrations, automation, AI, maintenance and infrastructure: examples of deliverables for products already in operation.'
 eyebrow: Solutions
-lead: RBX combines engineering capabilities for companies with live software or an advanced pilot. We start with the change the business needs and what it will take to deliver and maintain it.
+lead: Your product's priority defines the work. These are examples of problems and deliverables that can form a cycle of the monthly partnership, for live products or advanced pilots.
 ---
 
-## Digital products and platforms
+## A feature or portal needs to become part of the product
 
-When a feature, portal or access workflow needs to move from planning into the product, the scope can bring together interfaces, backend and business rules. We work on web applications and custom systems, including identity, content and payment integrations according to the requirements.
+A new workflow, access area or portal needs an interface, backend and business rules. RBX implements that combination, with identity, content or payment integrations when they are part of the scope.
+
+**Example deliverables:** feature code, workflow tests and recorded design decisions.
 
 Related services: [web development](/services/web-development) and [custom systems](/services/custom-systems).
 
-## Integrations and process automation
+## An integration is blocking the next step
 
-When teams copy data between tools or rely on manual tasks to complete a workflow, we connect systems and organize the automation. We define rules, owners and exception handling, including human approval where it is needed.
+The product depends on an ERP, a payment service or a partner's API. We define the data contract and connection, including the handling of failures, repeated requests and exceptions.
 
-Related services: [API integration](/services/api-integration) and [process automation](/services/process-automation).
+**Example deliverables:** a data contract, API adapter and tests for failure scenarios.
 
-## Applied AI for your product
+Related service: [API integration](/services/api-integration).
 
-When there is a defined task for an assistant or agent, we evaluate the use of models in the product's context. The work can include retrieval from authorized content, system integration and criteria for testing responses. Quality, cost and action boundaries are part of the design; people remain accountable for consequential decisions.
+## Operations still copy data between tools
+
+A routine relies on copying data or checking spreadsheets to complete a workflow. We organize the rules, owners and steps that can be automated. Human approval remains where the decision requires it.
+
+**Example deliverables:** an implemented workflow, approval rules and execution records.
+
+Related service: [process automation](/services/process-automation).
+
+## There is an AI use case, but no criteria
+
+An assistant or agent needs a defined task, examples of acceptable responses and action boundaries. The work can bring together retrieval from authorized content, product integration and quality and cost evaluation. People remain accountable for consequential decisions.
+
+**Example deliverables:** test cases, model integration and an evaluation report identifying its limits and available data.
 
 Related services: [AI engineering](/services/ai-engineering), [AI agents](/services/ai-agents) and [LLMOps](/services/llmops).
 
-## System continuity and evolution
+## Changing the product has become slow and risky
 
-When changes become difficult, dependencies age or knowledge rests with one person, we organize maintenance and next steps. The scope can include fixes, component updates, tests and documentation, with priorities defined by their impact on the product.
+Changes run into accumulated code, outdated dependencies or knowledge held by one person. We prioritize fixes, component updates, testing and documentation by their impact on the product.
+
+**Example deliverables:** reviewed fixes or updates, tests for the changed code and records of significant decisions.
 
 Related services: [system maintenance](/services/system-maintenance) and [technical consulting](/services/technical-consulting).
 
-## Infrastructure and operations
+## Releasing a change still requires manual steps
 
-When releasing a change requires manual steps or there are no signals to understand a failure, we work on the operational foundation. The scope can include reproducible environments, delivery pipelines, observability and recovery. Access, cost and support requirements are defined for the project's context.
+Deployment relies on a manual checklist, or there are no signals to investigate a failure. We work on reproducible environments, delivery and observability, with recovery defined for the agreed scope.
+
+**Example deliverables:** a delivery pipeline, a dashboard or alerts and a tested recovery procedure.
 
 Related services: [DevOps and cloud](/services/devops-cloud), [observability](/services/observability) and [cloud solutions](/services/cloud-solutions).
 
-## A partnership around your priority
+## References and next step
 
-RBX Engineering Partnership combines these capabilities in a monthly partnership, working on one product and one priority workstream at a time. Objectives, delivery criteria and responsibilities are agreed before execution. AI-assisted implementation, human review, testing and asynchronous updates are part of the work.
+Articles in the [RBX Journal](/journal) and references in the [product portfolio and evidence](/products#evidencias) let you explore RBX's public work. Our own products have scopes and stages separate from the partnership.
 
-The partnership page presents the monthly price, monthly capacity and conditions. You can share your context without scheduling a meeting. Qualification confirms fit, availability and the start date; larger work is organized into cycles within the agreed scope.
+These examples guide the scope discussion; each cycle's deliverables are agreed. The partnership page sets out pricing, monthly capacity and terms. Support is provided during agreed hours; round-the-clock on-call support and immediate response are outside this plan.
 
-## Public references
-
-The [RBX Journal](/journal) records technical articles and field notes on engineering decisions, systems and operations. The [product portfolio](/products) presents RBX's own initiatives and their stages, separate from engineering work for your company.
-
-[Check fit and availability](/partnership)
+[Check fit and availability](/partnership#qualificacao)
 
 [Legal notice and terms of use](/legal).

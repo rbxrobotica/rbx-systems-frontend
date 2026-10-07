@@ -1,42 +1,41 @@
 {
   "schema_version": "rbx-static-site-review-preflight/1",
   "date": "2026-10-06",
-  "scope": "Static Home/Solutions PT+EN, home hierarchy/locale SEO and contact prompts",
+  "scope": "Editorial refinement after Fable review: Home/Solutions PT+EN, CTA hierarchy, nav/footer, partnership labels and fallbacks",
   "authority": "User requests public RBX Systems static content improvement, maintaining RBX design system and using Leanctx as a structural reference",
   "state_changed": "Git source and reconstructible local build/preview fixtures only",
   "canonical_live_store": "S3 bucket rbx-content, unchanged; no production credential used for this preview",
-  "base_revision": "bf424b70caa7f091c4abaaaab41ada58546145ac",
-  "remote_source": "https://github.com/rbxrobotica/rbx-systems-frontend/tree/codex/public-site-static-communication",
+  "base_revision": "7447623b25803517e6cc7d928e09513c632a499a",
+  "remote_source": "https://github.com/rbxrobotica/rbx-systems-frontend/tree/codex/public-site-editorial-refinement",
   "candidate_markdown": [
     {
       "path": "site-content/en/home/index.md",
-      "sha256": "0da9eda099c9ee193a41912818474b89c51a0dc705ad67dc521b0d5781833ab3"
+      "sha256": "e654dec59be034fca08450211d7a6e1c0bfce7f93056a5c145644648f1b89d1a"
     },
     {
       "path": "site-content/en/solutions/index.md",
-      "sha256": "f8cd19d0e63ced1df593771f7ddb5c44fe81bf28945ac16c8176ef7c9518bbf6"
+      "sha256": "d139d52c42cc075acf53f6ef2c077910a9b18dbac9b0dd38b9a79adf40d4dac1"
     },
     {
       "path": "site-content/pt-BR/home/index.md",
-      "sha256": "42b920825307cdf441a58a565c168a561611fe9492d1bcde6454de0e029ab29e"
+      "sha256": "4f5a61d9a0c00ecbdcc060aacdf3ae49dc3870b965573bc391bcc9041287e72c"
     },
     {
       "path": "site-content/pt-BR/solutions/index.md",
-      "sha256": "412c8dd5241128993f9d5dacde47dfd56eaea315056805aa1b09e47732c65d94"
+      "sha256": "2bc9bea630cbf0ed49c7361f3b427dfd76f47ce054ea363e3f83b041d2a820dc"
     }
   ],
   "preview_backend": "Real compiled SvelteKit SSR, loopback adapter and two read-only locale proxies, four in-memory S3-compatible fixtures",
   "preview_external_mutations": false,
-  "models_executed": false,
-  "observed_llm_spend_usd": 0,
   "live_backup_last_execution": "Not assessed; prerequisite for any later S3 publication",
   "live_restore_last_test": "Not assessed; no live content mutation in this scope",
   "preview_recovery": "Rebuild from Git Markdown sources and restart generated preview. No unique state or database.",
   "rpo_rto": "Local preview has no unique data; rebuild/restart time only. No production RPO/RTO claim.",
   "risks": [
     "S3 publication and frontend image promotion remain separate operations",
-    "Optional Fable editorial suggestions have not yet been received",
-    "Historical bulk seed must not be used for release"
+    "Live-content backup and restoration evidence must be completed before publication",
+    "Historical bulk seed must not be used for release",
+    "Conversion effects remain hypotheses until observed"
   ],
   "verification": {
     "svelte_errors": 0,
@@ -48,22 +47,14 @@
     "export_scope": "exact locale pairs with matching hashes; no S3 calls",
     "dependency_scan": "OSV: No issues found after scoped remediation"
   },
-  "independent_review": {
-    "semantic": {
-      "reviewer": "measurement",
-      "commit": "d9ab14cda6d8154db5694e88b3e9dba9752e7a69",
-      "result": "approved; four Markdown hashes unchanged"
-    },
-    "technical": {
-      "reviewer": "merge_review_technical",
-      "commit": "0511d95da940630efe22b72e76508f5202f131c4",
-      "result": "approved; final scoped dependency delta requires review"
-    }
-  },
   "visual_review": {
     "pages": ["PT Home", "PT Solutions", "EN Home", "EN Solutions"],
-    "narrow_viewport": "Home and Solutions fit width; Home issue cards become one column",
-    "interaction_scope": "read-only SSR; forms and hydration intentionally disabled"
+    "viewports_px": [1265, 390],
+    "narrow_viewport": "Home and Solutions fit width in both locales; Home issue cards become one column; Partnership remains visible near Home in the existing scrolling navigation",
+    "cta_hierarchy": "one primary qualification action, repeated after Home copy; products and evidence is a secondary text link",
+    "anchors": "existing qualification and product evidence targets verified through read-only navigation",
+    "interaction_scope": "read-only SSR; forms and hydration intentionally disabled",
+    "review_date": "2026-10-06"
   },
   "dependency_remediation": {
     "cause": "PR dependency-scan discovered two vulnerabilities in unchanged base lockfile",
@@ -79,9 +70,39 @@
     "verification": "frozen pnpm 9.15.9 install, lint, check, 83 tests, SEO, build and OSV pass"
   },
   "next_steps": [
-    "Complete independent review of the final dependency delta and CI on the exact final head",
-    "Integrate source through PR 104 under existing commit/push/merge authorization",
-    "Consider optional Fable editorial feedback when provided",
-    "Before any live publication, capture four current objects and record remote backup, restoration, retention, owner and runbook; production release authorization remains a separate operation"
-  ]
+    "Record independent review of the exact final head in the PR and governance checkpoint",
+    "Integrate source through a new PR under existing commit/push/merge authorization",
+    "Before live publication capture four current objects and record remote backup, restoration, retention, owner and runbook; production release is a separate operation"
+  ],
+  "previous_source_review": {
+    "semantic": {
+      "reviewer": "measurement",
+      "commit": "d9ab14cda6d8154db5694e88b3e9dba9752e7a69",
+      "result": "approved; four Markdown hashes unchanged"
+    },
+    "technical": {
+      "reviewer": "merge_review_technical",
+      "commit": "0511d95da940630efe22b72e76508f5202f131c4",
+      "result": "approved; final scoped dependency delta requires review"
+    }
+  },
+  "independent_review": {
+    "semantic": {
+      "reviewer": "measurement",
+      "result": "four new Markdown hashes approved; final fallback/head confirmation pending"
+    },
+    "technical": {
+      "reviewer": "merge_review_technical",
+      "result": "final candidate pending review"
+    }
+  },
+  "hosted_campaign_models_executed": false,
+  "hosted_campaign_spend_usd": 0,
+  "manual_editorial_input": {
+    "model_named_by_operator": "Fable 5.1",
+    "review_received": true,
+    "review_sha256": "e50ee7ee7b03e567e8e3af5e2c1f4458ce8fbb739dcb7e0c02f3255d53be9b49",
+    "operator_model_cost": "unknown; outside the deferred hosted campaign ledger",
+    "decisions": "docs/reviews/codex/fable-editorial-decisions.md"
+  }
 }
