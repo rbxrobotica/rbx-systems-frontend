@@ -9,3 +9,6 @@ build/
 
 # Journal source is formatted by its publishing workflow; avoid content-only rewrites.
 blog-posts/
+
+# Preserve captured public object bytes for verified recovery.
+site-content-recovery/
