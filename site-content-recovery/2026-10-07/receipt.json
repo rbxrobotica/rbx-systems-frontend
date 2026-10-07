@@ -54,5 +54,6 @@
     "Conditional PUT enforcement by this provider is not proven by a live conflict injection",
     "Four-object publication is non-transactional; partial failure requires diagnosis and explicit rollback"
   ],
-  "production_mutations_at_receipt_creation": false
+  "public_content_or_runtime_mutations_at_receipt_creation": false,
+  "jaguar_supplemental_cache_written": true
 }
