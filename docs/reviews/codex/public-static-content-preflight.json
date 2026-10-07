@@ -45,6 +45,43 @@
     "seo": "passed",
     "lint": "passed",
     "build": "passed",
-    "export_scope": "exact locale pairs with matching hashes; no S3 calls"
-  }
+    "export_scope": "exact locale pairs with matching hashes; no S3 calls",
+    "dependency_scan": "OSV: No issues found after scoped remediation"
+  },
+  "independent_review": {
+    "semantic": {
+      "reviewer": "measurement",
+      "commit": "d9ab14cda6d8154db5694e88b3e9dba9752e7a69",
+      "result": "approved; four Markdown hashes unchanged"
+    },
+    "technical": {
+      "reviewer": "merge_review_technical",
+      "commit": "0511d95da940630efe22b72e76508f5202f131c4",
+      "result": "approved; final scoped dependency delta requires review"
+    }
+  },
+  "visual_review": {
+    "pages": ["PT Home", "PT Solutions", "EN Home", "EN Solutions"],
+    "narrow_viewport": "Home and Solutions fit width; Home issue cards become one column",
+    "interaction_scope": "read-only SSR; forms and hydration intentionally disabled"
+  },
+  "dependency_remediation": {
+    "cause": "PR dependency-scan discovered two vulnerabilities in unchanged base lockfile",
+    "scope": "exact parent-scoped pins only; no direct dependency or unrelated resolution changed",
+    "pins": {
+      "eslint-plugin-svelte>postcss-selector-parser": "7.1.6",
+      "postcss>source-map-js": "1.2.2"
+    },
+    "references": [
+      "https://github.com/advisories/GHSA-rj75-hqrm-r3gf",
+      "https://github.com/advisories/GHSA-68fv-2mgg-jv7q"
+    ],
+    "verification": "frozen pnpm 9.15.9 install, lint, check, 83 tests, SEO, build and OSV pass"
+  },
+  "next_steps": [
+    "Complete independent review of the final dependency delta and CI on the exact final head",
+    "Integrate source through PR 104 under existing commit/push/merge authorization",
+    "Consider optional Fable editorial feedback when provided",
+    "Before any live publication, capture four current objects and record remote backup, restoration, retention, owner and runbook; production release authorization remains a separate operation"
+  ]
 }
