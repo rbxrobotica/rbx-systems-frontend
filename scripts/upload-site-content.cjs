@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const { load: parseYaml } = require('js-yaml');
+const fs = require('node:fs');
+const path = require('node:path');
+const { createHash } = require('node:crypto');
 
 const s3 = new S3Client({
   endpoint: process.env.CONTABO_S3_ENDPOINT,
@@ -39,179 +42,20 @@ function validatePage({ key, body }) {
   }
 }
 
-// Home
-addPage(
-  'home',
-  `---
-title: Engenharia de sistemas para operações que exigem controle
-description: Engenharia de sistemas, automação operacional, IA aplicada e infraestrutura em nuvem para operações de alta exigência.
-eyebrow: RBX Systems
-lead: Projetamos plataformas, automações e infraestrutura para empresas que operam com alta exigência. Backend, cloud, agentes inteligentes e integrações construídos para confiabilidade e escala previsível.
----
-`,
-  `---
-title: Systems engineering for operations that demand control
-description: Systems engineering, operational automation, applied AI and cloud infrastructure for high-demand operations.
-eyebrow: RBX Systems
-lead: We design platforms, automations and infrastructure for companies operating with high demands. Backend, cloud, intelligent agents and integrations built for reliability and predictable scale.
----
-`
-);
+// Reviewed home and solutions copy is versioned as Markdown rather than
+// duplicated in this historical seed. Every other page keeps its existing source.
+function addReviewedPage(pagePath) {
+  for (const locale of ['pt-BR', 'en']) {
+    const source = path.join(__dirname, '..', 'site-content', locale, pagePath, 'index.md');
+    pages.push({
+      key: `site/${locale}/${pagePath}/index.md`,
+      body: fs.readFileSync(source, 'utf8')
+    });
+  }
+}
 
-// Solutions
-addPage(
-  'solutions',
-  `---
-title: Soluções
-description: Capacidades de engenharia para operações que exigem controle.
-eyebrow: Engineering
-lead: Capacidades de engenharia para operações que exigem controle.
----
-
-A RBX projeta, constrói e opera sistemas onde confiabilidade, auditabilidade e manutenibilidade de longo prazo são requisitos, não detalhes.
-
-## Operational Systems Engineering
-
-Systems designed to be operated.
-
-- Architecture for long-term maintainability
-- Observability, tracing and operational telemetry
-- Failure-mode analysis and controlled degradation
-- Release discipline and rollback readiness
-
-## Deterministic AI & Agents
-
-Controlled automation, not black boxes.
-
-- LLM routing, evaluation and fallback design
-- Agent orchestration with stop conditions
-- Truth-grounding and canonical parameter control
-- Responsible AI review and governance gates
-
-## Automation & Integrations
-
-Remove manual operation from critical paths.
-
-- Workflow design and state-machine automation
-- API and event-driven integrations
-- Legacy system adapters and data sync
-- Exception handling and operational alerting
-
-## Cloud Infrastructure & Platform Engineering
-
-Declarative, reproducible environments.
-
-- Infrastructure as code and GitOps workflows
-- Kubernetes platform design and operation
-- CI/CD pipelines and artifact management
-- Cost, security and access control discipline
-
-## Backend & API Engineering
-
-Reliable foundations for products and integrations.
-
-- Service and API architecture
-- Data modeling and persistence strategy
-- Schema evolution and contract testing
-- Performance and reliability benchmarking
-
-## Long-Term Maintenance & Evolution
-
-Software that lasts beyond the first deploy.
-
-- Production support and incident response
-- Regression control and change management
-- Technical debt triage and modernization
-- Runbooks and operational documentation
-
-## Serviços especializados
-
-- [Desenvolvimento web](/servicos/desenvolvimento-web)
-- [Aplicativos mobile](/servicos/aplicativos-mobile)
-- [Sistemas personalizados](/servicos/sistemas-personalizados)
-- [Consultoria técnica](/servicos/consultoria-tecnica)
-- [Automação de processos](/servicos/automacao-de-processos)
-- [Integração de APIs](/servicos/integracao-de-apis)
-- [Manutenção de sistemas](/servicos/manutencao-de-sistemas)
-- [Design UX/UI](/servicos/design-ux-ui)
-- [Soluções em nuvem](/servicos/solucoes-em-nuvem)
-`,
-  `---
-title: Solutions
-description: Engineering capabilities for operations that demand control.
-eyebrow: Engineering
-lead: Engineering capabilities for operations that demand control.
----
-
-RBX designs, builds and operates systems where reliability, auditability and long-term maintainability are requirements, not afterthoughts.
-
-## Operational Systems Engineering
-
-Systems designed to be operated.
-
-- Architecture for long-term maintainability
-- Observability, tracing and operational telemetry
-- Failure-mode analysis and controlled degradation
-- Release discipline and rollback readiness
-
-## Deterministic AI & Agents
-
-Controlled automation, not black boxes.
-
-- LLM routing, evaluation and fallback design
-- Agent orchestration with stop conditions
-- Truth-grounding and canonical parameter control
-- Responsible AI review and governance gates
-
-## Automation & Integrations
-
-Remove manual operation from critical paths.
-
-- Workflow design and state-machine automation
-- API and event-driven integrations
-- Legacy system adapters and data sync
-- Exception handling and operational alerting
-
-## Cloud Infrastructure & Platform Engineering
-
-Declarative, reproducible environments.
-
-- Infrastructure as code and GitOps workflows
-- Kubernetes platform design and operation
-- CI/CD pipelines and artifact management
-- Cost, security and access control discipline
-
-## Backend & API Engineering
-
-Reliable foundations for products and integrations.
-
-- Service and API architecture
-- Data modeling and persistence strategy
-- Schema evolution and contract testing
-- Performance and reliability benchmarking
-
-## Long-Term Maintenance & Evolution
-
-Software that lasts beyond the first deploy.
-
-- Production support and incident response
-- Regression control and change management
-- Technical debt triage and modernization
-- Runbooks and operational documentation
-
-## Specialized services
-
-- [Web development](/services/web-development)
-- [Mobile apps](/services/mobile-apps)
-- [Custom systems](/services/custom-systems)
-- [Technical consulting](/services/technical-consulting)
-- [Process automation](/services/process-automation)
-- [API integration](/services/api-integration)
-- [System maintenance](/services/system-maintenance)
-- [UX/UI design](/services/ux-ui-design)
-- [Cloud solutions](/services/cloud-solutions)
-`
-);
+addReviewedPage('home');
+addReviewedPage('solutions');
 
 // Cases
 addPage(
@@ -1771,6 +1615,28 @@ async function main() {
     }
   }
   selected.forEach(validatePage);
+  const exportArg = process.argv.find((arg) => arg.startsWith('--export-dir='));
+  if (exportArg) {
+    if (!onlyArg || !exportArg.slice('--export-dir='.length)) {
+      throw new Error('export requires --only=<page> and a new --export-dir=<directory>');
+    }
+    const directory = path.resolve(exportArg.slice('--export-dir='.length));
+    fs.mkdirSync(directory, { mode: 0o700 }); // Existing directory refuses overwrite.
+    const manifest = [];
+    for (const { key, body } of selected) {
+      const target = path.join(directory, key);
+      fs.mkdirSync(path.dirname(target), { recursive: true });
+      fs.writeFileSync(target, body, { flag: 'wx' });
+      manifest.push({ key, sha256: createHash('sha256').update(body).digest('hex') });
+    }
+    fs.writeFileSync(
+      path.join(directory, 'manifest.json'),
+      JSON.stringify(manifest, null, 2) + '\n',
+      { flag: 'wx' }
+    );
+    console.log(`exported ${selected.length} objects; no S3 requests`);
+    return;
+  }
   if (process.argv.includes('--validate-only')) {
     console.log(`validated ${selected.length} objects`);
     return;

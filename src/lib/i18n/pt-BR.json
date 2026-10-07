@@ -32,12 +32,13 @@
     "body": "Confiança em IA não é propriedade de um modelo. É propriedade de arquitetura."
   },
   "home": {
-    "metaTitle": "RBX Systems · Engenharia de Sistemas & Infraestrutura",
-    "metaDescription": "Engenharia de sistemas, automação operacional, IA aplicada e infraestrutura em nuvem para operações de alta exigência.",
-    "headline": "Engenharia de sistemas para operações que exigem controle",
-    "body": "Projetamos plataformas, automações e infraestrutura para empresas que operam com alta exigência. Backend, cloud, agentes inteligentes e integrações construídos para confiabilidade e escala previsível.",
+    "metaTitle": "Engenharia para construir e evoluir seu software",
+    "metaDescription": "Parceria de engenharia para evoluir produtos digitais, integrar sistemas e aplicar IA com direção técnica, revisão humana e entregas verificáveis.",
+    "headline": "Engenharia para construir e evoluir seu software",
+    "body": "Seu produto precisa de uma nova funcionalidade, de uma integração ou de uma base mais fácil de manter. A RBX combina direção técnica e implementação para evoluir software e aplicar IA quando ela resolve um problema definido.",
     "ctaServices": "Nossas soluções",
-    "ctaProducts": "Produtos"
+    "ctaProducts": "Explorar produtos",
+    "ctaPartnership": "Conhecer a parceria"
   },
   "about": {
     "metaTitle": "Sobre a RBX Systems · Engenharia de IA, LLMOps e Infraestrutura",
@@ -109,9 +110,9 @@
   },
   "contact": {
     "metaTitle": "Contato RBX Systems · Fale com Nossa Engenharia",
-    "metaDescription": "Fale com a RBX Systems sobre engenharia de IA, LLMOps, agentes e infraestrutura. Resposta em até um dia útil, por e-mail ou WhatsApp.",
-    "heading": "Entre em contato",
-    "body": "Envie uma mensagem. Retornamos em até um dia útil.",
+    "metaDescription": "Converse com a RBX sobre seu produto, uma integração ou um processo que precisa evoluir. Compartilhe o contexto por escrito, por e-mail ou WhatsApp.",
+    "heading": "Conte o que precisa evoluir.",
+    "body": "Descreva seu produto ou operação, o problema atual e a prioridade. Escolha como prefere receber nossa resposta.",
     "whatsappLabel": "WhatsApp",
     "whatsappCta": "Falar no WhatsApp",
     "form": {
@@ -123,7 +124,7 @@
       "emailPlaceholder": "seu@email.com",
       "phonePlaceholder": "+55 11 99999-9999",
       "phoneRequiredForWhatsapp": "Informe seu número de WhatsApp para receber a resposta por lá.",
-      "messagePlaceholder": "Como podemos ajudar?",
+      "messagePlaceholder": "Qual é o produto ou processo? O que precisa mudar? Qual é a prioridade?",
       "whatsappOptIn": "Aceito receber resposta pelo WhatsApp.",
       "submit": "Enviar mensagem",
       "submitting": "Enviando...",
