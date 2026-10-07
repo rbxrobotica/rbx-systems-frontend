@@ -100,6 +100,14 @@ Condicionais seguem o [contrato S3](https://docs.aws.amazon.com/AmazonS3/latest/
 A compatibilidade concreta do provedor não é comprovada apenas por essa
 documentação. Não retirar a condição como fallback de uma falha.
 
+O GET observado retorna ETag entre aspas. O helper envia no PUT o mesmo token
+sem o par externo de aspas e recusa valores vazios, wildcard ou fracos. A
+normalização mantém `If-Match`; não repete uma falha com PUT incondicional.
+O [caminho de escrita do Ceph Reef](https://github.com/ceph/ceph/blob/reef/src/rgw/driver/rados/rgw_rados.cc#L5731)
+compara o token diretamente; isso orienta a compatibilidade, sem identificar
+a versão do provedor. O primeiro PUT com aspas retornou PreconditionFailed;
+quatro GETs posteriores confirmaram baseline e headers intactos.
+
 Esperar a expiração do cache de conteúdo, de 60 segundos, e verificar os dois
 hosts públicos, Home, Soluções, Parceria, CTA e metadados PT/EN. Não enviar
 formulários de leads durante o smoke test. Registrar o recibo em Git.

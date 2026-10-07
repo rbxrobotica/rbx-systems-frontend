@@ -7,11 +7,63 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {
   guardedWrite,
+  conditionalETag,
   headersMatch,
   readSnapshot,
   sha256,
   targets
 } from './site-content-recovery.mjs';
+import { S3Client } from '@aws-sdk/client-s3';
+
+test('conditional ETag preserves the token and refuses wildcard, weak and malformed conditions', () => {
+  const token = '1234567890abcdef1234567890abcdef';
+  assert.equal(conditionalETag(`"${token}"`), token);
+  assert.equal(conditionalETag(token), token);
+  for (const invalid of [
+    '*',
+    '',
+    '""',
+    'W/"etag"',
+    'etag\r\nother',
+    '"unfinished',
+    'nested"quote',
+    null
+  ]) {
+    assert.throws(() => conditionalETag(invalid), /InvalidETag/);
+  }
+});
+
+test('SDK sends the normalized If-Match token on every bounded PUT without a network', async (t) => {
+  t.mock.method(console, 'log', () => {});
+  const sent = [];
+  const token = '1234567890abcdef1234567890abcdef';
+  const client = new S3Client({
+    endpoint: 'http://127.0.0.1',
+    region: 'us-east-1',
+    maxAttempts: 1,
+    credentials: { accessKeyId: 'fixture', secretAccessKey: 'fixture' },
+    requestHandler: {
+      handle: async (request) => {
+        sent.push(request.headers['if-match']);
+        return {
+          response: { statusCode: 200, headers: { etag: 'fixture' }, body: new Uint8Array() }
+        };
+      },
+      destroy: () => {}
+    }
+  });
+  try {
+    await guardedWrite(
+      client,
+      targets.map(([key]) => ({ key, sha256: 'old' })),
+      targets.map(() => ({ body: Buffer.from('reviewed'), headers: {} })),
+      async () => ({ sha256: 'old', etag: `"${token}"` })
+    );
+    assert.deepEqual(sent, [token, token, token, token]);
+  } finally {
+    client.destroy();
+  }
+});
 
 function fixture() {
   const directory = mkdtempSync(path.join(os.tmpdir(), 'site-recovery-test-'));
