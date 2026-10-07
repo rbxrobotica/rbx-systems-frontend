@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "captured_at": "2026-10-07T14:47:34.482Z",
+  "objects": [
+    {
+      "key": "site/pt-BR/home/index.md",
+      "bytes": 447,
+      "sha256": "363b6f3c5bede02e4befa9c32385c773a216fad0385c9404138579df91788843",
+      "headers": {
+        "ContentType": "text/markdown"
+      }
+    },
+    {
+      "key": "site/pt-BR/solutions/index.md",
+      "bytes": 1863,
+      "sha256": "b70803d4a65df764dba40465ec7e327290f33cae550c2d58f8179e6181f7d7cf",
+      "headers": {
+        "ContentType": "text/markdown"
+      }
+    },
+    {
+      "key": "site/en/home/index.md",
+      "bytes": 411,
+      "sha256": "a1ea1c976bb16491a9596bc37b2683d87eb65f8f2f545491a897942f61e74a65",
+      "headers": {
+        "ContentType": "text/markdown"
+      }
+    },
+    {
+      "key": "site/en/solutions/index.md",
+      "bytes": 1852,
+      "sha256": "ee107c2b0089586f72c5d815ed6ae05b73ad002c15044c5e724c81b351c03174",
+      "headers": {
+        "ContentType": "text/markdown"
+      }
+    }
+  ]
+}

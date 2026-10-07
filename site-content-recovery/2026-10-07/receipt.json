@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-07",
+  "scope": "Four public Home/Solutions objects only; no key, vault, database, DNS or cluster control-plane mutation",
+  "owner": "RBX operator psyctl",
+  "baseline_remote_commit": "aa61c4cdf95c6bf195747d781e9965363ae44fb0",
+  "github_restore_on_second_machine": {
+    "result": "passed",
+    "remote_commit": "aa61c4cdf95c6bf195747d781e9965363ae44fb0",
+    "objects": 4,
+    "elapsed_seconds": 1.288,
+    "cipher_sha256": "330fbe2968e0879f9c7a142c865435a2a137649859fc8d432f72413a4da3ef21",
+    "http_gets": 6,
+    "production_writes": false
+  },
+  "encrypted_archive": {
+    "sha256": "330fbe2968e0879f9c7a142c865435a2a137649859fc8d432f72413a4da3ef21",
+    "jaguar_readback_checksum": "matched",
+    "jaguar_location_class": "temporary supplemental cache; durable copy in GitHub",
+    "local_decryption_and_four_hashes": "passed",
+    "local_elapsed_seconds": 0.343,
+    "second_machine_decryption": "requires_interactive_unlock_not_tested"
+  },
+  "recovery": {
+    "rpo": "Version immediately before this four-object publication; excludes subsequent CMS edits",
+    "rto_target_minutes": 30,
+    "retention": "At least 90 days of dated snapshot plus Git history; no automatic deletion",
+    "monitoring": "Per-publication timestamp/hash/live verification and durable receipt; no recurring automated monitor",
+    "restore_scope": "Isolated file recovery, no production S3 rollback exercised"
+  },
+  "application": {
+    "candidate_image": "sha-27623c8",
+    "candidate_digest": "sha256:869ee16ee4b794408000530a8069e4de1ce5e0aab9075ef71368d07f90654618",
+    "previous_image": "sha-bf424b7",
+    "previous_digest": "sha256:68611dc4642e59ae3a78d5a2b0e3349befdbb9cd813c19db6b11eb9ca3b09b6d",
+    "both_registry_heads": 200,
+    "desired_replicas_per_frontend": 2,
+    "ready_replicas_per_frontend": 2,
+    "ready_endpoints_per_frontend": 2,
+    "frontend_restarts": 0,
+    "applications": "Healthy/Synced before promotion",
+    "applicable_external_secrets": "Ready",
+    "both_public_tls_hosts": "verified"
+  },
+  "observability": {
+    "metrics_server": "Ready",
+    "prometheus_grafana_alertmanager_loki_promtail": "Running/Ready with endpoints",
+    "baseline_pod_and_deployment_alert_rules": "present",
+    "alert_route_source": "email-ops exists; delivery not exercised",
+    "existing_restarts": "Monitoring has historical restarts; Loki last OOMKilled at 2026-10-07T08:40:20Z, Ready since 08:40:22Z. No frontend restarts observed; no monitoring configuration changed."
+  },
+  "remaining_limits": [
+    "No automatic content backup service installed",
+    "GPG offline custody remains unconfirmed; public Git rollback does not require GPG",
+    "Conditional PUT enforcement by this provider is not proven by a live conflict injection",
+    "Four-object publication is non-transactional; partial failure requires diagnosis and explicit rollback"
+  ],
+  "public_content_or_runtime_mutations_at_receipt_creation": false,
+  "jaguar_supplemental_cache_written": true
+}
