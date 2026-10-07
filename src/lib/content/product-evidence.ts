@@ -103,26 +103,26 @@ export const productEvidence: ProductEvidence[] = [
       en: 'Each evaluation brings together its result, criteria and failure attribution. The structure supports reviewing why a system passed or failed.'
     },
     repository: 'rbxrobotica/verentir',
-    commit: '7e37fa40ba961ab09482525738f3f5ecf9b3df13',
+    commit: 'a8dc4cb9354530c0f1963500cd2bd1589b74ddc8',
     path: 'src/domain.rs',
     startLine: 199,
     language: 'rust',
     code: '/// The output of one evaluation: score + cause + owner.\n#[derive(Debug, Clone, Serialize, Deserialize)]\npub struct Verdict {\n    pub id: Uuid,\n    pub subject_id: String,\n    pub created_at: DateTime<Utc>,\n    pub overall: f32,\n    pub passed: bool,\n    pub dimensions: Vec<DimensionScore>,\n    pub attribution: Option<Attribution>,\n    pub judge_model: String,\n}',
     capture: {
-      src: '/products/evidence/verentir-main-7e37fa4.jpg',
-      width: 1009,
-      height: 631,
+      src: '/products/evidence/verentir-main-a8dc4cb.jpg',
+      width: 2400,
+      height: 1280,
       repository: 'rbxrobotica/verentir',
-      commit: '7e37fa40ba961ab09482525738f3f5ecf9b3df13',
+      commit: 'a8dc4cb9354530c0f1963500cd2bd1589b74ddc8',
       alt: {
         'pt-BR':
-          'Scorecard Verentir com métricas ilustrativas e dimensões identificadas como DEMO.',
-        en: 'Verentir scorecard with illustrative metrics and dimensions marked DEMO.'
+          'Scorecard Verentir: 12 vereditos de demonstração, taxa de aprovação, média por dimensão e falhas atribuídas por classe e responsável.',
+        en: 'Verentir scorecard: 12 demonstration verdicts, pass rate, average by dimension and failures attributed by class and owner.'
       },
       caption: {
         'pt-BR':
-          'Console da main com dados demonstrativos. As métricas são ilustrativas, não resultados de produção.',
-        en: 'Main-branch console with demonstration data. Metrics are illustrative, not production results.'
+          'Console real da main, executado localmente com um juiz simulado. Os vereditos são de demonstração, não resultados de produção.',
+        en: 'Actual main-branch console, run locally with a stub judge. Verdicts are demonstration data, not production results.'
       }
     }
   },
