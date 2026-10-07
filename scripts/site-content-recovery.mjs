@@ -19,6 +19,14 @@ export const targets = [
   ['site/en/solutions/index.md', 'd139d52c42cc075acf53f6ef2c077910a9b18dbac9b0dd38b9a79adf40d4dac1']
 ];
 export const sha256 = (body) => createHash('sha256').update(body).digest('hex');
+// GET returns quoted ETags. Ceph PUT paths may compare the token directly,
+// so preserve the token while removing only its surrounding pair of quotes.
+export function conditionalETag(etag) {
+  if (typeof etag !== 'string') throw new Error('InvalidETag');
+  const value = etag.startsWith('"') && etag.endsWith('"') ? etag.slice(1, -1) : etag;
+  if (!/^[a-zA-Z0-9][a-zA-Z0-9._:-]*$/.test(value)) throw new Error('InvalidETag');
+  return value;
+}
 export const headersMatch = (left = {}, right = {}) =>
   ['ContentType', 'CacheControl', 'ContentLanguage', 'ContentDisposition'].every(
     (name) => left[name] === right[name]
@@ -132,7 +140,7 @@ export async function guardedWrite(
         ? snapshot[index].headers
         : { ContentType: 'text/markdown' };
     if (!headersMatch(object.headers, expectedHeaders)) throw new Error('LiveHeadersChanged');
-    current.push({ etag: object.etag });
+    current.push({ etag: conditionalETag(object.etag) });
   }
   for (let index = 0; index < targets.length; index++) {
     const replacement = replacements[index];
@@ -276,6 +284,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       'SnapshotHeaders',
       'ReviewedSourceChanged',
       'InvalidFrontmatter',
+      'InvalidETag',
       'ObjectTooLarge',
       'UnsupportedObjectMetadata',
       'LiveContentChanged',
