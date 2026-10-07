@@ -5,9 +5,31 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 import { sanitizeMessages } from '../src/lib/server/chatMessages.js';
+import { importTypeScriptModule } from './test-support/import-typescript-module.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const route = await readFile(path.join(root, 'src/routes/api/chat/+server.ts'), 'utf8');
+
+test('the actual partnership prompt shares assessment examples and requires human confirmation', async () => {
+  const { partnershipContent, partnershipTerms, formatPartnershipPrice } =
+    await importTypeScriptModule(new URL('../src/lib/content/partnership.ts', import.meta.url));
+  const expression = route.match(/const SYSTEM_PROMPT = ([\s\S]+?);\n\ninterface Message/);
+  assert.ok(expression, 'render the real prompt without calling a model or gateway');
+  const prompt = new Function(
+    'partnershipContent',
+    'partnershipTerms',
+    'formatPartnershipPrice',
+    `return ${expression[1]};`
+  )(partnershipContent, partnershipTerms, formatPartnershipPrice);
+  for (const card of partnershipContent.en.fitCards) {
+    assert.ok(prompt.includes(card.description));
+  }
+  assert.match(prompt, /subject to scope review and engineering availability/);
+  assert.match(prompt, /These examples do not confirm acceptance or a dedicated specialist team/);
+  assert.match(prompt, /A human confirms scope and engineering availability/);
+  assert.match(prompt, /You cannot confirm availability, reserve a place, approve fit/);
+  assert.match(prompt, /Do not convert it to dollars or Swiss francs/);
+});
 
 test('RBX Journal discovery stays inside the assistant scope', () => {
   assert.match(route, /Requests to discover or recommend public RBX Journal articles are in scope/);

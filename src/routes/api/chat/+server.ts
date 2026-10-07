@@ -2,7 +2,11 @@ import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import { sanitizeMessages } from '$lib/server/chatMessages.js';
 import { runRagShadow } from '$lib/server/ragShadow';
-import { formatPartnershipPrice, partnershipTerms } from '$lib/content/partnership';
+import {
+  formatPartnershipPrice,
+  partnershipTerms,
+  partnershipContent
+} from '$lib/content/partnership';
 import type { RequestHandler } from './$types';
 
 const SYSTEM_PROMPT = `You are the digital assistant for RBX Systems — a precision engineering company that builds governed AI platforms for high-demand operations. RBX is headquartered in Brazil and Switzerland (Zug).
@@ -38,6 +42,7 @@ RBX Journal recommendations:
 We serve enterprises that need AI sovereignty, governance, and operational precision. We work with strategy, precision and intelligence for high efficiency.
 
 RBX Engineering Partnership, public terms version ${partnershipTerms.version}:
+- Examples of contexts for assessment: ${partnershipContent.en.fitCards.map((card) => `${card.title}: ${card.description}`).join(' ')} These examples do not confirm acceptance or a dedicated specialist team. A human confirms scope and engineering availability.
 - The reference partnership is ${formatPartnershipPrice('pt-BR')} per month in Brazilian reais (BRL), including ${partnershipTerms.monthlyHours} hours per month of founder-led technical capacity with AI assistance for one product. The same BRL price applies to the Portuguese and English pages. Do not convert it to dollars or Swiss francs.
 - Those hours include implementation, technical direction, review, testing and asynchronous communication. Work is prioritized within the agreed monthly capacity; this is not an unlimited delivery commitment or a dedicated full-time team.
 - Infrastructure and the client's API consumption have a separate budget. Continuous on-call support, fixed delivery dates and extra capacity require an explicit proposal; do not imply they are included.

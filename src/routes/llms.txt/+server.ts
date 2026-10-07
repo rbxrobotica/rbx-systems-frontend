@@ -2,7 +2,11 @@ import type { RequestHandler } from '@sveltejs/kit';
 import { detectLocaleFromUrl } from '$lib/i18n/locale';
 import { t } from '$lib/i18n/translate';
 import { SERVICE_ROUTES, servicePublicPath } from '$lib/services/catalog';
-import { formatPartnershipPrice, partnershipTerms } from '$lib/content/partnership';
+import {
+  formatPartnershipPrice,
+  partnershipTerms,
+  partnershipContent
+} from '$lib/content/partnership';
 import type { Locale } from '$types/content';
 
 const siteUrlByLocale: Record<Locale, string> = {
@@ -104,12 +108,12 @@ export const GET: RequestHandler = async ({ url }) => {
       ? link(
           'RBX Engineering Partnership',
           '/parceria#qualificacao',
-          `${formatPartnershipPrice(locale)}/mês, em reais (BRL), por ${partnershipTerms.monthlyHours} horas mensais de capacidade técnica liderada pelo fundador com assistência de IA para um produto. Implementação, revisão, testes e comunicação assíncrona incluídos nessa capacidade. Infraestrutura e consumo de APIs do cliente têm orçamento separado. A qualificação inicia pelo formulário; escopo, disponibilidade e início são confirmados por uma pessoa da RBX por e-mail. Não é contratação automática. Condições de referência: ${partnershipTerms.version}.`
+          `${formatPartnershipPrice(locale)}/mês, em reais (BRL), por ${partnershipTerms.monthlyHours} horas mensais de capacidade técnica liderada pelo fundador com assistência de IA para um produto. Implementação, revisão, testes e comunicação assíncrona incluídos nessa capacidade. Infraestrutura e consumo de APIs do cliente têm orçamento separado. A qualificação inicia pelo formulário; escopo, disponibilidade e início são confirmados por uma pessoa da RBX por e-mail. Não é contratação automática. Contextos para avaliação: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Condições de referência: ${partnershipTerms.version}.`
         )
       : link(
           'RBX Engineering Partnership',
           '/partnership#qualificacao',
-          `${formatPartnershipPrice(locale)}/month, in Brazilian reais (BRL), for ${partnershipTerms.monthlyHours} monthly hours of founder-led technical capacity with AI assistance for one product. Implementation, review, testing and asynchronous communication share that capacity. Infrastructure and the client's API consumption have a separate budget. Qualification starts with the form; an RBX team member confirms scope, availability and start date by email. This is not automatic contracting. Reference terms: ${partnershipTerms.version}.`
+          `${formatPartnershipPrice(locale)}/month, in Brazilian reais (BRL), for ${partnershipTerms.monthlyHours} monthly hours of founder-led technical capacity with AI assistance for one product. Implementation, review, testing and asynchronous communication share that capacity. Infrastructure and the client's API consumption have a separate budget. Qualification starts with the form; an RBX team member confirms scope, availability and start date by email. This is not automatic contracting. Contexts for assessment: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Reference terms: ${partnershipTerms.version}.`
         );
 
   const institutionalLinks = institutionalByLocale[locale].map((page) =>
