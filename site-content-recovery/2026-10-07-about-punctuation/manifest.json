@@ -1,0 +1,23 @@
+{
+  "captured_at": "2026-10-07T20:07:45.325Z",
+  "objects": [
+    {
+      "key": "site/pt-BR/about/index.md",
+      "bytes": 687,
+      "sha256": "6427480aa998b38cd24c8f4086eb6c0843af7b619802b760b82e753e688f45dd",
+      "etag": "\"40e237d4e2f2af38ab4cbd6c68faaf77\"",
+      "headers": {
+        "ContentType": "text/markdown"
+      }
+    },
+    {
+      "key": "site/en/about/index.md",
+      "bytes": 674,
+      "sha256": "879d710588840617aaf551e4c61df39a8d7dc4c1400bdb1ad21be240a9ec65e8",
+      "etag": "\"e6e86f417a26c6b819f0e73036218531\"",
+      "headers": {
+        "ContentType": "text/markdown"
+      }
+    }
+  ]
+}
