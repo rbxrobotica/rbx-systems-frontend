@@ -32,12 +32,13 @@
     "body": "Trust in AI is not a model property. It is an architectural property."
   },
   "home": {
-    "metaTitle": "RBX Systems · Systems Engineering & Infrastructure",
-    "metaDescription": "Systems engineering, operational automation, applied AI and cloud infrastructure for high-demand operations.",
-    "headline": "Systems engineering for operations that demand control",
-    "body": "We design platforms, automations and infrastructure for companies operating with high demands. Backend, cloud, intelligent agents and integrations built for reliability and predictable scale.",
+    "metaTitle": "Engineering to build and evolve your software",
+    "metaDescription": "An engineering partnership to evolve digital products, integrate systems and apply AI with technical direction, human review and verifiable delivery.",
+    "headline": "Engineering to build and evolve your software",
+    "body": "Your product needs a new feature, an integration or a codebase that is easier to maintain. RBX combines technical direction and implementation to evolve software and apply AI when it solves a defined problem.",
     "ctaServices": "Our solutions",
-    "ctaProducts": "Products"
+    "ctaProducts": "Explore products",
+    "ctaPartnership": "Explore the partnership"
   },
   "about": {
     "metaTitle": "About RBX Systems · AI Engineering, LLMOps & Infrastructure",
@@ -109,9 +110,9 @@
   },
   "contact": {
     "metaTitle": "Contact RBX Systems · Talk to Our Engineering Team",
-    "metaDescription": "Talk to RBX Systems about AI engineering, LLMOps, agents and infrastructure. We reply within one business day, by email or WhatsApp.",
-    "heading": "Get in touch",
-    "body": "Send a message. We reply within one business day.",
+    "metaDescription": "Talk to RBX about your product, an integration or a process that needs to evolve. Share the context in writing, by email or WhatsApp.",
+    "heading": "Tell us what needs to evolve.",
+    "body": "Describe your product or operation, the current problem and your priority. Choose how you would like us to reply.",
     "whatsappLabel": "WhatsApp",
     "whatsappCta": "Chat on WhatsApp",
     "form": {
@@ -123,7 +124,7 @@
       "emailPlaceholder": "you@email.com",
       "phonePlaceholder": "+41 79 000 00 00",
       "phoneRequiredForWhatsapp": "Add your WhatsApp number to receive the reply there.",
-      "messagePlaceholder": "How can we help?",
+      "messagePlaceholder": "What is the product or process? What needs to change? What is the priority?",
       "whatsappOptIn": "I agree to receive a reply via WhatsApp.",
       "submit": "Send message",
       "submitting": "Sending...",
