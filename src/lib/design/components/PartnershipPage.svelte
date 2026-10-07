@@ -87,7 +87,7 @@
       <h2 id="fit-title">{content.fitTitle}</h2>
       <p>{content.fitLead}</p>
     </div>
-    <div class="three-columns">
+    <div class="fit-grid">
       {#each content.fitCards as card}
         <article>
           <h3>{card.title}</h3>
@@ -246,6 +246,11 @@
     color: var(--fg-1);
     line-height: var(--lead-loose);
   }
+  .fit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-6);
+  }
   .three-columns {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -318,6 +323,7 @@
     .partnership-page {
       padding-top: 0;
     }
+    .fit-grid,
     .three-columns,
     .scope-grid {
       grid-template-columns: minmax(0, 1fr);

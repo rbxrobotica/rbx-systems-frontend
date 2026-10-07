@@ -54,6 +54,11 @@ export const partnershipContent = {
         title: 'Plataformas de conteúdo',
         description:
           'Conectar publicação, identidade, acesso pago e controle dos dados em um roadmap dimensionado por ciclo.'
+      },
+      {
+        title: 'Produtos conectados e embarcados',
+        description:
+          'Avaliamos demandas de software embarcado e integração de dispositivos com APIs e plataformas, conforme o escopo e a disponibilidade técnica.'
       }
     ],
     scopeTitle: 'Um compromisso delimitado a cada ciclo.',
@@ -133,6 +138,11 @@ export const partnershipContent = {
         title: 'Content platforms',
         description:
           'Connect publishing, identity, paid access and data control through a roadmap sized to each cycle.'
+      },
+      {
+        title: 'Connected products and embedded software',
+        description:
+          'We assess embedded software needs and device integration with APIs and platforms, subject to scope review and engineering availability.'
       }
     ],
     scopeTitle: 'A bounded commitment for each cycle.',

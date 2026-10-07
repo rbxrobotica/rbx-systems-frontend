@@ -54,6 +54,20 @@ case rather than relying on permanent full occupancy.
 
 ## Page boundaries and qualification
 
+The fit examples include connected products and embedded software as contexts
+for assessment, subject to scope review and engineering availability. This is
+an editorial addition to the existing product engineering partnership. It does
+not change the terms, establish dedicated specialist capacity or promise that
+a request will be accepted. The commercial and analytics offer version remains
+`2026-10-05`.
+
+The page renders the four localized `partnershipContent.fitCards` in two columns
+on desktop and one on mobile. The assistant reads the same English examples;
+`llms.txt` derives the localized context titles from that source and retains
+human confirmation of scope and availability. The form's existing objective
+hint lets visitors optionally name a device platform if known, without adding
+fields, payload properties, validation, telemetry or network requests.
+
 `/produtos` and `/products` remain portfolio and implementation evidence pages.
 They link to the localized `/parceria` and `/partnership` pages. The offer can
 also be shared directly with an already qualified lead. Price, scope and limits

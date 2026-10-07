@@ -28,7 +28,7 @@
           planning: 'Planning',
           objective: 'What do you need to move forward?',
           objectiveHint:
-            'Describe your priority and the outcome you want. Do not include passwords, customer data or confidential code.',
+            'Describe your priority and the outcome you want. If devices are involved, mention the platform if known. Do not include passwords, customer data or confidential code.',
           timeframe: 'When would you like to start?',
           nextMonth: 'Within the next month',
           nextQuarter: 'Within the next three months',
@@ -76,7 +76,7 @@
           planning: 'Em planejamento',
           objective: 'O que você precisa fazer avançar?',
           objectiveHint:
-            'Descreva sua prioridade e o resultado esperado. Não inclua senhas, dados de clientes ou código confidencial.',
+            'Descreva sua prioridade e o resultado esperado. Se houver dispositivos envolvidos, mencione a plataforma, se souber. Não inclua senhas, dados de clientes ou código confidencial.',
           timeframe: 'Quando gostaria de começar?',
           nextMonth: 'No próximo mês',
           nextQuarter: 'Nos próximos três meses',
