@@ -1,0 +1,18 @@
+{
+  "scope": "Two About locale objects only; punctuation correction",
+  "owner": "RBX operator psyctl",
+  "baseline_remote_commit": "136e98379fc1208f7da7ded3a9de5b8f0ae90600",
+  "live_matches_versioned_seed": true,
+  "captured_at": "2026-10-07T20:07:45.325Z",
+  "encrypted_backup_sha256": "837e106433e540552a34a6544ab7784a67d19df6a86e312df44d6aafffcba26d",
+  "isolated_archive_restore": "passed",
+  "isolated_archive_restore_seconds": 0.348,
+  "restore_scope": "Files only; production S3 rollback not exercised",
+  "rpo": "Exact two versions immediately before punctuation correction",
+  "rto_target_minutes": 30,
+  "retention": "At least 90 days and Git history; no automatic deletion",
+  "monitoring": "Per-publication timestamp/hash/live verification; manual quarterly isolated restore",
+  "runbook": "Re-export about from baseline Git seed; compare the recorded hashes; restore only these two objects using fresh GET and conditionalETag(ETag) in IfMatch, preserving captured headers; read back and check hashes. Abort on concurrent changes. Confirm both public pages after cache TTL of 60s.",
+  "canonical_remote": "GitHub rbxrobotica/rbx-systems-frontend history and feature PR, separate from S3 workload credentials",
+  "production_writes": false
+}
