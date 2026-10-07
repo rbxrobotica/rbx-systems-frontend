@@ -132,7 +132,7 @@ export async function guardedWrite(
         ? snapshot[index].headers
         : { ContentType: 'text/markdown' };
     if (!headersMatch(object.headers, expectedHeaders)) throw new Error('LiveHeadersChanged');
-    current.push(object);
+    current.push({ etag: object.etag });
   }
   for (let index = 0; index < targets.length; index++) {
     const replacement = replacements[index];

@@ -74,7 +74,7 @@ test('drift in the last read prevents every write', async () => {
 
 test('all 15 changed subsets after the last GET preserve intervening writer bytes', async (t) => {
   t.mock.method(console, 'log', () => {});
-  // Exhaust all 16 subsets of objects changed by another writer after GET.
+  // Exhaust all 15 nonempty subsets changed by another writer after GET.
   // A conditional failure stops the remaining writes without an unguarded retry.
   for (let mask = 1; mask < 16; mask++) {
     const live = targets.map(() => ({ body: 'old', etag: 'v1' }));

@@ -132,7 +132,8 @@ altera LastModified/ETag do backend; esses identificadores não são restaurados
 `verify`: zero requisições S3. `capture` e `check-live`: até quatro GETs.
 `publish` e `restore`: até 12 chamadas (quatro GETs, quatro PUTs, quatro GETs).
 Operações sequenciais, uma tentativa por chamada e timeout de 10 segundos.
-Memória limitada a quatro corpos de até 1 MiB e temporários de leitura.
+Cada corpo remoto é limitado a 1 MiB; a memória de trabalho é proporcional ao
+lote fixo de quatro objetos.
 
 Esta solução preserva um lote pequeno de conteúdo público e o rollback da
 aplicação. Não instala plataforma de backup, não comprova recuperação do cofre
