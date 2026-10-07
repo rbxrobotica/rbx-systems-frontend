@@ -41,6 +41,11 @@
 
 {#if data.page?.html}
   <div class="home-copy"><Prose html={data.page.html} /></div>
+  <div class="actions actions--final">
+    <a href={data.locale === 'pt-BR' ? '/parceria' : '/partnership'} class="rbx-cta">
+      {t(data.locale, 'home.ctaPartnership')}
+    </a>
+  </div>
 {/if}
 
 <style>
@@ -52,6 +57,10 @@
   }
   .home-copy {
     max-width: var(--content-w);
+  }
+  .actions--final {
+    margin-top: var(--s-6);
+    margin-bottom: 0;
   }
   .home-copy :global(p) {
     max-width: var(--prose-w);
