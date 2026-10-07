@@ -1,50 +1,64 @@
 ---
-title: Engenharia para os próximos passos do seu produto
-description: Desenvolvimento de produto, integrações, automação, IA aplicada, manutenção e cloud, organizados em torno da prioridade do seu negócio.
+title: O que a RBX faz em um produto em operação
+description: 'Funcionalidades, integrações, automação, IA, manutenção e infraestrutura: exemplos de entregas para produtos que já operam.'
 eyebrow: Soluções
-lead: A RBX combina capacidades de engenharia para empresas com software em operação ou piloto avançado. O ponto de partida é a mudança que o negócio precisa fazer e o que será necessário para entregá-la e mantê-la.
+lead: A prioridade do seu produto define o trabalho. Estes são exemplos de problemas e de entregas que podem compor um ciclo da parceria mensal, para produtos em operação ou em piloto avançado.
 ---
 
-## Produto digital e plataformas
+## Uma funcionalidade ou um portal precisa entrar no produto
 
-Quando uma funcionalidade, portal ou fluxo de acesso precisa sair do planejamento e entrar no produto, o escopo pode reunir interface, backend e regras de negócio. Trabalhamos com aplicações web e sistemas sob medida, incluindo integrações de identidade, conteúdo e pagamentos conforme os requisitos.
+Um fluxo novo, uma área de acesso ou um portal precisa de interface, backend e regras de negócio. A RBX implementa esse conjunto, com integrações de identidade, conteúdo ou pagamentos quando fazem parte do escopo.
+
+**Exemplos de entrega:** código da funcionalidade, testes do fluxo e decisões de desenho registradas.
 
 Serviços relacionados: [desenvolvimento web](/servicos/desenvolvimento-web) e [sistemas personalizados](/servicos/sistemas-personalizados).
 
-## Integrações e automação de processos
+## Uma integração está travando o próximo passo
 
-Quando a equipe copia dados entre ferramentas ou depende de tarefas manuais para concluir um fluxo, conectamos sistemas e organizamos a automação. Definimos as regras, os responsáveis e o tratamento das exceções, incluindo aprovação humana onde ela é necessária.
+O produto depende de um ERP, um meio de pagamento ou da API de um parceiro. Definimos o contrato de dados e a conexão, incluindo o tratamento de falhas, repetições e exceções.
 
-Serviços relacionados: [integração de APIs](/servicos/integracao-de-apis) e [automação de processos](/servicos/automacao-de-processos).
+**Exemplos de entrega:** contrato de dados, adaptador da API e testes dos cenários de falha.
 
-## IA aplicada ao produto
+Serviço relacionado: [integração de APIs](/servicos/integracao-de-apis).
 
-Quando existe uma tarefa definida para um assistente ou agente, avaliamos o uso de modelos no contexto do produto. O trabalho pode incluir consulta a conteúdo autorizado, integração com sistemas e critérios para testar respostas. Qualidade, custo e limites de atuação entram no desenho; decisões relevantes permanecem sob responsabilidade humana.
+## A operação ainda copia dados entre ferramentas
+
+Uma rotina depende de copiar dados ou conferir planilhas para o fluxo fechar. Organizamos as regras, os responsáveis e as etapas que podem ser automatizadas. A aprovação humana permanece onde a decisão exige.
+
+**Exemplos de entrega:** fluxo implementado, regras de aprovação e registros de execução.
+
+Serviço relacionado: [automação de processos](/servicos/automacao-de-processos).
+
+## Existe um caso para IA, mas faltam critérios
+
+Um assistente ou agente precisa de uma tarefa definida, exemplos de resposta aceitável e limites de atuação. O trabalho pode reunir consulta a conteúdo autorizado, integração com o produto e avaliação de qualidade e custo. Decisões relevantes permanecem com pessoas.
+
+**Exemplos de entrega:** casos de teste, integração com o modelo e relatório de avaliação com limites e dados disponíveis identificados.
 
 Serviços relacionados: [engenharia de IA](/servicos/engenharia-de-ia), [agentes de IA](/servicos/agentes-de-ia) e [LLMOps](/servicos/llmops).
 
-## Continuidade e evolução de sistemas
+## Mudar o produto ficou lento e arriscado
 
-Quando alterações ficam difíceis, dependências envelhecem ou o conhecimento se concentra em uma pessoa, organizamos a manutenção e os próximos passos. O escopo pode reunir correções, atualização de componentes, testes e documentação, com prioridades definidas pelo impacto no produto.
+Alterações esbarram em código acumulado, dependências antigas ou conhecimento concentrado em uma pessoa. Priorizamos correções, atualização de componentes, testes e documentação pelo impacto no produto.
+
+**Exemplos de entrega:** correções ou atualizações revisadas, testes dos trechos alterados e registro das decisões relevantes.
 
 Serviços relacionados: [manutenção de sistemas](/servicos/manutencao-de-sistemas) e [consultoria técnica](/servicos/consultoria-tecnica).
 
-## Infraestrutura e operação
+## Publicar uma mudança ainda exige passos manuais
 
-Quando publicar uma mudança exige passos manuais ou faltam sinais para entender uma falha, trabalhamos na base de operação. O escopo pode incluir ambientes reproduzíveis, pipelines de entrega, observabilidade e recuperação. Requisitos de acesso, custo e atendimento são definidos para o contexto do projeto.
+O deploy depende de um roteiro manual ou faltam sinais para investigar uma falha. Trabalhamos em ambientes reproduzíveis, publicação e observabilidade, com recuperação definida para o escopo acordado.
+
+**Exemplos de entrega:** pipeline de publicação, painel ou alertas e procedimento de recuperação testado.
 
 Serviços relacionados: [DevOps e cloud](/servicos/devops-cloud), [observabilidade](/servicos/observabilidade) e [soluções em nuvem](/servicos/solucoes-em-nuvem).
 
-## Uma parceria em torno da prioridade
+## Referências e próximo passo
 
-A RBX Engineering Partnership combina essas capacidades em uma parceria mensal, com um produto acompanhado e uma frente prioritária por vez. Objetivos, critérios de entrega e responsabilidades são acordados antes da execução. Implementação assistida por IA, revisão humana, testes e atualizações assíncronas integram o trabalho.
+Artigos no [RBX Journal](/journal) e referências no [portfólio de produtos e evidências](/produtos#evidencias) permitem conhecer o trabalho público da RBX. Produtos próprios têm escopo e estágios separados da parceria.
 
-Preço mensal, capacidade mensal e condições estão na página da parceria. Você pode enviar seu contexto sem agendar uma reunião. A qualificação confirma adequação, disponibilidade e início; trabalhos maiores são organizados em ciclos dentro do escopo acordado.
+Os exemplos acima orientam a conversa sobre escopo; as entregas de cada ciclo são acordadas. A página da parceria reúne preço, capacidade mensal e condições. O atendimento ocorre em horários acordados; plantão 24 horas e resposta imediata não fazem parte da modalidade.
 
-## Referências públicas
-
-O [RBX Journal](/journal) registra artigos técnicos e notas de campo sobre decisões de engenharia, sistemas e operação. O [portfólio de produtos](/produtos) apresenta iniciativas próprias da RBX e seus estágios, separado do trabalho de engenharia para sua empresa.
-
-[Verificar adequação e disponibilidade](/parceria)
+[Verificar aderência e disponibilidade](/parceria#qualificacao)
 
 [Aviso legal e condições de uso](/legal).

@@ -40,7 +40,13 @@ exact four prior objects with their hashes, preserve a remote rollback checkpoin
 verify restoration, and release only the reviewed object pair for each page.
 Verify both hosts after the Content Gateway cache window.
 
-The home renderer places the partnership and product paths after the hero,
-localizes their URLs and takes SEO metadata from the same content source.
+The home renderer presents one qualification action after the hero and at the
+end, with products as a secondary evidence link. Navigation and footer expose
+the partnership in both locales. SEO metadata follows the same content source.
 Contact prompts ask for product, problem and priority; they introduce no new
 contact fields or data flow.
+
+Editorial refinement after PR 104 incorporates the operator-provided Fable
+review. Decisions and limits are recorded in
+`docs/reviews/codex/fable-editorial-decisions.md`. Conversion effects remain
+hypotheses; prices and capacity are not changed.

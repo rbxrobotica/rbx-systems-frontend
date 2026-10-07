@@ -1,37 +1,39 @@
 ---
-title: Engineering to build and evolve your software
-description: An engineering partnership to evolve digital products, integrate systems and apply AI with technical direction, human review and verifiable delivery.
+title: Monthly engineering partnership to evolve your product
+description: Monthly engineering partnership for live products or advanced pilots. One priority at a time, with technical direction and implementation.
 eyebrow: RBX Systems
-lead: Your product needs a new feature, an integration or a codebase that is easier to maintain. RBX combines technical direction and implementation to evolve software and apply AI when it solves a defined problem.
+lead: For companies with a live product or an advanced pilot. RBX combines technical direction and implementation around one priority at a time. The first exchange is in writing, with a human reply by email.
 ---
 
-## Your product needs to move forward
+## When to work with RBX
 
-We work with founders and teams responsible for a live digital product or an advanced pilot. The priority may be a new feature, an integration or continuity for a codebase that has become difficult to maintain.
+The partnership fits when your product already exists and a specific change needs to move forward. Each engagement starts with the problem and the outcome to be verified.
 
-- The next workflow depends on an integration that has not moved beyond planning.
-- Product changes run into accumulated code, outdated dependencies or undocumented decisions.
-- Operations copy data between tools and need a process with clear owners and exceptions.
-- There is a use case for AI, but no criteria to evaluate responses and decide where people remain in control.
+- **An integration is blocking the next workflow.** We define the data and connect the systems, with failure handling and testing within the agreed scope.
+- **Changing the product has become slow and risky.** We review dependencies, tests and documentation to guide the next changes.
+- **Operations copy data between tools.** We design automation for the routine, with rules, owners and human approval where it is needed.
+- **There is an AI use case, but no criteria.** We define the task, how to evaluate responses and where people remain in control before integrating the model into the product.
 
-The work starts with that problem and the outcome that needs to be verified.
+## How the partnership works
 
-## Engineering with continuity
+RBX Engineering Partnership is a monthly partnership with defined capacity. One product, one priority at a time. Technical direction, implementation, review, testing and communication all use the same contracted capacity. Each cycle's scope is agreed before execution, with objectives and acceptance criteria. Larger requests are split into stages.
 
-RBX Engineering Partnership brings technical direction, implementation, review and testing into a monthly partnership. We work on one product and one priority workstream at a time, with agreed objectives, delivery criteria and responsibilities.
+Updates are asynchronous, with records of deliveries, risks and next steps. Repositories, environments and accounts remain under your company's control where applicable, with authorized access and documentation for whoever continues the work.
 
-Communication starts in writing. We share deliveries, risks and next steps asynchronously. Code, relevant decisions and continuity instructions are part of the work.
+AI supports execution with human review. Within the product, it is used when there is a defined task and criteria for evaluating responses. Testing is part of both uses.
 
-We use AI to support execution and as a product capability when the use case calls for it. Model integrations, assistants and automation enter the scope with evaluation and human review.
+## What RBX publishes
 
-## Public work to learn about RBX
+The [RBX Journal](/journal) brings together technical articles and field notes about engineering decisions, our own systems and operations.
 
-The [RBX Journal](/journal) presents technical articles and field notes on engineering decisions, systems and operations.
+The [product portfolio and evidence](/products#evidencias) presents RBX's own initiatives, their stages and implementation references with their sources identified. These products have their own scope. The partnership is the path to evolve your company's product.
 
-The [product portfolio](/products) presents RBX's own initiatives, their stages and engineering evidence. These products have their own scope; the Partnership is the path to work on your company's product.
+## How to start
 
-## Start with your product's context
+**Read the terms.** Monthly pricing, capacity in hours and limits are on the [partnership page](/partnership).
 
-Describe what is running, the current priority and your intended timing. The partnership page presents monthly capacity, the monthly price and conditions before submission. You can share your context without scheduling a meeting. RBX confirms fit, availability and the start date during qualification.
+**Share the context.** Describe the current product, the priority and when you would like to start. No meeting needs to be scheduled first. The initial context does not need private code, credentials or customer data.
+
+**Receive a reply by email.** A person at RBX reviews fit and availability. Questions or a proposal follow from that assessment. Scope, start date and terms are confirmed before engagement; submission does not reserve capacity or start work.
 
 [Legal notice and terms of use](/legal).

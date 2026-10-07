@@ -27,6 +27,7 @@
         <h3 class="rbx-label">{tr('footer.companyTitle')}</h3>
         <ul>
           <li><a href={href('/')}>{tr('nav.home')}</a></li>
+          <li><a href={href('/parceria')}>{tr('nav.partnership')}</a></li>
           <li><a href={href('/sobre')}>{tr('nav.about')}</a></li>
           <li><a href={href('/historia')}>{tr('nav.history')}</a></li>
           <li><a href={href('/carreiras')}>{tr('nav.careers')}</a></li>

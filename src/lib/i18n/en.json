@@ -18,10 +18,11 @@
     "caueAlencar": "Cauê Alencar",
     "flaviaRibeiro": "Flavia Ribeiro",
     "legal": "Legal Notice",
-    "manifesto": "Manifesto"
+    "manifesto": "Manifesto",
+    "partnership": "Partnership"
   },
   "footer": {
-    "description": "Systems engineering, automation and infrastructure for high-demand operations.",
+    "description": "Product engineering, integrations and applied AI, with a monthly partnership to evolve existing software.",
     "companyTitle": "Company",
     "resourcesTitle": "Resources",
     "contactTitle": "Contact",
@@ -32,13 +33,13 @@
     "body": "Trust in AI is not a model property. It is an architectural property."
   },
   "home": {
-    "metaTitle": "Engineering to build and evolve your software",
-    "metaDescription": "An engineering partnership to evolve digital products, integrate systems and apply AI with technical direction, human review and verifiable delivery.",
-    "headline": "Engineering to build and evolve your software",
-    "body": "Your product needs a new feature, an integration or a codebase that is easier to maintain. RBX combines technical direction and implementation to evolve software and apply AI when it solves a defined problem.",
+    "metaTitle": "Monthly engineering partnership to evolve your product",
+    "metaDescription": "Monthly engineering partnership for live products or advanced pilots. One priority at a time, with technical direction and implementation.",
+    "headline": "Monthly engineering partnership to evolve your product",
+    "body": "For companies with a live product or an advanced pilot. RBX combines technical direction and implementation around one priority at a time. The first exchange is in writing, with a human reply by email.",
     "ctaServices": "Our solutions",
-    "ctaProducts": "Explore products",
-    "ctaPartnership": "Explore the partnership"
+    "ctaProducts": "Products and evidence",
+    "ctaPartnership": "Check fit and availability"
   },
   "about": {
     "metaTitle": "About RBX Systems · AI Engineering, LLMOps & Infrastructure",
@@ -85,10 +86,10 @@
     "fallbackLead": "Work at RBX. We build operational platforms with AI for companies that demand control, and we are looking for people who take engineering seriously. If you want to join this team, send your resume and a short introduction through our contact page."
   },
   "solutions": {
-    "metaTitle": "RBX Systems Solutions · AI Engineering, LLMOps, Agents & Cloud",
-    "metaDescription": "AI engineering, LLMOps, intelligent agents, DevOps, cloud, financial software and logistics software services. Built for critical operations.",
-    "headline": "Solutions",
-    "body": "Engineering capabilities for operations that demand control, governance and predictable scale."
+    "metaTitle": "What RBX does for a live product",
+    "metaDescription": "Features, integrations, automation, AI, maintenance and infrastructure: examples of deliverables for products already in operation.",
+    "headline": "What RBX does for a live product",
+    "body": "Your product's priority defines the work. These are examples of problems and deliverables that can form a cycle of the monthly partnership, for live products or advanced pilots."
   },
   "journal": {
     "metaTitle": "RBX Journal · Engineering, AI & Field Notes",

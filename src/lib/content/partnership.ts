@@ -20,10 +20,10 @@ export function formatPartnershipPrice(locale: Locale): string {
 
 export const partnershipContent = {
   'pt-BR': {
-    title: 'Parceria de capacidade tecnológica',
+    title: 'Parceria mensal de engenharia',
     description: `Parceria RBX de engenharia de produto por ${formatPartnershipPrice('pt-BR')}/mês, com ${partnershipTerms.monthlyHours} horas mensais de capacidade técnica e qualificação assíncrona. Conheça o escopo e as condições.`,
     eyebrow: 'RBX Engineering Partnership',
-    headline: 'Capacidade tecnológica para dar continuidade ao seu produto.',
+    headline: 'Parceria mensal de engenharia para evoluir seu produto.',
     lead: 'Engenharia de produto com direção técnica, execução assistida por IA e entregas verificáveis. Uma parceria mensal para evoluir software com prioridades e responsabilidades claras.',
     priceLabel: 'Parceria mensal',
     period: '/mês',
@@ -32,7 +32,7 @@ export const partnershipContent = {
     capacityDetail:
       'Implementação, revisão, testes, comunicação e acompanhamento fazem parte dessa capacidade.',
     intake: `Entrada inicial limitada a ${partnershipTerms.initialPartners} parcerias. A data de início é confirmada após a avaliação de aderência e disponibilidade.`,
-    cta: 'Verificar adequação e disponibilidade',
+    cta: 'Verificar aderência e disponibilidade',
     ctaNote: 'Comece por escrito. Uma reunião inicial não é requisito para enviar seu contexto.',
     portfolioLabel: 'Explorar produtos e evidências',
     portfolioHref: '/produtos#evidencias',
@@ -99,10 +99,10 @@ export const partnershipContent = {
       'Um breve contexto é suficiente para começar. A resposta segue por e-mail, sem agendamento obrigatório.'
   },
   en: {
-    title: 'Technology capacity partnership',
+    title: 'Monthly engineering partnership',
     description: `RBX product engineering partnership at ${formatPartnershipPrice('en')}/month, with ${partnershipTerms.monthlyHours} monthly hours of technical capacity and asynchronous qualification. Explore scope and terms.`,
     eyebrow: 'RBX Engineering Partnership',
-    headline: 'Technical capacity to keep your product moving.',
+    headline: 'Monthly engineering partnership to evolve your product.',
     lead: 'Product engineering with technical direction, AI-assisted execution and verifiable delivery. A monthly partnership to evolve software with clear priorities and responsibilities.',
     priceLabel: 'Monthly partnership',
     period: '/month',
