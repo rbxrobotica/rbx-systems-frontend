@@ -47,8 +47,8 @@ export const productEvidence: ProductEvidence[] = [
       'https://github.com/ldamasio/robson/blob/0cef339b22f5c458fd73511238f75fabc527f899/robson-domain/src/policy.rs#L225-L237',
     capture: {
       src: '/products/evidence/robson-main-0cef339.jpg',
-      width: 2400,
-      height: 1500,
+      width: 1862,
+      height: 898,
       repository: 'ldamasio/robson',
       commit: '0cef339b22f5c458fd73511238f75fabc527f899',
       alt: {
@@ -58,8 +58,8 @@ export const productEvidence: ProductEvidence[] = [
       },
       caption: {
         'pt-BR':
-          'Frontend real do Robson na mesma revisão que roda em produção, executado localmente contra uma API simulada somente de leitura. Dados sintéticos, sem negociação.',
-        en: 'The actual Robson frontend at the revision running in production, run locally against a read-only stub API. Synthetic data, no trading.'
+          'Console do Robson em produção, capturado pelo operador na própria conta. Saldos e preços são um instantâneo, não evidência de desempenho.',
+        en: 'The Robson console in production, captured by the operator on their own account. Balances and prices are a snapshot, not performance evidence.'
       }
     }
   },
@@ -180,7 +180,7 @@ export const productEvidence: ProductEvidence[] = [
     capture: {
       src: '/products/evidence/robson-code-main-db646e0.jpg',
       width: 2400,
-      height: 1267,
+      height: 1133,
       repository: 'rbxrobotica/robson-code',
       commit: 'db646e02f1dcef0eb9dcac3afa743fa59d62017c',
       alt: {
@@ -190,8 +190,8 @@ export const productEvidence: ProductEvidence[] = [
       },
       caption: {
         'pt-BR':
-          'Saída real de robson-code query --help, apresentada em um visualizador de texto. Não representa uma sessão ativa de IA.',
-        en: 'Actual robson-code query --help output displayed in a text viewer. It does not represent an active AI session.'
+          'Saída real de robson-code query --help, apresentada em uma janela de terminal. Não representa uma sessão ativa de IA.',
+        en: 'Actual robson-code query --help output shown in a terminal window. It does not represent an active AI session.'
       }
     }
   },
