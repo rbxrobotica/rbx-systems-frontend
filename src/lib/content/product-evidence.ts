@@ -25,7 +25,7 @@ export interface ProductEvidence {
   };
 }
 
-// Selected main-branch excerpts and local captures verified on 2026-10-05.
+// Selected main-branch excerpts verified on 2026-10-05; captures re-taken at device scale factor 2 on 2026-10-08.
 // See docs/products-portfolio.md for capture provenance and demo limitations.
 export const productEvidence: ProductEvidence[] = [
   {
@@ -47,8 +47,8 @@ export const productEvidence: ProductEvidence[] = [
       'https://github.com/ldamasio/robson/blob/0cef339b22f5c458fd73511238f75fabc527f899/robson-domain/src/policy.rs#L225-L237',
     capture: {
       src: '/products/evidence/robson-main-0cef339.jpg',
-      width: 1425,
-      height: 891,
+      width: 2400,
+      height: 1500,
       repository: 'ldamasio/robson',
       commit: '0cef339b22f5c458fd73511238f75fabc527f899',
       alt: {
@@ -57,8 +57,9 @@ export const productEvidence: ProductEvidence[] = [
         en: 'Robson dashboard with risk limits and operations populated with synthetic data.'
       },
       caption: {
-        'pt-BR': 'Interface do Robson a partir da main, com dados sintéticos em ambiente local.',
-        en: 'Robson interface from main, with synthetic data in a local environment.'
+        'pt-BR':
+          'Frontend real do Robson na mesma revisão que roda em produção, executado localmente contra uma API simulada somente de leitura. Dados sintéticos, sem negociação.',
+        en: 'The actual Robson frontend at the revision running in production, run locally against a read-only stub API. Synthetic data, no trading.'
       }
     }
   },
@@ -77,11 +78,11 @@ export const productEvidence: ProductEvidence[] = [
     language: 'typescript',
     code: 'export interface HumanDecision {\n  alternativeId?: string;  // Pode diferir da recomendação da IA\n  outcome: "approved" | "rejected" | "deferred";\n  notes?: string;\n  decidedBy: string;       // ID/nome do ator humano\n  decidedAt: Date;\n}\n\nexport interface DecisionEvidence {\n  type: "data" | "report" | "analysis" | "external";\n  title: string;\n  source: string;\n}',
     capture: {
-      src: '/products/evidence/strategos-main-ca6f6a7.jpg',
-      width: 1440,
-      height: 900,
+      src: '/products/evidence/strategos-main-fcf14bd.jpg',
+      width: 2400,
+      height: 1500,
       repository: 'rbxrobotica/strategos-ui',
-      commit: 'ca6f6a7d157e7138a774bc35ff6c29e549097f59',
+      commit: 'fcf14bd38eeb665c8f3abdffa06e39ca40274363',
       alt: {
         'pt-BR':
           'Cockpit Strategos com decisões pendentes, riscos e observatório de agentes demonstrativos.',
@@ -89,8 +90,8 @@ export const productEvidence: ProductEvidence[] = [
       },
       caption: {
         'pt-BR':
-          'Interface da main com dados demonstrativos. Captura local, sem dados de produção.',
-        en: 'Main-branch interface with demonstration data. Local capture without production data.'
+          'Cockpit real do Strategos na revisão implantada em produção, executado localmente em modo mock com identidade sintética. A produção exige login.',
+        en: 'The actual Strategos cockpit at the revision deployed in production, run locally in mock mode with a synthetic identity. Production requires sign-in.'
       }
     }
   },
@@ -142,8 +143,8 @@ export const productEvidence: ProductEvidence[] = [
     code: '#[derive(Debug, Clone, Serialize, Deserialize)]\npub struct Policy {\n    pub id: String,\n    pub tenant: String,\n    pub product: String,\n    pub workflow: String,\n    pub permitted_backends: Vec<BackendHandle>,\n    pub budget: Budget,\n    pub context_grants: Vec<ContextGrant>,\n    pub redaction_rules: Vec<RedactionRule>,\n    pub audit_required: bool,\n    pub risk_threshold: RiskLevel,',
     capture: {
       src: '/products/evidence/thalamus-main-fd19dc4.jpg',
-      width: 1440,
-      height: 900,
+      width: 2400,
+      height: 1500,
       repository: 'rbxrobotica/thalamus-core',
       commit: 'fd19dc4107a479ce9072c41a6f7de4805991d03c',
       alt: {
@@ -153,8 +154,8 @@ export const productEvidence: ProductEvidence[] = [
       },
       caption: {
         'pt-BR':
-          'Console da main com valores demonstrativos e ajuste local na inicialização da configuração; sem conexão a um servidor.',
-        en: 'Main-branch console with demonstration values and a local configuration bootstrap adjustment; no server connection.'
+          'Console real da main, desconectado, com valores de demonstração. Inclui a correção de inicialização da configuração proposta ao thalamus-core; o console não tem exposição pública.',
+        en: 'Actual main-branch console, disconnected, with demonstration values. Includes the configuration bootstrap fix proposed to thalamus-core; the console has no public exposure.'
       }
     },
     sourceUrl:
@@ -178,8 +179,8 @@ export const productEvidence: ProductEvidence[] = [
     code: '    /// Approve a durable intent (mutation OR exec), bound to the exact\n    /// intent and its binding hash (a patch\'s diff hash, or an exec\n    /// definition\'s hash): an approval whose binding does not match the\n    /// pending intent is a denial. Never resolved by the unbound `Approve`.\n    ApproveIntent {\n        intent_id: IntentId,\n        binding_hash: ContentHash,\n    },\n    /// Deny a mutation or exec intent.\n    DenyIntent {\n        intent_id: IntentId,\n        #[serde(skip_serializing_if = "Option::is_none", default)]\n        reason: Option<String>,\n    },',
     capture: {
       src: '/products/evidence/robson-code-main-db646e0.jpg',
-      width: 1440,
-      height: 900,
+      width: 2400,
+      height: 1267,
       repository: 'rbxrobotica/robson-code',
       commit: 'db646e02f1dcef0eb9dcac3afa743fa59d62017c',
       alt: {
@@ -209,20 +210,20 @@ export const productEvidence: ProductEvidence[] = [
     language: 'typescript',
     code: '      const order: ArtifactName[] = KNOWN_ARTIFACTS.filter((name) => name in declared);\n      const bodies = new Map<ArtifactName, Buffer>();\n      for (const filename of order) {\n        const body = await readFile(join(outDir, filename));\n        const expected = declared[filename];\n        const digest = `sha256:${createHash("sha256").update(body).digest("hex")}`;\n        if (expected?.checksum !== digest || expected?.size_bytes !== body.length) {\n          throw new Error(`Local artifact integrity mismatch: ${filename}`);\n        }\n        bodies.set(filename, body);\n      }',
     capture: {
-      src: '/products/evidence/satwake-main-c6f6b58.jpg',
-      width: 1425,
-      height: 891,
+      src: '/products/evidence/satwake-main-8a02318.jpg',
+      width: 2400,
+      height: 1500,
       repository: 'rbxrobotica/rbx-landing-briefing-btc',
-      commit: 'c6f6b58f8cec25a95b98166cac4d51861d858845',
+      commit: '8a023186aab81204dd7707fbb40ec5f8b4e80466',
       alt: {
         'pt-BR':
-          'Apresentação Satwake com estrutura de edição identificada como exemplo esquemático.',
-        en: 'Satwake presentation with the edition structure labeled as a schematic example.'
+          'Página pública do Briefing Diário BTC em produção, com título, proposta e botões de assinatura e amostra.',
+        en: 'Public Briefing Diário BTC page in production, with headline, offer and the subscribe and sample buttons.'
       },
       caption: {
         'pt-BR':
-          'Apresentação do Satwake na main. A interface identifica a amostra como esquemática.',
-        en: 'Satwake presentation from main. The interface labels the sample as schematic.'
+          'Captura direta da página pública em produção, na revisão implantada. Sem acesso a pagamento, login ou conteúdo de membros.',
+        en: 'Direct capture of the public production page at the deployed revision. No payment, sign-in or member content was accessed.'
       }
     }
   }
