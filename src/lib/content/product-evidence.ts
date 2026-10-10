@@ -210,15 +210,15 @@ export const productEvidence: ProductEvidence[] = [
     language: 'typescript',
     code: '      const order: ArtifactName[] = KNOWN_ARTIFACTS.filter((name) => name in declared);\n      const bodies = new Map<ArtifactName, Buffer>();\n      for (const filename of order) {\n        const body = await readFile(join(outDir, filename));\n        const expected = declared[filename];\n        const digest = `sha256:${createHash("sha256").update(body).digest("hex")}`;\n        if (expected?.checksum !== digest || expected?.size_bytes !== body.length) {\n          throw new Error(`Local artifact integrity mismatch: ${filename}`);\n        }\n        bodies.set(filename, body);\n      }',
     capture: {
-      src: '/products/evidence/satwake-main-c6f6b58.jpg',
+      src: '/products/evidence/satwake-main-2976536.jpg',
       width: 2400,
       height: 1500,
       repository: 'rbxrobotica/rbx-landing-briefing-btc',
-      commit: 'c6f6b58f8cec25a95b98166cac4d51861d858845',
+      commit: '297653642334ca3f3d17e8e8a2e950aa49128be6',
       alt: {
         'pt-BR':
-          'Landing pública do Satwake em produção, com título, proposta, botões para o formato de uma edição e o plano Pro, e o aviso de que não há sinais nem promessa de resultado.',
-        en: 'Public Satwake landing in production, with headline, offer, the edition-format and Pro buttons, and the notice that there are no signals or promised results.'
+          'Landing pública do Satwake em produção, com título, proposta, botões para o formato de uma edição e para o Pro com o preço, e o aviso de que não há sinais nem promessa de resultado.',
+        en: 'Public Satwake landing in production, with headline, offer, the edition-format button and the Pro button with its price, and the notice that there are no signals or promised results.'
       },
       caption: {
         'pt-BR':
