@@ -326,6 +326,15 @@
       "motif": "deliberation-kernel",
       "accent": "cyan",
       "alt": "Abstract deliberative situation room converging into a sovereign kernel with outgoing text-first signal streams"
+    },
+    {
+      "slug": "2026-10-12-irc-human-agent-sessions",
+      "title": "Uma conversa por IRC precisa de limites",
+      "extension": "png",
+      "revision": 1,
+      "motif": "execution-unit",
+      "accent": "cyan",
+      "alt": "Abstract message paths entering a bounded session and leaving as three correlated responses"
     }
   ]
 }
