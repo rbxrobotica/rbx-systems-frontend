@@ -335,6 +335,15 @@
       "motif": "execution-unit",
       "accent": "cyan",
       "alt": "Abstract message paths entering a bounded session and leaving as three correlated responses"
+    },
+    {
+      "slug": "2026-10-13-uma-semana-com-o-livro-aberto",
+      "title": "A Week With the Book Open: What Reviewing Robson Taught Us",
+      "extension": "png",
+      "revision": 1,
+      "motif": "evidence-ledger",
+      "accent": "cyan",
+      "alt": "Abstract open ledger of live evidence feeding a review while a protected position stays running"
     }
   ]
 }
