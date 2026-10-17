@@ -3,12 +3,19 @@
   import Seo from './Seo.svelte';
   import ProductEvidence from './ProductEvidence.svelte';
   import { productsContent } from '$lib/content/products';
-  import { formatPartnershipPrice, partnershipTerms } from '$lib/content/partnership';
+  import {
+    formatPartnershipPrice,
+    partnershipTerms,
+    type PartnershipExchangeRates
+  } from '$lib/content/partnership';
   import { trackPartnershipEvent } from '$lib/analytics/partnership';
   import { buildGraph, collectionPageSchema } from '$lib/seo/schema';
   import type { Locale } from '$types/content';
 
-  let { locale }: { locale: Locale } = $props();
+  let {
+    locale,
+    exchangeRates = null
+  }: { locale: Locale; exchangeRates?: PartnershipExchangeRates | null } = $props();
 
   const content = $derived(productsContent[locale]);
   const siteUrl = $derived(locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
@@ -195,7 +202,7 @@
       <h2 id="collaboration-title">{content.collaborationTitle}</h2>
       <p>{content.collaborationLead}</p>
       <p class="partnership-price">
-        {formatPartnershipPrice(locale)}{locale === 'pt-BR' ? '/mês' : '/month'} · {partnershipTerms.monthlyHours}
+        {formatPartnershipPrice(locale, exchangeRates)}{locale === 'pt-BR' ? '/mês' : '/month'} · {partnershipTerms.monthlyHours}
         {locale === 'pt-BR'
           ? 'horas mensais de capacidade técnica'
           : 'monthly hours of technical capacity'}

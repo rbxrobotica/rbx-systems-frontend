@@ -2,8 +2,10 @@ import type { RequestHandler } from '@sveltejs/kit';
 import { detectLocaleFromUrl } from '$lib/i18n/locale';
 import { t } from '$lib/i18n/translate';
 import { SERVICE_ROUTES, servicePublicPath } from '$lib/services/catalog';
+import { getPartnershipExchangeRates } from '$lib/server/partnershipPricing';
 import {
   formatPartnershipPrice,
+  partnershipPriceNote,
   partnershipTerms,
   partnershipContent
 } from '$lib/content/partnership';
@@ -73,6 +75,7 @@ const headings: Record<
 
 export const GET: RequestHandler = async ({ url }) => {
   const locale = detectLocaleFromUrl(url);
+  const exchangeRates = locale === 'en' ? await getPartnershipExchangeRates() : null;
   const siteUrl = siteUrlByLocale[locale];
   const h = headings[locale];
 
@@ -113,7 +116,7 @@ export const GET: RequestHandler = async ({ url }) => {
       : link(
           'RBX Engineering Partnership',
           '/partnership#qualificacao',
-          `${formatPartnershipPrice(locale)}/month, in Brazilian reais (BRL), for ${partnershipTerms.monthlyHours} monthly hours of founder-led technical capacity with AI assistance for one product. Implementation, review, testing and asynchronous communication share that capacity. Infrastructure and the client's API consumption have a separate budget. Qualification starts with the form; an RBX team member confirms scope, availability and start date by email. This is not automatic contracting. Contexts for assessment: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Reference terms: ${partnershipTerms.version}.`
+          `${formatPartnershipPrice(locale, exchangeRates)}/month. ${partnershipPriceNote(locale, exchangeRates)} For ${partnershipTerms.monthlyHours} monthly hours of founder-led technical capacity with AI assistance for one product. Implementation, review, testing and asynchronous communication share that capacity. Infrastructure and the client's API consumption have a separate budget. Qualification starts with the form; an RBX team member confirms scope, availability and start date by email. This is not automatic contracting. Contexts for assessment: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Reference terms: ${partnershipTerms.version}.`
         );
 
   const institutionalLinks = institutionalByLocale[locale].map((page) =>
@@ -159,7 +162,7 @@ ${journalLinks.join('\n')}
   return new Response(body, {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600'
+      'Cache-Control': 'public, max-age=300'
     }
   });
 };

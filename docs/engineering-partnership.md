@@ -12,9 +12,15 @@ have already been validated. No changes to that separate repository are made her
 
 `src/lib/content/partnership.ts` is the versioned frontend source of truth for
 price, capacity and localized offer copy. `partnershipTerms` supplies the numeric
-terms and version; `formatPartnershipPrice(locale)` formats the same BRL amount
-for both locales. The offer page, assistant prompt and `llms.txt` consume that
-source. English presentation does not imply a USD or CHF conversion.
+terms and version. Following the operator's 2026-10-16 request, the Brazilian
+site retains R$ 8,000/month while the international site displays indicative
+conversions in BTC, EUR and USD, in that order, without a BRL price.
+`getPartnershipPrices` and `formatPartnershipPrice` share this presentation with
+the portfolio, qualification brief and `llms.txt`. The assistant sends visitors
+to the international page for its current quote instead of calculating a rate.
+The monthly capacity and original offer version remain unchanged; each quote
+records its own rate-check timestamp. The final currency amount is confirmed
+in the proposal, rather than promising a fixed converted price.
 
 The offer covers one product with priorities agreed within the reserved monthly
 capacity. Implementation, technical direction, review, testing, communication
@@ -112,7 +118,27 @@ flowchart LR
 The offer renders from the repository with **zero CMS requests**. It replaces
 the earlier CMS-backed partnership rendering while keeping the existing public
 paths. Existing S3 partnership objects remain untouched and do not supply this
-page. A request to `llms.txt` likewise adds no CMS or outbound request.
+page. Brazilian pages and `llms.txt` add no outbound pricing requests.
+
+International partnership, portfolio and `llms.txt` requests share one
+per-process quote cache in `src/lib/server/partnershipPricing.ts`. A cache miss
+adds at most one Coinbase public exchange-rate GET (BRL base, all three target
+currencies in one response), with a two-second timeout, 128 KiB response cap,
+redirect rejection and no retries. Concurrent reads share the in-flight
+request. Successful quotes and failed attempts are cached for five minutes;
+there is no browser polling, timer-driven refresh, credential or visitor data
+sent to Coinbase. The public API contract is documented in
+[Coinbase exchange rates](https://docs.cdp.coinbase.com/coinbase-app/track-apis/exchange-rates).
+
+If the feed fails, a quote may be reused for at most one hour, always displaying
+its original timestamp. Without a usable quote, the international page shows
+an explicit availability message and contact path, never a BRL fallback or a
+fabricated amount. Structured server warnings distinguish a dated quote from
+unavailability. A service restart clears this non-durable cache and the first
+international request must fetch again. This trades a bounded server request
+and provider dependency for current reference conversions; fixed international
+prices would require a separate commercial decision. No database or background
+job is introduced. `llms.txt` has a five-minute HTTP cache limit.
 
 The form uses one anti-bot challenge GET per verification attempt and one contact
 POST only after an explicit, valid user submission. A retry may require another
@@ -154,17 +180,18 @@ the affected page, assistant and metadata together.
 
 ## Failure modes
 
-| Dependency or failure                                            | Visible behavior and safe boundary                                                                     | Recovery                                                                                                |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| CMS or content storage unavailable                               | The static partnership offer is unaffected; it makes no CMS request                                    | No offer fallback request is required                                                                   |
-| Frontend service unavailable                                     | The page cannot load; no lead submission is implied                                                    | Restore the deployed service or roll back to the last reviewed release                                  |
-| JavaScript or anti-bot challenge unavailable                     | The offer remains readable; qualification cannot claim success without verification                    | Retry after recovery or use the published email; fields remain disabled without JavaScript              |
-| Contact API unavailable, network failure or non-success response | Show submission failure, preserve fields and re-enable the form; no automatic retry                    | Visitor retries intentionally after the service recovers                                                |
-| Response lost after the server accepted a submission             | The frontend may show failure although the message reached Comms; exactly-once delivery is not claimed | Human review reconciles repeated enquiries; do not auto-resubmit                                        |
-| Comms persistence or downstream email delivery fails             | Receipt by the API is not evidence of human review or delivered email                                  | Existing Comms operational monitoring and recovery own downstream delivery; inspect its delivery status |
-| No capacity or need exceeds the reference offer                  | Neither the form nor assistant promises acceptance, a slot or a start date                             | Human reply explains a feasible start, adjusted scope or lack of fit                                    |
-| LLM gateway unavailable or model gives an inaccurate answer      | The versioned offer and qualification form remain independent                                          | Consult the page; assistant output is not a binding proposal                                            |
-| Analytics disabled, blocked or unavailable                       | Navigation and qualification continue; missing events are not interpreted as missing leads             | Review analytics configuration separately; do not replay contact submissions to recover metrics         |
+| Dependency or failure                                            | Visible behavior and safe boundary                                                                         | Recovery                                                                                                |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| CMS or content storage unavailable                               | The static partnership offer is unaffected; it makes no CMS request                                        | No offer fallback request is required                                                                   |
+| Frontend service unavailable                                     | The page cannot load; no lead submission is implied                                                        | Restore the deployed service or roll back to the last reviewed release                                  |
+| JavaScript or anti-bot challenge unavailable                     | The offer remains readable; qualification cannot claim success without verification                        | Retry after recovery or use the published email; fields remain disabled without JavaScript              |
+| Contact API unavailable, network failure or non-success response | Show submission failure, preserve fields and re-enable the form; no automatic retry                        | Visitor retries intentionally after the service recovers                                                |
+| Response lost after the server accepted a submission             | The frontend may show failure although the message reached Comms; exactly-once delivery is not claimed     | Human review reconciles repeated enquiries; do not auto-resubmit                                        |
+| Comms persistence or downstream email delivery fails             | Receipt by the API is not evidence of human review or delivered email                                      | Existing Comms operational monitoring and recovery own downstream delivery; inspect its delivery status |
+| No capacity or need exceeds the reference offer                  | Neither the form nor assistant promises acceptance, a slot or a start date                                 | Human reply explains a feasible start, adjusted scope or lack of fit                                    |
+| LLM gateway unavailable or model gives an inaccurate answer      | The versioned offer and qualification form remain independent                                              | Consult the page; assistant output is not a binding proposal                                            |
+| Exchange-rate API unavailable or response invalid                | Show a dated quote for at most an hour, then explicit quote unavailability; never show BRL internationally | Next request after the five-minute cooldown retries; qualification remains available                    |
+| Analytics disabled, blocked or unavailable                       | Navigation and qualification continue; missing events are not interpreted as missing leads                 | Review analytics configuration separately; do not replay contact submissions to recover metrics         |
 
 There is no new financial reconciliation or money movement path in this change.
 The form must not report a successful contract, confirmed vacancy or payment.
@@ -173,13 +200,16 @@ RBX Comms; this frontend change does not establish or replace its guarantees.
 
 ## Validation checklist
 
-- Verify both localized routes, canonicals, language alternates and discovery
-  links; keep the same BRL price and 16-hour capacity across all surfaces.
+- Verify both host locales, canonicals, language alternates and discovery
+  links; keep BRL 8,000 on the Brazilian site, BTC/EUR/USD on the international
+  site, and the same 16-hour capacity across all surfaces.
 - Confirm catalog CTAs reach the dedicated offer and its qualification anchors.
 - Verify explicit consent, field validation, anti-bot gating, successful receipt,
   disabled pending form, double-submit protection and field retention on failure.
 - Exercise failures with a local Comms stub; do not send test leads to production.
 - Verify request counts: no CMS fetch; bounded challenge and user-triggered POST.
+- Verify conversion arithmetic, quote timestamps, concurrent cache refresh,
+  timeout, malformed responses and quote expiry without an international BRL fallback.
 - Inspect desktop and mobile layouts, keyboard navigation and status feedback.
 - Run the repository's type, test, SEO, lint, build and security checks. Dependency
   remediation in PR #103 remains a separate prerequisite where applicable.
@@ -196,5 +226,6 @@ consent, a 403 response preserving answers, the whole form disabled during a
 delayed response, and a double click producing exactly one POST and one success.
 Desktop navigation between portfolio and partnership works in both directions;
 390-pixel viewport inspection showed no horizontal overflow. Both host locales
-render the same BRL offer and their correct canonical and qualification anchor.
+rendered the same BRL offer and their correct canonical and qualification anchor
+at that time; the 2026-10-16 currency presentation above supersedes this behavior.
 Analytics tests use a mocked provider and do not establish production collection.

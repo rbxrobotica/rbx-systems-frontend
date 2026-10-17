@@ -10,12 +10,53 @@ export const partnershipTerms = {
   version: '2026-10-05'
 } as const;
 
-export function formatPartnershipPrice(locale: Locale): string {
-  return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: 'BRL',
-    maximumFractionDigits: 0
-  }).format(partnershipTerms.monthlyPriceBRL);
+export interface PartnershipExchangeRates {
+  rates: { BTC: number; EUR: number; USD: number };
+  updatedAt: string;
+}
+
+export function getPartnershipPrices(
+  locale: Locale,
+  exchangeRates: PartnershipExchangeRates | null = null
+) {
+  const currencies = locale === 'pt-BR' ? (['BRL'] as const) : (['BTC', 'EUR', 'USD'] as const);
+  if (locale === 'en' && !exchangeRates) return [];
+
+  return currencies.map((currency) => {
+    const amount =
+      partnershipTerms.monthlyPriceBRL * (currency === 'BRL' ? 1 : exchangeRates!.rates[currency]);
+    const formatted = new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency,
+      currencyDisplay: currency === 'BRL' ? 'symbol' : 'code',
+      minimumFractionDigits: currency === 'BTC' ? 8 : currency === 'BRL' ? 0 : 2,
+      maximumFractionDigits: currency === 'BTC' ? 8 : currency === 'BRL' ? 0 : 2
+    }).format(amount);
+    return { currency, amount, formatted };
+  });
+}
+
+export function formatPartnershipPrice(
+  locale: Locale,
+  exchangeRates: PartnershipExchangeRates | null = null
+): string {
+  const prices = getPartnershipPrices(locale, exchangeRates);
+  if (!prices.length) return 'BTC, EUR and USD: quote temporarily unavailable';
+  return `${locale === 'en' ? '≈ ' : ''}${prices.map((price) => price.formatted).join(' / ')}`;
+}
+
+export function partnershipPriceNote(
+  locale: Locale,
+  exchangeRates: PartnershipExchangeRates | null = null
+): string {
+  if (locale === 'pt-BR') return 'Valor em reais (BRL).';
+  if (!exchangeRates) return 'Contact RBX for the current monthly quote in BTC, EUR or USD.';
+  const date = new Intl.DateTimeFormat('en-GB', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+    timeZone: 'UTC'
+  }).format(new Date(exchangeRates.updatedAt));
+  return `Indicative conversions · Coinbase rates checked ${date} UTC. Final amount confirmed in the proposal.`;
 }
 
 export const partnershipContent = {
@@ -27,7 +68,6 @@ export const partnershipContent = {
     lead: 'Engenharia de produto com direção técnica, execução assistida por IA e entregas verificáveis. Uma parceria mensal para evoluir software com prioridades e responsabilidades claras.',
     priceLabel: 'Parceria mensal',
     period: '/mês',
-    currency: 'Valor em reais (BRL).',
     capacity: 'horas mensais de atuação técnica',
     capacityDetail:
       'Implementação, revisão, testes, comunicação e acompanhamento fazem parte dessa capacidade.',
@@ -105,13 +145,12 @@ export const partnershipContent = {
   },
   en: {
     title: 'Monthly engineering partnership',
-    description: `RBX product engineering partnership at ${formatPartnershipPrice('en')}/month, with ${partnershipTerms.monthlyHours} monthly hours of technical capacity and asynchronous qualification. Explore scope and terms.`,
+    description: `RBX product engineering partnership with monthly reference prices in BTC, EUR and USD, ${partnershipTerms.monthlyHours} monthly hours of technical capacity and asynchronous qualification. Explore scope and terms.`,
     eyebrow: 'RBX Engineering Partnership',
     headline: 'Monthly engineering partnership to evolve your product.',
     lead: 'Product engineering with technical direction, AI-assisted execution and verifiable delivery. A monthly partnership to evolve software with clear priorities and responsibilities.',
     priceLabel: 'Monthly partnership',
     period: '/month',
-    currency: 'Priced in Brazilian reais (BRL).',
     capacity: 'monthly hours of technical work',
     capacityDetail:
       'Implementation, review, testing, communication and follow-up all use this capacity.',
@@ -178,7 +217,7 @@ export const partnershipContent = {
       {
         title: 'Receive a clear proposal',
         description:
-          'When the request fits this plan, the displayed monthly price applies. Scope, start date and terms are confirmed before engagement.'
+          'When the request fits this plan, the monthly reference applies. Currency conversions are indicative; the final amount, scope, start date and terms are confirmed in the proposal.'
       }
     ],
     processNote:

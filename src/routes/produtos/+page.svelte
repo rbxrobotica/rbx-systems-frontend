@@ -5,4 +5,4 @@
   let { data }: { data: PageData } = $props();
 </script>
 
-<ProductsPage locale={data.locale} />
+<ProductsPage locale={data.locale} exchangeRates={data.exchangeRates} />

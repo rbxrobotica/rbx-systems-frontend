@@ -6,7 +6,12 @@ const { buildQualificationSubmission, qualificationLimits } = await importTypeSc
   new URL('../src/lib/partnership/qualification.ts', import.meta.url)
 );
 
-const terms = { monthlyPriceBRL: 8000, monthlyHours: 16, version: '2026-10-05' };
+const terms = {
+  monthlyPriceBRL: 8000,
+  monthlyHours: 16,
+  version: '2026-10-05',
+  referencePrice: 'BRL 8000'
+};
 const input = {
   name: ' Ana ',
   email: ' ana@example.com ',
@@ -49,13 +54,25 @@ test('budget evaluation remains a valid request without inventing a new quote', 
   const result = buildQualificationSubmission(
     { ...input, budget: 'review', productUrl: '' },
     'en',
-    terms,
+    {
+      ...terms,
+      referencePrice: '≈ BTC 0.02000000 / EUR 1,400.00 / USD 1,600.00',
+      exchangeRatesCheckedAt: '2026-10-16T12:00:00.000Z'
+    },
     proof
   );
   assert.equal(result.ok, true);
   assert.equal(result.payload.language, 'en');
   assert.match(result.payload.message, /Budget fit: needs evaluation/);
-  assert.match(result.payload.message, /Reference price: BRL 8000\/month/);
+  assert.match(
+    result.payload.message,
+    /Reference price: ≈ BTC 0.02000000 \/ EUR 1,400.00 \/ USD 1,600.00\/month/
+  );
+  assert.match(
+    result.payload.message,
+    /Indicative exchange rates checked at: 2026-10-16T12:00:00.000Z/
+  );
+  assert.doesNotMatch(result.payload.message, /BRL|R\$/);
   assert.match(result.payload.message, /Public product URL: \(not provided\)/);
 });
 

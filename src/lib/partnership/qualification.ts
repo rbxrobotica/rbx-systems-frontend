@@ -26,6 +26,8 @@ interface OfferTerms {
   monthlyPriceBRL: number;
   monthlyHours: number;
   version: string;
+  referencePrice: string;
+  exchangeRatesCheckedAt?: string;
 }
 
 export type QualificationError = 'required' | 'length' | 'url' | 'consent' | 'verification';
@@ -98,7 +100,10 @@ export function buildQualificationSubmission(
   const message = [
     'RBX Engineering Partnership',
     `Offer version: ${terms.version}`,
-    `Reference price: BRL ${terms.monthlyPriceBRL}/month`,
+    `Reference price: ${terms.referencePrice}/month`,
+    ...(terms.exchangeRatesCheckedAt
+      ? [`Indicative exchange rates checked at: ${terms.exchangeRatesCheckedAt}`]
+      : []),
     `Reserved capacity: ${terms.monthlyHours} hours/month`,
     `Company / product: ${fields.company}`,
     `Public product URL: ${fields.productUrl || '(not provided)'}`,

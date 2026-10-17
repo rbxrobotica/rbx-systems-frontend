@@ -28,7 +28,14 @@ test('the actual partnership prompt shares assessment examples and requires huma
   assert.match(prompt, /These examples do not confirm acceptance or a dedicated specialist team/);
   assert.match(prompt, /A human confirms scope and engineering availability/);
   assert.match(prompt, /You cannot confirm availability, reserve a place, approve fit/);
-  assert.match(prompt, /Do not convert it to dollars or Swiss francs/);
+  assert.match(
+    prompt,
+    /international partnership page at rbxsystems.ch lists indicative monthly conversions in BTC, EUR and USD/
+  );
+  assert.match(
+    prompt,
+    /do not quote BRL as the international price or calculate conversions yourself/
+  );
 });
 
 test('RBX Journal discovery stays inside the assistant scope', () => {
@@ -45,6 +52,19 @@ test('RBX Journal discovery stays inside the assistant scope', () => {
   assert.match(route, /For another RBX theme not covered above/);
   assert.match(route, /commercial, editorial, or support information/);
   assert.match(route, /Refuse every other topic/);
+});
+
+test('partnership pricing follows the current host even if the visitor changes language', () => {
+  assert.match(route, /detectLocaleFromUrl\(url\) === 'en'/);
+  assert.match(
+    route,
+    /Use the international BTC, EUR and USD partnership terms regardless of the visitor’s language/
+  );
+  assert.match(
+    route,
+    /Use the Brazilian BRL partnership terms regardless of the visitor’s language/
+  );
+  assert.match(route, /content: `\$\{SYSTEM_PROMPT\}\\n\\n\$\{pricingContext\}`/);
 });
 
 test('the three Robson product identities remain distinct', () => {
