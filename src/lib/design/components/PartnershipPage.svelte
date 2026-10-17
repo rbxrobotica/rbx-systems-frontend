@@ -4,15 +4,20 @@
   import {
     partnershipContent,
     partnershipTerms,
-    formatPartnershipPrice
+    getPartnershipPrices,
+    partnershipPriceNote,
+    type PartnershipExchangeRates
   } from '$lib/content/partnership';
   import { buildGraph } from '$lib/seo/schema';
   import { trackPartnershipEvent } from '$lib/analytics/partnership';
   import type { Locale } from '$types/content';
 
-  let { locale }: { locale: Locale } = $props();
+  let {
+    locale,
+    exchangeRates = null
+  }: { locale: Locale; exchangeRates?: PartnershipExchangeRates | null } = $props();
   const content = $derived(partnershipContent[locale]);
-  const price = $derived(formatPartnershipPrice(locale));
+  const prices = $derived(getPartnershipPrices(locale, exchangeRates));
   const pageUrl = $derived(
     locale === 'pt-BR' ? 'https://rbx.ia.br/parceria' : 'https://rbxsystems.ch/partnership'
   );
@@ -62,8 +67,15 @@
     </div>
     <aside class="offer" aria-labelledby="offer-title" use:observeOffer>
       <p id="offer-title" class="eyebrow">{content.priceLabel}</p>
-      <p class="price">{price}<span>{content.period}</span></p>
-      <p class="currency">{content.currency}</p>
+      {#each prices as price (price.currency)}
+        <p class="price" class:international={locale === 'en'}>
+          {price.formatted}<span>{content.period}</span>
+        </p>
+      {:else}
+        <p class="quote-unavailable">BTC · EUR · USD</p>
+        <p class="detail">Current prices are temporarily unavailable.</p>
+      {/each}
+      <p class="currency">{partnershipPriceNote(locale, exchangeRates)}</p>
       <p class="capacity"><strong>{partnershipTerms.monthlyHours}</strong> {content.capacity}</p>
       <p class="detail">{content.capacityDetail}</p>
       <a
@@ -138,7 +150,7 @@
       <h2 id="qualification-title">{content.qualificationTitle}</h2>
       <p>{content.qualificationLead}</p>
     </div>
-    <PartnershipForm {locale} />
+    <PartnershipForm {locale} {exchangeRates} />
   </section>
 </div>
 
@@ -201,6 +213,15 @@
     font-size: var(--text-base);
     letter-spacing: normal;
     color: var(--fg-1);
+  }
+  .price.international {
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.025em;
+  }
+  .quote-unavailable {
+    margin-top: var(--s-4);
+    font-size: var(--text-xl);
   }
   .currency {
     color: var(--fg-2);

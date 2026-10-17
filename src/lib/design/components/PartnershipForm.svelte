@@ -2,7 +2,11 @@
   import { onDestroy, onMount } from 'svelte';
   import { getCommsBaseUrl } from '$lib/api/comms';
   import { trackPartnershipEvent, getPartnershipAttribution } from '$lib/analytics/partnership';
-  import { partnershipTerms, formatPartnershipPrice } from '$lib/content/partnership';
+  import {
+    partnershipTerms,
+    formatPartnershipPrice,
+    type PartnershipExchangeRates
+  } from '$lib/content/partnership';
   import {
     buildQualificationSubmission,
     qualificationLimits,
@@ -11,7 +15,10 @@
   import type { Locale } from '$types/content';
   import AltchaWidget from './AltchaWidget.svelte';
 
-  let { locale }: { locale: Locale } = $props();
+  let {
+    locale,
+    exchangeRates = null
+  }: { locale: Locale; exchangeRates?: PartnershipExchangeRates | null } = $props();
 
   const copy = $derived(
     locale === 'en'
@@ -179,7 +186,11 @@
         website
       },
       locale,
-      partnershipTerms,
+      {
+        ...partnershipTerms,
+        referencePrice: formatPartnershipPrice(locale, exchangeRates),
+        exchangeRatesCheckedAt: locale === 'en' ? exchangeRates?.updatedAt : undefined
+      },
       altchaWidget?.getValue() ?? altchaPayload,
       getPartnershipAttribution()
     );
@@ -383,7 +394,7 @@
         <div class="field">
           <label for="partnership-budget">{copy.budget}</label>
           <p class="price-reference">
-            {formatPartnershipPrice(locale)} / {locale === 'en' ? 'month' : 'mês'}
+            {formatPartnershipPrice(locale, exchangeRates)} / {locale === 'en' ? 'month' : 'mês'}
           </p>
           <select id="partnership-budget" name="budget" required bind:value={budget}>
             <option value="" disabled>{copy.select}</option>

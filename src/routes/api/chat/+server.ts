@@ -2,6 +2,7 @@ import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import { sanitizeMessages } from '$lib/server/chatMessages.js';
 import { runRagShadow } from '$lib/server/ragShadow';
+import { detectLocaleFromUrl } from '$lib/i18n/locale';
 import {
   formatPartnershipPrice,
   partnershipTerms,
@@ -43,7 +44,7 @@ We serve enterprises that need AI sovereignty, governance, and operational preci
 
 RBX Engineering Partnership, public terms version ${partnershipTerms.version}:
 - Examples of contexts for assessment: ${partnershipContent.en.fitCards.map((card) => `${card.title}: ${card.description}`).join(' ')} These examples do not confirm acceptance or a dedicated specialist team. A human confirms scope and engineering availability.
-- The reference partnership is ${formatPartnershipPrice('pt-BR')} per month in Brazilian reais (BRL), including ${partnershipTerms.monthlyHours} hours per month of founder-led technical capacity with AI assistance for one product. The same BRL price applies to the Portuguese and English pages. Do not convert it to dollars or Swiss francs.
+- The Brazilian partnership page at rbx.ia.br lists ${formatPartnershipPrice('pt-BR')} per month in Brazilian reais (BRL). The international partnership page at rbxsystems.ch lists indicative monthly conversions in BTC, EUR and USD. For international pricing, direct visitors to https://rbxsystems.ch/partnership#qualificacao for the current quote; do not quote BRL as the international price or calculate conversions yourself. Both include ${partnershipTerms.monthlyHours} hours per month of founder-led technical capacity with AI assistance for one product. The final currency amount is confirmed in the proposal.
 - Those hours include implementation, technical direction, review, testing and asynchronous communication. Work is prioritized within the agreed monthly capacity; this is not an unlimited delivery commitment or a dedicated full-time team.
 - Infrastructure and the client's API consumption have a separate budget. Continuous on-call support, fixed delivery dates and extra capacity require an explicit proposal; do not imply they are included.
 - RBX is opening with a plan for ${partnershipTerms.initialPartners} partnerships. This is a planning limit, not a live count of available places. You cannot confirm availability, reserve a place, approve fit, promise a start date or conclude a contract. A human confirms scope, capacity and commercial conditions by email after qualification.
@@ -138,7 +139,7 @@ function resolveLlmTarget(): LlmTarget | null {
   return null;
 }
 
-export const POST: RequestHandler = async ({ request, getClientAddress }) => {
+export const POST: RequestHandler = async ({ request, getClientAddress, url }) => {
   const target = resolveLlmTarget();
   if (!target) throw error(503, 'AI assistant not configured');
 
@@ -169,6 +170,10 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
         console.warn('[rag-shadow] unexpected failure', { reason: 'unexpected_error' });
       })
     : Promise.resolve();
+  const pricingContext =
+    detectLocaleFromUrl(url) === 'en'
+      ? 'Current website: rbxsystems.ch. Use the international BTC, EUR and USD partnership terms regardless of the visitor’s language. Direct the visitor to the international partnership page for the current quote; never give BRL as this site’s partnership price.'
+      : 'Current website: rbx.ia.br. Use the Brazilian BRL partnership terms regardless of the visitor’s language.';
 
   const [res] = await Promise.all([
     fetch(target.url, {
@@ -179,7 +184,7 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
       },
       body: JSON.stringify({
         model: target.model,
-        messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...recent],
+        messages: [{ role: 'system', content: `${SYSTEM_PROMPT}\n\n${pricingContext}` }, ...recent],
         max_tokens: 320,
         temperature: 0.65
       })
