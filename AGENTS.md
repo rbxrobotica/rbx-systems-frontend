@@ -11,6 +11,15 @@ This file is the root index for agent-facing operational instructions in this re
 
 ## Mandatory Rules
 
+Python tooling follows the RBX operator decision of 2026-10-22: use **uv**.
+New or updated Journal tutorials must use a tested uv workflow. For project
+examples, commit `pyproject.toml`, `.python-version` and `uv.lock`, install with
+`uv sync --locked`, and execute with `uv run --locked`. Do not publish standalone
+pip installation commands or substitute tool names without a clean-environment
+rerun. Preserve the configured CPU/CUDA index and model revision when migrating
+machine-learning examples. See the canonical `rbx-governance` standard
+`docs/standards/python-uv-standard.md` and its operator-authorized adoption record.
+
 If the task involves creating, translating, publishing, or updating a Journal
 post, read [docs/AGENT-BLOG-PUBLISHING.md](docs/AGENT-BLOG-PUBLISHING.md)
 before acting.

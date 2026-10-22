@@ -28,51 +28,45 @@ Você apresenta um texto, uma pergunta e as opções. O modelo devolve uma opç�
 
 O checkpoint multilíngue tem aproximadamente 322 milhões de parâmetros. Ele não redige uma resposta longa como um chatbot: produz uma resposta estruturada para a pergunta configurada. Isso facilita a integração, mas não elimina erros de classificação. A [página do modelo](https://huggingface.co/convaiinnovations/laya-multilingual) descreve a arquitetura e seus limites; o [código da biblioteca](https://github.com/NandhaKishorM/laya/tree/c4a805b5160621bbfc53417126990a67d3163bc5) é um projeto externo à RBX.
 
-## 1. Prepare o Python e um ambiente separado
+## 1. Instale o uv
 
-Os comandos abaixo foram validados em Linux x86_64 com Python 3.12.3. Windows e macOS têm comandos de ambiente e opções de PyTorch diferentes; este passo a passo cobre Linux com CPU.
+Os comandos abaixo foram validados em Linux x86_64 com uv 0.13.5 e Python 3.12.3. Este passo a passo cobre Linux com CPU; o projeto não está configurado para Windows, macOS ou CUDA.
+
+O `uv` gerencia o Python, o ambiente isolado e as dependências. Se você ainda não o tem, use o instalador oficial para a versão deste ensaio:
+
+```bash
+curl -LsSf https://astral.sh/uv/0.13.5/install.sh | sh
+source "$HOME/.local/bin/env"
+uv --version
+```
+
+O instalador coloca o executável na pasta do usuário. O comando `source` disponibiliza essa pasta no terminal atual. Se você já usa uv 0.13.5 ou mais recente, confira `uv --version` e siga para o próximo passo. A [documentação de instalação do uv](https://docs.astral.sh/uv/getting-started/installation/) apresenta outros métodos.
 
 Reserve alguns gigabytes livres para dependências e cache. No ensaio anterior da RBX com o mesmo checkpoint, os cinco arquivos do modelo somavam cerca de 678 MB e o processo completo chegou a aproximadamente 2,28 GiB de RAM. São referências daquele ensaio, não requisitos máximos garantidos.
 
-Abra um terminal e crie uma pasta:
+## 2. Reproduza o ambiente com uv.lock
+
+Crie uma pasta e baixe os três arquivos de configuração da versão fixa do [exemplo completo](https://github.com/rbxrobotica/rbx-systems-frontend/tree/b7f1815a5baf6529820a4adb6c9762163b8d0f94/examples/laya). Depois restaure o ambiente:
 
 ```bash
 mkdir teste-laya
 cd teste-laya
-python3 --version
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip --version
+LAYA_SOURCE_URL="https://raw.githubusercontent.com/rbxrobotica/rbx-systems-frontend/b7f1815a5baf6529820a4adb6c9762163b8d0f94/examples/laya"
+curl -fsSLo pyproject.toml "$LAYA_SOURCE_URL/pyproject.toml"
+curl -fsSLo uv.lock "$LAYA_SOURCE_URL/uv.lock"
+curl -fsSLo .python-version "$LAYA_SOURCE_URL/.python-version"
+uv sync --locked
+uv run --locked python --version
+uv run --locked python -c "import torch, laya; print('torch:', torch.__version__); print('laya:', laya.__version__); print('cuda:', torch.version.cuda)"
 ```
 
-Confira se o primeiro comando de versão indica Python 3.12. O ambiente `.venv` mantém as dependências deste teste separadas dos outros projetos. A ativação precisa ser repetida quando você abrir outro terminal nessa pasta.
+`pyproject.toml` declara Laya 0.4.3, PyTorch 2.14.1 para CPU, Transformers 5.19.0 e NumPy 2.5.4. O índice específico de CPU se aplica somente ao PyTorch; as demais bibliotecas vêm do PyPI. Usamos deliberadamente essas versões para manter o experimento descrito, sem afirmar que são as mais recentes.
 
-Se o Debian, Ubuntu ou Mint informar que `ensurepip` não está disponível, instale o pacote de ambientes virtuais e repita a criação:
+`.python-version` seleciona Python 3.12.3. Se ele não estiver disponível localmente, o uv poderá baixá-lo. `uv.lock` registra a combinação resolvida de dependências, os endereços dos arquivos e seus hashes. `uv sync --locked` cria `.venv` e instala essa combinação; se o arquivo de configuração divergir do lock, o comando falha em vez de atualizar o lock silenciosamente.
 
-```bash
-sudo apt install python3-venv
-python3 -m venv .venv
-source .venv/bin/activate
-```
+Não é necessário ativar o ambiente no terminal: `uv run --locked` escolhe o ambiente do projeto. Na instalação validada, o PyTorch informa `2.14.1+cpu`, o Laya informa `0.4.3` e `cuda` aparece como `None`. Isso é esperado: escolhemos executar em CPU. Ainda não carregamos o modelo.
 
-Consulte a [documentação de ambientes virtuais do Python](https://docs.python.org/3/library/venv.html) se a sua distribuição usar outro pacote ou executável.
-
-## 2. Instale as versões usadas no exemplo
-
-Primeiro instale a distribuição de PyTorch para CPU. Depois instale Laya e as duas dependências principais com versões fixas:
-
-```bash
-python -m pip install "torch==2.14.1" --index-url https://download.pytorch.org/whl/cpu
-python -m pip install "laya==0.4.3" "transformers==5.19.0" "numpy==2.5.4"
-python -m pip check
-python -c "import torch, laya; print('torch:', torch.__version__); print('laya:', laya.__version__); print('cuda:', torch.version.cuda)"
-```
-
-Usamos deliberadamente Laya 0.4.3 para manter a mesma versão do experimento descrito. Ela não é necessariamente a versão mais recente. O [pacote no PyPI](https://pypi.org/project/laya/0.4.3/) e o [guia de instalação do PyTorch](https://pytorch.org/get-started/locally/) são as referências para outros ambientes.
-
-Na instalação validada, o PyTorch informa `2.14.1+cpu`, o Laya informa `0.4.3` e `cuda` aparece como `None`. Isso é esperado: escolhemos executar em CPU. O comando `pip check` deve informar que não há dependências incompatíveis. Ainda não carregamos o modelo.
-
-As dependências transitivas podem mudar entre instalações. Para reproduzir a nossa combinação completa em Linux x86_64/Python 3.12, o [código-fonte deste artigo](https://github.com/rbxrobotica/rbx-systems-frontend/tree/637f19904daa25ae90f4207377dd8d4a868c8c0f/examples/laya) inclui o programa, os resultados registrados e um arquivo de dependências com versões, URLs e hashes. O `README.md` desse diretório mostra como instalar a combinação completa com `--require-hashes`. Para explorar a API, os comandos acima são o caminho mais curto; registre seu ambiente com `python -m pip freeze > ambiente.txt`.
+O [guia de integração entre uv e PyTorch](https://docs.astral.sh/uv/guides/integration/pytorch/) explica a configuração do índice, e o [pacote Laya no PyPI](https://pypi.org/project/laya/0.4.3/) identifica a versão da biblioteca. O diretório do exemplo inclui o programa e os resultados registrados. O lock cobre o ambiente Python; a revisão dos pesos do modelo é fixada separadamente no programa.
 
 ## 3. Crie o programa de classificação
 
@@ -173,10 +167,10 @@ O laço executa uma inferência para cada mensagem e mostra a categoria prevista
 
 ## 4. Execute e leia a resposta
 
-Com o ambiente ainda ativado, execute:
+Dentro da pasta `teste-laya`, execute:
 
 ```bash
-python triagem.py
+uv run --locked triagem.py
 ```
 
 A primeira carga precisa de internet para baixar os arquivos públicos do checkpoint. As próximas cargas podem reutilizar o cache do Hugging Face. Depois do download, o cálculo do modelo acontece localmente; este programa não chama uma API de classificação.
@@ -235,11 +229,11 @@ Quando uma falha puder causar prejuízo, mantenha uma intervenção humana ou um
 
 | Sintoma | Primeiro passo |
 | --- | --- |
-| `No module named laya` | Ative `.venv` e use `python -m pip` com o mesmo Python que executa o arquivo. |
+| `No module named laya` | Entre na pasta do projeto, execute `uv sync --locked` e rode o arquivo com `uv run --locked triagem.py`. |
 | Falha no download | Confira o acesso ao Hugging Face e repita a carga. Não invente arquivos de configuração ausentes. |
 | Mensagem classificada incorretamente | Confira as categorias, o texto e a previsão. Uma execução sem erro de software não garante uma classificação correta. |
 | Consumo de memória elevado | Feche outros processos e teste um programa de cada vez. Os arquivos baixados não representam toda a memória usada pelo processo. |
 
-Para encerrar o ambiente no terminal, execute `deactivate`. Os arquivos do projeto e o cache do modelo permanecem no disco.
+Quando o programa termina, o comando devolve o controle ao terminal. A pasta `.venv`, os arquivos do projeto e o cache do modelo permanecem no disco para a próxima execução.
 
 Esse teste é um ponto de partida para discutir [avaliação de IA e engenharia de produto](/solucoes). No [Journal da RBX](/journal), o artigo [O modelo não é o sistema](/blog/2026-04-01-the-model-is-not-the-system) aprofunda a relação entre modelo e controles. Se você tem um produto em operação e precisa definir como avaliar e integrar IA, [conheça a RBX Engineering Partnership](/parceria).

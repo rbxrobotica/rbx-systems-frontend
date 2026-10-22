@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-22",
+  "uv": "0.13.5",
+  "fresh_reader_directory": true,
+  "published_shell_blocks_executed": true,
+  "both_locales_same_commands_and_program": true,
+  "source_files_from_immutable_public_commit": "b7f1815a5baf6529820a4adb6c9762163b8d0f94",
+  "downloaded_config_equals_committed_source": true,
+  "lock_check_passed": true,
+  "syntax_check_passed": true,
+  "cpu_and_library_versions_checked": true,
+  "predictions_and_probabilities_equal_original": true,
+  "stale_lock_rejected": true,
+  "model_correct": 2,
+  "baseline_correct": 4,
+  "sample_size": 4,
+  "production_benchmark": false,
+  "frontend_tests_passed": 102,
+  "cover_tests_passed": 4,
+  "seo_check_passed": true,
+  "rows": [
+    {
+      "mensagem": "Cobraram duas vezes a mensalidade. Quero estorno.",
+      "esperado": "financeiro",
+      "modelo": "financeiro",
+      "regras": "financeiro",
+      "probabilidades": {
+        "financeiro": 0.801,
+        "tecnico": 0.1767,
+        "comercial": 0.0056,
+        "outro": 0.0166
+      },
+      "tempo_ms": 119.9
+    },
+    {
+      "mensagem": "A tela fecha quando tento salvar um cadastro.",
+      "esperado": "tecnico",
+      "modelo": "tecnico",
+      "regras": "tecnico",
+      "probabilidades": {
+        "financeiro": 0.0228,
+        "tecnico": 0.8647,
+        "comercial": 0.0244,
+        "outro": 0.0881
+      },
+      "tempo_ms": 107.2
+    },
+    {
+      "mensagem": "Quero conhecer os planos e contratar para a equipe.",
+      "esperado": "comercial",
+      "modelo": "tecnico",
+      "regras": "comercial",
+      "probabilidades": {
+        "financeiro": 0.1411,
+        "tecnico": 0.4987,
+        "comercial": 0.1841,
+        "outro": 0.1761
+      },
+      "tempo_ms": 109.5
+    },
+    {
+      "mensagem": "Obrigado pelo atendimento.",
+      "esperado": "outro",
+      "modelo": "tecnico",
+      "regras": "outro",
+      "probabilidades": {
+        "financeiro": 0.0154,
+        "tecnico": 0.8821,
+        "comercial": 0.021,
+        "outro": 0.0816
+      },
+      "tempo_ms": 103.9
+    }
+  ]
+}
