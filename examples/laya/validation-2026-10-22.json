@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "validated_on": "2026-10-22",
+  "platform": "Linux x86_64",
+  "python": "3.12.3",
+  "device": "cpu",
+  "pytorch": "2.14.1+cpu",
+  "laya": "0.4.3",
+  "transformers": "5.19.0",
+  "numpy": "2.5.4",
+  "model_id": "convaiinnovations/laya-multilingual",
+  "model_revision": "e4e9ddf21a7b1903b7acffd8814ad4307bf63a67",
+  "example_sha256": "1552e5ff9d2ca651b7fdbe9a327810e48f33b90ce16e98528e5ab2a0e27ad8e6",
+  "rows": [
+    {
+      "mensagem": "Cobraram duas vezes a mensalidade. Quero estorno.",
+      "esperado": "financeiro",
+      "modelo": "financeiro",
+      "regras": "financeiro",
+      "probabilidades": {
+        "financeiro": 0.801,
+        "tecnico": 0.1767,
+        "comercial": 0.0056,
+        "outro": 0.0166
+      },
+      "tempo_ms": 114.3
+    },
+    {
+      "mensagem": "A tela fecha quando tento salvar um cadastro.",
+      "esperado": "tecnico",
+      "modelo": "tecnico",
+      "regras": "tecnico",
+      "probabilidades": {
+        "financeiro": 0.0228,
+        "tecnico": 0.8647,
+        "comercial": 0.0244,
+        "outro": 0.0881
+      },
+      "tempo_ms": 105.6
+    },
+    {
+      "mensagem": "Quero conhecer os planos e contratar para a equipe.",
+      "esperado": "comercial",
+      "modelo": "tecnico",
+      "regras": "comercial",
+      "probabilidades": {
+        "financeiro": 0.1411,
+        "tecnico": 0.4987,
+        "comercial": 0.1841,
+        "outro": 0.1761
+      },
+      "tempo_ms": 107.4
+    },
+    {
+      "mensagem": "Obrigado pelo atendimento.",
+      "esperado": "outro",
+      "modelo": "tecnico",
+      "regras": "outro",
+      "probabilidades": {
+        "financeiro": 0.0154,
+        "tecnico": 0.8821,
+        "comercial": 0.021,
+        "outro": 0.0816
+      },
+      "tempo_ms": 99.5
+    }
+  ],
+  "model_correct": 2,
+  "baseline_correct": 4,
+  "sample_size": 4,
+  "independent_test_set": false,
+  "production_benchmark": false,
+  "note": "Author-written demonstration messages; labels and keyword baseline favor obvious lexical cues. Timings are one execution, not a performance estimate."
+}
