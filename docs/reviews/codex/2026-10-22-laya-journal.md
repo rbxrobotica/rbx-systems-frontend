@@ -53,8 +53,30 @@ the catalogued raster, compare hashes, then use the repository's Journal publish
 scripts for an explicitly authorized recovery operation. This scoped additive
 publication makes no claim about general bucket or platform disaster recovery.
 
-The cover upload completed. Final article publication and HTTP/object readback
-are pending at this checkpoint and will be recorded after execution.
+Publication completed. Both Markdown objects and the cover were downloaded
+from the serving store and matched their local bytes and SHA-256 values. Both
+public article URLs returned HTTP 200 with the intended locale, one rendered
+H1, the correct canonical URL, the runnable code and the observed results. The
+public cover returned HTTP 200, matched its source hash and measured 1200x630.
+The article is listed in the Journal. Desktop rendering was inspected visually.
+Machine-readable evidence is in `2026-10-22-laya-publication.json`.
+
+The source remains on feature branch `codex/journal-laya-20261022`, with draft
+PR #117 for repository integration. Publication uses the content gateway and
+does not require merging a frontend release or redeploying the application.
+
+```text
+State alterado: dois artigos e uma capa novos; fonte e evidência na feature branch.
+Fonte de verdade: fontes Git registradas e objetos servidos, com hashes iguais.
+Backend remoto: GitHub para fonte; armazenamento do Journal para publicação.
+Backup e última execução: fonte remota conferida em 2026-10-22; seis arquivos recuperados.
+Último restore testado: recuperação byte a byte da fonte em 2026-10-22, 1,486 s.
+RPO/RTO: zero alterações de fonte commitadas perdidas; RTO completo não medido.
+IaC/commit: conteúdo em 0eb2ca8; nenhuma infraestrutura alterada.
+Drift encontrado: nenhum nos três objetos novos verificados.
+Estado local residual: worktree de fonte, ambientes e caches reproduzíveis.
+Riscos ou bloqueios: integração do PR pendente; não é requisito para o artigo já servido.
+```
 
 ## Intended public URLs
 
