@@ -48,8 +48,23 @@ standard `mem-2026-00170`. The agent-layer guardrail and frontend AGENTS referen
 it. Repository integration and runtime propagation remain separate; no global
 rollout or migration of unrelated repositories is claimed.
 
-Publication status: validated; corrected source will be published and read back
-before the already authorized institutional LinkedIn post.
+Publication status: both corrected locale objects were published, downloaded
+again and matched their local bytes. Both public URLs returned HTTP 200 and
+showed uv commands, the immutable source commit, no old installer commands and
+one H1. The campaign query survived the public response and canonical URLs
+remained clean. The initial public read served the prior SWR cache; later reads
+confirmed the corrected version in both locales.
+
+The official RBX Systems LinkedIn post was then published and verified in the UI.
+Its short link resolves to the full submitted campaign URL with all four UTMs.
+Receipt: `2026-10-22-laya-linkedin-publication.json`. The post is text only because
+the automatic preview dropped UTMs and the extension blocked local image upload.
+No extension permissions were changed and no personal-profile repost was made.
+Plausible compatibility was checked against its official UTM documentation;
+dashboard attribution was not inspected.
+
+Institutional integration PRs: Governance #97 and agent-layer #58. Runtime
+activation and bulk migration of existing projects remain outside this task.
 
 ```text
 State alterado: fonte bilíngue, exemplo uv e instrução editorial.

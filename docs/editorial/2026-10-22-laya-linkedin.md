@@ -1,21 +1,33 @@
-# LinkedIn drafts: Laya tutorial
+# LinkedIn: Laya tutorial
 
-Drafts only. No social publication or message is authorized by this file.
+Published on the official RBX Systems company page on 2026-10-22 after the operator authorized the post and required the uv correction and rerun first. No personal-profile repost.
 
-## PT-BR
+Post: https://www.linkedin.com/feed/update/urn:li:share:7519172616675430401/?actorCompanyId=103949050
 
-Como testar um classificador local sem começar por uma GPU ou um treinamento?
+The complete campaign URL was submitted. LinkedIn renders it as https://lnkd.in/dDTnsVJJ; its destination was verified in LinkedIn with all four UTM parameters intact. The automatic canonical-only preview was removed; this is a text-only post. Plausible dashboard attribution has not been inspected.
 
-Publicamos um tutorial de Laya com PyTorch em CPU. Ele acompanha a instalação,
-o código completo e a leitura das probabilidades. Nos quatro exemplos didáticos,
-o modelo acertou dois. Um dos erros veio com probabilidade alta. Mantivemos os
-resultados e a comparação com regras simples para mostrar o que uma primeira
-execução permite concluir e o que ainda precisa de avaliação.
+## PT-BR: published
 
-Leia e execute o exemplo:
-https://rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos
+O modelo classificou um agradecimento como problema técnico, com probabilidade de 88,21%.
 
-## EN
+Esse foi um dos resultados do nosso experimento com Laya. Nos quatro exemplos didáticos, o modelo acertou dois. As regras por palavras-chave acertaram os quatro.
+
+No novo tutorial do RBX Journal, mostramos como reproduzir o teste com uv e PyTorch, localmente e em CPU:
+
+• preparar um ambiente com versões fixadas em uv.lock;
+• classificar mensagens em português;
+• conferir as probabilidades e os erros;
+• comparar com uma solução simples e discutir onde manter revisão humana.
+
+Quatro exemplos não formam um benchmark. Eles mostram por que executar um modelo e avaliar sua adequação à tarefa são etapas diferentes. Uma probabilidade alta também pode acompanhar uma decisão errada.
+
+Tutorial completo, com código e resultados:
+https://rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos?utm_source=linkedin&utm_medium=social_organic&utm_campaign=2026h2_b2b_ai_engineering_009&utm_content=b2b_post_laya_009
+
+#EngenhariaDeIA #PyTorch #Python
+
+## EN: draft only
+
 
 How can you test a local text classifier before adding a GPU or a training job?
 

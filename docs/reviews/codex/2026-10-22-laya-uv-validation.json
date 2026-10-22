@@ -71,5 +71,35 @@
       },
       "tempo_ms": 103.9
     }
-  ]
+  ],
+  "corrected_articles_published_and_verified": true,
+  "public_http": [
+    {
+      "url": "https://rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos?utm_source=linkedin&utm_medium=social_organic&utm_campaign=2026h2_b2b_ai_engineering_009&utm_content=b2b_post_laya_009",
+      "final_url": "https://rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos?utm_source=linkedin&utm_medium=social_organic&utm_campaign=2026h2_b2b_ai_engineering_009&utm_content=b2b_post_laya_009",
+      "status": 200,
+      "uv_sync_present": true,
+      "uv_run_present": true,
+      "old_installer_absent": true,
+      "fixed_source_present": true,
+      "h1_count": 1,
+      "canonical": "https://rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos"
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-10-22-text-classification-laya-pytorch",
+      "final_url": "https://rbxsystems.ch/blog/2026-10-22-text-classification-laya-pytorch",
+      "status": 200,
+      "uv_sync_present": true,
+      "uv_run_present": true,
+      "old_installer_absent": true,
+      "fixed_source_present": true,
+      "h1_count": 1,
+      "canonical": "https://rbxsystems.ch/blog/2026-10-22-text-classification-laya-pytorch"
+    }
+  ],
+  "campaign_url": "https://rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos?utm_source=linkedin&utm_medium=social_organic&utm_campaign=2026h2_b2b_ai_engineering_009&utm_content=b2b_post_laya_009",
+  "object_readback_matches_source": {
+    "pt-BR": "0f9ae8d131587b8c4eb8f89a8449741e30343988c3c41248081bbd4a250675f1",
+    "en": "9940d149a2f64e30e8351b1a97ad75af5e6e7f655a7151b80b0c0683fca2e504"
+  }
 }
