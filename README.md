@@ -64,7 +64,6 @@ See `docs/AGENT-BLOG-PUBLISHING.md` and `docs/BLOG.md`.
 
 © RBX Systems. All rights reserved.
 
-
 ## PI IV: criminalidade local em São Paulo
 
 `/estudos/criminalidade-sp` publica um protótipo acadêmico independente para
