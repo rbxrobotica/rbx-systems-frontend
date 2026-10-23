@@ -54,6 +54,21 @@ test('retains earlier Satwake and taxonomy v2 legacy campaigns', () => {
   assert.equal(parseUtm('?utm_source=LinkedIn&utm_campaign=Satwake_H1_ritual07h'), null);
 });
 
+test('preserves the WhatsApp group distribution in the real parser', () => {
+  assert.deepEqual(
+    parseUtm(
+      '?utm_source=whatsapp&utm_medium=social_organic&utm_campaign=2026h2_b2b_ai_engineering_009&utm_content=b2b_group_rbx_systems_009'
+    ),
+    {
+      utm_source: 'whatsapp',
+      utm_medium: 'social_organic',
+      utm_campaign: '2026h2_b2b_ai_engineering_009',
+      utm_content: 'b2b_group_rbx_systems_009'
+    }
+  );
+  assert.equal(parseUtm('?utm_source=WhatsApp'), null);
+});
+
 test('drops PII-bearing and oversized values', () => {
   assert.deepEqual(
     parseUtm('?utm_source=google&utm_campaign=satwake_h1_1234567890&utm_term=joao_11999999999'),

@@ -344,6 +344,15 @@
       "motif": "evidence-ledger",
       "accent": "cyan",
       "alt": "Abstract open ledger of live evidence feeding a review while a protected position stays running"
+    },
+    {
+      "slug": "2026-10-22-laya-pytorch-classificacao-de-textos",
+      "title": "Laya with PyTorch: classify text on a CPU",
+      "extension": "jpg",
+      "revision": 1,
+      "motif": "validation-gates",
+      "accent": "cyan",
+      "alt": "Abstract classification signal crossing successive reference gates with an uncertain final decision"
     }
   ]
 }

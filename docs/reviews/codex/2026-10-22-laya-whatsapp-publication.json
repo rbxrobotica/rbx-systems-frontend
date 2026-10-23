@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-22",
+  "timezone": "America/Sao_Paulo",
+  "displayed_send_time": "20:31",
+  "status": "sent_verified_in_whatsapp_ui",
+  "account": "operator-selected personal WhatsApp account in Chrome",
+  "destination_kind": "group",
+  "destination_alias": "rbx_systems",
+  "destination_display_name": "RBX Systems",
+  "submitted_url": "https://rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos?utm_source=whatsapp&utm_medium=social_organic&utm_campaign=2026h2_b2b_ai_engineering_009&utm_content=b2b_group_rbx_systems_009",
+  "actual_sent_hyperlink": "https://rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos?utm_source=whatsapp&utm_medium=social_organic&utm_campaign=2026h2_b2b_ai_engineering_009&utm_content=b2b_group_rbx_systems_009",
+  "utm": {
+    "utm_source": "whatsapp",
+    "utm_medium": "social_organic",
+    "utm_campaign": "2026h2_b2b_ai_engineering_009",
+    "utm_content": "b2b_group_rbx_systems_009"
+  },
+  "message_sha256": "dc9d2df833aab6e3fbecddf5467542cc4acccc04c061d65eb25399f47784e387",
+  "send_attempts": 1,
+  "observed_progress": [
+    "Pending",
+    "Sent"
+  ],
+  "recipient_delivery_or_read_verified": false,
+  "public_http_status": 200,
+  "public_url_query_preserved": true,
+  "canonical": "https://rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos",
+  "plausible_dashboard_inspected": false,
+  "frontend_whatsapp_allowlist": "implemented and tested in source; not deployed by this task",
+  "governance_pr": "https://github.com/rbxrobotica/rbx-governance/pull/98",
+  "taxonomy_pr": "https://github.com/rbxrobotica/rbx-growth/pull/36",
+  "privacy": "No participant names, phone numbers, private chat IDs or unrelated conversation history recorded."
+}

@@ -3,7 +3,7 @@
  *
  * Implements slice S1/S2 of rbx-growth:
  *   marketing/2026-h2-growth/analytics/briefing-btc-measurement-slice.md
- * Validation rules come from the canonical Growth taxonomy v2
+ * Validation rules come from the canonical Growth taxonomy v3
  * (marketing/2026-h2-growth/analytics/utm-taxonomy.yaml), extended with the
  * satwake campaign namespace (`satwake_h[12]_*`). Values that fail validation
  * are dropped silently, key by key.
@@ -29,10 +29,11 @@ const FIRST_TOUCH_KEY = 'rbx_utm_first';
 const LAST_TOUCH_KEY = 'rbx_utm_last';
 const MAX_VALUE_LENGTH = 120;
 
-// Growth taxonomy v2 sources: social/organic/paid platforms plus RBX-owned
+// Growth taxonomy v3 sources: social/organic/paid platforms plus RBX-owned
 // channels (briefing, robson, newsletter, partner).
 const UTM_SOURCES = new Set([
   'linkedin',
+  'whatsapp',
   'instagram',
   'facebook',
   'google',
@@ -56,7 +57,7 @@ const UTM_MEDIUMS = new Set([
   'newsletter'
 ]);
 
-// utm-taxonomy.yaml (Growth taxonomy v2) validation regexes: the legacy
+// utm-taxonomy.yaml (Growth taxonomy v3) validation regexes: the legacy
 // 2026-h2 formats plus the satwake campaign namespace.
 const CAMPAIGN_RE =
   /^(?:2026h2_(?:b2b|robson|briefing)_[a-z_]+_[0-9]{3}|satwake_h[12]_[a-z0-9_]+)$/;
