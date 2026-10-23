@@ -63,3 +63,49 @@ See `docs/AGENT-BLOG-PUBLISHING.md` and `docs/BLOG.md`.
 ---
 
 © RBX Systems. All rights reserved.
+
+
+## PI IV: criminalidade local em São Paulo
+
+`/estudos/criminalidade-sp` publica um protótipo acadêmico independente para
+revisão e testes da equipe. A RBX fornece domínio e infraestrutura de apoio,
+sem aquisição de outro domínio. O endereço facilita demonstrações, acesso em
+computador e celular e coleta de feedback; a hospedagem não comprova validação
+comunitária ou conclusão do produto acadêmico.
+
+A rota entrega um snapshot HTML/CSS/JavaScript e SVG, preparado a partir do piloto
+local de 21/10/2026. A interface ainda não foi reescrita em componentes Svelte.
+O processamento analítico em Node.js/TensorFlow.js ocorre antes da publicação.
+Amostra: 75 agregados anuais, três circunscrições policiais, anos completos
+2002–2025 e 2026 parcial; 69 observações são usadas no agrupamento. A coleta da
+fonte é manual. A interface identifica origem, período e limitações. Não há
+previsão de risco ou inferência causal.
+
+```mermaid
+flowchart LR
+  P[Piloto e resultados verificados] --> H[Snapshot HTML e figuras]
+  H --> S[Rota SvelteKit existente]
+  S --> U[Equipe e participantes dos testes]
+```
+
+| Opção | Avaliação para esta publicação |
+| --- | --- |
+| Rota no domínio existente | Escolhida: reutiliza HTTPS e hospedagem; exige publicar uma imagem do site. |
+| Subdomínio independente | Possível evolução; exige DNS, TLS e hospedagem próprios. |
+| Novo domínio | Aquisição e manutenção adicionais sem necessidade para os testes. |
+
+A rota realiza uma resposta HTTP, sem consultas a banco ou APIs externas.
+Filtros e gráficos funcionam no navegador, sem requisições adicionais; os três
+PNGs são carregados somente ao abrir seus links. Seus nomes incluem hashes para
+invalidar cache após mudanças. O HTML tem cache de um minuto, CSP com hash do
+script e metadado `noindex` para a versão de testes. Não há formulários, gravação,
+autenticação, rastreamento adicional ou processamento de dados pessoais.
+
+| Falha | Comportamento e recuperação |
+| --- | --- |
+| Fonte criminal indisponível | A versão publicada mantém o snapshot datado; atualização permanece manual. |
+| Banco, S3 ou serviços analíticos indisponíveis | O painel não os consulta e mantém o conteúdo incorporado. |
+| Site ou hospedagem indisponível | O acesso público falha; o HTML original continua disponível no pacote local. Reverter a promoção da imagem restaura a versão anterior do site. |
+
+A rota não integra o protótipo a um eventual repositório da equipe. A decisão de
+incorporar a solução e as evidências dos testes deve ser registrada no PI.
