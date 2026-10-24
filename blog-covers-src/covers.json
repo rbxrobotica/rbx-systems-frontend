@@ -353,6 +353,15 @@
       "motif": "retest-buffer",
       "accent": "amber",
       "alt": "Abstract price path forming a top with a waiting buffer before the retest entry, four early marks left behind"
+    },
+    {
+      "slug": "2026-10-24-de-onde-o-robson-mede",
+      "title": "Where Robson Measures From: the first rung is not what it looks like",
+      "extension": "png",
+      "revision": 1,
+      "motif": "persistent-stop",
+      "accent": "green",
+      "alt": "Abstract ladder of stop levels measured from a reference mark, with the fill sitting slightly above it"
     }
   ]
 }
