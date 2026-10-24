@@ -1,0 +1,15 @@
+# osv-scanner exceptions (Guardrails CI, dependency-scan job).
+#
+# Every entry here is a documented, dated exception for a finding whose only
+# fix is a semver-major we cannot take yet, AND whose vulnerable code path is
+# not used by this site. Never add an entry for a finding that has a
+# compatible fix — update the dependency instead. Re-audit on each entry's
+# stated condition. Same discipline as ldamasio/robson's osv-scanner.toml.
+
+[[IgnoredVulns]]
+id = "GHSA-27mw-82g8-phjj"
+reason = "@sveltejs/kit < 3.0.0: XSS via an untrusted cache-control header inserted into a prerendered page's <meta http-equiv> tag. Preconditions: prerendered pages AND setHeaders('cache-control', <untrusted value>) at prerender time. This site prerenders nothing (adapter-node, SSR reading content from object storage; `grep -rn 'prerender\\|setHeaders' src` is empty), so the vulnerable code path is never executed. Fix is kit 3.0.0, a semver-major. Re-evaluate when the SvelteKit 3 upgrade lands or if prerendering/setHeaders is introduced. (2026-10-24)"
+
+[[IgnoredVulns]]
+id = "GHSA-pfhg-q3qv-9q6r"
+reason = "@sveltejs/kit < 3.0.0: open redirect through enhanced form actions (use:enhance) on routes that accept paths beginning with '//', e.g. catch-all routes. This site has no form actions and no use:enhance (`grep -rln 'use:enhance' src` is empty); its only catch-all routes are GET asset proxies under /api/assets and /api/blog/cover. The advisory's precondition (an enhanced form action resolving a protocol-relative action path) does not exist here. Fix is kit 3.0.0, a semver-major. Re-evaluate when the SvelteKit 3 upgrade lands or if form actions are introduced. (2026-10-24)"
