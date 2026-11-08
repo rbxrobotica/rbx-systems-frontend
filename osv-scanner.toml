@@ -1,10 +1,11 @@
 # osv-scanner exceptions (Guardrails CI, dependency-scan job).
 #
 # Every entry here is a documented, dated exception for a finding whose only
-# fix is a semver-major we cannot take yet, AND whose vulnerable code path is
-# not used by this site. Never add an entry for a finding that has a
-# compatible fix — update the dependency instead. Re-audit on each entry's
-# stated condition. Same discipline as ldamasio/robson's osv-scanner.toml.
+# fix is a semver-major we cannot take yet (or that has no fix at all), AND
+# whose vulnerable code path is not used by this site. Never add an entry for
+# a finding that has a compatible fix — update the dependency instead.
+# Re-audit on each entry's stated condition. Same discipline as
+# ldamasio/robson's osv-scanner.toml.
 
 [[IgnoredVulns]]
 id = "GHSA-27mw-82g8-phjj"
@@ -13,3 +14,11 @@ reason = "@sveltejs/kit < 3.0.0: XSS via an untrusted cache-control header inser
 [[IgnoredVulns]]
 id = "GHSA-pfhg-q3qv-9q6r"
 reason = "@sveltejs/kit < 3.0.0: open redirect through enhanced form actions (use:enhance) on routes that accept paths beginning with '//', e.g. catch-all routes. This site has no form actions and no use:enhance (`grep -rln 'use:enhance' src` is empty); its only catch-all routes are GET asset proxies under /api/assets and /api/blog/cover. The advisory's precondition (an enhanced form action resolving a protocol-relative action path) does not exist here. Fix is kit 3.0.0, a semver-major. Re-evaluate when the SvelteKit 3 upgrade lands or if form actions are introduced. (2026-10-24)"
+
+[[IgnoredVulns]]
+id = "GHSA-g3hv-75wg-m249"
+reason = "minimatch >= 7.0.0, < 11.0.1: CPU/memory amplification in firstPhasePreProcess() from an attacker-supplied glob pattern. The only affected copy is minimatch 10.2.5 under @typescript-eslint/typescript-estree 8.61.1 (typescript-eslint, a devDependency used by `pnpm lint`); the other copy, 3.1.5 under eslint, is outside the range. typescript-estree declares minimatch ^10.2.2 up to its latest release (8.72.1), and 11.x is a rewrite of the matcher (no RegExp engine, makeRe removed), so forcing it through an override is outside the consumer's supported range. Its only call is in useProgramFromProjectService.js, matching parserOptions.projectService.allowDefaultProject globs with { dot: true }, i.e. the default optimizationLevel 1; firstPhasePreProcess only runs at optimizationLevel >= 2. eslint.config.js enables neither project nor projectService, the globs would be developer-authored config, and the SSR server (`node build`) never imports typescript-eslint, so no attacker-supplied pattern reaches the vulnerable code. Re-evaluate when typescript-eslint depends on minimatch >= 11.0.1 (then update), or if projectService/allowDefaultProject or optimizationLevel >= 2 is introduced. (2026-11-08)"
+
+[[IgnoredVulns]]
+id = "GHSA-gcqx-w48m-w2h4"
+reason = "deepmerge <= 4.3.1: mergeObject() skips unsafe source keys but copies the target's own keys unchecked, so for certain target shapes (e.g. an object carrying an own __proto__ key, as JSON.parse or js-yaml produce) an attacker-shaped input can set the prototype of the returned object. No fix exists: 4.3.1 (2023-03-16) is the latest release. Consumers: svelte-i18n 4.0.1 at runtime, and @sveltejs/vite-plugin-svelte 5.1.1 and @rollup/plugin-node-resolve 16.0.3 at build time, where they merge build config and library defaults. svelte-i18n calls deepmerge only in addMessages(); this site calls it twice in src/lib/i18n/index.ts with the bundled pt-BR.json and en.json, and never uses register() loaders (`grep -rnE 'register\\(|addMessages\\(' src` shows only those two calls). CMS content parsed from object storage goes to the separate t()/lookup helpers in src/lib/i18n/translate.ts, never to deepmerge. No attacker-controlled object reaches a merge. Re-evaluate if a fixed deepmerge is published (then override), or if dictionaries start being loaded at runtime from fetched or CMS data. (2026-11-08)"
