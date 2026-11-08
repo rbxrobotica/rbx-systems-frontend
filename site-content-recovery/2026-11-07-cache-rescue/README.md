@@ -19,9 +19,9 @@ The layout mirrors the bucket keys.
 | ---- | ----- | -------- |
 | `site/<locale>/<key>/index.md` | 54 | Frontmatter is exact (from `page.meta`). The body is the rendered HTML, because the cache does not hold the source Markdown. `marked` passes block HTML through, so a re-upload renders the same page. |
 | `blog/posts/<slug>.<locale>.md` | 75 | The body is the exact source Markdown. Frontmatter is rebuilt from the post fields: `title`, `date`, `author`, `authorRole`, `tags`, `excerpt`, `slugAlias` and `cover`. |
-| `blog/covers/*` | 9 of 73 | Original bytes. The other covers were already evicted, because the gateway caches asset fetch failures as null. They can be regenerated from `blog-covers-src/`. |
+| `blog/covers/*` | 9 of 38 | Original bytes, out of 38 distinct cover keys (73 host URLs tried). The other 29 were already evicted, because the gateway caches asset fetch failures as null. Covers with a `blog-covers-src/covers.json` entry can be regenerated. The Laya cover has no entry on `main`. |
 | `assets/ui/bitmap.svg` | 1 | Original bytes. The other UI, team and about assets were evicted. |
-| `journal/<locale>-posts.json`, `journal/<locale>-rss.xml` | | The Journal index as served. |
+| `journal/<locale>-posts.json`, `journal/<locale>-rss.xml` | | The Journal index and feed as served, 38 posts per locale. The first English feed came from the replica with an empty cache and had no items. It was replaced by a populated copy fetched from the other replica. |
 | `manifest.json` | | Each object with its source URL and the sha256 of the source answer and of the file. Also every URL tried, with its status codes. |
 
 All 129 Markdown files were round-trip checked. Each one parses with the gateway's frontmatter
@@ -30,9 +30,11 @@ and HTML snapshots stay outside Git (see `raw_evidence` in the manifest).
 
 ## Compared with Git at 6407ba9
 
-- 48 of the 54 pages exist nowhere else. Home, solutions and about match the copies already in
-  `site-content/` and in the 2026-10-07 snapshots.
-- 64 posts are identical to `blog-posts/`, and 4 differ only in Prettier formatting.
+- 48 of the 54 pages exist nowhere else. Home and solutions match `site-content/`. About is the
+  published version: it uses colons where the `2026-10-07-about-punctuation` pre-publication
+  snapshot has em dashes.
+- 65 posts have the same metadata and Markdown as `blog-posts/`, and 4 differ only in Prettier
+  formatting.
 - Four English posts carry a `slugAlias` that `blog-posts/` lacks: 2026-07-13, 2026-07-23,
   2026-08-01 (auditoria) and 2026-08-02 (painel). Re-publishing those posts from `blog-posts/`
   would break their localized URLs.

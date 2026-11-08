@@ -6326,6 +6326,17 @@
       "sha256": [
         "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b"
       ]
+    },
+    {
+      "url": "https://rbxsystems.ch/rss.xml",
+      "statuses": [
+        200,
+        200
+      ],
+      "sha256": [
+        "74241ee9bb95abf0a3fa224a12afb0b32101b9b6d738ecc663604ceabea6b0a5"
+      ],
+      "note": "refetch 2026-11-08: the first saved English feed came from the cold replica (0 items); this copy has 38"
     }
   ]
 }
