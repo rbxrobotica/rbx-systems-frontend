@@ -2,6 +2,12 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import ts from 'typescript';
+import { importTypeScriptModule } from './test-support/import-typescript-module.mjs';
+
+const { buildQualificationSubmission } = await importTypeScriptModule(
+  new URL('../src/lib/partnership/qualification.ts', import.meta.url)
+);
+const utmSource = await readFile(new URL('../src/lib/analytics/utm.ts', import.meta.url), 'utf8');
 
 const source = await readFile(
   new URL('../src/lib/analytics/partnership.ts', import.meta.url),
@@ -62,6 +68,72 @@ function fixture({
 }
 
 const context = { locale: 'pt-BR', surface: 'partnership', entry: 'form' };
+
+test('weekly channel links survive capture, clean navigation and the submitted Comms context', () => {
+  for (const [channel, placement] of [
+    ['linkedin', 'b2b_post_authority_046'],
+    ['linkedin', 'b2b_post_application_046'],
+    ['youtube', 'b2b_video_explanation_046'],
+    ['facebook', 'b2b_video_reuse_046']
+  ]) {
+    const storage = () => {
+      const values = new Map();
+      return { getItem: (key) => values.get(key), setItem: (key, value) => values.set(key, value) };
+    };
+    const capture = new Function(
+      'browser',
+      'localStorage',
+      'sessionStorage',
+      compile(utmSource.replace("import { browser } from '$app/environment';", '')) +
+        '\nreturn { captureUtm, getFirstTouchUtm, getLastTouchUtm };'
+    )(true, storage(), storage());
+    const values = {
+      utm_source: channel,
+      utm_medium: 'social_organic',
+      utm_campaign: '2026h2_b2b_partnership_001',
+      utm_content: placement,
+      utm_term: 'founder_saas'
+    };
+    capture.captureUtm('?' + new URLSearchParams(values));
+    capture.captureUtm(''); // clean internal navigation must retain the touch
+    const attribution = fixture({
+      first: capture.getFirstTouchUtm(),
+      last: capture.getLastTouchUtm()
+    }).getPartnershipAttribution();
+    const submission = buildQualificationSubmission(
+      {
+        name: 'Synthetic contract',
+        email: 'contract@example.invalid',
+        company: 'Synthetic SaaS',
+        productUrl: '',
+        stage: 'production',
+        objective: 'Review one integration.',
+        timeframe: 'next-month',
+        budget: 'review',
+        commercialConsent: true,
+        website: ''
+      },
+      'pt-BR',
+      {
+        monthlyPriceBRL: 8000,
+        monthlyHours: 16,
+        version: '2026-10-05',
+        referencePrice: 'BRL 8000'
+      },
+      'test-only',
+      attribution
+    );
+    assert.equal(submission.ok, true);
+    for (const touch of ['first_touch', 'last_touch']) {
+      for (const [key, value] of Object.entries(values)) {
+        assert.equal(attribution[`${touch}_${key}`], value);
+        assert.ok(submission.payload.message.includes(`${touch}_${key}: ${value}`));
+      }
+    }
+    assert.equal(submission.payload.whatsapp_opt_in, false);
+    assert.equal(submission.payload.source, 'rbx-engineering-partnership');
+  }
+});
 
 test('partnership events keep only bounded properties and a canonical query-free URL', () => {
   const f = fixture();

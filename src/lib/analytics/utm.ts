@@ -35,6 +35,7 @@ const UTM_SOURCES = new Set([
   'linkedin',
   'instagram',
   'facebook',
+  'youtube',
   'google',
   'referral',
   'outbound',

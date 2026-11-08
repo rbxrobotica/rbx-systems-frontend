@@ -65,7 +65,7 @@ flow with its stated purpose; they are never event properties. There are no new
 tracking cookies, visitor IDs, fingerprinting, session replay or persistent event
 queues in this implementation.
 
-Existing first/last-touch UTM capture remains unchanged. The new
+Existing first/last-touch UTM storage behavior remains unchanged. The
 `getPartnershipAttribution()` reads that storage and revalidates values before they
 can accompany a commercial request. It writes no storage and includes no free-text
 `utm_term`, arbitrary campaign name, raw query, referrer URL or per-person label.
@@ -79,6 +79,23 @@ Allowed content labels:
 
 - `b2b_portfolio_partnership_001`
 - `b2b_institutional_partnership_001`
+- `b2b_post_authority_046`
+- `b2b_post_application_046`
+- `b2b_video_explanation_046`
+- `b2b_video_reuse_046`
+
+The W46 weekly Journal reuse uses the existing partnership campaign with LinkedIn,
+YouTube and Facebook organic placements. YouTube is accepted by both the URL parser
+and this form allowlist. The only allowed term is the institutional ICP alias
+`founder_saas`; arbitrary terms still fail closed. Keep the Growth taxonomy aligned
+with these sources and the versioned weekly package before distribution.
+
+The complete first/last-touch context is preserved in the existing Comms submission
+`message`. Comms to Commerce ingestion currently has no structured UTM fields; a
+lead created through that endpoint does not automatically inherit attribution.
+An operator must reconcile the source submission ID and message with the existing
+commercial pipeline. This frontend change adds no CRM, follow-up or publication
+automation. Until deployed, these new values can still be dropped by the live form.
 
 Sources and media use the existing fixed Growth vocabularies. Returned keys are
 prefixed `first_touch_utm_` or `last_touch_utm_`. Missing, blocked or invalid storage
@@ -165,3 +182,11 @@ canonical URLs, locale routes, opt-out, loopback, SSR, provider/storage failure,
 untrusted stored attribution, referrer minimization and existing caller compatibility.
 It makes no network request and uses no real lead data. The normal test, Svelte check,
 lint and build commands still apply to the complete frontend change.
+
+The weekly test executes the real URL parser, storage capture, clean internal
+navigation, form attribution filter and qualification builder for all four channel
+placements. It asserts each first/last source, medium, campaign, content and term
+appears in the actual Comms payload message, while WhatsApp opt-in stays false.
+This proves local retention through the prepared submission, not live persistence
+or conversion. A read-only visit on 2026-11-08 confirmed the public `/parceria`
+page and enabled form. No public form was submitted.

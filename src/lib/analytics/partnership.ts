@@ -101,6 +101,7 @@ const attributionValues: Record<string, readonly string[]> = {
     'linkedin',
     'instagram',
     'facebook',
+    'youtube',
     'google',
     'referral',
     'outbound',
@@ -122,7 +123,15 @@ const attributionValues: Record<string, readonly string[]> = {
   ],
   // Shared campaign labels, never an individual's name or a per-lead identifier.
   utm_campaign: ['2026h2_b2b_networking_001', '2026h2_b2b_partnership_001'],
-  utm_content: ['b2b_portfolio_partnership_001', 'b2b_institutional_partnership_001']
+  utm_content: [
+    'b2b_portfolio_partnership_001',
+    'b2b_institutional_partnership_001',
+    'b2b_post_authority_046',
+    'b2b_post_application_046',
+    'b2b_video_explanation_046',
+    'b2b_video_reuse_046'
+  ],
+  utm_term: ['founder_saas']
 };
 
 /**
