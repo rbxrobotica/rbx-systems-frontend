@@ -1,0 +1,6331 @@
+{
+  "version": 1,
+  "kind": "pod-cache-rescue",
+  "note": "Reconstructed from the frontend pods' in-memory Content Gateway cache while Contabo Object Storage was disabled. Not a byte-exact S3 capture: not consumable by scripts/site-content-recovery.mjs. See README.md.",
+  "started_at": "2026-11-08T02:13:38Z",
+  "finished_at": "2026-11-08T02:21:48Z",
+  "method": "public GET, __data.json decoded; pages carry rendered HTML, posts raw Markdown",
+  "raw_evidence": "Undecoded __data.json and HTML snapshots are kept outside Git by the operator, addressed by source_sha256.",
+  "objects": [
+    {
+      "kind": "asset",
+      "key": "assets/ui/bitmap.svg",
+      "file": "assets/ui/bitmap.svg",
+      "from": "rbxsystems.ch/api/assets/ui/bitmap.svg",
+      "source_sha256": "ff57b6b814a7543ebea60e1093514769adebcfcfdca782cb419d1578505dc973",
+      "body": "bytes",
+      "file_sha256": "ff57b6b814a7543ebea60e1093514769adebcfcfdca782cb419d1578505dc973",
+      "bytes": 2736
+    },
+    {
+      "kind": "asset",
+      "key": "blog/covers/2026-04-01-the-model-is-not-the-system-v2.png",
+      "file": "blog/covers/2026-04-01-the-model-is-not-the-system-v2.png",
+      "from": "rbxsystems.ch/api/blog/cover/2026-04-01-the-model-is-not-the-system-v2.png",
+      "source_sha256": "2bebfb3ce3d44dc741ae17ee476dc602982a8f88a7a8a4e836550296c7f4318b",
+      "body": "bytes",
+      "file_sha256": "2bebfb3ce3d44dc741ae17ee476dc602982a8f88a7a8a4e836550296c7f4318b",
+      "bytes": 214312
+    },
+    {
+      "kind": "asset",
+      "key": "blog/covers/2026-04-16-testnet-validation-architecture-v2.png",
+      "file": "blog/covers/2026-04-16-testnet-validation-architecture-v2.png",
+      "from": "rbxsystems.ch/api/blog/cover/2026-04-16-testnet-validation-architecture-v2.png",
+      "source_sha256": "22e3a1186bee4f8ac423e21984c6b78c066feba19dcc0d00ce74af7c4bc88869",
+      "body": "bytes",
+      "file_sha256": "22e3a1186bee4f8ac423e21984c6b78c066feba19dcc0d00ce74af7c4bc88869",
+      "bytes": 184434
+    },
+    {
+      "kind": "asset",
+      "key": "blog/covers/2026-05-15-ia-corporativa-como-infraestrutura-v2.png",
+      "file": "blog/covers/2026-05-15-ia-corporativa-como-infraestrutura-v2.png",
+      "from": "rbxsystems.ch/api/blog/cover/2026-05-15-ia-corporativa-como-infraestrutura-v2.png",
+      "source_sha256": "237a0879606d4a5547bc1751aff68f8af46931c81c2d0099bb4a13f0f56809fc",
+      "body": "bytes",
+      "file_sha256": "237a0879606d4a5547bc1751aff68f8af46931c81c2d0099bb4a13f0f56809fc",
+      "bytes": 180274
+    },
+    {
+      "kind": "asset",
+      "key": "blog/covers/2026-07-04-one-entry-four-bugs-v2.jpg",
+      "file": "blog/covers/2026-07-04-one-entry-four-bugs-v2.jpg",
+      "from": "rbx.ia.br/api/blog/cover/2026-07-04-one-entry-four-bugs-v2.jpg",
+      "source_sha256": "eec31bc4d52aa010ca1f50eb298b48f3afe86afa52a36f153d8f15a62f51abda",
+      "body": "bytes",
+      "file_sha256": "eec31bc4d52aa010ca1f50eb298b48f3afe86afa52a36f153d8f15a62f51abda",
+      "bytes": 59206
+    },
+    {
+      "kind": "asset",
+      "key": "blog/covers/2026-07-05-cost-of-innovation-startups-v2.png",
+      "file": "blog/covers/2026-07-05-cost-of-innovation-startups-v2.png",
+      "from": "rbx.ia.br/api/blog/cover/2026-07-05-cost-of-innovation-startups-v2.png",
+      "source_sha256": "ce35db304188bc557e864ca18fd998b8de60f1d0ff1c360026b7c00559c55e38",
+      "body": "bytes",
+      "file_sha256": "ce35db304188bc557e864ca18fd998b8de60f1d0ff1c360026b7c00559c55e38",
+      "bytes": 189242
+    },
+    {
+      "kind": "asset",
+      "key": "blog/covers/2026-07-05-stop-gain-that-audited-the-system-v2.jpg",
+      "file": "blog/covers/2026-07-05-stop-gain-that-audited-the-system-v2.jpg",
+      "from": "rbx.ia.br/api/blog/cover/2026-07-05-stop-gain-that-audited-the-system-v2.jpg",
+      "source_sha256": "c1ad4c1a77df2e140276384c50c4562ab6af0e44405a5870274dea82df2cf508",
+      "body": "bytes",
+      "file_sha256": "c1ad4c1a77df2e140276384c50c4562ab6af0e44405a5870274dea82df2cf508",
+      "bytes": 55431
+    },
+    {
+      "kind": "asset",
+      "key": "blog/covers/2026-08-02-rbx-journal-rss-v2.png",
+      "file": "blog/covers/2026-08-02-rbx-journal-rss-v2.png",
+      "from": "rbxsystems.ch/api/blog/cover/2026-08-02-rbx-journal-rss-v2.png",
+      "source_sha256": "ab8f8174ad68b752cf051cf2ef67348915f3a4dac04af30e539a6b4125b218fb",
+      "body": "bytes",
+      "file_sha256": "ab8f8174ad68b752cf051cf2ef67348915f3a4dac04af30e539a6b4125b218fb",
+      "bytes": 212508
+    },
+    {
+      "kind": "asset",
+      "key": "blog/covers/2026-08-26-recover-change-prove-v2.png",
+      "file": "blog/covers/2026-08-26-recover-change-prove-v2.png",
+      "from": "rbxsystems.ch/api/blog/cover/2026-08-26-recover-change-prove-v2.png",
+      "source_sha256": "44592a2659499effd46831d46f1297a59c3f8fb31d55def906c085850925c907",
+      "body": "bytes",
+      "file_sha256": "44592a2659499effd46831d46f1297a59c3f8fb31d55def906c085850925c907",
+      "bytes": 220100
+    },
+    {
+      "kind": "asset",
+      "key": "blog/covers/2026-08-31-engenharia-de-loop-v2.png",
+      "file": "blog/covers/2026-08-31-engenharia-de-loop-v2.png",
+      "from": "rbxsystems.ch/api/blog/cover/2026-08-31-engenharia-de-loop-v2.png",
+      "source_sha256": "8c81f144013c24676960f77b712436c6b9e1317acada53be03e452f40e8c7d12",
+      "body": "bytes",
+      "file_sha256": "8c81f144013c24676960f77b712436c6b9e1317acada53be03e452f40e8c7d12",
+      "bytes": 201212
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-03-25-truthmetal-launch.en.md",
+      "file": "blog/posts/2026-03-25-truthmetal-launch.en.md",
+      "from": "rbxsystems.ch/blog/2026-03-25-truthmetal-launch",
+      "source_sha256": "6b1dc7de1bda3f9bc4378bff209b9d4614dcac5d98e3b8b812ef935def9f542f",
+      "body": "raw-markdown",
+      "file_sha256": "78a68e18ab507d7736b5f5ccd212acabdf42222df19ee2d7a41ee5846379f0e1",
+      "bytes": 1793
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-03-25-truthmetal-launch.pt-BR.md",
+      "file": "blog/posts/2026-03-25-truthmetal-launch.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-03-25-truthmetal-launch",
+      "source_sha256": "83195de9595d8c92a558bd4747dda67505c6394791b1c3dbda322887083ff43a",
+      "body": "raw-markdown",
+      "file_sha256": "ba274979de02d59574ff51afaa861bc734875d75052e1ec8522a3c0c7d966706",
+      "bytes": 1848
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-03-29-infrastructure-update.en.md",
+      "file": "blog/posts/2026-03-29-infrastructure-update.en.md",
+      "from": "rbxsystems.ch/blog/2026-03-29-infrastructure-update",
+      "source_sha256": "5d9db1fb1608d70d18e9362825bd176a8b3c0116344d1fab8b7951f43ca4d6f3",
+      "body": "raw-markdown",
+      "file_sha256": "3608d894dd9dcf5f565b0918931a2c0bd00cc9a5d9bb25d8c024a9d24dbc6d14",
+      "bytes": 5178
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-04-01-the-model-is-not-the-system.en.md",
+      "file": "blog/posts/2026-04-01-the-model-is-not-the-system.en.md",
+      "from": "rbxsystems.ch/blog/2026-04-01-the-model-is-not-the-system",
+      "source_sha256": "ebc629dd1d3043c3ce685c799cf0de11db8e9ca8b24ab0b5b3a6be8b4ba0578a",
+      "body": "raw-markdown",
+      "file_sha256": "66c4daf1f780516fbd0561af22054d33abcb61f80e955674c5e3ccdda29a948e",
+      "bytes": 6420
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-04-01-the-model-is-not-the-system.pt-BR.md",
+      "file": "blog/posts/2026-04-01-the-model-is-not-the-system.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-04-01-the-model-is-not-the-system",
+      "source_sha256": "d937a4cf4c613f259250d454b56dbf533f886630e13ef8616aa4e86bd34122d6",
+      "body": "raw-markdown",
+      "file_sha256": "fa2b01f320a0352f7dabd51c9cc618d7164969b372b07e9c933b151c90b86182",
+      "bytes": 7205
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-04-04-the-unit-is-not-the-prompt.en.md",
+      "file": "blog/posts/2026-04-04-the-unit-is-not-the-prompt.en.md",
+      "from": "rbxsystems.ch/blog/2026-04-04-the-unit-is-not-the-prompt",
+      "source_sha256": "04337e21b1dc462db5829f8b9691e2bf293ae9907163b42fe5cffd173eb5e69e",
+      "body": "raw-markdown",
+      "file_sha256": "f8706bb659bd8f598c02426edcbc1d870ebfe240e17ddb2ac3b40a9eaee10380",
+      "bytes": 3921
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-04-04-the-unit-is-not-the-prompt.pt-BR.md",
+      "file": "blog/posts/2026-04-04-the-unit-is-not-the-prompt.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-04-04-the-unit-is-not-the-prompt",
+      "source_sha256": "492304ed8d1496efe1bc376545e7233f8c41ef93c27324aa12bfea0b18d1a0c8",
+      "body": "raw-markdown",
+      "file_sha256": "66d3e68c269d7460d003560f1a4c1b831e1a799950d7739a91797104ace0ebfd",
+      "bytes": 4417
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-04-05-robson-v2-finds-its-missing-execution-glue.en.md",
+      "file": "blog/posts/2026-04-05-robson-v2-finds-its-missing-execution-glue.en.md",
+      "from": "rbxsystems.ch/blog/2026-04-05-robson-v2-finds-its-missing-execution-glue",
+      "source_sha256": "37ab15e281f7eb5cfacd7a198d58bc200e2baa8d80615a2185ce0a7de5c79e2a",
+      "body": "raw-markdown",
+      "file_sha256": "c507748ba52da156ae4dbdbf19c5958790648e74866e26cbd967d5ab3dcbb906",
+      "bytes": 6508
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-04-05-robson-v2-finds-its-missing-execution-glue.pt-BR.md",
+      "file": "blog/posts/2026-04-05-robson-v2-finds-its-missing-execution-glue.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-04-05-robson-v2-finds-its-missing-execution-glue",
+      "source_sha256": "010acebf6daaa42d33d3553d87a42f7362584ac78bb077beb0a40c2ec614f2a9",
+      "body": "raw-markdown",
+      "file_sha256": "c19cc80b54c4a1de4143b1f5140c90ddac79d74bc4ce5526fb37f4162dc9d77c",
+      "bytes": 7010
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-04-16-testnet-validation-architecture.en.md",
+      "file": "blog/posts/2026-04-16-testnet-validation-architecture.en.md",
+      "from": "rbxsystems.ch/blog/2026-04-16-testnet-validation-architecture",
+      "source_sha256": "1cb897944fa19352198f5f2e88113e4d12a455a2393a7882b48c77be7512212a",
+      "body": "raw-markdown",
+      "file_sha256": "885a70d88cf2651cb8fa0731d67a9988bc6ed89bcbc7696b1dd89539419f028c",
+      "bytes": 7831
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-04-16-testnet-validation-architecture.pt-BR.md",
+      "file": "blog/posts/2026-04-16-testnet-validation-architecture.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-04-16-testnet-validation-architecture",
+      "source_sha256": "c428579acdd6b3f0f874888df330d1fd7bb6facf2c2ad961e9e64462d3a4a132",
+      "body": "raw-markdown",
+      "file_sha256": "e206f540fe7c3c7dffb03988bd722187372ab65f4ffa74b240243a18adf0b883",
+      "bytes": 8621
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-04-22-robson-first-real-capital.en.md",
+      "file": "blog/posts/2026-04-22-robson-first-real-capital.en.md",
+      "from": "rbxsystems.ch/blog/2026-04-22-robson-first-real-capital",
+      "source_sha256": "9c751d897c5e22de6f6d353610d73a2f0d6a60f87309bf8e251e38d95663bd91",
+      "body": "raw-markdown",
+      "file_sha256": "9a85e661c63bfb6423b14d9dbbe8aaeb6f06095e35c0c8ffa9555dd6829288d5",
+      "bytes": 8752
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-04-22-robson-first-real-capital.pt-BR.md",
+      "file": "blog/posts/2026-04-22-robson-first-real-capital.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-04-22-robson-first-real-capital",
+      "source_sha256": "bce7326d72d78e2d3cc3014c4da302fb11037723eb47dcadd261f255f36a0d9c",
+      "body": "raw-markdown",
+      "file_sha256": "256cdf05f2077e6bd4752ce0833759b1e868711405c9cb7b5f0c8d23c4f605fc",
+      "bytes": 9799
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-05-15-ia-corporativa-como-infraestrutura.en.md",
+      "file": "blog/posts/2026-05-15-ia-corporativa-como-infraestrutura.en.md",
+      "from": "rbxsystems.ch/blog/2026-05-15-corporate-ai-with-method",
+      "source_sha256": "8898e652c355a4ba88f5be218ec07b8441ff285f7654dda23116b6208c0ee695",
+      "body": "raw-markdown",
+      "file_sha256": "f575673d264f5c156b73f4e6ca99f8c90ecc8d3f3e74f69780550097c2b4a48b",
+      "bytes": 8302
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-05-15-ia-corporativa-como-infraestrutura.pt-BR.md",
+      "file": "blog/posts/2026-05-15-ia-corporativa-como-infraestrutura.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-05-15-ia-corporativa-como-infraestrutura",
+      "source_sha256": "c35161dd351de06795563f3c713ccfa0dad18d397e234a132b4ad37aafa4b3e5",
+      "body": "raw-markdown",
+      "file_sha256": "ad493ede6ea055a6a5015aae823534ead83b99a83037867dcdf6f02125736b45",
+      "bytes": 8850
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-03-stops-that-survive-failures.en.md",
+      "file": "blog/posts/2026-07-03-stops-that-survive-failures.en.md",
+      "from": "rbxsystems.ch/blog/2026-07-03-stops-that-survive-failures",
+      "source_sha256": "c04282736750e3a626f2f1b775429d2c3a36ca0044466c3ea4cc32726624fbbf",
+      "body": "raw-markdown",
+      "file_sha256": "b1a2e4d2b799c29324c897bdc77399412302decbc1b38bbdea486a5d46f07d49",
+      "bytes": 8052
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-03-stops-that-survive-failures.pt-BR.md",
+      "file": "blog/posts/2026-07-03-stops-that-survive-failures.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-07-03-stops-that-survive-failures",
+      "source_sha256": "bf376b53b1f16f60e33e6cbe78fa0b836308d73b4fdf16e4dc07f339368b6250",
+      "body": "raw-markdown",
+      "file_sha256": "52d4e01408b6629e50645f31d3ffa04cfdeff9b88108b6cd9762a83f2bb3fcaf",
+      "bytes": 8394
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-04-one-entry-four-bugs.en.md",
+      "file": "blog/posts/2026-07-04-one-entry-four-bugs.en.md",
+      "from": "rbxsystems.ch/blog/2026-07-04-one-entry-four-bugs",
+      "source_sha256": "f5e99ff15745cd5bf0326bc295c87a8103ae85ea30ab4aa8115da7e23b3db572",
+      "body": "raw-markdown",
+      "file_sha256": "37d2fd0afcdf80a837c4d608a5fc298fc772daabffb22e9bdc4f5d71d03619e5",
+      "bytes": 8572
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-04-one-entry-four-bugs.pt-BR.md",
+      "file": "blog/posts/2026-07-04-one-entry-four-bugs.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-07-04-one-entry-four-bugs",
+      "source_sha256": "1dbb86cfc77e513da8e2a81f6bb072acd194f2d61afb9fa42ec908fe2bf1c1cd",
+      "body": "raw-markdown",
+      "file_sha256": "75a59d5b65ae87a5308fff894e7a711a349e4777971705e85cd42abb1b7d5540",
+      "bytes": 9386
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-04-the-retest-that-did-not-stop-us.en.md",
+      "file": "blog/posts/2026-07-04-the-retest-that-did-not-stop-us.en.md",
+      "from": "rbxsystems.ch/blog/2026-07-04-the-retest-that-did-not-stop-us",
+      "source_sha256": "92e9768c6fd7047d32099f00e524fe4ecc88d640e981ef8fb3b11a597716ede2",
+      "body": "raw-markdown",
+      "file_sha256": "581ceeb1ff0def1ad158d669b64e9b72553ca8e5cc895afb54f8bbfe4288cc24",
+      "bytes": 6322
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-04-the-retest-that-did-not-stop-us.pt-BR.md",
+      "file": "blog/posts/2026-07-04-the-retest-that-did-not-stop-us.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-07-04-the-retest-that-did-not-stop-us",
+      "source_sha256": "92505f492112b0a46db213e1e40d096b7bd16d5c7b591a3961631651bbc499aa",
+      "body": "raw-markdown",
+      "file_sha256": "771c88440dc0d0f62b2e3592d97ac31ba21fdb3d786608f597f259f1884d1697",
+      "bytes": 6780
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-05-cost-of-innovation-startups.en.md",
+      "file": "blog/posts/2026-07-05-cost-of-innovation-startups.en.md",
+      "from": "rbxsystems.ch/blog/2026-07-05-cost-of-innovation-startups",
+      "source_sha256": "971312718d6add6ad25561f2100bddaeeaed14386dcdc38ff60a2269ef99626a",
+      "body": "raw-markdown",
+      "file_sha256": "57f4befcff3f16d448e6fbf478e349d3a56a5fea8b8a9c45727559c187ef457f",
+      "bytes": 11335
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-05-cost-of-innovation-startups.pt-BR.md",
+      "file": "blog/posts/2026-07-05-cost-of-innovation-startups.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-07-05-cost-of-innovation-startups",
+      "source_sha256": "9c32db30d7e2701842ce4a2d96b64fded484add35c24c74d6ccd800decd40785",
+      "body": "raw-markdown",
+      "file_sha256": "e28cb1064a3ca3313935e35ade29872ec58612b8a4a20f81052c1e41afb2319f",
+      "bytes": 12441
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-05-saved-risk-extra-operation.en.md",
+      "file": "blog/posts/2026-07-05-saved-risk-extra-operation.en.md",
+      "from": "rbxsystems.ch/blog/2026-07-05-saved-risk-extra-operation",
+      "source_sha256": "3711a298e0a8470437b04b27fe8dd2012c8b5ee48df9233368f2c7760e5e0195",
+      "body": "raw-markdown",
+      "file_sha256": "08880ededa229dce2dd05f01050040353587e82a45efd9fbf252c3ef8befa1dd",
+      "bytes": 5858
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-05-saved-risk-extra-operation.pt-BR.md",
+      "file": "blog/posts/2026-07-05-saved-risk-extra-operation.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-07-05-saved-risk-extra-operation",
+      "source_sha256": "4530c1e5d3173777cdb2e0767aa78a6977498646c15f3c507a3554b9134970ad",
+      "body": "raw-markdown",
+      "file_sha256": "f1becccd7ebf60ba17a192c0a7fc6f2f2a54cfc3ea3cc04668a288422a5a70b7",
+      "bytes": 6283
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-05-stop-gain-that-audited-the-system.en.md",
+      "file": "blog/posts/2026-07-05-stop-gain-that-audited-the-system.en.md",
+      "from": "rbxsystems.ch/blog/2026-07-05-stop-gain-that-audited-the-system",
+      "source_sha256": "b5dfa2e7df2bcda30c8e9c1d9dd008181ca94648cc9905a280d727c4a36d43fe",
+      "body": "raw-markdown",
+      "file_sha256": "75445a87a1abbce6c0f7adb9e8c436a4818fc4fe2a8f5cbe555fa77aa82444c0",
+      "bytes": 6396
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-05-stop-gain-that-audited-the-system.pt-BR.md",
+      "file": "blog/posts/2026-07-05-stop-gain-that-audited-the-system.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-07-05-stop-gain-that-audited-the-system",
+      "source_sha256": "c26fce804a7e3c45fa926a23c6c5e327feafeb8aa9b4042f2864bf8fff774d07",
+      "body": "raw-markdown",
+      "file_sha256": "be45ba80439907f7c65cec738d0d4af22883f1975687f7c858770676497d4ec5",
+      "bytes": 6671
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-06-fallback-debuts-in-production.en.md",
+      "file": "blog/posts/2026-07-06-fallback-debuts-in-production.en.md",
+      "from": "rbxsystems.ch/blog/2026-07-06-fallback-debuts-in-production",
+      "source_sha256": "007bff5a1201e545820b09d3bdcb4ac711c3cff43d19a455534e141f9a998a49",
+      "body": "raw-markdown",
+      "file_sha256": "e934c828e12da8549064438db18b0803d227f14d28f04c47ba4543a6ba568ec3",
+      "bytes": 5600
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-06-fallback-debuts-in-production.pt-BR.md",
+      "file": "blog/posts/2026-07-06-fallback-debuts-in-production.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-07-06-fallback-debuts-in-production",
+      "source_sha256": "b059ea1bdbe913c87c9583322afa43f4597f882f469989b051b0555022be9327",
+      "body": "raw-markdown",
+      "file_sha256": "35f5a7c547f124e64f662700731216bd2a98e6b7c18180a6b4cf569302818af3",
+      "bytes": 5879
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-07-the-brief-a-stranger-could-run.en.md",
+      "file": "blog/posts/2026-07-07-the-brief-a-stranger-could-run.en.md",
+      "from": "rbxsystems.ch/blog/2026-07-07-the-brief-a-stranger-could-run",
+      "source_sha256": "7b5ea245b8821be6e90008186c95cdc3fcf2dea94649d6023189a416a0664a77",
+      "body": "raw-markdown",
+      "file_sha256": "df163a5f863fad7fb98a91670b616642977620168764a5951827c8e300a64118",
+      "bytes": 6001
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-07-the-brief-a-stranger-could-run.pt-BR.md",
+      "file": "blog/posts/2026-07-07-the-brief-a-stranger-could-run.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-07-07-the-brief-a-stranger-could-run",
+      "source_sha256": "d9e76aa85672b568ac849663184a69c00f6aa89ed8c0ae2fb6738f10eff758fc",
+      "body": "raw-markdown",
+      "file_sha256": "db20b048eb909cd642407b03ee3d4502f1ad4be1a86f4e8d94dc80631d9045c5",
+      "bytes": 6528
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-12-volatile-logs-are-not-evidence.en.md",
+      "file": "blog/posts/2026-07-12-volatile-logs-are-not-evidence.en.md",
+      "from": "rbxsystems.ch/blog/2026-07-12-volatile-logs-are-not-evidence",
+      "source_sha256": "f90f29e1515029f1f6d5574a1e94ef1071813a8b34592dd1a2e8d26267364bce",
+      "body": "raw-markdown",
+      "file_sha256": "58c1fac1bf5a4c094ae09fbe6f43a063614e204ba2c589f18db427a7f13262d6",
+      "bytes": 5750
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-12-volatile-logs-are-not-evidence.pt-BR.md",
+      "file": "blog/posts/2026-07-12-volatile-logs-are-not-evidence.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-07-12-volatile-logs-are-not-evidence",
+      "source_sha256": "bd212f220059bbe4aa117e7244753126fa6dd5f913035a941952049bb99393ae",
+      "body": "raw-markdown",
+      "file_sha256": "79a044fc14afc0cf951e8fabdb1c3c464ea379202077ba8e333460ca88a5fc1f",
+      "bytes": 6091
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-13-no-bitcoin-proprio.en.md",
+      "file": "blog/posts/2026-07-13-no-bitcoin-proprio.en.md",
+      "from": "rbxsystems.ch/blog/2026-07-13-why-rbx-runs-its-own-bitcoin-node",
+      "source_sha256": "035f6d5b562fcab5461c8f9e3cb7e21e641cecc4ffc0eabc5cb5eb1362eb454f",
+      "body": "raw-markdown",
+      "file_sha256": "829cae45e4aa56251d0559bc8f93f1196e21c33c35e7b6e9b83aade5df237b7a",
+      "bytes": 3709
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-13-no-bitcoin-proprio.pt-BR.md",
+      "file": "blog/posts/2026-07-13-no-bitcoin-proprio.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-07-13-no-bitcoin-proprio",
+      "source_sha256": "b44602c15a33d6940a25572023698709b49b5d42b2f80dfa1802c599cc6516e2",
+      "body": "raw-markdown",
+      "file_sha256": "17442cc658375b5b6b193a9c211aa1593b186ac480146b9d1e7b908568601312",
+      "bytes": 3817
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-23-o-no-chegou-ao-topo.en.md",
+      "file": "blog/posts/2026-07-23-o-no-chegou-ao-topo.en.md",
+      "from": "rbxsystems.ch/blog/2026-07-23-the-node-reached-the-tip",
+      "source_sha256": "1702d0c643e4503203510d0d52788ccd7b652d088844970e0e90f3c06f5df32a",
+      "body": "raw-markdown",
+      "file_sha256": "a25cf93da1487a932e59aed7e5d61be9a47ed0994f4c09e3b90628756834cb47",
+      "bytes": 3599
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-23-o-no-chegou-ao-topo.pt-BR.md",
+      "file": "blog/posts/2026-07-23-o-no-chegou-ao-topo.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-07-23-o-no-chegou-ao-topo",
+      "source_sha256": "147093277316dd562da52b96f86e5339f035c7237b97fcfe07000a33aa5f48d5",
+      "body": "raw-markdown",
+      "file_sha256": "68f485ba2496c24528d5758f478dfa1474b3b12b6e57ec353651f4a991da2ecb",
+      "bytes": 3745
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-29-governed-public-rag.en.md",
+      "file": "blog/posts/2026-07-29-governed-public-rag.en.md",
+      "from": "rbxsystems.ch/blog/2026-07-29-governed-public-rag",
+      "source_sha256": "ac9ef1f88fe170312951fd599c2691f4b0d39fb7ad58c109bc0b6a2db859d357",
+      "body": "raw-markdown",
+      "file_sha256": "02ec2b5a04b57e4538e8678d95f138bfbdee68aef6bf8ef0ba7d921896ea1b65",
+      "bytes": 10727
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-07-29-governed-public-rag.pt-BR.md",
+      "file": "blog/posts/2026-07-29-governed-public-rag.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-07-29-governed-public-rag",
+      "source_sha256": "d1c82008eaf5161768050b8370fdab6f66db9cdf63884f88df00b0fb7560cafe",
+      "body": "raw-markdown",
+      "file_sha256": "a3cacfa49c06d6ed1ab8bd434275fb927845f42163574c95fc9bbc4ef45b43d7",
+      "bytes": 11578
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-01-auditoria-ou-telemetria.en.md",
+      "file": "blog/posts/2026-08-01-auditoria-ou-telemetria.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-01-audit-trail-not-telemetry-sink",
+      "source_sha256": "174f877db2a32900c3ca3dc708e9036ae48bcc378c614d162186461d567ec8da",
+      "body": "raw-markdown",
+      "file_sha256": "2cd6655f8bb1d19460abb8464287ee224d9317c7de2584e1fe757dcb146818f5",
+      "bytes": 5345
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-01-auditoria-ou-telemetria.pt-BR.md",
+      "file": "blog/posts/2026-08-01-auditoria-ou-telemetria.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-01-auditoria-ou-telemetria",
+      "source_sha256": "bd41e82f36a3a14e97c1792aa9bec5c41ed7e6e3309ce5de03a5a3724785c4a4",
+      "body": "raw-markdown",
+      "file_sha256": "021aaa5e3d722cd1cfb2495958fc919ce88e2f510d9af71067628a2b4f9421ba",
+      "bytes": 5508
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-01-governed-autonomy-distributed-systems.en.md",
+      "file": "blog/posts/2026-08-01-governed-autonomy-distributed-systems.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-01-governed-autonomy-distributed-systems",
+      "source_sha256": "5dee9b95aedd26da27cb111b33d4be788efa16765b7e3dafb18ac8e1fdaad557",
+      "body": "raw-markdown",
+      "file_sha256": "b815d4edf6a65ed19f5d5afb031c12ebdc636e207a0cecfe6d75e06d13014989",
+      "bytes": 15139
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-01-governed-autonomy-distributed-systems.pt-BR.md",
+      "file": "blog/posts/2026-08-01-governed-autonomy-distributed-systems.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-01-governed-autonomy-distributed-systems",
+      "source_sha256": "9fc7cab250338086117fcbc631549147da3db4c2dd6eb355ec33a1dc4fdcb87a",
+      "body": "raw-markdown",
+      "file_sha256": "dba58736ed58db4ff74c6cc030600381d213d0eaa0cb6faa73a3bcc23ba5b6c0",
+      "bytes": 15781
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-02-o-painel-dizia-synced.en.md",
+      "file": "blog/posts/2026-08-02-o-painel-dizia-synced.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-02-the-dashboard-said-synced",
+      "source_sha256": "36f2b7d346a2f635956c57efab4946d3e657ee2cf3b299e591a19b33aea79fc0",
+      "body": "raw-markdown",
+      "file_sha256": "015849227630c57dd232e08baf684021347e5cf70736dd0b58819304b3abb7f1",
+      "bytes": 4737
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-02-o-painel-dizia-synced.pt-BR.md",
+      "file": "blog/posts/2026-08-02-o-painel-dizia-synced.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-02-o-painel-dizia-synced",
+      "source_sha256": "6cb80ec6968b932c646a04e78442a63f8a4f26f370b2928335efef5be2631846",
+      "body": "raw-markdown",
+      "file_sha256": "576e65c55bd81ff088cd93d2837659421baa7103af18eed5b4c5d8f4fcf7c4f8",
+      "bytes": 5065
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-02-rbx-journal-rss.en.md",
+      "file": "blog/posts/2026-08-02-rbx-journal-rss.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-02-rbx-journal-rss",
+      "source_sha256": "676b1f19274611d8548ec511cc46edfbebec7269df6ce01cbd63c97179b9e44b",
+      "body": "raw-markdown",
+      "file_sha256": "90567ed1aa605f0d9f543f79f7a93ae8d59fd29dea1b36323cd8f101c5aaf614",
+      "bytes": 2206
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-02-rbx-journal-rss.pt-BR.md",
+      "file": "blog/posts/2026-08-02-rbx-journal-rss.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-02-rbx-journal-rss",
+      "source_sha256": "b80bea4c6622866870ea972af690cbe0688e46feaf1a9a6ef33c114802f21653",
+      "body": "raw-markdown",
+      "file_sha256": "e110e8838fda829f7c3a28a53f5332158af4f2695a5da4714e3d05521c7506f0",
+      "bytes": 2266
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-04-o-slot-que-sumiu.en.md",
+      "file": "blog/posts/2026-08-04-o-slot-que-sumiu.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-04-the-missing-slot",
+      "source_sha256": "0db68d17526ea8563e0a8e7971ddf5c16f5e52592bbd3b4d4cd3cc63dee76f61",
+      "body": "raw-markdown",
+      "file_sha256": "c90f66f7df81a40377e6e78623c7b46ff182d48fd857aba3a3035428b5fcbdc8",
+      "bytes": 6415
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-04-o-slot-que-sumiu.pt-BR.md",
+      "file": "blog/posts/2026-08-04-o-slot-que-sumiu.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-04-o-slot-que-sumiu",
+      "source_sha256": "e58bf1420afa6b6a6c4d07b9587bea24c1104c41a1656a4d5897ca1f94da9684",
+      "body": "raw-markdown",
+      "file_sha256": "5ed5c4c4d2828ea9b4465d4c5de6ef17291753bcd0e650502cf8e54ed1598ff3",
+      "bytes": 6582
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-04-uma-regua-so.en.md",
+      "file": "blog/posts/2026-08-04-uma-regua-so.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-04-one-ruler",
+      "source_sha256": "457252d3fb58883ff7a5a92d9ad327f9a979f9b9873e334300afb4dd1b6acab0",
+      "body": "raw-markdown",
+      "file_sha256": "10996196d02b9614e1a875b454919f9736794453c196acd70040507e2811b0de",
+      "bytes": 5891
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-04-uma-regua-so.pt-BR.md",
+      "file": "blog/posts/2026-08-04-uma-regua-so.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-04-uma-regua-so",
+      "source_sha256": "b39f2244d156cfa37850edda22bae63e248ec15bc41ac942e4fabb0f363a90bf",
+      "body": "raw-markdown",
+      "file_sha256": "10ecd39c1a38391c98707b1ddc77895d5baacb37b41b3156160d044eb3f14b5d",
+      "bytes": 6002
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-05-o-primeiro-palmo.en.md",
+      "file": "blog/posts/2026-08-05-o-primeiro-palmo.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-05-the-first-span",
+      "source_sha256": "108b9cb0556c70852721b28b2e77e0956dbbde819e802a44ba976224ce962056",
+      "body": "raw-markdown",
+      "file_sha256": "ff8796cbaab652f799d6d5837606e71e3a7791dddbde457ad44e9a6a50250644",
+      "bytes": 3948
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-05-o-primeiro-palmo.pt-BR.md",
+      "file": "blog/posts/2026-08-05-o-primeiro-palmo.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-05-o-primeiro-palmo",
+      "source_sha256": "61ee0f64d774ab42decc711926f4d376505d0a6cc68f7e91851472814316f185",
+      "body": "raw-markdown",
+      "file_sha256": "6212c4a91e93382dbddffaeb7f3ac2c2de420770b0662a3f7be27db60ea4d6a2",
+      "bytes": 3973
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-06-o-plano-que-encolheu.en.md",
+      "file": "blog/posts/2026-08-06-o-plano-que-encolheu.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-06-the-plan-that-shrank",
+      "source_sha256": "0a68383988d303003ec45e456afd72b1c33fff8df470891a3d22fd67c7e7e257",
+      "body": "raw-markdown",
+      "file_sha256": "477b70c4213c47c66b9c94ea4b955a96f3aa6f7a1561f915d3f19d7702020aff",
+      "bytes": 6381
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-06-o-plano-que-encolheu.pt-BR.md",
+      "file": "blog/posts/2026-08-06-o-plano-que-encolheu.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-06-o-plano-que-encolheu",
+      "source_sha256": "48d51c5de7b06a87e1a955ea3d5bde5fc1f0588bac9707634866b4f537019cbd",
+      "body": "raw-markdown",
+      "file_sha256": "e0dced53abee42460f9ee8ef23354fa341e7b03764e93c2cf1732b823ba765b1",
+      "bytes": 6498
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-07-evidence-authority-boundaries.en.md",
+      "file": "blog/posts/2026-08-07-evidence-authority-boundaries.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-07-evidence-authority-boundaries",
+      "source_sha256": "3374070c4b4d41d9bcefb8ef38865b60409abc51f22a71f686c7699dc4345da0",
+      "body": "raw-markdown",
+      "file_sha256": "98196cfce7874bcc1a1d2d7132afc1f4f59af70401494409c70e9ba4c17191d0",
+      "bytes": 14627
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-07-evidence-authority-boundaries.pt-BR.md",
+      "file": "blog/posts/2026-08-07-evidence-authority-boundaries.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-07-evidence-authority-boundaries",
+      "source_sha256": "f63c98010b1135212f7f424460b4e233bbe50a64190787dfb42d16057d0a76ff",
+      "body": "raw-markdown",
+      "file_sha256": "506c9a9893aa677fafa60f513eda8466e0471ddd4d631430c4e1c9442fd095c7",
+      "bytes": 15196
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-08-o-revisor-que-rejeitou-a-si-mesmo.en.md",
+      "file": "blog/posts/2026-08-08-o-revisor-que-rejeitou-a-si-mesmo.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-08-the-reviewer-who-rejected-itself",
+      "source_sha256": "b16a5d016b1a077dc76c006753e590568aaa6545f350d8b59078fed6e710063a",
+      "body": "raw-markdown",
+      "file_sha256": "b0d6b39de26fc1a5ffad48380f4ed01dcdc5dcd9131088249b6c92d106893a8a",
+      "bytes": 5978
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-08-o-revisor-que-rejeitou-a-si-mesmo.pt-BR.md",
+      "file": "blog/posts/2026-08-08-o-revisor-que-rejeitou-a-si-mesmo.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-08-o-revisor-que-rejeitou-a-si-mesmo",
+      "source_sha256": "278077307466610300d3fb2f403f42c92b683caf0c39722871d7cb1e7dc3c0b3",
+      "body": "raw-markdown",
+      "file_sha256": "0bf9be6be69afc6dbdd5347c6b16940b6caadec54e522bdfe322911f2f58a467",
+      "bytes": 6089
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-08-rigor-demais-tambem-e-um-bug.en.md",
+      "file": "blog/posts/2026-08-08-rigor-demais-tambem-e-um-bug.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-08-too-much-rigor-is-also-a-bug",
+      "source_sha256": "ee223c528a06afea609f683c3b0416b68dc723b6fcbf68968645abb49bfc4569",
+      "body": "raw-markdown",
+      "file_sha256": "94ec3a20cc3e2904df82d503beff09a5a98c4ac5f972d64eb296133fb08a9dfa",
+      "bytes": 6412
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-08-rigor-demais-tambem-e-um-bug.pt-BR.md",
+      "file": "blog/posts/2026-08-08-rigor-demais-tambem-e-um-bug.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-08-rigor-demais-tambem-e-um-bug",
+      "source_sha256": "e585c6ce38ff0f69c5280b0964f7cb552aef6878af3fe98437da5a4a65b03679",
+      "body": "raw-markdown",
+      "file_sha256": "e651f9bce285599962a7d8a98a7afa6427ac547b6407e6ae25a74b6226cf3102",
+      "bytes": 6582
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-23-backpressure-fronteira-de-governanca.en.md",
+      "file": "blog/posts/2026-08-23-backpressure-fronteira-de-governanca.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-23-backpressure-fronteira-de-governanca",
+      "source_sha256": "f3f39cd40b745cef122b942be7cd6afdf2cf23f1d046810e8d1891c7f47984ee",
+      "body": "raw-markdown",
+      "file_sha256": "2acdf6296d9b6339dfab70ff9967dd42d565bf9185b490c434feed01c1d99442",
+      "bytes": 8225
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-23-backpressure-fronteira-de-governanca.pt-BR.md",
+      "file": "blog/posts/2026-08-23-backpressure-fronteira-de-governanca.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-23-backpressure-fronteira-de-governanca",
+      "source_sha256": "f66440c46bb3e46d485648f06e5938f959a8ca7ff1d55e60a62cdfa0986903b3",
+      "body": "raw-markdown",
+      "file_sha256": "3bba18fa3690f1036f5e6f723976c23a2d1a59d8adc4595c71fdad7145594731",
+      "bytes": 8503
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-26-recover-change-prove.en.md",
+      "file": "blog/posts/2026-08-26-recover-change-prove.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-26-recover-change-prove",
+      "source_sha256": "4835b7819b590945f039f429f3c6bc2eddd9441ce8953f78a5e9dcb821a9d1b3",
+      "body": "raw-markdown",
+      "file_sha256": "87da70b4a6891b7401db83c24db87a80f7a005cbd3460ae2bfe0bd9da9ccb9d9",
+      "bytes": 11782
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-26-recover-change-prove.pt-BR.md",
+      "file": "blog/posts/2026-08-26-recover-change-prove.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-26-recuperar-mudar-e-provar",
+      "source_sha256": "d61d6a79c0cc2b0d72b896186e84b56a91c3fe354a1e6e3b28aa581d079ee1ea",
+      "body": "raw-markdown",
+      "file_sha256": "6386e43215e836c83341209a595d90ba07adb114b8be2e7e1af1c1aa234e5c9f",
+      "bytes": 12857
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-31-engenharia-de-loop.en.md",
+      "file": "blog/posts/2026-08-31-engenharia-de-loop.en.md",
+      "from": "rbxsystems.ch/blog/2026-08-31-loop-engineering",
+      "source_sha256": "41cda482985ef6c7e3b02539a2d49a5e473e3a176a0295538afc4116397abd01",
+      "body": "raw-markdown",
+      "file_sha256": "99c1180daa0c25633902c2bba97d1b79d1b4c5e1cf78302ba382ba0ffd7150e6",
+      "bytes": 8049
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-08-31-engenharia-de-loop.pt-BR.md",
+      "file": "blog/posts/2026-08-31-engenharia-de-loop.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-08-31-engenharia-de-loop",
+      "source_sha256": "195da75013bb19353d82d35253c9738ead18311a35eeec693c3ea8e8b719e61a",
+      "body": "raw-markdown",
+      "file_sha256": "b6f7391e52388bcf722912401fead706de020c6ac1e8fcfaaf42e21d08d0c385",
+      "bytes": 8217
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-09-15-the-bottleneck-moved.en.md",
+      "file": "blog/posts/2026-09-15-the-bottleneck-moved.en.md",
+      "from": "rbxsystems.ch/blog/2026-09-15-the-bottleneck-moved",
+      "source_sha256": "016b84b5e88d155476371a236434b66ba0122df3608789c306ca9ddf6108ca79",
+      "body": "raw-markdown",
+      "file_sha256": "f15ef6a8d9cb877f9e29b427ab8f9806d6b6fd890610a607053f0b49338d0762",
+      "bytes": 3732
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-09-15-the-bottleneck-moved.pt-BR.md",
+      "file": "blog/posts/2026-09-15-the-bottleneck-moved.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-09-15-o-gargalo-mudou",
+      "source_sha256": "86bb2b8b5daf67df781e6131759873904dd8c1d60ff18f9479185086d48ce2b8",
+      "body": "raw-markdown",
+      "file_sha256": "e037920a1fa0c742109bfb76bcc8ba87f71a4f06228a436c58c121d1cee90e27",
+      "bytes": 4024
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-09-24-desaceleracao-para-quem.en.md",
+      "file": "blog/posts/2026-09-24-desaceleracao-para-quem.en.md",
+      "from": "rbxsystems.ch/blog/2026-09-24-ai-slowdown-for-whom",
+      "source_sha256": "ce8f50b7349f5d0ff322f44e51326062003435f8757678794ac910556342eadc",
+      "body": "raw-markdown",
+      "file_sha256": "b1132d7003aaa9c8d610ce00524ad62d5824fe94deeb32dc8fac40a1c8439588",
+      "bytes": 7871
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-09-24-desaceleracao-para-quem.pt-BR.md",
+      "file": "blog/posts/2026-09-24-desaceleracao-para-quem.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-09-24-desaceleracao-para-quem",
+      "source_sha256": "b641f826265858a2b4e802dc5cc56b9767b61b56f2cea887b9989f62a4349ade",
+      "body": "raw-markdown",
+      "file_sha256": "02fd04709cb7330a36f94eb36bc967c21f8ed98d848d30e9c8505d2fe0c24949",
+      "bytes": 8196
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-10-13-uma-semana-com-o-livro-aberto.en.md",
+      "file": "blog/posts/2026-10-13-uma-semana-com-o-livro-aberto.en.md",
+      "from": "rbxsystems.ch/blog/2026-10-13-a-week-with-the-book-open",
+      "source_sha256": "c04e6fb50404ddc4a2d49ff93a22458d6b801d01910937353c59d94865ede685",
+      "body": "raw-markdown",
+      "file_sha256": "948e3a32386ee7c90c03f6f66994e62cdb3ae862c2943f98b99e77b620717d14",
+      "bytes": 7100
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-10-13-uma-semana-com-o-livro-aberto.pt-BR.md",
+      "file": "blog/posts/2026-10-13-uma-semana-com-o-livro-aberto.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-10-13-uma-semana-com-o-livro-aberto",
+      "source_sha256": "d5d22858e89e6b4ad155d05066855573d8a3c3b4829edd98f68a479740ff96ef",
+      "body": "raw-markdown",
+      "file_sha256": "44b7a59189761db7c302db6f08a16bcf340d2c9d258389a88d3a9b06160f0a44",
+      "bytes": 7487
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-10-22-laya-pytorch-classificacao-de-textos.en.md",
+      "file": "blog/posts/2026-10-22-laya-pytorch-classificacao-de-textos.en.md",
+      "from": "rbxsystems.ch/blog/2026-10-22-text-classification-laya-pytorch",
+      "source_sha256": "e7dfa13726e7503900b0bfaded1362b18a10482cd55679498123c16a54eaf08d",
+      "body": "raw-markdown",
+      "file_sha256": "c71b178dc4497b4fbc67b84528cd1c0732c5c3c2d44b86aefa66c4067e3af6e1",
+      "bytes": 14922
+    },
+    {
+      "kind": "post",
+      "key": "blog/posts/2026-10-22-laya-pytorch-classificacao-de-textos.pt-BR.md",
+      "file": "blog/posts/2026-10-22-laya-pytorch-classificacao-de-textos.pt-BR.md",
+      "from": "rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos",
+      "source_sha256": "06bcd9d318f356fb8f777f9b7ae256fbcfd398adc4f75c2dff59df320ed6cd29",
+      "body": "raw-markdown",
+      "file_sha256": "871b6ba9fb22c2e731aa71022fbbeed52f5e50e15e7d1219fde9b98e31553fb2",
+      "bytes": 14790
+    },
+    {
+      "kind": "page",
+      "key": "site/en/about/index.md",
+      "file": "site/en/about/index.md",
+      "from": "rbxsystems.ch/about",
+      "source_sha256": "c7adcf7c2c6de10fe13bf6396b2119ad88d94c8de50c444f50ca599ac0b5c472",
+      "body": "rendered-html",
+      "file_sha256": "47333d443e7b8694a4f680ed37cf3b93018dac30b473034edbdb55e53e269b23",
+      "bytes": 754
+    },
+    {
+      "kind": "page",
+      "key": "site/en/atelier/index.md",
+      "file": "site/en/atelier/index.md",
+      "from": "rbxsystems.ch/atelier",
+      "source_sha256": "8a51360965d251262dd30c2d305881c4123924bfbbd6adea1dcc2c8d7659f6f8",
+      "body": "rendered-html",
+      "file_sha256": "4fe052e775ae2e1ffd47add9d87181f26835f61b533c5d84076c93cc0a89b687",
+      "bytes": 104
+    },
+    {
+      "kind": "page",
+      "key": "site/en/briefing-btc/index.md",
+      "file": "site/en/briefing-btc/index.md",
+      "from": "rbxsystems.ch/products/briefing-btc",
+      "source_sha256": "5532d8e1fc9e9ce24afb8a3b3a2b2aec9f9662d11711a722956c04e5e13485be",
+      "body": "rendered-html",
+      "file_sha256": "220a6540f4cd53bc4059c4568f7f5807beee6b5151cb89147d666fe0cc2543f7",
+      "bytes": 2215
+    },
+    {
+      "kind": "page",
+      "key": "site/en/careers/index.md",
+      "file": "site/en/careers/index.md",
+      "from": "rbxsystems.ch/careers",
+      "source_sha256": "3aedc524aa9da05b5aee53cee0d9e36b5330e6ff3cb1ad6ca4534533882d72bb",
+      "body": "rendered-html",
+      "file_sha256": "fd61cd2955de09b4fce2e31bb615c3039b6a258ea1d1eaa178a182f3792485f4",
+      "bytes": 2181
+    },
+    {
+      "kind": "page",
+      "key": "site/en/cases/index.md",
+      "file": "site/en/cases/index.md",
+      "from": "rbxsystems.ch/cases",
+      "source_sha256": "fb89e947320dfdb2d0febeb8ba99e7ba7b3d92c79b61620c98c5f7f8fb8adc0d",
+      "body": "rendered-html",
+      "file_sha256": "f53e51986de619da82f2512eceac716758bc6d72857197d5fa721bb22a5752a6",
+      "bytes": 2524
+    },
+    {
+      "kind": "page",
+      "key": "site/en/caue-alencar/index.md",
+      "file": "site/en/caue-alencar/index.md",
+      "from": "rbxsystems.ch/caue-alencar",
+      "source_sha256": "d9f0018f044276ae520d398bbc5cb6b36f48fe40bb32865a09225691176c7d85",
+      "body": "rendered-html",
+      "file_sha256": "a0ed280ce6a9813a7ad8dc83b9add0e1a3b9a94e08168c40e3335acde6fb0f1f",
+      "bytes": 303
+    },
+    {
+      "kind": "page",
+      "key": "site/en/changelog/index.md",
+      "file": "site/en/changelog/index.md",
+      "from": "rbxsystems.ch/changelog",
+      "source_sha256": "226dff8812b4441bbfed4dd8206a908c3e19abdbebd2d59736cc67e2447e751a",
+      "body": "rendered-html",
+      "file_sha256": "bfc6c17a43e21c3ea26215ef5ca0cedc437783630f9952d8bfa337e9a0cc9a86",
+      "bytes": 2018
+    },
+    {
+      "kind": "page",
+      "key": "site/en/flavia-ribeiro/index.md",
+      "file": "site/en/flavia-ribeiro/index.md",
+      "from": "rbxsystems.ch/flavia-ribeiro",
+      "source_sha256": "21967200577e323d6f8a000c0ab362b19db9636136199de5180c80ee6ba9a5dd",
+      "body": "rendered-html",
+      "file_sha256": "272271ca7e6442591c47cd56ddae37d1a515a08f90746173fb95740ab35b98cc",
+      "bytes": 369
+    },
+    {
+      "kind": "page",
+      "key": "site/en/history/index.md",
+      "file": "site/en/history/index.md",
+      "from": "rbxsystems.ch/history",
+      "source_sha256": "f4976e388ca7be8b43c21dcdbf279469567d199640bc0f6e8fd7a1aecf6cdff6",
+      "body": "rendered-html",
+      "file_sha256": "bd0160b2b37aad7459f55a017d220dfbb60b594234d2b5dbd08493c4ab99d05b",
+      "bytes": 2417
+    },
+    {
+      "kind": "page",
+      "key": "site/en/home/index.md",
+      "file": "site/en/home/index.md",
+      "from": "rbxsystems.ch/",
+      "source_sha256": "b8b4e5b68bdd77a73c7ddb666cc0d0ad52972cb8ae6d9b5252f39ba1d9675518",
+      "body": "rendered-html",
+      "file_sha256": "4530ad091914f02a306c3b1255a1a415f2a2bbeb0122b90896d4a85e2b418a19",
+      "bytes": 3374
+    },
+    {
+      "kind": "page",
+      "key": "site/en/leandro-damasio/index.md",
+      "file": "site/en/leandro-damasio/index.md",
+      "from": "rbxsystems.ch/leandro-damasio",
+      "source_sha256": "66e0d56a8d4c3692819b5cfcdd00dc4ea435e836931e3ef71c6c049ded55164d",
+      "body": "rendered-html",
+      "file_sha256": "fb595d2eb64bc4bb7180591be6d790bba84fd1a34165bbc0dcf41218f073fbc7",
+      "bytes": 310
+    },
+    {
+      "kind": "page",
+      "key": "site/en/legal/index.md",
+      "file": "site/en/legal/index.md",
+      "from": "rbxsystems.ch/legal",
+      "source_sha256": "6562fbe6615212c3ed093fc35104cdbcac329bb91ac09844d766cbfd84abf3b1",
+      "body": "rendered-html",
+      "file_sha256": "c0c1d87ae852bbf6885c15aa5f4740c87bb0157cdb6559999d779be800b80708",
+      "bytes": 3553
+    },
+    {
+      "kind": "page",
+      "key": "site/en/manifesto/index.md",
+      "file": "site/en/manifesto/index.md",
+      "from": "rbxsystems.ch/manifesto",
+      "source_sha256": "b5ee221dbf012b79a4dfc1019013517fe2b0ccc822a7519c63a9915f91d7fb25",
+      "body": "rendered-html",
+      "file_sha256": "64f8a97db01d65061832305b70bfb6abe9ef6f5718a04a4b88a2a55500575b91",
+      "bytes": 2182
+    },
+    {
+      "kind": "page",
+      "key": "site/en/newsroom/index.md",
+      "file": "site/en/newsroom/index.md",
+      "from": "rbxsystems.ch/newsroom",
+      "source_sha256": "1bb591b1bee6f8895d7bb296d12b0f79f0d5a1363286b28a8fefd7f3584b6387",
+      "body": "rendered-html",
+      "file_sha256": "f3d34dce21acdebe4393122dc5594f7de9f8ffa9ee860dd18785b1c1dded0c06",
+      "bytes": 1585
+    },
+    {
+      "kind": "page",
+      "key": "site/en/products/maestro/index.md",
+      "file": "site/en/products/maestro/index.md",
+      "from": "rbxsystems.ch/products/maestro",
+      "source_sha256": "2a5a60c871c95100fe0a87810c9ad29a25e59cd916f5872d75b241d7d401cb2b",
+      "body": "rendered-html",
+      "file_sha256": "12c03051e876b24cccf41ec693eace983b82971f4d4b3be7cac9b22e166af33e",
+      "bytes": 883
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/ai-agents/index.md",
+      "file": "site/en/services/ai-agents/index.md",
+      "from": "rbxsystems.ch/services/ai-agents",
+      "source_sha256": "6b86af21a20a0c1e72d63cb53ba16cf0e03bf363f689bb31e8dbcbd9ebb0e193",
+      "body": "rendered-html",
+      "file_sha256": "b9250bc11bc64201956ee8956cf2db6303c81ede3739d92ef7abe06de63f611a",
+      "bytes": 1291
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/ai-engineering/index.md",
+      "file": "site/en/services/ai-engineering/index.md",
+      "from": "rbxsystems.ch/services/ai-engineering",
+      "source_sha256": "21abd51a7b6e5e07eb0ddab4b9427d128fa30d01d5d9d25aa0822adda8bc1219",
+      "body": "rendered-html",
+      "file_sha256": "a31b7970a89159005cfd433ab7c47599f32341678e29e39bcdcf1e4679c1f77b",
+      "bytes": 1449
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/api-integration/index.md",
+      "file": "site/en/services/api-integration/index.md",
+      "from": "rbxsystems.ch/services/api-integration",
+      "source_sha256": "78ac180756af00a2c45ceda7e0de4999f083e5daf576108c5481dffb68ce4a31",
+      "body": "rendered-html",
+      "file_sha256": "46d3d138a690fdc2f28c730c85285d55251a8bb2be5218c65ddb0dce44f3f049",
+      "bytes": 2006
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/cloud-solutions/index.md",
+      "file": "site/en/services/cloud-solutions/index.md",
+      "from": "rbxsystems.ch/services/cloud-solutions",
+      "source_sha256": "7b4fbb5e02fe2f35e47fcb9c80bf0d53ce30f7820d95fe1e6b6b6b016dbdfa09",
+      "body": "rendered-html",
+      "file_sha256": "8087718cefbf0a10a961854fcfc3d88df29b5653bc572134242c62a0634f9a6e",
+      "bytes": 2024
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/custom-systems/index.md",
+      "file": "site/en/services/custom-systems/index.md",
+      "from": "rbxsystems.ch/services/custom-systems",
+      "source_sha256": "49a8dbaf3075839a3e0cf9a1318e1395455199f05e388b44fe976317074df4dc",
+      "body": "rendered-html",
+      "file_sha256": "d6ec39e86a3747b5fedb5ea577c66e8d1889d26398aeb3a6dfe0e1d308aac70e",
+      "bytes": 1883
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/devops-cloud/index.md",
+      "file": "site/en/services/devops-cloud/index.md",
+      "from": "rbxsystems.ch/services/devops-cloud",
+      "source_sha256": "c33560d19510d62c798c69c51815f45a055408ef38b23f9b9e51c0a81eb0c868",
+      "body": "rendered-html",
+      "file_sha256": "50d4bd492727fee39175499a2336de31cd2f3db6a43ffc67205dad2ce58e261d",
+      "bytes": 1264
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/financial-software/index.md",
+      "file": "site/en/services/financial-software/index.md",
+      "from": "rbxsystems.ch/services/financial-software",
+      "source_sha256": "1e570e42e2ed153738ce1994ae9c5007f26c9cd2c630208b76ddb202848e674a",
+      "body": "rendered-html",
+      "file_sha256": "497c10d27db041342187c8a611e063f71e582d572ddc3472d57222668b1624eb",
+      "bytes": 1254
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/llmops/index.md",
+      "file": "site/en/services/llmops/index.md",
+      "from": "rbxsystems.ch/services/llmops",
+      "source_sha256": "ff9e5b5de7ed43ac7ef59cc29c107de6df00f95fe3d7f68f19897e2d0eb87ce5",
+      "body": "rendered-html",
+      "file_sha256": "3d0c38c609975c6aa8de58d93980fe7400f3b703d20eb8e6b3ef13fd70e5d544",
+      "bytes": 1259
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/logistics-software/index.md",
+      "file": "site/en/services/logistics-software/index.md",
+      "from": "rbxsystems.ch/services/logistics-software",
+      "source_sha256": "299dbdb7612c834d841b9d99e2b12bef651d9a8eb5caecd720b2535196971dd5",
+      "body": "rendered-html",
+      "file_sha256": "64a89b4faa820adf3d9f0ffab22a6ef1ad885ef74e84bddd7a09426a49c09d49",
+      "bytes": 1295
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/mobile-apps/index.md",
+      "file": "site/en/services/mobile-apps/index.md",
+      "from": "rbxsystems.ch/services/mobile-apps",
+      "source_sha256": "961655c4b280926f89d7ec9723a9b8c9cc80f48428c8cc97a83d8bb68b8630a8",
+      "body": "rendered-html",
+      "file_sha256": "9cad122cd2221624fdef4d96ead353e8da4214a6728a39d17ddaefc83bc15015",
+      "bytes": 1931
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/observability/index.md",
+      "file": "site/en/services/observability/index.md",
+      "from": "rbxsystems.ch/services/observability",
+      "source_sha256": "d6079b4b6e2c8604ef344a4a7d4e144615d798ac1653f53eadc9619f4a64e528",
+      "body": "rendered-html",
+      "file_sha256": "3ea4f8d2145a358e3b9f19cdd75b8f38bdbd2413a3d681ddcdfa1a61702a9801",
+      "bytes": 1209
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/process-automation/index.md",
+      "file": "site/en/services/process-automation/index.md",
+      "from": "rbxsystems.ch/services/process-automation",
+      "source_sha256": "2a726471635823878e3c0c93e3241067e846484b7c662c1c5543ad1bd03f0c9a",
+      "body": "rendered-html",
+      "file_sha256": "c828d962785900ff3e21a053cac149191d29095426daf74794b90d40221e5179",
+      "bytes": 1937
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/system-maintenance/index.md",
+      "file": "site/en/services/system-maintenance/index.md",
+      "from": "rbxsystems.ch/services/system-maintenance",
+      "source_sha256": "05b807c69df39f34923c2bb2833fcb33e68d1bd5a3af0778cfd9d982ea55fb43",
+      "body": "rendered-html",
+      "file_sha256": "fef2d9bcc38c3dea60fe808d560673cb35b51046d02a40272bc2aa03bf970255",
+      "bytes": 1949
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/technical-consulting/index.md",
+      "file": "site/en/services/technical-consulting/index.md",
+      "from": "rbxsystems.ch/services/technical-consulting",
+      "source_sha256": "61f6e7ab0d1c883a2afe2dfd8791a5d6fc4a49d6c3e7810fa12053301ed93d97",
+      "body": "rendered-html",
+      "file_sha256": "29e4cb1d14ecc515ad64d7a9f684971c4f86c067536d97cb4904a7627f744a9f",
+      "bytes": 2048
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/ux-ui-design/index.md",
+      "file": "site/en/services/ux-ui-design/index.md",
+      "from": "rbxsystems.ch/services/ux-ui-design",
+      "source_sha256": "2bb743b6e7af6735bbba2d7438f8deb29abccd6fd72062447240cefb3a7a2620",
+      "body": "rendered-html",
+      "file_sha256": "08c5bc200cf6753ea445d3e2fbaecdb65c56532ba26d0ca56abe47e424814f67",
+      "bytes": 1914
+    },
+    {
+      "kind": "page",
+      "key": "site/en/services/web-development/index.md",
+      "file": "site/en/services/web-development/index.md",
+      "from": "rbxsystems.ch/services/web-development",
+      "source_sha256": "416d5b7ae0a73140a0a124e1d23bbc9f2145764a5005512ec1ca5a796f788f02",
+      "body": "rendered-html",
+      "file_sha256": "c64ddbd4da7a36ef18d8d7f2afc14218128f2eb50d434985fedb19438ec684fd",
+      "bytes": 2008
+    },
+    {
+      "kind": "page",
+      "key": "site/en/solutions/index.md",
+      "file": "site/en/solutions/index.md",
+      "from": "rbxsystems.ch/solutions",
+      "source_sha256": "fa3a0014b35cc76da24653798a6dc325efffe57a40d9feb1bf030dc8be462cd5",
+      "body": "rendered-html",
+      "file_sha256": "fc1cf2726098e3e21ff79201eb702ed32e21065cf081b5b822e2d8c49aaf70eb",
+      "bytes": 4267
+    },
+    {
+      "kind": "page",
+      "key": "site/en/team/index.md",
+      "file": "site/en/team/index.md",
+      "from": "rbxsystems.ch/team",
+      "source_sha256": "18bcd1e2fe39b734036de0001efe9eb3a3e97b651207a71ba7d7bafedf4382dc",
+      "body": "rendered-html",
+      "file_sha256": "572ee2b5f723aa0a694c6c57512149bd1b0990e2274a94698fd7a74c87c6fda5",
+      "bytes": 318
+    },
+    {
+      "kind": "page",
+      "key": "site/en/trust/index.md",
+      "file": "site/en/trust/index.md",
+      "from": "rbxsystems.ch/trust",
+      "source_sha256": "a0a4c2c530b96cd288298a2d9edb5b663406869da00a98672c1f9397b329d231",
+      "body": "rendered-html",
+      "file_sha256": "06045b18ad31105d26455cece2e7aeecd3c60a22498a690e7f41c6b5ecb1c683",
+      "bytes": 1205
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/about/index.md",
+      "file": "site/pt-BR/about/index.md",
+      "from": "rbx.ia.br/sobre",
+      "source_sha256": "a44e24b58b0335560c3ec20054e9a4fca363c338ed4eff4a23872d31225dca12",
+      "body": "rendered-html",
+      "file_sha256": "714c5fc426e9ad8698e6ea909783b08c436dcd9c9cecb836f4f1c10a7f1b8e23",
+      "bytes": 767
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/atelier/index.md",
+      "file": "site/pt-BR/atelier/index.md",
+      "from": "rbx.ia.br/atelier",
+      "source_sha256": "87c84d088be28e805825696d1c48555d6dc6e3cf116de7fdcdcfedb9dddd8e8f",
+      "body": "rendered-html",
+      "file_sha256": "5cc50233dde16e1a022022a416789289958d4efe3a8f221596d5e2e95c94f3cd",
+      "bytes": 101
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/briefing-btc/index.md",
+      "file": "site/pt-BR/briefing-btc/index.md",
+      "from": "rbx.ia.br/produtos/briefing-btc",
+      "source_sha256": "b27c714ea775df8a0f992a6bb4afb60393a3e799e8705e6d213c2bc0a7c51f0b",
+      "body": "rendered-html",
+      "file_sha256": "42e77427a48e7c5b8b63362ced1ec7900a89dc0cd78203d166795db32f430967",
+      "bytes": 2226
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/careers/index.md",
+      "file": "site/pt-BR/careers/index.md",
+      "from": "rbx.ia.br/carreiras",
+      "source_sha256": "bcc8a75965ca14134d6a48b9f0f5c27cdeee6c3a544cec7c43a007c555e3cb2f",
+      "body": "rendered-html",
+      "file_sha256": "b4dec0e653f1818150e072bd3800d4dfd50cb525e1a5838fc0f5896746c98ee8",
+      "bytes": 2352
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/cases/index.md",
+      "file": "site/pt-BR/cases/index.md",
+      "from": "rbx.ia.br/cases",
+      "source_sha256": "298c36672258c1cad9718b6c9dbce901b0045af80c614424af83745d5f92d988",
+      "body": "rendered-html",
+      "file_sha256": "b906eeddcea3250cd51921d2731debacb49005e9128bdae84a30a40ac0c73617",
+      "bytes": 2626
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/caue-alencar/index.md",
+      "file": "site/pt-BR/caue-alencar/index.md",
+      "from": "rbx.ia.br/caue-alencar",
+      "source_sha256": "a716923352ab61d757bafe6f332c341aec4b0a8cecfcaafb430c8087218df5a7",
+      "body": "rendered-html",
+      "file_sha256": "f90493c51f4d6551402fb9fd0a285eb293493538d6606c0f5a2a1f6ce2797b77",
+      "bytes": 312
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/changelog/index.md",
+      "file": "site/pt-BR/changelog/index.md",
+      "from": "rbx.ia.br/changelog",
+      "source_sha256": "6f79c60e9788b277fb1414d6c27e8c0cc24937b08c1f4bb2956df12c49de36bc",
+      "body": "rendered-html",
+      "file_sha256": "9e93e66e7a8b74d1cc0111adfee6bbae1ba4722705a4aecd95108c1807ee05c0",
+      "bytes": 2152
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/flavia-ribeiro/index.md",
+      "file": "site/pt-BR/flavia-ribeiro/index.md",
+      "from": "rbx.ia.br/flavia-ribeiro",
+      "source_sha256": "46f8b3396a757ff171469b07843aa4848108c6e76f62c89ff2baf510deb0fdd6",
+      "body": "rendered-html",
+      "file_sha256": "91b6050f6862aa9e53e0bd4882e06d4cb27c03e66f5ab14affcb0f07a14438bb",
+      "bytes": 384
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/history/index.md",
+      "file": "site/pt-BR/history/index.md",
+      "from": "rbx.ia.br/historia",
+      "source_sha256": "c83abbcdc0ee46b33998cdc68e849839bb202cb63fe10d870410bf546eb65214",
+      "body": "rendered-html",
+      "file_sha256": "3c0dec0e1b7320f4cc4377657ee2a9880917e2325ae99ae6789b2f34a0475277",
+      "bytes": 2638
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/home/index.md",
+      "file": "site/pt-BR/home/index.md",
+      "from": "rbx.ia.br/",
+      "source_sha256": "dbb9d493434cbb6b2fd59fbd49536db9b9d3fc6423d09c6a97deac6df425688b",
+      "body": "rendered-html",
+      "file_sha256": "62eab9783490c94bca45613963112775671ef3d080c8c9e03f7810eb8ddb1c68",
+      "bytes": 3463
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/leandro-damasio/index.md",
+      "file": "site/pt-BR/leandro-damasio/index.md",
+      "from": "rbx.ia.br/leandro-damasio",
+      "source_sha256": "faa4b8e124f557a6a63bff73493c86780956250568c0e30463679219fe3375ea",
+      "body": "rendered-html",
+      "file_sha256": "c13101a8a926938a82f7567f09926670d1908bd11bebb3191784575c78d41109",
+      "bytes": 302
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/legal/index.md",
+      "file": "site/pt-BR/legal/index.md",
+      "from": "rbx.ia.br/legal",
+      "source_sha256": "37a008b24398c980e5fa781e7298a02c210ab264b571a58c334af03c26385435",
+      "body": "rendered-html",
+      "file_sha256": "b1cb4cb343c8532edba3a6b536002f1198c50be5fc0ec31bbde2de8906aabc7a",
+      "bytes": 3785
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/manifesto/index.md",
+      "file": "site/pt-BR/manifesto/index.md",
+      "from": "rbx.ia.br/manifesto",
+      "source_sha256": "c520cccb4f38ef7a900fde69c4f08227611053e3ebe02ec6a6dd97439b4e311e",
+      "body": "rendered-html",
+      "file_sha256": "a0d48f05a49f2f301cfe5799d1db86ceab2289b5f7775f95f8c5f62c73b0acf2",
+      "bytes": 2344
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/newsroom/index.md",
+      "file": "site/pt-BR/newsroom/index.md",
+      "from": "rbx.ia.br/newsroom",
+      "source_sha256": "cb80ac2d3f1023345fa904ebe8c0271f3f18ceee589c8000061466762f06fe70",
+      "body": "rendered-html",
+      "file_sha256": "703f358c2bd74189897e3161430f707459de8ffa762932ee5e66385f13a851ea",
+      "bytes": 1616
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/products/maestro/index.md",
+      "file": "site/pt-BR/products/maestro/index.md",
+      "from": "rbx.ia.br/produtos/maestro",
+      "source_sha256": "028f2b366f8524c3932b904ed003557e6670185e3fef9ccb7f106e3d6deb2754",
+      "body": "rendered-html",
+      "file_sha256": "3e49920518977c0d4ae060225c850304a43de261535a55f4804c2204d3ffb846",
+      "bytes": 942
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/services/ai-agents/index.md",
+      "file": "site/pt-BR/services/ai-agents/index.md",
+      "from": "rbx.ia.br/servicos/agentes-de-ia",
+      "source_sha256": "b67b4a792a039438db7a29417236ae7ba6424f348b2882fae9fbb30735519ac7",
+      "body": "rendered-html",
+      "file_sha256": "45ee8236e79bf1b9fd97509c4639891e568b68d3a61f32138a4e551318936963",
+      "bytes": 1448
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/services/llmops/index.md",
+      "file": "site/pt-BR/services/llmops/index.md",
+      "from": "rbx.ia.br/servicos/llmops",
+      "source_sha256": "59abbecb607405bf734c9a28784b16d5f2daf3a7bb9c7c31d5dd7fdb591032bd",
+      "body": "rendered-html",
+      "file_sha256": "57227db0caaf756ba47990a5dd372796bd5938754aa3101c10e8e24e49e21e71",
+      "bytes": 1372
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/solutions/index.md",
+      "file": "site/pt-BR/solutions/index.md",
+      "from": "rbx.ia.br/solucoes",
+      "source_sha256": "e049ab8415bc62b02996da1e699dc6917c285244d0b08284d2b0c3a2c59564c1",
+      "body": "rendered-html",
+      "file_sha256": "a4693e2fb5f9c8f932171e5e9b3f6961956025c4f3e0a2371c39a2e037392c2a",
+      "bytes": 4565
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/team/index.md",
+      "file": "site/pt-BR/team/index.md",
+      "from": "rbx.ia.br/equipe",
+      "source_sha256": "9c95bfa3ad6ba1f7eb8367fb3cc0be8a3c4065713e5faf70ab200bd98313e14b",
+      "body": "rendered-html",
+      "file_sha256": "b758283ae12bc98f3a0cb4f6b8030d7d79c33b9d077eea584eee7c8e440ef09b",
+      "bytes": 346
+    },
+    {
+      "kind": "page",
+      "key": "site/pt-BR/trust/index.md",
+      "file": "site/pt-BR/trust/index.md",
+      "from": "rbx.ia.br/trust",
+      "source_sha256": "c477ffd15204cb07407b563cb7cac67fae23bd959f053c17e4a5ba0ac4cd85c1",
+      "body": "rendered-html",
+      "file_sha256": "2f65defb83e18cbc89fe8bda82863cb1f66022a55991e0b29624a1af7e27d81e",
+      "bytes": 1309
+    }
+  ],
+  "requests": [
+    {
+      "url": "https://rbx.ia.br/sobre/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "a44e24b58b0335560c3ec20054e9a4fca363c338ed4eff4a23872d31225dca12"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/carreiras/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "bcc8a75965ca14134d6a48b9f0f5c27cdeee6c3a544cec7c43a007c555e3cb2f"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/atelier/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "87c84d088be28e805825696d1c48555d6dc6e3cf116de7fdcdcfedb9dddd8e8f"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "dbb9d493434cbb6b2fd59fbd49536db9b9d3fc6423d09c6a97deac6df425688b"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/sobre",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "f43913d6afa61cfe9ca123da5ce9178f17872b41ac6dd03e1cc235eb978fe4aa"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/atelier",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "9c6e79d236840b76ad8552f41f3a2b06e5bc3c8c125497afdddde923c983a112"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/carreiras",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "e64441737e16c78c9e4d6b1da61517afb439b25244e35ddb620d582a701f4d58"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "18b8e7a7b2a139296cb091fabcaf5a813b583f12535f046eea3e3f7eb555ca3b"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/cases/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "298c36672258c1cad9718b6c9dbce901b0045af80c614424af83745d5f92d988"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/caue-alencar/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "a716923352ab61d757bafe6f332c341aec4b0a8cecfcaafb430c8087218df5a7"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/flavia-ribeiro/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "46f8b3396a757ff171469b07843aa4848108c6e76f62c89ff2baf510deb0fdd6"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/cases",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "22e355305e2ac5dc17b22e82ef9d0895492db3f89ecba2009fae271e88aec382"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/leandro-damasio/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "faa4b8e124f557a6a63bff73493c86780956250568c0e30463679219fe3375ea"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/caue-alencar",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "db02428b5a3bf2ba2b282d53f8ee31ae57bd4e579f6d361b747ce2d2e68cb406"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/flavia-ribeiro",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "aecd92ccc1e155e25ec0c82e3390e2e0fd4f4dd53c916ae7b83e2f77bf9a6dcd"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/leandro-damasio",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "2b1d3faf866e29a80fe4d3bf33afcc36cb9adaf0ccf3088c0b11221c643ba9e3"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/newsroom/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "cb80ac2d3f1023345fa904ebe8c0271f3f18ceee589c8000061466762f06fe70"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/changelog/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "6f79c60e9788b277fb1414d6c27e8c0cc24937b08c1f4bb2956df12c49de36bc"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/manifesto/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "c520cccb4f38ef7a900fde69c4f08227611053e3ebe02ec6a6dd97439b4e311e"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/newsroom",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "e29c970f7b91308be2ee1fe5cb0608619f6adbc1ba3d93bfa8c56822d807f2c7"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/manifesto",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "7e8853a2c9fb95a35b1c4448e4d42d9711deb4e5b060b38e606c31cd5eb6fa14"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/changelog",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "af80ad8e0738410fa23f7a76ee34bb0b90ebbef4557dafcba29654e009aa876c"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/trust/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "81b00911c1e1ab302fcadbb209dda9f128ab429f374d2857b2f78955a080810b",
+        "c477ffd15204cb07407b563cb7cac67fae23bd959f053c17e4a5ba0ac4cd85c1"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/trust",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "95a78d81aeba43fceffd4ac0d36a575bbdb08218a15731d000f3ad168ddc227f"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/legal/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "37a008b24398c980e5fa781e7298a02c210ab264b571a58c334af03c26385435"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/equipe/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "9c95bfa3ad6ba1f7eb8367fb3cc0be8a3c4065713e5faf70ab200bd98313e14b",
+        "a39caaf7e8a28dbda051718e0038558f22ec82ee704d959125b2a3587a4d808f"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/diagnostico/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "e0f5f275a93ccd0e0aa8c18c05048761f75e111a74e77b42c9292abcc61513d3"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/historia/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "c83abbcdc0ee46b33998cdc68e849839bb202cb63fe10d870410bf546eb65214"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/legal",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "aaa803a3e1b25b986f5fa16092dc909652e881b4013c15e1f991f2e6fcd8e55f"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/historia",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "338b0c7cc23e736eca6e8e34e44c30d3be7c7839aea00b67b6a3d61fbd5d8adc"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/equipe",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "e2f955ee4a8fe6463991f5243ed5a9d68bdf5bc127487733a955c8047e219ae4"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/briefing-btc/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "b27c714ea775df8a0f992a6bb4afb60393a3e799e8705e6d213c2bc0a7c51f0b",
+        "d5ae819eb5d964a534163e8873eb20eefed488ae5aee083ad73d2aa4e4a44709"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/diagnostico",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/robson/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "c2a10d9554ad463670911275a97194bececf031e1f591bd96d135de30a5c151e"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/solucoes/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "e049ab8415bc62b02996da1e699dc6917c285244d0b08284d2b0c3a2c59564c1"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/briefing-btc",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "5324144fce77df0fb3f57fc057fb2280aeed5ffea5b9c084d6452a46eea3dcd4"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/solucoes",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "87ae1ccf3f1683de699848749c8560a9dc7cbeacf56e1cabe482a468dc523308"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/argos-radar/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "16ba221e721b3731380a0d25b6cf86a9b280198c033830d1e41920c837bab749"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/robson",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/maestro/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "028f2b366f8524c3932b904ed003557e6670185e3fef9ccb7f106e3d6deb2754",
+        "5e8ea260119ee27de883bd7fbfed32714d02d0891f20e84275db8f2c86512ff2"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/maestro",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "f453bfbd2c78385956d235fcc2ead010007f0643b3847255805b7c3e8dd0cb69"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/rbx-ledger/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "e394074c4e6f4d8e4318d130980f5456ea08162eaaef58f3f6649e1c3f1c6540"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/rbx-maestro/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "691201cd7961cc03e8a46c9341be7671c7df593d7f184bf7576b013c9de2dd8f"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/argos-radar",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/rbx-memory/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "8a18b1e4eb4f8551b3cf3025e803914e75b62dac5904d3f24eb17600274860d1"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/rbx-ledger",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/rbx-yield/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "ca8239501bcf02246373c544d976e7b2f2d342a4c1dc2ca9bfcfb9cbc4b65efd"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/rbx-maestro",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/rbx-memory",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/strategos/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "9c4f652cc886f14d53309de81ca8111af2b9a2f097a91e359c61e907ec9e38a4"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/rbx-yield",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/thalamus/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "66128bea2dcfaff59878dc16c2be7cc8d1143e33d6b6377bf65fa06f8795dcd2"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/truthmetal/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "2cbe5f0fe81b9e494b99f95d1260faa8ed48cee22bcf6a56186d122a1bdbc7af"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/strategos",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/verentir/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "e94e8a8f558f8dc0e39e14824a13d869a6fdc7639b83f225cb0a2e5f250790fa"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/thalamus",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/truthmetal",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/ledger/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "9f28c7dbe842958654bbeac6e5e02295be5002d9f8956f24ac39c716a5ab6a6e"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/verentir",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/yield/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "1e45c1ddf92977240392fbf1b7d1499dfb3d1ec4616f548eef16ce2a3e57d88c"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/satwake/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "fae1a920ac62624e32e332c963ca4ded23e06c54b795be60b935bfb000de124c"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/ledger",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/kulinaryos/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "878e020d85aa3fad9b780e395d1d4b93f15ae5d9fa17c8f80810c471d073838b"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/yield",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/satwake",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/robson-code/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "49bbcc6d57c2dbe1b665b99ab5b0632d2f54681cda63a512dd14a97ca31c4b40"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/kulinaryos",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/portal/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "1bb9016d5e54e2811be086b9eebe2a33a523baddd81d7b8cb67e759b08b2f852"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/engenharia-de-ia/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "dfd915af7e9d630eeceab9edbe125a29924d5d08760e4ca6b2024e9251c1b5c2"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/robson-code",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/llmops/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "59abbecb607405bf734c9a28784b16d5f2daf3a7bb9c7c31d5dd7fdb591032bd"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/produtos/portal",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/llmops",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "8acec6ddfa6d98fda0fc6a099a1df0e9b4ce411147ece397d23bede9588c9140"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/engenharia-de-ia",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/agentes-de-ia/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "b67b4a792a039438db7a29417236ae7ba6424f348b2882fae9fbb30735519ac7"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/agentes-de-ia",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "4907f1040a04f53ce069c3091db8a7f49cb3b17ad7b836d440eb6bacc95e411d"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/devops-cloud/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "8e470d4f5ae54129737480d9fd42e9caef8380af58791a04494b61577545e100"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/software-financeiro/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "46b397ac7612b6d49640c92006afed936084844f9507676f65ff075ce3b5618f"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/software-para-logistica/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "89028aa0e2b98572ee85f7fa606b03631414b78d456f7e981e692bdcd44a50c8"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/observabilidade/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "95b5abb79371bea327792565de2587d4749a0a37a7b32cc2ca0fa300703fc980"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/devops-cloud",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/software-financeiro",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/software-para-logistica",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/observabilidade",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/desenvolvimento-web/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "1c10155056e23bbc0a2b3e8f6b185420341ac3b3b3346de75a0a332f551e8536"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/aplicativos-mobile/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "08ced9437ad4c1710c52560dfc1343681defe95a4f5b6055c31ad21684f93d83"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/sistemas-personalizados/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "2685a77724ba714e77959a7929c24dd0392d93755ae02d26830eb34044104722"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/consultoria-tecnica/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "b3589c76829a81d8de95360e2a885bca4ec212bd7c5cc2fbda1ce023d6c9db0a"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/desenvolvimento-web",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/aplicativos-mobile",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/sistemas-personalizados",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/consultoria-tecnica",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/automacao-de-processos/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "6481a53c50d79b824feb29017767556dfb860cc6a9eaf70e8285a93e2dc764e0"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/integracao-de-apis/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "108527e0679f4c6a14343bd502f5db6287c0ef0715f5235c17d95c751635fca8"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/manutencao-de-sistemas/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "318f46004fa946a55c53335cf281c17d23eb8fb22f694da391d7859178862688"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/design-ux-ui/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "d2e6a55a500cf82e44582399b9c813093e674136d3bd63a33eb6385eb076dd22"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/automacao-de-processos",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/integracao-de-apis",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/manutencao-de-sistemas",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/design-ux-ui",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/solucoes-em-nuvem/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "6988a5e45d04507e6e390c6aee3d1d8ef3cdb2b4c21379f94e783ed60dabb48b"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "2a6ce02a10ccbd4e90232e28ea003dbefe8ec0f52ddf4699f12d3090ea404a87",
+        "b8b4e5b68bdd77a73c7ddb666cc0d0ad52972cb8ae6d9b5252f39ba1d9675518"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/about/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "0425ad7ea5cd717f5e2844050a5857900cf524df941a39345a17030f95fefdf2",
+        "c7adcf7c2c6de10fe13bf6396b2119ad88d94c8de50c444f50ca599ac0b5c472"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "787e152c28f1e571fe606708ca2e2a711abcb69de72657480b708f13cde0c48e"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/about",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "8228ac128badef8209849017314ecd61b666c68dce109ee9a9e780d524d04d50"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/atelier/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "6c790f03a59d75c1025ea9f68f4cf4fa1c928dd938bbd076729d247e9390f108",
+        "8a51360965d251262dd30c2d305881c4123924bfbbd6adea1dcc2c8d7659f6f8"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/servicos/solucoes-em-nuvem",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/careers/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "36dae04529903ee73fe7f2358ecf38effddfbadc4d5823f4f731808c6be31723",
+        "3aedc524aa9da05b5aee53cee0d9e36b5330e6ff3cb1ad6ca4534533882d72bb"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/careers",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "49c6cc2c3025bbaa174e1d18d54ed1c2cd1f0a45346dd03166b2bcc2df981102"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/atelier",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        200
+      ],
+      "sha256": [
+        "35ca47433a71d122fb9cb20c4d3970c2719cfc7c008bc8da8b6fcf189510edb0"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/cases/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "652316d6deb79dad66445b0be3c988007babd88bb06e0aa4857228a86d8fd753",
+        "fb89e947320dfdb2d0febeb8ba99e7ba7b3d92c79b61620c98c5f7f8fb8adc0d"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/caue-alencar/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "0c089c268c04a211df782373a103b0cb5be266b940c18fd9fda62a28ee426717",
+        "d9f0018f044276ae520d398bbc5cb6b36f48fe40bb32865a09225691176c7d85"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/cases",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "4fd34876ecc0bbd99f001edcd9c26b326b090a474a7259986f3903649a1a11e8"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/caue-alencar",
+      "statuses": [
+        503,
+        503,
+        200
+      ],
+      "sha256": [
+        "915909903b92916ef394b00bfe33ebc63f7d303adf5d4de38d7be1572eaa07cc"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/flavia-ribeiro/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "17f6adaa2a4d8634bd50d4a2af8a358bc253d71f3baba00ac40f8e88e704ebbf",
+        "21967200577e323d6f8a000c0ab362b19db9636136199de5180c80ee6ba9a5dd"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/flavia-ribeiro",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "1f31593444005adcc9be3ca09fedd69f7fe3522216f91fc7a8902d08d7d984a6"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/leandro-damasio/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "66e0d56a8d4c3692819b5cfcdd00dc4ea435e836931e3ef71c6c049ded55164d",
+        "f2503e70602da41afb3e83d2ed44b4c4163f28b2e00149bbe784fa57c8e1d209"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/leandro-damasio",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "5f7f407d6bc79fe1569daab72d79e7c1553d4aee5c28a95cf9b9e7a788a18dcc"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/changelog/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "226dff8812b4441bbfed4dd8206a908c3e19abdbebd2d59736cc67e2447e751a",
+        "2d6d08e265b14793af835e39348897cddd652d69f7907c45e16a022d50a4ef07"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/manifesto/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "1c813c436649432aaddde5221e1d990b245b87389a5985ab1ec304b1237c8d02",
+        "b5ee221dbf012b79a4dfc1019013517fe2b0ccc822a7519c63a9915f91d7fb25"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/changelog",
+      "statuses": [
+        503,
+        503,
+        503,
+        200
+      ],
+      "sha256": [
+        "6b887987e10e495af5d3b3bdd51bf2e95dc2168019550c21774aa0e55432deb3"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/manifesto",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "4a7aef4799f1ec95fbd940bcf053366d2e3a244c0677a907aea44601826c972a"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/newsroom/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "1bb591b1bee6f8895d7bb296d12b0f79f0d5a1363286b28a8fefd7f3584b6387",
+        "fdde5e43ae475f9c996ee9323f2483c229dbc98617c7dfb78af56b187f2db3d7"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/trust/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "34875ceb14cad20a8c5411dbf90e7affd773fa3b344f9e314f6322fcd9edd2f3",
+        "a0a4c2c530b96cd288298a2d9edb5b663406869da00a98672c1f9397b329d231"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/newsroom",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "02ff01ff108499c60d18cf73094129183f79987cf874488aaca46a42c6481032"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/trust",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "dd1481d02dfb73a0517fe3c3541473dac84db20b5af0b5296e6f14db474fcc21"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/legal/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "6562fbe6615212c3ed093fc35104cdbcac329bb91ac09844d766cbfd84abf3b1",
+        "be6f4e67130d1676dcc2eb77c589768205250ce1f0c59e174540facae9010a99"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/diagnostic/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "a9d8dda2be6c5d76b8137bf454071f2bb8387ac6caca2100dbab011aa9f7fe08"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/history/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "a82e2cff784684b45f021c5f87b6ed913eb6f821cfc5dcc32d9ef459c0cf752f",
+        "f4976e388ca7be8b43c21dcdbf279469567d199640bc0f6e8fd7a1aecf6cdff6"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/team/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "049d81d7640c41ba7c7295d6d371492a52c9511d715c5b379cb6053adfde8912",
+        "18bcd1e2fe39b734036de0001efe9eb3a3e97b651207a71ba7d7bafedf4382dc"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/history",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "6a49d9c7883883514d3029aeaec61cbad715e09bba67be7e9c1dcbb647807150"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/legal",
+      "statuses": [
+        503,
+        503,
+        200
+      ],
+      "sha256": [
+        "32489954380941f7ea48e37c4847df44b8b317ec992ae49c1e74d756e6031c2f"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/team",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "82dd949a8551c4d50c73181c7af9d38842b64a799dd33cb0fb98495fccaab8d4"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/diagnostic",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/briefing-btc/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "543351374b8e445c96a6ca1a160751ad1f942dfe7a0283c5a36247a8590b2d4c"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/robson/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "a2a7c209aa18405783b81a3fcbeaf13bd0e0bbac0f98a7ec24560d72489d92ec"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/solutions/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "4150bb4348f4cfec9d518d1f1fe1764d99d9eb130986c85711e71fee1b74c1fa",
+        "fa3a0014b35cc76da24653798a6dc325efffe57a40d9feb1bf030dc8be462cd5"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/briefing-btc",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "2d544684221263014144233ad4f779503b340f6e1f2b2d71059d1e3aa30638e0"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/solutions",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "0bb4e56899bdaa3087378087900566cb4d178132f2be209902f1e68e8eee5ac3"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/argos-radar/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "37ceafa8ae3b2c4e2b7afd69799eb1c03b4d12d6ee5e574f65a53455d283a6f0"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/robson",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/maestro/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "2a5a60c871c95100fe0a87810c9ad29a25e59cd916f5872d75b241d7d401cb2b",
+        "872d6be26e9f75fa7717bb1bea23b9d2fd3cf9bf7d9ebd292f4cf542e2d09c2c"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/argos-radar",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/rbx-ledger/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "53244ce3190b13742a55ea11b829af3b58ec23423c66ae6de85e6cc5da93df48"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/maestro",
+      "statuses": [
+        503,
+        503,
+        200
+      ],
+      "sha256": [
+        "8823a1f347027d58e0694daea61929b548e335ff6f1ea4e9bce52abb62a587b9"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/rbx-maestro/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "9ce7ce6405493e55e90f497dae18518d027be6c12e263482e2cb02e5dcde1c50"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/rbx-ledger",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/rbx-memory/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "2809c7316abfd4118e84526e265a4ba01e392fc67abc5790a923bf75d5fd2db2"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/rbx-yield/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "fe0fd3cc017a1417180723d45286db735c4a482848ef9cbd3154dae8aeb9b183"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/rbx-maestro",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/strategos/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "a3d70ed35781e9f46e90b42bf4e7246cc9c618c008b442a49267b9187e5661b4"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/rbx-memory",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/rbx-yield",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/thalamus/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "368208743fb132a3a875387cb57668bb04f488327dbd456c6783a136a197d9d5"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/truthmetal/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "6527ae634fb5a0fc580ed95513476cd7ecfb50ea44e72987ab9733b3d36ad991"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/strategos",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/verentir/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "b2d897261ed0aef8ad3104ce22e0206958414a9fc8d54ebcf0d08a0e96859033"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/thalamus",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/ledger/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "1f528716c2afd1845c7a8fcb64df6f5b30234f6bb0c322b72d67c41ad4b0c1ef"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/truthmetal",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/verentir",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/yield/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "199290441ef7635085cbc2cc366f981cc3a24a6746fbc53b35fa85e5c9368f77"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/ledger",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/satwake/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "65947a64f372790fb532bdc45ec2be1b22f35045a791258cbefdfe0a0323c5c0"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/kulinaryos/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "c11db8cf94263ca21b02524e29bd10a0996abf337290030546791325ea479e2d"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/yield",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/robson-code/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "5c42dde714314ebd98c7c609298f2cf0fe65099ea9fc3765119e1dc10a5e486f"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/satwake",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/kulinaryos",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/portal/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "6a3bed64f0fbb568c2ed40447f95525eb1052106d2783be55f17bf2b679a35be"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/robson-code",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/services/ai-engineering/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "21abd51a7b6e5e07eb0ddab4b9427d128fa30d01d5d9d25aa0822adda8bc1219",
+        "3668c6799be6a137bcd17da263cdbc685d484092543c03dc9eff162746e19394"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/llmops/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "5b91b35af0e9e1c6a71dd39b8bd49bd1047f7bd89dd1c77664b02468f1d0b419",
+        "ff9e5b5de7ed43ac7ef59cc29c107de6df00f95fe3d7f68f19897e2d0eb87ce5"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/ai-engineering",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "265d6278a4fb07db427049280561ed07cd1f4d7759e03c5443b1d580ec7e8961"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/llmops",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "c29c332f90d14fdbc570c2933cb3faf12c8e7b1e10db605930fc3d1ff5adacc1"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/portal",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/services/ai-agents/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "6b86af21a20a0c1e72d63cb53ba16cf0e03bf363f689bb31e8dbcbd9ebb0e193",
+        "85b8296c268d393dd0bdc8eacb85cd8fdcdcfb63c46de7962e14e920152ee7a2"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/devops-cloud/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "a45a3f50b5257617dd422aa5ec7af37b725b702f46cc682b664262811fa66b92",
+        "c33560d19510d62c798c69c51815f45a055408ef38b23f9b9e51c0a81eb0c868"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/ai-agents",
+      "statuses": [
+        503,
+        503,
+        200
+      ],
+      "sha256": [
+        "d7c5d0486243dda1a7ae7f872bc1389513db408322c42073356ac454fd43c334"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/financial-software/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "1e570e42e2ed153738ce1994ae9c5007f26c9cd2c630208b76ddb202848e674a"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/devops-cloud",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "69218f22301efb916dbfbe73de02e3f0cb45b569aa704ce9758e636fca9ffb63"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/logistics-software/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "299dbdb7612c834d841b9d99e2b12bef651d9a8eb5caecd720b2535196971dd5",
+        "35ea866fd25c259e01736571545569bfc5fcd6b824c56dbdc4f94994fbeada82"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/financial-software",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "d27e6d282d4346fa7b6e33c255d1819adb77cbbbaa1f38bef1f487a231e4155b"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/observability/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "d6079b4b6e2c8604ef344a4a7d4e144615d798ac1653f53eadc9619f4a64e528",
+        "f17094b168902eb9849b6e7af6411eb7b6a71b72db10a8fe0526b7ee1c78fc32"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/logistics-software",
+      "statuses": [
+        503,
+        503,
+        200
+      ],
+      "sha256": [
+        "cab932d0cbb35a70a51d7853675b06f37a41515a96c39fd819064727b9744208"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/observability",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "6f0685bab68386d98c8ece89821d7de314560faf2bde2eb321ea9c66534e852b"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/web-development/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "416d5b7ae0a73140a0a124e1d23bbc9f2145764a5005512ec1ca5a796f788f02",
+        "b41bca04634668701384030c413e73aca1f42743b239579ac6eeba64450133e3"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/mobile-apps/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "4b967bc5fe402cbe9bda06df931ff5e1648030bc23bdff83b22acd6021003f5c",
+        "961655c4b280926f89d7ec9723a9b8c9cc80f48428c8cc97a83d8bb68b8630a8"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/mobile-apps",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "ec9253085d60ee4d9344245d33b9cb291bd607596cc455659ba38802c6a464b2"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/custom-systems/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "49a8dbaf3075839a3e0cf9a1318e1395455199f05e388b44fe976317074df4dc",
+        "8f700d0eccff77b9310babc0496e54783ceea308bb136edf7692c6b69525f221"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/web-development",
+      "statuses": [
+        503,
+        503,
+        200
+      ],
+      "sha256": [
+        "aaf15f2ecc7dc7f4ef509bf8b64c76cc216c409e454ea696fdfe4237fdf6bf88"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/technical-consulting/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "cc18cbd9fd40bc42b107948cbb193e82ee726a6dc5de6bc1c6f7c239b0c49568"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/technical-consulting",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "af59f0cf66eaf06069d72f882449c5d95cdfae4df1f90d794a9fc3c54008210e"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/custom-systems",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        200
+      ],
+      "sha256": [
+        "7c6122ab9772bb763f35bfc5e1a134ae324d999aec86c57f3233875374ccb4e2"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/process-automation/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "2a726471635823878e3c0c93e3241067e846484b7c662c1c5543ad1bd03f0c9a",
+        "79bbc8494825f9ca81e6ddab3c4b135aaaf86d93a442575cc66a3bf36f7cff3e"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/api-integration/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "78ac180756af00a2c45ceda7e0de4999f083e5daf576108c5481dffb68ce4a31",
+        "d691a73af7308392ce5c012d65baa4c5cf338e3ea0fe4a3d88ee2c49955dbdf3"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/process-automation",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "430fd6a1bafda7f5447103d56bd6315a6edd07d80cf63215123611f4304c76ac"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/api-integration",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "8556481e5099182ff33036ee56bded57a838f1aedd020ed262d5fc50fcc4acf5"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/system-maintenance/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "05b807c69df39f34923c2bb2833fcb33e68d1bd5a3af0778cfd9d982ea55fb43",
+        "945a2b2342e2b5cd5811218cc0106ad9bbae2f4a045fa224f85cf3add0939632"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/system-maintenance",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "e53f8f85b22d414fd350bd617fe851cc7d77304b412d03d08b9fff5bc143554a"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/ux-ui-design/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "2bb743b6e7af6735bbba2d7438f8deb29abccd6fd72062447240cefb3a7a2620",
+        "3af7612fe89cde8dd0b04e421c03566d8f4ea1ed199b6dbf761d96629a462b1a"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/ux-ui-design",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "8cda568fec8ecef2a3bece08f0a125567b3ac1118474264ed064f7c177257d3c"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/cloud-solutions/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "7b4fbb5e02fe2f35e47fcb9c80bf0d53ce30f7820d95fe1e6b6b6b016dbdfa09",
+        "f49054be617137259b59f3b5885977717f3614181094a31ca8ed13983df760e5"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/cloud-solutions",
+      "statuses": [
+        503,
+        200
+      ],
+      "sha256": [
+        "233acd181f19e24c16e52dc68f70ae63d77fcda290b5844f546b953688746b33"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/journal/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "0f0a6dd53fcf0937a85a478501cc314474dd391d6b9706986be08620d5a824c3"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/rss.xml",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "fd9a28588ecbb9845d50afa91863aa585ec560ccf361eeefadf020cceed10296"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/journal/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "898c5f5828cc4519f69f9b711aa1b9094a7b82de03423775dde3f374bfb2d264",
+        "95eddef0e62a9d46d8c5c6ddad7c0db5334438558732ea08ef0e883e87dc6b90"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/rss.xml",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "e9302f87341c991875991fc9e964361debd9442312ff7d3257982a794dc605ec"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-04-04-the-unit-is-not-the-prompt/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "492304ed8d1496efe1bc376545e7233f8c41ef93c27324aa12bfea0b18d1a0c8"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-03-29-infrastructure-update/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-03-25-truthmetal-launch/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "83195de9595d8c92a558bd4747dda67505c6394791b1c3dbda322887083ff43a"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-04-01-the-model-is-not-the-system/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "d937a4cf4c613f259250d454b56dbf533f886630e13ef8616aa4e86bd34122d6"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-04-05-robson-v2-finds-its-missing-execution-glue/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "010acebf6daaa42d33d3553d87a42f7362584ac78bb077beb0a40c2ec614f2a9"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-05-15-ia-corporativa-como-infraestrutura/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "c35161dd351de06795563f3c713ccfa0dad18d397e234a132b4ad37aafa4b3e5"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-04-16-testnet-validation-architecture/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "c428579acdd6b3f0f874888df330d1fd7bb6facf2c2ad961e9e64462d3a4a132"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-04-22-robson-first-real-capital/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "bce7326d72d78e2d3cc3014c4da302fb11037723eb47dcadd261f255f36a0d9c"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-07-03-stops-that-survive-failures/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "bf376b53b1f16f60e33e6cbe78fa0b836308d73b4fdf16e4dc07f339368b6250"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-07-04-one-entry-four-bugs/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "1dbb86cfc77e513da8e2a81f6bb072acd194f2d61afb9fa42ec908fe2bf1c1cd"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-07-04-the-retest-that-did-not-stop-us/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "92505f492112b0a46db213e1e40d096b7bd16d5c7b591a3961631651bbc499aa"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-07-05-cost-of-innovation-startups/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "9c32db30d7e2701842ce4a2d96b64fded484add35c24c74d6ccd800decd40785"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-07-06-fallback-debuts-in-production/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "b059ea1bdbe913c87c9583322afa43f4597f882f469989b051b0555022be9327"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-07-05-saved-risk-extra-operation/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "4530c1e5d3173777cdb2e0767aa78a6977498646c15f3c507a3554b9134970ad"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-07-05-stop-gain-that-audited-the-system/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "c26fce804a7e3c45fa926a23c6c5e327feafeb8aa9b4042f2864bf8fff774d07"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-07-07-the-brief-a-stranger-could-run/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "d9e76aa85672b568ac849663184a69c00f6aa89ed8c0ae2fb6738f10eff758fc"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-07-13-no-bitcoin-proprio/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "b44602c15a33d6940a25572023698709b49b5d42b2f80dfa1802c599cc6516e2"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-07-12-volatile-logs-are-not-evidence/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "bd212f220059bbe4aa117e7244753126fa6dd5f913035a941952049bb99393ae"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-07-23-o-no-chegou-ao-topo/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "147093277316dd562da52b96f86e5339f035c7237b97fcfe07000a33aa5f48d5"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-07-29-governed-public-rag/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "d1c82008eaf5161768050b8370fdab6f66db9cdf63884f88df00b0fb7560cafe"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-01-auditoria-ou-telemetria/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "bd41e82f36a3a14e97c1792aa9bec5c41ed7e6e3309ce5de03a5a3724785c4a4"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-02-o-painel-dizia-synced/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "6cb80ec6968b932c646a04e78442a63f8a4f26f370b2928335efef5be2631846"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-01-governed-autonomy-distributed-systems/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "9fc7cab250338086117fcbc631549147da3db4c2dd6eb355ec33a1dc4fdcb87a"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-02-rbx-journal-rss/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "b80bea4c6622866870ea972af690cbe0688e46feaf1a9a6ef33c114802f21653"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-04-uma-regua-so/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "b39f2244d156cfa37850edda22bae63e248ec15bc41ac942e4fabb0f363a90bf"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-04-o-slot-que-sumiu/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "e58bf1420afa6b6a6c4d07b9587bea24c1104c41a1656a4d5897ca1f94da9684"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-05-o-primeiro-palmo/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "61ee0f64d774ab42decc711926f4d376505d0a6cc68f7e91851472814316f185"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-06-o-plano-que-encolheu/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "48d51c5de7b06a87e1a955ea3d5bde5fc1f0588bac9707634866b4f537019cbd"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-07-evidence-authority-boundaries/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "f63c98010b1135212f7f424460b4e233bbe50a64190787dfb42d16057d0a76ff"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-08-o-revisor-que-rejeitou-a-si-mesmo/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "278077307466610300d3fb2f403f42c92b683caf0c39722871d7cb1e7dc3c0b3"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-08-rigor-demais-tambem-e-um-bug/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "e585c6ce38ff0f69c5280b0964f7cb552aef6878af3fe98437da5a4a65b03679"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-23-backpressure-fronteira-de-governanca/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "f66440c46bb3e46d485648f06e5938f959a8ca7ff1d55e60a62cdfa0986903b3"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-26-recuperar-mudar-e-provar/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "d61d6a79c0cc2b0d72b896186e84b56a91c3fe354a1e6e3b28aa581d079ee1ea"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-09-15-o-gargalo-mudou/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "86bb2b8b5daf67df781e6131759873904dd8c1d60ff18f9479185086d48ce2b8"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-08-31-engenharia-de-loop/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "195da75013bb19353d82d35253c9738ead18311a35eeec693c3ea8e8b719e61a"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-09-24-desaceleracao-para-quem/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "b641f826265858a2b4e802dc5cc56b9767b61b56f2cea887b9989f62a4349ade"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-10-13-uma-semana-com-o-livro-aberto/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "d5d22858e89e6b4ad155d05066855573d8a3c3b4829edd98f68a479740ff96ef"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-03-29-infrastructure-update/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "270cb4ff114c215ff945b795e2a5151d99b4e16a45c7c660230c50012f69579a",
+        "5d9db1fb1608d70d18e9362825bd176a8b3c0116344d1fab8b7951f43ca4d6f3"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b",
+        "06bcd9d318f356fb8f777f9b7ae256fbcfd398adc4f75c2dff59df320ed6cd29"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-03-25-truthmetal-launch/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "12106285981c18e28d81ece6fd03a6e54fd0e627bf8696944fb088a9daca7501",
+        "6b1dc7de1bda3f9bc4378bff209b9d4614dcac5d98e3b8b812ef935def9f542f"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-04-01-the-model-is-not-the-system/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "0ecea8d41327b844486f8a0d73b95d94f05ab773c5e5fc38d984b8f3c7d51450",
+        "ebc629dd1d3043c3ce685c799cf0de11db8e9ca8b24ab0b5b3a6be8b4ba0578a"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-04-04-the-unit-is-not-the-prompt/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "04337e21b1dc462db5829f8b9691e2bf293ae9907163b42fe5cffd173eb5e69e",
+        "fe67805b8c15bab6748fff1af6848e20ae265c3f460ab6b7b6a77f7d95484e30"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-04-05-robson-v2-finds-its-missing-execution-glue/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "37ab15e281f7eb5cfacd7a198d58bc200e2baa8d80615a2185ce0a7de5c79e2a",
+        "3e5fabd62c6606e3fc3ee6d2148171ae0febc8d59d4de3072f2205908cced336"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-04-16-testnet-validation-architecture/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "1cb897944fa19352198f5f2e88113e4d12a455a2393a7882b48c77be7512212a",
+        "d812cfc88f659c88370e97db5fcbb60eb5f9951cfbda42028b3b478c0f679ba0"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-05-15-corporate-ai-with-method/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "370c53ed11db772391fa6be82263a39df5f5f79e99f3f0f95d99f3371d1e354a",
+        "8898e652c355a4ba88f5be218ec07b8441ff285f7654dda23116b6208c0ee695"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-04-22-robson-first-real-capital/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "7a9b3d026426721733efea6ffb01d6fef929f6a5f8297f3819d7760c46cbdcfb",
+        "9c751d897c5e22de6f6d353610d73a2f0d6a60f87309bf8e251e38d95663bd91"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-07-03-stops-that-survive-failures/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "4d52fb6588de7f1f68f8ebfed3c9ab7a9bd1d832b30fc599d51d6fd4f7a9277d",
+        "c04282736750e3a626f2f1b775429d2c3a36ca0044466c3ea4cc32726624fbbf"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-07-04-one-entry-four-bugs/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "8c8b44b0971c75fe474306e1d747f5c2d053dc9b71ee0bc855077d0edb549282",
+        "f5e99ff15745cd5bf0326bc295c87a8103ae85ea30ab4aa8115da7e23b3db572"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-07-05-cost-of-innovation-startups/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "971312718d6add6ad25561f2100bddaeeaed14386dcdc38ff60a2269ef99626a",
+        "fe5c12fd3e1093c2e9c710030a9459c8fb65475e34bf8a1258c84068979468d1"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-07-04-the-retest-that-did-not-stop-us/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "7b8139daffeb38692c5ce1c5bf046c32ccda92785286b327a0fc000269fd7a9e",
+        "92e9768c6fd7047d32099f00e524fe4ecc88d640e981ef8fb3b11a597716ede2"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-07-05-saved-risk-extra-operation/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "3711a298e0a8470437b04b27fe8dd2012c8b5ee48df9233368f2c7760e5e0195",
+        "861548b3aad2fceff7e397a767b24512f18d8a76f34c5eecdd52b44bca4d03bd"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-07-05-stop-gain-that-audited-the-system/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "5c13ec5629482016834244cb3046fbb9be0f2c3583a2e519347ce31b0b40784d",
+        "b5dfa2e7df2bcda30c8e9c1d9dd008181ca94648cc9905a280d727c4a36d43fe"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-07-06-fallback-debuts-in-production/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "007bff5a1201e545820b09d3bdcb4ac711c3cff43d19a455534e141f9a998a49",
+        "58f246c884a9b41a364b9290ff387f57ba83685f49b4eb391208a31f67b6a8da"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-07-07-the-brief-a-stranger-could-run/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "4c3571c0e3e7678f3943e2bae4bb2c95f791a04201a448439d9d2d98603812a2",
+        "7b5ea245b8821be6e90008186c95cdc3fcf2dea94649d6023189a416a0664a77"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-07-12-volatile-logs-are-not-evidence/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "defd63f6e2aebdeeb392517f5afdcb41471de96f6d1b97929d8675b160fea631",
+        "f90f29e1515029f1f6d5574a1e94ef1071813a8b34592dd1a2e8d26267364bce"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-07-23-the-node-reached-the-tip/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "1702d0c643e4503203510d0d52788ccd7b652d088844970e0e90f3c06f5df32a",
+        "5a136d236cb436fd01de62e69f12cf9b2a5b477cc729a0aab796b93a9036fb5f"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-07-13-why-rbx-runs-its-own-bitcoin-node/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "035f6d5b562fcab5461c8f9e3cb7e21e641cecc4ffc0eabc5cb5eb1362eb454f",
+        "3b10ee67b0dcf701d9f337c2d63048fae6bb676b2c8aa1d1fcc75535eda3337f"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-07-29-governed-public-rag/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "09fe0dabafb3e433d4ad4a0393a5400b9e04656794bdbccd65f1852916f6d732",
+        "ac9ef1f88fe170312951fd599c2691f4b0d39fb7ad58c109bc0b6a2db859d357"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-01-audit-trail-not-telemetry-sink/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "174f877db2a32900c3ca3dc708e9036ae48bcc378c614d162186461d567ec8da",
+        "5ce0ba0fd93a7c29dba8b8be2d91016edb61ac2b6c31326ab5ad2e3c23b28fd0"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-01-governed-autonomy-distributed-systems/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "5dee9b95aedd26da27cb111b33d4be788efa16765b7e3dafb18ac8e1fdaad557",
+        "78f884ff5a5cefde4d6fd2f7f93598aeafbb578414ac44fb0ba3c09bffdd777a"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-02-the-dashboard-said-synced/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "36f2b7d346a2f635956c57efab4946d3e657ee2cf3b299e591a19b33aea79fc0",
+        "42d576ce4578ace52c84aadddd5dae7ecc78d514aff8119a1428d83f31eeef8b"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-02-rbx-journal-rss/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "676b1f19274611d8548ec511cc46edfbebec7269df6ce01cbd63c97179b9e44b",
+        "c57f801f08ab6498b1df1f86a688b5bf6a1207bd5dae79874f3bcfed2446c0a7"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-04-the-missing-slot/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "0db68d17526ea8563e0a8e7971ddf5c16f5e52592bbd3b4d4cd3cc63dee76f61",
+        "6e3b67b8b8129cc06f7154306edb712b8164845e7f109ab2c1df8d1e6f1c1f22"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-05-the-first-span/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "108b9cb0556c70852721b28b2e77e0956dbbde819e802a44ba976224ce962056",
+        "6f92a6c61bc547c9d376ea10393dc2f13194dc9c1503a1e5eaeca8ee2101b302"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-04-one-ruler/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "457252d3fb58883ff7a5a92d9ad327f9a979f9b9873e334300afb4dd1b6acab0",
+        "7ce1fa790cc0ffbb77d336be47d0078aecc9fb8dafbf8f1f8bf44ff00dd6a39a"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-06-the-plan-that-shrank/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "0a68383988d303003ec45e456afd72b1c33fff8df470891a3d22fd67c7e7e257",
+        "3f0df3275b4f172b92b76b385bd5a1d2c30fc1a0ad55bce879d03a32e33a59a2"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-08-the-reviewer-who-rejected-itself/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "83be1eb0903e48a4ef253d92a3b33ffa0de0a23332152eb5f38578c9d310ace8",
+        "b16a5d016b1a077dc76c006753e590568aaa6545f350d8b59078fed6e710063a"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-07-evidence-authority-boundaries/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "3374070c4b4d41d9bcefb8ef38865b60409abc51f22a71f686c7699dc4345da0"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-08-too-much-rigor-is-also-a-bug/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "ee223c528a06afea609f683c3b0416b68dc723b6fcbf68968645abb49bfc4569",
+        "f51797bb8b7378b83439711ef602b43e7c59585563aa11458db2468c3cfeb077"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-23-backpressure-fronteira-de-governanca/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "521f95d043e8c8a0380b79d5a471fa18e590d5aaab21cb09db148231faca6d8a"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-09-15-the-bottleneck-moved/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "016b84b5e88d155476371a236434b66ba0122df3608789c306ca9ddf6108ca79",
+        "fa9d65419e2ec36ca07a5ac9714bca53f1890ddeb1fdebcd36a5d808174c9182"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-26-recover-change-prove/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "4835b7819b590945f039f429f3c6bc2eddd9441ce8953f78a5e9dcb821a9d1b3",
+        "d7cfaec54bd1d72cb05da7ab3ed9c4051b8822f4d0ecc16a37a0f376a72737e0"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-09-24-ai-slowdown-for-whom/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "2940c01dd54d90f8aba54d700e0f5af090fe0bd7304abc5afd6111182007e424",
+        "ce8f50b7349f5d0ff322f44e51326062003435f8757678794ac910556342eadc"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-31-loop-engineering/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "41cda482985ef6c7e3b02539a2d49a5e473e3a176a0295538afc4116397abd01",
+        "a2cca0ac2909dbbb822cd11998c5b04a0591a62a455e5dee76093d8bbc677432"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-10-13-a-week-with-the-book-open/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "c04e6fb50404ddc4a2d49ff93a22458d6b801d01910937353c59d94865ede685",
+        "d4aa2969ba77690114ff89cde0433f2b21eccbe02ad355f45a129e3ab3da4ac3"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-10-22-text-classification-laya-pytorch/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "37edec012cf5c5d44a865f104da39df0d8cbd8470a51e832d55c156c1edf4b1c",
+        "e7dfa13726e7503900b0bfaded1362b18a10482cd55679498123c16a54eaf08d"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/api/assets/ui/bitmap.svg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/assets/ui/diamond-sunset.svg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/assets/ui/polka-dots.svg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/assets/ui/bitmap_bg.svg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/assets/ui/bitmap.svg",
+      "statuses": [
+        404,
+        404,
+        200
+      ],
+      "sha256": [
+        "ff57b6b814a7543ebea60e1093514769adebcfcfdca782cb419d1578505dc973"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/api/assets/ui/polka-dots.svg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/assets/ui/diamond-sunset.svg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/assets/ui/bitmap_bg.svg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/assets/team/rafael-scharf.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/assets/team/anthony-farias.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/assets/team/magno-ozzyr.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/assets/team/leandro-damasio.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/assets/team/rafael-scharf.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/assets/team/anthony-farias.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/assets/team/magno-ozzyr.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/assets/team/leandro-damasio.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/assets/team/flavia-ribeiro.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/assets/about/rbx-about.jpeg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-03-25-truthmetal-launch-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-03-29-infrastructure-update-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/assets/team/flavia-ribeiro.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/assets/about/rbx-about.jpeg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-03-25-truthmetal-launch-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-03-29-infrastructure-update-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-04-01-the-model-is-not-the-system-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-04-01-the-model-is-not-the-system-v2.png",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "2bebfb3ce3d44dc741ae17ee476dc602982a8f88a7a8a4e836550296c7f4318b"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-04-05-robson-v2-finds-its-missing-execution-glue-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-04-04-the-unit-is-not-the-prompt-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-04-16-testnet-validation-architecture-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-04-16-testnet-validation-architecture-v2.png",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "22e3a1186bee4f8ac423e21984c6b78c066feba19dcc0d00ce74af7c4bc88869"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-04-22-robson-first-real-capital-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-04-05-robson-v2-finds-its-missing-execution-glue-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-04-04-the-unit-is-not-the-prompt-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-07-04-one-entry-four-bugs-v2.jpg",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "eec31bc4d52aa010ca1f50eb298b48f3afe86afa52a36f153d8f15a62f51abda"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-05-15-ia-corporativa-como-infraestrutura-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-04-22-robson-first-real-capital-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-05-15-ia-corporativa-como-infraestrutura-v2.png",
+      "statuses": [
+        404,
+        200
+      ],
+      "sha256": [
+        "237a0879606d4a5547bc1751aff68f8af46931c81c2d0099bb4a13f0f56809fc"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-07-03-stops-that-survive-failures-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-07-05-cost-of-innovation-startups-v2.png",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "ce35db304188bc557e864ca18fd998b8de60f1d0ff1c360026b7c00559c55e38"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-07-04-the-retest-that-did-not-stop-us-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-07-05-stop-gain-that-audited-the-system-v2.jpg",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "c1ad4c1a77df2e140276384c50c4562ab6af0e44405a5870274dea82df2cf508"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-07-05-saved-risk-extra-operation-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-07-03-stops-that-survive-failures-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-07-04-the-retest-that-did-not-stop-us-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-07-06-fallback-debuts-in-production-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-07-05-saved-risk-extra-operation-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-07-07-the-brief-a-stranger-could-run-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-07-12-volatile-logs-are-not-evidence-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-07-06-fallback-debuts-in-production-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-07-13-no-bitcoin-proprio-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-07-07-the-brief-a-stranger-could-run-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-07-12-volatile-logs-are-not-evidence-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-07-23-o-no-chegou-ao-topo-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-07-13-no-bitcoin-proprio-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-07-29-governed-public-rag-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-01-auditoria-ou-telemetria-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-07-23-o-no-chegou-ao-topo-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-01-governed-autonomy-distributed-systems-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-07-29-governed-public-rag-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-01-auditoria-ou-telemetria-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-02-o-painel-dizia-synced-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-01-governed-autonomy-distributed-systems-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-02-rbx-journal-rss-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-04-o-slot-que-sumiu-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-02-rbx-journal-rss-v2.png",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "ab8f8174ad68b752cf051cf2ef67348915f3a4dac04af30e539a6b4125b218fb"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-02-o-painel-dizia-synced-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-04-uma-regua-so-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-04-o-slot-que-sumiu-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-05-o-primeiro-palmo-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-06-o-plano-que-encolheu-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-04-uma-regua-so-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-07-evidence-authority-boundaries-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-05-o-primeiro-palmo-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-06-o-plano-que-encolheu-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-08-o-revisor-que-rejeitou-a-si-mesmo-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-07-evidence-authority-boundaries-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-08-rigor-demais-tambem-e-um-bug-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-23-backpressure-fronteira-de-governanca-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-08-o-revisor-que-rejeitou-a-si-mesmo-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-08-rigor-demais-tambem-e-um-bug-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-26-recover-change-prove-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-23-backpressure-fronteira-de-governanca-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-26-recover-change-prove-v2.png",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "44592a2659499effd46831d46f1297a59c3f8fb31d55def906c085850925c907"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-08-31-engenharia-de-loop-v2.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-09-15-the-bottleneck-moved-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-08-31-engenharia-de-loop-v2.png",
+      "statuses": [
+        404,
+        200
+      ],
+      "sha256": [
+        "8c81f144013c24676960f77b712436c6b9e1317acada53be03e452f40e8c7d12"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-09-24-desaceleracao-para-quem-v1.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-10-13-uma-semana-com-o-livro-aberto-v1.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbx.ia.br/api/blog/cover/2026-10-22-laya-pytorch-classificacao-de-textos-v1.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-09-15-the-bottleneck-moved-v2.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-09-24-desaceleracao-para-quem-v1.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-10-13-uma-semana-com-o-livro-aberto-v1.png",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/api/blog/cover/2026-10-22-laya-pytorch-classificacao-de-textos-v1.jpg",
+      "statuses": [
+        404,
+        404,
+        404,
+        404,
+        404,
+        404
+      ],
+      "sha256": []
+    },
+    {
+      "url": "https://rbxsystems.ch/products/briefing-btc/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "543351374b8e445c96a6ca1a160751ad1f942dfe7a0283c5a36247a8590b2d4c",
+        "5532d8e1fc9e9ce24afb8a3b3a2b2aec9f9662d11711a722956c04e5e13485be"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/products/briefing-btc",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "2d544684221263014144233ad4f779503b340f6e1f2b2d71059d1e3aa30638e0"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/technical-consulting/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "61f6e7ab0d1c883a2afe2dfd8791a5d6fc4a49d6c3e7810fa12053301ed93d97",
+        "cc18cbd9fd40bc42b107948cbb193e82ee726a6dc5de6bc1c6f7c239b0c49568"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/services/technical-consulting",
+      "statuses": [
+        200
+      ],
+      "sha256": [
+        "af59f0cf66eaf06069d72f882449c5d95cdfae4df1f90d794a9fc3c54008210e"
+      ]
+    },
+    {
+      "url": "https://rbxsystems.ch/blog/2026-08-23-backpressure-fronteira-de-governanca/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "521f95d043e8c8a0380b79d5a471fa18e590d5aaab21cb09db148231faca6d8a",
+        "f3f39cd40b745cef122b942be7cd6afdf2cf23f1d046810e8d1891c7f47984ee"
+      ]
+    },
+    {
+      "url": "https://rbx.ia.br/blog/2026-03-29-infrastructure-update/__data.json",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "sha256": [
+        "06249045c0d6d6c7af94401156764955b47789a9cfa5cd1269e3f82fe08dc64b"
+      ]
+    }
+  ]
+}

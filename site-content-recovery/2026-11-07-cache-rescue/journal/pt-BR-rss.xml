@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/rss-style.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RBX Journal · Engenharia, IA e Notas de Campo</title>
+    <link>https://rbx.ia.br/journal</link>
+    <description>Ideias, engenharia e notas de campo da RBX Systems. Artigos técnicos sobre IA, LLMOps, agentes, software e infraestrutura.</description>
+    <language>pt-br</language>
+    <lastBuildDate>Thu, 22 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://rbx.ia.br/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Laya com PyTorch: classifique textos na CPU</title>
+      <link>https://rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-10-22-laya-pytorch-classificacao-de-textos</guid>
+      <pubDate>Thu, 22 Oct 2026 00:00:00 GMT</pubDate>
+      <description>Um tutorial de Laya e PyTorch: instale em ambiente isolado, classifique mensagens em português e confira os acertos e os erros.</description>
+    </item>
+    <item>
+      <title>Uma semana com o livro aberto: o que a revisão do Robson ensinou</title>
+      <link>https://rbx.ia.br/blog/2026-10-13-uma-semana-com-o-livro-aberto</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-10-13-uma-semana-com-o-livro-aberto</guid>
+      <pubDate>Tue, 13 Oct 2026 00:00:00 GMT</pubDate>
+      <description>Revisamos o Robson com uma posição real aberta, corrigimos seis defeitos em três dias e fizemos sete deploys sem tocar na operação. O que encontramos diz mais sobre evidência do que sobre código.</description>
+    </item>
+    <item>
+      <title>Desaceleração de IA para quem? O retorno do Strategos, o Kernel e a sobriedade do IRC</title>
+      <link>https://rbx.ia.br/blog/2026-09-24-desaceleracao-para-quem</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-09-24-desaceleracao-para-quem</guid>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 GMT</pubDate>
+      <description>O gargalo da IA não é o próximo modelo, mas a arquitetura e a governança de fronteiras. O Strategos volta ao centro, o Public Presence emerge como Kernel e o IRC ancora o ChatOps soberano.</description>
+    </item>
+    <item>
+      <title>O Gargalo Mudou</title>
+      <link>https://rbx.ia.br/blog/2026-09-15-o-gargalo-mudou</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-09-15-o-gargalo-mudou</guid>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
+      <description>A capacidade da IA continua avançando. A restrição migrou para a confiabilidade do sistema, o ground truth e a engenharia ao redor do modelo.</description>
+    </item>
+    <item>
+      <title>Engenharia de Loop</title>
+      <link>https://rbx.ia.br/blog/2026-08-31-engenharia-de-loop</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-31-engenharia-de-loop</guid>
+      <pubDate>Mon, 31 Aug 2026 00:00:00 GMT</pubDate>
+      <description>58 rodadas de revisão adversarial entre dois modelos, com um humano na triagem, levaram um plano de migração de runtime de 12 achados a zero.</description>
+    </item>
+    <item>
+      <title>Recuperar, mudar e provar</title>
+      <link>https://rbx.ia.br/blog/2026-08-26-recuperar-mudar-e-provar</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-26-recuperar-mudar-e-provar</guid>
+      <pubDate>Wed, 26 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Resiliência não é uptime. É a capacidade testada de recuperar, mudar dependências e produzir evidência de que funções críticas seguem dentro dos limites.</description>
+    </item>
+    <item>
+      <title>Quando o ambiente diz pare: backpressure como fronteira de governança</title>
+      <link>https://rbx.ia.br/blog/2026-08-23-backpressure-fronteira-de-governanca</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-23-backpressure-fronteira-de-governanca</guid>
+      <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Um agente que opera através do navegador é cliente de um sistema que não controla. Os limites de taxa e os avisos de comportamento automatizado não são obstáculos a contornar — são backpressure, e a resposta de engenharia correta é parar, não acelerar disfarçado.</description>
+    </item>
+    <item>
+      <title>Rigor demais também é um bug</title>
+      <link>https://rbx.ia.br/blog/2026-08-08-rigor-demais-tambem-e-um-bug</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-08-rigor-demais-tambem-e-um-bug</guid>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
+      <description>De manhã publicamos a história do revisor que rejeitou o próprio texto. À tarde veio o capítulo seguinte: um exportador de dados inteiro construído em um dia, provado byte a byte contra vetores de referência, com mais de cem testes verdes. E o achado mais valioso do dia veio de um segundo revisor, gêmeo do implementador, que encontrou o defeito que nenhum teste da suíte pegaria: o código estava rigoroso demais para o mundo real.</description>
+    </item>
+    <item>
+      <title>O revisor que rejeitou a si mesmo</title>
+      <link>https://rbx.ia.br/blog/2026-08-08-o-revisor-que-rejeitou-a-si-mesmo</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-08-o-revisor-que-rejeitou-a-si-mesmo</guid>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Anteontem contamos como um plano de dados encolheu até sobrar só o essencial. O que veio depois foi mais interessante: construir o que sobrou sob revisão adversarial contínua, com dois modelos em papéis opostos. Um contrato passou por três vereditos, uma migration numerada errada quase quebrou o banco vivo, um SDK escondia o vencedor de uma corrida de escrita, e no meio disso o revisor encontrou um defeito no texto que ele mesmo tinha exigido. A história de por que certeza se compra por passe, e do momento certo de parar de comprar.</description>
+    </item>
+    <item>
+      <title>Evidência não é autoridade</title>
+      <link>https://rbx.ia.br/blog/2026-08-07-evidence-authority-boundaries</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-07-evidence-authority-boundaries</guid>
+      <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Como separar avaliação, autorização, efeitos, fatos financeiros e atribuição de valor em sistemas agênticos autônomos.</description>
+    </item>
+    <item>
+      <title>O plano que encolheu</title>
+      <link>https://rbx.ia.br/blog/2026-08-06-o-plano-que-encolheu</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-06-o-plano-que-encolheu</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Escrevemos um plano de plataforma de dados para o Robson: dezesseis métricas, oito tabelas analíticas, warehouse, dashboards. Entregamos o plano a um segundo modelo com uma instrução de uma linha: proteja a produção. O veredito foi NO-GO, e cada corte que ele propôs sobreviveu à verificação no código. O que sobrou coube em cinco invariantes, um contrato de duas tabelas e um ensaio com números. A história de como um plano bom fica melhor encolhendo.</description>
+    </item>
+    <item>
+      <title>O primeiro palmo</title>
+      <link>https://rbx.ia.br/blog/2026-08-05-o-primeiro-palmo</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-05-o-primeiro-palmo</guid>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Ontem contamos a decisão: uma régua só para o risco inteiro. Hoje ela estreou em produção, numa posição real. Este post confere a geometria número por número, mostra os dois segundos de eventos que separam o sinal do stop de proteção, e explica por que o tamanho da posição diminuiu quando o palmo cresceu.</description>
+    </item>
+    <item>
+      <title>Uma régua só</title>
+      <link>https://rbx.ia.br/blog/2026-08-04-uma-regua-so</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-04-uma-regua-so</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+      <description>O operador olhou uma tela e fez uma pergunta de uma linha: por que o stop está três vezes mais longe que o primeiro alvo? A resposta revelou duas réguas convivendo no mesmo sistema, uma variável de ambiente que criava dois produtos num binário só, e terminou no maior trabalho de engenharia do Robson desde a reescrita em Rust. Incluindo o dia em que a correção quase foi pior que o defeito.</description>
+    </item>
+    <item>
+      <title>O slot que sumiu</title>
+      <link>https://rbx.ia.br/blog/2026-08-04-o-slot-que-sumiu</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-04-o-slot-que-sumiu</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Um mês sem nenhuma perda governada, e o painel mostrava 3 slots de 4. O número estava certo e a regra estava errada. Como uma pergunta de operador virou a substituição formal de um ADR, por que a correção óbvia era insegura, e o que um segundo modelo encontrou no nosso próprio texto antes da aprovação.</description>
+    </item>
+    <item>
+      <title>O RBX Journal agora tem RSS</title>
+      <link>https://rbx.ia.br/blog/2026-08-02-rbx-journal-rss</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-02-rbx-journal-rss</guid>
+      <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
+      <description>O Journal agora pode ser assinado de graça por RSS: todos os artigos de engenharia da RBX, direto no seu leitor, sem algoritmo e sem e-mail no meio.</description>
+    </item>
+    <item>
+      <title>O painel dizia Synced</title>
+      <link>https://rbx.ia.br/blog/2026-08-02-o-painel-dizia-synced</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-02-o-painel-dizia-synced</guid>
+      <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Nosso pipeline de deploy morreu e ficou quatro dias morto enquanto todos os painéis diziam Synced e Healthy. A anatomia de uma falha silenciosa, o que estava represado sem ninguém saber, e o critério que passamos a exigir de qualquer automação: quando ela quebrar, o que fica vermelho?</description>
+    </item>
+    <item>
+      <title>Autonomia governada é um problema de sistemas distribuídos</title>
+      <link>https://rbx.ia.br/blog/2026-08-01-governed-autonomy-distributed-systems</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-01-governed-autonomy-distributed-systems</guid>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Por que idempotência, proveniência, resultados desconhecidos e observabilidade vendor-neutral são o centro da arquitetura agêntica, não a margem do prompt.</description>
+    </item>
+    <item>
+      <title>Auditoria não é telemetria</title>
+      <link>https://rbx.ia.br/blog/2026-08-01-auditoria-ou-telemetria</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-08-01-auditoria-ou-telemetria</guid>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
+      <description>O banco do nosso sistema de trading pesava 17 GB. A auditoria real cabia em menos de 1 MB. A história de como 96% de um event log virou ruído, o que fizemos para limpar sem perder uma linha de evidência, e a regra que adotamos para o problema nunca voltar.</description>
+    </item>
+    <item>
+      <title>RAG público com controle e evidência</title>
+      <link>https://rbx.ia.br/blog/2026-07-29-governed-public-rag</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-07-29-governed-public-rag</guid>
+      <pubDate>Wed, 29 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Como separamos retrieval, controle, memória e avaliação em um assistente público preparado para shadow, com Rust, Thalamus e evidência auditável.</description>
+    </item>
+    <item>
+      <title>O nó chegou ao topo</title>
+      <link>https://rbx.ia.br/blog/2026-07-23-o-no-chegou-ao-topo</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-07-23-o-no-chegou-ao-topo</guid>
+      <pubDate>Thu, 23 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Dez dias depois, nosso nó Bitcoin validou o último bloco da cadeia. Os números finais da sincronização, o que a curva confirmou e o que ainda falta antes do primeiro pagamento real.</description>
+    </item>
+    <item>
+      <title>Por que a RBX roda seu próprio nó Bitcoin</title>
+      <link>https://rbx.ia.br/blog/2026-07-13-no-bitcoin-proprio</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-07-13-no-bitcoin-proprio</guid>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Em vez de confiar numa API de terceiro, a RBX verifica cada pagamento em Bitcoin com seu próprio nó, dentro do próprio cluster.</description>
+    </item>
+    <item>
+      <title>Logs voláteis não são evidência</title>
+      <link>https://rbx.ia.br/blog/2026-07-12-volatile-logs-are-not-evidence</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-07-12-volatile-logs-are-not-evidence</guid>
+      <pubDate>Sun, 12 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Recovery em sistemas críticos precisa emitir evento, métrica ou estado auditável. Logs ajudam no diagnóstico, mas não bastam como prova.</description>
+    </item>
+    <item>
+      <title>Atualização de engenharia: o briefing que um estranho conseguiria rodar</title>
+      <link>https://rbx.ia.br/blog/2026-07-07-the-brief-a-stranger-could-run</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-07-07-the-brief-a-stranger-could-run</guid>
+      <pubDate>Tue, 07 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Uma correção de reconciliação levou a um segundo bug que ninguém pediu para encontrar, e o próximo capítulo saiu como um briefing escrito para um agente sem memória do dia. Rodou mesmo assim.</description>
+    </item>
+    <item>
+      <title>Atualização de engenharia: o fallback estreia em produção</title>
+      <link>https://rbx.ia.br/blog/2026-07-06-fallback-debuts-in-production</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-07-06-fallback-debuts-in-production</guid>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Menos de 24 horas depois do merge, o fallback de dados de mercado protegeu uma entrada real. E a caça à causa raiz terminou num lugar inesperado. O update completo.</description>
+    </item>
+    <item>
+      <title>O stop gain que auditou o sistema</title>
+      <link>https://rbx.ia.br/blog/2026-07-05-stop-gain-that-audited-the-system</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-07-05-stop-gain-that-audited-the-system</guid>
+      <pubDate>Sun, 05 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Um stop de lucro executado durante um deploy expôs dois modos de falha invisíveis e mudou a política de risco do Robson. O relato e as decisões estão aqui.</description>
+    </item>
+    <item>
+      <title>Risco economizado vira operação extra</title>
+      <link>https://rbx.ia.br/blog/2026-07-05-saved-risk-extra-operation</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-07-05-saved-risk-extra-operation</guid>
+      <pubDate>Sun, 05 Jul 2026 00:00:00 GMT</pubDate>
+      <description>O Robson garantia 4 operações por mês. Agora cada entrada é cobrada pelo risco real, e o orçamento que sobra vira nova chance de operar. A matemática está aqui.</description>
+    </item>
+    <item>
+      <title>O custo da inovação: como a economia molda o futuro das startups brasileiras</title>
+      <link>https://rbx.ia.br/blog/2026-07-05-cost-of-innovation-startups</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-07-05-cost-of-innovation-startups</guid>
+      <pubDate>Sun, 05 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Tecnologia não é apenas software. É uma ferramenta de transformação econômica, e é essa lógica que orienta a forma como a RBX constrói o Strategos.</description>
+    </item>
+    <item>
+      <title>O retest que não nos estopou: validação com fogo real do buffer de stop</title>
+      <link>https://rbx.ia.br/blog/2026-07-04-the-retest-that-did-not-stop-us</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-07-04-the-retest-that-did-not-stop-us</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Duas shorts no mesmo símbolo, com horas de diferença. Uma saiu acima da máxima recente exatamente como projetado. A outra viu o preço tocar 63.450 — além do nível que antes era o stop — e continuou viva. Entre as duas, encontramos um número que mentia e uma regra de risco que ninguém jamais adotou.</description>
+    </item>
+    <item>
+      <title>Uma entrada, quatro bugs: uma noite de depuração em produção no Robson</title>
+      <link>https://rbx.ia.br/blog/2026-07-04-one-entry-four-bugs</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-07-04-one-entry-four-bugs</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Publicamos uma nova camada protetora para o motor de stops e usamos entradas reais para validá-la. A primeira ordem foi rejeitada pelo nosso próprio gate de risco, por uma margem de 0,0000000000000000000002. Três outros bugs se escondiam atrás desse.</description>
+    </item>
+    <item>
+      <title>Stops que sobrevivem a falhas: o redesenho da camada de execução do Robson</title>
+      <link>https://rbx.ia.br/blog/2026-07-03-stops-that-survive-failures</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-07-03-stops-that-survive-failures</guid>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Um trade fechou 48% acima do teto de risco enquanto o daemon estava fora do ar. A investigação produziu dois ADRs, cinco correções de produção e uma surpresa da API da Binance. Estes são os números.</description>
+    </item>
+    <item>
+      <title>IA Corporativa com Método: Diagnóstico, Arquitetura e Governança para Empresas que Operam com Seriedade</title>
+      <link>https://rbx.ia.br/blog/2026-05-15-ia-corporativa-como-infraestrutura</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-05-15-ia-corporativa-como-infraestrutura</guid>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+      <description>Empresas que querem usar IA de forma sustentável precisam ir além da adoção pontual de ferramentas. O valor real aparece quando a inteligência passa a integrar a operação com consistência: conectada aos processos, aos dados e aos critérios de controle da organização.</description>
+    </item>
+    <item>
+      <title>Robson executa sua primeira operação com capital real</title>
+      <link>https://rbx.ia.br/blog/2026-04-22-robson-first-real-capital</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-04-22-robson-first-real-capital</guid>
+      <pubDate>Wed, 22 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Depois de um processo formal de validação em duas fases no testnet, o Robson abriu sua primeira posição ao vivo em futuros perpétuos de BTCUSDT com capital real. Este post cobre a migração, a arquitetura e o que o processo de validação efetivamente confirmou.</description>
+    </item>
+    <item>
+      <title>Como validamos o Robson antes de habilitar capital real</title>
+      <link>https://rbx.ia.br/blog/2026-04-16-testnet-validation-architecture</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-04-16-testnet-validation-architecture</guid>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Antes de habilitar qualquer capital real, o Robson passa por uma validação E2E formal de 5 fases em testnet. Aqui está como esse processo funciona, o que encontramos e o que a arquitetura aprendeu.</description>
+    </item>
+    <item>
+      <title>Robson v2 encontra a cola de execução que faltava</title>
+      <link>https://rbx.ia.br/blog/2026-04-05-robson-v2-finds-its-missing-execution-glue</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-04-05-robson-v2-finds-its-missing-execution-glue</guid>
+      <pubDate>Sun, 05 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Nos últimos três dias, o Robson v2 ganhou a camada governada que faltava entre risco, aprovação, auditoria, projeções e recovery. Isso está preparando o terreno real para o v3.</description>
+    </item>
+    <item>
+      <title>O prompt não é a unidade</title>
+      <link>https://rbx.ia.br/blog/2026-04-04-the-unit-is-not-the-prompt</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-04-04-the-unit-is-not-the-prompt</guid>
+      <pubDate>Sat, 04 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Query e QueryEngine apontam para uma abstração mais robusta para sistemas agênticos: a execução é um objeto governado, com estado, eventos, orçamentos e permissões.</description>
+    </item>
+    <item>
+      <title>O modelo não é o sistema</title>
+      <link>https://rbx.ia.br/blog/2026-04-01-the-model-is-not-the-system</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-04-01-the-model-is-not-the-system</guid>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Um incidente recente envolvendo a arquitetura de um agente de IA reforçou um ponto que muitas equipes ainda ignoram: agentes confiáveis são definidos pelo controle de runtime, não apenas pela escolha do modelo.</description>
+    </item>
+    <item>
+      <title>Atualização de Infraestrutura: maturidade em GitOps, bancos mais resilientes e um cluster mais saudável</title>
+      <link>https://rbx.ia.br/blog/2026-03-29-infrastructure-update</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-03-29-infrastructure-update</guid>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Passamos os últimos dias reforçando nossa infraestrutura de produção: migramos para uma arquitetura de banco mais resiliente, corrigimos o pipeline de GitOps e limpamos uma fila importante de dívida técnica. Aqui está o que mudou e por que isso importa.</description>
+    </item>
+    <item>
+      <title>TruthMetal: parâmetros distribuídos com imutabilidade garantida</title>
+      <link>https://rbx.ia.br/blog/2026-03-25-truthmetal-launch</link>
+      <guid isPermaLink="true">https://rbx.ia.br/blog/2026-03-25-truthmetal-launch</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Lançamos o TruthMetal, nosso serviço de configuração distribuída com ledger imutável e consenso SimpleQuorum, agora rodando em produção no cluster RBX.</description>
+    </item>
+  </channel>
+</rss>
