@@ -12,7 +12,11 @@ COPY . .
 ARG PUBLIC_SITE_URL
 ENV PUBLIC_SITE_URL=$PUBLIC_SITE_URL
 
-RUN pnpm run build
+# Public artifact identity, embedded by Vite. These are build-only inputs;
+# the runtime stage cannot replace the metadata through its environment.
+ARG RBX_BUILD_REVISION
+ARG RBX_BUILD_BUILT_AT
+RUN RBX_BUILD_REVISION="$RBX_BUILD_REVISION" RBX_BUILD_BUILT_AT="$RBX_BUILD_BUILT_AT" pnpm run build
 
 # Stage 2: runtime — Node SSR via @sveltejs/adapter-node (ADR-0002).
 # The Node server reads content server-side from Contabo Object Storage through
