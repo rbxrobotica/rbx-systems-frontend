@@ -1,0 +1,650 @@
+[
+  {
+    "slug": "2026-10-22-laya-pytorch-classificacao-de-textos",
+    "publicSlug": "2026-10-22-laya-pytorch-classificacao-de-textos",
+    "title": "Laya com PyTorch: classifique textos na CPU",
+    "date": "2026-10-22",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "ai",
+      "python",
+      "pytorch",
+      "machine-learning",
+      "evaluation"
+    ],
+    "excerpt": "Um tutorial de Laya e PyTorch: instale em ambiente isolado, classifique mensagens em português e confira os acertos e os erros.",
+    "cover": "/api/blog/cover/2026-10-22-laya-pytorch-classificacao-de-textos-v1.jpg"
+  },
+  {
+    "slug": "2026-10-13-uma-semana-com-o-livro-aberto",
+    "publicSlug": "2026-10-13-uma-semana-com-o-livro-aberto",
+    "title": "Uma semana com o livro aberto: o que a revisão do Robson ensinou",
+    "date": "2026-10-13",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "robson",
+      "trading",
+      "risco",
+      "observabilidade",
+      "event-sourcing",
+      "operações",
+      "engenharia"
+    ],
+    "excerpt": "Revisamos o Robson com uma posição real aberta, corrigimos seis defeitos em três dias e fizemos sete deploys sem tocar na operação. O que encontramos diz mais sobre evidência do que sobre código.",
+    "cover": "/api/blog/cover/2026-10-13-uma-semana-com-o-livro-aberto-v1.png"
+  },
+  {
+    "slug": "2026-09-24-desaceleracao-para-quem",
+    "publicSlug": "2026-09-24-desaceleracao-para-quem",
+    "title": "Desaceleração de IA para quem? O retorno do Strategos, o Kernel e a sobriedade do IRC",
+    "date": "2026-09-24",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "ai",
+      "agents",
+      "governance",
+      "distributed-systems",
+      "engineering"
+    ],
+    "excerpt": "O gargalo da IA não é o próximo modelo, mas a arquitetura e a governança de fronteiras. O Strategos volta ao centro, o Public Presence emerge como Kernel e o IRC ancora o ChatOps soberano.",
+    "cover": "/api/blog/cover/2026-09-24-desaceleracao-para-quem-v1.png"
+  },
+  {
+    "slug": "2026-09-15-the-bottleneck-moved",
+    "publicSlug": "2026-09-15-o-gargalo-mudou",
+    "title": "O Gargalo Mudou",
+    "date": "2026-09-15",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "ai",
+      "agents",
+      "governance",
+      "distributed-systems",
+      "engineering"
+    ],
+    "excerpt": "A capacidade da IA continua avançando. A restrição migrou para a confiabilidade do sistema, o ground truth e a engenharia ao redor do modelo.",
+    "cover": "/api/blog/cover/2026-09-15-the-bottleneck-moved-v2.jpg"
+  },
+  {
+    "slug": "2026-08-31-engenharia-de-loop",
+    "publicSlug": "2026-08-31-engenharia-de-loop",
+    "title": "Engenharia de Loop",
+    "date": "2026-08-31",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "engenharia",
+      "processo",
+      "agentes",
+      "flightdeck"
+    ],
+    "excerpt": "58 rodadas de revisão adversarial entre dois modelos, com um humano na triagem, levaram um plano de migração de runtime de 12 achados a zero.",
+    "cover": "/api/blog/cover/2026-08-31-engenharia-de-loop-v2.png"
+  },
+  {
+    "slug": "2026-08-26-recover-change-prove",
+    "publicSlug": "2026-08-26-recuperar-mudar-e-provar",
+    "title": "Recuperar, mudar e provar",
+    "date": "2026-08-26",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "resiliência",
+      "infraestrutura",
+      "IA",
+      "observabilidade",
+      "governança"
+    ],
+    "excerpt": "Resiliência não é uptime. É a capacidade testada de recuperar, mudar dependências e produzir evidência de que funções críticas seguem dentro dos limites.",
+    "cover": "/api/blog/cover/2026-08-26-recover-change-prove-v2.png"
+  },
+  {
+    "slug": "2026-08-23-backpressure-fronteira-de-governanca",
+    "publicSlug": "2026-08-23-backpressure-fronteira-de-governanca",
+    "title": "Quando o ambiente diz pare: backpressure como fronteira de governança",
+    "date": "2026-08-23",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "agentes",
+      "governança",
+      "sistemas-distribuídos",
+      "operator-edge",
+      "engenharia"
+    ],
+    "excerpt": "Um agente que opera através do navegador é cliente de um sistema que não controla. Os limites de taxa e os avisos de comportamento automatizado não são obstáculos a contornar — são backpressure, e a resposta de engenharia correta é parar, não acelerar disfarçado.",
+    "cover": "/api/blog/cover/2026-08-23-backpressure-fronteira-de-governanca-v2.png"
+  },
+  {
+    "slug": "2026-08-08-rigor-demais-tambem-e-um-bug",
+    "publicSlug": "2026-08-08-rigor-demais-tambem-e-um-bug",
+    "title": "Rigor demais também é um bug",
+    "date": "2026-08-08",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "engenharia",
+      "dados",
+      "robson",
+      "qualidade",
+      "agentes"
+    ],
+    "excerpt": "De manhã publicamos a história do revisor que rejeitou o próprio texto. À tarde veio o capítulo seguinte: um exportador de dados inteiro construído em um dia, provado byte a byte contra vetores de referência, com mais de cem testes verdes. E o achado mais valioso do dia veio de um segundo revisor, gêmeo do implementador, que encontrou o defeito que nenhum teste da suíte pegaria: o código estava rigoroso demais para o mundo real.",
+    "cover": "/api/blog/cover/2026-08-08-rigor-demais-tambem-e-um-bug-v2.png"
+  },
+  {
+    "slug": "2026-08-08-o-revisor-que-rejeitou-a-si-mesmo",
+    "publicSlug": "2026-08-08-o-revisor-que-rejeitou-a-si-mesmo",
+    "title": "O revisor que rejeitou a si mesmo",
+    "date": "2026-08-08",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "engenharia",
+      "dados",
+      "adr",
+      "robson",
+      "qualidade"
+    ],
+    "excerpt": "Anteontem contamos como um plano de dados encolheu até sobrar só o essencial. O que veio depois foi mais interessante: construir o que sobrou sob revisão adversarial contínua, com dois modelos em papéis opostos. Um contrato passou por três vereditos, uma migration numerada errada quase quebrou o banco vivo, um SDK escondia o vencedor de uma corrida de escrita, e no meio disso o revisor encontrou um defeito no texto que ele mesmo tinha exigido. A história de por que certeza se compra por passe, e do momento certo de parar de comprar.",
+    "cover": "/api/blog/cover/2026-08-08-o-revisor-que-rejeitou-a-si-mesmo-v2.png"
+  },
+  {
+    "slug": "2026-08-07-evidence-authority-boundaries",
+    "publicSlug": "2026-08-07-evidence-authority-boundaries",
+    "title": "Evidência não é autoridade",
+    "date": "2026-08-07",
+    "author": "Leandro Damasio",
+    "authorRole": "CEO, RBX Systems",
+    "tags": [
+      "architecture",
+      "ai-governance",
+      "agentic-systems",
+      "distributed-systems",
+      "roi"
+    ],
+    "excerpt": "Como separar avaliação, autorização, efeitos, fatos financeiros e atribuição de valor em sistemas agênticos autônomos.",
+    "cover": "/api/blog/cover/2026-08-07-evidence-authority-boundaries-v2.png"
+  },
+  {
+    "slug": "2026-08-06-o-plano-que-encolheu",
+    "publicSlug": "2026-08-06-o-plano-que-encolheu",
+    "title": "O plano que encolheu",
+    "date": "2026-08-06",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "engenharia",
+      "dados",
+      "adr",
+      "robson",
+      "observabilidade"
+    ],
+    "excerpt": "Escrevemos um plano de plataforma de dados para o Robson: dezesseis métricas, oito tabelas analíticas, warehouse, dashboards. Entregamos o plano a um segundo modelo com uma instrução de uma linha: proteja a produção. O veredito foi NO-GO, e cada corte que ele propôs sobreviveu à verificação no código. O que sobrou coube em cinco invariantes, um contrato de duas tabelas e um ensaio com números. A história de como um plano bom fica melhor encolhendo.",
+    "cover": "/api/blog/cover/2026-08-06-o-plano-que-encolheu-v2.png"
+  },
+  {
+    "slug": "2026-08-05-o-primeiro-palmo",
+    "publicSlug": "2026-08-05-o-primeiro-palmo",
+    "title": "O primeiro palmo",
+    "date": "2026-08-05",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "engenharia",
+      "risco",
+      "adr",
+      "robson",
+      "confiabilidade"
+    ],
+    "excerpt": "Ontem contamos a decisão: uma régua só para o risco inteiro. Hoje ela estreou em produção, numa posição real. Este post confere a geometria número por número, mostra os dois segundos de eventos que separam o sinal do stop de proteção, e explica por que o tamanho da posição diminuiu quando o palmo cresceu.",
+    "cover": "/api/blog/cover/2026-08-05-o-primeiro-palmo-v2.png"
+  },
+  {
+    "slug": "2026-08-04-uma-regua-so",
+    "publicSlug": "2026-08-04-uma-regua-so",
+    "title": "Uma régua só",
+    "date": "2026-08-04",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "engenharia",
+      "risco",
+      "adr",
+      "robson",
+      "confiabilidade"
+    ],
+    "excerpt": "O operador olhou uma tela e fez uma pergunta de uma linha: por que o stop está três vezes mais longe que o primeiro alvo? A resposta revelou duas réguas convivendo no mesmo sistema, uma variável de ambiente que criava dois produtos num binário só, e terminou no maior trabalho de engenharia do Robson desde a reescrita em Rust. Incluindo o dia em que a correção quase foi pior que o defeito.",
+    "cover": "/api/blog/cover/2026-08-04-uma-regua-so-v2.png"
+  },
+  {
+    "slug": "2026-08-04-o-slot-que-sumiu",
+    "publicSlug": "2026-08-04-o-slot-que-sumiu",
+    "title": "O slot que sumiu",
+    "date": "2026-08-04",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "engenharia",
+      "risco",
+      "adr",
+      "robson",
+      "confiabilidade"
+    ],
+    "excerpt": "Um mês sem nenhuma perda governada, e o painel mostrava 3 slots de 4. O número estava certo e a regra estava errada. Como uma pergunta de operador virou a substituição formal de um ADR, por que a correção óbvia era insegura, e o que um segundo modelo encontrou no nosso próprio texto antes da aprovação.",
+    "cover": "/api/blog/cover/2026-08-04-o-slot-que-sumiu-v2.png"
+  },
+  {
+    "slug": "2026-08-02-rbx-journal-rss",
+    "publicSlug": "2026-08-02-rbx-journal-rss",
+    "title": "O RBX Journal agora tem RSS",
+    "date": "2026-08-02",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "journal",
+      "rss",
+      "engenharia"
+    ],
+    "excerpt": "O Journal agora pode ser assinado de graça por RSS: todos os artigos de engenharia da RBX, direto no seu leitor, sem algoritmo e sem e-mail no meio.",
+    "cover": "/api/blog/cover/2026-08-02-rbx-journal-rss-v2.png"
+  },
+  {
+    "slug": "2026-08-02-o-painel-dizia-synced",
+    "publicSlug": "2026-08-02-o-painel-dizia-synced",
+    "title": "O painel dizia Synced",
+    "date": "2026-08-02",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "engenharia",
+      "gitops",
+      "kubernetes",
+      "argocd",
+      "deploy",
+      "confiabilidade"
+    ],
+    "excerpt": "Nosso pipeline de deploy morreu e ficou quatro dias morto enquanto todos os painéis diziam Synced e Healthy. A anatomia de uma falha silenciosa, o que estava represado sem ninguém saber, e o critério que passamos a exigir de qualquer automação: quando ela quebrar, o que fica vermelho?",
+    "cover": "/api/blog/cover/2026-08-02-o-painel-dizia-synced-v2.png"
+  },
+  {
+    "slug": "2026-08-01-governed-autonomy-distributed-systems",
+    "publicSlug": "2026-08-01-governed-autonomy-distributed-systems",
+    "title": "Autonomia governada é um problema de sistemas distribuídos",
+    "date": "2026-08-01",
+    "author": "Leandro Damasio",
+    "authorRole": "Fundador e CEO, RBX Systems",
+    "tags": [
+      "agentes",
+      "governança",
+      "sistemas-distribuídos",
+      "observabilidade",
+      "engenharia"
+    ],
+    "excerpt": "Por que idempotência, proveniência, resultados desconhecidos e observabilidade vendor-neutral são o centro da arquitetura agêntica, não a margem do prompt.",
+    "cover": "/api/blog/cover/2026-08-01-governed-autonomy-distributed-systems-v2.png"
+  },
+  {
+    "slug": "2026-08-01-auditoria-ou-telemetria",
+    "publicSlug": "2026-08-01-auditoria-ou-telemetria",
+    "title": "Auditoria não é telemetria",
+    "date": "2026-08-01",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "engenharia",
+      "event-sourcing",
+      "postgres",
+      "auditoria",
+      "robson"
+    ],
+    "excerpt": "O banco do nosso sistema de trading pesava 17 GB. A auditoria real cabia em menos de 1 MB. A história de como 96% de um event log virou ruído, o que fizemos para limpar sem perder uma linha de evidência, e a regra que adotamos para o problema nunca voltar.",
+    "cover": "/api/blog/cover/2026-08-01-auditoria-ou-telemetria-v2.png"
+  },
+  {
+    "slug": "2026-07-29-governed-public-rag",
+    "publicSlug": "2026-07-29-governed-public-rag",
+    "title": "RAG público com controle e evidência",
+    "date": "2026-07-29",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "rag",
+      "ai-engineering",
+      "rust",
+      "governance",
+      "retrieval"
+    ],
+    "excerpt": "Como separamos retrieval, controle, memória e avaliação em um assistente público preparado para shadow, com Rust, Thalamus e evidência auditável.",
+    "cover": "/api/blog/cover/2026-07-29-governed-public-rag-v2.png"
+  },
+  {
+    "slug": "2026-07-23-o-no-chegou-ao-topo",
+    "publicSlug": "2026-07-23-o-no-chegou-ao-topo",
+    "title": "O nó chegou ao topo",
+    "date": "2026-07-23",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "bitcoin",
+      "infraestrutura",
+      "pagamentos",
+      "soberania",
+      "engenharia"
+    ],
+    "excerpt": "Dez dias depois, nosso nó Bitcoin validou o último bloco da cadeia. Os números finais da sincronização, o que a curva confirmou e o que ainda falta antes do primeiro pagamento real.",
+    "cover": "/api/blog/cover/2026-07-23-o-no-chegou-ao-topo-v2.png"
+  },
+  {
+    "slug": "2026-07-13-no-bitcoin-proprio",
+    "publicSlug": "2026-07-13-no-bitcoin-proprio",
+    "title": "Por que a RBX roda seu próprio nó Bitcoin",
+    "date": "2026-07-13",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "bitcoin",
+      "infraestrutura",
+      "pagamentos",
+      "soberania",
+      "engenharia"
+    ],
+    "excerpt": "Em vez de confiar numa API de terceiro, a RBX verifica cada pagamento em Bitcoin com seu próprio nó, dentro do próprio cluster.",
+    "cover": "/api/blog/cover/2026-07-13-no-bitcoin-proprio-v2.png"
+  },
+  {
+    "slug": "2026-07-12-volatile-logs-are-not-evidence",
+    "publicSlug": "2026-07-12-volatile-logs-are-not-evidence",
+    "title": "Logs voláteis não são evidência",
+    "date": "2026-07-12",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "robson",
+      "engenharia",
+      "confiabilidade",
+      "governanca",
+      "recovery"
+    ],
+    "excerpt": "Recovery em sistemas críticos precisa emitir evento, métrica ou estado auditável. Logs ajudam no diagnóstico, mas não bastam como prova.",
+    "cover": "/api/blog/cover/2026-07-12-volatile-logs-are-not-evidence-v2.png"
+  },
+  {
+    "slug": "2026-07-07-the-brief-a-stranger-could-run",
+    "publicSlug": "2026-07-07-the-brief-a-stranger-could-run",
+    "title": "Atualização de engenharia: o briefing que um estranho conseguiria rodar",
+    "date": "2026-07-07",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "robson",
+      "engenharia",
+      "confiabilidade",
+      "agentes",
+      "trading"
+    ],
+    "excerpt": "Uma correção de reconciliação levou a um segundo bug que ninguém pediu para encontrar, e o próximo capítulo saiu como um briefing escrito para um agente sem memória do dia. Rodou mesmo assim.",
+    "cover": "/api/blog/cover/2026-07-07-the-brief-a-stranger-could-run-v2.jpg"
+  },
+  {
+    "slug": "2026-07-06-fallback-debuts-in-production",
+    "publicSlug": "2026-07-06-fallback-debuts-in-production",
+    "title": "Atualização de engenharia: o fallback estreia em produção",
+    "date": "2026-07-06",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "robson",
+      "engenharia",
+      "confiabilidade",
+      "risco",
+      "trading"
+    ],
+    "excerpt": "Menos de 24 horas depois do merge, o fallback de dados de mercado protegeu uma entrada real. E a caça à causa raiz terminou num lugar inesperado. O update completo.",
+    "cover": "/api/blog/cover/2026-07-06-fallback-debuts-in-production-v2.jpg"
+  },
+  {
+    "slug": "2026-07-05-stop-gain-that-audited-the-system",
+    "publicSlug": "2026-07-05-stop-gain-that-audited-the-system",
+    "title": "O stop gain que auditou o sistema",
+    "date": "2026-07-05",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "robson",
+      "risco",
+      "confiabilidade",
+      "engenharia",
+      "trading"
+    ],
+    "excerpt": "Um stop de lucro executado durante um deploy expôs dois modos de falha invisíveis e mudou a política de risco do Robson. O relato e as decisões estão aqui.",
+    "cover": "/api/blog/cover/2026-07-05-stop-gain-that-audited-the-system-v2.jpg"
+  },
+  {
+    "slug": "2026-07-05-saved-risk-extra-operation",
+    "publicSlug": "2026-07-05-saved-risk-extra-operation",
+    "title": "Risco economizado vira operação extra",
+    "date": "2026-07-05",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "robson",
+      "risco",
+      "produto",
+      "política",
+      "trading"
+    ],
+    "excerpt": "O Robson garantia 4 operações por mês. Agora cada entrada é cobrada pelo risco real, e o orçamento que sobra vira nova chance de operar. A matemática está aqui.",
+    "cover": "/api/blog/cover/2026-07-05-saved-risk-extra-operation-v2.jpg"
+  },
+  {
+    "slug": "2026-07-05-cost-of-innovation-startups",
+    "publicSlug": "2026-07-05-cost-of-innovation-startups",
+    "title": "O custo da inovação: como a economia molda o futuro das startups brasileiras",
+    "date": "2026-07-05",
+    "author": "Cauê Souza Azevedo Alencar",
+    "authorRole": "CFO",
+    "tags": [
+      "economia",
+      "inovação",
+      "startups",
+      "estratégia",
+      "strategos"
+    ],
+    "excerpt": "Tecnologia não é apenas software. É uma ferramenta de transformação econômica, e é essa lógica que orienta a forma como a RBX constrói o Strategos.",
+    "cover": "/api/blog/cover/2026-07-05-cost-of-innovation-startups-v2.png"
+  },
+  {
+    "slug": "2026-07-04-the-retest-that-did-not-stop-us",
+    "publicSlug": "2026-07-04-the-retest-that-did-not-stop-us",
+    "title": "O retest que não nos estopou: validação com fogo real do buffer de stop",
+    "date": "2026-07-04",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "robson",
+      "execução",
+      "risco",
+      "stops",
+      "trading"
+    ],
+    "excerpt": "Duas shorts no mesmo símbolo, com horas de diferença. Uma saiu acima da máxima recente exatamente como projetado. A outra viu o preço tocar 63.450 — além do nível que antes era o stop — e continuou viva. Entre as duas, encontramos um número que mentia e uma regra de risco que ninguém jamais adotou.",
+    "cover": "/api/blog/cover/2026-07-04-the-retest-that-did-not-stop-us-v2.jpg"
+  },
+  {
+    "slug": "2026-07-04-one-entry-four-bugs",
+    "publicSlug": "2026-07-04-one-entry-four-bugs",
+    "title": "Uma entrada, quatro bugs: uma noite de depuração em produção no Robson",
+    "date": "2026-07-04",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "robson",
+      "execução",
+      "risco",
+      "depuração",
+      "trading"
+    ],
+    "excerpt": "Publicamos uma nova camada protetora para o motor de stops e usamos entradas reais para validá-la. A primeira ordem foi rejeitada pelo nosso próprio gate de risco, por uma margem de 0,0000000000000000000002. Três outros bugs se escondiam atrás desse.",
+    "cover": "/api/blog/cover/2026-07-04-one-entry-four-bugs-v2.jpg"
+  },
+  {
+    "slug": "2026-07-03-stops-that-survive-failures",
+    "publicSlug": "2026-07-03-stops-that-survive-failures",
+    "title": "Stops que sobrevivem a falhas: o redesenho da camada de execução do Robson",
+    "date": "2026-07-03",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "robson",
+      "execução",
+      "risco",
+      "confiabilidade",
+      "trading"
+    ],
+    "excerpt": "Um trade fechou 48% acima do teto de risco enquanto o daemon estava fora do ar. A investigação produziu dois ADRs, cinco correções de produção e uma surpresa da API da Binance. Estes são os números.",
+    "cover": "/api/blog/cover/2026-07-03-stops-that-survive-failures-v2.jpg"
+  },
+  {
+    "slug": "2026-05-15-ia-corporativa-como-infraestrutura",
+    "publicSlug": "2026-05-15-ia-corporativa-como-infraestrutura",
+    "title": "IA Corporativa com Método: Diagnóstico, Arquitetura e Governança para Empresas que Operam com Seriedade",
+    "date": "2026-05-15",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "ia",
+      "arquitetura",
+      "governança",
+      "consultoria",
+      "engenharia-de-ia"
+    ],
+    "excerpt": "Empresas que querem usar IA de forma sustentável precisam ir além da adoção pontual de ferramentas. O valor real aparece quando a inteligência passa a integrar a operação com consistência: conectada aos processos, aos dados e aos critérios de controle da organização.",
+    "cover": "/api/blog/cover/2026-05-15-ia-corporativa-como-infraestrutura-v2.png"
+  },
+  {
+    "slug": "2026-04-22-robson-first-real-capital",
+    "publicSlug": "2026-04-22-robson-first-real-capital",
+    "title": "Robson executa sua primeira operação com capital real",
+    "date": "2026-04-22",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "robson",
+      "trading",
+      "futures",
+      "risco",
+      "event-sourcing",
+      "arquitetura",
+      "validação"
+    ],
+    "excerpt": "Depois de um processo formal de validação em duas fases no testnet, o Robson abriu sua primeira posição ao vivo em futuros perpétuos de BTCUSDT com capital real. Este post cobre a migração, a arquitetura e o que o processo de validação efetivamente confirmou.",
+    "cover": "/api/blog/cover/2026-04-22-robson-first-real-capital-v2.png"
+  },
+  {
+    "slug": "2026-04-16-testnet-validation-architecture",
+    "publicSlug": "2026-04-16-testnet-validation-architecture",
+    "title": "Como validamos o Robson antes de habilitar capital real",
+    "date": "2026-04-16",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "robson",
+      "testnet",
+      "validação",
+      "arquitetura",
+      "risco",
+      "websocket",
+      "event-sourcing"
+    ],
+    "excerpt": "Antes de habilitar qualquer capital real, o Robson passa por uma validação E2E formal de 5 fases em testnet. Aqui está como esse processo funciona, o que encontramos e o que a arquitetura aprendeu.",
+    "cover": "/api/blog/cover/2026-04-16-testnet-validation-architecture-v2.png"
+  },
+  {
+    "slug": "2026-04-05-robson-v2-finds-its-missing-execution-glue",
+    "publicSlug": "2026-04-05-robson-v2-finds-its-missing-execution-glue",
+    "title": "Robson v2 encontra a cola de execução que faltava",
+    "date": "2026-04-05",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "robson",
+      "runtime",
+      "arquitetura",
+      "execução",
+      "agentes"
+    ],
+    "excerpt": "Nos últimos três dias, o Robson v2 ganhou a camada governada que faltava entre risco, aprovação, auditoria, projeções e recovery. Isso está preparando o terreno real para o v3.",
+    "cover": "/api/blog/cover/2026-04-05-robson-v2-finds-its-missing-execution-glue-v2.png"
+  },
+  {
+    "slug": "2026-04-04-the-unit-is-not-the-prompt",
+    "publicSlug": "2026-04-04-the-unit-is-not-the-prompt",
+    "title": "O prompt não é a unidade",
+    "date": "2026-04-04",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "ia",
+      "agentes",
+      "runtime",
+      "arquitetura",
+      "execução"
+    ],
+    "excerpt": "Query e QueryEngine apontam para uma abstração mais robusta para sistemas agênticos: a execução é um objeto governado, com estado, eventos, orçamentos e permissões.",
+    "cover": "/api/blog/cover/2026-04-04-the-unit-is-not-the-prompt-v2.png"
+  },
+  {
+    "slug": "2026-04-01-the-model-is-not-the-system",
+    "publicSlug": "2026-04-01-the-model-is-not-the-system",
+    "title": "O modelo não é o sistema",
+    "date": "2026-04-01",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "ia",
+      "agentes",
+      "runtime",
+      "arquitetura",
+      "observabilidade"
+    ],
+    "excerpt": "Um incidente recente envolvendo a arquitetura de um agente de IA reforçou um ponto que muitas equipes ainda ignoram: agentes confiáveis são definidos pelo controle de runtime, não apenas pela escolha do modelo.",
+    "cover": "/api/blog/cover/2026-04-01-the-model-is-not-the-system-v2.png"
+  },
+  {
+    "slug": "2026-03-29-infrastructure-update",
+    "publicSlug": "2026-03-29-infrastructure-update",
+    "title": "Atualização de Infraestrutura: maturidade em GitOps, bancos mais resilientes e um cluster mais saudável",
+    "date": "2026-03-29",
+    "author": "RBX Systems",
+    "authorRole": "Engineering Team",
+    "tags": [
+      "infra",
+      "gitops",
+      "codigo-aberto",
+      "kubernetes",
+      "argocd"
+    ],
+    "excerpt": "Passamos os últimos dias reforçando nossa infraestrutura de produção: migramos para uma arquitetura de banco mais resiliente, corrigimos o pipeline de GitOps e limpamos uma fila importante de dívida técnica. Aqui está o que mudou e por que isso importa.",
+    "cover": "/api/blog/cover/2026-03-29-infrastructure-update-v2.jpg"
+  },
+  {
+    "slug": "2026-03-25-truthmetal-launch",
+    "publicSlug": "2026-03-25-truthmetal-launch",
+    "title": "TruthMetal: parâmetros distribuídos com imutabilidade garantida",
+    "date": "2026-03-25",
+    "author": "Leandro Damasio",
+    "authorRole": "Fundador, RBX Systems",
+    "tags": [
+      "infra",
+      "golang",
+      "rbx"
+    ],
+    "excerpt": "Lançamos o TruthMetal, nosso serviço de configuração distribuída com ledger imutável e consenso SimpleQuorum, agora rodando em produção no cluster RBX.",
+    "cover": "/api/blog/cover/2026-03-25-truthmetal-launch-v2.jpg"
+  }
+]

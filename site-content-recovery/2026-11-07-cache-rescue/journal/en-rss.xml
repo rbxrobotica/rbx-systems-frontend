@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/rss-style.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RBX Journal · Engineering, AI &amp; Field Notes</title>
+    <link>https://rbxsystems.ch/journal</link>
+    <description>Ideas, engineering and field notes from RBX Systems. Technical articles on AI, LLMOps, agents, software and infrastructure.</description>
+    <language>en</language>
+    <lastBuildDate>Thu, 22 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://rbxsystems.ch/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Laya with PyTorch: classify text on a CPU</title>
+      <link>https://rbxsystems.ch/blog/2026-10-22-text-classification-laya-pytorch</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-10-22-text-classification-laya-pytorch</guid>
+      <pubDate>Thu, 22 Oct 2026 00:00:00 GMT</pubDate>
+      <description>A Laya and PyTorch tutorial: install in an isolated environment, classify Portuguese messages, and inspect correct and incorrect predictions.</description>
+    </item>
+    <item>
+      <title>A Week With the Book Open: What Reviewing Robson Taught Us</title>
+      <link>https://rbxsystems.ch/blog/2026-10-13-a-week-with-the-book-open</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-10-13-a-week-with-the-book-open</guid>
+      <pubDate>Tue, 13 Oct 2026 00:00:00 GMT</pubDate>
+      <description>We reviewed Robson with a real position open, fixed six defects in three days and shipped seven deploys without touching the trade. What we found says more about evidence than about code.</description>
+    </item>
+    <item>
+      <title>AI Slowdown for Whom? Strategos at the Center, the Public Presence Kernel, and the Sovereign Austerity of IRC</title>
+      <link>https://rbxsystems.ch/blog/2026-09-24-ai-slowdown-for-whom</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-09-24-ai-slowdown-for-whom</guid>
+      <pubDate>Thu, 24 Sep 2026 00:00:00 GMT</pubDate>
+      <description>The bottleneck in AI is not model capacity, but architecture and boundary governance. Strategos returns to the center, Public Presence emerges as the Kernel, and IRC anchors sovereign ChatOps.</description>
+    </item>
+    <item>
+      <title>The Bottleneck Moved</title>
+      <link>https://rbxsystems.ch/blog/2026-09-15-the-bottleneck-moved</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-09-15-the-bottleneck-moved</guid>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
+      <description>AI capability is still advancing. The constraint has moved to system reliability, ground truth and the engineering around the model.</description>
+    </item>
+    <item>
+      <title>Loop Engineering</title>
+      <link>https://rbxsystems.ch/blog/2026-08-31-loop-engineering</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-31-loop-engineering</guid>
+      <pubDate>Mon, 31 Aug 2026 00:00:00 GMT</pubDate>
+      <description>58 rounds of adversarial review between two models, with a human on triage, took a runtime migration plan from 12 findings to zero.</description>
+    </item>
+    <item>
+      <title>Recover, change and prove it</title>
+      <link>https://rbxsystems.ch/blog/2026-08-26-recover-change-prove</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-26-recover-change-prove</guid>
+      <pubDate>Wed, 26 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Resilience is not uptime. It is the tested ability to recover, change dependencies and produce evidence that critical functions remain within bounds.</description>
+    </item>
+    <item>
+      <title>When the environment says stop: backpressure as a governance boundary</title>
+      <link>https://rbxsystems.ch/blog/2026-08-23-backpressure-fronteira-de-governanca</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-23-backpressure-fronteira-de-governanca</guid>
+      <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+      <description>An agent operating through a browser is a client of a system it does not control. Rate limits and automated-behavior warnings are not obstacles to route around — they are backpressure, and the correct engineering response is to stop, not to accelerate in disguise.</description>
+    </item>
+    <item>
+      <title>Too much rigor is also a bug</title>
+      <link>https://rbxsystems.ch/blog/2026-08-08-too-much-rigor-is-also-a-bug</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-08-too-much-rigor-is-also-a-bug</guid>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
+      <description>This morning we published the story of the reviewer that rejected its own text. In the afternoon came the next chapter: an entire data exporter built in one day, proven byte by byte against reference vectors, with more than a hundred green tests. And the most valuable finding of the day came from a second reviewer, a twin of the implementer, which found the defect no test in the suite could catch: the code was too strict for the real world.</description>
+    </item>
+    <item>
+      <title>The reviewer who rejected itself</title>
+      <link>https://rbxsystems.ch/blog/2026-08-08-the-reviewer-who-rejected-itself</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-08-the-reviewer-who-rejected-itself</guid>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Two days ago we told the story of a data plan that shrank until only the essential remained. What came next was more interesting: building what survived under continuous adversarial review, with two models in opposing roles. A contract went through three verdicts, a wrongly numbered migration nearly broke the live database, an SDK was hiding the winner of a write race, and in the middle of it all the reviewer found a defect in text it had itself demanded. A story about how certainty is bought by the pass, and about knowing when to stop buying.</description>
+    </item>
+    <item>
+      <title>Evidence Is Not Authority</title>
+      <link>https://rbxsystems.ch/blog/2026-08-07-evidence-authority-boundaries</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-07-evidence-authority-boundaries</guid>
+      <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
+      <description>How to separate evaluation, authorization, effects, financial facts, and value attribution in autonomous agentic systems.</description>
+    </item>
+    <item>
+      <title>The plan that shrank</title>
+      <link>https://rbxsystems.ch/blog/2026-08-06-the-plan-that-shrank</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-06-the-plan-that-shrank</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 GMT</pubDate>
+      <description>We wrote a data platform plan for Robson: sixteen metrics, eight analytical tables, a warehouse, dashboards. We handed it to a second model with a one-line instruction: protect production. The verdict was NO-GO, and every cut it proposed survived verification against the code. What remained fits in five invariants, a two-table contract, and a rehearsal with numbers. The story of how a good plan gets better by shrinking.</description>
+    </item>
+    <item>
+      <title>The first span</title>
+      <link>https://rbxsystems.ch/blog/2026-08-05-the-first-span</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-05-the-first-span</guid>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Yesterday we told the decision: one ruler for all of risk. Today it debuted in production, on a real position. This post checks the geometry number by number, walks the two seconds of events between the signal and the protective stop, and explains why the position size went down when the span went up.</description>
+    </item>
+    <item>
+      <title>One ruler</title>
+      <link>https://rbxsystems.ch/blog/2026-08-04-one-ruler</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-04-one-ruler</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+      <description>The operator looked at a screen and asked a one-line question: why is the stop three times farther than the first target? The answer exposed two rulers living in the same system, an environment variable that turned one binary into two products, and ended in the largest engineering effort on Robson since the Rust rewrite. Including the day the fix was nearly worse than the defect.</description>
+    </item>
+    <item>
+      <title>The missing slot</title>
+      <link>https://rbxsystems.ch/blog/2026-08-04-the-missing-slot</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-04-the-missing-slot</guid>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+      <description>A month with zero governed losses, and the dashboard showed 3 slots out of 4. The number was right and the rule was wrong. How one operator question became the formal supersession of an ADR, why the obvious fix was unsafe, and what a second model found in our own text before approval.</description>
+    </item>
+    <item>
+      <title>The RBX Journal now has RSS</title>
+      <link>https://rbxsystems.ch/blog/2026-08-02-rbx-journal-rss</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-02-rbx-journal-rss</guid>
+      <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
+      <description>The Journal can now be followed free via RSS: every RBX engineering article, straight to your reader, with no algorithm and no email in between.</description>
+    </item>
+    <item>
+      <title>The dashboard said Synced</title>
+      <link>https://rbxsystems.ch/blog/2026-08-02-the-dashboard-said-synced</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-02-the-dashboard-said-synced</guid>
+      <pubDate>Sun, 02 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Our deploy pipeline died and stayed dead for four days while every dashboard said Synced and Healthy. The anatomy of a silent failure, what was stuck without anyone knowing, and the criterion we now demand of any automation: when it breaks, what turns red?</description>
+    </item>
+    <item>
+      <title>Governed autonomy is a distributed systems problem</title>
+      <link>https://rbxsystems.ch/blog/2026-08-01-governed-autonomy-distributed-systems</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-01-governed-autonomy-distributed-systems</guid>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Why idempotency, provenance, unknown outcomes and vendor-neutral observability belong at the center of agentic architecture, not at the margins of the prompt.</description>
+    </item>
+    <item>
+      <title>An audit trail is not a telemetry sink</title>
+      <link>https://rbxsystems.ch/blog/2026-08-01-audit-trail-not-telemetry-sink</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-08-01-audit-trail-not-telemetry-sink</guid>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Our trading system database weighed 17 GB. The genuine audit trail fit in under 1 MB. How 96% of an event log became noise, how we cleaned it without losing a single line of evidence, and the rule we adopted so it never happens again.</description>
+    </item>
+    <item>
+      <title>Public RAG with control and evidence</title>
+      <link>https://rbxsystems.ch/blog/2026-07-29-governed-public-rag</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-07-29-governed-public-rag</guid>
+      <pubDate>Wed, 29 Jul 2026 00:00:00 GMT</pubDate>
+      <description>How we separated retrieval, control, memory, and evaluation in a public assistant prepared for shadow mode with Rust, Thalamus, and auditable evidence.</description>
+    </item>
+    <item>
+      <title>The Node Reached the Tip</title>
+      <link>https://rbxsystems.ch/blog/2026-07-23-the-node-reached-the-tip</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-07-23-the-node-reached-the-tip</guid>
+      <pubDate>Thu, 23 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Ten days later, our Bitcoin node validated the last block in the chain. The final sync numbers, what the curve confirmed, and what is still missing before the first real payment.</description>
+    </item>
+    <item>
+      <title>Why RBX Runs Its Own Bitcoin Node</title>
+      <link>https://rbxsystems.ch/blog/2026-07-13-why-rbx-runs-its-own-bitcoin-node</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-07-13-why-rbx-runs-its-own-bitcoin-node</guid>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Instead of trusting a third-party API, RBX verifies every Bitcoin payment with its own node, running inside its own cluster.</description>
+    </item>
+    <item>
+      <title>Volatile logs are not evidence</title>
+      <link>https://rbxsystems.ch/blog/2026-07-12-volatile-logs-are-not-evidence</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-07-12-volatile-logs-are-not-evidence</guid>
+      <pubDate>Sun, 12 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Recovery in critical systems must emit an auditable event, metric, or state. Logs help diagnostics, but they are not enough as proof.</description>
+    </item>
+    <item>
+      <title>Engineering update: the brief a stranger could run</title>
+      <link>https://rbxsystems.ch/blog/2026-07-07-the-brief-a-stranger-could-run</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-07-07-the-brief-a-stranger-could-run</guid>
+      <pubDate>Tue, 07 Jul 2026 00:00:00 GMT</pubDate>
+      <description>A reconciliation fix led to a second bug nobody asked to find, and the next chapter shipped as a brief written for an agent with zero memory of the day. It ran anyway.</description>
+    </item>
+    <item>
+      <title>Engineering update: the fallback debuts in production</title>
+      <link>https://rbxsystems.ch/blog/2026-07-06-fallback-debuts-in-production</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-07-06-fallback-debuts-in-production</guid>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Less than 24 hours after merge, the market-data fallback protected a real entry. And the root-cause hunt ended somewhere unexpected. The full update.</description>
+    </item>
+    <item>
+      <title>The stop gain that audited the system</title>
+      <link>https://rbxsystems.ch/blog/2026-07-05-stop-gain-that-audited-the-system</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-07-05-stop-gain-that-audited-the-system</guid>
+      <pubDate>Sun, 05 Jul 2026 00:00:00 GMT</pubDate>
+      <description>A profitable stop that fired during a deploy exposed two invisible failure modes and changed Robson risk policy. The story and the decisions are here.</description>
+    </item>
+    <item>
+      <title>Saved risk becomes an extra operation</title>
+      <link>https://rbxsystems.ch/blog/2026-07-05-saved-risk-extra-operation</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-07-05-saved-risk-extra-operation</guid>
+      <pubDate>Sun, 05 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Robson guaranteed 4 operations per month. Now each entry is charged its actual risk, and leftover budget becomes another chance to trade. Here is the math.</description>
+    </item>
+    <item>
+      <title>The cost of innovation: how economics shapes the future of Brazilian startups</title>
+      <link>https://rbxsystems.ch/blog/2026-07-05-cost-of-innovation-startups</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-07-05-cost-of-innovation-startups</guid>
+      <pubDate>Sun, 05 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Technology is not just software. It is a tool of economic transformation, and that logic is what drives how RBX builds Strategos.</description>
+    </item>
+    <item>
+      <title>The retest that did not stop us: live-fire validation of the stop buffer</title>
+      <link>https://rbxsystems.ch/blog/2026-07-04-the-retest-that-did-not-stop-us</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-07-04-the-retest-that-did-not-stop-us</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Two shorts on the same symbol, hours apart. One exited above the recent high exactly as designed. The other watched price tag 63,450 — past the level that used to be the stop — and stayed alive. Between them we found a number that lied and a risk rule nobody had ever adopted.</description>
+    </item>
+    <item>
+      <title>One entry, four bugs: a night of production debugging on Robson</title>
+      <link>https://rbxsystems.ch/blog/2026-07-04-one-entry-four-bugs</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-07-04-one-entry-four-bugs</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
+      <description>We shipped a new protective layer for the stop engine and used live entries to validate it. The first order was rejected by our own risk gate, by a margin of 0.0000000000000000000002. Three more bugs were hiding behind that one.</description>
+    </item>
+    <item>
+      <title>Stops that survive failures: redesigning the execution layer of Robson</title>
+      <link>https://rbxsystems.ch/blog/2026-07-03-stops-that-survive-failures</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-07-03-stops-that-survive-failures</guid>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
+      <description>A trade closed 48% above the risk cap while the daemon was down. The investigation produced two ADRs, five production fixes, and a Binance API surprise. Here are the numbers.</description>
+    </item>
+    <item>
+      <title>Corporate AI with Method: Diagnosis, Architecture, and Governance for Organizations That Operate Seriously</title>
+      <link>https://rbxsystems.ch/blog/2026-05-15-corporate-ai-with-method</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-05-15-corporate-ai-with-method</guid>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+      <description>Companies that want to use AI sustainably need to go beyond adopting tools on a case-by-case basis. Real value emerges when intelligence becomes embedded in operations consistently: connected to processes, data, and the organization&apos;s control criteria.</description>
+    </item>
+    <item>
+      <title>Robson executes its first real-capital trade</title>
+      <link>https://rbxsystems.ch/blog/2026-04-22-robson-first-real-capital</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-04-22-robson-first-real-capital</guid>
+      <pubDate>Wed, 22 Apr 2026 00:00:00 GMT</pubDate>
+      <description>After a formal two-phase validation process on testnet, Robson opened its first live BTCUSDT perpetual futures position with real capital. This post covers the migration, the architecture, and what the validation process actually confirmed.</description>
+    </item>
+    <item>
+      <title>How we validate Robson before enabling real capital</title>
+      <link>https://rbxsystems.ch/blog/2026-04-16-testnet-validation-architecture</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-04-16-testnet-validation-architecture</guid>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Before any real capital is enabled, Robson runs a formal 5-phase E2E validation on testnet. Here is what that process looks like, what we found, and what the architecture learned.</description>
+    </item>
+    <item>
+      <title>Robson v2 finds its missing execution glue</title>
+      <link>https://rbxsystems.ch/blog/2026-04-05-robson-v2-finds-its-missing-execution-glue</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-04-05-robson-v2-finds-its-missing-execution-glue</guid>
+      <pubDate>Sun, 05 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Over the last three days, Robson v2 gained the governed layer it was missing between risk, approval, audit, projections, and recovery. That is laying real groundwork for v3.</description>
+    </item>
+    <item>
+      <title>The Unit Is Not the Prompt</title>
+      <link>https://rbxsystems.ch/blog/2026-04-04-the-unit-is-not-the-prompt</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-04-04-the-unit-is-not-the-prompt</guid>
+      <pubDate>Sat, 04 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Query and QueryEngine point to a more durable abstraction for agent systems: execution is a governed object with state, events, budgets, and permissions.</description>
+    </item>
+    <item>
+      <title>The Model Is Not the System</title>
+      <link>https://rbxsystems.ch/blog/2026-04-01-the-model-is-not-the-system</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-04-01-the-model-is-not-the-system</guid>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 GMT</pubDate>
+      <description>A recent AI agent architecture incident reinforced a point most teams still miss: reliable agents are defined by runtime control, not by model selection alone.</description>
+    </item>
+    <item>
+      <title>Infrastructure Update: GitOps Maturity, Resilient Databases, and a Healthier Cluster</title>
+      <link>https://rbxsystems.ch/blog/2026-03-29-infrastructure-update</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-03-29-infrastructure-update</guid>
+      <pubDate>Sun, 29 Mar 2026 00:00:00 GMT</pubDate>
+      <description>We spent the last few days hardening our production infrastructure: migrating to a more resilient database architecture, fixing our GitOps pipeline, and cleaning up a backlog of technical debt. Here is what changed and why it matters.</description>
+    </item>
+    <item>
+      <title>TruthMetal: distributed parameters with guaranteed immutability</title>
+      <link>https://rbxsystems.ch/blog/2026-03-25-truthmetal-launch</link>
+      <guid isPermaLink="true">https://rbxsystems.ch/blog/2026-03-25-truthmetal-launch</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
+      <description>We launched TruthMetal, our distributed configuration service with an immutable ledger and SimpleQuorum consensus, now running in production in the RBX cluster.</description>
+    </item>
+  </channel>
+</rss>
