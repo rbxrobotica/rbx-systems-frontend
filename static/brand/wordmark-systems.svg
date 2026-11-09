@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- RBX Systems wordmark — engineering firm lockup -->
+<!-- RBX Systems horizontal lockup (2026-11-08): mark + "RBX" in Archivo 700 expanded + "Systems" in Inter 300.
+     Text depends on installed fonts; the canonical lockup is the Logo component of the site. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 60" width="320" height="60">
   <rect width="320" height="60" fill="#07080A"/>
-  <text x="20" y="40"
-    font-family="Inter, system-ui, sans-serif"
-    font-size="28" font-weight="500" letter-spacing="-0.5"
-    fill="#22E5E5">RBX</text>
-  <text x="90" y="40"
-    font-family="Inter, system-ui, sans-serif"
-    font-size="28" font-weight="300" letter-spacing="-0.2"
-    fill="#B8BCC2">Systems</text>
-  <line x1="20" y1="48" x2="90" y2="48" stroke="#22E5E5" stroke-width="1" stroke-opacity="0.5"/>
+  <path fill="#22E5E5" transform="translate(20 12) scale(0.5625)" d="M30 8 H56 V34 L34 56 H8 V30 Z"/>
+  <text x="68" y="41" font-family="Archivo, Inter, system-ui, sans-serif" font-size="28" font-weight="700" font-stretch="expanded" letter-spacing="-0.5" fill="#ECECEC">RBX</text>
+  <text x="146" y="41" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="300" fill="#B8BCC2">Systems</text>
 </svg>

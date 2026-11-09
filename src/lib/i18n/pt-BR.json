@@ -19,7 +19,15 @@
     "flaviaRibeiro": "Flavia Ribeiro",
     "legal": "Aviso Legal",
     "manifesto": "Manifesto",
-    "partnership": "Parceria"
+    "partnership": "Parceria",
+    "company": "Empresa",
+    "overview": "Visão geral",
+    "diagnostic": "Diagnóstico",
+    "language": "Idioma",
+    "primary": "Principal",
+    "breadcrumb": "Caminho",
+    "menu": "Abrir menu",
+    "closeMenu": "Fechar menu"
   },
   "footer": {
     "description": "Engenharia de produto, integrações e IA aplicada, com parceria mensal para evoluir software existente.",

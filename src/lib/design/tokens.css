@@ -3,7 +3,7 @@
    Dark-first, Zurich/Zug-coded. Single-accent cyan family.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
   /* ——— Backgrounds ——— */
@@ -31,6 +31,10 @@
   --cyan-dim: #0b6e6e;
   --cyan-subtle: rgba(0, 255, 255, 0.08);
 
+  /* ——— Actions ——— */
+  --cta: var(--cyan-brand);
+  --on-cta: var(--bg-0);
+
   /* ——— Semantic ——— */
   --ok: #7fb77e;
   --warn: #d9b55a;
@@ -44,6 +48,8 @@
   /* ——— Type ——— */
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* Wordmark only (the "RBX" beside the mark). Never in interface text. */
+  --font-wordmark: 'Archivo', 'Inter', system-ui, sans-serif;
 
   --text-xs: 0.6875rem;
   --text-sm: 0.8125rem;
@@ -111,6 +117,12 @@
   --prose-w: 42rem;
   --gutter: 1.5rem;
   --header-h: 4rem;
+  /* Header in three rows: brand, primary navigation, section band. In px: the
+     site root is 15px, and these heights follow the design system, not the rem. */
+  --header-row: 72px;
+  --header-row-mobile: 60px;
+  --nav-row: 48px;
+  --band-row: 44px;
 }
 
 .rbx {

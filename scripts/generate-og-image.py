@@ -40,19 +40,22 @@ def main():
     # Accent line
     draw.rectangle([80, 80, 1120, 82], fill=CYAN)
 
-    # Logo mark: stylised hexagon-ish square
+    # Logo mark (2026-11-08): block with two opposite 45° chamfers. In the
+    # 64-unit brand viewBox the mark spans 8..56 and each chamfer cuts 22 units.
     mark_size = 96
     mark_x, mark_y = 80, 120
-    draw.rectangle(
-        [mark_x, mark_y, mark_x + mark_size, mark_y + mark_size],
+    unit = mark_size / 48
+    cut = 22 * unit
+    draw.polygon(
+        [
+            (mark_x + cut, mark_y),
+            (mark_x + mark_size, mark_y),
+            (mark_x + mark_size, mark_y + mark_size - cut),
+            (mark_x + mark_size - cut, mark_y + mark_size),
+            (mark_x, mark_y + mark_size),
+            (mark_x, mark_y + cut),
+        ],
         fill=CYAN,
-        outline=CYAN,
-    )
-    # Cutout detail
-    draw.rectangle(
-        [mark_x + mark_size // 2, mark_y, mark_x + mark_size, mark_y + mark_size // 2],
-        fill=BG,
-        outline=CYAN,
     )
 
     # Fonts
