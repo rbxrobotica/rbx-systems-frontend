@@ -110,11 +110,13 @@ export const SERVICE_ROUTES: ServiceRoute[] = [
 
 export function servicePublicPath(locale: Locale, service: ServiceRoute): string {
   const prefix = locale === 'pt-BR' ? '/servicos' : '/services';
+  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en'
   return `${prefix}/${service[locale]}`;
 }
 
 export function serviceContentSlug(locale: Locale, publicSlug: string): string {
   return (
+    // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en'
     SERVICE_ROUTES.find((service) => service[locale] === publicSlug)?.storageSlug ?? publicSlug
   );
 }

@@ -31,6 +31,13 @@ test('canonicalTag leaves already-canonical tags untouched', () => {
   assert.equal(canonicalTag('engineering'), 'engineering');
 });
 
+test('canonicalTag never resolves a tag to a property inherited by the alias table', () => {
+  // The tag comes from the URL (/journal/tag/[tag]).
+  for (const tag of ['constructor', '__proto__', 'toString', 'hasOwnProperty', 'valueOf']) {
+    assert.equal(canonicalTag(tag), tag.toLowerCase());
+  }
+});
+
 test('postHasTag matches across locales', () => {
   assert.equal(postHasTag(['engenharia', 'risco'], 'engineering'), true);
   assert.equal(postHasTag(['robson'], 'ai'), false);

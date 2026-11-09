@@ -40,6 +40,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   const legacyTarget = LEGACY_REDIRECTS[url.pathname.replace(/\/$/, '') || '/'];
   if (legacyTarget) {
     url.hostname = url.hostname.replace(/^www\./, '');
+    // eslint-disable-next-line security/detect-object-injection -- legacyTarget is a value of LEGACY_REDIRECTS; locale is 'pt-BR' or 'en'
     url.pathname = LOCALE_PATH_MAP[legacyTarget]?.[locale] ?? legacyTarget;
     return new Response(null, {
       status: 301,

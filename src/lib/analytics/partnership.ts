@@ -73,7 +73,9 @@ export function trackPartnershipEvent(event: PartnershipEvent, props: Partnershi
     offer_version: PARTNERSHIP_OFFER_VERSION
   };
   for (const key of Object.keys(allowedValues) as (keyof PartnershipEventProps)[]) {
+    // eslint-disable-next-line security/detect-object-injection -- key iterates the keys of the constant allowedValues
     const value = props[key];
+    // eslint-disable-next-line security/detect-object-injection -- key iterates the keys of the constant allowedValues
     if (typeof value === 'string' && allowedValues[key].includes(value)) safe[key] = value;
   }
   if (!safe.locale || !safe.surface || !safe.entry) return;
@@ -147,6 +149,7 @@ export function getPartnershipAttribution(): Record<string, string> {
     for (const [touch, values] of Object.entries(touches)) {
       if (!values || typeof values !== 'object') continue;
       for (const [key, allowed] of Object.entries(attributionValues)) {
+        // eslint-disable-next-line security/detect-object-injection -- key iterates the keys of the constant attributionValues
         const value = (values as Record<string, unknown>)[key];
         if (typeof value === 'string' && allowed.includes(value)) result[`${touch}_${key}`] = value;
       }

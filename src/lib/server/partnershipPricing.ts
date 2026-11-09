@@ -54,6 +54,7 @@ export function createPartnershipPricing(
       const body = JSON.parse(new TextDecoder().decode(bytes));
       const rates = Object.fromEntries(
         ['BTC', 'EUR', 'USD'].map((currency) => {
+          // eslint-disable-next-line security/detect-object-injection -- currency iterates the literal list on the line above
           const raw = body?.data?.rates?.[currency];
           return [currency, typeof raw === 'string' || typeof raw === 'number' ? Number(raw) : NaN];
         })

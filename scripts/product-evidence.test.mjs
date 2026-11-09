@@ -19,7 +19,9 @@ function jpegDimensions(bytes) {
   ]);
   let offset = 2;
   while (offset < bytes.length - 1) {
+    // eslint-disable-next-line security/detect-object-injection -- offset is a numeric index into the image bytes
     assert.equal(bytes[offset], 0xff, 'JPEG segment marker');
+    // eslint-disable-next-line security/detect-object-injection -- offset is a numeric index into the image bytes
     while (bytes[offset] === 0xff) offset++;
     const marker = bytes[offset++];
     if (marker === 0xd9 || marker === 0xda) break;
@@ -116,7 +118,9 @@ test('each product has Portuguese and English descriptions, image alternatives a
     for (const field of [entry.description, entry.capture.alt, entry.capture.caption]) {
       assert.deepEqual(Object.keys(field).sort(), ['en', 'pt-BR']);
       for (const locale of ['pt-BR', 'en']) {
+        // eslint-disable-next-line security/detect-object-injection -- locale iterates the literal list of this loop
         assert.equal(typeof field[locale], 'string');
+        // eslint-disable-next-line security/detect-object-injection -- locale iterates the literal list of this loop
         assert.ok(field[locale].trim().length >= 20, `${entry.id}: missing ${locale} context`);
       }
       assert.notEqual(field['pt-BR'], field.en, `${entry.id}: untranslated evidence copy`);

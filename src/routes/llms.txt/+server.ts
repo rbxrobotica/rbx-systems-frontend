@@ -76,7 +76,9 @@ const headings: Record<
 export const GET: RequestHandler = async ({ url }) => {
   const locale = detectLocaleFromUrl(url);
   const exchangeRates = locale === 'en' ? await getPartnershipExchangeRates() : null;
+  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
   const siteUrl = siteUrlByLocale[locale];
+  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
   const h = headings[locale];
 
   const summary =
@@ -111,14 +113,17 @@ export const GET: RequestHandler = async ({ url }) => {
       ? link(
           'RBX Engineering Partnership',
           '/parceria#qualificacao',
+          // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
           `${formatPartnershipPrice(locale)}/mês, em reais (BRL), por ${partnershipTerms.monthlyHours} horas mensais de capacidade técnica liderada pelo fundador com assistência de IA para um produto. Implementação, revisão, testes e comunicação assíncrona incluídos nessa capacidade. Infraestrutura e consumo de APIs do cliente têm orçamento separado. A qualificação inicia pelo formulário; escopo, disponibilidade e início são confirmados por uma pessoa da RBX por e-mail. Não é contratação automática. Contextos para avaliação: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Condições de referência: ${partnershipTerms.version}.`
         )
       : link(
           'RBX Engineering Partnership',
           '/partnership#qualificacao',
+          // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
           `${formatPartnershipPrice(locale, exchangeRates)}/month. ${partnershipPriceNote(locale, exchangeRates)} For ${partnershipTerms.monthlyHours} monthly hours of founder-led technical capacity with AI assistance for one product. Implementation, review, testing and asynchronous communication share that capacity. Infrastructure and the client's API consumption have a separate budget. Qualification starts with the form; an RBX team member confirms scope, availability and start date by email. This is not automatic contracting. Contexts for assessment: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Reference terms: ${partnershipTerms.version}.`
         );
 
+  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
   const institutionalLinks = institutionalByLocale[locale].map((page) =>
     link(page.label, page.path, page.note)
   );

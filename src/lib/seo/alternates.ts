@@ -66,11 +66,13 @@ export interface Alternate {
 /** Resolve a canonical internal path to the route used by the active locale. */
 export function localizedPath(locale: Locale, pathname: string): string {
   const normalized = pathname.replace(/\/$/, '') || '/';
+  // eslint-disable-next-line security/detect-object-injection -- normalized is a site path starting with '/', which no inherited property name does; locale is 'pt-BR' or 'en'
   return LOCALE_PATH_MAP[normalized]?.[locale] ?? pathname;
 }
 
 export function getAlternates(locale: Locale, pathname: string): Alternate[] | undefined {
   const normalized = pathname.replace(/\/$/, '') || '/';
+  // eslint-disable-next-line security/detect-object-injection -- normalized is a site path starting with '/', which no inherited property name does
   const mapping = LOCALE_PATH_MAP[normalized];
   if (!mapping) return undefined;
 

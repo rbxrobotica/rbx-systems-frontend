@@ -268,6 +268,7 @@ async function parsePost(key: string, slug: string): Promise<Post | null> {
  */
 function sanitizeSlugAlias(value: unknown): string | null {
   if (typeof value !== 'string') return null;
+  // eslint-disable-next-line security/detect-unsafe-regex -- linear: every repetition starts with "-", which the class cannot match
   return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) ? value : null;
 }
 

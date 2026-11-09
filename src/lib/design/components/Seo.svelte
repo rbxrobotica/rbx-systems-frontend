@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { getAlternates } from '$lib/seo/alternates';
+  import { serializeJsonLd } from '$lib/seo/schema';
   import type { Locale } from '$types/content';
 
   interface Props {
@@ -41,14 +42,7 @@
 
   const inferredAlternate = $derived(alternate ?? getAlternates(locale, $page.url.pathname));
 
-  const structuredData = $derived(
-    schema
-      ? JSON.stringify({
-          '@context': 'https://schema.org',
-          ...schema
-        })
-      : undefined
-  );
+  const structuredData = $derived(schema ? serializeJsonLd(schema) : undefined);
 
   const searchConsoleToken = $derived(
     locale === 'pt-BR'
@@ -91,6 +85,7 @@
 
   <!-- JSON-LD -->
   {#if structuredData}
+    <!-- eslint-disable-next-line svelte/no-at-html-tags -- a script element cannot be written in the template; serializeJsonLd escapes "<" so the JSON cannot close it -->
     {@html '\u003cscript type="application/ld+json"\u003e' + structuredData + '\u003c/script\u003e'}
   {/if}
 </svelte:head>

@@ -30,6 +30,7 @@ function createAltchaStore(challengeurl: string) {
   ): Promise<number | null> {
     for (let i = 0; i <= maxNumber; i++) {
       const hash = await sha256(salt + i);
+      // eslint-disable-next-line security/detect-possible-timing-attacks -- proof-of-work solver in the browser: hash and challenge are both public
       if (hash === challenge) {
         return i;
       }

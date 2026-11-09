@@ -157,11 +157,13 @@ const PREFIX_PAIRS: [en: string, pt: string][] = [
  */
 export function canonicalPath(rawPathname: string): string {
   const pathname = normalize(rawPathname);
+  // eslint-disable-next-line security/detect-object-injection -- pathname is a site path starting with '/', which no inherited property name does
   const mapped = LOCALE_PATH_MAP[pathname]?.['pt-BR'];
   if (mapped) return mapped;
   for (const [en, pt] of PREFIX_PAIRS) {
     if (pathname.startsWith(`${en}/`)) {
       const respelled = `${pt}${pathname.slice(en.length)}`;
+      // eslint-disable-next-line security/detect-object-injection -- respelled starts with a pt-BR prefix of PREFIX_PAIRS, which no inherited property name does
       return LOCALE_PATH_MAP[respelled]?.['pt-BR'] ?? respelled;
     }
     if (pathname.startsWith(`${pt}/`)) {
@@ -319,5 +321,6 @@ function respell(target: Locale, pathname: string): string {
 export function localeSwitchHref(current: Locale, target: Locale, pathname: string): string {
   if (target === current) return pathname;
   const alt = getAlternates(current, canonicalPath(pathname))?.find((a) => a.hreflang === target);
+  // eslint-disable-next-line security/detect-object-injection -- target is a Locale: 'pt-BR' or 'en'
   return alt?.href ?? `${BASES[target]}${respell(target, normalize(pathname))}`;
 }

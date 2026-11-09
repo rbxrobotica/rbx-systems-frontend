@@ -51,9 +51,13 @@ const TAG_ALIASES: Record<string, string> = {
   'codigo-aberto': 'open-source'
 };
 
+// Looked up through a Map: a tag comes from the URL, and "constructor" or
+// "__proto__" must not resolve to something inherited from Object.prototype.
+const ALIAS_BY_TAG = new Map(Object.entries(TAG_ALIASES));
+
 export function canonicalTag(tag: string): string {
   const normalized = normalizeTag(tag);
-  return TAG_ALIASES[normalized] ?? normalized;
+  return ALIAS_BY_TAG.get(normalized) ?? normalized;
 }
 
 export function postHasTag(tags: string[], tag: string): boolean {

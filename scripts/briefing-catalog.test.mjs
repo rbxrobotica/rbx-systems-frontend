@@ -172,6 +172,7 @@ function keyShape(value) {
     return Object.fromEntries(
       Object.keys(value)
         .sort()
+        // eslint-disable-next-line security/detect-object-injection -- k iterates Object.keys(value)
         .map((k) => [k, keyShape(value[k])])
     );
   }

@@ -2,8 +2,27 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { importTypeScriptModule } from './test-support/import-typescript-module.mjs';
 
-const { breadcrumbSchema, collectionPageSchema, faqPageSchema, personSchemaFor, serviceSchema } =
-  await importTypeScriptModule(new URL('../src/lib/seo/schema.ts', import.meta.url));
+const {
+  breadcrumbSchema,
+  collectionPageSchema,
+  faqPageSchema,
+  personSchemaFor,
+  serializeJsonLd,
+  serviceSchema
+} = await importTypeScriptModule(new URL('../src/lib/seo/schema.ts', import.meta.url));
+
+test('serializeJsonLd cannot close the script element it is inlined in', () => {
+  const schema = {
+    '@type': 'BlogPosting',
+    headline: 'Escaping </script><script>alert(1)</script> and <!-- comments',
+    keywords: ['a < b', 'plain']
+  };
+  const serialized = serializeJsonLd(schema);
+
+  assert.ok(!serialized.includes('<'));
+  // Same document for a JSON parser, with the schema.org context added.
+  assert.deepEqual(JSON.parse(serialized), { '@context': 'https://schema.org', ...schema });
+});
 
 test('breadcrumbSchema emits ordered ListItems with absolute URLs', () => {
   const schema = breadcrumbSchema('pt-BR', 'https://rbx.ia.br/blog/post', [

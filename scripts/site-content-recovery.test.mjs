@@ -155,9 +155,11 @@ test('all 15 changed subsets after the last GET preserve intervening writer byte
     let writes = 0;
     const read = async (_client, key) => {
       const index = targets.findIndex(([candidate]) => candidate === key);
+      // eslint-disable-next-line security/detect-object-injection -- index is a number: a position in the four targets
       const response = { sha256: sha256(live[index].body), etag: live[index].etag };
       if (++reads === 4) {
         for (let i = 0; i < 4; i++) {
+          // eslint-disable-next-line security/detect-object-injection -- i is the loop counter: a number
           if (mask & (1 << i)) live[i] = { body: 'external', etag: 'v2' };
         }
       }
@@ -168,7 +170,9 @@ test('all 15 changed subsets after the last GET preserve intervening writer byte
         writes++;
         const index = targets.findIndex(([key]) => key === command.input.Key);
         assert.equal(command.input.Bucket, 'rbx-content');
+        // eslint-disable-next-line security/detect-object-injection -- index is a number: a position in the four targets
         if (command.input.IfMatch !== live[index].etag) throw new Error('PreconditionFailed');
+        // eslint-disable-next-line security/detect-object-injection -- index is a number: a position in the four targets
         live[index] = { body: command.input.Body.toString(), etag: 'v3' };
       }
     };
@@ -176,6 +180,7 @@ test('all 15 changed subsets after the last GET preserve intervening writer byte
     assert.equal(reads, 4);
     assert.ok(writes <= 4);
     for (let index = 0; index < 4; index++) {
+      // eslint-disable-next-line security/detect-object-injection -- index is a number: a position in the four targets
       if (mask & (1 << index)) assert.equal(live[index].body, 'external');
     }
   }
@@ -197,6 +202,7 @@ test('restore accepts all 16 old/reviewed mixtures and rejects a third version b
     const read = async (_client, key) => {
       const index = targets.findIndex(([candidate]) => key === candidate);
       return {
+        // eslint-disable-next-line security/detect-object-injection -- index is a number: a position in the four targets
         sha256: mask & (1 << index) ? targets[index][1] : snapshot[index].sha256,
         etag: 'v1',
         headers: { ContentType: 'text/markdown' }
