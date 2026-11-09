@@ -9,6 +9,7 @@
     organizationSchema,
     personSchemaFor
   } from '$lib/seo/schema';
+  import { breadcrumbItems, leafTitle } from '$design/nav';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
@@ -44,11 +45,11 @@
           url: `${siteUrl}/blog/${post.publicSlug}`
         }))
       ),
-      breadcrumbSchema(data.locale, pageUrl, [
-        { name: t(data.locale, 'nav.home'), path: '/' },
-        { name: t(data.locale, 'nav.journal'), path: '/journal' },
-        { name: data.author.name, path: `/journal/autor/${data.author.slug}` }
-      ]),
+      breadcrumbSchema(
+        data.locale,
+        pageUrl,
+        breadcrumbItems(data.locale, `/journal/autor/${data.author.slug}`, leafTitle(data))
+      ),
       authorNode
     ])
   );

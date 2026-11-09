@@ -2,6 +2,7 @@
   import { page as pageStore } from '$app/stores';
   import ContentPage from '$components/ContentPage.svelte';
   import { breadcrumbSchema } from '$lib/seo/schema';
+  import { breadcrumbItems, leafTitle } from '$design/nav';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
@@ -9,12 +10,12 @@
 
   const siteUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
   const pageUrl = $derived(`${siteUrl}${$pageStore.url.pathname}`);
-  const title = $derived(data.page?.title ?? t(data.locale, 'careers.fallbackTitle'));
   const schemaNodes = $derived([
-    breadcrumbSchema(data.locale, pageUrl, [
-      { name: t(data.locale, 'nav.home'), path: '/' },
-      { name: title, path: $pageStore.url.pathname }
-    ])
+    breadcrumbSchema(
+      data.locale,
+      pageUrl,
+      breadcrumbItems(data.locale, $pageStore.url.pathname, leafTitle(data))
+    )
   ]);
 </script>
 

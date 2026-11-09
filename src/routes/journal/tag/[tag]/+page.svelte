@@ -3,6 +3,7 @@
   import PageHeader from '$components/PageHeader.svelte';
   import Seo from '$components/Seo.svelte';
   import { buildGraph, breadcrumbSchema, collectionPageSchema } from '$lib/seo/schema';
+  import { breadcrumbItems, leafTitle } from '$design/nav';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
@@ -26,11 +27,11 @@
           url: `${siteUrl}/blog/${post.publicSlug}`
         }))
       ),
-      breadcrumbSchema(data.locale, pageUrl, [
-        { name: t(data.locale, 'nav.home'), path: '/' },
-        { name: t(data.locale, 'nav.journal'), path: '/journal' },
-        { name: data.tag, path: `/journal/tag/${data.tag}` }
-      ])
+      breadcrumbSchema(
+        data.locale,
+        pageUrl,
+        breadcrumbItems(data.locale, `/journal/tag/${data.tag}`, leafTitle(data))
+      )
     ])
   );
 </script>

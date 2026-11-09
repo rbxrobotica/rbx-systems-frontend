@@ -2,7 +2,7 @@
   import { page as pageStore } from '$app/stores';
   import ContentPage from '$components/ContentPage.svelte';
   import { breadcrumbSchema, serviceSchema } from '$lib/seo/schema';
-  import { t } from '$lib/i18n/translate';
+  import { breadcrumbItems, leafTitle } from '$design/nav';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
@@ -11,14 +11,13 @@
   const pageUrl = $derived(`${siteUrl}${$pageStore.url.pathname}`);
   const title = $derived(data.page?.title ?? data.slug);
   const description = $derived(data.page?.description ?? data.page?.lead ?? '');
-  const solutionsPath = $derived(data.locale === 'pt-BR' ? '/solucoes' : '/solutions');
   const schemaNodes = $derived([
     serviceSchema(data.locale, pageUrl, title, description),
-    breadcrumbSchema(data.locale, pageUrl, [
-      { name: t(data.locale, 'nav.home'), path: '/' },
-      { name: t(data.locale, 'nav.solutions'), path: solutionsPath },
-      { name: title, path: $pageStore.url.pathname }
-    ])
+    breadcrumbSchema(
+      data.locale,
+      pageUrl,
+      breadcrumbItems(data.locale, $pageStore.url.pathname, leafTitle(data))
+    )
   ]);
 </script>
 

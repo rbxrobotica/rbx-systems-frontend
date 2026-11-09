@@ -2,7 +2,7 @@
   import { page } from '$app/stores';
   import { afterNavigate } from '$app/navigation';
   import Logo from './Logo.svelte';
-  import { NAV_SECTIONS, navLabel, resolveNav, localeSwitchHref } from '$design/nav';
+  import { NAV_SECTIONS, leafTitle, navLabel, resolveNav, localeSwitchHref } from '$design/nav';
   import { t } from '$lib/i18n/translate';
   import { localizedPath } from '$lib/seo/alternates';
   import type { Locale } from '$types/content';
@@ -19,8 +19,13 @@
   // Header in three rows: brand + language + contact; the five sections; and,
   // when the page belongs to a section, a band with that section's pages.
   const pathname = $derived($page.url.pathname);
-  const nav = $derived(resolveNav(locale, pathname));
+  const nav = $derived(resolveNav(locale, pathname, leafTitle($page.data)));
   const band = $derived(nav.section && nav.section.children.length > 1 ? nav.section : undefined);
+  // Mobile section button: "Section › current page", when the page is not the
+  // section's own landing.
+  const currentLabel = $derived(
+    nav.trail.length > 1 ? nav.trail[nav.trail.length - 1].label : undefined
+  );
 
   const ptHref = $derived(localeSwitchHref(locale, 'pt-BR', pathname));
   const enHref = $derived(localeSwitchHref(locale, 'en', pathname));
@@ -154,9 +159,9 @@
       >
         <span class="section-path">
           <span class="section-name">{navLabel(locale, band)}</span>
-          {#if nav.item && nav.item.path !== band.path}
+          {#if currentLabel}
             <span class="sep" aria-hidden="true">›</span>
-            <span class="section-current">{navLabel(locale, nav.item)}</span>
+            <span class="section-current">{currentLabel}</span>
           {/if}
         </span>
         <svg
@@ -260,9 +265,12 @@
     padding: var(--s-2);
     line-height: 1;
   }
+  /* Active underlines are a 1px background, not a box-shadow: the focus ring
+     is a box-shadow and must stay visible on the active link too. */
   .lang a.active {
     color: var(--fg-0);
-    box-shadow: inset 0 -1px 0 var(--cyan-brand);
+    background: linear-gradient(var(--cyan-brand), var(--cyan-brand)) left bottom / 100% 1px
+      no-repeat;
   }
   .lang span {
     color: var(--fg-3);
@@ -279,7 +287,8 @@
     line-height: 1;
     transition: background var(--dur) var(--ease);
   }
-  .cta:hover {
+  /* Qualified with .site-nav a so it outranks the generic link hover above. */
+  .site-nav a.cta:hover {
     background: var(--cyan-signal);
     color: var(--on-cta);
   }
@@ -312,7 +321,8 @@
   }
   .primary a.active {
     color: var(--fg-0);
-    box-shadow: inset 0 -1px 0 var(--cyan-brand);
+    background: linear-gradient(var(--cyan-brand), var(--cyan-brand)) left bottom / 100% 1px
+      no-repeat;
   }
 
   .band {
@@ -356,7 +366,8 @@
     color: var(--fg-0);
     padding-bottom: 3px;
     margin-bottom: -3px;
-    box-shadow: inset 0 -1px 0 var(--cyan-brand);
+    background: linear-gradient(var(--cyan-brand), var(--cyan-brand)) left bottom / 100% 1px
+      no-repeat;
   }
 
   .section-toggle,
@@ -438,7 +449,15 @@
     .sep {
       color: var(--fg-3);
     }
+    .section-name,
+    .sep {
+      flex: none;
+    }
     .section-current {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       padding-bottom: 3px;
       margin-bottom: -3px;
       box-shadow: inset 0 -1px 0 var(--cyan-brand);

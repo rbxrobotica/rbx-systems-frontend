@@ -186,7 +186,7 @@
 <style>
   .evidence {
     margin-top: var(--s-8);
-    scroll-margin-top: calc(var(--header-h) + var(--s-6));
+    scroll-margin-top: var(--s-6);
   }
   header {
     max-width: 46rem;

@@ -1,10 +1,19 @@
 /**
  * Navigation model for the public site: five sections, the pages each one
  * shows in the secondary band, and the resolution of the current URL into
- * section, band item and breadcrumb trail. Paths are canonical pt-BR routes;
- * `localizedPath` maps them to the route of the active host.
+ * section, band item and breadcrumb trail.
+ *
+ * Paths in the model are canonical pt-BR routes. Both spellings of a route
+ * are live on both hosts (rbxsystems.ch/sobre renders as well as /about), so
+ * a requested path is first respelled to its canonical form and only then
+ * matched; hrefs go out through `localizedPath`, in the spelling of the
+ * active host.
+ *
+ * The visible breadcrumb and the BreadcrumbList structured data are both
+ * derived from `resolveNav`, with the same page title from `leafTitle`, so
+ * they cannot drift apart.
  */
-import { getAlternates, localizedPath } from '$lib/seo/alternates';
+import { LOCALE_PATH_MAP, getAlternates, localizedPath } from '$lib/seo/alternates';
 import { t } from '$lib/i18n/translate';
 import type { Locale } from '$types/content';
 
@@ -16,11 +25,16 @@ export interface NavItem {
   /** Literal label (product names). */
   label?: string;
   /**
-   * Other canonical paths that belong under this item, matched exactly or as
-   * a prefix: blog posts under Journal, service pages under Soluções, person
-   * pages under Equipe.
+   * Known pages that belong under this item without being band items:
+   * person pages under Equipe, a campaign form under Contato.
    */
-  also?: string[];
+  pages?: NavItem[];
+  /**
+   * Canonical path prefixes whose pages belong under this item and are known
+   * only by their own title: blog posts under Journal, service pages under
+   * Soluções. Pages below the item's own path are always included.
+   */
+  under?: string[];
 }
 
 export interface NavSection extends NavItem {
@@ -39,7 +53,11 @@ export const NAV_SECTIONS: NavSection[] = [
       {
         path: '/equipe',
         labelKey: 'nav.team',
-        also: ['/leandro-damasio', '/caue-alencar', '/flavia-ribeiro']
+        pages: [
+          { path: '/leandro-damasio', labelKey: 'nav.leandroDamasio' },
+          { path: '/caue-alencar', labelKey: 'nav.caueAlencar' },
+          { path: '/flavia-ribeiro', labelKey: 'nav.flaviaRibeiro' }
+        ]
       },
       { path: '/carreiras', labelKey: 'nav.careers' },
       { path: '/manifesto', labelKey: 'nav.manifesto' },
@@ -51,7 +69,7 @@ export const NAV_SECTIONS: NavSection[] = [
     labelKey: 'nav.solutions',
     path: '/solucoes',
     children: [
-      { path: '/solucoes', labelKey: 'nav.overview', also: ['/servicos', '/services'] },
+      { path: '/solucoes', labelKey: 'nav.overview', under: ['/servicos'] },
       { path: '/cases', labelKey: 'nav.cases' },
       { path: '/atelier', labelKey: 'nav.atelier' }
     ]
@@ -62,7 +80,7 @@ export const NAV_SECTIONS: NavSection[] = [
     path: '/produtos',
     children: [
       { path: '/produtos', labelKey: 'nav.overview' },
-      { path: '/produtos/robson', label: 'Robson', also: ['/robson'] },
+      { path: '/produtos/robson', label: 'Robson', under: ['/robson'] },
       { path: '/produtos/briefing-btc', label: 'Briefing BTC' }
     ]
   },
@@ -80,7 +98,7 @@ export const NAV_SECTIONS: NavSection[] = [
     labelKey: 'nav.journal',
     path: '/journal',
     children: [
-      { path: '/journal', labelKey: 'nav.journal', also: ['/blog'] },
+      { path: '/journal', labelKey: 'nav.journal', under: ['/blog'] },
       { path: '/changelog', labelKey: 'nav.changelog' },
       { path: '/newsroom', labelKey: 'nav.newsroom' }
     ]
@@ -89,7 +107,11 @@ export const NAV_SECTIONS: NavSection[] = [
 
 /** Pages outside the five sections that still get a breadcrumb. */
 export const STANDALONE_PAGES: NavItem[] = [
-  { path: '/contato', labelKey: 'nav.contact' },
+  {
+    path: '/contato',
+    labelKey: 'nav.contact',
+    pages: [{ path: '/contact/strategos', label: 'Strategos Founder Plan' }]
+  },
   { path: '/legal', labelKey: 'nav.legal' }
 ];
 
@@ -102,9 +124,13 @@ export interface Crumb {
 export interface NavState {
   /** Active primary section, when the page belongs to one. */
   section?: NavSection;
-  /** Band item to highlight, when the page is one of them. */
+  /** Band item to highlight: the page itself, or the item it sits under. */
   item?: NavItem;
-  /** Breadcrumb after Home; empty on the home page and on unknown routes. */
+  /**
+   * Breadcrumb after Home, ending in the current page. Empty on the home
+   * page and on unknown routes. When a page is known only by its parent and
+   * no title was given, the trail ends in that parent, still linked.
+   */
   trail: Crumb[];
 }
 
@@ -117,67 +143,181 @@ function normalize(pathname: string): string {
   return pathname.replace(/\/+$/, '') || '/';
 }
 
-type Match = 'exact' | 'under' | null;
+/** English route prefixes whose slugs carry over, with their pt-BR spelling. */
+const PREFIX_PAIRS: [en: string, pt: string][] = [
+  ['/products', '/produtos'],
+  ['/services', '/servicos']
+];
 
-/** Exact match on the item's own route, or a page that belongs under it. */
-function match(locale: Locale, item: NavItem, pathname: string): Match {
-  const own = localizedPath(locale, item.path);
-  if (pathname === own) return 'exact';
-  const roots = [own, ...(item.also ?? []).map((p) => localizedPath(locale, p))];
-  for (const root of roots) {
-    if (root === '/') continue;
-    if (pathname === root || pathname.startsWith(`${root}/`)) return 'under';
+/**
+ * The pt-BR spelling of a route, whichever spelling was requested. A service
+ * slug may also arrive under the prefix of the other host
+ * (/services/agentes-de-ia, /servicos/ai-agents): the loaders render both,
+ * so both resolve to the one mapped route.
+ */
+export function canonicalPath(rawPathname: string): string {
+  const pathname = normalize(rawPathname);
+  const mapped = LOCALE_PATH_MAP[pathname]?.['pt-BR'];
+  if (mapped) return mapped;
+  for (const [en, pt] of PREFIX_PAIRS) {
+    if (pathname.startsWith(`${en}/`)) {
+      const respelled = `${pt}${pathname.slice(en.length)}`;
+      return LOCALE_PATH_MAP[respelled]?.['pt-BR'] ?? respelled;
+    }
+    if (pathname.startsWith(`${pt}/`)) {
+      return LOCALE_PATH_MAP[`${en}${pathname.slice(pt.length)}`]?.['pt-BR'] ?? pathname;
+    }
   }
-  return null;
+  return pathname;
 }
 
-export function resolveNav(locale: Locale, rawPathname: string): NavState {
-  const pathname = normalize(rawPathname);
-  if (pathname === '/') return { trail: [] };
+interface Located {
+  item: NavItem;
+  /** Known page under the item, when the path is one of `item.pages`. */
+  page?: NavItem;
+  /** The path is the item's own route. */
+  exact: boolean;
+}
 
-  for (const section of NAV_SECTIONS) {
-    const sectionLabel = navLabel(locale, section);
-    const sectionHref = localizedPath(locale, section.path);
-    // Longest routes first, so /produtos/robson wins over /produtos.
-    const children = [...section.children].sort((a, b) => b.path.length - a.path.length);
+/** Find the item a canonical path is, or sits under. */
+function locate(items: NavItem[], path: string): Located | undefined {
+  const exact = items.find((item) => item.path === path);
+  if (exact) return { item: exact, exact: true };
 
-    const exact = children.find((c) => match(locale, c, pathname) === 'exact');
-    if (exact) {
-      const isRoot = exact.path === section.path;
-      return {
-        section,
-        item: exact,
-        trail: isRoot
-          ? [{ label: sectionLabel }]
-          : [{ label: sectionLabel, href: sectionHref }, { label: navLabel(locale, exact) }]
-      };
-    }
-
-    const under = children.find((c) => match(locale, c, pathname) === 'under');
-    if (under) {
-      const isRoot = under.path === section.path;
-      const trail: Crumb[] = [{ label: sectionLabel, href: sectionHref }];
-      if (!isRoot) {
-        trail.push({ label: navLabel(locale, under), href: localizedPath(locale, under.path) });
-      }
-      return { section, item: isRoot ? undefined : under, trail };
-    }
+  for (const item of items) {
+    const page = item.pages?.find((candidate) => candidate.path === path);
+    if (page) return { item, page, exact: false };
   }
 
-  const standalone = STANDALONE_PAGES.find((p) => match(locale, p, pathname));
-  if (standalone) return { trail: [{ label: navLabel(locale, standalone) }] };
-  return { trail: [] };
+  // Longest root first, so /produtos/robson/x sits under Robson, not Produtos.
+  const roots = items
+    .flatMap((item) => [item.path, ...(item.under ?? [])].map((root) => ({ item, root })))
+    .filter(({ root }) => root !== '/' && (path === root || path.startsWith(`${root}/`)))
+    .sort((a, b) => b.root.length - a.root.length);
+  return roots[0] ? { item: roots[0].item, exact: false } : undefined;
+}
+
+/**
+ * Resolve a requested path. `leaf` is the title of the current page for
+ * pages the model knows only by their parent (see `leafTitle`).
+ */
+export function resolveNav(locale: Locale, rawPathname: string, leaf?: string): NavState {
+  const path = canonicalPath(rawPathname);
+  if (path === '/') return { trail: [] };
+
+  const link = (item: NavItem): Crumb => ({
+    label: navLabel(locale, item),
+    href: localizedPath(locale, item.path)
+  });
+  const here = (label: string): Crumb => ({ label });
+  /** Crumbs below the parent: the item, then the page when it is known. */
+  const below = ({ item, page, exact }: Located, itemIsParent: boolean): Crumb[] => {
+    if (exact) return itemIsParent ? [] : [here(navLabel(locale, item))];
+    const crumbs: Crumb[] = itemIsParent ? [] : [link(item)];
+    if (page) crumbs.push(here(navLabel(locale, page)));
+    else if (leaf) crumbs.push(here(leaf));
+    return crumbs;
+  };
+
+  for (const section of NAV_SECTIONS) {
+    const found = locate(section.children, path);
+    if (!found) continue;
+    // The first band item is the section's own landing page.
+    const isLanding = found.item.path === section.path;
+    if (found.exact && isLanding) {
+      return { section, item: found.item, trail: [here(navLabel(locale, section))] };
+    }
+    return {
+      section,
+      // A page under the landing item (a post, a service) highlights nothing.
+      item: found.exact || !isLanding ? found.item : undefined,
+      trail: [link(section), ...below(found, isLanding)]
+    };
+  }
+
+  const found = locate(STANDALONE_PAGES, path);
+  if (!found) return { trail: [] };
+  if (found.exact) return { trail: [here(navLabel(locale, found.item))] };
+  return { trail: [link(found.item), ...below(found, true)] };
+}
+
+/**
+ * CMS titles of service and product pages end in the site name
+ * ("LLMOps — RBX Systems", "API Integration · RBX Systems"); a crumb does not
+ * repeat it.
+ */
+const SITE_SUFFIX = /\s+[—–·|-]\s+RBX Systems$/;
+
+/**
+ * Title of the current page as its loader exposes it: a post, an author, a
+ * tag, a CMS page, or the slug as last resort. The layout and the pages that
+ * emit BreadcrumbList call this on the same page data.
+ */
+export function leafTitle(data: unknown): string | undefined {
+  if (!data || typeof data !== 'object') return undefined;
+  const d = data as {
+    post?: { title?: unknown; publicSlug?: unknown; slug?: unknown } | null;
+    author?: { name?: unknown } | null;
+    tag?: unknown;
+    page?: { title?: unknown } | null;
+    slug?: unknown;
+  };
+  const candidates = [
+    d.post?.title,
+    d.author?.name,
+    d.tag,
+    d.page?.title,
+    d.slug,
+    // A post stored with a blank title is still named, by its public slug.
+    d.post?.publicSlug,
+    d.post?.slug
+  ];
+  const found = candidates.find((value) => typeof value === 'string' && value.trim() !== '');
+  if (typeof found !== 'string') return undefined;
+  const title = found.trim();
+  return title.replace(SITE_SUFFIX, '') || title;
+}
+
+/**
+ * The trail as BreadcrumbList items: Home first, then every crumb, the
+ * current page with its own path. Feed it to `breadcrumbSchema`.
+ */
+export function breadcrumbItems(
+  locale: Locale,
+  pathname: string,
+  leaf?: string
+): { name: string; path: string }[] {
+  const current = normalize(pathname);
+  return [
+    { name: t(locale, 'nav.home'), path: '/' },
+    ...resolveNav(locale, pathname, leaf).trail.map((crumb) => ({
+      name: crumb.label,
+      path: crumb.href ?? current
+    }))
+  ];
 }
 
 const BASES: Record<Locale, string> = { 'pt-BR': 'https://rbx.ia.br', en: 'https://rbxsystems.ch' };
 
+/** Respell a slug-carrying route prefix for the target locale. */
+function respell(target: Locale, pathname: string): string {
+  for (const [en, pt] of PREFIX_PAIRS) {
+    const [from, to] = target === 'en' ? [pt, en] : [en, pt];
+    if (pathname.startsWith(`${from}/`)) return `${to}${pathname.slice(from.length)}`;
+  }
+  return pathname;
+}
+
 /**
  * Href of the language switch. The other locale lives on the other host: use
- * the hreflang alternate when the route is mapped, otherwise the same path
- * (blog slugs are shared across hosts and redirect to their alias).
+ * the hreflang alternate when the route is mapped, looked up by its canonical
+ * spelling so a service reached under the other host's prefix still lands on
+ * its own page; otherwise the same path, with /produtos/<slug> and
+ * /products/<slug> respelled for the target host (blog slugs are shared
+ * across hosts and redirect to their alias).
  */
 export function localeSwitchHref(current: Locale, target: Locale, pathname: string): string {
   if (target === current) return pathname;
-  const alt = getAlternates(current, pathname)?.find((a) => a.hreflang === target);
-  return alt?.href ?? `${BASES[target]}${pathname}`;
+  const alt = getAlternates(current, canonicalPath(pathname))?.find((a) => a.hreflang === target);
+  return alt?.href ?? `${BASES[target]}${respell(target, normalize(pathname))}`;
 }
