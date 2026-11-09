@@ -63,8 +63,12 @@ mandatory per-page-view hot path: public content is cacheable.
 - Content Gateway under `src/lib/server/content` (`store` → `cache` → `gateway`).
   The store is the **only** module aware of the S3-compatible API. The UI
   consumes the gateway abstraction and never touches Object Storage.
-- In-memory cache with short TTL, per-replica.
+- In-memory cache with short TTL, per-replica, bounded in entries (LRU).
 - Missing content or upstream error surfaces as an explicit 404 or 503; no silent stale fallback.
+  _Superseded for cached content (2026-08-23, #77, and 2026-11-08): an entry
+  that is already cached is served stale while its revalidation fails, with no
+  maximum age, and each failed revalidation is logged. Uncached content still
+  surfaces as 404 or 503. See `docs/implementation/content-gateway-cache.md`._
 - Server-side asset proxy routes (`/api/blog/cover/[...path]`, `/api/assets/[...path]`).
 - HTML and assets emitted with `Cache-Control` + `ETag` to prepare for a future
   RBX proxy/edge with no application change.
