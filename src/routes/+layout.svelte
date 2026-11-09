@@ -7,6 +7,7 @@
   import { page } from '$app/stores';
   import NavBar from '$components/NavBar.svelte';
   import Footer from '$components/Footer.svelte';
+  import Breadcrumb from '$components/Breadcrumb.svelte';
   import ContactMenu from '$components/ContactMenu.svelte';
   import Analytics from '$lib/analytics/Analytics.svelte';
   import { captureUtm } from '$lib/analytics/utm';
@@ -36,6 +37,7 @@
 <div class="rbx-root">
   <NavBar locale={data.locale} />
   <main class="page">
+    <Breadcrumb locale={data.locale} />
     {@render children()}
   </main>
   <Footer locale={data.locale} />

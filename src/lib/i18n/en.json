@@ -19,7 +19,15 @@
     "flaviaRibeiro": "Flavia Ribeiro",
     "legal": "Legal Notice",
     "manifesto": "Manifesto",
-    "partnership": "Partnership"
+    "partnership": "Partnership",
+    "company": "Company",
+    "overview": "Overview",
+    "diagnostic": "Diagnostic",
+    "language": "Language",
+    "primary": "Primary",
+    "breadcrumb": "You are here",
+    "menu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "footer": {
     "description": "Product engineering, integrations and applied AI, with a monthly partnership to evolve existing software.",

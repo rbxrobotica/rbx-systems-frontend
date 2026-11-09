@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Logo from './Logo.svelte';
   import { t } from '$lib/i18n/translate';
   import { localizedPath } from '$lib/seo/alternates';
   import type { Locale } from '$types/content';
@@ -17,8 +18,9 @@
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <img src="/brand/rbx-mark.svg" alt="" width="28" height="28" />
-      <span class="footer-name">RBX Systems</span>
+      <a href={href('/')} class="footer-logo" aria-label="RBX Systems"
+        ><Logo size={24} variant="horizontal" /></a
+      >
       <p class="rbx-caption">{tr('footer.description')}</p>
     </div>
 
@@ -104,9 +106,14 @@
     flex-direction: column;
     gap: var(--s-2);
   }
-  .footer-name {
-    font-size: var(--text-xl);
-    font-weight: 600;
+  .footer-logo {
+    display: inline-flex;
+    align-self: flex-start;
+    border-bottom: none;
+    margin-bottom: var(--s-2);
+  }
+  .footer-logo:hover {
+    border-bottom: none;
   }
   .footer-columns {
     display: grid;
