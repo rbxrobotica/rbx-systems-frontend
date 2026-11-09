@@ -1,6 +1,7 @@
 import type { Handle } from '@sveltejs/kit';
 import { detectLocaleFromUrl } from '$lib/i18n/locale';
 import { LOCALE_PATH_MAP } from '$lib/seo/alternates';
+import { withStorageBudget } from '$lib/server/content/request-budget';
 
 /**
  * Legacy URLs from the previous company sites (rbx-site 2023,
@@ -69,10 +70,16 @@ export const handle: Handle = async ({ event, resolve }) => {
     });
   }
 
-  const response = await resolve(event, {
-    // app.html ships %sveltekit.lang%; fill it with the host-detected locale.
-    transformPageChunk: ({ html }) => html.replaceAll('%sveltekit.lang%', locale)
-  });
+  // Each handled request is one storage request budget operation (guardrail
+  // 1.1). The route id, not the path, names it: bounded and never user-authored.
+  const response = await withStorageBudget(
+    `${event.request.method} ${event.route.id ?? 'unmatched'}`,
+    async () =>
+      resolve(event, {
+        // app.html ships %sveltekit.lang%; fill it with the host-detected locale.
+        transformPageChunk: ({ html }) => html.replaceAll('%sveltekit.lang%', locale)
+      })
+  );
 
   if (event.request.method === 'GET' && response.status === 200) {
     const contentType = response.headers.get('content-type') ?? '';

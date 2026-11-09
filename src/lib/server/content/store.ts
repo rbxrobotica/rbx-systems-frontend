@@ -4,6 +4,7 @@
  * $lib/server so it can never be imported into a client bundle.
  */
 import { S3Client, GetObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3';
+import { countStorageRequest } from './request-budget';
 
 const BUCKET = process.env.CONTABO_S3_CONTENT_BUCKET ?? 'rbx-content';
 
@@ -31,6 +32,7 @@ export interface ByteObject {
 /** Get a text object. Returns null when the key does not exist. */
 export async function getTextObject(key: string): Promise<TextObject | null> {
   try {
+    countStorageRequest();
     const res = await client.send(new GetObjectCommand({ Bucket: BUCKET, Key: key }));
     if (!res.Body) return null;
     return { body: await res.Body.transformToString(), etag: res.ETag };
@@ -43,6 +45,7 @@ export async function getTextObject(key: string): Promise<TextObject | null> {
 /** Get a binary object (assets/covers). Returns null when the key does not exist. */
 export async function getByteObject(key: string): Promise<ByteObject | null> {
   try {
+    countStorageRequest();
     const res = await client.send(new GetObjectCommand({ Bucket: BUCKET, Key: key }));
     if (!res.Body) return null;
     const bytes = await res.Body.transformToByteArray();
@@ -58,6 +61,7 @@ export async function listObjectKeys(prefix: string): Promise<string[]> {
   const keys: string[] = [];
   let token: string | undefined;
   do {
+    countStorageRequest();
     const res = await client.send(
       new ListObjectsV2Command({ Bucket: BUCKET, Prefix: prefix, ContinuationToken: token })
     );

@@ -9,6 +9,7 @@ import { load as parseYaml } from 'js-yaml';
 import { marked } from 'marked';
 import { getTextObject, getByteObject, listObjectKeys, type ByteObject } from './store';
 import { SwrCache } from './cache';
+import { trackLoad } from './request-budget';
 import type { Locale, PageContent, Post, PostAlternate, PostMeta } from '$types/content';
 
 const SITE_PREFIX = 'site/';
@@ -45,7 +46,7 @@ function parseFrontmatter(raw: string): {
 }
 
 export async function loadPage(path: string, locale: Locale): Promise<PageContent> {
-  return pageCache.get(`page:${locale}:${path}`, async () => {
+  return cached(pageCache, `page:${locale}:${path}`, async () => {
     const page = await fetchPage(path, locale);
     if (!page) throw error(404, `Content not found: ${path}`);
     return page;
@@ -67,11 +68,11 @@ export async function loadPageOrNull(path: string, locale: Locale): Promise<Page
 }
 
 export async function loadAllPosts(locale: Locale): Promise<PostMeta[]> {
-  return listCache.get(`posts:${locale}`, () => fetchPostList(locale));
+  return cached(listCache, `posts:${locale}`, () => fetchPostList(locale));
 }
 
 export async function loadPost(slug: string, locale: Locale): Promise<Post> {
-  return postCache.get(`post:${locale}:${slug}`, async () => {
+  return cached(postCache, `post:${locale}:${slug}`, async () => {
     const post = await fetchPost(slug, locale);
     if (!post) throw error(404, `Post not found: ${slug}`);
     return post;
@@ -133,13 +134,21 @@ export async function getAsset(
 ): Promise<{ bytes: Uint8Array; contentType?: string } | null> {
   if (!isSafeAssetPath(path)) return null;
   const key = `${prefix}${path}`;
-  return assetCache.get(`asset:${key}`, async () => {
+  return cached(assetCache, `asset:${key}`, async () => {
     try {
       return await getByteObject(key);
     } catch {
       return null;
     }
   });
+}
+
+/**
+ * Cache lookup whose loader, when the cache runs it, is charged to the storage
+ * request budget of the operation that triggered it.
+ */
+function cached<T>(cache: SwrCache<T>, key: string, load: () => Promise<T>): Promise<T> {
+  return cache.get(key, () => trackLoad(key, load));
 }
 
 // --- fetchers (talk to the store; never throw to the UI) ---
