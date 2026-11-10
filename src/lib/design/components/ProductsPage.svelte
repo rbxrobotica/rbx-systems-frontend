@@ -327,7 +327,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     background: var(--bg-1);
-    scroll-margin-top: calc(var(--header-h) + var(--s-6));
+    scroll-margin-top: var(--s-6);
   }
   .card-heading {
     display: flex;
@@ -415,7 +415,7 @@
   .additional-grid article {
     border-top: 1px solid var(--border);
     padding-top: var(--s-4);
-    scroll-margin-top: calc(var(--header-h) + var(--s-6));
+    scroll-margin-top: var(--s-6);
   }
 
   .additional-grid h3 {

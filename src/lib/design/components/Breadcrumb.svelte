@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { resolveNav } from '$design/nav';
+  import { leafTitle, resolveNav } from '$design/nav';
   import { t } from '$lib/i18n/translate';
   import { localizedPath } from '$lib/seo/alternates';
   import type { Locale } from '$types/content';
@@ -12,9 +12,11 @@
   let { locale }: Props = $props();
 
   // Visible counterpart of the BreadcrumbList JSON-LD: home, section, page.
-  // Derived from the navigation model, so every page gets one without
-  // declaring it; hidden on the home page where there is nothing to trace.
-  const trail = $derived(resolveNav(locale, $page.url.pathname).trail);
+  // Derived from the navigation model, so every page rendered by the layout
+  // gets one without declaring it; hidden on the home page. Posts, tags,
+  // authors, services and products are named from the page data, the same
+  // source their structured data uses.
+  const trail = $derived(resolveNav(locale, $page.url.pathname, leafTitle($page.data)).trail);
 </script>
 
 {#if trail.length > 0}
@@ -38,7 +40,7 @@
           </svg>
         </a>
       </li>
-      {#each trail as crumb (crumb.label)}
+      {#each trail as crumb, index (index)}
         <li class="sep" aria-hidden="true">›</li>
         <li>
           {#if crumb.href}
@@ -63,12 +65,18 @@
     padding: 0;
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
     gap: var(--s-2);
   }
   li {
     display: flex;
     align-items: center;
+    flex: none;
+  }
+  /* Ancestors keep their width; a long page title is cut on one line (the
+     full title is the heading right below). */
+  li:last-child {
+    flex: 0 1 auto;
+    min-width: 0;
   }
   a {
     color: var(--fg-2);
@@ -87,7 +95,12 @@
   }
   .current {
     color: var(--fg-0);
-    padding-bottom: 2px;
+    /* Room above for accented capitals, which the clipping would cut. */
+    padding: 2px 0;
     box-shadow: inset 0 -1px 0 var(--cyan-dim);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 </style>

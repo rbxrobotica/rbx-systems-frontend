@@ -327,7 +327,7 @@
   }
   .qualification {
     max-width: 52rem;
-    scroll-margin-top: calc(var(--header-h) + var(--s-6));
+    scroll-margin-top: var(--s-6);
     padding-top: var(--s-7);
     border-top: 1px solid var(--border);
   }

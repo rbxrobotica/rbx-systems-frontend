@@ -5,6 +5,7 @@
   import { authorSlugFor } from '$lib/journal/authors';
   import { canonicalTag } from '$lib/journal/tags';
   import { buildGraph, blogPostingSchema, breadcrumbSchema } from '$lib/seo/schema';
+  import { breadcrumbItems, leafTitle } from '$design/nav';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
@@ -48,11 +49,15 @@
               authorRole: data.post.authorRole,
               cover: data.post.cover
             }),
-            breadcrumbSchema(data.locale, pageUrl, [
-              { name: t(data.locale, 'nav.home'), path: '/' },
-              { name: t(data.locale, 'nav.journal'), path: '/journal' },
-              { name: data.post.title, path: `/blog/${data.publicSlug ?? data.post.slug}` }
-            ])
+            breadcrumbSchema(
+              data.locale,
+              pageUrl,
+              breadcrumbItems(
+                data.locale,
+                `/blog/${data.publicSlug ?? data.post.slug}`,
+                leafTitle(data)
+              )
+            )
           ],
           `${pageUrl}#article`
         )
