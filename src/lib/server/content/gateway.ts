@@ -8,7 +8,8 @@ import { error } from '@sveltejs/kit';
 import { load as parseYaml } from 'js-yaml';
 import { marked } from 'marked';
 import { getTextObject, getByteObject, listObjectKeys, type ByteObject } from './store';
-import { SwrCache } from './cache';
+import { SwrCache, type OriginFailures } from './cache';
+import { monitoredCache } from './cache-monitor';
 import { trackLoad } from './request-budget';
 import type { Locale, PageContent, Post, PostAlternate, PostMeta } from '$types/content';
 
@@ -18,11 +19,31 @@ const S3_COVER_PREFIX = 'https://eu2.contabostorage.com/rbx-content/blog/covers/
 
 const ttlMs = (Number(process.env.CONTENT_CACHE_TTL_SECONDS) || 60) * 1000;
 
-const pageCache = new SwrCache<PageContent>(ttlMs);
-const postCache = new SwrCache<Post>(ttlMs);
-const listCache = new SwrCache<PostMeta[]>(ttlMs);
-// Assets are stable by filename; cache longer.
-const assetCache = new SwrCache<ByteObject | null>(ttlMs * 10);
+// The caches load from one bucket, so they share its failure count: a storage
+// failure seen through any of them holds evictions in all of them.
+const storage: OriginFailures = { count: 0 };
+
+// A loader rejects with the gateway's own 404 when the bucket answered that
+// the key does not exist. Any other rejection is a storage failure.
+const isNotFound = (err: unknown) => (err as { status?: number } | null)?.status === 404;
+
+function contentCache<T>(name: string, maxEntries: number, ttl = ttlMs): SwrCache<T> {
+  return new SwrCache<T>(ttl, {
+    ...monitoredCache(name, maxEntries),
+    origin: storage,
+    isOriginFailure: (err) => !isNotFound(err)
+  });
+}
+
+// Entry bounds (guardrail 1.3) sit several times above what is published
+// today, so only a runaway key space reaches them. Sizing and outage behavior:
+// docs/implementation/content-gateway-cache.md.
+const pageCache = contentCache<PageContent>('page', 256);
+const postCache = contentCache<Post>('post', 1024);
+const listCache = contentCache<PostMeta[]>('list', 8);
+// Assets are stable by filename; cache longer. `null` records a key that the
+// bucket answered as not found.
+const assetCache = contentCache<ByteObject | null>('asset', 256, ttlMs * 10);
 
 /**
  * Parse YAML frontmatter (gray-matter-compatible) using js-yaml 4 directly.
@@ -62,7 +83,7 @@ export async function loadPageOrNull(path: string, locale: Locale): Promise<Page
   try {
     return await loadPage(path, locale);
   } catch (err) {
-    if ((err as { status?: number } | null)?.status === 404) return null;
+    if (isNotFound(err)) return null;
     throw err;
   }
 }
@@ -134,13 +155,16 @@ export async function getAsset(
 ): Promise<{ bytes: Uint8Array; contentType?: string } | null> {
   if (!isSafeAssetPath(path)) return null;
   const key = `${prefix}${path}`;
-  return cached(assetCache, `asset:${key}`, async () => {
-    try {
-      return await getByteObject(key);
-    } catch {
-      return null;
-    }
-  });
+  try {
+    // A storage failure must reach the cache as a failure: that is what keeps
+    // a cached asset in place and makes the failed revalidation visible.
+    return await cached(assetCache, `asset:${key}`, () => getByteObject(key));
+  } catch {
+    // Storage failed and nothing is cached for this key. Answer "not found"
+    // without caching it: a cached failure would occupy an entry, and during
+    // an outage a flood of them would evict assets that can still be served.
+    return null;
+  }
 }
 
 /**

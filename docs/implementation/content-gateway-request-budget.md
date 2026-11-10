@@ -134,7 +134,7 @@ Failure modes of option C:
 
 | Failure                                | Behavior                                                                                   | How it becomes visible                               |
 | -------------------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
-| Object Storage down, warm cache        | Unchanged: stale entries keep being served                                                 | Not visible today: refresh failures are not reported |
+| Object Storage down, warm cache        | Unchanged: stale entries keep being served                                                 | `[content-cache] refresh failed, serving stale` logs |
 | Object Storage down, cold cache        | Unchanged: 503                                                                             | 503 responses                                        |
 | Index missing, unreadable or malformed | Every post is read individually (today's cost); content stays correct                      | Budget warning on the listing                        |
 | Post published, index write failed     | That post is read individually until the next index write                                  | Drift count above zero; budget warning if it grows   |
