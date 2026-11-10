@@ -84,7 +84,9 @@ const siteUrlByLocale: Record<Locale, string> = {
 
 export const GET: RequestHandler = async ({ url }) => {
   const locale = detectLocaleFromUrl(url);
+  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
   const siteUrl = siteUrlByLocale[locale];
+  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
   const entries = entriesByLocale[locale];
 
   let postEntries: SitemapEntry[] = [];
@@ -103,12 +105,14 @@ export const GET: RequestHandler = async ({ url }) => {
     }
     postEntries = posts.map((post) => {
       const alternates = [
+        // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
         { hreflang: locale, href: `${siteUrlByLocale[locale]}/blog/${post.publicSlug}` }
       ];
       const otherSlug = otherByCanonical.get(post.slug);
       if (otherSlug) {
         alternates.push({
           hreflang: otherLocale,
+          // eslint-disable-next-line security/detect-object-injection -- otherLocale is the other of the two locales
           href: `${siteUrlByLocale[otherLocale]}/blog/${otherSlug}`
         });
       }

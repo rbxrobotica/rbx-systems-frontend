@@ -429,6 +429,7 @@
       />
 
       {#if status === 'error'}
+        <!-- eslint-disable-next-line security/detect-object-injection -- error holds one of the literals of its declared type -->
         <p class="error" role="alert">{copy.errors[error]}</p>
       {/if}
 

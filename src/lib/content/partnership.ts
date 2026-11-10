@@ -24,6 +24,7 @@ export function getPartnershipPrices(
 
   return currencies.map((currency) => {
     const amount =
+      // eslint-disable-next-line security/detect-object-injection -- currency iterates the constant list above
       partnershipTerms.monthlyPriceBRL * (currency === 'BRL' ? 1 : exchangeRates!.rates[currency]);
     const formatted = new Intl.NumberFormat(locale, {
       style: 'currency',

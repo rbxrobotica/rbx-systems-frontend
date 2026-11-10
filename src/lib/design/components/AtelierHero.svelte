@@ -8,6 +8,7 @@
   let { locale = 'pt-BR' }: Props = $props();
 
   const copy = $derived(
+    // eslint-disable-next-line security/detect-object-injection -- locale is the Locale prop: 'pt-BR' or 'en'
     {
       'pt-BR': {
         chapter: 'Capítulo',

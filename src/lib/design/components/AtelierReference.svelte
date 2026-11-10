@@ -32,6 +32,7 @@
     <div class="ref-body">
       <span class="ref-eyebrow">{t(locale, 'atelier.ref.eyebrow')}</span>
       <h2 id="atelier-ref-title" class="ref-title">{repo.name}</h2>
+      <!-- eslint-disable-next-line security/detect-object-injection -- locale is the Locale prop: 'pt-BR' or 'en' -->
       <p class="ref-description">{repo.description[locale]}</p>
 
       <div class="ref-meta">

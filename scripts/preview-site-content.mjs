@@ -148,6 +148,7 @@ async function main() {
         upstream.end();
       })
     );
+    // eslint-disable-next-line security/detect-object-injection -- locale iterates the literal list of this loop
     urls[locale] = `http://127.0.0.1:${port}`;
   }
   console.log(

@@ -108,6 +108,7 @@ test('invalid or missing classification and contact details never produce a payl
 
 test('public product URLs reject unsupported protocols and embedded credentials', () => {
   for (const productUrl of [
+    // eslint-disable-next-line no-script-url -- input the validator must reject
     'javascript:alert(1)',
     'ftp://example.com',
     'https://user:secret@example.com',
@@ -161,10 +162,12 @@ test('aggregate byte guard rejects excess context instead of silently truncating
 
 test('oversized fields are rejected, including multibyte email that exceeds Go bytes', () => {
   for (const field of ['name', 'email', 'company', 'productUrl', 'objective']) {
+    /* eslint-disable security/detect-object-injection -- field iterates the literal list of this loop */
     const value =
       field === 'email'
         ? 'a'.repeat(200) + '@example.com'
         : 'x'.repeat(qualificationLimits[field] + 1);
+    /* eslint-enable security/detect-object-injection */
     assert.equal(
       buildQualificationSubmission({ ...input, [field]: value }, 'pt-BR', terms, proof).error,
       'length'

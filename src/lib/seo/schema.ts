@@ -348,3 +348,13 @@ export function buildGraph(
     '@graph': graph
   };
 }
+
+/**
+ * Serialize a JSON-LD document for inlining in a `<script>` element.
+ * `JSON.stringify` leaves "<" untouched, so a value containing `</script>`
+ * would close the element and the rest would be parsed as HTML. `\u003c` is
+ * the same character to a JSON parser and inert to the HTML parser.
+ */
+export function serializeJsonLd(schema: Record<string, unknown>): string {
+  return JSON.stringify({ '@context': 'https://schema.org', ...schema }).replace(/</g, '\\u003c');
+}

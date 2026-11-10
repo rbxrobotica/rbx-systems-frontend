@@ -29,6 +29,7 @@ export function conditionalETag(etag) {
 }
 export const headersMatch = (left = {}, right = {}) =>
   ['ContentType', 'CacheControl', 'ContentLanguage', 'ContentDisposition'].every(
+    // eslint-disable-next-line security/detect-object-injection -- name iterates the literal list above
     (name) => left[name] === right[name]
   );
 
@@ -37,6 +38,7 @@ export function readSnapshot(directory) {
   if (manifest.version !== 1 || manifest.objects?.length !== 4) throw new Error('SnapshotShape');
   if (!Number.isFinite(Date.parse(manifest.captured_at))) throw new Error('SnapshotDate');
   return targets.map(([key], index) => {
+    // eslint-disable-next-line security/detect-object-injection -- index is the array position given by map
     const entry = manifest.objects[index];
     if (entry.key !== key || !/^[a-f0-9]{64}$/.test(entry.sha256)) {
       throw new Error('SnapshotScope');
@@ -64,6 +66,7 @@ function reviewedBodies() {
     const frontmatter = /^---\r?\n([\s\S]*?)\r?\n---\r?\n/.exec(body.toString('utf8'));
     const data = frontmatter && parseYaml(frontmatter[1]);
     for (const field of ['title', 'description', 'lead']) {
+      // eslint-disable-next-line security/detect-object-injection -- field iterates the literal list of this loop
       if (typeof data?.[field] !== 'string' || !data[field].trim())
         throw new Error('InvalidFrontmatter');
     }
@@ -112,6 +115,7 @@ async function getObject(client, key) {
   }
   const headers = {};
   for (const name of ['ContentType', 'CacheControl', 'ContentLanguage', 'ContentDisposition']) {
+    // eslint-disable-next-line security/detect-object-injection -- name iterates the literal list of this loop
     if (response[name] !== undefined) headers[name] = response[name];
   }
   const body = Buffer.concat(chunks);
@@ -127,6 +131,7 @@ export async function guardedWrite(
   read = getObject,
   restoring = false
 ) {
+  /* eslint-disable security/detect-object-injection -- index is the counter of the two loops over targets: a number */
   const current = [];
   for (let index = 0; index < targets.length; index++) {
     const object = await read(client, targets[index][0]);
@@ -169,6 +174,7 @@ export async function guardedWrite(
       })
     );
   }
+  /* eslint-enable security/detect-object-injection */
 }
 
 async function main(args) {

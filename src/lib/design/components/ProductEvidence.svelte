@@ -90,13 +90,14 @@
           <h3 id="evidence-product-title">{item.name}</h3>
           <span class="branch">main · {item.commit.slice(0, 7)}</span>
         </div>
+        <!-- eslint-disable security/detect-object-injection -- locale is the Locale prop: 'pt-BR' or 'en' -->
         <p class="description">{item.description[locale]}</p>
         <figure>
           <a
             class="capture-link"
             href={item.capture.src}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             onclick={() =>
               trackPartnershipEvent('cta_click', {
                 locale,
@@ -118,6 +119,7 @@
           </a>
           <figcaption>
             <p>{item.capture.caption[locale]}</p>
+            <!-- eslint-enable security/detect-object-injection -->
             <small
               >{copy.capture}: {item.capture.repository} · main · {item.capture.commit.slice(
                 0,

@@ -24,6 +24,7 @@ function rfc822(isoDate: string): string {
 
 export const GET: RequestHandler = async ({ url }) => {
   const locale = detectLocaleFromUrl(url);
+  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
   const siteUrl = siteUrlByLocale[locale];
 
   let posts: Awaited<ReturnType<typeof loadAllPosts>> = [];

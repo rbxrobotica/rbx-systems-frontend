@@ -16,6 +16,7 @@
     locale,
     exchangeRates = null
   }: { locale: Locale; exchangeRates?: PartnershipExchangeRates | null } = $props();
+  // eslint-disable-next-line security/detect-object-injection -- locale is the Locale prop: 'pt-BR' or 'en'
   const content = $derived(partnershipContent[locale]);
   const prices = $derived(getPartnershipPrices(locale, exchangeRates));
   const pageUrl = $derived(

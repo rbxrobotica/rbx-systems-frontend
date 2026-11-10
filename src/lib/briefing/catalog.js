@@ -74,6 +74,7 @@ const LIST_PER_MONTH = {
  * @returns {{ amount: number, listAmount: number, discountPct: number }}
  */
 function priceFor(currency, billing) {
+  // eslint-disable-next-line security/detect-object-injection -- currency is 'BRL' or 'USD', the Currency type
   const monthlyList = LIST_PER_MONTH[currency].monthlyList;
   if (billing === 'annual') {
     const listAmount = monthlyList * 12;
@@ -97,6 +98,7 @@ for (const audience of /** @type {Audience[]} */ (['individual', 'team'])) {
         audience,
         billing,
         currency,
+        // eslint-disable-next-line security/detect-object-injection -- currency iterates the literal list of the loop above
         method: PAYMENT_METHODS[currency][0],
         ...priceFor(currency, billing)
       });

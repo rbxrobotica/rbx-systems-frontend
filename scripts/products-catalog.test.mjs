@@ -50,6 +50,7 @@ test('Kulinaryos remains an external reference outside the RBX catalog and SEO d
 
 test('financial disclosures match the runtime canonical contract exactly in both locales', () => {
   for (const [locale, content] of Object.entries(productsContent)) {
+    // eslint-disable-next-line security/detect-object-injection -- locale iterates the keys of productsContent
     assert.equal(content.financialNote, disclosures[locale]);
   }
 });

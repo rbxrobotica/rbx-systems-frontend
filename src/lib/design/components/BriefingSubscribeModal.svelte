@@ -183,6 +183,7 @@
           : tr('title')
   );
 
+  // eslint-disable-next-line security/detect-object-injection -- currency comes from currencyForLocale: 'BRL' or 'USD'
   const methods = $derived(PAYMENT_METHODS[currency]);
   const methodText = (m: PaymentMethod) =>
     m === 'pix'
@@ -393,6 +394,7 @@
   }
 
   function focusProblem(p: Problem) {
+    // eslint-disable-next-line security/detect-object-injection -- p is a Problem literal and problemField is a constant
     const id = p ? problemField[p] : undefined;
     if (!id) return;
     queueMicrotask(() => document.getElementById(id)?.focus());

@@ -7,7 +7,7 @@
 </script>
 
 <article class="prose">
-  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -- Markdown rendered by the Content Gateway from the private bucket; only operators can write there -->
   {@html html}
 </article>
 

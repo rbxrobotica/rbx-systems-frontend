@@ -36,6 +36,7 @@ function validatePage({ key, body }) {
   const data = parseYaml(match[1]);
   if (!data || typeof data !== 'object') throw new Error(`${key}: invalid YAML frontmatter`);
   for (const field of ['title', 'description', 'lead']) {
+    // eslint-disable-next-line security/detect-object-injection -- field iterates the literal list of this loop
     if (typeof data[field] !== 'string' || !data[field].trim()) {
       throw new Error(`${key}: missing ${field}`);
     }

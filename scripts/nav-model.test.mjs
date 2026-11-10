@@ -21,6 +21,7 @@ function loadModule(rel, deps = {}) {
   }).outputText;
   const exports = {};
   const require = (specifier) => {
+    // eslint-disable-next-line security/detect-object-injection -- specifier is an import of the repository module under test; deps is this test's own stub table
     if (specifier in deps) return deps[specifier];
     throw new Error(`Unexpected dependency of ${rel}: ${specifier}`);
   };

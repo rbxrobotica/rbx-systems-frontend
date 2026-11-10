@@ -9,6 +9,7 @@ const siteUrlByLocale: Record<Locale, string> = {
 
 export const GET: RequestHandler = async ({ url }) => {
   const locale = detectLocaleFromUrl(url);
+  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
   const siteUrl = siteUrlByLocale[locale];
 
   const body = `User-agent: *

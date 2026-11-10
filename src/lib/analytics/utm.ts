@@ -64,6 +64,7 @@ const CAMPAIGN_RE =
 const CONTENT_RE =
   /^(?:(?:b2b|robson|briefing)_[a-z_]+_[a-z_]+_[0-9]{3}|satwake_h[12]_[a-z0-9_]+_[0-9]{3})$/;
 // <audience>_<segment>, lowercase snake.
+// eslint-disable-next-line security/detect-unsafe-regex -- linear: every repetition starts with "_", which the class cannot match
 const TERM_RE = /^[a-z0-9]+(_[a-z0-9]+)+$/;
 // Taxonomy rule: UTMs never contain PII. Reject email addresses, tel/mailto
 // schemes and phone-like digit runs before any format check.
@@ -100,6 +101,7 @@ export function parseUtm(search: string): UtmParams | null {
   for (const key of keys) {
     const value = params.get(key);
     if (value !== null && isValid(key, value)) {
+      // eslint-disable-next-line security/detect-object-injection -- key iterates the fixed list of UTM names above
       utm[key] = value;
     }
   }
@@ -162,10 +164,11 @@ function sameUtm(a: UtmParams, b: UtmParams): boolean {
 export function getAttributionPayload(): Record<string, string> {
   const first = getFirstTouchUtm();
   if (!first) return {};
-  const payload: Record<string, string> = {};
-  for (const [key, value] of Object.entries(first)) {
-    if (value) payload[key] = value;
-  }
+  // The stored touch is whatever JSON the visitor's browser holds. Build the
+  // payload from own entries, never by assigning to a key the storage names.
+  const payload: Record<string, string> = Object.fromEntries(
+    Object.entries(first).filter((entry): entry is [string, string] => Boolean(entry[1]))
+  );
   const last = getLastTouchUtm();
   if (last && !sameUtm(first, last)) {
     payload.last_touch_utm = JSON.stringify(last);

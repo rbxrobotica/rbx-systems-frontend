@@ -17,6 +17,7 @@
     exchangeRates = null
   }: { locale: Locale; exchangeRates?: PartnershipExchangeRates | null } = $props();
 
+  // eslint-disable-next-line security/detect-object-injection -- locale is the Locale prop: 'pt-BR' or 'en'
   const content = $derived(productsContent[locale]);
   const siteUrl = $derived(locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
   const pageUrl = $derived(`${siteUrl}${$page.url.pathname}`);

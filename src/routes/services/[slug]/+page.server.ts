@@ -4,6 +4,7 @@ import { loadPage } from '$lib/server/content/gateway';
 import { serviceContentSlug } from '$lib/services/catalog';
 import type { PageServerLoad } from './$types';
 
+// eslint-disable-next-line security/detect-unsafe-regex -- linear: every repetition starts with "-", which the class cannot match
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 export const load: PageServerLoad = async ({ url, params }) => {
