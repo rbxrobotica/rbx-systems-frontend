@@ -90,7 +90,8 @@
   .atelier-hero {
     --hero-accent: var(--cyan-brand);
     --hero-muted: var(--cyan-dim);
-    padding: var(--s-8) 0 var(--s-9);
+    /* No top padding: the breadcrumb above already sets the distance to the header. */
+    padding: 0 0 var(--s-9);
   }
 
   .hero-frame {
