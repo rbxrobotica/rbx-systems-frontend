@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rbx:health:v1",
+  "title": "RBX process health and build identity v1",
+  "description": "GET /health/details. Process liveness only; not dependency readiness, deployment authorization, release freshness or business health. Cache-Control: no-store, max-age=0. GET /healthz remains unchanged.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "service", "health", "release"],
+  "properties": {
+    "schemaVersion": { "const": "rbx.health.v1" },
+    "service": { "const": "rbx-systems-frontend" },
+    "health": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": { "status": { "const": "up" } }
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["revision", "builtAt"],
+      "properties": {
+        "revision": {
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{40}$",
+          "description": "Full lowercase source commit supplied explicitly at build time. Unknown or invalid input is null; never inferred from runtime environment or local Git."
+        },
+        "builtAt": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,9})?Z$",
+          "description": "Validated RFC3339 UTC build timestamp, or null when unknown. Not the time of the request."
+        }
+      }
+    }
+  },
+  "x-build-inputs": {
+    "RBX_BUILD_REVISION": "CI github.sha; build-only Docker ARG and Vite define literal",
+    "RBX_BUILD_BUILT_AT": "UTC timestamp created by CI; build-only Docker ARG and Vite define literal",
+    "local-default": { "revision": null, "builtAt": null }
+  },
+  "x-cost-per-request": { "databaseQueries": 0, "outboundRequests": 0 },
+  "x-failure-modes": {
+    "missing-or-invalid-build-input": "The affected release field is null; process health remains up.",
+    "database-storage-or-feed-unavailable": "Not queried or represented by this liveness endpoint.",
+    "server-unavailable": "No successful response; callers must use their own timeout and report an unavailable observation.",
+    "runtime-metadata-overrides": "Ignored because release identity is embedded in the built server bundle."
+  }
+}
