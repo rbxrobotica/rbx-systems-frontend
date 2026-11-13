@@ -1,6 +1,9 @@
 import type { RequestHandler } from './$types';
 import { getAsset } from '$lib/server/content/gateway';
 
+// Trailing slashes are dropped by the handle hook, not by the router.
+export const trailingSlash = 'ignore';
+
 // Server-side proxy for blog cover images. Keeps the Object Storage bucket
 // private: the browser never contacts S3 directly. (ADR-0002)
 export const GET: RequestHandler = async ({ params }) => {

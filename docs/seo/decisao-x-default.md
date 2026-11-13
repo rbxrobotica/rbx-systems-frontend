@@ -1,7 +1,9 @@
 # Decisão: hreflang x-default
 
 Data: 2026-09-21
-Status: vigente
+Status: substituída em 2026-11-13 por `docs/adr/ADR-0003-one-host-language-by-path.md`. O
+`x-default` segue em inglês, agora em `merovelis.com/en`. O texto abaixo é o registro da
+decisão anterior.
 
 ## Decisão
 

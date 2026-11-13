@@ -2,7 +2,7 @@
 /**
  * E2E smoke test: prove the mutation-freeze pattern works.
  *
- * 1. Open rbx.ia.br
+ * 1. Open the Portuguese home of the site
  * 2. Open the AI chat widget
  * 3. Type a message
  * 4. Intercept /api/chat and delay the response
@@ -17,7 +17,7 @@ import path from 'node:path';
 const OUT_DIR = path.resolve(process.cwd(), 'test-results', 'freeze');
 mkdirSync(OUT_DIR, { recursive: true });
 
-const BASE_URL = process.env.BASE_URL || 'https://rbx.ia.br';
+const BASE_URL = process.env.BASE_URL || 'https://merovelis.com/pt-br';
 const HEADLESS = process.env.HEADLESS !== 'false';
 
 async function main() {

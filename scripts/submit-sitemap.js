@@ -8,7 +8,7 @@
  *
  * Usage:
  *   GOOGLE_SEARCH_CONSOLE_KEY_PATH=/path/to/key.json \
- *   SITE_URL=https://rbx.ia.br \
+ *   SITE_URL=https://merovelis.com \
  *   node scripts/submit-sitemap.js
  */
 

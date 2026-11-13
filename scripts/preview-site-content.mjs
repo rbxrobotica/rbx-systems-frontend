@@ -109,48 +109,45 @@ async function main() {
   }
   if (!ready) throw new Error('Local preview application did not become ready.');
 
-  const urls = {};
-  for (const [locale, host] of [
-    ['pt-BR', 'rbx.ia.br'],
-    ['en', 'rbxsystems.ch']
-  ]) {
-    const port = await listen(
-      createServer((req, res) => {
-        if (req.method !== 'GET' && req.method !== 'HEAD') {
-          res.writeHead(405).end('Read-only preview');
-          return;
+  // One read-only proxy in front of the application. The language is the first
+  // path segment, so both previews share it.
+  const port = await listen(
+    createServer((req, res) => {
+      if (req.method !== 'GET' && req.method !== 'HEAD') {
+        res.writeHead(405).end('Read-only preview');
+        return;
+      }
+      const upstream = httpRequest(
+        {
+          hostname: '127.0.0.1',
+          port: applicationPort,
+          path: req.url,
+          method: req.method,
+          timeout: 5000
+        },
+        (response) => {
+          res.writeHead(response.statusCode, {
+            ...response.headers,
+            'Cache-Control': 'no-store',
+            // Block hydration and all interaction, including direct Comms calls.
+            'Content-Security-Policy':
+              "default-src 'self'; script-src 'none'; connect-src 'none'; form-action 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'"
+          });
+          response.pipe(res);
         }
-        const upstream = httpRequest(
-          {
-            hostname: '127.0.0.1',
-            port: applicationPort,
-            path: req.url,
-            method: req.method,
-            headers: { host },
-            timeout: 5000
-          },
-          (response) => {
-            res.writeHead(response.statusCode, {
-              ...response.headers,
-              'Cache-Control': 'no-store',
-              // Block hydration and all interaction, including direct Comms calls.
-              'Content-Security-Policy':
-                "default-src 'self'; script-src 'none'; connect-src 'none'; form-action 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'"
-            });
-            response.pipe(res);
-          }
-        );
-        upstream.once('timeout', () => upstream.destroy());
-        upstream.once('error', () => {
-          if (!res.headersSent) res.writeHead(502);
-          res.end('Preview unavailable');
-        });
-        upstream.end();
-      })
-    );
-    // eslint-disable-next-line security/detect-object-injection -- locale iterates the literal list of this loop
-    urls[locale] = `http://127.0.0.1:${port}`;
-  }
+      );
+      upstream.once('timeout', () => upstream.destroy());
+      upstream.once('error', () => {
+        if (!res.headersSent) res.writeHead(502);
+        res.end('Preview unavailable');
+      });
+      upstream.end();
+    })
+  );
+  const urls = {
+    'pt-BR': `http://127.0.0.1:${port}/pt-br`,
+    en: `http://127.0.0.1:${port}/en`
+  };
   console.log(
     JSON.stringify({
       status: 'ready',

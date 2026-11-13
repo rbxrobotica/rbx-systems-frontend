@@ -2,9 +2,9 @@
 
 ## Repository Purpose
 
-This is the public-facing website for RBX Systems (`rbx.ia.br` / `rbxsystems.ch`). It is a **SvelteKit (adapter-node) SSR** application. Blog posts are **Markdown** (rendered with `marked`; YAML frontmatter parsed with `js-yaml` 4) stored in Contabo Object Storage (S3-compatible, **private bucket**). Covers and UI assets are served through server-side proxies (`/api/blog/cover/...`, `/api/assets/...`); the bucket is never read from the client.
+This is the public-facing website for RBX Systems (`merovelis.com/pt-br` / `merovelis.com/en`). It is a **SvelteKit (adapter-node) SSR** application. Blog posts are **Markdown** (rendered with `marked`; YAML frontmatter parsed with `js-yaml` 4) stored in Contabo Object Storage (S3-compatible, **private bucket**). Covers and UI assets are served through server-side proxies (`/api/blog/cover/...`, `/api/assets/...`); the bucket is never read from the client.
 
-> **Conversion landing lives elsewhere (2026-09-20):** `/briefing-btc` is a 301 (in `src/hooks.server.ts`) to `https://briefingbtc.merovelis.com`, the isolated landing in the `rbxrobotica/rbx-landing-briefing-btc` repository — do not recreate that route here. The institutional product pages remain `/produtos/briefing-btc` and `/products/briefing-btc`.
+> **Conversion landing lives elsewhere (2026-09-20):** `/briefing-btc` is a 301 (in `src/hooks.server.ts`) to `https://briefingbtc.merovelis.com`, the isolated landing in the `rbxrobotica/rbx-landing-briefing-btc` repository — do not recreate that route here. The institutional product pages remain `/pt-br/produtos/briefing-btc` and `/en/products/briefing-btc`.
 
 > **Canonical publishing workflow:** see `~/docs/rbx-content-publish-workflow.md` (agnostic source of truth). Publishing writes one Markdown object to S3; the site reflects it within ~60s via the Content Gateway cache TTL — **no rebuild, no redeploy**.
 
@@ -66,7 +66,7 @@ Use locale-specific variants when needed:
 
 The public URL slug remains `YYYY-MM-DD-slug`. The site serves the locale-specific variant that matches the current site language and falls back to the base file if needed.
 
-**Per-locale public slug (optional):** a locale variant may declare `slugAlias: 'YYYY-MM-DD-localized-slug'` in its frontmatter (lowercase slug shape only) to localize the public URL on its host. Storage keys, cover keys, and git filenames keep the canonical slug; the site 301-redirects the canonical slug (and other-locale aliases) to the active locale's public slug and emits hreflang alternates. See `docs/AGENT-BLOG-PUBLISHING.md`.
+**Per-locale public slug (optional):** a locale variant may declare `slugAlias: 'YYYY-MM-DD-localized-slug'` in its frontmatter (lowercase slug shape only) to localize the public URL under its locale segment. Storage keys, cover keys, and git filenames keep the canonical slug; the site 301-redirects the canonical slug (and other-locale aliases) to the active locale's public slug and emits hreflang alternates. See `docs/AGENT-BLOG-PUBLISHING.md`.
 
 For all **new** agent-published posts, prefer creating both locale files and skip the base fallback file unless there is a specific reason to keep a single-language post.
 
@@ -94,10 +94,10 @@ The scripts auto-load `CONTABO_S3_*` credentials from the repo `.env` via `scrip
 
 The post is now live at:
 
-- `rbx.ia.br/blog/YYYY-MM-DD-slug` with `pt-BR` as the default locale
-- `rbxsystems.ch/blog/YYYY-MM-DD-slug` with `en` as the default locale
+- `merovelis.com/pt-br/blog/YYYY-MM-DD-slug` with `pt-BR` as the locale
+- `merovelis.com/en/blog/YYYY-MM-DD-slug` with `en` as the locale
 
-The header locale toggle may override either default via cookie.
+The header locale toggle links to the same page under the other locale segment.
 
 ### Step 3 — Specify and generate the deterministic cover
 

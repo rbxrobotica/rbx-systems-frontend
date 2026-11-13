@@ -51,15 +51,15 @@ the catalogued renderer if it satisfies the contract.
 
 The site behavior is:
 
-- `rbx.ia.br` defaults to `pt-BR`
-- `rbxsystems.ch` defaults to `en`
-- the header locale toggle may override either default via the `rbx-locale-override` cookie
+- `merovelis.com/pt-br` serves `pt-BR`
+- `merovelis.com/en` serves `en`
+- the header locale toggle links to the same page under the other locale segment
 
 The canonical storage slug stays the same across locales (S3 keys, covers,
 git filenames):
 
-- `rbx.ia.br/blog/YYYY-MM-DD-slug`
-- `rbxsystems.ch/blog/YYYY-MM-DD-slug`
+- `merovelis.com/pt-br/blog/YYYY-MM-DD-slug`
+- `merovelis.com/en/blog/YYYY-MM-DD-slug`
 
 ### Per-locale public slug (`slugAlias`)
 
@@ -71,12 +71,12 @@ slugAlias: 'YYYY-MM-DD-localized-slug'
 ```
 
 When present, that locale's public URL becomes `/blog/YYYY-MM-DD-localized-slug`
-on its host. The storage slug (canonical filename), the S3 keys, and the cover
-key do not change. The site 301-redirects the storage slug, and any other
-locale's alias, to the active locale's public slug, and emits hreflang
-alternates linking both hosts. Typical use: a Portuguese storage slug with an
-English `slugAlias` in the `.en.md` variant so `rbxsystems.ch` gets an English
-URL.
+under its locale segment. The storage slug (canonical filename), the S3 keys,
+and the cover key do not change. The site 301-redirects the storage slug, and
+any other locale's alias, to the active locale's public slug, and emits
+hreflang alternates linking both locale paths. Typical use: a Portuguese
+storage slug with an English `slugAlias` in the `.en.md` variant so
+`merovelis.com/en` gets an English URL.
 
 ## Authoring Rules
 

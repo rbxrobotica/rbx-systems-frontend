@@ -8,7 +8,7 @@
 
 1. **Uma entidade por página**: cada URL representa uma entidade clara (pessoa, organização, produto, serviço, artigo).
 2. **Grafo conectado**: JSON-LD `@graph` liga explicitamente Person ↔ Organization ↔ Product ↔ Service ↔ Article.
-3. **Canônico por idioma**: `rbx.ia.br/*` é pt-BR; `rbxsystems.ch/*` é en. Uso de `hreflang` e canonical auto-referencial.
+3. **Canônico por idioma**: `merovelis.com/pt-br/*` é pt-BR; `merovelis.com/en/*` é en (ADR-0003 deste repositório, 2026-11-13; antes, `rbx.ia.br/*` e `rbxsystems.ch/*`, que agora redirecionam). Uso de `hreflang` e canonical auto-referencial.
 4. **Domínios de marca**: RBX Systems (institucional), Merovelis (marca de produto), Strategos (produto).
 5. **Nada de black-hat**: sem keyword stuffing, cloaking, conteúdo artificial ou farms de links.
 

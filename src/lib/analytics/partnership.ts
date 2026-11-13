@@ -1,6 +1,8 @@
 import { browser } from '$app/environment';
 import { trackEvent, type EventProps } from './index';
 import { getFirstTouchUtm, getLastTouchUtm } from './utm';
+import { localizedHref } from '$lib/seo/alternates';
+import type { Locale } from '$types/content';
 
 export type PartnershipEvent =
   | 'offer_view'
@@ -79,14 +81,11 @@ export function trackPartnershipEvent(event: PartnershipEvent, props: Partnershi
     if (typeof value === 'string' && allowedValues[key].includes(value)) safe[key] = value;
   }
   if (!safe.locale || !safe.surface || !safe.entry) return;
-  const path =
-    safe.surface === 'products'
-      ? safe.locale === 'pt-BR'
-        ? '/produtos'
-        : '/products'
-      : safe.locale === 'pt-BR'
-        ? '/parceria'
-        : '/partnership';
+  // The page the offer lives on, at its address in the language of the event.
+  const path = localizedHref(
+    safe.locale as Locale,
+    safe.surface === 'products' ? '/produtos' : '/parceria'
+  );
 
   try {
     trackEvent(event, safe, {

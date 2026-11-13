@@ -148,8 +148,8 @@ Never include:
 
 Blog posts may be published in **English** and **pt-BR**.
 
-- Prefer English for `rbxsystems.ch`
-- Prefer pt-BR for `rbx.ia.br`
+- Prefer English for `merovelis.com/en`
+- Prefer pt-BR for `merovelis.com/pt-br`
 - When both variants exist, keep them semantically aligned instead of writing two unrelated articles under the same slug
 - In `pt-BR`, use standard Portuguese orthography with UTF-8 accents and cedilha
 - Never replace Portuguese diacritics with ASCII approximations such as `nao`, `producao`, `configuracao`, or `execucao`

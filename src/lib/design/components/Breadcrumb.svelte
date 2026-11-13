@@ -2,7 +2,7 @@
   import { page } from '$app/stores';
   import { leafTitle, resolveNav } from '$design/nav';
   import { t } from '$lib/i18n/translate';
-  import { localizedPath } from '$lib/seo/alternates';
+  import { localizedHref } from '$lib/seo/alternates';
   import type { Locale } from '$types/content';
 
   interface Props {
@@ -23,7 +23,7 @@
   <nav class="crumbs rbx-eyebrow" aria-label={t(locale, 'nav.breadcrumb')}>
     <ol>
       <li>
-        <a href={localizedPath(locale, '/')} class="home" aria-label={t(locale, 'nav.home')}>
+        <a href={localizedHref(locale, '/')} class="home" aria-label={t(locale, 'nav.home')}>
           <svg
             width="14"
             height="14"

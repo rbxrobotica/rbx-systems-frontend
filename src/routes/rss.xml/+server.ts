@@ -2,12 +2,10 @@ import type { RequestHandler } from '@sveltejs/kit';
 import { detectLocaleFromUrl } from '$lib/i18n/locale';
 import { loadAllPosts } from '$lib/server/content/gateway';
 import { t } from '$lib/i18n/translate';
-import type { Locale } from '$types/content';
+import { localizedUrl } from '$lib/seo/alternates';
 
-const siteUrlByLocale: Record<Locale, string> = {
-  'pt-BR': 'https://rbx.ia.br',
-  en: 'https://rbxsystems.ch'
-};
+// Trailing slashes are dropped by the handle hook, not by the router.
+export const trailingSlash = 'ignore';
 
 function escapeXml(value: string): string {
   return value
@@ -22,10 +20,10 @@ function rfc822(isoDate: string): string {
   return new Date(`${isoDate}T00:00:00Z`).toUTCString();
 }
 
+// One feed per language, under its locale segment. Without a segment the
+// request is redirected to a language before it gets here.
 export const GET: RequestHandler = async ({ url }) => {
   const locale = detectLocaleFromUrl(url);
-  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
-  const siteUrl = siteUrlByLocale[locale];
 
   let posts: Awaited<ReturnType<typeof loadAllPosts>> = [];
   try {
@@ -36,7 +34,7 @@ export const GET: RequestHandler = async ({ url }) => {
 
   const items = posts
     .map((post) => {
-      const link = `${siteUrl}/blog/${post.publicSlug}`;
+      const link = localizedUrl(locale, `/blog/${post.publicSlug}`);
       return `    <item>
       <title>${escapeXml(post.title)}</title>
       <link>${link}</link>
@@ -54,11 +52,11 @@ export const GET: RequestHandler = async ({ url }) => {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml(t(locale, 'journal.metaTitle'))}</title>
-    <link>${siteUrl}/journal</link>
+    <link>${localizedUrl(locale, '/journal')}</link>
     <description>${escapeXml(t(locale, 'journal.metaDescription'))}</description>
     <language>${locale === 'pt-BR' ? 'pt-br' : 'en'}</language>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
-    <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="${localizedUrl(locale, '/rss.xml')}" rel="self" type="application/rss+xml"/>
 ${items}
   </channel>
 </rss>`;

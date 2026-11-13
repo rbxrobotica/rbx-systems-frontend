@@ -1,8 +1,6 @@
 <script lang="ts">
-  import { page as pageStore } from '$app/stores';
   import ContentPage from '$components/ContentPage.svelte';
-  import Seo from '$components/Seo.svelte';
-  import { buildGraph } from '$lib/seo/schema';
+  import { siteHref } from '$lib/seo/alternates';
   import { t } from '$lib/i18n/translate';
   import type { Locale, PageContent } from '$types/content';
 
@@ -12,12 +10,6 @@
   }
 
   let { page, locale }: Props = $props();
-
-  const title = $derived(page?.title || t(locale, 'team.headline'));
-  const description = $derived(page?.description ?? t(locale, 'team.body') ?? '');
-  const siteUrl = $derived(locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
-  const pageUrl = $derived(`${siteUrl}${$pageStore.url.pathname}`);
-  const schema = $derived(buildGraph(locale, pageUrl, title, description));
 
   const founders = $derived([
     {
@@ -53,8 +45,7 @@
   ]);
 </script>
 
-<Seo {title} {description} {locale} canonical={pageUrl} {schema} />
-
+<!-- ContentPage writes the head of the page: one title, one canonical. -->
 <ContentPage
   {page}
   fallbackTitle={t(locale, 'team.headline')}
@@ -67,7 +58,7 @@
   <ul class="founders">
     {#each founders as founder}
       <li class="founder-card">
-        <a href={founder.href} class="founder-link">
+        <a href={siteHref(locale, founder.href)} class="founder-link">
           <span class="founder-name">{founder.name}</span>
           <span class="founder-role">{founder.role}</span>
         </a>
