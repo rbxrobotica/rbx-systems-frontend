@@ -55,7 +55,8 @@
       "qs": "^6.16.1",
       "devalue": "^5.9.2",
       "eslint-plugin-svelte>postcss-selector-parser": "7.1.6",
-      "postcss>source-map-js": "1.2.2"
+      "postcss>source-map-js": "1.2.2",
+      "@aws-sdk/xml-builder@3.972.30>fast-xml-parser": "5.12.0"
     }
   }
 }
