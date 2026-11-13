@@ -1,10 +1,13 @@
 # Stage 1: build
-FROM docker.io/library/node:20-alpine AS build
+# Node and pnpm are pinned (guardrail 2): the image by digest, with its tag
+# beside it for the reader, and pnpm to the exact release CI uses. A new
+# release of either reaches the image only through a change to this file.
+FROM docker.io/library/node:20.20.2-alpine3.23@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 AS build
 
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
-RUN corepack enable && corepack prepare pnpm@9 --activate
+RUN corepack enable && corepack prepare pnpm@9.15.9 --activate
 RUN pnpm install --frozen-lockfile
 
 COPY . .
@@ -18,7 +21,8 @@ RUN pnpm run build
 # The Node server reads content server-side from Contabo Object Storage through
 # the in-process Content Gateway; the bucket stays private and is never reached
 # by the browser. PORT / ORIGIN / forwarded headers come from k8s env at runtime.
-FROM docker.io/library/node:20-alpine
+# Same image as the build stage.
+FROM docker.io/library/node:20.20.2-alpine3.23@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293
 
 WORKDIR /app
 
