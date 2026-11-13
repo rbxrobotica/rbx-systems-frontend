@@ -17,7 +17,6 @@
       en: 'Visual Identity (Brand Voltage) and Design Systems for RBX products.'
     },
     language: 'HTML / Design Tokens',
-    updated: '2026-07-07',
     branch: 'main'
   };
 </script>
@@ -47,10 +46,6 @@
         <div class="meta-cell">
           <span class="meta-label">{t(locale, 'atelier.ref.language')}</span>
           <span class="meta-value">{repo.language}</span>
-        </div>
-        <div class="meta-cell">
-          <span class="meta-label">{t(locale, 'atelier.ref.updated')}</span>
-          <span class="meta-value">{repo.updated}</span>
         </div>
       </div>
 
@@ -162,7 +157,7 @@
 
   @media (min-width: 640px) {
     .ref-meta {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
