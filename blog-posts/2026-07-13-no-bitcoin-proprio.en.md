@@ -6,6 +6,7 @@ authorRole: 'Engineering Team'
 tags: [bitcoin, infrastructure, payments, sovereignty, engineering]
 excerpt: 'Instead of trusting a third-party API, RBX verifies every Bitcoin payment with its own node, running inside its own cluster.'
 cover: 'https://eu2.contabostorage.com/rbx-content/blog/covers/2026-07-13-no-bitcoin-proprio-v2.png'
+slugAlias: '2026-07-13-why-rbx-runs-its-own-bitcoin-node'
 ---
 
 Every time a company accepts a Bitcoin payment, there is a question almost nobody asks: who is confirming that the payment actually happened?
