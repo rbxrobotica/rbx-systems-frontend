@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   secret-scan:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     env:
       # gitleaks reads the output of `git log -p -U0`. Left to itself, that
       # output lacks four kinds of change, so the scans below pass their own
@@ -29,7 +29,7 @@ jobs:
       #   its new path.
       LOG_OPTS: --text --no-renames --diff-merges=first-parent
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
       # The SHA-256 is the one the release publishes for this file.
@@ -138,9 +138,9 @@ jobs:
         run: pnpm exec eslint .
 
   dependency-scan:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - name: Download osv-scanner v2.4.0
         run: |
           curl -sSfL -o osv-scanner "https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_linux_amd64"
