@@ -12,13 +12,22 @@ jobs:
   secret-scan:
     runs-on: ubuntu-latest
     env:
-      # gitleaks reads `git log -p`, which prints no patch for a merge commit
-      # unless asked. This prints the patch against the first parent: every
-      # line a merge has and its first parent lacks. The scans below pass
-      # their own options to `git log` for a second reason: left to itself,
-      # gitleaks adds a filter that drops a file whose type changes, such as a
-      # symbolic link that becomes a regular file.
-      MERGES: --diff-merges=first-parent
+      # gitleaks reads the output of `git log -p -U0`. Left to itself, that
+      # output lacks four kinds of change, so the scans below pass their own
+      # options to `git log`:
+      # - A merge commit, for which git prints no patch unless asked.
+      #   --diff-merges=first-parent prints every line a merge has and its
+      #   first parent lacks.
+      # - A file whose type changes, such as a symbolic link that becomes a
+      #   regular file. gitleaks adds a filter that drops it, and adds none
+      #   when the scan passes options of its own.
+      # - A file git takes for binary, by its content or because a line of
+      #   .gitattributes says so (-diff, binary). --text prints it as text.
+      # - The lines a rename leaves as they were, which matters when a file
+      #   leaves a path the rules skip, such as the .env.example that
+      #   .gitleaks.toml allowlists. --no-renames prints the file whole at
+      #   its new path.
+      LOG_OPTS: --text --no-renames --diff-merges=first-parent
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,12 +39,13 @@ jobs:
           echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  gitleaks.tar.gz" | sha256sum --check --strict
           tar -xzf gitleaks.tar.gz
           chmod +x gitleaks
-      # A throwaway repository with two random tokens, in the two kinds of
-      # commit gitleaks does not read unless asked: one in a file that takes
-      # the place of a symbolic link, one typed into a merge commit. The scan,
+      # A throwaway repository with four random tokens, one in each kind of
+      # change listed above: in a file that takes the place of a symbolic
+      # link, typed into a merge commit, in a file that .gitattributes marks
+      # -diff, and in a file renamed out of the allowlisted path. The scan,
       # with the options of the full-history scan below and the rules of
-      # .gitleaks.toml, has to find both.
-      - name: Check that the scan reads type changes and merge commits
+      # .gitleaks.toml, has to find all four.
+      - name: Check that the scan reads what gitleaks leaves out by default
         run: |
           fixture="$RUNNER_TEMP/scan-fixture"
           token() { printf 'token = "ghp_%s"\n' "$(od -An -tx1 -N18 /dev/urandom | tr -d ' \n')"; }
@@ -55,16 +65,28 @@ jobs:
           token > "$fixture/typed-into-the-merge.env"
           git -C "$fixture" add typed-into-the-merge.env
           git -C "$fixture" commit --quiet --message merge
-          ./gitleaks detect --source "$fixture" --config .gitleaks.toml --no-banner --redact --log-opts="--full-history --all $MERGES" --report-path "$RUNNER_TEMP/scan-fixture.json" || true
-          for file in was-a-link.env typed-into-the-merge.env; do
+          printf 'marked-as-binary.env -diff\n' > "$fixture/.gitattributes"
+          token > "$fixture/marked-as-binary.env"
+          token > "$fixture/.env.example"
+          git -C "$fixture" add .gitattributes marked-as-binary.env .env.example
+          git -C "$fixture" commit --quiet --message 'a file marked -diff, a file at the allowlisted path'
+          git -C "$fixture" mv .env.example left-the-allowlisted-path.env
+          git -C "$fixture" commit --quiet --message 'the file leaves the allowlisted path'
+          ./gitleaks detect --source "$fixture" --config .gitleaks.toml --no-banner --redact --log-opts="--full-history --all $LOG_OPTS" --report-path "$RUNNER_TEMP/scan-fixture.json" || true
+          for file in was-a-link.env typed-into-the-merge.env marked-as-binary.env left-the-allowlisted-path.env; do
             if ! grep -q "$file" "$RUNNER_TEMP/scan-fixture.json"; then
               echo "gitleaks did not report the token in $file" >&2
               exit 1
             fi
           done
-      # gitleaks exits 0 when git itself fails, so each scan first runs the
-      # `git log` that gitleaks runs, patches included. It fails on a commit
-      # or an option git does not know, and when git cannot print a patch.
+      # gitleaks reports nothing and exits 0 when the `git log` it runs fails
+      # (a commit or an option git does not know, a patch git cannot print).
+      # When that `git log` succeeds but writes a line gitleaks does not
+      # expect, gitleaks can stop before it has read all that git printed,
+      # and it still exits 0 if it found nothing by then: a line of
+      # .gitattributes that git cannot read is enough. So each scan first
+      # runs the command gitleaks runs, `git log -p -U0` with the same
+      # options, and stops if it fails or writes anything to standard error.
       # A pull request is scanned over its own commits first, so that a secret
       # it adds is told apart from one the repository already had.
       - name: Run gitleaks on the commits of the pull request
@@ -73,14 +95,24 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          git log -p -U0 "$MERGES" "${BASE_SHA}..${HEAD_SHA}" > /dev/null
-          ./gitleaks detect --source . --no-banner --redact -v --log-opts="$MERGES ${BASE_SHA}..${HEAD_SHA}"
+          read -r -a options <<< "$LOG_OPTS ${BASE_SHA}..${HEAD_SHA}"
+          if ! warnings="$(git log -p -U0 "${options[@]}" 2>&1 > /dev/null)" || [ -n "$warnings" ]; then
+            printf '%s\n' "$warnings" >&2
+            echo "git log failed or wrote the lines above, and gitleaks does not read all of its output when it does" >&2
+            exit 1
+          fi
+          ./gitleaks detect --source . --no-banner --redact -v --log-opts="${options[*]}"
       # Every run, a pull request as much as a push to main, then scans the
       # full history of every branch and tag, as this job did before.
       - name: Run gitleaks on the full history
         run: |
-          git log -p -U0 --full-history --all "$MERGES" > /dev/null
-          ./gitleaks detect --source . --no-banner --redact -v --log-opts="--full-history --all $MERGES"
+          read -r -a options <<< "--full-history --all $LOG_OPTS"
+          if ! warnings="$(git log -p -U0 "${options[@]}" 2>&1 > /dev/null)" || [ -n "$warnings" ]; then
+            printf '%s\n' "$warnings" >&2
+            echo "git log failed or wrote the lines above, and gitleaks does not read all of its output when it does" >&2
+            exit 1
+          fi
+          ./gitleaks detect --source . --no-banner --redact -v --log-opts="${options[*]}"
 
   security-lint:
     runs-on: ubuntu-24.04
