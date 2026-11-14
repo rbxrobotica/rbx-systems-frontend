@@ -32,6 +32,50 @@ pnpm check
 pnpm lint
 ```
 
+## Public assistant and the LLM gateway
+
+`POST /api/chat` (`src/routes/api/chat/+server.ts`) answers the chat widget. Each
+request makes one completion request to the LLM gateway, and nothing is retried by
+the server: a retry is the visitor's choice and counts against the same rate limit
+(30 requests per address in five minutes, per pod).
+
+The gateway request has a deadline that covers the connection, the headers and the
+body. It is 35 s by default and `LLM_GATEWAY_TIMEOUT_MS` overrides it with a whole
+number of milliseconds from 1 to 60000. Any other value is ignored, with one warning
+in the pod log, and the default applies, so a wrong value cannot turn the deadline
+off. The gateway is configured to give its provider call 30 s
+(`router_settings.timeout` in `apps/prod/llm-gateway/litellm-config.yml`, `rbx-infra`
+main at `0a0dc03`, read on 2026-11-14). The default sits above that on purpose: the
+gateway's own timeout error can arrive first, and the deadline is left for a gateway
+that does not answer at all.
+
+The trade-off: a visitor can wait up to 35 s, with the widget frozen, before a
+silent gateway shows as an error. A shorter deadline would show it sooner and would
+also cut answers the gateway is still producing. The other way round, an answer the
+gateway takes longer than 35 s to give, because its timeout was raised or because it
+retries its provider, is cut here. The default has to be reviewed with the gateway
+configuration; nothing checks one against the other.
+
+| What fails                                          | What `/api/chat` answers                       | What the visitor gets                              | How it shows in the pod log                                    | Recovery                   |
+| --------------------------------------------------- | ---------------------------------------------- | -------------------------------------------------- | -------------------------------------------------------------- | -------------------------- |
+| The gateway is not configured                       | 503                                            | The connection error, with a retry button          | Nothing: the answer itself                                     | Configure the gateway      |
+| The gateway answers an HTTP error                   | 502, `AI service unavailable`                  | The connection error, with a retry button          | `[chat] LLM gateway error`, with the status and the error body | Gateway back               |
+| The gateway answers OK with a body that is not JSON | 502, `AI service unavailable`                  | The connection error, with a retry button          | `[chat] LLM gateway answer is not JSON`, without the body      | Gateway back               |
+| The connection is refused, reset or cut mid-answer  | 502, `code: "gateway_unreachable"`             | The connection error, with a retry button          | `[chat] LLM gateway unreachable`, with the error code          | Gateway reachable again    |
+| The gateway accepts the request and stays silent    | 504 at the deadline, `code: "gateway_timeout"` | The timeout error, with a retry button             | `[chat] LLM gateway timed out`, with the deadline              | Gateway answering again    |
+| Too many requests from one address                  | 429                                            | A line asking to wait                              | Nothing                                                        | Automatic after the window |
+| This application dies or is unreachable mid-request | Nothing, or an error from the ingress          | The connection error, with a retry button          | Probes on `/healthz`                                           | Pods back                  |
+| The network stalls between the browser and the site | Nothing                                        | The widget stays frozen until the browser gives up | Nothing                                                        | A known gap, see below     |
+
+The log lines of the deadline and of a failed connection carry neither what the
+visitor wrote nor the gateway credential. The error body of the gateway is logged as
+the gateway sent it, as it was before the deadline existed. The widget keeps the
+visitor's message after a failure, so the retry button asks again without retyping,
+and it stays frozen while a request is pending. The deadline is the server's: the
+request the browser makes to `/api/chat` has none of its own, which is the last row
+of the table. `scripts/chat-gateway.test.mjs` runs the real handler against a fake
+gateway for the gateway rows.
+
 ## Public-assistant RAG shadow
 
 The chat BFF can duplicate only the latest user question to the governed Thalamus
