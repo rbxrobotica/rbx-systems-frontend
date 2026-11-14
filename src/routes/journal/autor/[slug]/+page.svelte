@@ -10,13 +10,13 @@
     personSchemaFor
   } from '$lib/seo/schema';
   import { breadcrumbItems, leafTitle } from '$design/nav';
+  import { localizedUrl, siteHref } from '$lib/seo/alternates';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
 
-  const siteUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
-  const pageUrl = $derived(`${siteUrl}/journal/autor/${data.author.slug}`);
+  const pageUrl = $derived(localizedUrl(data.locale, `/journal/autor/${data.author.slug}`));
   const metaTitle = $derived(
     `${t(data.locale, 'journal.headline')} · ${t(data.locale, 'journal.authorTitle')}: ${data.author.name}`
   );
@@ -42,11 +42,10 @@
         metaDescription,
         data.posts.map((post) => ({
           name: post.title,
-          url: `${siteUrl}/blog/${post.publicSlug}`
+          url: localizedUrl(data.locale, `/blog/${post.publicSlug}`)
         }))
       ),
       breadcrumbSchema(
-        data.locale,
         pageUrl,
         breadcrumbItems(data.locale, `/journal/autor/${data.author.slug}`, leafTitle(data))
       ),
@@ -75,7 +74,7 @@
   <ul class="post-list">
     {#each data.posts as post}
       <li class="post-item">
-        <a href="/blog/{post.publicSlug}">
+        <a href={siteHref(data.locale, `/blog/${post.publicSlug}`)}>
           <span class="post-date">{formatDate(post.date, data.locale)}</span>
           <h2 class="post-title">{post.title}</h2>
           <p class="rbx-caption">{post.excerpt}</p>
@@ -85,7 +84,7 @@
   </ul>
 {/if}
 
-<a href="/journal" class="back">{t(data.locale, 'common.back')}</a>
+<a href={siteHref(data.locale, '/journal')} class="back">{t(data.locale, 'common.back')}</a>
 
 <style>
   .post-list {

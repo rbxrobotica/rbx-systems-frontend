@@ -2,6 +2,7 @@
   import PageHeader from '$components/PageHeader.svelte';
   import Prose from '$components/Prose.svelte';
   import Seo from '$components/Seo.svelte';
+  import { localizedUrl, siteHref } from '$lib/seo/alternates';
   import { buildGraph } from '$lib/seo/schema';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
@@ -10,9 +11,7 @@
 
   const title = $derived(data.page?.title || t(data.locale, 'home.metaTitle'));
   const description = $derived(data.page?.description || t(data.locale, 'home.metaDescription'));
-  const pageUrl = $derived(
-    data.locale === 'pt-BR' ? 'https://rbx.ia.br/' : 'https://rbxsystems.ch/'
-  );
+  const pageUrl = $derived(localizedUrl(data.locale, '/'));
   const schema = $derived(buildGraph(data.locale, pageUrl, title, description));
 </script>
 
@@ -31,16 +30,10 @@
 {/if}
 
 <div class="actions">
-  <a
-    href={data.locale === 'pt-BR' ? '/parceria#qualificacao' : '/partnership#qualificacao'}
-    class="rbx-cta"
-  >
+  <a href={siteHref(data.locale, '/parceria#qualificacao')} class="rbx-cta">
     {t(data.locale, 'home.ctaPartnership')}
   </a>
-  <a
-    href={data.locale === 'pt-BR' ? '/produtos#evidencias' : '/products#evidencias'}
-    class="evidence-link"
-  >
+  <a href={siteHref(data.locale, '/produtos#evidencias')} class="evidence-link">
     {t(data.locale, 'home.ctaProducts')}
   </a>
 </div>
@@ -48,10 +41,7 @@
 {#if data.page?.html}
   <div class="home-copy"><Prose html={data.page.html} /></div>
   <div class="actions actions--final">
-    <a
-      href={data.locale === 'pt-BR' ? '/parceria#qualificacao' : '/partnership#qualificacao'}
-      class="rbx-cta"
-    >
+    <a href={siteHref(data.locale, '/parceria#qualificacao')} class="rbx-cta">
       {t(data.locale, 'home.ctaPartnership')}
     </a>
   </div>

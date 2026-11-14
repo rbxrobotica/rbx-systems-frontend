@@ -4,6 +4,7 @@
   import Prose from './Prose.svelte';
   import Seo from './Seo.svelte';
   import { buildGraph } from '$lib/seo/schema';
+  import { SITE_ORIGIN } from '$lib/seo/site';
   import type { Locale, PageContent } from '$types/content';
 
   interface Props {
@@ -28,8 +29,7 @@
 
   const title = $derived(page?.title || fallbackTitle);
   const description = $derived(page?.description ?? fallbackLead ?? '');
-  const siteUrl = $derived(locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
-  const pageUrl = $derived(`${siteUrl}${$pageStore.url.pathname}`);
+  const pageUrl = $derived(`${SITE_ORIGIN}${$pageStore.url.pathname}`);
   const schema = $derived(buildGraph(locale, pageUrl, title, description, schemaNodes, aboutId));
 </script>
 

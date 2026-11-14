@@ -1,6 +1,6 @@
 # RBX Systems — Public Website
 
-Public-facing institutional website for **RBX Systems** (`rbx.ia.br` / `rbxsystems.ch`).
+Public-facing institutional website for **RBX Systems** (`merovelis.com/pt-br` / `merovelis.com/en`).
 Built with **SvelteKit 5**, **TypeScript** and `@sveltejs/adapter-node` (SSR).
 
 Content (site pages and blog posts) is stored in a private S3-compatible bucket
@@ -9,8 +9,12 @@ prerender is required.
 
 ## Domains
 
-- `rbx.ia.br` — Brazilian Portuguese (pt-BR)
-- `rbxsystems.ch` — English (en)
+- `merovelis.com/pt-br` — Brazilian Portuguese (pt-BR)
+- `merovelis.com/en` — English (en)
+
+The two earlier hosts, `rbx.ia.br` and `rbxsystems.ch`, redirect page by page to the same page
+here. The design, its trade-offs and what has to be true before it goes live are in
+`docs/adr/ADR-0003-one-host-language-by-path.md`.
 
 ## Development
 
@@ -53,7 +57,7 @@ live chat result. This latency trade-off is accepted only for shadow measurement
 ## SEO / Content
 
 - Metadata, Open Graph and JSON-LD are managed via `src/lib/design/components/Seo.svelte`.
-- `robots.txt` and `sitemap.xml` are dynamic per-host endpoints (`src/routes/robots.txt/+server.ts` and `src/routes/sitemap.xml/+server.ts`), not static files. The sitemap lists the static pages plus the Journal posts, tag pages and author pages derived from the CMS content.
+- `robots.txt` is one host-wide endpoint and `sitemap.xml` is an index of the localized `/pt-br/sitemap.xml` and `/en/sitemap.xml` endpoints (`src/routes/robots.txt/+server.ts` and `src/routes/sitemap.xml/+server.ts`), not static files. The localized sitemaps list the static pages plus the Journal posts, tag pages and author pages derived from the CMS content.
 - See `docs/seo/` for the full SEO strategy, editorial plan and publishing checklist.
 
 ## Publishing a blog post

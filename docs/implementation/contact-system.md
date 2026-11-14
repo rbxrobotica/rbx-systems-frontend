@@ -10,7 +10,7 @@
 
 ## Purpose
 
-The contact system is the canonical entry point for inbound communication to RBX Systems via the public sites (`rbx.ia.br`, `rbxsystems.ch`). It owns:
+The contact system is the canonical entry point for inbound communication to RBX Systems via the public site (`merovelis.com`, in Portuguese under `/pt-br` and in English under `/en`). It owns:
 
 - The contact form on the public sites
 - Email delivery via Postmark (`contact@rbxsystems.ch`)
@@ -38,8 +38,8 @@ It does **not** own (see Non-goals below): CRM, marketing campaigns, multi-tenan
 ## Architecture (current)
 
 ```
-                    public sites
-                  (rbx.ia.br, rbxsystems.ch)
+                    public site
+               (merovelis.com/pt-br, /en)
                           │
                           ▼
               ┌────────────────────────┐

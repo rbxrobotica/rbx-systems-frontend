@@ -1,6 +1,9 @@
 import type { RequestHandler } from './$types';
 import html from '$lib/server/studies/criminalidade-sp.html?raw';
 
+// Trailing slashes are dropped by the handle hook, not by the router.
+export const trailingSlash = 'ignore';
+
 // A self-contained academic snapshot: no external requests or server-side state.
 export const GET: RequestHandler = () =>
   new Response(html, {

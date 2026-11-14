@@ -69,7 +69,7 @@
 - [ ] Frontmatter completo: title, date, author, authorRole, tags, excerpt, cover.
 - [ ] Cover image 1200×630 JPEG enviada para S3.
 - [ ] Post publicado via `./scripts/blog-publish.sh --all-locales YYYY-MM-DD-slug`.
-- [ ] URL acessível em `rbx.ia.br/blog/YYYY-MM-DD-slug` e `rbxsystems.ch/blog/YYYY-MM-DD-slug`.
+- [ ] URL acessível em `merovelis.com/pt-br/blog/YYYY-MM-DD-slug` e `merovelis.com/en/blog/YYYY-MM-DD-slug`.
 - [ ] Commits dos arquivos Markdown feitos localmente.
 
 ---

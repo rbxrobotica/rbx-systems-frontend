@@ -65,6 +65,29 @@ export function monitoredCache(cache: string, maxEntries: number): SwrCacheOptio
   };
 }
 
+/**
+ * Report a failure that its caller absorbs: the caller goes on with less
+ * (a post list read as empty), so without this line nothing would show that
+ * storage failed. Throttled like the cache events: the first failure of a
+ * kind is logged at once, later ones are folded into the next line.
+ */
+export function absorbedFailures(what: string): (detail: string, err: unknown) => void {
+  const tallies = new Map<string, Tally>();
+  return (detail, err) => {
+    let tally = tallies.get(detail);
+    if (!tally) {
+      tally = new Tally();
+      tallies.set(detail, tally);
+    }
+    const count = tally.count();
+    if (count === 0) return;
+    console.warn(
+      `[content-gateway] ${what}`,
+      JSON.stringify({ detail, error: describe(err), failures: count, total: tally.total })
+    );
+  };
+}
+
 function describe(err: unknown): string {
   let text = String(err);
   if (err instanceof Error) {

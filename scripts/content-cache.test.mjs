@@ -84,6 +84,37 @@ test('a full cache evicts the least recently read entry and reports it', async (
   await assert.rejects(cache.get('b', originDown), /origin down/);
 });
 
+test('peek returns what is cached, fresh or stale, and touches nothing', async (t) => {
+  const clock = controlClock(t);
+  const { cache, evicted, refreshErrors } = observedCache(2);
+  let loads = 0;
+  const load = (value) => async () => {
+    loads += 1;
+    return value;
+  };
+
+  assert.equal(cache.peek('a'), undefined);
+  assert.equal(loads, 0, 'a key that is not cached is not loaded');
+  await cache.get('a', load(1));
+  await cache.get('b', load(2));
+  assert.equal(cache.peek('a'), 1);
+
+  // Stale: still returned, and no revalidation is started. A reader that
+  // must not wait on the origin must not start work on it either.
+  clock.advance(TTL * 50);
+  assert.equal(cache.peek('a'), 1);
+  await backgroundWorkSettled();
+  assert.equal(loads, 2);
+  assert.deepEqual(refreshErrors, []);
+
+  // Not a read: `a` is still the least recently read entry, and it is the
+  // one a new key pushes out.
+  await cache.get('c', load(3));
+  assert.deepEqual(evicted, ['a']);
+  assert.equal(cache.peek('a'), undefined);
+  assert.equal(cache.peek('b'), 2);
+});
+
 test('a failed load adds nothing and evicts nothing', async () => {
   const { cache, evicted } = observedCache(2);
   await cache.get('a', async () => 'A');

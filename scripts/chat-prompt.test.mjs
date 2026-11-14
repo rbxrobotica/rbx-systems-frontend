@@ -6,9 +6,16 @@ import { fileURLToPath } from 'node:url';
 
 import { sanitizeMessages } from '../src/lib/server/chatMessages.js';
 import { importTypeScriptModule } from './test-support/import-typescript-module.mjs';
+import { loadTypeScriptGraph } from './test-support/load-typescript-graph.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const route = await readFile(path.join(root, 'src/routes/api/chat/+server.ts'), 'utf8');
+const widget = await readFile(
+  path.join(root, 'src/lib/design/components/AIChatWidget.svelte'),
+  'utf8'
+);
+const { siteHref } = loadTypeScriptGraph(new URL('../src/lib/seo/alternates.ts', import.meta.url));
+const { SITE_ORIGIN } = loadTypeScriptGraph(new URL('../src/lib/seo/site.ts', import.meta.url));
 
 test('the actual partnership prompt shares assessment examples and requires human confirmation', async () => {
   const { partnershipContent, partnershipTerms, formatPartnershipPrice } =
@@ -19,8 +26,9 @@ test('the actual partnership prompt shares assessment examples and requires huma
     'partnershipContent',
     'partnershipTerms',
     'formatPartnershipPrice',
+    'SITE_ORIGIN',
     `return ${expression[1]};`
-  )(partnershipContent, partnershipTerms, formatPartnershipPrice);
+  )(partnershipContent, partnershipTerms, formatPartnershipPrice, SITE_ORIGIN);
   for (const card of partnershipContent.en.fitCards) {
     assert.ok(prompt.includes(card.description));
   }
@@ -30,8 +38,16 @@ test('the actual partnership prompt shares assessment examples and requires huma
   assert.match(prompt, /You cannot confirm availability, reserve a place, approve fit/);
   assert.match(
     prompt,
-    /international partnership page at rbxsystems.ch lists indicative monthly conversions in BTC, EUR and USD/
+    /international partnership page, in English at https:\/\/merovelis\.com\/en\/partnership, lists indicative monthly conversions in BTC, EUR and USD/
   );
+  // Every address of the site the prompt gives is a page under a locale
+  // segment, and no address of the two earlier hosts is left.
+  const addresses = prompt.match(/https:\/\/merovelis\.com[^\s),;]*/g) ?? [];
+  assert.ok(addresses.length >= 8, 'the prompt links the site');
+  for (const address of addresses) {
+    assert.match(address, /^https:\/\/merovelis\.com\/(pt-br|en)\//, address);
+  }
+  assert.doesNotMatch(prompt, /rbx\.ia\.br|rbxsystems\.ch/);
   assert.match(
     prompt,
     /do not quote BRL as the international price or calculate conversions yourself/
@@ -41,12 +57,12 @@ test('the actual partnership prompt shares assessment examples and requires huma
 test('RBX Journal discovery stays inside the assistant scope', () => {
   assert.match(route, /Requests to discover or recommend public RBX Journal articles are in scope/);
   assert.match(route, /recommend "RAG público com controle e evidência"/);
-  assert.match(route, /https:\/\/rbx\.ia\.br\/blog\/2026-07-29-governed-public-rag/);
+  assert.match(route, /\$\{SITE_ORIGIN\}\/pt-br\/blog\/2026-07-29-governed-public-rag/);
   assert.match(
     route,
-    /https:\/\/rbx\.ia\.br\/blog\/2026-08-01-governed-autonomy-distributed-systems/
+    /\$\{SITE_ORIGIN\}\/pt-br\/blog\/2026-08-01-governed-autonomy-distributed-systems/
   );
-  assert.match(route, /https:\/\/rbx\.ia\.br\/blog\/2026-08-01-auditoria-ou-telemetria/);
+  assert.match(route, /\$\{SITE_ORIGIN\}\/pt-br\/blog\/2026-08-01-auditoria-ou-telemetria/);
   assert.match(route, /include the exact title, one concise reason and the full RBX URL/);
   assert.match(route, /Recommend only the listed public RBX Journal posts/);
   assert.match(route, /For another RBX theme not covered above/);
@@ -54,8 +70,15 @@ test('RBX Journal discovery stays inside the assistant scope', () => {
   assert.match(route, /Refuse every other topic/);
 });
 
-test('partnership pricing follows the current host even if the visitor changes language', () => {
-  assert.match(route, /detectLocaleFromUrl\(url\) === 'en'/);
+test('partnership pricing follows the language section of the page even if the visitor changes language', () => {
+  // The API has one address for both sections, so the page reports its own;
+  // any other value is the default section.
+  assert.match(
+    route,
+    /const locale = section === 'pt-BR' \|\| section === 'en' \? section : DEFAULT_LOCALE;/
+  );
+  assert.match(route, /locale === 'en'\n\s+\? `Current section of the website: English/);
+  assert.match(widget, /locale: partnershipLocale,/);
   assert.match(
     route,
     /Use the international BTC, EUR and USD partnership terms regardless of the visitor’s language/
@@ -96,14 +119,14 @@ test('Satwake / Briefing BTC facts and boundaries are pinned without delivery gu
   );
   assert.match(
     route,
-    /at R\$ 39 per month billed monthly or R\$ 390 per year billed annually \(R\$ 32,50 per month\), via Pix on rbx\.ia\.br, and \$12 per month or \$120 per year on rbxsystems\.ch paid in USDT through the RBX BTCPay Server or by card/
+    /at R\$ 39 per month billed monthly or R\$ 390 per year billed annually \(R\$ 32,50 per month\), via Pix on the Portuguese page \(\$\{SITE_ORIGIN\}\/pt-br\/produtos\/briefing-btc\), and \$12 per month or \$120 per year on the English page \(\$\{SITE_ORIGIN\}\/en\/products\/briefing-btc\) paid in USDT through the RBX BTCPay Server or by card/
   );
   assert.match(route, /the international edition is written in English/);
   assert.match(route, /Team plans charge the Pro per-seat price for 2 to 50 seats on one invoice/);
   assert.match(route, /State these prices only when the visitor asks about Briefing BTC/);
   assert.match(
     route,
-    /link Portuguese-speaking visitors to https:\/\/briefingbtc\.merovelis\.com and English-speaking visitors to https:\/\/rbxsystems\.ch\/products\/briefing-btc/
+    /link Portuguese-speaking visitors to https:\/\/briefingbtc\.merovelis\.com and English-speaking visitors to \$\{SITE_ORIGIN\}\/en\/products\/briefing-btc/
   );
   assert.match(
     route,
@@ -145,12 +168,13 @@ test('engineering intent offers an actionable localized qualification button', a
     /For Engineering Partnership pricing, proposals or qualification, append exactly \[CTA_PARTNERSHIP\]/
   );
   assert.doesNotMatch(route, /append neither marker/);
-  const widget = await readFile(
-    path.join(root, 'src/lib/design/components/AIChatWidget.svelte'),
-    'utf8'
-  );
   assert.match(widget, /showPartnershipCta = data\.showPartnershipCta \?\? false/);
-  assert.match(widget, /'\/partnership#qualificacao' : '\/parceria#qualificacao'/);
+  assert.match(
+    widget,
+    /partnershipHref = \$derived\(siteHref\(partnershipLocale, '\/parceria#qualificacao'\)\)/
+  );
+  assert.equal(siteHref('en', '/parceria#qualificacao'), '/en/partnership#qualificacao');
+  assert.equal(siteHref('pt-BR', '/parceria#qualificacao'), '/pt-br/parceria#qualificacao');
   assert.match(widget, /href=\{partnershipHref\}[^>]*onclick=\{openPartnership\}/);
   assert.match(widget, /entry: 'chat'/);
   assert.ok(

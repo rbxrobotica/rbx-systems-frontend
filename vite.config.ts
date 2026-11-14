@@ -6,10 +6,11 @@ export default defineConfig({
   server: {
     port: 5173,
     host: true,
-    // Locale is decided by the request host (rbx.ia.br = pt-BR, rbxsystems.ch
-    // = en), so local checks of the en site need the dev server to accept
-    // that host header: `curl -H 'Host: rbxsystems.ch' http://localhost:5173/`
-    // or an /etc/hosts entry. Production never runs the Vite server.
-    allowedHosts: ['rbx.ia.br', 'rbxsystems.ch']
+    // The site answers on merovelis.com and redirects its two earlier hosts
+    // page by page, so local checks of those redirects need the dev server to
+    // accept their host headers: `curl -I -H 'Host: rbxsystems.ch'
+    // http://localhost:5173/sobre` or an /etc/hosts entry. Production never
+    // runs the Vite server.
+    allowedHosts: ['merovelis.com', 'www.merovelis.com', 'rbx.ia.br', 'rbxsystems.ch']
   }
 });

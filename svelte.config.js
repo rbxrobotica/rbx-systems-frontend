@@ -20,6 +20,13 @@ const config = {
     },
     paths: {
       relative: false
+    },
+    // A form submitted from another origin is refused with 403 before any
+    // hook runs, and the origin of a deployment is its ORIGIN. No origin is
+    // trusted, the two earlier hosts included: the site has no form action
+    // and no endpoint that reads a form body (docs/adr/ADR-0003).
+    csrf: {
+      trustedOrigins: []
     }
   }
 };

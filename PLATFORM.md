@@ -144,6 +144,6 @@ Mas as quatro responsabilidades permanecem:
 
 **`rbx-robotica-frontend`** é a interface pública da plataforma RBX.
 
-Este repositório implementa o site institucional e as landing pages dos produtos RBX (rbx.ia.br, rbxsystems.ch). Não é AI-native: renderiza conteúdo estático e dinâmico, expõe formulários de captura integrados ao rbx-comms e apresenta os produtos ao público. Quando features de IA forem introduzidas na experiência do usuário — recomendações, personalização, assistentes — toda chamada a modelos deve transitar pelo Thalamus como portão obrigatório.
+Este repositório implementa o site institucional e as landing pages dos produtos RBX (merovelis.com/pt-br, merovelis.com/en). Não é AI-native: renderiza conteúdo estático e dinâmico, expõe formulários de captura integrados ao rbx-comms e apresenta os produtos ao público. Quando features de IA forem introduzidas na experiência do usuário — recomendações, personalização, assistentes — toda chamada a modelos deve transitar pelo Thalamus como portão obrigatório.
 
 rbx-robotica-frontend não controla tráfego AI, não avalia modelos e não coordena missões. Ele apresenta: a face pública da plataforma, os produtos disponíveis e os pontos de entrada do funil.
