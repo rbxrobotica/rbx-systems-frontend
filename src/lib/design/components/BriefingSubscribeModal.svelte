@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
   import { t, tl } from '$lib/i18n/translate';
+  import { siteHref } from '$lib/seo/alternates';
   import { getCommerceBaseUrl } from '$lib/api/commerce';
   import {
     trackEvent,
@@ -201,7 +202,7 @@
 
   const commerceBase = getCommerceBaseUrl();
   const challengeUrl = `${commerceBase}/api/public/altcha-challenge`;
-  const supportPath = $derived(locale === 'pt-BR' ? '/contato' : '/contact');
+  const supportPath = $derived(siteHref(locale, '/contato'));
 
   // Scroll lock, focus and the open event. Cleanup restores the page and the
   // element that opened the modal.
@@ -1409,7 +1410,10 @@
 
       <footer class="foot">
         <span>{tr('footer.note')}</span>
-        <span>{tr('footer.governance')} <a href="/legal">{tr('footer.legal')}</a></span>
+        <span
+          >{tr('footer.governance')}
+          <a href={siteHref(locale, '/legal')}>{tr('footer.legal')}</a></span
+        >
       </footer>
     </div>
   </div>

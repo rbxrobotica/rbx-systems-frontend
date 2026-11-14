@@ -4,8 +4,8 @@
   import Logo from './Logo.svelte';
   import { NAV_SECTIONS, leafTitle, navLabel, resolveNav, localeSwitchHref } from '$design/nav';
   import { t } from '$lib/i18n/translate';
-  import { localizedPath } from '$lib/seo/alternates';
-  import type { Locale } from '$types/content';
+  import { localizedHref } from '$lib/seo/alternates';
+  import type { Locale, PostAlternate } from '$types/content';
 
   interface Props {
     locale: Locale;
@@ -14,7 +14,7 @@
   let { locale }: Props = $props();
 
   const tr = (key: string) => t(locale, key);
-  const href = (pathname: string) => localizedPath(locale, pathname);
+  const href = (pathname: string) => localizedHref(locale, pathname);
 
   // Header in three rows: brand + language + contact; the five sections; and,
   // when the page belongs to a section, a band with that section's pages.
@@ -27,8 +27,10 @@
     nav.trail.length > 1 ? nav.trail[nav.trail.length - 1].label : undefined
   );
 
-  const ptHref = $derived(localeSwitchHref(locale, 'pt-BR', pathname));
-  const enHref = $derived(localeSwitchHref(locale, 'en', pathname));
+  // A post names its address in each language it exists in.
+  const alternates = $derived(($page.data as { alternates?: PostAlternate[] }).alternates);
+  const ptHref = $derived(localeSwitchHref(locale, 'pt-BR', pathname, alternates));
+  const enHref = $derived(localeSwitchHref(locale, 'en', pathname, alternates));
 
   let menuOpen = $state(false);
   let sectionOpen = $state(false);
@@ -48,9 +50,13 @@
       </a>
 
       <div class="tools">
+        <!-- Changing language loads a new document, as it did when each
+             language had its own host: whatever a component decided once from
+             the address (the service it calls, the dictionary) starts again. -->
         <div class="lang rbx-eyebrow" role="group" aria-label={tr('nav.language')}>
           <a
             href={ptHref}
+            data-sveltekit-reload
             hreflang="pt-BR"
             lang="pt-BR"
             class:active={locale === 'pt-BR'}
@@ -59,6 +65,7 @@
           <span aria-hidden="true">/</span>
           <a
             href={enHref}
+            data-sveltekit-reload
             hreflang="en"
             lang="en"
             class:active={locale === 'en'}

@@ -9,7 +9,9 @@
     type PartnershipExchangeRates
   } from '$lib/content/partnership';
   import { trackPartnershipEvent } from '$lib/analytics/partnership';
+  import { siteHref } from '$lib/seo/alternates';
   import { buildGraph, collectionPageSchema } from '$lib/seo/schema';
+  import { SITE_ORIGIN } from '$lib/seo/site';
   import type { Locale } from '$types/content';
 
   let {
@@ -19,8 +21,7 @@
 
   // eslint-disable-next-line security/detect-object-injection -- locale is the Locale prop: 'pt-BR' or 'en'
   const content = $derived(productsContent[locale]);
-  const siteUrl = $derived(locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
-  const pageUrl = $derived(`${siteUrl}${$page.url.pathname}`);
+  const pageUrl = $derived(`${SITE_ORIGIN}${$page.url.pathname}`);
   const schema = $derived(
     buildGraph(locale, pageUrl, content.title, content.description, [
       collectionPageSchema(
@@ -55,7 +56,7 @@
     </ul>
     <a
       class="partnership-link"
-      href={content.contactHref}
+      href={siteHref(locale, content.contactHref)}
       onclick={() =>
         trackPartnershipEvent('cta_click', {
           locale,
@@ -87,9 +88,9 @@
           {#if product.note}<p class="product-note">{product.note}</p>{/if}
           {#if product.href}
             <div class="product-links">
-              <a href={product.href}>{product.linkLabel}</a>
+              <a href={siteHref(locale, product.href)}>{product.linkLabel}</a>
               {#each product.secondaryLinks ?? [] as link}
-                <a href={link.href}>{link.label}</a>
+                <a href={siteHref(locale, link.href)}>{link.label}</a>
               {/each}
             </div>
           {/if}
@@ -122,7 +123,7 @@
           <h3>{product.name}</h3>
           <p class="product-context">{product.context}</p>
           <p>{product.description}</p>
-          {#if product.href}<a href={product.href}>{product.linkLabel}</a>{/if}
+          {#if product.href}<a href={siteHref(locale, product.href)}>{product.linkLabel}</a>{/if}
         </article>
       {/each}
     </div>
@@ -192,7 +193,7 @@
           <p class="eyebrow">{reference.name}</p>
           <h3>{reference.title}</h3>
           <p>{reference.description}</p>
-          {#if reference.href}<a href={reference.href}>{reference.label}</a>{/if}
+          {#if reference.href}<a href={siteHref(locale, reference.href)}>{reference.label}</a>{/if}
         </article>
       {/each}
     </div>
@@ -211,7 +212,7 @@
     </div>
     <a
       class="rbx-cta"
-      href={content.contactHref}
+      href={siteHref(locale, content.contactHref)}
       onclick={() =>
         trackPartnershipEvent('cta_click', {
           locale,
@@ -224,7 +225,7 @@
 
   <aside class="portfolio-notes" aria-label={content.legalLabel}>
     <p><strong>Satwake / Briefing BTC.</strong> {content.financialNote}</p>
-    <a href="/legal">{content.legalLabel}</a>
+    <a href={siteHref(locale, '/legal')}>{content.legalLabel}</a>
   </aside>
 </div>
 

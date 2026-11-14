@@ -2,6 +2,7 @@
   import { formatDate } from '$api/content';
   import PageHeader from '$components/PageHeader.svelte';
   import Seo from '$components/Seo.svelte';
+  import { localizedUrl, siteHref } from '$lib/seo/alternates';
   import { buildGraph, breadcrumbSchema, collectionPageSchema } from '$lib/seo/schema';
   import { breadcrumbItems, leafTitle } from '$design/nav';
   import { t } from '$lib/i18n/translate';
@@ -9,8 +10,7 @@
 
   let { data }: { data: PageData } = $props();
 
-  const siteUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
-  const pageUrl = $derived(`${siteUrl}/journal/tag/${data.tag}`);
+  const pageUrl = $derived(localizedUrl(data.locale, `/journal/tag/${data.tag}`));
   const metaTitle = $derived(
     `${t(data.locale, 'journal.headline')} · ${t(data.locale, 'journal.tagTitle')}: ${data.tag}`
   );
@@ -24,11 +24,10 @@
         metaDescription,
         data.posts.map((post) => ({
           name: post.title,
-          url: `${siteUrl}/blog/${post.publicSlug}`
+          url: localizedUrl(data.locale, `/blog/${post.publicSlug}`)
         }))
       ),
       breadcrumbSchema(
-        data.locale,
         pageUrl,
         breadcrumbItems(data.locale, `/journal/tag/${data.tag}`, leafTitle(data))
       )
@@ -56,7 +55,7 @@
   <ul class="post-list">
     {#each data.posts as post}
       <li class="post-item">
-        <a href="/blog/{post.publicSlug}">
+        <a href={siteHref(data.locale, `/blog/${post.publicSlug}`)}>
           <span class="post-date">{formatDate(post.date, data.locale)}</span>
           <h2 class="post-title">{post.title}</h2>
           <p class="rbx-caption">{post.excerpt}</p>
@@ -66,7 +65,7 @@
   </ul>
 {/if}
 
-<a href="/journal" class="back">{t(data.locale, 'common.back')}</a>
+<a href={siteHref(data.locale, '/journal')} class="back">{t(data.locale, 'common.back')}</a>
 
 <style>
   .post-list {

@@ -2,13 +2,17 @@ import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import { sanitizeMessages } from '$lib/server/chatMessages.js';
 import { runRagShadow } from '$lib/server/ragShadow';
-import { detectLocaleFromUrl } from '$lib/i18n/locale';
+import { DEFAULT_LOCALE } from '$lib/i18n/locale';
+import { SITE_ORIGIN } from '$lib/seo/site';
 import {
   formatPartnershipPrice,
   partnershipTerms,
   partnershipContent
 } from '$lib/content/partnership';
 import type { RequestHandler } from './$types';
+
+// Trailing slashes are dropped by the handle hook, not by the router.
+export const trailingSlash = 'ignore';
 
 const SYSTEM_PROMPT = `You are the digital assistant for RBX Systems — a precision engineering company that builds governed AI platforms for high-demand operations. RBX is headquartered in Brazil and Switzerland (Zug).
 
@@ -30,13 +34,13 @@ Principal RBX products:
 - Robson Code: a distinct internal RBX coding agent. Always use the full name and never attribute its coding capabilities to the original Robson.
 - Robson AI Assistant: this public RBX assistant for institutional, commercial, editorial and product-support information. It does not execute trades and is not Robson Code.
 - Strategos: an RBX product and the human situation room for observing, judging and deciding around agents and operations. It is the strategic surface for human judgment; it is not a CRM, ERP, agent runtime, canonical governance registry, LLM router, or ground-truth engine.
-- Satwake / Briefing Diário BTC (also called Briefing BTC; the existing pages and URLs still use Briefing BTC, so identify both names when linking): an RBX market-intelligence subscription. Operational reading of the BTC/USDT futures market, with available editions in the authenticated member area. Do not promise a new edition every day, a delivery deadline or a continuous archive. Each edition consolidates context, scenarios and a flight plan in six core audit artifacts (flight-plan, snapshot, model-output, manifest, sources, execution-log) plus the delivered briefing message, built from public read-only Binance USD-M data, with history available for consultation and audit. It is NOT a trading signal: it does not recommend buying or selling, does not promise returns, and does not trigger execution systems. Never generate, reproduce, summarize or personalize briefing content yourself: no scenarios, levels, entries, stops, targets or market reads, even framed as product support or examples. You have no access to briefing editions or their history. Publicly listed plans, as shown on the landing page: Free at R$ 0 (reading the seven most recent published editions in total, including the current edition when available, in the logged-in area at https://app.merovelis.com/briefing-btc with a Google sign-in, no WhatsApp delivery); Pro with access to older available editions and the six downloadable artifacts of each edition, at R$ 39 per month billed monthly or R$ 390 per year billed annually (R$ 32,50 per month), via Pix on rbx.ia.br, and $12 per month or $120 per year on rbxsystems.ch paid in USDT through the RBX BTCPay Server or by card; the international edition is written in English. Team plans charge the Pro per-seat price for 2 to 50 seats on one invoice, with each seat's WhatsApp number registered by RBX after payment. State these prices only when the visitor asks about Briefing BTC. For product details or subscription, link Portuguese-speaking visitors to https://briefingbtc.merovelis.com and English-speaking visitors to https://rbxsystems.ch/products/briefing-btc.
+- Satwake / Briefing Diário BTC (also called Briefing BTC; the existing pages and URLs still use Briefing BTC, so identify both names when linking): an RBX market-intelligence subscription. Operational reading of the BTC/USDT futures market, with available editions in the authenticated member area. Do not promise a new edition every day, a delivery deadline or a continuous archive. Each edition consolidates context, scenarios and a flight plan in six core audit artifacts (flight-plan, snapshot, model-output, manifest, sources, execution-log) plus the delivered briefing message, built from public read-only Binance USD-M data, with history available for consultation and audit. It is NOT a trading signal: it does not recommend buying or selling, does not promise returns, and does not trigger execution systems. Never generate, reproduce, summarize or personalize briefing content yourself: no scenarios, levels, entries, stops, targets or market reads, even framed as product support or examples. You have no access to briefing editions or their history. Publicly listed plans, as shown on the landing page: Free at R$ 0 (reading the seven most recent published editions in total, including the current edition when available, in the logged-in area at https://app.merovelis.com/briefing-btc with a Google sign-in, no WhatsApp delivery); Pro with access to older available editions and the six downloadable artifacts of each edition, at R$ 39 per month billed monthly or R$ 390 per year billed annually (R$ 32,50 per month), via Pix on the Portuguese page (${SITE_ORIGIN}/pt-br/produtos/briefing-btc), and $12 per month or $120 per year on the English page (${SITE_ORIGIN}/en/products/briefing-btc) paid in USDT through the RBX BTCPay Server or by card; the international edition is written in English. Team plans charge the Pro per-seat price for 2 to 50 seats on one invoice, with each seat's WhatsApp number registered by RBX after payment. State these prices only when the visitor asks about Briefing BTC. For product details or subscription, link Portuguese-speaking visitors to https://briefingbtc.merovelis.com and English-speaking visitors to ${SITE_ORIGIN}/en/products/briefing-btc.
 - RBX owns and develops Robson, Strategos and Briefing Diário BTC. Refer to them as RBX products, never as third-party products.
 
 RBX Journal recommendations:
-- For a general request such as "recommend a Journal post for me to read today", recommend "RAG público com controle e evidência". Explain briefly that it shows how RBX separates retrieval, runtime control, memory and evaluation in the public assistant. Link to https://rbx.ia.br/blog/2026-07-29-governed-public-rag.
-- For agent governance or production autonomy, recommend "Autonomia governada é um problema de sistemas distribuídos". Link to https://rbx.ia.br/blog/2026-08-01-governed-autonomy-distributed-systems.
-- For audit, event sourcing or observability, recommend "Auditoria não é telemetria". Link to https://rbx.ia.br/blog/2026-08-01-auditoria-ou-telemetria.
+- For a general request such as "recommend a Journal post for me to read today", recommend "RAG público com controle e evidência". Explain briefly that it shows how RBX separates retrieval, runtime control, memory and evaluation in the public assistant. Link to ${SITE_ORIGIN}/pt-br/blog/2026-07-29-governed-public-rag.
+- For agent governance or production autonomy, recommend "Autonomia governada é um problema de sistemas distribuídos". Link to ${SITE_ORIGIN}/pt-br/blog/2026-08-01-governed-autonomy-distributed-systems.
+- For audit, event sourcing or observability, recommend "Auditoria não é telemetria". Link to ${SITE_ORIGIN}/pt-br/blog/2026-08-01-auditoria-ou-telemetria.
 - For another RBX theme not covered above, ask one concise clarifying question or use the general recommendation.
 - A recommendation must include the exact title, one concise reason and the full RBX URL. Recommend only the listed public RBX Journal posts. Never invent a post, slug, author, publication date or external recommendation.
 
@@ -44,11 +48,11 @@ We serve enterprises that need AI sovereignty, governance, and operational preci
 
 RBX Engineering Partnership, public terms version ${partnershipTerms.version}:
 - Examples of contexts for assessment: ${partnershipContent.en.fitCards.map((card) => `${card.title}: ${card.description}`).join(' ')} These examples do not confirm acceptance or a dedicated specialist team. A human confirms scope and engineering availability.
-- The Brazilian partnership page at rbx.ia.br lists ${formatPartnershipPrice('pt-BR')} per month in Brazilian reais (BRL). The international partnership page at rbxsystems.ch lists indicative monthly conversions in BTC, EUR and USD. For international pricing, direct visitors to https://rbxsystems.ch/partnership#qualificacao for the current quote; do not quote BRL as the international price or calculate conversions yourself. Both include ${partnershipTerms.monthlyHours} hours per month of founder-led technical capacity with AI assistance for one product. The final currency amount is confirmed in the proposal.
+- The Brazilian partnership page, in Portuguese at ${SITE_ORIGIN}/pt-br/parceria, lists ${formatPartnershipPrice('pt-BR')} per month in Brazilian reais (BRL). The international partnership page, in English at ${SITE_ORIGIN}/en/partnership, lists indicative monthly conversions in BTC, EUR and USD. For international pricing, direct visitors to ${SITE_ORIGIN}/en/partnership#qualificacao for the current quote; do not quote BRL as the international price or calculate conversions yourself. Both include ${partnershipTerms.monthlyHours} hours per month of founder-led technical capacity with AI assistance for one product. The final currency amount is confirmed in the proposal.
 - Those hours include implementation, technical direction, review, testing and asynchronous communication. Work is prioritized within the agreed monthly capacity; this is not an unlimited delivery commitment or a dedicated full-time team.
 - Infrastructure and the client's API consumption have a separate budget. Continuous on-call support, fixed delivery dates and extra capacity require an explicit proposal; do not imply they are included.
 - RBX is opening with a plan for ${partnershipTerms.initialPartners} partnerships. This is a planning limit, not a live count of available places. You cannot confirm availability, reserve a place, approve fit, promise a start date or conclude a contract. A human confirms scope, capacity and commercial conditions by email after qualification.
-- For partnership pricing or concrete interest in engineering capacity, give the public reference price and direct Portuguese-speaking visitors to https://rbx.ia.br/parceria#qualificacao or English-speaking visitors to https://rbxsystems.ch/partnership#qualificacao. The short form starts an asynchronous fit review; an exploratory meeting is not required for every enquiry.
+- For partnership pricing or concrete interest in engineering capacity, give the public reference price and direct Portuguese-speaking visitors to ${SITE_ORIGIN}/pt-br/parceria#qualificacao or English-speaking visitors to ${SITE_ORIGIN}/en/partnership#qualificacao. The short form starts an asynchronous fit review; an exploratory meeting is not required for every enquiry.
 - Do not invent prices, discounts, currency conversions or individualized estimates. Do not ask for credentials, private source code, customer records or other sensitive data. The public assistant does not automatically qualify leads or prepare binding proposals.
 
 Your role:
@@ -139,7 +143,7 @@ function resolveLlmTarget(): LlmTarget | null {
   return null;
 }
 
-export const POST: RequestHandler = async ({ request, getClientAddress, url }) => {
+export const POST: RequestHandler = async ({ request, getClientAddress }) => {
   const target = resolveLlmTarget();
   if (!target) throw error(503, 'AI assistant not configured');
 
@@ -148,11 +152,16 @@ export const POST: RequestHandler = async ({ request, getClientAddress, url }) =
   }
 
   let messages: Message[];
+  let section: unknown;
   try {
-    ({ messages } = await request.json());
+    ({ messages, locale: section } = await request.json());
   } catch {
     throw error(400, 'Invalid request body');
   }
+  // The language section the visitor is in, as the page reports it. The API
+  // has one address for both, so the URL does not say. Anything else than the
+  // two known values is the default section.
+  const locale = section === 'pt-BR' || section === 'en' ? section : DEFAULT_LOCALE;
 
   if (!Array.isArray(messages) || messages.length === 0) {
     throw error(400, 'messages array required');
@@ -171,9 +180,9 @@ export const POST: RequestHandler = async ({ request, getClientAddress, url }) =
       })
     : Promise.resolve();
   const pricingContext =
-    detectLocaleFromUrl(url) === 'en'
-      ? 'Current website: rbxsystems.ch. Use the international BTC, EUR and USD partnership terms regardless of the visitor’s language. Direct the visitor to the international partnership page for the current quote; never give BRL as this site’s partnership price.'
-      : 'Current website: rbx.ia.br. Use the Brazilian BRL partnership terms regardless of the visitor’s language.';
+    locale === 'en'
+      ? `Current section of the website: English, ${SITE_ORIGIN}/en. Use the international BTC, EUR and USD partnership terms regardless of the visitor’s language. Direct the visitor to the international partnership page for the current quote; never give BRL as this section’s partnership price.`
+      : `Current section of the website: Portuguese, ${SITE_ORIGIN}/pt-br. Use the Brazilian BRL partnership terms regardless of the visitor’s language.`;
 
   const [res] = await Promise.all([
     fetch(target.url, {

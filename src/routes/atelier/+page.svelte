@@ -2,6 +2,7 @@
   import ContentPage from '$components/ContentPage.svelte';
   import AtelierReference from '$components/AtelierReference.svelte';
   import AtelierHero from '$components/AtelierHero.svelte';
+  import Seo from '$components/Seo.svelte';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
@@ -21,6 +22,13 @@
 </script>
 
 {#if isPlaceholder}
+  <!-- The poster stands in for the content, and is still a page: it has a
+       title and names its own address, like the page it stands in for. -->
+  <Seo
+    title={data.page?.title || t(data.locale, 'nav.atelier')}
+    description={data.page?.description ?? ''}
+    locale={data.locale}
+  />
   <AtelierHero locale={data.locale} />
 {:else}
   <ContentPage

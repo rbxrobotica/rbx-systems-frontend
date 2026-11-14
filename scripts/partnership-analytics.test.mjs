@@ -3,6 +3,11 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import ts from 'typescript';
 import { importTypeScriptModule } from './test-support/import-typescript-module.mjs';
+import { loadTypeScriptGraph } from './test-support/load-typescript-graph.mjs';
+
+const { localizedHref } = loadTypeScriptGraph(
+  new URL('../src/lib/seo/alternates.ts', import.meta.url)
+);
 
 const { buildQualificationSubmission } = await importTypeScriptModule(
   new URL('../src/lib/partnership/qualification.ts', import.meta.url)
@@ -28,7 +33,7 @@ function compile(source) {
 
 function fixture({
   browser = true,
-  hostname = 'rbx.ia.br',
+  hostname = 'merovelis.com',
   storage,
   first,
   last,
@@ -39,20 +44,23 @@ function fixture({
     location: {
       hostname,
       origin: `https://${hostname}`,
-      href: `https://${hostname}/parceria?email=private@example.test#private`
+      href: `https://${hostname}/pt-br/parceria?email=private@example.test#private`
     },
     localStorage: storage ?? { getItem: () => null }
   };
   const transformed = source
     .replace("import { browser } from '$app/environment';", '')
     .replace("import { trackEvent, type EventProps } from './index';", '')
-    .replace("import { getFirstTouchUtm, getLastTouchUtm } from './utm';", '');
+    .replace("import { getFirstTouchUtm, getLastTouchUtm } from './utm';", '')
+    .replace("import { localizedHref } from '$lib/seo/alternates';", '')
+    .replace("import type { Locale } from '$types/content';", '');
   const api = new Function(
     'browser',
     'window',
     'trackEvent',
     'getFirstTouchUtm',
     'getLastTouchUtm',
+    'localizedHref',
     compile(transformed) + '\nreturn { trackPartnershipEvent, getPartnershipAttribution };'
   )(
     browser,
@@ -62,7 +70,8 @@ function fixture({
       calls.push(args);
     },
     () => first,
-    () => last
+    () => last,
+    localizedHref
   );
   return { ...api, calls };
 }
@@ -157,7 +166,7 @@ test('partnership events keep only bounded properties and a canonical query-free
         ...context,
         destination: 'qualification'
       },
-      { url: 'https://rbx.ia.br/parceria', interactive: true }
+      { url: 'https://merovelis.com/pt-br/parceria', interactive: true }
     ]
   ]);
 });
@@ -165,13 +174,13 @@ test('partnership events keep only bounded properties and a canonical query-free
 test('all locales and surfaces use canonical paths; passive views do not inflate engagement', () => {
   const f = fixture();
   for (const [locale, surface, path] of [
-    ['pt-BR', 'products', '/produtos'],
-    ['en', 'products', '/products'],
-    ['pt-BR', 'partnership', '/parceria'],
-    ['en', 'partnership', '/partnership']
+    ['pt-BR', 'products', '/pt-br/produtos'],
+    ['en', 'products', '/en/products'],
+    ['pt-BR', 'partnership', '/pt-br/parceria'],
+    ['en', 'partnership', '/en/partnership']
   ]) {
     f.trackPartnershipEvent('offer_view', { locale, surface, entry: 'offer' });
-    assert.equal(f.calls.at(-1)[2].url, `https://rbx.ia.br${path}`);
+    assert.equal(f.calls.at(-1)[2].url, `https://merovelis.com${path}`);
     assert.equal(f.calls.at(-1)[2].interactive, false);
   }
   f.trackPartnershipEvent('evidence_view', {
@@ -286,14 +295,14 @@ test('the shared provider removes referrer details only for partnership events',
 test('the shared provider forwards canonical URL and passive status without breaking earlier callers', () => {
   const f = providerFixture();
   f.setRuntimeConfig({
-    domain: 'rbx.ia.br',
+    domain: 'merovelis.com',
     scriptSrc: 'https://analytics.example.test/script.js'
   });
   f.bootstrapPlausible();
   f.trackEvent(
     'offer_view',
     { offer: 'engineering-partnership' },
-    { url: 'https://rbx.ia.br/parceria', interactive: false }
+    { url: 'https://merovelis.com/pt-br/parceria', interactive: false }
   );
   f.trackEvent('chat_open', { entry: 'contact-menu' });
   assert.deepEqual(f.window.plausible.q, [
@@ -301,7 +310,7 @@ test('the shared provider forwards canonical URL and passive status without brea
       'offer_view',
       {
         props: { offer: 'engineering-partnership' },
-        u: 'https://rbx.ia.br/parceria',
+        u: 'https://merovelis.com/pt-br/parceria',
         interactive: false
       }
     ],

@@ -2,8 +2,14 @@
  * JSON-LD schema generators for RBX Systems public pages.
  * All IDs are canonical and stable; they should match the canonical URL
  * of the page where they are embedded.
+ *
+ * Both languages live on one host, so the organization, the site and each
+ * person have one id each, the same in both languages. What a node says in a
+ * language (description, job title, the address of a page) differs per page.
  */
 import type { Locale } from '$types/content';
+import { localizedUrl } from './alternates';
+import { SITE_ORIGIN } from './site';
 
 const RBX_NAME = 'RBX Systems';
 const RBX_ALTERNATE_NAMES = ['RBX', 'RBX Robótica'];
@@ -19,53 +25,30 @@ const LEANDRO_JOB_TITLE_EN = 'Founder & CEO, RBX Systems';
 const LEANDRO_LINKEDIN = 'https://www.linkedin.com/in/ldamasio/';
 const LEANDRO_GITHUB = 'https://github.com/ldamasio';
 
-const ORG_ID_PT = 'https://rbx.ia.br/#organization';
-const ORG_ID_EN = 'https://rbxsystems.ch/#organization';
-const WEBSITE_ID_PT = 'https://rbx.ia.br/#website';
-const WEBSITE_ID_EN = 'https://rbxsystems.ch/#website';
-const PERSON_ID_PT = 'https://rbx.ia.br/#leandro-damasio';
-const PERSON_ID_EN = 'https://rbxsystems.ch/#leandro-damasio';
+const ORG_ID = `${SITE_ORIGIN}/#organization`;
+const WEBSITE_ID = `${SITE_ORIGIN}/#website`;
+const PERSON_ID = `${SITE_ORIGIN}/#leandro-damasio`;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function orgSameAs(locale: Locale): string[] {
-  const sameAs = [
-    'https://github.com/rbxrobotica',
-    'https://www.linkedin.com/in/ldamasio/',
-    'https://rbx.ia.br',
-    'https://rbxsystems.ch',
-    'https://merovelis.com',
-    'https://strategos.gr'
-  ];
-  return sameAs;
-}
-
-function orgId(locale: Locale): string {
-  return locale === 'pt-BR' ? ORG_ID_PT : ORG_ID_EN;
-}
-
-function websiteId(locale: Locale): string {
-  return locale === 'pt-BR' ? WEBSITE_ID_PT : WEBSITE_ID_EN;
-}
-
-function personId(locale: Locale): string {
-  return locale === 'pt-BR' ? PERSON_ID_PT : PERSON_ID_EN;
-}
-
-function siteUrl(locale: Locale): string {
-  return locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch';
-}
+// Other places that identify the organization. The two earlier hosts are not
+// among them: they redirect here.
+const ORG_SAME_AS = [
+  'https://github.com/rbxrobotica',
+  'https://www.linkedin.com/in/ldamasio/',
+  'https://strategos.gr'
+];
 
 export function organizationSchema(locale: Locale = 'pt-BR'): Record<string, unknown> {
-  const url = siteUrl(locale);
   return {
     '@type': 'Organization',
-    '@id': orgId(locale),
+    '@id': ORG_ID,
     name: RBX_NAME,
     alternateName: RBX_ALTERNATE_NAMES,
-    url,
-    logo: `${url}${RBX_LOGO}`,
-    sameAs: orgSameAs(locale),
-    founder: { '@id': personId(locale) },
+    // The home page in the language of the page: the root itself answers
+    // with a redirect, and an address in structured data is one that is served.
+    url: localizedUrl(locale, '/'),
+    logo: `${SITE_ORIGIN}${RBX_LOGO}`,
+    sameAs: ORG_SAME_AS,
+    founder: { '@id': PERSON_ID },
     description: locale === 'pt-BR' ? RBX_DESCRIPTION_PT : RBX_DESCRIPTION_EN,
     areaServed: 'Worldwide',
     knowsAbout: [
@@ -90,15 +73,14 @@ export function organizationSchema(locale: Locale = 'pt-BR'): Record<string, unk
 }
 
 export function personSchema(locale: Locale = 'pt-BR'): Record<string, unknown> {
-  const url = siteUrl(locale);
   return {
     '@type': 'Person',
-    '@id': personId(locale),
+    '@id': PERSON_ID,
     name: LEANDRO_NAME,
     jobTitle: locale === 'pt-BR' ? LEANDRO_JOB_TITLE_PT : LEANDRO_JOB_TITLE_EN,
-    url: `${url}/leandro-damasio`,
+    url: localizedUrl(locale, '/leandro-damasio'),
     sameAs: [LEANDRO_LINKEDIN, LEANDRO_GITHUB],
-    worksFor: { '@id': orgId(locale) },
+    worksFor: { '@id': ORG_ID },
     knowsAbout: [
       'AI Engineering',
       'LLMOps',
@@ -113,8 +95,8 @@ export function personSchema(locale: Locale = 'pt-BR'): Record<string, unknown> 
 
 /**
  * Data-driven Person node for team pages other than the founder's. The @id
- * follows the same site-level fragment convention as personSchema, so every
- * locale host mints its own stable entity id.
+ * follows the same site-level fragment convention as personSchema: one stable
+ * entity id per person, the same in both languages.
  */
 export function personSchemaFor(
   locale: Locale,
@@ -123,14 +105,13 @@ export function personSchemaFor(
   jobTitle: string,
   sameAs: string[] = []
 ): Record<string, unknown> {
-  const url = siteUrl(locale);
   const schema: Record<string, unknown> = {
     '@type': 'Person',
-    '@id': `${url}/#${slug}`,
+    '@id': `${SITE_ORIGIN}/#${slug}`,
     name,
     jobTitle,
-    url: `${url}/${slug}`,
-    worksFor: { '@id': orgId(locale) }
+    url: localizedUrl(locale, `/${slug}`),
+    worksFor: { '@id': ORG_ID }
   };
   if (sameAs.length > 0) {
     schema.sameAs = sameAs;
@@ -138,15 +119,19 @@ export function personSchemaFor(
   return schema;
 }
 
-export function websiteSchema(locale: Locale = 'pt-BR'): Record<string, unknown> {
-  const url = siteUrl(locale);
+/**
+ * The one site, in its two languages. The node is the same on every page;
+ * its address is the English home page, the default of the site, because the
+ * root answers with a redirect.
+ */
+export function websiteSchema(): Record<string, unknown> {
   return {
     '@type': 'WebSite',
-    '@id': websiteId(locale),
+    '@id': WEBSITE_ID,
     name: RBX_NAME,
-    url,
-    publisher: { '@id': orgId(locale) },
-    inLanguage: locale === 'pt-BR' ? 'pt-BR' : 'en'
+    url: localizedUrl('en', '/'),
+    publisher: { '@id': ORG_ID },
+    inLanguage: ['pt-BR', 'en']
   };
 }
 
@@ -163,7 +148,7 @@ export function webPageSchema(
     url: pageUrl,
     name: title,
     description,
-    isPartOf: { '@id': websiteId(locale) },
+    isPartOf: { '@id': WEBSITE_ID },
     inLanguage: locale === 'pt-BR' ? 'pt-BR' : 'en'
   };
   if (aboutId) {
@@ -173,7 +158,6 @@ export function webPageSchema(
 }
 
 export function serviceSchema(
-  locale: Locale = 'pt-BR',
   pageUrl: string,
   serviceName: string,
   description: string
@@ -182,7 +166,7 @@ export function serviceSchema(
     '@type': 'Service',
     '@id': `${pageUrl}#service`,
     serviceType: serviceName,
-    provider: { '@id': orgId(locale) },
+    provider: { '@id': ORG_ID },
     areaServed: 'Worldwide',
     description,
     url: pageUrl
@@ -190,7 +174,6 @@ export function serviceSchema(
 }
 
 export function softwareApplicationSchema(
-  locale: Locale = 'pt-BR',
   pageUrl: string,
   name: string,
   description: string,
@@ -204,7 +187,7 @@ export function softwareApplicationSchema(
     operatingSystem: 'Any',
     description,
     url: pageUrl,
-    provider: { '@id': orgId(locale) },
+    provider: { '@id': ORG_ID },
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -234,13 +217,13 @@ export function blogPostingSchema(
     description: post.excerpt,
     author: {
       '@type': isLeandro ? 'Person' : 'Organization',
-      '@id': isLeandro ? personId(locale) : orgId(locale),
+      '@id': isLeandro ? PERSON_ID : ORG_ID,
       name: authorName
     },
-    publisher: { '@id': orgId(locale) },
+    publisher: { '@id': ORG_ID },
     datePublished: post.date,
     dateModified: post.date,
-    image: post.cover ? `${siteUrl(locale)}${post.cover}` : undefined,
+    image: post.cover ? `${SITE_ORIGIN}${post.cover}` : undefined,
     url: pageUrl,
     inLanguage: locale === 'pt-BR' ? 'pt-BR' : 'en',
     articleSection: 'Journal'
@@ -249,7 +232,7 @@ export function blogPostingSchema(
 
 export interface BreadcrumbItem {
   name: string;
-  /** Site-relative path (e.g. '/journal'); absolutized against the locale host. */
+  /** Path on the site, with its locale segment (e.g. '/en/journal'). */
   path: string;
 }
 
@@ -258,11 +241,9 @@ export interface BreadcrumbItem {
  * its absolute URL; the item paths must be real URLs on the site.
  */
 export function breadcrumbSchema(
-  locale: Locale,
   pageUrl: string,
   items: BreadcrumbItem[]
 ): Record<string, unknown> {
-  const base = siteUrl(locale);
   return {
     '@type': 'BreadcrumbList',
     '@id': `${pageUrl}#breadcrumb`,
@@ -270,7 +251,7 @@ export function breadcrumbSchema(
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `${base}${item.path}`
+      item: `${SITE_ORIGIN}${item.path}`
     }))
   };
 }
@@ -292,7 +273,7 @@ export function collectionPageSchema(
     url: pageUrl,
     name,
     description,
-    isPartOf: { '@id': websiteId(locale) },
+    isPartOf: { '@id': WEBSITE_ID },
     inLanguage: locale === 'pt-BR' ? 'pt-BR' : 'en'
   };
   if (items.length > 0) {
@@ -339,7 +320,7 @@ export function buildGraph(
   const graph = [
     organizationSchema(locale),
     personSchema(locale),
-    websiteSchema(locale),
+    websiteSchema(),
     webPageSchema(locale, pageUrl, title, description, aboutId),
     ...nodes
   ];

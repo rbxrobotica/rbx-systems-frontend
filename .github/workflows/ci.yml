@@ -57,6 +57,16 @@ jobs:
       - name: Run unit tests
         run: pnpm test
 
+      # What the unit tests cannot see: what the router and the adapter answer
+      # before the handle hook, what a client-side navigation is told, and
+      # every address a rendered page names. Builds the application and asks
+      # it, on loopback, against the content committed in the repository.
+      - name: Build
+        run: pnpm build
+
+      - name: Check the built site
+        run: pnpm check:built
+
   image:
     if: github.event_name != 'pull_request'
     needs: verify

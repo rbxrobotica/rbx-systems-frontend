@@ -30,6 +30,8 @@ const TAG_ALIASES: Record<string, string> = {
   governanca: 'governance',
   arquitetura: 'architecture',
   execucao: 'execution',
+  entrada: 'entry',
+  operacoes: 'operations',
   validacao: 'validation',
   depuracao: 'debugging',
   dados: 'data',

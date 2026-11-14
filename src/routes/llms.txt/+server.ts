@@ -9,12 +9,12 @@ import {
   partnershipTerms,
   partnershipContent
 } from '$lib/content/partnership';
+import { localizedUrl, siteHref } from '$lib/seo/alternates';
+import { SITE_ORIGIN } from '$lib/seo/site';
 import type { Locale } from '$types/content';
 
-const siteUrlByLocale: Record<Locale, string> = {
-  'pt-BR': 'https://rbx.ia.br',
-  en: 'https://rbxsystems.ch'
-};
+// Trailing slashes are dropped by the handle hook, not by the router.
+export const trailingSlash = 'ignore';
 
 const servicesByLocale = (locale: Locale) =>
   SERVICE_ROUTES.map((service) => ({
@@ -55,29 +55,35 @@ const institutionalByLocale: Record<Locale, { label: string; path: string; note:
 
 const headings: Record<
   Locale,
-  Record<'services' | 'partnership' | 'products' | 'institutional' | 'journal', string>
+  Record<
+    'services' | 'partnership' | 'products' | 'institutional' | 'journal' | 'languages',
+    string
+  >
 > = {
   'pt-BR': {
     services: 'Serviços',
     partnership: 'Parceria de engenharia',
     products: 'Produtos',
     institutional: 'Institucional',
-    journal: 'Journal'
+    journal: 'Journal',
+    languages: 'Outros idiomas'
   },
   en: {
     services: 'Services',
     partnership: 'Engineering partnership',
     products: 'Products',
     institutional: 'Institutional',
-    journal: 'Journal'
+    journal: 'Journal',
+    languages: 'Other languages'
   }
 };
 
+// Under a locale segment this is the index of that language. Without one it
+// is the English index, at the address the convention expects, and it points
+// at the Portuguese one.
 export const GET: RequestHandler = async ({ url }) => {
   const locale = detectLocaleFromUrl(url);
   const exchangeRates = locale === 'en' ? await getPartnershipExchangeRates() : null;
-  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
-  const siteUrl = siteUrlByLocale[locale];
   // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
   const h = headings[locale];
 
@@ -87,7 +93,12 @@ export const GET: RequestHandler = async ({ url }) => {
       : 'Systems engineering, operational automation, applied AI and cloud infrastructure for high-demand operations.';
 
   const link = (label: string, path: string, note: string) =>
-    `- [${label}](${siteUrl}${path}): ${note}`;
+    `- [${label}](${SITE_ORIGIN}${siteHref(locale, path)}): ${note}`;
+
+  const otherLanguage =
+    locale === 'pt-BR'
+      ? `- [English](${localizedUrl('en', '/llms.txt')}): this index in English`
+      : `- [Português](${localizedUrl('pt-BR', '/llms.txt')}): este índice em português`;
 
   const serviceLinks = servicesByLocale(locale).map((service) =>
     link(
@@ -162,6 +173,10 @@ ${institutionalLinks.join('\n')}
 ## ${h.journal}
 
 ${journalLinks.join('\n')}
+
+## ${h.languages}
+
+${otherLanguage}
 `;
 
   return new Response(body, {

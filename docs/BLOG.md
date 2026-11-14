@@ -2,14 +2,14 @@
 
 > **Atualizado 2026-07-08:** o site é **SvelteKit SSR** (não mais Next.js/ISR). O bucket é **privado**; capas são servidas via proxy `/api/blog/cover/...`. Propagação após publish: **~60s** (TTL do Content Gateway), sem stale fallback e sem redeploy. Workflow canônico e atual: `~/docs/rbx-content-publish-workflow.md`. O restante deste arquivo mantém a orientação editorial (estilo, PT-BR, specs de capa) — ignore quaisquer remanescentes de MDX/ISR.
 
-O blog vive em **rbx.ia.br/blog**. Posts são arquivos Markdown armazenados no Contabo Object Storage (S3-compatible, **bucket privado**). Publicar não requer deploy — o site lê o S3 server-side via Content Gateway e reflete mudanças em **~60s** (TTL do cache do gateway).
+O blog vive em **merovelis.com/pt-br/blog**. Posts são arquivos Markdown armazenados no Contabo Object Storage (S3-compatible, **bucket privado**). Publicar não requer deploy — o site lê o S3 server-side via Content Gateway e reflete mudanças em **~60s** (TTL do cache do gateway).
 
 ---
 
 ## Regras editoriais
 
 - **Idioma:** posts podem ter variantes em `pt-BR` e `en`
-- **Seleção de idioma:** `rbx.ia.br` prioriza `pt-BR`, `rbxsystems.ch` prioriza `en`, e o toggle do header permite alternância manual
+- **Seleção de idioma:** `merovelis.com/pt-br` usa `pt-BR`, `merovelis.com/en` usa `en`, e o toggle do header aponta para a mesma página no outro segmento de idioma
 - **Tom:** direto, claro, institucional — estilo Cursor ou Anthropic
 - **Sem detalhes sensíveis de segurança:** não expor IPs internos, credenciais, topologia de rede, ou incidentes em aberto
 - **Commit obrigatório:** após publicar, commitar o Markdown no git — S3 é o storage vivo, git é o backup

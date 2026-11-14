@@ -5,6 +5,7 @@ import {
   backgroundWorkSettled,
   controlClock,
   createContentGateway,
+  hookEvent,
   journalSlug,
   loadHandleHook,
   publishJournal
@@ -451,13 +452,10 @@ test('the handle hook runs each request as one operation named by its route', as
   const reports = captureReports(t);
   const { s3, gateway, budget } = createContentGateway();
   const posts = publishJournal(s3, POSTS);
-  const handle = loadHandleHook(budget);
+  const handle = loadHandleHook({ gateway, budget });
 
   const response = await handle({
-    event: {
-      request: new Request('https://rbx.ia.br/journal?utm_source=x'),
-      route: { id: '/journal' }
-    },
+    event: hookEvent('https://merovelis.com/pt-br/journal?utm_source=x', { routeId: '/journal' }),
     resolve: async () => {
       await gateway.loadAllPosts('pt-BR');
       return new Response('<html></html>', { headers: { 'content-type': 'text/html' } });
@@ -477,7 +475,7 @@ test('the handle hook runs each request as one operation named by its route', as
   ]);
 
   await handle({
-    event: { request: new Request('https://rbx.ia.br/nowhere'), route: { id: null } },
+    event: hookEvent('https://merovelis.com/pt-br/nowhere'),
     resolve: async () => {
       for (let i = 0; i < 16; i += 1) budget.countStorageRequest();
       return new Response('Not found', { status: 404 });

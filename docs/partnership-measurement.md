@@ -105,7 +105,7 @@ the commercial request, not a means of joining identified leads to anonymous eve
 Example shared networking link, without an individual's name:
 
 ```text
-https://rbx.ia.br/produtos?utm_source=partner&utm_medium=referral&utm_campaign=2026h2_b2b_networking_001&utm_content=b2b_portfolio_partnership_001
+https://merovelis.com/pt-br/produtos?utm_source=partner&utm_medium=referral&utm_campaign=2026h2_b2b_networking_001&utm_content=b2b_portfolio_partnership_001
 ```
 
 Normal Plausible pageview attribution can report campaign/source traffic according

@@ -1,12 +1,17 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { detectLocaleFromUrl } from '$lib/i18n/locale';
+import { localeOfPath } from '$lib/i18n/locale';
 import { loadAllPosts } from '$lib/server/content/gateway';
 import { authorSlugFor } from '$lib/journal/authors';
 import { collectCanonicalTags } from '$lib/journal/tags';
+import { localizedUrl } from '$lib/seo/alternates';
 import { SERVICE_ROUTES, servicePublicPath } from '$lib/services/catalog';
 import type { Locale } from '$types/content';
 
+// Trailing slashes are dropped by the handle hook, not by the router.
+export const trailingSlash = 'ignore';
+
 interface SitemapEntry {
+  /** Site path without the locale segment, in the spelling of the language. */
   path: string;
   changefreq: 'daily' | 'weekly' | 'monthly';
   priority: string;
@@ -77,16 +82,34 @@ const entriesByLocale: Record<Locale, SitemapEntry[]> = {
   ]
 };
 
-const siteUrlByLocale: Record<Locale, string> = {
-  'pt-BR': 'https://rbx.ia.br',
-  en: 'https://rbxsystems.ch'
-};
+const LOCALES: Locale[] = ['pt-BR', 'en'];
 
+const xml = (body: string) =>
+  new Response(body, {
+    headers: {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600'
+    }
+  });
+
+/**
+ * Without a locale segment this is the index of the two sitemaps, the one
+ * address robots.txt and Search Console are given. Under a segment it is the
+ * sitemap of that language.
+ */
 export const GET: RequestHandler = async ({ url }) => {
-  const locale = detectLocaleFromUrl(url);
-  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
-  const siteUrl = siteUrlByLocale[locale];
-  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
+  const locale = localeOfPath(url.pathname);
+  if (!locale) {
+    return xml(`<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${LOCALES.map(
+  (each) => `  <sitemap>
+    <loc>${localizedUrl(each, '/sitemap.xml')}</loc>
+  </sitemap>`
+).join('\n')}
+</sitemapindex>`);
+  }
+  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from localeOfPath
   const entries = entriesByLocale[locale];
 
   let postEntries: SitemapEntry[] = [];
@@ -105,15 +128,13 @@ export const GET: RequestHandler = async ({ url }) => {
     }
     postEntries = posts.map((post) => {
       const alternates = [
-        // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
-        { hreflang: locale, href: `${siteUrlByLocale[locale]}/blog/${post.publicSlug}` }
+        { hreflang: locale, href: localizedUrl(locale, `/blog/${post.publicSlug}`) }
       ];
       const otherSlug = otherByCanonical.get(post.slug);
       if (otherSlug) {
         alternates.push({
           hreflang: otherLocale,
-          // eslint-disable-next-line security/detect-object-injection -- otherLocale is the other of the two locales
-          href: `${siteUrlByLocale[otherLocale]}/blog/${otherSlug}`
+          href: localizedUrl(otherLocale, `/blog/${otherSlug}`)
         });
       }
       return {
@@ -161,7 +182,7 @@ ${allEntries
       .join('');
     const lastmod = entry.lastmod ? `\n    <lastmod>${entry.lastmod}</lastmod>` : '';
     return `  <url>
-    <loc>${siteUrl}${entry.path}</loc>${alternateLinks}${lastmod}
+    <loc>${localizedUrl(locale, entry.path)}</loc>${alternateLinks}${lastmod}
     <changefreq>${entry.changefreq}</changefreq>
     <priority>${entry.priority}</priority>
   </url>`;
@@ -169,10 +190,5 @@ ${allEntries
   .join('\n')}
 </urlset>`;
 
-  return new Response(body, {
-    headers: {
-      'Content-Type': 'application/xml; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600'
-    }
-  });
+  return xml(body);
 };

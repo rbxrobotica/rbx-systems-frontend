@@ -2,6 +2,7 @@
   import { locale } from 'svelte-i18n';
   import { tick } from 'svelte';
   import { trackPartnershipEvent } from '$lib/analytics/partnership';
+  import { siteHref } from '$lib/seo/alternates';
 
   interface Props {
     onclose: () => void;
@@ -53,6 +54,9 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          // The API has one address for both languages: the page says which
+          // language section the visitor is in.
+          locale: partnershipLocale,
           messages: messages.map((m) => ({ role: m.role, content: m.content }))
         })
       });
@@ -109,9 +113,8 @@
     $locale?.startsWith('en') ? 'Subscribe to the BTC Briefing' : 'Assinar o Briefing BTC'
   );
   const partnershipLocale = $derived($locale?.startsWith('en') ? 'en' : 'pt-BR');
-  const partnershipHref = $derived(
-    partnershipLocale === 'en' ? '/partnership#qualificacao' : '/parceria#qualificacao'
-  );
+  const partnershipHref = $derived(siteHref(partnershipLocale, '/parceria#qualificacao'));
+  const contactHref = $derived(siteHref(partnershipLocale, '/contato'));
   const ctaPartnership = $derived(
     partnershipLocale === 'en'
       ? 'Check fit and availability'
@@ -201,7 +204,7 @@
     {:else if showCta && !loading}
       <div class="cta-row">
         <!-- /contato, not /#contact: the home page no longer carries the contact section. -->
-        <a href="/contato" class="cta-btn primary" onclick={onclose}>{ctaForm}</a>
+        <a href={contactHref} class="cta-btn primary" onclick={onclose}>{ctaForm}</a>
         {#if onwhatsapp}
           <button type="button" class="cta-btn secondary" disabled={loading} onclick={onwhatsapp}>
             {ctaWhatsApp}

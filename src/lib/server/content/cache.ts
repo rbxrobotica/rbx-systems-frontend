@@ -104,6 +104,15 @@ export class SwrCache<T> {
     return this.load(key, load); // miss: must block on load
   }
 
+  /**
+   * The cached value, fresh or stale, or undefined when the key is not
+   * cached. Loads nothing, revalidates nothing and does not count as a read:
+   * for a caller that must never wait on the origin.
+   */
+  peek(key: string): T | undefined {
+    return this.store.get(key)?.value;
+  }
+
   /** Invalidate a single key or all keys whose key starts with `prefix`. */
   invalidate(prefix?: string): void {
     if (!prefix) {

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { locale } from 'svelte-i18n';
+  import { stripLocalePrefix } from '$lib/i18n/locale';
   import WhatsAppDrawer from './WhatsAppDrawer.svelte';
   import AIChatWidget from './AIChatWidget.svelte';
   import { trackEvent, CHAT_OPEN, WHATSAPP_CLICK } from '$lib/analytics/events';
@@ -40,8 +41,10 @@
     }
   };
 
-  function getContextMessage(path: string, loc: string | null | undefined): string {
+  function getContextMessage(pathname: string, loc: string | null | undefined): string {
     const isEn = loc?.startsWith('en');
+    // The keys are site paths; the address carries the locale segment first.
+    const path = stripLocalePrefix(pathname);
     const entry = Object.entries(contextMessages).find(([key]) => path.startsWith(key));
     if (entry) return isEn ? entry[1].en : entry[1].pt;
     return isEn

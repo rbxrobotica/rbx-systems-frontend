@@ -8,6 +8,7 @@
     partnershipPriceNote,
     type PartnershipExchangeRates
   } from '$lib/content/partnership';
+  import { localizedUrl, siteHref } from '$lib/seo/alternates';
   import { buildGraph } from '$lib/seo/schema';
   import { trackPartnershipEvent } from '$lib/analytics/partnership';
   import type { Locale } from '$types/content';
@@ -19,9 +20,7 @@
   // eslint-disable-next-line security/detect-object-injection -- locale is the Locale prop: 'pt-BR' or 'en'
   const content = $derived(partnershipContent[locale]);
   const prices = $derived(getPartnershipPrices(locale, exchangeRates));
-  const pageUrl = $derived(
-    locale === 'pt-BR' ? 'https://rbx.ia.br/parceria' : 'https://rbxsystems.ch/partnership'
-  );
+  const pageUrl = $derived(localizedUrl(locale, '/parceria'));
   const schema = $derived(buildGraph(locale, pageUrl, content.title, content.description));
 
   function observeOffer(node: HTMLElement) {
@@ -56,7 +55,7 @@
       <p class="lead">{content.lead}</p>
       <a
         class="portfolio-link"
-        href={content.portfolioHref}
+        href={siteHref(locale, content.portfolioHref)}
         onclick={() =>
           trackPartnershipEvent('cta_click', {
             locale,
