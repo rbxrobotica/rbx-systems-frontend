@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
-    "@sveltejs/kit": "^2.70.2",
+    "@sveltejs/kit": "^2.70.4",
     "@sveltejs/vite-plugin-svelte": "^5.0.0",
     "@types/js-yaml": "^4.0.0",
     "@types/node": "^20.11.0",
@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1016.0",
-    "@sveltejs/adapter-node": "^5.5.7",
+    "@sveltejs/adapter-node": "^5.5.8",
     "altcha": "^3.1.0",
     "entities": "8.1.0",
     "js-yaml": "^4.3.2",
