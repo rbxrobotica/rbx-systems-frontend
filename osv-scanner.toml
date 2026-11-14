@@ -1,15 +1,22 @@
 # osv-scanner exceptions (Guardrails CI, dependency-scan job).
 #
-# Every entry here is a documented, dated exception for a finding whose only
-# fix is a semver-major we cannot take yet (or that has no fix at all), AND
-# whose vulnerable code path is not used by this site. Never add an entry for
-# a finding that has a compatible fix — update the dependency instead.
-# Re-audit on each entry's stated condition. Same discipline as
-# ldamasio/robson's osv-scanner.toml.
+# Every entry here is a documented, dated exception of one of two kinds:
+#
+# 1. A finding whose only fix is a semver-major we cannot take yet (or that
+#    has no fix at all), AND whose vulnerable code path is not used by this
+#    site.
+# 2. A finding the installed release already fixes while the advisory still
+#    lists that release as affected (a backport the advisory's range does not
+#    name). The entry says where the fix is in the installed release, and it
+#    is removed as soon as the advisory's range is corrected.
+#
+# Never add an entry for a finding that has a compatible fix that is not
+# installed: update the dependency instead. Re-audit on each entry's stated
+# condition. Same discipline as ldamasio/robson's osv-scanner.toml.
 
 [[IgnoredVulns]]
 id = "GHSA-27mw-82g8-phjj"
-reason = "@sveltejs/kit < 3.0.0: XSS via an untrusted cache-control header inserted into a prerendered page's <meta http-equiv> tag. Preconditions: prerendered pages AND setHeaders('cache-control', <untrusted value>) at prerender time. This site prerenders nothing (adapter-node, SSR reading content from object storage; `grep -rn 'prerender\\|setHeaders' src` is empty), so the vulnerable code path is never executed. Fix is kit 3.0.0, a semver-major. Re-evaluate when the SvelteKit 3 upgrade lands or if prerendering/setHeaders is introduced. (2026-10-24)"
+reason = "@sveltejs/kit: XSS via an untrusted cache-control header inserted into a prerendered page's <meta http-equiv> tag. Already fixed in the installed release (kind 2 above). The advisory lists every version below 3.0.0 as affected, but the fix was backported to the 2.x line (sveltejs/kit commit 0a2e58cbccdd46cac20aa5af4e2edf17e0da11dd, 'backport security fixes to version 2', changeset clean-headers-escape) and is in @sveltejs/kit 2.70.4: src/runtime/server/page/render.js writes that value through escape_html(state.prerendering.cache, true), where 2.70.2 wrote it raw. The scanner still reports it only because the advisory's range was not updated, so this entry covers stale advisory metadata, not an accepted vulnerability. Independently of the fix, this site prerenders nothing (adapter-node, SSR reading content from object storage; `grep -rn 'prerender\\|setHeaders' src` is empty), so that code never runs here. Remove this entry when the advisory's range names the 2.x fix. Until then, check the escape in render.js again on any change of the kit version that stays below 3.0.0, and keep the range in package.json at ^2.70.4 or above. (2026-10-24; rewritten 2026-11-14 with the move to 2.70.4)"
 
 [[IgnoredVulns]]
 id = "GHSA-pfhg-q3qv-9q6r"
