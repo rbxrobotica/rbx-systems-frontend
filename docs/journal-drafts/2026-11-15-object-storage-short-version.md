@@ -27,7 +27,7 @@ snapshots. O artigo apresenta um desenho em qualificação, sem afirmar cobertur
 integral da infraestrutura.
 
 Canonical article:
-https://rbx.ia.br/journal/2026-11-15-object-storage-politica-retencao-recuperacao
+https://rbx.ia.br/blog/2026-11-15-object-storage-politica-retencao-recuperacao
 
 ## English
 
@@ -47,4 +47,4 @@ retention. It presents a design under qualification, without claiming complete
 infrastructure coverage.
 
 Canonical article:
-https://rbxsystems.ch/journal/2026-11-15-object-storage-policy-retention-recovery
+https://rbxsystems.ch/blog/2026-11-15-object-storage-policy-retention-recovery
