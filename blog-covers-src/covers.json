@@ -362,6 +362,15 @@
       "motif": "persistent-stop",
       "accent": "green",
       "alt": "Abstract ladder of stop levels measured from a reference mark, with the fill sitting slightly above it"
+    },
+    {
+      "slug": "2026-11-15-object-storage-politica-retencao-recuperacao",
+      "title": "Object Storage: policy, retention and recovery",
+      "extension": "png",
+      "revision": 1,
+      "motif": "recovery-cycle",
+      "accent": "cyan",
+      "alt": "Abstract independent storage layers connected through a controlled recovery cycle with preserved checkpoints"
     }
   ]
 }
