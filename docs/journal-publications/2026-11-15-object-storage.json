@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-15",
+  "article": "Object Storage: policy, retention and recovery",
+  "owner_requested_publication": true,
+  "public_pages": [
+    {
+      "locale": "pt-BR",
+      "http_status": 200,
+      "final_url": "https://rbx.ia.br/blog/2026-11-15-object-storage-politica-retencao-recuperacao",
+      "html_lang": "pt-BR",
+      "canonical": "https://rbx.ia.br/blog/2026-11-15-object-storage-politica-retencao-recuperacao",
+      "single_h1": true,
+      "expected_body_present": true,
+      "og_image": "https://rbx.ia.br/api/blog/cover/2026-11-15-object-storage-politica-retencao-recuperacao-v1.png",
+      "cover_http_status": 200,
+      "alternates": [
+        {
+          "lang": "pt-BR",
+          "href": "https://rbx.ia.br/blog/2026-11-15-object-storage-politica-retencao-recuperacao"
+        },
+        {
+          "lang": "en",
+          "href": "https://rbxsystems.ch/blog/2026-11-15-object-storage-policy-retention-recovery"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://rbxsystems.ch/blog/2026-11-15-object-storage-policy-retention-recovery"
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "http_status": 200,
+      "final_url": "https://rbxsystems.ch/blog/2026-11-15-object-storage-policy-retention-recovery",
+      "html_lang": "en",
+      "canonical": "https://rbxsystems.ch/blog/2026-11-15-object-storage-policy-retention-recovery",
+      "single_h1": true,
+      "expected_body_present": true,
+      "og_image": "https://rbxsystems.ch/api/blog/cover/2026-11-15-object-storage-politica-retencao-recuperacao-v1.png",
+      "cover_http_status": 200,
+      "alternates": [
+        {
+          "lang": "pt-BR",
+          "href": "https://rbx.ia.br/blog/2026-11-15-object-storage-politica-retencao-recuperacao"
+        },
+        {
+          "lang": "en",
+          "href": "https://rbxsystems.ch/blog/2026-11-15-object-storage-policy-retention-recovery"
+        },
+        {
+          "lang": "x-default",
+          "href": "https://rbxsystems.ch/blog/2026-11-15-object-storage-policy-retention-recovery"
+        }
+      ]
+    }
+  ],
+  "verified_at_utc": "2026-11-15T19:34:31.394605+00:00",
+  "storage_readback_matches_sources": true,
+  "source_variants": [
+    {
+      "locale": "pt-BR",
+      "readback_exact_bytes_match": true,
+      "source_bytes": 10286,
+      "source_sha256": "61d983f0418b15f7b2d52e24764378204f0010b4d8504f63fcea06cdffac8cea"
+    },
+    {
+      "locale": "en",
+      "readback_exact_bytes_match": true,
+      "source_bytes": 9375,
+      "source_sha256": "16b95cf5bbd82f76bb58b660b8343c258db9395f8a8eb9c144a2a2088673a9ec"
+    }
+  ],
+  "cover_sha256": "4e30c7abf0412f256fead9c4e5f24b34b3586514c167871e3e14186603607c2e",
+  "cover_bytes": 220020,
+  "initial_public_pt_404_then_cache_reconciled": true,
+  "extra_upload_or_deploy_for_cache_reconciliation": false,
+  "existing_objects_deleted": 0,
+  "bucket_permissions_changed": false,
+  "paid_promotion_or_social_send": false,
+  "source_commit": "22ba69a",
+  "local_validation": {
+    "tests_passed": 181,
+    "cover_contract": true,
+    "svelte_diagnostics_errors": 0,
+    "svelte_diagnostics_warnings": 0,
+    "build": true,
+    "seo": true,
+    "targeted_formatting": true,
+    "eslint": true,
+    "public_source_secret_scan_findings": 0,
+    "global_formatting_baseline": "Four warnings in files byte-identical to origin/main; not changed."
+  }
+}
