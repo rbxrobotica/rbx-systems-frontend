@@ -193,13 +193,11 @@
     z-index: 41;
     width: 3.5rem;
     height: 3.5rem;
-    border: 1px solid var(--border-accent, #22e5e5);
+    border: 1px solid var(--accent-line);
     border-radius: 50%;
     background: var(--bg-1, #0f1117);
-    color: var(--cyan-brand, #22e5e5);
-    box-shadow:
-      0 4px 16px rgba(34, 229, 229, 0.15),
-      0 2px 8px rgba(0, 0, 0, 0.4);
+    color: var(--accent-text);
+    box-shadow: var(--shadow-float);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -212,9 +210,7 @@
 
   .menu-toggle:hover {
     background: var(--bg-2, #161b22);
-    box-shadow:
-      0 6px 24px rgba(34, 229, 229, 0.25),
-      0 2px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-float-hover);
     transform: scale(1.08);
   }
 
@@ -230,9 +226,7 @@
   /* Expanded menu items */
   .contact-menu.expanded .menu-toggle {
     background: var(--bg-2, #161b22);
-    box-shadow:
-      0 6px 24px rgba(34, 229, 229, 0.25),
-      0 2px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-float-hover);
   }
 
   .menu-overlay {
@@ -285,7 +279,7 @@
 
   .menu-item:hover {
     background: var(--bg-2, #161b22);
-    border-color: var(--cyan-brand, #22e5e5);
+    border-color: var(--accent-outline-hover);
   }
 
   .menu-item:active {
@@ -297,11 +291,11 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--cyan-signal, #0dd9ff), var(--cyan-brand, #22e5e5));
+    background: linear-gradient(135deg, var(--cta-hover), var(--cta));
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--bg-0, #010409);
+    color: var(--on-cta);
     font-weight: 700;
   }
 

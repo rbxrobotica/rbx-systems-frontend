@@ -102,7 +102,7 @@
     border-bottom: 1px solid var(--border);
   }
   .post-item a:hover .post-title {
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   .post-date {
     font-family: var(--font-mono);

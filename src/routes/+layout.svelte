@@ -76,8 +76,8 @@
       color var(--dur) var(--ease);
   }
   :global(a:hover) {
-    color: var(--cyan-brand);
-    border-bottom-color: var(--cyan-brand);
+    color: var(--accent-text);
+    border-bottom-color: var(--accent-line);
   }
   :global(*:focus-visible) {
     outline: none;

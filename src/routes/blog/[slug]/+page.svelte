@@ -125,7 +125,7 @@
     color: inherit;
   }
   .author-link:hover {
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   .tag-list {
     list-style: none;
@@ -149,8 +149,8 @@
       border-color var(--dur) var(--ease);
   }
   .tag-list a:hover {
-    color: var(--cyan-brand);
-    border-color: var(--cyan-brand);
+    color: var(--accent-text);
+    border-color: var(--accent-outline-hover);
   }
   .cover {
     width: 100%;

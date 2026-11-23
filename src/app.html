@@ -3,8 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#07080A" />
+    <script>
+      // Apply the visitor's stored theme before first paint. Dark is the default.
+      // Key and values match src/lib/design/theme.ts.
+      try {
+        if (localStorage.getItem('theme') === 'light') {
+          document.documentElement.dataset.theme = 'light';
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#F2EFE6');
+        }
+      } catch (e) {}
+    </script>
     <link rel="icon" href="%sveltekit.assets%/favicon.svg" type="image/svg+xml" />
     %sveltekit.head%
   </head>

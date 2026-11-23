@@ -2,6 +2,7 @@
   import { page } from '$app/stores';
   import { afterNavigate } from '$app/navigation';
   import Logo from './Logo.svelte';
+  import ThemeToggle from './ThemeToggle.svelte';
   import { NAV_SECTIONS, leafTitle, navLabel, resolveNav, localeSwitchHref } from '$design/nav';
   import { t } from '$lib/i18n/translate';
   import { localizedPath } from '$lib/seo/alternates';
@@ -48,6 +49,8 @@
       </a>
 
       <div class="tools">
+        <span class="theme-desktop"><ThemeToggle {locale} /></span>
+
         <div class="lang rbx-eyebrow" role="group" aria-label={tr('nav.language')}>
           <a
             href={ptHref}
@@ -209,6 +212,7 @@
         {/if}
       </div>
     {/each}
+    <div class="menu-theme"><ThemeToggle {locale} variant="row" /></div>
   </nav>
 </div>
 
@@ -269,7 +273,7 @@
      is a box-shadow and must stay visible on the active link too. */
   .lang a.active {
     color: var(--fg-0);
-    background: linear-gradient(var(--cyan-brand), var(--cyan-brand)) left bottom / 100% 1px
+    background: linear-gradient(var(--accent-active), var(--accent-active)) left bottom / 100% 1px
       no-repeat;
   }
   .lang span {
@@ -289,7 +293,7 @@
   }
   /* Qualified with .site-nav a so it outranks the generic link hover above. */
   .site-nav a.cta:hover {
-    background: var(--cyan-signal);
+    background: var(--cta-hover);
     color: var(--on-cta);
   }
   .cta-icon {
@@ -321,7 +325,7 @@
   }
   .primary a.active {
     color: var(--fg-0);
-    background: linear-gradient(var(--cyan-brand), var(--cyan-brand)) left bottom / 100% 1px
+    background: linear-gradient(var(--accent-active), var(--accent-active)) left bottom / 100% 1px
       no-repeat;
   }
 
@@ -366,7 +370,7 @@
     color: var(--fg-0);
     padding-bottom: 3px;
     margin-bottom: -3px;
-    background: linear-gradient(var(--cyan-brand), var(--cyan-brand)) left bottom / 100% 1px
+    background: linear-gradient(var(--accent-active), var(--accent-active)) left bottom / 100% 1px
       no-repeat;
   }
 
@@ -374,6 +378,10 @@
   .section-menu,
   .menu {
     display: none;
+  }
+  .theme-desktop {
+    display: inline-flex;
+    margin-right: calc(var(--s-3) * -1);
   }
 
   @media (max-width: 767px) {
@@ -389,6 +397,15 @@
     }
     .tools {
       gap: var(--s-1);
+    }
+    /* No room beside the brand on a phone: the toggle moves into the menu. */
+    .theme-desktop {
+      display: none;
+    }
+    .menu-theme {
+      margin-top: var(--s-4);
+      padding-top: var(--s-3);
+      border-top: 1px solid var(--border);
     }
     .lang {
       margin-right: var(--s-2);
@@ -460,7 +477,7 @@
       white-space: nowrap;
       padding-bottom: 3px;
       margin-bottom: -3px;
-      box-shadow: inset 0 -1px 0 var(--cyan-brand);
+      box-shadow: inset 0 -1px 0 var(--accent-active);
     }
     .chevron {
       flex: none;

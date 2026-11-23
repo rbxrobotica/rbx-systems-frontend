@@ -239,7 +239,7 @@
     letter-spacing: 0.1em;
     line-height: var(--lead-body);
     text-transform: uppercase;
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   .portfolio-header {
     padding: var(--s-5) 0 var(--s-8);
@@ -266,7 +266,7 @@
     font-size: var(--text-sm);
   }
   .collaboration .partnership-price {
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     font-size: var(--text-sm);
   }
   .disciplines,
@@ -290,7 +290,7 @@
     width: 5px;
     height: 5px;
     margin-right: var(--s-3);
-    background: var(--cyan-brand);
+    background: var(--accent-line);
     vertical-align: middle;
   }
   section {
@@ -426,7 +426,7 @@
   .platform {
     padding: var(--s-7);
     border: 1px solid var(--border-strong);
-    border-top: 2px solid var(--cyan-brand);
+    border-top: 2px solid var(--accent-line);
     border-radius: var(--radius-md);
     background: var(--bg-1);
   }
@@ -450,7 +450,7 @@
     margin-bottom: var(--s-5);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   .platform h3,
   .reference h3 {
@@ -475,9 +475,12 @@
     justify-content: space-between;
     gap: var(--s-3);
     padding: var(--s-4) var(--s-5);
-    border: 1px solid var(--cyan-dim);
+    border: 1px solid var(--accent-outline);
     border-top: 0;
-    background: var(--cyan-subtle);
+    background: var(--accent-subtle);
+  }
+  .foundation .eyebrow {
+    color: var(--accent-text-on-tint);
   }
   .foundation p {
     font-size: var(--text-sm);

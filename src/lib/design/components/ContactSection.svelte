@@ -105,7 +105,7 @@
     position: absolute;
     inset: 0 0 auto 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--cyan-brand), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-line), transparent);
     opacity: 0.6;
   }
 
@@ -120,7 +120,7 @@
     position: absolute;
     width: 0.75rem;
     height: 0.75rem;
-    border-color: rgba(0, 255, 255, 0.3);
+    border-color: var(--accent-glow);
     border-style: solid;
   }
   .corners::before {
@@ -147,7 +147,7 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--track-label);
-    color: var(--cyan-muted);
+    color: var(--accent-label);
     font-weight: 500;
   }
 
@@ -158,9 +158,9 @@
     margin-top: var(--s-2);
     padding: var(--s-2) var(--s-4);
     background: transparent;
-    border: 1px solid var(--cyan-dim);
+    border: 1px solid var(--accent-outline);
     border-radius: var(--radius-sm);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     font-family: var(--font-sans);
     font-size: var(--text-sm);
     cursor: pointer;
@@ -170,9 +170,9 @@
   }
 
   .wa-button:hover {
-    background: var(--cyan-subtle);
-    border-color: var(--cyan-brand);
-    color: var(--cyan-signal);
+    background: var(--accent-subtle);
+    border-color: var(--accent-outline-hover);
+    color: var(--accent-text-hover);
   }
 
   .icon-small {

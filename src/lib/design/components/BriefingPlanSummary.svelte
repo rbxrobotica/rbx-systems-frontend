@@ -65,7 +65,7 @@
     position: absolute;
     inset: 0 0 auto 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--cyan-brand), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-line), transparent);
     opacity: 0.8;
   }
 
@@ -74,7 +74,7 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--track-label);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     font-weight: 600;
   }
 

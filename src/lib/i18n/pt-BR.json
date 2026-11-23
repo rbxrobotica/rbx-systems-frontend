@@ -27,7 +27,9 @@
     "primary": "Principal",
     "breadcrumb": "Caminho",
     "menu": "Abrir menu",
-    "closeMenu": "Fechar menu"
+    "closeMenu": "Fechar menu",
+    "themeToLight": "Usar tema claro",
+    "themeToDark": "Usar tema escuro"
   },
   "footer": {
     "description": "Engenharia de produto, integrações e IA aplicada, com parceria mensal para evoluir software existente.",

@@ -233,7 +233,7 @@
     position: fixed;
     inset: 0;
     z-index: 110;
-    background: rgba(7, 8, 10, 0.72);
+    background: var(--bg-overlay);
     backdrop-filter: blur(4px);
     display: flex;
     justify-content: flex-end;
@@ -264,7 +264,7 @@
     position: absolute;
     inset: 0 0 auto 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--cyan-brand), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-line), transparent);
   }
 
   .header {
@@ -341,14 +341,14 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--track-label);
-    color: var(--cyan-muted);
+    color: var(--accent-label);
     font-weight: 500;
   }
 
   .field input,
   .field textarea {
     padding: var(--s-3) var(--s-4);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--field-bg);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     color: var(--fg-0);
@@ -366,8 +366,8 @@
   .field input:focus,
   .field textarea:focus {
     outline: none;
-    border-color: var(--cyan-brand);
-    box-shadow: 0 0 0 2px rgba(34, 229, 229, 0.15);
+    border-color: var(--accent-focus);
+    box-shadow: 0 0 0 2px var(--accent-halo);
   }
 
   .field textarea {
@@ -395,8 +395,8 @@
     padding: var(--s-3) var(--s-5);
     border: none;
     border-radius: var(--radius-sm);
-    background: linear-gradient(90deg, var(--cyan-signal), var(--cyan-brand));
-    color: var(--bg-0);
+    background: linear-gradient(90deg, var(--cta-hover), var(--cta));
+    color: var(--on-cta);
     font-weight: 600;
     letter-spacing: var(--track-wide);
     cursor: pointer;
@@ -417,8 +417,8 @@
   .spinner {
     width: 1rem;
     height: 1rem;
-    border: 2px solid rgba(7, 8, 10, 0.3);
-    border-top-color: var(--bg-0);
+    border: 2px solid var(--on-cta-track);
+    border-top-color: var(--on-cta);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }
@@ -447,7 +447,7 @@
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    background: var(--cyan-subtle);
-    color: var(--cyan-brand);
+    background: var(--accent-subtle);
+    color: var(--accent-text);
   }
 </style>
