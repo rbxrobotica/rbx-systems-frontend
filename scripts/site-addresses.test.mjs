@@ -26,7 +26,7 @@ const alternates = loadTypeScriptGraph(source('lib/seo/alternates.ts'));
 const { SITE_ORIGIN, SITE_HOST, LEGACY_HOST_LOCALE } = loadTypeScriptGraph(
   source('lib/seo/site.ts')
 );
-const { negotiateLocale, resolveRedirect } = loadTypeScriptGraph(source('lib/seo/redirects.ts'));
+const { resolveRedirect } = loadTypeScriptGraph(source('lib/seo/redirects.ts'));
 const { RETIRED_PATHS, JOURNAL_PAGES } = alternates;
 const { BRIEFING_LANDING } = loadTypeScriptGraph(source('lib/seo/site.ts'));
 const { reroute } = loadTypeScriptGraph(source('hooks.ts'));
@@ -292,7 +292,7 @@ test('each earlier host sends every page, in one hop, to the same page in its la
         const expected = alternates.localizedHref(locale, route);
         assert.deepEqual(
           redirect,
-          { status: 301, location: `${SITE_ORIGIN}${expected}?utm_source=x`, negotiated: false },
+          { status: 301, location: `${SITE_ORIGIN}${expected}?utm_source=x` },
           `${name}${route}`
         );
         // One hop: the address it lands on is served, and it is a real page.
@@ -562,8 +562,7 @@ test('an address is written one way: no trailing slash, no needless escape', () 
   }
 });
 
-test('a page path without a segment goes to the language of its spelling, or is negotiated', () => {
-  const portuguese = 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7';
+test('a page path without a segment goes to the language of its spelling, or to English', () => {
   for (const [pathname, location] of [
     ['/sobre', '/pt-br/sobre'],
     ['/about', '/en/about'],
@@ -572,62 +571,42 @@ test('a page path without a segment goes to the language of its spelling, or is 
     ['/produtos/maestro', '/pt-br/produtos/maestro'],
     ['/contato/', '/pt-br/contato']
   ]) {
-    // The spelling decides, whatever the browser asks for.
-    for (const acceptLanguage of [portuguese, 'en-US,en;q=0.9', undefined]) {
-      assert.deepEqual(
-        resolveRedirect(onSite(pathname, { acceptLanguage, search: '?a=1' })),
-        { status: 301, location: `${location}?a=1`, negotiated: false },
-        pathname
-      );
-    }
-  }
-
-  for (const [pathname, pt, en] of [
-    ['/', '/pt-br', '/en'],
-    ['/journal', '/pt-br/journal', '/en/journal'],
-    ['/blog/a-post', '/pt-br/blog/a-post', '/en/blog/a-post'],
-    ['/leandro-damasio', '/pt-br/leandro-damasio', '/en/leandro-damasio'],
-    ['/rss.xml', '/pt-br/rss.xml', '/en/rss.xml'],
-    // A retired name has no language of its own either.
-    ['/aboutus', '/pt-br/sobre', '/en/about'],
-    ['/nowhere', '/pt-br/nowhere', '/en/nowhere']
-  ]) {
     assert.deepEqual(
-      resolveRedirect(onSite(pathname, { acceptLanguage: portuguese, search: '?a=1' })),
-      { status: 302, location: `${pt}?a=1`, negotiated: true },
+      resolveRedirect(onSite(pathname, { search: '?a=1' })),
+      { status: 301, location: `${location}?a=1` },
       pathname
     );
-    for (const acceptLanguage of ['en-GB,en;q=0.9', 'fr-FR,fr;q=0.9', '', undefined, null]) {
-      assert.deepEqual(
-        resolveRedirect(onSite(pathname, { acceptLanguage })),
-        { status: 302, location: en, negotiated: true },
-        `${pathname} ${acceptLanguage}`
-      );
-    }
+  }
+
+  // A spelling that serves both languages goes to the default one. The answer
+  // is temporary: the default is a choice, not where the page moved.
+  for (const [pathname, en] of [
+    ['/', '/en'],
+    ['/journal', '/en/journal'],
+    ['/blog/a-post', '/en/blog/a-post'],
+    ['/leandro-damasio', '/en/leandro-damasio'],
+    ['/rss.xml', '/en/rss.xml'],
+    // A retired name has no language of its own either.
+    ['/aboutus', '/en/about'],
+    ['/nowhere', '/en/nowhere']
+  ]) {
+    assert.deepEqual(
+      resolveRedirect(onSite(pathname, { search: '?a=1' })),
+      { status: 302, location: `${en}?a=1` },
+      pathname
+    );
   }
 });
 
-test('the browser language is the first Portuguese or English range by weight', () => {
-  for (const [header, locale] of [
-    ['pt-BR', 'pt-BR'],
-    ['pt', 'pt-BR'],
-    ['pt-PT,pt;q=0.9', 'pt-BR'],
-    ['en-US,en;q=0.9,pt;q=0.8', 'en'],
-    ['fr;q=0.9, pt;q=0.5, en;q=0.4', 'pt-BR'],
-    ['en;q=0.1, pt;q=0.9', 'pt-BR'],
-    ['pt;q=0.5, en;q=0.5', 'pt-BR'],
-    ['PT-br', 'pt-BR'],
-    ['fr-FR,fr;q=0.9,de;q=0.8', 'en'],
-    ['*', 'en'],
-    ['pt;q=0', 'en'],
-    ['pt;q=abc, en', 'en'],
-    ['ptx, enx', 'en'],
-    [',,;q=1,', 'en'],
-    ['', 'en'],
-    [undefined, 'en'],
-    [null, 'en']
-  ]) {
-    assert.equal(negotiateLocale(header), locale, String(header));
+test('the browser language does not choose the language', () => {
+  // Portuguese is for whoever selects it. A browser that asks for it at an
+  // address without a language still gets English.
+  for (const acceptLanguage of ['pt-BR,pt;q=0.9', 'pt', 'fr-FR', '', undefined]) {
+    assert.deepEqual(
+      resolveRedirect(onSite('/', { acceptLanguage })),
+      { status: 302, location: '/en' },
+      String(acceptLanguage)
+    );
   }
 });
 
@@ -651,7 +630,7 @@ test('under a segment, a retired name or the spelling of the other language goes
   ]) {
     assert.deepEqual(
       resolveRedirect(onSite(pathname, { search: '?a=1' })),
-      { status: 301, location: `${location}?a=1`, negotiated: false },
+      { status: 301, location: `${location}?a=1` },
       pathname
     );
   }
@@ -665,17 +644,15 @@ test('the www name goes to the bare name in the same hop as any change of path',
   const www = (pathname, extra) => resolveRedirect(onHost(`www.${SITE_HOST}`, pathname, extra));
   assert.deepEqual(www('/en/about'), {
     status: 301,
-    location: `${SITE_ORIGIN}/en/about`,
-    negotiated: false
+    location: `${SITE_ORIGIN}/en/about`
   });
   assert.equal(www('/en/sobre').location, `${SITE_ORIGIN}/en/about`);
   assert.equal(www('/sobre').location, `${SITE_ORIGIN}/pt-br/sobre`);
   assert.equal(www('/robots.txt').location, `${SITE_ORIGIN}/robots.txt`);
   assert.equal(www('/sitemap.xml').location, `${SITE_ORIGIN}/sitemap.xml`);
-  assert.deepEqual(www('/', { acceptLanguage: 'pt-BR' }), {
+  assert.deepEqual(www('/'), {
     status: 302,
-    location: `${SITE_ORIGIN}/pt-br`,
-    negotiated: true
+    location: `${SITE_ORIGIN}/en`
   });
 
   // Any other name (a pod address, a preview, localhost) is left where it
@@ -692,8 +669,7 @@ test('a request that is not a read keeps its method across the redirect', () => 
     resolveRedirect({ hosts, method: 'POST', pathname, search: '' });
   assert.deepEqual(post(['rbx.ia.br'], '/api/chat'), {
     status: 308,
-    location: `${SITE_ORIGIN}/api/chat`,
-    negotiated: false
+    location: `${SITE_ORIGIN}/api/chat`
   });
   assert.equal(post([SITE_HOST], '/sobre').status, 308);
   assert.equal(post([SITE_HOST], '/').status, 307);
@@ -760,7 +736,6 @@ test('whatever is asked for, a redirect stays on the site, keeps the query and t
     '10.42.0.7:8080'
   ];
   const searches = ['', '?a=1', '?next=//evil.example/x', '?q=%0d%0aSet-Cookie:x'];
-  const headers = [undefined, 'pt-BR,pt;q=0.9', 'en', 'fr', ';;;', 'pt;q=2'];
   // A Location with a host names this site or the landing of the briefing.
   // One without a host starts with a single slash and then a locale segment,
   // a host-wide name of this site or one of the two files of the root, so it
@@ -788,8 +763,7 @@ test('whatever is asked for, a redirect stays on the site, keeps the query and t
         urlHost: random.chance(0.5) ? host : SITE_HOST,
         method,
         pathname,
-        search,
-        acceptLanguage: random.pick(headers)
+        search
       };
       const label = `seed ${seed}: ${method} ${host}${pathname}${search}`;
       const redirect = resolveRedirect(request);
@@ -809,7 +783,6 @@ test('whatever is asked for, a redirect stays on the site, keeps the query and t
       assert.ok(redirect.location.endsWith(search), `${label}: query lost`);
       // Nothing that would need an escape is written raw into the header.
       assert.match(redirect.location, /^[\x21-\x7e]+$/, label);
-      assert.equal(redirect.negotiated, redirect.status === 302 || redirect.status === 307, label);
       assert.ok(
         (method === 'GET' ? [301, 302] : [308, 307]).includes(redirect.status),
         `${label}: ${redirect.status}`
@@ -863,11 +836,12 @@ test('the hook answers a redirect without rendering, and renders a page in the l
   assert.equal(response.status, 200);
   assert.deepEqual(rendered.splice(0), ['/pt-br/sobre']);
 
-  // The root: negotiated, so it varies and is not stored.
+  // The root goes to the default language whatever the browser asks for. The
+  // answer does not vary and is not stored.
   response = await ask(`${SITE_ORIGIN}/`, { headers: { 'accept-language': 'pt-BR,pt;q=0.9' } });
   assert.equal(response.status, 302);
-  assert.equal(response.headers.get('location'), '/pt-br');
-  assert.equal(response.headers.get('vary'), 'Accept-Language');
+  assert.equal(response.headers.get('location'), '/en');
+  assert.equal(response.headers.get('vary'), null);
   assert.equal(response.headers.get('cache-control'), 'private, no-store');
   assert.deepEqual(rendered, []);
 
@@ -1420,7 +1394,7 @@ test('an earlier address of a post reaches the post, with its query, through the
       if (response.status >= 300 && response.status < 400) {
         location = response.headers.get('location');
         // Bounded when permanent, by the hook or by the loader; not stored
-        // when negotiated.
+        // when it is the temporary one to the default language.
         assert.equal(
           response.headers.get('cache-control'),
           response.status === 301 ? 'public, max-age=3600' : 'private, no-store',
@@ -1473,7 +1447,7 @@ test('an earlier address of a post reaches the post, with its query, through the
     `301 ${SITE_ORIGIN}/pt-br/blog/2026-08-05-o-primeiro-palmo?utm_source=x`
   ]);
   assert.equal(end.data.post.title, 'O primeiro palmo');
-  // Without a segment on the site host: negotiated, and still one hop.
+  // Without a segment on the site host: the default language, and still one hop.
   end = await follow(`${SITE_ORIGIN}/blog/2026-08-05-o-primeiro-palmo`);
   assert.deepEqual(end.hops, ['302 /en/blog/2026-08-05-the-first-span']);
   assert.deepEqual(end.data.alternates, [

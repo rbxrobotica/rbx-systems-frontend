@@ -59,8 +59,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     urlHost: url.hostname,
     method: request.method,
     pathname: url.pathname,
-    search: url.search,
-    acceptLanguage: request.headers.get('accept-language')
+    search: url.search
   });
   if (redirect) {
     const location = toPublicPostSlug(redirect.location);
@@ -68,10 +67,12 @@ export const handle: Handle = async ({ event, resolve }) => {
       status: redirect.status,
       headers: {
         Location: location,
-        // A negotiated answer depends on the browser and is not stored.
-        ...(redirect.negotiated
-          ? { Vary: 'Accept-Language', 'Cache-Control': 'private, no-store' }
-          : { 'Cache-Control': PERMANENT_REDIRECT_CACHE })
+        // A permanent answer is stored for a bounded time. The temporary one, to
+        // the default language, is not stored: the default may change.
+        'Cache-Control':
+          redirect.status === 301 || redirect.status === 308
+            ? PERMANENT_REDIRECT_CACHE
+            : 'private, no-store'
       }
     });
   }

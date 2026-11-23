@@ -308,14 +308,14 @@ check('A / without a language', await hop('A', '/', site), [302, '/en']);
 check(
   'A / for a Portuguese browser',
   await hop('A', '/', { ...site, 'accept-language': 'pt-BR,pt;q=0.9,en;q=0.8' }),
-  [302, '/pt-br']
+  [302, '/en']
 );
 {
   const res = await get('A', '/', { ...site, 'accept-language': 'pt-BR' });
   check(
-    'A / a negotiated answer varies and is not stored',
+    'A / the default answer does not vary and is not stored',
     [res.headers.vary, res.headers['cache-control']],
-    ['Accept-Language', 'private, no-store']
+    [undefined, 'private, no-store']
   );
 }
 check('A /sobre', await hop('A', '/sobre?utm_source=x', site), [301, '/pt-br/sobre?utm_source=x']);
