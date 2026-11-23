@@ -27,7 +27,9 @@
     "primary": "Primary",
     "breadcrumb": "You are here",
     "menu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "themeToLight": "Use light theme",
+    "themeToDark": "Use dark theme"
   },
   "footer": {
     "description": "Product engineering, integrations and applied AI, with a monthly partnership to evolve existing software.",

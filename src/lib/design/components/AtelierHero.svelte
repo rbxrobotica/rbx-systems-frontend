@@ -41,7 +41,7 @@
       <div class="hero-mark">
         <svg viewBox="0 0 64 64" width="96" height="96" aria-hidden="true" class="mark-svg">
           <rect width="64" height="64" fill="var(--bg-0)" />
-          <path fill="var(--cyan-brand)" d="M30 8 H56 V34 L34 56 H8 V30 Z" />
+          <path fill="var(--accent-line)" d="M30 8 H56 V34 L34 56 H8 V30 Z" />
         </svg>
       </div>
 
@@ -88,8 +88,10 @@
 
 <style>
   .atelier-hero {
-    --hero-accent: var(--cyan-brand);
-    --hero-muted: var(--cyan-dim);
+    --hero-accent: var(--accent-line);
+    --hero-muted: var(--accent-edge);
+    --hero-text: var(--accent-text);
+    --hero-outline-hover: var(--accent-outline-hover);
     /* No top padding: the breadcrumb above already sets the distance to the header. */
     padding: 0 0 var(--s-9);
   }
@@ -167,7 +169,7 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--track-label);
-    color: var(--hero-accent);
+    color: var(--hero-text);
   }
 
   .hero-title {
@@ -238,8 +240,8 @@
   }
 
   .hero-cta:hover {
-    border-color: var(--hero-accent);
-    color: var(--hero-accent);
+    border-color: var(--hero-outline-hover);
+    color: var(--hero-text);
   }
 
   .hero-footer {

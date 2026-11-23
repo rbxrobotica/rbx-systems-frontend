@@ -49,7 +49,7 @@
   svg {
     display: block;
     flex: none;
-    fill: var(--cyan-brand);
+    fill: var(--accent-line);
   }
   .stack {
     display: flex;

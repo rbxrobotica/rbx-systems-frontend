@@ -97,7 +97,7 @@
     color: var(--fg-0);
     /* Room above for accented capitals, which the clipping would cut. */
     padding: 2px 0;
-    box-shadow: inset 0 -1px 0 var(--cyan-dim);
+    box-shadow: inset 0 -1px 0 var(--accent-edge);
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;

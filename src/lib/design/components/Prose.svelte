@@ -46,12 +46,12 @@
     margin-bottom: var(--s-2);
   }
   .prose :global(a) {
-    color: var(--cyan-brand);
-    border-bottom-color: var(--cyan-dim);
+    color: var(--accent-text);
+    border-bottom-color: var(--accent-edge);
   }
   .prose :global(a:hover) {
-    color: var(--cyan-signal);
-    border-bottom-color: var(--cyan-brand);
+    color: var(--accent-text-hover);
+    border-bottom-color: var(--accent-line);
   }
   .prose :global(code) {
     font-family: var(--font-mono);
@@ -73,7 +73,7 @@
     padding: 0;
   }
   .prose :global(blockquote) {
-    border-left: 2px solid var(--cyan-dim);
+    border-left: 2px solid var(--accent-edge);
     padding-left: var(--s-4);
     margin-left: 0;
     color: var(--fg-1);

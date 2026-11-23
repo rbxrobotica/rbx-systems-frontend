@@ -117,7 +117,7 @@
 
   .founder-role {
     font-size: var(--text-sm);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     font-family: var(--font-mono);
     text-transform: uppercase;
     letter-spacing: var(--track-label);

@@ -171,7 +171,7 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   h1 {
     margin: var(--s-5) 0;
@@ -195,7 +195,7 @@
   .offer {
     padding: var(--s-6);
     border: 1px solid var(--border-strong);
-    border-top: 2px solid var(--cyan-brand);
+    border-top: 2px solid var(--accent-line);
     border-radius: var(--radius-md);
     background: var(--bg-1);
   }
@@ -310,7 +310,7 @@
     margin-top: var(--s-6);
     padding: var(--s-5);
     background: var(--bg-1);
-    border-left: 2px solid var(--cyan-dim);
+    border-left: 2px solid var(--accent-edge);
   }
   .steps {
     padding: 0;

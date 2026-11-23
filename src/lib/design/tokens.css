@@ -1,11 +1,16 @@
 /* ==========================================================================
    RBX Systems — Design Tokens
    Dark-first, Zurich/Zug-coded. Single-accent cyan family.
+   Two themes: dark is the default, light applies under [data-theme='light'] on
+   <html>. Components take the accent through the role tokens (--accent-*), never
+   through the cyan scale, so one rule serves both themes. See docs/themes.md.
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
+  color-scheme: dark;
+
   /* ——— Backgrounds ——— */
   --bg-0: #07080a;
   --bg-1: #0d0f12;
@@ -22,7 +27,7 @@
   /* ——— Borders ——— */
   --border: #24282e;
   --border-strong: #3a4048;
-  --border-accent: #22e5e5;
+  --border-accent: var(--accent-focus);
 
   /* ——— Voltage cyan scale ——— */
   --cyan-signal: #00ffff;
@@ -33,7 +38,33 @@
 
   /* ——— Actions ——— */
   --cta: var(--cyan-brand);
+  --cta-hover: var(--cyan-signal);
   --on-cta: var(--bg-0);
+
+  /* ——— Accent roles ———
+     In dark each role points at the cyan scale above. In light the same cyan does
+     not pass contrast as text, so each role gets its own value. */
+  --accent-line: var(--cyan-brand); /* mark, chart line, badge border, link underline on hover */
+  --accent-text: var(
+    --cyan-brand
+  ); /* cyan text: outline button, badge, title on hover, prose link */
+  --accent-text-hover: var(--cyan-signal);
+  --accent-text-on-tint: var(--cyan-brand); /* cyan text on an --accent-subtle fill over --bg-1 */
+  --accent-label: var(--cyan-muted); /* field label */
+  --accent-edge: var(--cyan-dim); /* prose link underline, quote rule, current crumb */
+  --accent-outline: var(--cyan-dim); /* outline button border at rest */
+  --accent-outline-hover: var(--cyan-brand);
+  --accent-subtle: var(--cyan-subtle); /* outline button fill */
+  --accent-subtle-hover: rgba(0, 255, 255, 0.12);
+  --accent-active: var(--cyan-brand); /* active underline: language, primary nav, section band */
+  --accent-focus: var(--cyan-brand); /* focus ring and field border on focus */
+  --accent-halo: rgba(34, 229, 229, 0.15); /* soft ring added to a focused field */
+  --accent-glow: rgba(0, 255, 255, 0.3); /* card border on hover */
+  --accent-wash: rgba(0, 255, 255, 0.05); /* faint tint at the top of a selected panel */
+  --accent-solid: var(--cyan-dim); /* filled surface that carries text: the visitor's chat bubble */
+  --on-accent-solid: var(--fg-0);
+  --field-bg: rgba(255, 255, 255, 0.03);
+  --on-cta-track: rgba(7, 8, 10, 0.3); /* spinner track on a filled button */
 
   /* ——— Semantic ——— */
   --ok: #7fb77e;
@@ -95,10 +126,13 @@
   /* ——— Elevation ——— */
   --shadow-none: none;
   --shadow-overlay: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-panel: 0 8px 40px rgba(0, 0, 0, 0.5);
+  --shadow-float: 0 4px 16px rgba(34, 229, 229, 0.15), 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-float-hover: 0 6px 24px rgba(34, 229, 229, 0.25), 0 2px 8px rgba(0, 0, 0, 0.4);
   --shadow-nav: 0 4px 24px rgba(0, 0, 0, 0.6);
   --ring: 0 0 0 1px var(--border);
   --ring-strong: 0 0 0 1px var(--border-strong);
-  --ring-focus: 0 0 0 2px var(--cyan-brand);
+  --ring-focus: 0 0 0 2px var(--accent-focus);
 
   /* ——— Glass navigation ——— */
   --bg-nav-glass: hsla(222, 47%, 6%, 0.72);
@@ -123,6 +157,72 @@
   --header-row-mobile: 60px;
   --nav-row: 48px;
   --band-row: 44px;
+}
+
+/* ==========================================================================
+   Light theme — ivory with cyan
+   Values from the Voltage definition in the atelier (brand-voltage/TEMA-CLARO.md).
+   Same mark, type, radii, spacing and cyan hue. Surfaces are ivory; bg-1 is darker
+   than the page and bg-2 is lighter. The overlay, shadow, halo, glow and wash
+   values are this site's: the atelier does not define them yet.
+   ========================================================================== */
+[data-theme='light'] {
+  color-scheme: light;
+
+  --bg-0: #f2efe6;
+  --bg-1: #eae5d8;
+  --bg-2: #fbfaf4;
+  --bg-3: #e0d9c8;
+  --bg-overlay: rgba(32, 32, 28, 0.48);
+
+  --fg-0: #20201c;
+  --fg-1: #4a463e;
+  --fg-2: #666056;
+  --fg-3: #a8a192;
+
+  --border: #d6cfbe;
+  --border-strong: #c9c0ac;
+
+  --cta: #084f4f;
+  --cta-hover: #0b6e6e;
+  --on-cta: #fbfaf4;
+
+  --accent-line: #0f8f8f;
+  --accent-text: #0b6e6e;
+  --accent-text-hover: #084f4f;
+  --accent-text-on-tint: #084f4f;
+  --accent-label: #0b6e6e;
+  --accent-edge: #084f4f;
+  --accent-outline: #0f8f8f;
+  --accent-outline-hover: #0b6e6e;
+  --accent-subtle: rgba(11, 110, 110, 0.08);
+  --accent-subtle-hover: rgba(11, 110, 110, 0.14);
+  --accent-active: #0b6e6e;
+  --accent-focus: #0b6e6e;
+  --accent-halo: rgba(11, 110, 110, 0.18);
+  --accent-glow: rgba(15, 143, 143, 0.55);
+  --accent-wash: rgba(11, 110, 110, 0.05);
+  --accent-solid: #084f4f;
+  --on-accent-solid: #fbfaf4;
+  --field-bg: var(--bg-2);
+  --on-cta-track: rgba(251, 250, 244, 0.35);
+
+  --ok: #3f6837;
+  --warn: #7d5a0e;
+  --err: #963a3a;
+  --info: #3b5a80;
+  --ok-subtle: rgba(63, 104, 55, 0.12);
+  --warn-subtle: rgba(125, 90, 14, 0.12);
+  --err-subtle: rgba(150, 58, 58, 0.12);
+  --info-subtle: rgba(59, 90, 128, 0.12);
+
+  --shadow-overlay: 0 8px 24px rgba(32, 32, 28, 0.16);
+  --shadow-panel: 0 8px 40px rgba(32, 32, 28, 0.18);
+  --shadow-float: 0 4px 16px rgba(11, 110, 110, 0.12), 0 2px 8px rgba(32, 32, 28, 0.14);
+  --shadow-float-hover: 0 6px 24px rgba(11, 110, 110, 0.18), 0 2px 8px rgba(32, 32, 28, 0.14);
+  --shadow-nav: 0 4px 24px rgba(32, 32, 28, 0.14);
+  --bg-nav-glass: rgba(242, 239, 230, 0.82);
+  --border-nav-glass: rgba(214, 207, 190, 0.7);
 }
 
 .rbx {
@@ -204,8 +304,8 @@
     color var(--dur) var(--ease);
 }
 .rbx a:hover {
-  color: var(--cyan-brand);
-  border-bottom-color: var(--cyan-brand);
+  color: var(--accent-text);
+  border-bottom-color: var(--accent-line);
 }
 
 .rbx *:focus-visible {
@@ -240,10 +340,10 @@
   align-items: center;
   gap: var(--s-2);
   padding: var(--s-2) var(--s-4);
-  background: var(--cyan-subtle);
-  border: 1px solid var(--cyan-dim);
+  background: var(--accent-subtle);
+  border: 1px solid var(--accent-outline);
   border-radius: var(--radius-sm);
-  color: var(--cyan-brand);
+  color: var(--accent-text);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   text-transform: uppercase;
@@ -253,7 +353,7 @@
     border-color var(--dur) var(--ease);
 }
 .rbx-cta:hover {
-  background: rgba(0, 255, 255, 0.12);
-  border-color: var(--cyan-brand);
-  color: var(--cyan-signal);
+  background: var(--accent-subtle-hover);
+  border-color: var(--accent-outline-hover);
+  color: var(--accent-text-hover);
 }

@@ -140,7 +140,7 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--track-label);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     font-weight: 600;
   }
 
@@ -176,7 +176,7 @@
   .check {
     width: 1.25rem;
     height: 1.25rem;
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     flex-shrink: 0;
     margin-top: 0.1rem;
   }
@@ -200,7 +200,7 @@
     position: absolute;
     inset: 0 0 auto 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--cyan-brand), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-line), transparent);
     opacity: 0.8;
   }
 
@@ -215,7 +215,7 @@
     position: absolute;
     width: 1rem;
     height: 1rem;
-    border-color: rgba(0, 255, 255, 0.3);
+    border-color: var(--accent-glow);
     border-style: solid;
   }
   .corners::before {

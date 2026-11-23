@@ -67,8 +67,8 @@
     letter-spacing: var(--track-label);
   }
   .rss-badge {
-    color: var(--cyan-brand);
-    border: 1px solid var(--cyan-brand);
+    color: var(--accent-text);
+    border: 1px solid var(--accent-line);
     border-radius: var(--radius-sm);
     padding: 0 var(--s-1);
   }
@@ -77,7 +77,7 @@
     transition: color var(--dur) var(--ease);
   }
   .rss-cta a:hover {
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   .post-list {
     list-style: none;
@@ -93,7 +93,7 @@
     border-bottom: 1px solid var(--border);
   }
   .post-item a:hover .post-title {
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   .post-date {
     font-family: var(--font-mono);

@@ -1473,7 +1473,7 @@
     position: absolute;
     inset: 0 0 auto 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--cyan-brand), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-line), transparent);
     opacity: 0.8;
   }
 
@@ -1495,7 +1495,7 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--track-label);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     font-weight: 600;
   }
 
@@ -1571,8 +1571,8 @@
   }
 
   .stepper li.current {
-    color: var(--cyan-brand);
-    border-bottom-color: var(--cyan-brand);
+    color: var(--accent-text);
+    border-bottom-color: var(--accent-line);
   }
 
   .body {
@@ -1625,9 +1625,9 @@
   }
 
   .segmented button.active {
-    color: var(--cyan-brand);
-    background: var(--cyan-subtle);
-    border-color: var(--cyan-dim);
+    color: var(--accent-text);
+    background: var(--accent-subtle);
+    border-color: var(--accent-outline);
   }
 
   .chip {
@@ -1645,14 +1645,14 @@
   }
 
   .segmented button.active .chip {
-    border-color: var(--cyan-dim);
-    color: var(--cyan-brand);
+    border-color: var(--accent-outline);
+    color: var(--accent-text);
   }
 
   .chip.discount {
-    border-color: var(--cyan-dim);
-    color: var(--cyan-brand);
-    background: var(--cyan-subtle);
+    border-color: var(--accent-outline);
+    color: var(--accent-text);
+    background: var(--accent-subtle);
   }
 
   .cards {
@@ -1681,8 +1681,8 @@
   }
 
   .card.featured {
-    border-color: var(--cyan-dim);
-    background: linear-gradient(180deg, rgba(0, 255, 255, 0.05), transparent 40%), var(--bg-2);
+    border-color: var(--accent-outline);
+    background: linear-gradient(180deg, var(--accent-wash), transparent 40%), var(--bg-2);
   }
 
   .foot {
@@ -1709,13 +1709,13 @@
     left: var(--s-5);
     padding: var(--s-1) var(--s-3);
     background: var(--bg-1);
-    border: 1px solid var(--cyan-dim);
+    border: 1px solid var(--accent-outline);
     border-radius: var(--radius-sm);
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--track-label);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
 
   .card-head {
@@ -1844,7 +1844,7 @@
     height: 1rem;
     flex-shrink: 0;
     margin-top: 0.2rem;
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
 
   .more-seats {
@@ -1877,8 +1877,8 @@
   }
 
   .linkish:hover {
-    color: var(--cyan-brand);
-    border-bottom-color: var(--cyan-brand);
+    color: var(--accent-text);
+    border-bottom-color: var(--accent-line);
   }
 
   .seats {
@@ -1894,7 +1894,7 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--track-label);
-    color: var(--cyan-muted);
+    color: var(--accent-label);
     font-weight: 500;
   }
 
@@ -1903,7 +1903,7 @@
     align-items: stretch;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--field-bg);
     width: fit-content;
   }
 
@@ -1924,7 +1924,7 @@
   }
 
   .seat-control button:hover:not(:disabled) {
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
 
   .seat-control button:disabled {
@@ -1956,7 +1956,7 @@
 
   .seat-control input:focus {
     outline: none;
-    box-shadow: inset 0 0 0 1px var(--cyan-brand);
+    box-shadow: inset 0 0 0 1px var(--accent-focus);
   }
 
   .hint {
@@ -2078,7 +2078,7 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--track-label);
-    color: var(--cyan-muted);
+    color: var(--accent-label);
     font-weight: 500;
     padding: 0;
     margin-bottom: var(--s-2);
@@ -2092,7 +2092,7 @@
     padding: var(--s-2) var(--s-4);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--field-bg);
     color: var(--fg-1);
     cursor: pointer;
     transition:
@@ -2101,13 +2101,13 @@
   }
 
   .method.active {
-    border-color: var(--cyan-dim);
+    border-color: var(--accent-outline);
     color: var(--fg-0);
-    background: var(--cyan-subtle);
+    background: var(--accent-subtle);
   }
 
   .method input {
-    accent-color: var(--cyan-brand);
+    accent-color: var(--cta);
     width: 1rem;
     height: 1rem;
     margin: 0;
@@ -2122,7 +2122,7 @@
   .field input {
     min-height: 2.75rem;
     padding: var(--s-2) var(--s-4);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--field-bg);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     color: var(--fg-0);
@@ -2138,8 +2138,8 @@
 
   .field input:focus {
     outline: none;
-    border-color: var(--cyan-brand);
-    box-shadow: 0 0 0 2px rgba(34, 229, 229, 0.15);
+    border-color: var(--accent-focus);
+    box-shadow: 0 0 0 2px var(--accent-halo);
   }
 
   .summary {
@@ -2191,7 +2191,7 @@
 
   .summary dl > div.total dd {
     font-size: var(--text-lg);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
 
   .legal {
@@ -2243,8 +2243,8 @@
 
   .btn.primary {
     border: none;
-    background: linear-gradient(90deg, var(--cyan-signal), var(--cyan-brand));
-    color: var(--bg-0);
+    background: linear-gradient(90deg, var(--cta-hover), var(--cta));
+    color: var(--on-cta);
   }
 
   .btn.primary:hover:not(:disabled) {
@@ -2252,9 +2252,9 @@
   }
 
   .btn.secondary {
-    background: var(--cyan-subtle);
-    border: 1px solid var(--cyan-dim);
-    color: var(--cyan-brand);
+    background: var(--accent-subtle);
+    border: 1px solid var(--accent-outline);
+    color: var(--accent-text);
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     text-transform: uppercase;
@@ -2263,9 +2263,9 @@
   }
 
   .btn.secondary:hover:not(:disabled) {
-    background: rgba(0, 255, 255, 0.12);
-    border-color: var(--cyan-brand);
-    color: var(--cyan-signal);
+    background: var(--accent-subtle-hover);
+    border-color: var(--accent-outline-hover);
+    color: var(--accent-text-hover);
   }
 
   .btn.ghost {
@@ -2328,8 +2328,8 @@
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
-    background: var(--cyan-subtle);
-    color: var(--cyan-brand);
+    background: var(--accent-subtle);
+    color: var(--accent-text);
   }
 
   .icon {
@@ -2340,8 +2340,8 @@
   .spinner {
     width: 1rem;
     height: 1rem;
-    border: 2px solid rgba(7, 8, 10, 0.3);
-    border-top-color: var(--bg-0);
+    border: 2px solid var(--on-cta-track);
+    border-top-color: var(--on-cta);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }
@@ -2349,8 +2349,8 @@
   .spinner.large {
     width: 1.5rem;
     height: 1.5rem;
-    border-color: rgba(34, 229, 229, 0.25);
-    border-top-color: var(--cyan-brand);
+    border-color: color-mix(in srgb, var(--accent-line) 25%, transparent);
+    border-top-color: var(--accent-line);
   }
 
   @keyframes spin {

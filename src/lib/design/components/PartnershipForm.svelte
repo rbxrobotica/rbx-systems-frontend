@@ -511,7 +511,7 @@
   select:focus-visible,
   textarea:focus-visible,
   button:focus-visible {
-    outline: 2px solid var(--cyan-brand);
+    outline: 2px solid var(--accent-focus);
     outline-offset: 3px;
   }
 
@@ -525,7 +525,7 @@
   }
 
   .price-reference {
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     font-size: var(--text-sm);
     font-family: var(--font-mono);
   }
@@ -544,7 +544,7 @@
     width: 1.125rem;
     height: 1.125rem;
     margin-top: 0.25rem;
-    accent-color: var(--cyan-brand);
+    accent-color: var(--cta);
   }
 
   .honeypot {
@@ -565,10 +565,10 @@
 
   .submit {
     padding: var(--s-3) var(--s-5);
-    border: 1px solid var(--cyan-brand);
+    border: 1px solid var(--cta);
     border-radius: var(--radius-sm);
-    background: var(--cyan-brand);
-    color: var(--bg-0);
+    background: var(--cta);
+    color: var(--on-cta);
     font: inherit;
     font-weight: 600;
     cursor: pointer;
@@ -579,7 +579,7 @@
   }
 
   .success {
-    border-color: var(--cyan-brand);
+    border-color: var(--accent-line);
     color: var(--fg-1);
   }
 
