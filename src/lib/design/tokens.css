@@ -79,7 +79,7 @@
   /* ——— Type ——— */
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  /* Wordmark only (the "RBX" beside the mark). Never in interface text. */
+  /* Wordmark only (the "Merovelis" beside the mark). Never in interface text. */
   --font-wordmark: 'Archivo', 'Inter', system-ui, sans-serif;
 
   --text-xs: 0.6875rem;

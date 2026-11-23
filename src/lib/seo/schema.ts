@@ -1,5 +1,5 @@
 /**
- * JSON-LD schema generators for RBX Systems public pages.
+ * JSON-LD schema generators for the Merovelis public pages.
  * All IDs are canonical and stable; they should match the canonical URL
  * of the page where they are embedded.
  *
@@ -11,17 +11,21 @@ import type { Locale } from '$types/content';
 import { localizedUrl } from './alternates';
 import { SITE_ORIGIN } from './site';
 
-const RBX_NAME = 'RBX Systems';
-const RBX_ALTERNATE_NAMES = ['RBX', 'RBX Robótica'];
+// One organization and one site for both languages, so one name: the English
+// one, which is also the lockup. The Portuguese name and the names the house
+// had before 2026-11 are alternate names, which is how search engines connect
+// them to the same entity.
+const HOUSE_NAME = 'Merovelis Systems';
+const HOUSE_ALTERNATE_NAMES = ['Merovelis', 'Merovelis Sistemas', 'RBX Systems', 'RBX Robótica'];
 const RBX_LOGO = '/brand/rbx-mark.svg';
 const RBX_DESCRIPTION_PT =
-  'Engenharia de sistemas, automação operacional, IA aplicada e infraestrutura em nuvem para operações de alta exigência.';
+  'Empresa de produtos de software com IA: Strategos, Robson, Satwake, Verentir e Initelo, sobre uma plataforma própria de IA e infraestrutura.';
 const RBX_DESCRIPTION_EN =
-  'Systems engineering, operational automation, applied AI and cloud infrastructure for high-demand operations.';
+  'An AI software product company: Strategos, Robson, Satwake, Verentir and Initelo, on its own AI platform and infrastructure.';
 
 const LEANDRO_NAME = 'Leandro Damasio';
-const LEANDRO_JOB_TITLE_PT = 'Fundador e CEO, RBX Systems';
-const LEANDRO_JOB_TITLE_EN = 'Founder & CEO, RBX Systems';
+const LEANDRO_JOB_TITLE_PT = 'Fundador e CEO, Merovelis Sistemas';
+const LEANDRO_JOB_TITLE_EN = 'Founder & CEO, Merovelis Systems';
 const LEANDRO_LINKEDIN = 'https://www.linkedin.com/in/ldamasio/';
 const LEANDRO_GITHUB = 'https://github.com/ldamasio';
 
@@ -41,8 +45,8 @@ export function organizationSchema(locale: Locale = 'pt-BR'): Record<string, unk
   return {
     '@type': 'Organization',
     '@id': ORG_ID,
-    name: RBX_NAME,
-    alternateName: RBX_ALTERNATE_NAMES,
+    name: HOUSE_NAME,
+    alternateName: HOUSE_ALTERNATE_NAMES,
     // The home page in the language of the page: the root itself answers
     // with a redirect, and an address in structured data is one that is served.
     url: localizedUrl(locale, '/'),
@@ -128,7 +132,7 @@ export function websiteSchema(): Record<string, unknown> {
   return {
     '@type': 'WebSite',
     '@id': WEBSITE_ID,
-    name: RBX_NAME,
+    name: HOUSE_NAME,
     url: localizedUrl('en', '/'),
     publisher: { '@id': ORG_ID },
     inLanguage: ['pt-BR', 'en']

@@ -1,5 +1,5 @@
 ---
-title: What RBX does for a live product
+title: What Merovelis does for a live product
 description: 'Features, integrations, automation, AI, maintenance and infrastructure: examples of deliverables for products already in operation.'
 eyebrow: Solutions
 lead: Your product's priority defines the work. These are examples of problems and deliverables that can form a cycle of the monthly partnership, for live products or advanced pilots.
@@ -7,7 +7,7 @@ lead: Your product's priority defines the work. These are examples of problems a
 
 ## A feature or portal needs to become part of the product
 
-A new workflow, access area or portal needs an interface, backend and business rules. RBX implements that combination, with identity, content or payment integrations when they are part of the scope.
+A new workflow, access area or portal needs an interface, backend and business rules. Merovelis implements that combination, with identity, content or payment integrations when they are part of the scope.
 
 **Example deliverables:** feature code, workflow tests and recorded design decisions.
 
@@ -55,7 +55,7 @@ Related services: [DevOps and cloud](/services/devops-cloud), [observability](/s
 
 ## References and next step
 
-Articles in the [RBX Journal](/journal) and references in the [product portfolio and evidence](/products#evidencias) let you explore RBX's public work. Our own products have scopes and stages separate from the partnership.
+Articles in the [Merovelis Journal](/journal) and references in the [product portfolio and evidence](/products#evidencias) let you explore Merovelis’ public work. Our own products have scopes and stages separate from the partnership.
 
 These examples guide the scope discussion; each cycle's deliverables are agreed. The partnership page sets out pricing, monthly capacity and terms. Support is provided during agreed hours; round-the-clock on-call support and immediate response are outside this plan.
 

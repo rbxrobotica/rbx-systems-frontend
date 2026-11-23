@@ -18,8 +18,8 @@ export const JOURNAL_AUTHORS: JournalAuthor[] = [
     slug: 'leandro-damasio',
     name: 'Leandro Damasio',
     role: {
-      'pt-BR': 'Fundador e CEO, RBX Systems',
-      en: 'Founder & CEO, RBX Systems'
+      'pt-BR': 'Fundador e CEO, Merovelis Sistemas',
+      en: 'Founder & CEO, Merovelis Systems'
     },
     kind: 'person'
   },
@@ -27,8 +27,8 @@ export const JOURNAL_AUTHORS: JournalAuthor[] = [
     slug: 'caue-alencar',
     name: 'Cauê Souza Azevedo Alencar',
     role: {
-      'pt-BR': 'CFO, RBX Systems',
-      en: 'CFO, RBX Systems'
+      'pt-BR': 'CFO, Merovelis Sistemas',
+      en: 'CFO, Merovelis Systems'
     },
     kind: 'person'
   },

@@ -12,3 +12,9 @@ blog-posts/
 
 # Preserve captured public object bytes for verified recovery.
 site-content-recovery/
+
+# Pages derived from the rescued objects keep the captured HTML bodies. Home and
+# solutions are written as Markdown and stay formatted.
+site-content/**/index.md
+!site-content/*/home/index.md
+!site-content/*/solutions/index.md

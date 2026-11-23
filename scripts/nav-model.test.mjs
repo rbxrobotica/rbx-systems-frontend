@@ -135,6 +135,7 @@ test('pages known only by their parent are named from the page title', () => {
     { label: 'risk' }
   ]);
   assert.deepEqual(nav.resolveNav('en', '/services/llmops', 'LLMOps').trail, [
+    { label: 'Partnership', href: '/en/partnership' },
     { label: 'Solutions', href: '/en/solutions' },
     { label: 'LLMOps' }
   ]);
@@ -160,17 +161,13 @@ test('without a page title the trail stops at the linked parent', () => {
   ]);
 });
 
-test('person pages and the Strategos form are known pages under their parent', () => {
+test('person pages are known pages under their parent', () => {
   const person = nav.resolveNav('pt-BR', '/leandro-damasio', 'ignored CMS title');
   assert.equal(person.item.path, '/equipe');
   assert.deepEqual(person.trail, [
     { label: 'Empresa', href: '/pt-br/sobre' },
     { label: 'Equipe', href: '/pt-br/equipe' },
     { label: 'Leandro Damasio' }
-  ]);
-  assert.deepEqual(nav.resolveNav('en', '/contact/strategos').trail, [
-    { label: 'Contact', href: '/en/contact' },
-    { label: 'Strategos Founder Plan' }
   ]);
 });
 
@@ -210,6 +207,7 @@ test('leafTitle drops the site name that CMS titles carry', () => {
     ),
     [
       { name: 'Home', path: '/en' },
+      { name: 'Partnership', path: '/en/partnership' },
       { name: 'Solutions', path: '/en/solutions' },
       { name: 'LLMOps', path: '/en/services/llmops' }
     ]
@@ -296,6 +294,7 @@ test('a service under the prefix of the other language switches to its own page'
     assert.equal(nav.localeSwitchHref('pt-BR', 'en', mixed), '/en/services/ai-agents');
     assert.equal(nav.localeSwitchHref('en', 'pt-BR', mixed), '/pt-br/servicos/agentes-de-ia');
     assert.deepEqual(nav.resolveNav('pt-BR', mixed, 'Agentes de IA').trail, [
+      { label: 'Parceria', href: '/pt-br/parceria' },
       { label: 'Soluções', href: '/pt-br/solucoes' },
       { label: 'Agentes de IA' }
     ]);

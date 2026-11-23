@@ -9,6 +9,6 @@
 <ContentPage
   page={data.page}
   fallbackTitle={t(data.locale, 'nav.trust')}
-  fallbackLead="Governança, segurança, compliance e práticas de confiabilidade da RBX Systems."
+  fallbackLead="Governança, segurança, compliance e práticas de confiabilidade da Merovelis Sistemas."
   locale={data.locale}
 />

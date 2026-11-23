@@ -54,8 +54,11 @@ test('the actual partnership prompt shares assessment examples and requires huma
   );
 });
 
-test('RBX Journal discovery stays inside the assistant scope', () => {
-  assert.match(route, /Requests to discover or recommend public RBX Journal articles are in scope/);
+test('Merovelis Journal discovery stays inside the assistant scope', () => {
+  assert.match(
+    route,
+    /Requests to discover or recommend public Merovelis Journal articles are in scope/
+  );
   assert.match(route, /recommend "RAG público com controle e evidência"/);
   assert.match(route, /\$\{SITE_ORIGIN\}\/pt-br\/blog\/2026-07-29-governed-public-rag/);
   assert.match(
@@ -63,9 +66,9 @@ test('RBX Journal discovery stays inside the assistant scope', () => {
     /\$\{SITE_ORIGIN\}\/pt-br\/blog\/2026-08-01-governed-autonomy-distributed-systems/
   );
   assert.match(route, /\$\{SITE_ORIGIN\}\/pt-br\/blog\/2026-08-01-auditoria-ou-telemetria/);
-  assert.match(route, /include the exact title, one concise reason and the full RBX URL/);
-  assert.match(route, /Recommend only the listed public RBX Journal posts/);
-  assert.match(route, /For another RBX theme not covered above/);
+  assert.match(route, /include the exact title, one concise reason and the full Merovelis URL/);
+  assert.match(route, /Recommend only the listed public Merovelis Journal posts/);
+  assert.match(route, /For another Merovelis theme not covered above/);
   assert.match(route, /commercial, editorial, or support information/);
   assert.match(route, /Refuse every other topic/);
 });
@@ -91,12 +94,15 @@ test('partnership pricing follows the language section of the page even if the v
 });
 
 test('the three Robson product identities remain distinct', () => {
-  assert.match(route, /Robson: without a qualifier, this name means the original RBX product/);
-  assert.match(route, /open-source Rust system for trade execution and risk management in crypto/);
-  assert.match(route, /Robson Code: a distinct internal RBX coding agent/);
   assert.match(
     route,
-    /Robson AI Assistant: this public RBX assistant for institutional, commercial, editorial and product-support information/
+    /Robson: without a qualifier, this name means the original Merovelis product/
+  );
+  assert.match(route, /open-source Rust system for trade execution and risk management in crypto/);
+  assert.match(route, /Robson Code: a distinct internal Merovelis coding agent/);
+  assert.match(
+    route,
+    /Robson AI Assistant: this public Merovelis assistant for institutional, commercial, editorial and product-support information/
   );
   assert.match(route, /It does not execute trades and is not Robson Code/);
   assert.match(route, /Do not claim precision, returns or financial performance/);
@@ -119,7 +125,7 @@ test('Satwake / Briefing BTC facts and boundaries are pinned without delivery gu
   );
   assert.match(
     route,
-    /at R\$ 39 per month billed monthly or R\$ 390 per year billed annually \(R\$ 32,50 per month\), via Pix on the Portuguese page \(\$\{SITE_ORIGIN\}\/pt-br\/produtos\/briefing-btc\), and \$12 per month or \$120 per year on the English page \(\$\{SITE_ORIGIN\}\/en\/products\/briefing-btc\) paid in USDT through the RBX BTCPay Server or by card/
+    /at R\$ 39 per month billed monthly or R\$ 390 per year billed annually \(R\$ 32,50 per month\), via Pix on the Portuguese page \(\$\{SITE_ORIGIN\}\/pt-br\/produtos\/briefing-btc\), and \$12 per month or \$120 per year on the English page \(\$\{SITE_ORIGIN\}\/en\/products\/briefing-btc\) paid in USDT through the Merovelis BTCPay Server or by card/
   );
   assert.match(route, /the international edition is written in English/);
   assert.match(route, /Team plans charge the Pro per-seat price for 2 to 50 seats on one invoice/);

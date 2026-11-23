@@ -24,9 +24,9 @@ const servicesByLocale = (locale: Locale) =>
 
 const institutionalByLocale: Record<Locale, { label: string; path: string; note: string }[]> = {
   'pt-BR': [
-    { label: 'Sobre', path: '/sobre', note: 'quem é a RBX Systems' },
-    { label: 'História', path: '/historia', note: 'trajetória da RBX Systems' },
-    { label: 'Carreiras', path: '/carreiras', note: 'como trabalhar com a RBX Systems' },
+    { label: 'Sobre', path: '/sobre', note: 'quem é a Merovelis Sistemas' },
+    { label: 'História', path: '/historia', note: 'trajetória da Merovelis Sistemas' },
+    { label: 'Carreiras', path: '/carreiras', note: 'como trabalhar com a Merovelis Sistemas' },
     { label: 'Equipe', path: '/equipe', note: 'time de engenharia e liderança' },
     {
       label: 'Leandro Damasio',
@@ -38,9 +38,9 @@ const institutionalByLocale: Record<Locale, { label: string; path: string; note:
     { label: 'Legal', path: '/legal', note: 'aviso legal' }
   ],
   en: [
-    { label: 'About', path: '/about', note: 'who RBX Systems is' },
-    { label: 'History', path: '/history', note: 'the RBX Systems trajectory' },
-    { label: 'Careers', path: '/careers', note: 'how to work with RBX Systems' },
+    { label: 'About', path: '/about', note: 'who Merovelis Systems is' },
+    { label: 'History', path: '/history', note: 'the Merovelis Systems trajectory' },
+    { label: 'Careers', path: '/careers', note: 'how to work with Merovelis Systems' },
     { label: 'Team', path: '/team', note: 'engineering and leadership team' },
     {
       label: 'Leandro Damasio',
@@ -122,16 +122,16 @@ export const GET: RequestHandler = async ({ url }) => {
   const partnershipLink =
     locale === 'pt-BR'
       ? link(
-          'RBX Engineering Partnership',
+          'Merovelis Engineering Partnership',
           '/parceria#qualificacao',
           // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
-          `${formatPartnershipPrice(locale)}/mês, em reais (BRL), por ${partnershipTerms.monthlyHours} horas mensais de capacidade técnica liderada pelo fundador com assistência de IA para um produto. Implementação, revisão, testes e comunicação assíncrona incluídos nessa capacidade. Infraestrutura e consumo de APIs do cliente têm orçamento separado. A qualificação inicia pelo formulário; escopo, disponibilidade e início são confirmados por uma pessoa da RBX por e-mail. Não é contratação automática. Contextos para avaliação: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Condições de referência: ${partnershipTerms.version}.`
+          `${formatPartnershipPrice(locale)}/mês, em reais (BRL), por ${partnershipTerms.monthlyHours} horas mensais de capacidade técnica liderada pelo fundador com assistência de IA para um produto. Implementação, revisão, testes e comunicação assíncrona incluídos nessa capacidade. Infraestrutura e consumo de APIs do cliente têm orçamento separado. A qualificação inicia pelo formulário; escopo, disponibilidade e início são confirmados por uma pessoa da Merovelis por e-mail. Não é contratação automática. Contextos para avaliação: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Condições de referência: ${partnershipTerms.version}.`
         )
       : link(
-          'RBX Engineering Partnership',
+          'Merovelis Engineering Partnership',
           '/partnership#qualificacao',
           // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
-          `${formatPartnershipPrice(locale, exchangeRates)}/month. ${partnershipPriceNote(locale, exchangeRates)} For ${partnershipTerms.monthlyHours} monthly hours of founder-led technical capacity with AI assistance for one product. Implementation, review, testing and asynchronous communication share that capacity. Infrastructure and the client's API consumption have a separate budget. Qualification starts with the form; an RBX team member confirms scope, availability and start date by email. This is not automatic contracting. Contexts for assessment: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Reference terms: ${partnershipTerms.version}.`
+          `${formatPartnershipPrice(locale, exchangeRates)}/month. ${partnershipPriceNote(locale, exchangeRates)} For ${partnershipTerms.monthlyHours} monthly hours of founder-led technical capacity with AI assistance for one product. Implementation, review, testing and asynchronous communication share that capacity. Infrastructure and the client's API consumption have a separate budget. Qualification starts with the form; an Merovelis team member confirms scope, availability and start date by email. This is not automatic contracting. Contexts for assessment: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Reference terms: ${partnershipTerms.version}.`
         );
 
   // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
@@ -142,15 +142,15 @@ export const GET: RequestHandler = async ({ url }) => {
   const journalLinks =
     locale === 'pt-BR'
       ? [
-          link('RBX Journal', '/journal', t(locale, 'journal.metaDescription')),
+          link('Merovelis Journal', '/journal', t(locale, 'journal.metaDescription')),
           link('RSS do Journal', '/rss.xml', 'feed RSS com todos os artigos')
         ]
       : [
-          link('RBX Journal', '/journal', t(locale, 'journal.metaDescription')),
+          link('Merovelis Journal', '/journal', t(locale, 'journal.metaDescription')),
           link('Journal RSS', '/rss.xml', 'RSS feed with every article')
         ];
 
-  const body = `# RBX Systems
+  const body = `# Merovelis Systems
 
 > ${summary}
 

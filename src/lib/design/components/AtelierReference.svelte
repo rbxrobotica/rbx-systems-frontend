@@ -13,8 +13,8 @@
     fullName: 'rbxrobotica/rbx-atelier',
     url: 'https://github.com/rbxrobotica/rbx-atelier',
     description: {
-      'pt-BR': 'Identidade Visual (Brand Voltage) e Design Systems para produtos RBX.',
-      en: 'Visual Identity (Brand Voltage) and Design Systems for RBX products.'
+      'pt-BR': 'Identidade Visual (Brand Voltage) e Design Systems para produtos Merovelis.',
+      en: 'Visual Identity (Brand Voltage) and Design Systems for Merovelis products.'
     },
     language: 'HTML / Design Tokens',
     branch: 'main'

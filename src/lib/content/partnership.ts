@@ -51,7 +51,7 @@ export function partnershipPriceNote(
   exchangeRates: PartnershipExchangeRates | null = null
 ): string {
   if (locale === 'pt-BR') return 'Valor em reais (BRL).';
-  if (!exchangeRates) return 'Contact RBX for the current monthly quote in BTC, EUR or USD.';
+  if (!exchangeRates) return 'Contact Merovelis for the current monthly quote in BTC, EUR or USD.';
   const date = new Intl.DateTimeFormat('en-GB', {
     dateStyle: 'medium',
     timeStyle: 'short',
@@ -63,8 +63,8 @@ export function partnershipPriceNote(
 export const partnershipContent = {
   'pt-BR': {
     title: 'Parceria mensal de engenharia',
-    description: `Parceria RBX de engenharia de produto por ${formatPartnershipPrice('pt-BR')}/mês, com ${partnershipTerms.monthlyHours} horas mensais de capacidade técnica e qualificação assíncrona. Conheça o escopo e as condições.`,
-    eyebrow: 'RBX Engineering Partnership',
+    description: `Parceria Merovelis de engenharia de produto por ${formatPartnershipPrice('pt-BR')}/mês, com ${partnershipTerms.monthlyHours} horas mensais de capacidade técnica e qualificação assíncrona. Conheça o escopo e as condições.`,
+    eyebrow: 'Merovelis Engineering Partnership',
     headline: 'Parceria mensal de engenharia para evoluir seu produto.',
     lead: 'Engenharia de produto com direção técnica, execução assistida por IA e entregas verificáveis. Uma parceria mensal para evoluir software com prioridades e responsabilidades claras.',
     priceLabel: 'Parceria mensal',
@@ -114,7 +114,7 @@ export const partnershipContent = {
     boundaries: [
       'O volume de entregas depende da complexidade. Demandas maiores são divididas entre ciclos.',
       'Infraestrutura, licenças e APIs do produto têm orçamento separado, acordado antes do consumo.',
-      'As ferramentas usadas pela RBX para executar o trabalho integram o custo da parceria.',
+      'As ferramentas usadas pela Merovelis para executar o trabalho integram o custo da parceria.',
       'Atendimento em horários acordados. Plantão 24 horas e resposta imediata não fazem parte desta modalidade.'
     ],
     sovereigntyTitle: 'Continuidade também significa controle.',
@@ -128,7 +128,7 @@ export const partnershipContent = {
           'Conte qual produto precisa evoluir, a prioridade e o horizonte de início. O preço e a capacidade já estão visíveis.'
       },
       {
-        title: 'A RBX verifica a aderência',
+        title: 'A Merovelis verifica a aderência',
         description:
           'Analisamos o escopo e a disponibilidade. Eventuais perguntas seguem por e-mail; uma conversa acontece quando ajudar a resolver uma dúvida.'
       },
@@ -146,8 +146,8 @@ export const partnershipContent = {
   },
   en: {
     title: 'Monthly engineering partnership',
-    description: `RBX product engineering partnership with monthly reference prices in BTC, EUR and USD, ${partnershipTerms.monthlyHours} monthly hours of technical capacity and asynchronous qualification. Explore scope and terms.`,
-    eyebrow: 'RBX Engineering Partnership',
+    description: `Merovelis product engineering partnership with monthly reference prices in BTC, EUR and USD, ${partnershipTerms.monthlyHours} monthly hours of technical capacity and asynchronous qualification. Explore scope and terms.`,
+    eyebrow: 'Merovelis Engineering Partnership',
     headline: 'Monthly engineering partnership to evolve your product.',
     lead: 'Product engineering with technical direction, AI-assisted execution and verifiable delivery. A monthly partnership to evolve software with clear priorities and responsibilities.',
     priceLabel: 'Monthly partnership',
@@ -197,7 +197,7 @@ export const partnershipContent = {
     boundaries: [
       'Delivery volume depends on complexity. Larger requests are divided across cycles.',
       'Product infrastructure, licences and APIs have a separate budget agreed before use.',
-      'The tools RBX uses to perform the work are included in the partnership cost.',
+      'The tools Merovelis uses to perform the work are included in the partnership cost.',
       'Support during agreed hours. Round-the-clock on-call support and immediate response are outside this plan.'
     ],
     sovereigntyTitle: 'Continuity also means control.',
@@ -211,7 +211,7 @@ export const partnershipContent = {
           'Describe the product, priority and intended start. Price and capacity are already visible.'
       },
       {
-        title: 'RBX reviews fit',
+        title: 'Merovelis reviews fit',
         description:
           'We assess scope and availability. Follow-up questions go by email; a conversation happens when it helps resolve an open question.'
       },

@@ -29,7 +29,8 @@
 
   // The path already carries the locale segment, so it is the whole address.
   const pageUrl = $derived(canonical ?? `${SITE_ORIGIN}${$page.url.pathname}`);
-  const fullTitle = $derived(`${title} · ${locale === 'pt-BR' ? 'RBX Systems' : 'RBX Systems'}`);
+  const siteName = $derived(locale === 'pt-BR' ? 'Merovelis Sistemas' : 'Merovelis Systems');
+  const fullTitle = $derived(`${title} · ${siteName}`);
   // Crawlers require an absolute og:image; covers arrive as site-relative
   // proxy paths (/api/blog/cover/...), same absolutization as the schema.
   const ogImage = $derived(
@@ -60,7 +61,7 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content={type} />
-  <meta property="og:site_name" content="RBX Systems" />
+  <meta property="og:site_name" content={siteName} />
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={pageUrl} />
