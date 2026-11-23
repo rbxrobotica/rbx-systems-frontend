@@ -27,6 +27,9 @@
   let messages = $state<Message[]>([{ role: 'assistant', content: welcomeMessage() }]);
   let input = $state('');
   let loading = $state(false);
+  // Why the last request got no answer. The visitor's message stays in the
+  // conversation, so a retry asks again without typing it again.
+  let failure = $state<'timeout' | 'unavailable' | null>(null);
   let showCta = $state(false);
   let showBriefingCta = $state(false);
   let showPartnershipCta = $state(false);
@@ -43,7 +46,15 @@
 
     input = '';
     messages = [...messages, { role: 'user', content: text }];
+    await request();
+  }
+
+  /** Ask for the answer to the conversation as it stands. A retry calls it again. */
+  async function request() {
+    // Set before the first await: a second click finds the surface frozen.
+    if (loading) return;
     loading = true;
+    failure = null;
     showCta = false;
     showBriefingCta = false;
     showPartnershipCta = false;
@@ -69,7 +80,12 @@
         return;
       }
 
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.ok) {
+        // 504 is the server's deadline for the gateway. Anything else is an
+        // assistant that cannot answer now.
+        failure = res.status === 504 ? 'timeout' : 'unavailable';
+        return;
+      }
 
       const data: {
         content: string;
@@ -82,10 +98,7 @@
       showBriefingCta = data.showBriefingCta ?? false;
       showPartnershipCta = data.showPartnershipCta ?? false;
     } catch {
-      const errMsg = $locale?.startsWith('en')
-        ? 'Sorry, I could not connect right now. Please try again in a moment.'
-        : 'Desculpe, não consegui conectar agora. Tente novamente em instantes.';
-      messages = [...messages, { role: 'assistant', content: errMsg }];
+      failure = 'unavailable';
     } finally {
       loading = false;
       await scrollBottom();
@@ -105,6 +118,16 @@
   );
   const sendLabel = $derived($locale?.startsWith('en') ? 'Send' : 'Enviar');
   const closeLabel = $derived($locale?.startsWith('en') ? 'Close' : 'Fechar');
+  const failureText = $derived(
+    failure === 'timeout'
+      ? $locale?.startsWith('en')
+        ? 'The answer took too long and was stopped. Please try again.'
+        : 'A resposta demorou demais e foi interrompida. Tente novamente.'
+      : $locale?.startsWith('en')
+        ? 'Sorry, I could not connect right now. Please try again in a moment.'
+        : 'Desculpe, não consegui conectar agora. Tente novamente em instantes.'
+  );
+  const retryLabel = $derived($locale?.startsWith('en') ? 'Try again' : 'Tentar novamente');
   const ctaWhatsApp = $derived(
     $locale?.startsWith('en') ? 'Talk on WhatsApp' : 'Falar no WhatsApp'
   );
@@ -184,6 +207,15 @@
           <span class="dot"></span>
           <span class="dot"></span>
         </div>
+      </div>
+    {/if}
+
+    {#if failure && !loading}
+      <div class="failure" role="alert">
+        <p class="failure-text">{failureText}</p>
+        <button type="button" class="cta-btn secondary" disabled={loading} onclick={request}>
+          {retryLabel}
+        </button>
       </div>
     {/if}
 
@@ -459,6 +491,28 @@
       opacity: 1;
       transform: scale(1);
     }
+  }
+
+  .failure {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-2);
+    padding: var(--s-3) var(--s-4);
+    border: 1px solid var(--err-subtle);
+    border-radius: var(--radius-md);
+    background: var(--err-subtle);
+  }
+
+  .failure-text {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--lead-body);
+    color: var(--err);
+  }
+
+  .failure .cta-btn {
+    flex: none;
   }
 
   .cta-row {

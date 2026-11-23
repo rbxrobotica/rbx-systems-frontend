@@ -114,6 +114,106 @@ interface LlmTarget {
   model: string;
 }
 
+// Deadline for the whole gateway exchange: connection, headers and body. The
+// gateway is configured to give its provider call 30 s (rbx-infra main at
+// 0a0dc03, apps/prod/llm-gateway/litellm-config.yml, `router_settings.timeout`,
+// read on 2026-11-14). The default sits above that, so the gateway's own
+// timeout error can arrive first and this deadline is left for a gateway that
+// does not answer at all. LLM_GATEWAY_TIMEOUT_MS overrides it with a whole
+// number of milliseconds from 1 to 60000; any other value is ignored, because
+// a wrong value must not turn the deadline off.
+const DEFAULT_GATEWAY_TIMEOUT_MS = 35_000;
+const MAX_GATEWAY_TIMEOUT_MS = 60_000;
+let invalidTimeoutLogged = false;
+
+function gatewayTimeoutMs(): number {
+  const configured = env.LLM_GATEWAY_TIMEOUT_MS?.trim();
+  if (!configured) return DEFAULT_GATEWAY_TIMEOUT_MS;
+  const value = Number(configured);
+  if (Number.isInteger(value) && value >= 1 && value <= MAX_GATEWAY_TIMEOUT_MS) return value;
+  if (!invalidTimeoutLogged) {
+    // Once per process: the value cannot change while it runs.
+    invalidTimeoutLogged = true;
+    console.warn('[chat] LLM_GATEWAY_TIMEOUT_MS invalid, default in use', {
+      default_ms: DEFAULT_GATEWAY_TIMEOUT_MS
+    });
+  }
+  return DEFAULT_GATEWAY_TIMEOUT_MS;
+}
+
+interface Completion {
+  choices?: { message?: { content?: string } }[];
+}
+
+type GatewayOutcome =
+  | { status: 'answered'; completion: Completion }
+  // The gateway answered, and the answer is an HTTP error or not JSON.
+  | { status: 'unusable' }
+  // The connection failed before the answer was complete.
+  | { status: 'unreachable' }
+  // The deadline passed first.
+  | { status: 'timeout' };
+
+/** What failed, by name and never by message: a message can quote the exchange. */
+function failureName(caught: unknown): string {
+  if (!(caught instanceof Error)) return 'unknown';
+  const code = (caught.cause as { code?: unknown } | undefined)?.code;
+  return typeof code === 'string' ? code : caught.name;
+}
+
+/**
+ * One completion from the gateway, ended at the deadline. It never rejects:
+ * each way the exchange can fail is logged here once, without the
+ * conversation, and returned as an outcome. Nothing is retried.
+ */
+async function askGateway(
+  target: LlmTarget,
+  messages: { role: string; content: string }[]
+): Promise<GatewayOutcome> {
+  const timeoutMs = gatewayTimeoutMs();
+  const deadline = new AbortController();
+  const timer = setTimeout(() => deadline.abort(), timeoutMs);
+
+  try {
+    const res = await fetch(target.url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${target.key}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: target.model,
+        messages,
+        max_tokens: 320,
+        temperature: 0.65
+      }),
+      signal: deadline.signal
+    });
+
+    if (!res.ok) {
+      const detail = await res.text().catch(() => '');
+      console.error('[chat] LLM gateway error', res.status, detail);
+      return { status: 'unusable' };
+    }
+
+    return { status: 'answered', completion: await res.json() };
+  } catch (caught) {
+    // The signal also ends a body that stalls after the headers arrived.
+    if (deadline.signal.aborted) {
+      console.error('[chat] LLM gateway timed out', { timeout_ms: timeoutMs });
+      return { status: 'timeout' };
+    }
+    if (caught instanceof SyntaxError) {
+      console.error('[chat] LLM gateway answer is not JSON');
+      return { status: 'unusable' };
+    }
+    console.error('[chat] LLM gateway unreachable', { cause: failureName(caught) });
+    return { status: 'unreachable' };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /**
  * Resolve the LLM target. Sovereign-first: route through the RBX LLM gateway
  * (LiteLLM, governed by Thalamus) so the site never holds a raw provider key
@@ -184,30 +284,28 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
       ? `Current section of the website: English, ${SITE_ORIGIN}/en. Use the international BTC, EUR and USD partnership terms regardless of the visitor’s language. Direct the visitor to the international partnership page for the current quote; never give BRL as this section’s partnership price.`
       : `Current section of the website: Portuguese, ${SITE_ORIGIN}/pt-br. Use the Brazilian BRL partnership terms regardless of the visitor’s language.`;
 
-  const [res] = await Promise.all([
-    fetch(target.url, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${target.key}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: target.model,
-        messages: [{ role: 'system', content: `${SYSTEM_PROMPT}\n\n${pricingContext}` }, ...recent],
-        max_tokens: 320,
-        temperature: 0.65
-      })
-    }),
+  const [gateway] = await Promise.all([
+    askGateway(target, [
+      { role: 'system', content: `${SYSTEM_PROMPT}\n\n${pricingContext}` },
+      ...recent
+    ]),
     shadowPromise
   ]);
 
-  if (!res.ok) {
-    const detail = await res.text().catch(() => '');
-    console.error('[chat] LLM gateway error', res.status, detail);
+  if (gateway.status === 'timeout') {
+    return json({ message: 'AI service timed out', code: 'gateway_timeout' }, { status: 504 });
+  }
+  if (gateway.status === 'unreachable') {
+    return json(
+      { message: 'AI service unreachable', code: 'gateway_unreachable' },
+      { status: 502 }
+    );
+  }
+  if (gateway.status === 'unusable') {
     throw error(502, 'AI service unavailable');
   }
 
-  const data = await res.json();
+  const data = gateway.completion;
   const raw: string = data.choices?.[0]?.message?.content ?? '';
   // Keep one actionable CTA even if the model emits multiple markers.
   // Briefing retains precedence, then partnership, then generic contact.
