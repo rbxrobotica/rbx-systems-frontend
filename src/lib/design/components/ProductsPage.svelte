@@ -321,6 +321,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--s-4);
   }
+  /* The first product is the featured one and takes the full row. */
+  .product-card:first-child {
+    grid-column: 1 / -1;
+  }
   .product-card {
     display: flex;
     flex-direction: column;

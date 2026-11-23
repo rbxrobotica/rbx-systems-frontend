@@ -1,39 +1,26 @@
 ---
-title: Monthly engineering partnership to evolve your product
-description: Monthly engineering partnership for live products or advanced pilots. One priority at a time, with technical direction and implementation.
-eyebrow: RBX Systems
-lead: For companies with a live product or an advanced pilot. RBX combines technical direction and implementation around one priority at a time. The first exchange is in writing, with a human reply by email.
+title: Merovelis Systems builds and operates AI software products
+description: 'Merovelis Systems is a product company: Strategos, Robson, Satwake, Verentir and Initelo, on the same engineering base.'
+eyebrow: Merovelis Systems
+lead: 'We are a product company. Each product has its own brand, address and stage, and all of them run on the same engineering base: our own infrastructure, AI governance and an auditable record.'
 ---
 
-## When to work with RBX
+## The common base
 
-The partnership fits when your product already exists and a specific change needs to move forward. Each engagement starts with the problem and the outcome to be verified.
+Merovelis products share identity, content, payments and operations. Thalamus controls AI calls through policies, routing and audit. TruthMetal holds the reference datasets and criteria for evaluations.
 
-- **An integration is blocking the next workflow.** We define the data and connect the systems, with failure handling and testing within the agreed scope.
-- **Changing the product has become slow and risky.** We review dependencies, tests and documentation to guide the next changes.
-- **Operations copy data between tools.** We design automation for the routine, with rules, owners and human approval where it is needed.
-- **There is an AI use case, but no criteria.** We define the task, how to evaluate responses and where people remain in control before integrating the model into the product.
+Each product states its own stage. The [portfolio](/products) shows what is published, what is in early access and what is in development, with the [implementation evidence](/products#evidencias).
 
-## How the partnership works
+## What Merovelis publishes
 
-RBX Engineering Partnership is a monthly partnership with defined capacity. One product, one priority at a time. Technical direction, implementation, review, testing and communication all use the same contracted capacity. Each cycle's scope is agreed before execution, with objectives and acceptance criteria. Larger requests are split into stages.
+The [Merovelis Journal](/journal) collects technical articles and field notes on engineering decisions, our own systems and operations.
 
-Updates are asynchronous, with records of deliveries, risks and next steps. Repositories, environments and accounts remain under your company's control where applicable, with authorized access and documentation for whoever continues the work.
+## Social responsibility
 
-AI supports execution with human review. Within the product, it is used when there is a defined task and criteria for evaluating responses. Testing is part of both uses.
+Olha Escola is the Merovelis social project, under the signature Cidadania na Escola (citizenship at school). It is in preparation and has not launched. It is not a commercial product.
 
-## What RBX publishes
+## Engineering under partnership
 
-The [RBX Journal](/journal) brings together technical articles and field notes about engineering decisions, our own systems and operations.
-
-The [product portfolio and evidence](/products#evidencias) presents RBX's own initiatives, their stages and implementation references with their sources identified. These products have their own scope. The partnership is the path to evolve your company's product.
-
-## How to start
-
-**Read the terms.** Monthly pricing, capacity in hours and limits are on the [partnership page](/partnership).
-
-**Share the context.** Describe the current product, the priority and when you would like to start. No meeting needs to be scheduled first. The initial context does not need private code, credentials or customer data.
-
-**Receive a reply by email.** A person at RBX reviews fit and availability. Questions or a proposal follow from that assessment. Scope, start date and terms are confirmed before engagement; submission does not reserve capacity or start work.
+The team that builds the Merovelis products also works on third-party products, one priority at a time. Monthly price, capacity in hours and limits are on the [partnership page](/partnership).
 
 [Legal notice and terms of use](/legal).

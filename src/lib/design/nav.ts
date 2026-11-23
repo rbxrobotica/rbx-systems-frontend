@@ -1,5 +1,5 @@
 /**
- * Navigation model for the public site: five sections, the pages each one
+ * Navigation model for the public site: four sections, the pages each one
  * shows in the secondary band, and the resolution of the current URL into
  * section, band item and breadcrumb trail.
  *
@@ -26,7 +26,7 @@ export interface NavItem {
   label?: string;
   /**
    * Known pages that belong under this item without being band items:
-   * person pages under Equipe, a campaign form under Contato.
+   * person pages under Equipe.
    */
   pages?: NavItem[];
   /**
@@ -42,7 +42,28 @@ export interface NavSection extends NavItem {
   children: NavItem[];
 }
 
+// Order of the header: products first, the partnership last.
 export const NAV_SECTIONS: NavSection[] = [
+  {
+    key: 'products',
+    labelKey: 'nav.products',
+    path: '/produtos',
+    children: [
+      { path: '/produtos', labelKey: 'nav.overview' },
+      { path: '/produtos/robson', label: 'Robson', under: ['/robson'] },
+      { path: '/produtos/briefing-btc', label: 'Briefing BTC' }
+    ]
+  },
+  {
+    key: 'journal',
+    labelKey: 'nav.journal',
+    path: '/journal',
+    children: [
+      { path: '/journal', labelKey: 'nav.journal', under: ['/blog'] },
+      { path: '/changelog', labelKey: 'nav.changelog' },
+      { path: '/newsroom', labelKey: 'nav.newsroom' }
+    ]
+  },
   {
     key: 'company',
     labelKey: 'nav.company',
@@ -65,53 +86,24 @@ export const NAV_SECTIONS: NavSection[] = [
     ]
   },
   {
-    key: 'solutions',
-    labelKey: 'nav.solutions',
-    path: '/solucoes',
-    children: [
-      { path: '/solucoes', labelKey: 'nav.overview', under: ['/servicos'] },
-      { path: '/cases', labelKey: 'nav.cases' },
-      { path: '/atelier', labelKey: 'nav.atelier' }
-    ]
-  },
-  {
-    key: 'products',
-    labelKey: 'nav.products',
-    path: '/produtos',
-    children: [
-      { path: '/produtos', labelKey: 'nav.overview' },
-      { path: '/produtos/robson', label: 'Robson', under: ['/robson'] },
-      { path: '/produtos/briefing-btc', label: 'Briefing BTC' }
-    ]
-  },
-  {
     key: 'partnership',
     labelKey: 'nav.partnership',
     path: '/parceria',
     children: [
       { path: '/parceria', labelKey: 'nav.overview' },
-      { path: '/diagnostico', labelKey: 'nav.diagnostic' }
-    ]
-  },
-  {
-    key: 'journal',
-    labelKey: 'nav.journal',
-    path: '/journal',
-    children: [
-      { path: '/journal', labelKey: 'nav.journal', under: ['/blog'] },
-      { path: '/changelog', labelKey: 'nav.changelog' },
-      { path: '/newsroom', labelKey: 'nav.newsroom' }
+      // What the partnership delivers. It was a section of its own until
+      // 2026-11-23, when products became the first thing the site says.
+      { path: '/solucoes', labelKey: 'nav.solutions', under: ['/servicos'] },
+      { path: '/diagnostico', labelKey: 'nav.diagnostic' },
+      { path: '/cases', labelKey: 'nav.cases' },
+      { path: '/atelier', labelKey: 'nav.atelier' }
     ]
   }
 ];
 
-/** Pages outside the five sections that still get a breadcrumb. */
+/** Pages outside the four sections that still get a breadcrumb. */
 export const STANDALONE_PAGES: NavItem[] = [
-  {
-    path: '/contato',
-    labelKey: 'nav.contact',
-    pages: [{ path: '/contact/strategos', label: 'Strategos Founder Plan' }]
-  },
+  { path: '/contato', labelKey: 'nav.contact' },
   { path: '/legal', labelKey: 'nav.legal' }
 ];
 
@@ -245,10 +237,11 @@ export function resolveNav(locale: Locale, rawPathname: string, leaf?: string): 
 
 /**
  * CMS titles of service and product pages end in the site name
- * ("LLMOps — RBX Systems", "API Integration · RBX Systems"); a crumb does not
- * repeat it.
+ * ("LLMOps — Merovelis Systems", "API Integration · Merovelis Sistemas"); a
+ * crumb does not repeat it. Pages saved before the change of name still end in
+ * "RBX Systems".
  */
-const SITE_SUFFIX = /\s+[—–·|-]\s+RBX Systems$/;
+const SITE_SUFFIX = /\s+[—–·|-]\s+(?:RBX Systems|Merovelis Systems|Merovelis Sistemas)$/;
 
 /**
  * Title of the current page as its loader exposes it: a post, an author, a

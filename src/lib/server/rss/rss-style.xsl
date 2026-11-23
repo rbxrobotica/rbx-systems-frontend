@@ -102,8 +102,8 @@
               <a>
                 <xsl:attribute name="href"><xsl:value-of select="/rss/channel/link"/></xsl:attribute>
                 <xsl:choose>
-                  <xsl:when test="$pt">Voltar ao RBX Journal</xsl:when>
-                  <xsl:otherwise>Back to the RBX Journal</xsl:otherwise>
+                  <xsl:when test="$pt">Voltar ao Merovelis Journal</xsl:when>
+                  <xsl:otherwise>Back to the Merovelis Journal</xsl:otherwise>
                 </xsl:choose>
               </a>
             </p>

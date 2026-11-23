@@ -19,8 +19,8 @@
 
   function welcomeMessage(): string {
     return $locale?.startsWith('en')
-      ? "Hello, I'm the RBX Systems assistant. I can explain our products, AI platform and Engineering Partnership. How can I help?"
-      : 'Olá, sou o assistente da RBX Systems. Posso explicar nossos produtos, a plataforma de IA e a Engineering Partnership. Como posso ajudar?';
+      ? "Hello, I'm the Merovelis Systems assistant. I can explain our products, AI platform and Engineering Partnership. How can I help?"
+      : 'Olá, sou o assistente da Merovelis Sistemas. Posso explicar nossos produtos, a plataforma de IA e a Engineering Partnership. Como posso ajudar?';
   }
 
   let messages = $state<Message[]>([{ role: 'assistant', content: welcomeMessage() }]);
@@ -108,7 +108,9 @@
     }
   }
 
-  const label = $derived($locale?.startsWith('en') ? 'RBX Assistant' : 'Assistente RBX');
+  const label = $derived(
+    $locale?.startsWith('en') ? 'Merovelis Assistant' : 'Assistente Merovelis'
+  );
   const placeholder = $derived(
     $locale?.startsWith('en') ? 'Ask about our platform…' : 'Pergunte sobre nossa plataforma…'
   );
@@ -171,7 +173,7 @@
       </div>
       <div>
         <span class="header-title">{label}</span>
-        <span class="header-sub">RBX Systems</span>
+        <span class="header-sub">Merovelis Systems</span>
       </div>
     </div>
     <button

@@ -17,28 +17,25 @@ const disclosures = {
 };
 
 const catalog = (content) => [...content.products, ...content.additionalProducts];
-const originalProductIds = [
+const catalogProductIds = [
+  'strategos', // Featured: first in the list and on the home.
   'robson',
-  'strategos',
-  'verentir',
   'satwake', // Existing Briefing BTC product under its requested public name.
-  'ledger',
-  'yield',
-  'maestro',
-  'argos-radar',
+  'verentir',
+  'initelo',
   'thalamus',
   'truthmetal'
 ];
 
-test('both locales preserve all ten original products with unique matching ids', () => {
+test('both locales list the same seven products, Strategos first', () => {
   for (const content of Object.values(productsContent)) {
     const ids = catalog(content).map((product) => product.id);
-    assert.deepEqual(ids, originalProductIds);
+    assert.deepEqual(ids, catalogProductIds);
     assert.equal(new Set(ids).size, ids.length);
   }
 });
 
-test('Kulinaryos remains an external reference outside the RBX catalog and SEO description', () => {
+test('Kulinaryos remains an external reference outside the catalog and SEO description', () => {
   for (const content of Object.values(productsContent)) {
     assert.equal(content.externalReference.id, 'kulinaryos');
     assert.match(content.externalReference.description, /Food Process/);
@@ -73,7 +70,6 @@ test('navigation uses reviewed public destinations and existing locale routes', 
     const reviewedPaths = new Set([
       `${prefix}/robson`,
       `${prefix}/briefing-btc`,
-      `${prefix}/maestro`,
       contact,
       '/blog/2026-08-07-evidence-authority-boundaries',
       '/blog/2026-07-29-governed-public-rag',
@@ -82,6 +78,7 @@ test('navigation uses reviewed public destinations and existing locale routes', 
     const reviewedExternal = new Set([
       'https://github.com/ldamasio/robson',
       'https://strategos.gr',
+      'https://initelo.com',
       'https://kulinaryos.com'
     ]);
     const entries = [...catalog(content), content.externalReference, ...content.references];
@@ -99,11 +96,7 @@ test('navigation uses reviewed public destinations and existing locale routes', 
         continue;
       }
       assert.ok(reviewedPaths.has(href), `Unreviewed internal destination: ${href}`);
-      const dynamic = href.startsWith('/blog/')
-        ? '/blog/[slug]'
-        : href === `${prefix}/maestro`
-          ? `${prefix}/[slug]`
-          : href;
+      const dynamic = href.startsWith('/blog/') ? '/blog/[slug]' : href;
       assert.ok(
         existsSync(new URL(`../src/routes${dynamic}/+page.svelte`, import.meta.url)),
         `Missing route: ${href}`

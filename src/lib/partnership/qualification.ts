@@ -98,7 +98,7 @@ export function buildQualificationSubmission(
   }
 
   const message = [
-    'RBX Engineering Partnership',
+    'Merovelis Engineering Partnership',
     `Offer version: ${terms.version}`,
     `Reference price: ${terms.referencePrice}/month`,
     ...(terms.exchangeRatesCheckedAt

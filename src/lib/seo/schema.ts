@@ -1,21 +1,30 @@
 /**
- * JSON-LD schema generators for RBX Systems public pages.
+ * JSON-LD schema generators for the Merovelis public pages.
  * All IDs are canonical and stable; they should match the canonical URL
  * of the page where they are embedded.
  */
 import type { Locale } from '$types/content';
 
-const RBX_NAME = 'RBX Systems';
-const RBX_ALTERNATE_NAMES = ['RBX', 'RBX Robótica'];
+// The house in each language, and the names it had before 2026-11: search engines
+// connect the earlier names to the organization through alternateName.
+const houseName = (locale: Locale): string =>
+  locale === 'pt-BR' ? 'Merovelis Sistemas' : 'Merovelis Systems';
+const HOUSE_ALTERNATE_NAMES = [
+  'Merovelis',
+  'Merovelis Systems',
+  'Merovelis Sistemas',
+  'RBX Systems',
+  'RBX Robótica'
+];
 const RBX_LOGO = '/brand/rbx-mark.svg';
 const RBX_DESCRIPTION_PT =
-  'Engenharia de sistemas, automação operacional, IA aplicada e infraestrutura em nuvem para operações de alta exigência.';
+  'Empresa de produtos de software com IA: Strategos, Robson, Satwake, Verentir e Initelo, sobre uma plataforma própria de IA e infraestrutura.';
 const RBX_DESCRIPTION_EN =
-  'Systems engineering, operational automation, applied AI and cloud infrastructure for high-demand operations.';
+  'An AI software product company: Strategos, Robson, Satwake, Verentir and Initelo, on its own AI platform and infrastructure.';
 
 const LEANDRO_NAME = 'Leandro Damasio';
-const LEANDRO_JOB_TITLE_PT = 'Fundador e CEO, RBX Systems';
-const LEANDRO_JOB_TITLE_EN = 'Founder & CEO, RBX Systems';
+const LEANDRO_JOB_TITLE_PT = 'Fundador e CEO, Merovelis Sistemas';
+const LEANDRO_JOB_TITLE_EN = 'Founder & CEO, Merovelis Systems';
 const LEANDRO_LINKEDIN = 'https://www.linkedin.com/in/ldamasio/';
 const LEANDRO_GITHUB = 'https://github.com/ldamasio';
 
@@ -60,8 +69,8 @@ export function organizationSchema(locale: Locale = 'pt-BR'): Record<string, unk
   return {
     '@type': 'Organization',
     '@id': orgId(locale),
-    name: RBX_NAME,
-    alternateName: RBX_ALTERNATE_NAMES,
+    name: houseName(locale),
+    alternateName: HOUSE_ALTERNATE_NAMES.filter((name) => name !== houseName(locale)),
     url,
     logo: `${url}${RBX_LOGO}`,
     sameAs: orgSameAs(locale),
@@ -143,7 +152,7 @@ export function websiteSchema(locale: Locale = 'pt-BR'): Record<string, unknown>
   return {
     '@type': 'WebSite',
     '@id': websiteId(locale),
-    name: RBX_NAME,
+    name: houseName(locale),
     url,
     publisher: { '@id': orgId(locale) },
     inLanguage: locale === 'pt-BR' ? 'pt-BR' : 'en'

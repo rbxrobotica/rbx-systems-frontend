@@ -42,7 +42,7 @@
 <div class="site-nav">
   <header class="site-header">
     <div class="row brand-row">
-      <a href={href('/')} class="brand" aria-label="RBX Systems">
+      <a href={href('/')} class="brand" aria-label="Merovelis Systems">
         <span class="brand-desktop"><Logo size={28} variant="stacked" /></span>
         <span class="brand-mobile"><Logo size={24} variant="compact" /></span>
       </a>
@@ -517,6 +517,12 @@
       align-items: center;
       min-height: 44px;
       color: var(--fg-1);
+    }
+  }
+  /* Up to 363px the name does not fit beside the controls: the mark stands alone. */
+  @media (max-width: 363px) {
+    .brand-mobile :global(.wm) {
+      display: none;
     }
   }
 </style>

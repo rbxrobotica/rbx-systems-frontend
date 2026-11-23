@@ -45,13 +45,13 @@
           reviewBudget: 'I need to evaluate it',
           select: 'Select an option',
           consent:
-            'I authorize RBX Systems to use these details to assess this request and contact me by email about this engineering partnership.',
+            'I authorize Merovelis Systems to use these details to assess this request and contact me by email about this engineering partnership.',
           submit: 'Send partnership brief',
           submitting: 'Sending brief…',
-          next: 'RBX will review scope and availability and reply by email. Sending this brief does not reserve capacity or create a contract.',
+          next: 'Merovelis will review scope and availability and reply by email. Sending this brief does not reserve capacity or create a contract.',
           successTitle: 'Brief received',
           success:
-            'Your request has been recorded. RBX will review fit and availability and contact you by email. No meeting is scheduled automatically.',
+            'Your request has been recorded. Merovelis will review fit and availability and contact you by email. No meeting is scheduled automatically.',
           verifyIdle: 'Verify you are not a robot',
           verifyLoading: 'Verifying…',
           verifySuccess: 'Verified',
@@ -93,13 +93,13 @@
           reviewBudget: 'Preciso avaliar',
           select: 'Selecione uma opção',
           consent:
-            'Autorizo a RBX Systems a usar estes dados para avaliar esta solicitação e entrar em contato comigo por e-mail sobre esta parceria de engenharia.',
+            'Autorizo a Merovelis Sistemas a usar estes dados para avaliar esta solicitação e entrar em contato comigo por e-mail sobre esta parceria de engenharia.',
           submit: 'Enviar contexto da parceria',
           submitting: 'Enviando contexto…',
-          next: 'A RBX revisará escopo e disponibilidade e responderá por e-mail. O envio não reserva capacidade nem constitui contratação.',
+          next: 'A Merovelis revisará escopo e disponibilidade e responderá por e-mail. O envio não reserva capacidade nem constitui contratação.',
           successTitle: 'Contexto recebido',
           success:
-            'Sua solicitação foi registrada. A RBX avaliará aderência e disponibilidade e entrará em contato por e-mail. Nenhuma reunião é agendada automaticamente.',
+            'Sua solicitação foi registrada. A Merovelis avaliará aderência e disponibilidade e entrará em contato por e-mail. Nenhuma reunião é agendada automaticamente.',
           verifyIdle: 'Verificar que não sou um robô',
           verifyLoading: 'Verificando…',
           verifySuccess: 'Verificado',

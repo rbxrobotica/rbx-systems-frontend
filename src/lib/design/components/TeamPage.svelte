@@ -26,8 +26,8 @@
       role: locale === 'pt-BR' ? 'Fundador & CEO' : 'Founder & CEO',
       bio:
         locale === 'pt-BR'
-          ? 'AI Engineer, Platform & Backend Systems, Technical Leadership. Fundador e CEO da RBX Systems.'
-          : 'AI Engineer, Platform & Backend Systems, Technical Leadership. Founder & CEO of RBX Systems.',
+          ? 'AI Engineer, Platform & Backend Systems, Technical Leadership. Fundador e CEO da Merovelis Sistemas.'
+          : 'AI Engineer, Platform & Backend Systems, Technical Leadership. Founder & CEO of Merovelis Systems.',
       href: '/leandro-damasio'
     },
     {
@@ -46,8 +46,8 @@
       role: locale === 'pt-BR' ? 'Fundadora SDR' : 'Founding SDR',
       bio:
         locale === 'pt-BR'
-          ? 'Sales Development, Client Support e Customer Care. Fundadora SDR da RBX Systems.'
-          : 'Sales Development, Client Support and Customer Care. Founding SDR of RBX Systems.',
+          ? 'Sales Development, Client Support e Customer Care. Fundadora SDR da Merovelis Sistemas.'
+          : 'Sales Development, Client Support and Customer Care. Founding SDR of Merovelis Systems.',
       href: '/flavia-ribeiro'
     }
   ]);

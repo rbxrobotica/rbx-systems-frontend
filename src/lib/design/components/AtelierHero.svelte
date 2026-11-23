@@ -12,17 +12,17 @@
     {
       'pt-BR': {
         chapter: 'Capítulo',
-        label: 'RBX Atelier',
+        label: 'Merovelis Atelier',
         title: 'Criatividade, narrativa e marca',
-        body: 'Um espaço de experimentação onde a engenharia encontra a arte, o design e a identidade. Aqui construímos o sistema visual que traduz a RBX em linguagem, forma e cor.',
+        body: 'Um espaço de experimentação onde a engenharia encontra a arte, o design e a identidade. Aqui construímos o sistema visual que traduz a Merovelis em linguagem, forma e cor.',
         cta: 'Explorar o repositório',
         quote: 'L’atelier où la précision rencontre l’imaginaire.'
       },
       en: {
         chapter: 'Chapter',
-        label: 'RBX Atelier',
+        label: 'Merovelis Atelier',
         title: 'Creativity, narrative and brand',
-        body: 'A space of experimentation where engineering meets art, design and identity. Here we build the visual system that translates RBX into language, form and color.',
+        body: 'A space of experimentation where engineering meets art, design and identity. Here we build the visual system that translates Merovelis into language, form and color.',
         cta: 'Explore the repository',
         quote: 'L’atelier où la précision rencontre l’imaginaire.'
       }
@@ -30,7 +30,7 @@
   );
 </script>
 
-<section class="atelier-hero" aria-label="RBX Atelier">
+<section class="atelier-hero" aria-label="Merovelis Atelier">
   <div class="hero-frame">
     <div class="hero-top">
       <span class="hero-line" aria-hidden="true"></span>

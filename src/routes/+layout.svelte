@@ -31,7 +31,12 @@
 </script>
 
 <svelte:head>
-  <link rel="alternate" type="application/rss+xml" title="RBX Journal" href="{rssBase}/rss.xml" />
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="Merovelis Journal"
+    href="{rssBase}/rss.xml"
+  />
 </svelte:head>
 
 <div class="rbx-root">

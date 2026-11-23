@@ -122,6 +122,7 @@ test('pages known only by their parent are named from the page title', () => {
     { label: 'risk' }
   ]);
   assert.deepEqual(nav.resolveNav('en', '/services/llmops', 'LLMOps').trail, [
+    { label: 'Partnership', href: '/partnership' },
     { label: 'Solutions', href: '/solutions' },
     { label: 'LLMOps' }
   ]);
@@ -147,17 +148,13 @@ test('without a page title the trail stops at the linked parent', () => {
   ]);
 });
 
-test('person pages and the Strategos form are known pages under their parent', () => {
+test('person pages are known pages under their parent', () => {
   const person = nav.resolveNav('pt-BR', '/leandro-damasio', 'ignored CMS title');
   assert.equal(person.item.path, '/equipe');
   assert.deepEqual(person.trail, [
     { label: 'Empresa', href: '/sobre' },
     { label: 'Equipe', href: '/equipe' },
     { label: 'Leandro Damasio' }
-  ]);
-  assert.deepEqual(nav.resolveNav('en', '/contact/strategos').trail, [
-    { label: 'Contact', href: '/contact' },
-    { label: 'Strategos Founder Plan' }
   ]);
 });
 
@@ -197,6 +194,7 @@ test('leafTitle drops the site name that CMS titles carry', () => {
     ),
     [
       { name: 'Home', path: '/' },
+      { name: 'Partnership', path: '/partnership' },
       { name: 'Solutions', path: '/solutions' },
       { name: 'LLMOps', path: '/services/llmops' }
     ]
@@ -259,6 +257,7 @@ test('a service under the prefix of the other host switches to its own page', ()
       'https://rbx.ia.br/servicos/agentes-de-ia'
     );
     assert.deepEqual(nav.resolveNav('pt-BR', mixed, 'Agentes de IA').trail, [
+      { label: 'Parceria', href: '/parceria' },
       { label: 'Soluções', href: '/solucoes' },
       { label: 'Agentes de IA' }
     ]);

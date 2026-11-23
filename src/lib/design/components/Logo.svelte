@@ -1,12 +1,15 @@
 <script lang="ts">
   /**
-   * RBX lockup: the mark (block with two opposite 45° chamfers) and the
-   * wordmark set in type. The mark is the only drawn element; "RBX" and
-   * "Systems" are text so they stay crisp and translatable in screen readers.
+   * Merovelis lockup: the mark (block with two opposite 45° chamfers) and the
+   * wordmark set in type. The mark is the only drawn element; "Merovelis" and
+   * "Systems" are text so they stay crisp and readable by screen readers. The
+   * name is written "Merovelis", never in capitals. Rules: BRAND-MARK.md in the
+   * atelier.
    *
-   * - stacked: mark + "RBX" over "SYSTEMS" (desktop header)
-   * - compact: mark + "RBX" (mobile header)
-   * - horizontal: mark + "RBX Systems" on one line (footer, documents)
+   * - stacked: mark + "Merovelis" over "SYSTEMS" (desktop header)
+   * - compact: mark + "Merovelis" (mobile header; the header hides the name
+   *   up to 363px wide, where it does not fit)
+   * - horizontal: mark + "Merovelis Systems" on one line (footer, documents)
    * - mark: the mark alone (favicon-like uses)
    */
   interface Props {
@@ -24,13 +27,13 @@
   </svg>
   {#if variant === 'stacked'}
     <span class="stack">
-      <span class="wm">RBX</span>
+      <span class="wm">Merovelis</span>
       <span class="sys">Systems</span>
     </span>
   {:else if variant === 'compact'}
-    <span class="wm">RBX</span>
+    <span class="wm">Merovelis</span>
   {:else if variant === 'horizontal'}
-    <span class="wm">RBX</span>
+    <span class="wm">Merovelis</span>
     <span class="sys-h">Systems</span>
   {/if}
 </span>

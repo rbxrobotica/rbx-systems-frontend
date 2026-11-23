@@ -59,17 +59,32 @@ interface ProductsContent {
 // docs/products-portfolio.md. Keep capabilities distinct from release promises.
 export const productsContent: Record<Locale, ProductsContent> = {
   'pt-BR': {
-    title: 'Produtos e plataformas',
+    title: 'Produtos',
     description:
-      'Produtos e plataformas da RBX: Robson, Strategos, Verentir e Satwake / Briefing BTC. Capacidades de engenharia de conteúdo, identidade e infraestrutura soberana.',
-    eyebrow: 'Produtos & plataformas',
-    headline: 'Produtos e plataformas da RBX.',
-    lead: 'Conheça os produtos e componentes que desenvolvemos, seus estágios e as capacidades de engenharia que os sustentam: identidade, conteúdo, pagamentos e operação.',
+      'Produtos da Merovelis Sistemas: Strategos, Robson, Satwake / Briefing BTC, Verentir e Initelo, sobre uma plataforma própria de IA e infraestrutura.',
+    eyebrow: 'Produtos',
+    headline: 'Os produtos da Merovelis.',
+    lead: 'A Merovelis Sistemas cria e opera produtos de software com IA. Cada um tem marca, endereço e estágio próprios, sobre a mesma base de engenharia: identidade, conteúdo, pagamentos e operação.',
     disciplines: ['Engenharia de produto', 'IA aplicada', 'Infraestrutura soberana'],
-    featuredTitle: 'Projetos em destaque',
+    featuredTitle: 'Produtos',
     featuredLead:
-      'Execução e risco, decisão estratégica, avaliação de IA e conteúdo por assinatura. Cada produto tem seu próprio escopo e estágio de disponibilidade.',
+      'Logística, execução e risco, conteúdo por assinatura, avaliação de IA e educação. Cada produto tem seu próprio escopo e estágio de disponibilidade.',
     products: [
+      {
+        id: 'strategos',
+        name: 'Strategos',
+        category: 'Logística & operações críticas',
+        context: 'Acesso antecipado',
+        description:
+          'Sala de situação para logística. Operações distantes da base dependem de mover pessoas e equipamentos por mar, ar e terra, com janelas curtas e pouca infraestrutura de apoio. O Strategos reúne os dados que a operação já tem e mostra custo, risco e capacidade no mesmo lugar, com cada decisão registrada.',
+        capabilities: [
+          'Custo, risco e capacidade',
+          'Decisões com evidências',
+          'Memória da operação'
+        ],
+        href: 'https://strategos.gr',
+        linkLabel: 'Site do Strategos'
+      },
       {
         id: 'robson',
         name: 'Robson',
@@ -84,15 +99,16 @@ export const productsContent: Record<Locale, ProductsContent> = {
         secondaryLinks: [{ href: 'https://github.com/ldamasio/robson', label: 'Código-fonte' }]
       },
       {
-        id: 'strategos',
-        name: 'Strategos',
-        category: 'Decisão estratégica',
-        context: 'Acesso antecipado',
+        id: 'satwake',
+        name: 'Satwake / Briefing BTC',
+        category: 'Conteúdo por assinatura',
+        context: 'Edições publicadas',
         description:
-          'Sala de situação para organizar contexto, evidências e decisões. A análise assistida por IA preserva a memória estratégica e a responsabilidade humana.',
-        capabilities: ['Memória estratégica', 'Decisões com evidências'],
-        href: 'https://strategos.gr',
-        linkLabel: 'Site do Strategos'
+          'Leitura operacional do mercado BTC Futuros, com edições em área autenticada. O acesso por plano separa a leitura recente do histórico disponível e dos artefatos para download.',
+        capabilities: ['Área de membros', 'Acesso por plano', 'Artefatos auditáveis'],
+        note: 'Material de preparação operacional. Não é recomendação de investimento.',
+        href: '/produtos/briefing-btc',
+        linkLabel: 'Sobre o Satwake / Briefing BTC'
       },
       {
         id: 'verentir',
@@ -104,16 +120,15 @@ export const productsContent: Record<Locale, ProductsContent> = {
         capabilities: ['Avaliação de respostas', 'Revisão humana']
       },
       {
-        id: 'satwake',
-        name: 'Satwake / Briefing BTC',
-        category: 'Conteúdo por assinatura',
-        context: 'Edições publicadas',
+        id: 'initelo',
+        name: 'Initelo',
+        category: 'Educação',
+        context: 'Primeira aula publicada',
         description:
-          'Leitura operacional do mercado BTC Futuros, com edições em área autenticada. O acesso por plano separa a leitura recente do histórico disponível e dos artefatos para download.',
-        capabilities: ['Área de membros', 'Acesso por plano', 'Artefatos auditáveis'],
-        note: 'Material de preparação operacional. Não é recomendação de investimento.',
-        href: '/produtos/briefing-btc',
-        linkLabel: 'Sobre o Satwake / Briefing BTC'
+          'Plataforma educacional. O primeiro curso é Finanças pessoais com IA, com uma aula aberta sobre como organizar o dinheiro do mês.',
+        capabilities: ['Cursos', 'Aula aberta'],
+        href: 'https://initelo.com',
+        linkLabel: 'Site da Initelo'
       }
     ],
     externalTitle: 'Referência externa · Food Process',
@@ -129,41 +144,9 @@ export const productsContent: Record<Locale, ProductsContent> = {
       href: 'https://kulinaryos.com',
       linkLabel: 'Site do Kulinaryos'
     },
-    additionalTitle: 'Outros produtos e componentes',
-    additionalLead:
-      'O portfólio também inclui estas linhas de desenvolvimento e componentes de plataforma.',
+    additionalTitle: 'Plataforma de IA',
+    additionalLead: 'Dois produtos de plataforma controlam e avaliam as chamadas de IA dos demais.',
     additionalProducts: [
-      {
-        id: 'ledger',
-        name: 'RBX Ledger',
-        context: 'Em desenvolvimento',
-        description: 'Registro de transações e relatórios financeiros com trilha de auditoria.',
-        href: '/blog/2026-08-07-evidence-authority-boundaries',
-        linkLabel: 'Arquitetura no Journal'
-      },
-      {
-        id: 'yield',
-        name: 'RBX Yield',
-        context: 'Capacidade proposta',
-        description: 'Relacionar custos e uso de IA a resultados de negócio.',
-        href: '/blog/2026-08-07-evidence-authority-boundaries',
-        linkLabel: 'Arquitetura no Journal'
-      },
-      {
-        id: 'maestro',
-        name: 'RBX Maestro',
-        context: 'Orquestração de agentes',
-        description:
-          'Coordenação de missões e agentes, com estados, sessões e controles de execução.',
-        href: '/produtos/maestro',
-        linkLabel: 'Sobre o Maestro'
-      },
-      {
-        id: 'argos-radar',
-        name: 'Argos Radar',
-        context: 'Experimental',
-        description: 'Projeto de monitoramento de oportunidades de financiamento sustentável.'
-      },
       {
         id: 'thalamus',
         name: 'Thalamus',
@@ -226,7 +209,7 @@ export const productsContent: Record<Locale, ProductsContent> = {
     ],
     evolutionTitle: 'Blockchain, metaverso e IA',
     evolutionLead:
-      'Frentes de evolução para plataformas de conteúdo na estratégia B2B da RBX. Cada uma pode integrar o roadmap da Engineering Partnership, conforme o modelo de negócio e os requisitos dos usuários.',
+      'Frentes de evolução para plataformas de conteúdo na estratégia B2B da Merovelis. Cada uma pode integrar o roadmap da Engineering Partnership, conforme o modelo de negócio e os requisitos dos usuários.',
     evolutionCards: [
       {
         title: 'Blockchain e proveniência',
@@ -251,7 +234,7 @@ export const productsContent: Record<Locale, ProductsContent> = {
       'O Portal e a área de membros orientam estas capacidades técnicas. As referências abaixo descrevem os mecanismos; a assinatura de conteúdo e a parceria de engenharia têm contratações próprias.',
     references: [
       {
-        name: 'Portal RBX',
+        name: 'Portal Merovelis',
         title: 'Acompanhamento com acesso por projeto',
         description:
           'Módulos, riscos, roadmap e evidências em uma área autenticada. Cada pessoa acessa os projetos para os quais recebeu permissão.'
@@ -265,15 +248,15 @@ export const productsContent: Record<Locale, ProductsContent> = {
         label: 'Apresentação pública e planos'
       },
       {
-        name: 'Journal RBX',
+        name: 'Merovelis Journal',
         title: 'Publicação e distribuição sob controle',
         description:
-          'O próprio Journal usa a camada de conteúdo da RBX para publicar artigos e distribuí-los por RSS. O relato técnico público descreve esse fluxo.',
+          'O próprio Journal usa a camada de conteúdo da Merovelis para publicar artigos e distribuí-los por RSS. O relato técnico público descreve esse fluxo.',
         href: '/blog/2026-08-02-rbx-journal-rss',
         label: 'Ler o relato de implementação'
       }
     ],
-    collaborationTitle: 'RBX Engineering Partnership',
+    collaborationTitle: 'Merovelis Engineering Partnership',
     collaborationLead:
       'Parceria continuada de engenharia de produto, com roadmap, responsabilidades e critérios de aceite acordados. Arquitetura, implementação e operação entram no escopo conforme o contexto.',
     contactLabel: 'Conhecer a parceria de engenharia',
@@ -283,17 +266,28 @@ export const productsContent: Record<Locale, ProductsContent> = {
       'Este briefing é material de preparação operacional e governança. Não constitui recomendação de investimento, sinal de trading ou orientação financeira. A decisão de operar é exclusiva do operador humano. Este produto não gera ordens, não recomenda compra/venda e não aciona sistemas de execução.'
   },
   en: {
-    title: 'Products and platforms',
+    title: 'Products',
     description:
-      'RBX products and platforms: Robson, Strategos, Verentir and Satwake / Briefing BTC. Engineering capabilities for content, identity and sovereign infrastructure.',
-    eyebrow: 'Products & platforms',
-    headline: 'RBX products and platforms.',
-    lead: 'Explore the products and components we develop, their stages and the engineering capabilities behind them: identity, content, payments and operations.',
+      'Merovelis Systems products: Strategos, Robson, Satwake / Briefing BTC, Verentir and Initelo, on our own AI platform and infrastructure.',
+    eyebrow: 'Products',
+    headline: 'The Merovelis products.',
+    lead: 'Merovelis Systems builds and operates AI software products. Each has its own brand, address and stage, on the same engineering base: identity, content, payments and operations.',
     disciplines: ['Product engineering', 'Applied AI', 'Sovereign infrastructure'],
-    featuredTitle: 'Featured projects',
+    featuredTitle: 'Products',
     featuredLead:
-      'Execution and risk, strategic decisions, AI evaluation and subscription content. Each product has its own scope and availability stage.',
+      'Logistics, execution and risk, subscription content, AI evaluation and education. Each product has its own scope and availability stage.',
     products: [
+      {
+        id: 'strategos',
+        name: 'Strategos',
+        category: 'Logistics & critical operations',
+        context: 'Early access',
+        description:
+          'A situation room for logistics. Operations far from their base depend on moving people and equipment by sea, air and land, with short windows and little supporting infrastructure. Strategos brings together the data the operation already holds and shows cost, risk and capacity in one place, with every decision recorded.',
+        capabilities: ['Cost, risk and capacity', 'Evidence-based decisions', 'Operational memory'],
+        href: 'https://strategos.gr',
+        linkLabel: 'Strategos website'
+      },
       {
         id: 'robson',
         name: 'Robson',
@@ -308,15 +302,16 @@ export const productsContent: Record<Locale, ProductsContent> = {
         secondaryLinks: [{ href: 'https://github.com/ldamasio/robson', label: 'Source code' }]
       },
       {
-        id: 'strategos',
-        name: 'Strategos',
-        category: 'Strategic decisions',
-        context: 'Early access',
+        id: 'satwake',
+        name: 'Satwake / Briefing BTC',
+        category: 'Subscription content',
+        context: 'Published editions',
         description:
-          'A situation room for context, evidence and decisions. AI-assisted analysis preserves strategic memory and human accountability.',
-        capabilities: ['Strategic memory', 'Evidence-based decisions'],
-        href: 'https://strategos.gr',
-        linkLabel: 'Strategos website'
+          'Operational reading of the BTC Futures market, with editions in an authenticated area. Plan-based access separates recent reading from available history and downloadable artifacts.',
+        capabilities: ['Member area', 'Plan-based access', 'Auditable artifacts'],
+        note: 'Operational preparation material. Not investment advice.',
+        href: '/products/briefing-btc',
+        linkLabel: 'About Satwake / Briefing BTC'
       },
       {
         id: 'verentir',
@@ -328,16 +323,15 @@ export const productsContent: Record<Locale, ProductsContent> = {
         capabilities: ['Response evaluation', 'Human review']
       },
       {
-        id: 'satwake',
-        name: 'Satwake / Briefing BTC',
-        category: 'Subscription content',
-        context: 'Published editions',
+        id: 'initelo',
+        name: 'Initelo',
+        category: 'Education',
+        context: 'First lesson published',
         description:
-          'Operational reading of the BTC Futures market, with editions in an authenticated area. Plan-based access separates recent reading from available history and downloadable artifacts.',
-        capabilities: ['Member area', 'Plan-based access', 'Auditable artifacts'],
-        note: 'Operational preparation material. Not investment advice.',
-        href: '/products/briefing-btc',
-        linkLabel: 'About Satwake / Briefing BTC'
+          'An education platform. Its first course is Personal finance with AI, taught in Portuguese, with an open lesson on organizing the month’s money.',
+        capabilities: ['Courses', 'Open lesson'],
+        href: 'https://initelo.com',
+        linkLabel: 'Initelo website'
       }
     ],
     externalTitle: 'External reference · Food Process',
@@ -353,41 +347,9 @@ export const productsContent: Record<Locale, ProductsContent> = {
       href: 'https://kulinaryos.com',
       linkLabel: 'Kulinaryos website'
     },
-    additionalTitle: 'Other products and components',
-    additionalLead:
-      'The portfolio also includes these development efforts and platform components.',
+    additionalTitle: 'AI platform',
+    additionalLead: 'Two platform products control and evaluate the AI calls of the others.',
     additionalProducts: [
-      {
-        id: 'ledger',
-        name: 'RBX Ledger',
-        context: 'In development',
-        description: 'Transaction records and financial reports with an audit trail.',
-        href: '/blog/2026-08-07-evidence-authority-boundaries',
-        linkLabel: 'Architecture in the Journal'
-      },
-      {
-        id: 'yield',
-        name: 'RBX Yield',
-        context: 'Proposed capability',
-        description: 'Connecting AI costs and usage to business outcomes.',
-        href: '/blog/2026-08-07-evidence-authority-boundaries',
-        linkLabel: 'Architecture in the Journal'
-      },
-      {
-        id: 'maestro',
-        name: 'RBX Maestro',
-        context: 'Agent orchestration',
-        description:
-          'Coordination of missions and agents, with states, sessions and execution controls.',
-        href: '/products/maestro',
-        linkLabel: 'About Maestro'
-      },
-      {
-        id: 'argos-radar',
-        name: 'Argos Radar',
-        context: 'Experimental',
-        description: 'A project for monitoring sustainable funding opportunities.'
-      },
       {
         id: 'thalamus',
         name: 'Thalamus',
@@ -450,7 +412,7 @@ export const productsContent: Record<Locale, ProductsContent> = {
     ],
     evolutionTitle: 'Blockchain, metaverse and AI',
     evolutionLead:
-      'Development paths for content platforms within RBX’s B2B strategy. Each can enter the Engineering Partnership roadmap according to the business model and user requirements.',
+      'Development paths for content platforms within the Merovelis B2B strategy. Each can enter the Engineering Partnership roadmap according to the business model and user requirements.',
     evolutionCards: [
       {
         title: 'Blockchain and provenance',
@@ -475,7 +437,7 @@ export const productsContent: Record<Locale, ProductsContent> = {
       'The Portal and member area inform these technical capabilities. The references below describe the mechanisms; the content subscription and engineering partnership are separate engagements.',
     references: [
       {
-        name: 'RBX Portal',
+        name: 'Merovelis Portal',
         title: 'Project tracking with controlled access',
         description:
           'Modules, risks, roadmaps and evidence in an authenticated area. Each person can access the projects for which they have permission.'
@@ -489,15 +451,15 @@ export const productsContent: Record<Locale, ProductsContent> = {
         label: 'Public presentation and plans'
       },
       {
-        name: 'RBX Journal',
+        name: 'Merovelis Journal',
         title: 'Controlled publishing and distribution',
         description:
-          'The Journal itself uses the RBX content layer to publish articles and distribute them through RSS. The public technical report describes this flow.',
+          'The Journal itself uses the Merovelis content layer to publish articles and distribute them through RSS. The public technical report describes this flow.',
         href: '/blog/2026-08-02-rbx-journal-rss',
         label: 'Read the implementation report'
       }
     ],
-    collaborationTitle: 'RBX Engineering Partnership',
+    collaborationTitle: 'Merovelis Engineering Partnership',
     collaborationLead:
       'An ongoing product engineering partnership, with an agreed roadmap, responsibilities and acceptance criteria. Architecture, implementation and operations enter the scope according to the context.',
     contactLabel: 'Explore the engineering partnership',
