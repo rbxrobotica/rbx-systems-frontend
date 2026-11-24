@@ -5,6 +5,19 @@ PT-BR/EN catalog in `src/lib/content/products.ts`.
 
 ## Scope and rendering
 
+**Change of 2026-11-24 (owner).** This paragraph replaces the catalog described
+below it. The catalog lists four products: Strategos, featured, then Verentir as
+the secondary product, with the AI platforms Thalamus and TruthMetal beside it.
+Robson is outside the grid: one discreet line on the home and a smaller block on
+the products page (`engineeringProduct`), with its page and its open-source
+repository. Satwake / Briefing BTC and Initelo are not presented for now: they
+left the catalog, the home, the About sources, the descriptions, `llms.txt` and
+the evidence gallery. The Satwake pages `/produtos/briefing-btc` and
+`/products/briefing-btc` stay live and in the sitemap, without a link from the
+catalog, because the subscription flow lives there. The assistant's instructions
+still describe both products. The sections below that mention Satwake or Initelo
+describe the catalog before this change.
+
 **Positioning of 2026-11-23 (owner).** The house is Merovelis Sistemas (Merovelis
 Systems in English), a product company. The catalog lists seven products:
 Strategos first, as the featured product for logistics, then Robson, Satwake /

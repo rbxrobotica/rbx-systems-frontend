@@ -10,12 +10,12 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const bucket = 'rbx-content';
 const limit = 1024 * 1024;
 export const targets = [
-  ['site/pt-BR/home/index.md', 'e765a37fc99859693becb89b1dc1eef4e8f22be64f846761ec0163676a53a4b4'],
+  ['site/pt-BR/home/index.md', 'a16ace2687c820da2b5383039c7348905395717e827b7f5622915eb7370cb141'],
   [
     'site/pt-BR/solutions/index.md',
     'e9680a23b0612fe2e88ca4e1a6b453b9544f3087a3454b3f76d9631c862b7e70'
   ],
-  ['site/en/home/index.md', 'baecb4dc82d360b8819453c79eea5eda1c07c6a6c1b7e3018a6077552558c60e'],
+  ['site/en/home/index.md', 'f9ff8d38b9f30e1ce72a9b8d19c0f3ee4c1385918d923e19083bd1e997903bb1'],
   ['site/en/solutions/index.md', 'e6b8d615791d2166837cb7765cc66ceead874c8eb6bc0e49917d54124778c84f']
 ];
 export const sha256 = (body) => createHash('sha256').update(body).digest('hex');

@@ -29,10 +29,12 @@
         pageUrl,
         content.title,
         content.description,
-        [...content.products, ...content.additionalProducts].map((product) => ({
-          name: product.name,
-          url: `${pageUrl}#${product.id}`
-        }))
+        [...content.products, ...content.additionalProducts, content.engineeringProduct].map(
+          (product) => ({
+            name: product.name,
+            url: `${pageUrl}#${product.id}`
+          })
+        )
       )
     ])
   );
@@ -99,19 +101,6 @@
     </div>
   </section>
 
-  <section class="external-reference" aria-labelledby="external-title">
-    <div>
-      <p class="eyebrow">{content.externalTitle}</p>
-      <h2 id="external-title">{content.externalReference.name}</h2>
-    </div>
-    <div>
-      <p>{content.externalReference.description}</p>
-      {#if content.externalReference.href}
-        <a href={content.externalReference.href}>{content.externalReference.linkLabel}</a>
-      {/if}
-    </div>
-  </section>
-
   <section aria-labelledby="additional-title">
     <div class="section-heading">
       <h2 id="additional-title">{content.additionalTitle}</h2>
@@ -126,6 +115,45 @@
           {#if product.href}<a href={siteHref(locale, product.href)}>{product.linkLabel}</a>{/if}
         </article>
       {/each}
+    </div>
+  </section>
+
+  <section class="external-reference engineering" aria-labelledby="engineering-title">
+    <div>
+      <p class="eyebrow">{content.engineeringTitle}</p>
+      <h2 id="engineering-title">{content.engineeringProduct.name}</h2>
+      <p class="product-context">
+        {content.engineeringProduct.category} · {content.engineeringProduct.context}
+      </p>
+    </div>
+    <div id={content.engineeringProduct.id}>
+      <p>{content.engineeringProduct.description}</p>
+      {#if content.engineeringProduct.note}
+        <p class="product-note">{content.engineeringProduct.note}</p>
+      {/if}
+      {#if content.engineeringProduct.href}
+        <div class="product-links">
+          <a href={siteHref(locale, content.engineeringProduct.href)}
+            >{content.engineeringProduct.linkLabel}</a
+          >
+          {#each content.engineeringProduct.secondaryLinks ?? [] as link}
+            <a href={siteHref(locale, link.href)}>{link.label}</a>
+          {/each}
+        </div>
+      {/if}
+    </div>
+  </section>
+
+  <section class="external-reference" aria-labelledby="external-title">
+    <div>
+      <p class="eyebrow">{content.externalTitle}</p>
+      <h2 id="external-title">{content.externalReference.name}</h2>
+    </div>
+    <div>
+      <p>{content.externalReference.description}</p>
+      {#if content.externalReference.href}
+        <a href={content.externalReference.href}>{content.externalReference.linkLabel}</a>
+      {/if}
     </div>
   </section>
 
@@ -224,7 +252,6 @@
   </section>
 
   <aside class="portfolio-notes" aria-label={content.legalLabel}>
-    <p><strong>Satwake / Briefing BTC.</strong> {content.financialNote}</p>
     <a href={siteHref(locale, '/legal')}>{content.legalLabel}</a>
   </aside>
 </div>
@@ -584,9 +611,6 @@
     font-size: var(--text-sm);
     color: var(--fg-1);
     line-height: var(--lead-loose);
-  }
-  .portfolio-notes p {
-    margin-bottom: var(--s-3);
   }
   @media (max-width: 900px) {
     .product-grid {

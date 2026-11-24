@@ -110,14 +110,8 @@ export const GET: RequestHandler = async ({ url }) => {
 
   const productLinks =
     locale === 'pt-BR'
-      ? [
-          link('Robson', '/produtos/robson', t(locale, 'robson.headline')),
-          link('Satwake / Briefing BTC', '/produtos/briefing-btc', t(locale, 'briefing.headline'))
-        ]
-      : [
-          link('Robson', '/products/robson', t(locale, 'robson.headline')),
-          link('Satwake / Briefing BTC', '/products/briefing-btc', t(locale, 'briefing.headline'))
-        ];
+      ? [link('Robson', '/produtos/robson', t(locale, 'robson.headline'))]
+      : [link('Robson', '/products/robson', t(locale, 'robson.headline'))];
 
   const partnershipLink =
     locale === 'pt-BR'

@@ -1,10 +1,10 @@
 ---
 title: Sobre a Merovelis Sistemas
-description: 'A Merovelis Sistemas é uma empresa de produtos de software com IA: Strategos, Robson, Satwake, Verentir e Initelo, sobre uma plataforma própria.'
+description: 'A Merovelis Sistemas é uma empresa de produtos de software com IA: Strategos, para logística, e Verentir, para avaliação de IA, sobre uma plataforma própria.'
 eyebrow: Empresa
 lead: Uma empresa de produtos. Cada um resolve um problema de operação e todos rodam sobre a mesma base de engenharia.
 ---
-<p>A Merovelis Sistemas cria e opera produtos de software com IA. O <a href="/produtos#strategos">Strategos</a> é a sala de situação para logística e operações críticas. O <a href="/produtos/robson">Robson</a> é um motor de execução e risco de código aberto. O <a href="/produtos/briefing-btc">Satwake</a> publica uma leitura operacional do mercado por assinatura. O Verentir avalia sistemas de IA. A Initelo é uma plataforma educacional.</p>
+<p>A Merovelis Sistemas cria e opera produtos de software com IA. O <a href="/produtos#strategos">Strategos</a> é a sala de situação para logística e operações críticas. O Verentir avalia sistemas de IA, ao lado das plataformas Thalamus e TruthMetal. O <a href="/produtos/robson">Robson</a> é um motor de execução e risco de código aberto.</p>
 <h2>A base comum</h2>
 <p>Os produtos compartilham identidade, conteúdo, pagamentos e operação, em infraestrutura que a Merovelis administra. O Thalamus controla as chamadas de IA com políticas, roteamento e auditoria. O TruthMetal reúne os datasets e os critérios de referência das avaliações. Cada produto declara o próprio estágio no <a href="/produtos">portfólio</a>.</p>
 <h2>Setores</h2>

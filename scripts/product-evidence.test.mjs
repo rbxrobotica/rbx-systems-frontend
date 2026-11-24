@@ -37,17 +37,10 @@ function jpegDimensions(bytes) {
   assert.fail('JPEG has no frame dimensions');
 }
 
-test('the evidence gallery covers the six requested products exactly once', () => {
+test('the evidence gallery covers the five presented products exactly once', () => {
   const ids = productEvidence.map((entry) => entry.id);
   assert.equal(new Set(ids).size, ids.length);
-  assert.deepEqual([...ids].sort(), [
-    'robson',
-    'robson-code',
-    'satwake',
-    'strategos',
-    'thalamus',
-    'verentir'
-  ]);
+  assert.deepEqual([...ids].sort(), ['robson', 'robson-code', 'strategos', 'thalamus', 'verentir']);
 });
 
 test('captures are local JPEGs with accurate dimensions and a bounded download budget', async () => {

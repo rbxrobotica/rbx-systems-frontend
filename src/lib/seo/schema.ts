@@ -19,9 +19,9 @@ const HOUSE_NAME = 'Merovelis Systems';
 const HOUSE_ALTERNATE_NAMES = ['Merovelis', 'Merovelis Sistemas', 'RBX Systems', 'RBX Robótica'];
 const RBX_LOGO = '/brand/rbx-mark.svg';
 const RBX_DESCRIPTION_PT =
-  'Empresa de produtos de software com IA: Strategos, Robson, Satwake, Verentir e Initelo, sobre uma plataforma própria de IA e infraestrutura.';
+  'Empresa de produtos de software com IA: Strategos, para logística, e Verentir, para avaliação de IA, sobre uma plataforma própria de IA e infraestrutura.';
 const RBX_DESCRIPTION_EN =
-  'An AI software product company: Strategos, Robson, Satwake, Verentir and Initelo, on its own AI platform and infrastructure.';
+  'An AI software product company: Strategos, for logistics, and Verentir, for AI evaluation, on its own AI platform and infrastructure.';
 
 const LEANDRO_NAME = 'Leandro Damasio';
 const LEANDRO_JOB_TITLE_PT = 'Fundador e CEO, Merovelis Sistemas';

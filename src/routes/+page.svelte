@@ -20,6 +20,7 @@
   const catalog = $derived(productsContent[data.locale]);
   const featured = $derived(catalog.products[0]);
   const others = $derived(catalog.products.slice(1));
+  const engineering = $derived(catalog.engineeringProduct);
   // Every address goes out through siteHref: under the locale segment and in
   // the spelling of the language.
   const href = (path: string) => siteHref(data.locale, path);
@@ -74,13 +75,7 @@
         {#if product.href}<a href={href(product.href)}>{product.linkLabel}</a>{/if}
       </article>
     {/each}
-  </div>
-</section>
-
-<section aria-labelledby="home-platform">
-  <h2 id="home-platform" class="section-title">{t(data.locale, 'home.platformTitle')}</h2>
-  <p class="section-lead">{catalog.additionalLead}</p>
-  <div class="grid">
+    <!-- The AI platforms sit beside the product they are close to. -->
     {#each catalog.additionalProducts as product (product.id)}
       <article class="card card--plain">
         <h3>{product.name}</h3>
@@ -89,8 +84,19 @@
       </article>
     {/each}
   </div>
+  <p class="section-lead platforms-lead">{catalog.additionalLead}</p>
   <p class="all-products"><a href={productsHref}>{t(data.locale, 'home.allProducts')}</a></p>
 </section>
+
+<!-- Robson is shown discreetly: one line, with its page and its source. -->
+<p class="engineering-note">
+  <span class="meta">{catalog.engineeringTitle}</span>
+  <a href={href(engineering.href ?? '/produtos')}>{engineering.name}</a>
+  · {engineering.category} · {engineering.context}
+  {#each engineering.secondaryLinks ?? [] as link}
+    · <a href={link.href} rel="noopener">{link.label}</a>
+  {/each}
+</p>
 
 {#if data.page?.html}
   <div class="home-copy"><Prose html={data.page.html} /></div>
@@ -109,6 +115,7 @@
   }
   .quiet-link,
   .all-products,
+  .engineering-note,
   .partnership-link {
     font-size: var(--text-sm);
   }
@@ -123,6 +130,17 @@
     font-size: var(--text-xs);
     letter-spacing: var(--track-wide);
     color: var(--fg-2);
+  }
+  .engineering-note {
+    margin-bottom: var(--s-8);
+    color: var(--fg-2);
+  }
+  .engineering-note .meta {
+    display: block;
+    margin-bottom: var(--s-1);
+  }
+  .platforms-lead {
+    margin-top: var(--s-4);
   }
   .featured {
     display: grid;

@@ -23,6 +23,8 @@ interface ProductsContent {
   featuredTitle: string;
   featuredLead: string;
   products: Product[];
+  engineeringTitle: string;
+  engineeringProduct: Product;
   externalTitle: string;
   externalReference: Product;
   additionalTitle: string;
@@ -52,7 +54,6 @@ interface ProductsContent {
   contactLabel: string;
   contactHref: string;
   legalLabel: string;
-  financialNote: string;
 }
 
 // Curated institutional portfolio. Evidence and publication boundaries:
@@ -61,14 +62,14 @@ export const productsContent: Record<Locale, ProductsContent> = {
   'pt-BR': {
     title: 'Produtos',
     description:
-      'Produtos da Merovelis Sistemas: Strategos, Robson, Satwake / Briefing BTC, Verentir e Initelo, sobre uma plataforma própria de IA e infraestrutura.',
+      'Produtos da Merovelis Sistemas: Strategos, para logística, e Verentir, para avaliação de IA, com as plataformas Thalamus e TruthMetal.',
     eyebrow: 'Produtos',
     headline: 'Os produtos da Merovelis.',
     lead: 'A Merovelis Sistemas cria e opera produtos de software com IA. Cada um tem marca, endereço e estágio próprios, sobre a mesma base de engenharia: identidade, conteúdo, pagamentos e operação.',
     disciplines: ['Engenharia de produto', 'IA aplicada', 'Infraestrutura soberana'],
     featuredTitle: 'Produtos',
     featuredLead:
-      'Logística, execução e risco, conteúdo por assinatura, avaliação de IA e educação. Cada produto tem seu próprio escopo e estágio de disponibilidade.',
+      'Logística e avaliação de IA. Cada produto tem seu próprio escopo e estágio de disponibilidade.',
     products: [
       {
         id: 'strategos',
@@ -86,31 +87,6 @@ export const productsContent: Record<Locale, ProductsContent> = {
         linkLabel: 'Site do Strategos'
       },
       {
-        id: 'robson',
-        name: 'Robson',
-        category: 'Execução & risco',
-        context: 'Open source',
-        description:
-          'Motor de execução e gestão de risco para mercados de cripto. Reúne execução determinística, controles de risco e uma trilha de eventos para auditoria.',
-        capabilities: ['Execução determinística', 'Rastreabilidade'],
-        note: 'Não é autotrader, não prevê preços e não gera sinais. Operar cripto envolve risco de perda.',
-        href: '/produtos/robson',
-        linkLabel: 'Sobre o Robson',
-        secondaryLinks: [{ href: 'https://github.com/ldamasio/robson', label: 'Código-fonte' }]
-      },
-      {
-        id: 'satwake',
-        name: 'Satwake / Briefing BTC',
-        category: 'Conteúdo por assinatura',
-        context: 'Edições publicadas',
-        description:
-          'Leitura operacional do mercado BTC Futuros, com edições em área autenticada. O acesso por plano separa a leitura recente do histórico disponível e dos artefatos para download.',
-        capabilities: ['Área de membros', 'Acesso por plano', 'Artefatos auditáveis'],
-        note: 'Material de preparação operacional. Não é recomendação de investimento.',
-        href: '/produtos/briefing-btc',
-        linkLabel: 'Sobre o Satwake / Briefing BTC'
-      },
-      {
         id: 'verentir',
         name: 'Verentir',
         category: 'Qualidade de IA',
@@ -118,19 +94,22 @@ export const productsContent: Record<Locale, ProductsContent> = {
         description:
           'Camada de medição e julgamento para sistemas de IA. Organiza avaliações e relatórios de qualidade para apoiar revisão humana e a evolução dos assistentes.',
         capabilities: ['Avaliação de respostas', 'Revisão humana']
-      },
-      {
-        id: 'initelo',
-        name: 'Initelo',
-        category: 'Educação',
-        context: 'Primeira aula publicada',
-        description:
-          'Plataforma educacional. O primeiro curso é Finanças pessoais com IA, com uma aula aberta sobre como organizar o dinheiro do mês.',
-        capabilities: ['Cursos', 'Aula aberta'],
-        href: 'https://initelo.com',
-        linkLabel: 'Site da Initelo'
       }
     ],
+    engineeringTitle: 'Engenharia aberta',
+    engineeringProduct: {
+      id: 'robson',
+      name: 'Robson',
+      category: 'Execução & risco',
+      context: 'Open source',
+      description:
+        'Motor de execução e gestão de risco para mercados de cripto, de código aberto. Reúne execução determinística, controles de risco e uma trilha de eventos para auditoria. É onde a engenharia da Merovelis em controle discreto, economia, risco e capital pode ser lida no código.',
+      capabilities: ['Execução determinística', 'Rastreabilidade'],
+      note: 'Não é autotrader, não prevê preços e não gera sinais. Operar cripto envolve risco de perda.',
+      href: '/produtos/robson',
+      linkLabel: 'Sobre o Robson',
+      secondaryLinks: [{ href: 'https://github.com/ldamasio/robson', label: 'Código-fonte' }]
+    },
     externalTitle: 'Referência externa · Food Process',
     externalReference: {
       id: 'kulinaryos',
@@ -144,8 +123,9 @@ export const productsContent: Record<Locale, ProductsContent> = {
       href: 'https://kulinaryos.com',
       linkLabel: 'Site do Kulinaryos'
     },
-    additionalTitle: 'Plataforma de IA',
-    additionalLead: 'Dois produtos de plataforma controlam e avaliam as chamadas de IA dos demais.',
+    additionalTitle: 'Plataformas de IA',
+    additionalLead:
+      'Duas plataformas de IA próximas ao Verentir: o Thalamus controla as chamadas de IA e o TruthMetal reúne os datasets e os critérios das avaliações.',
     additionalProducts: [
       {
         id: 'thalamus',
@@ -231,21 +211,13 @@ export const productsContent: Record<Locale, ProductsContent> = {
       'A soberania dos dados depende do conjunto: armazenamento, gestão de chaves, permissões e portabilidade. Blockchain contribui com registros verificáveis; o escopo de cada integração é definido e validado na parceria.',
     referencesTitle: 'Referências de implementação',
     referencesLead:
-      'O Portal e a área de membros orientam estas capacidades técnicas. As referências abaixo descrevem os mecanismos; a assinatura de conteúdo e a parceria de engenharia têm contratações próprias.',
+      'O Portal e o Journal orientam estas capacidades técnicas. As referências abaixo descrevem os mecanismos; a parceria de engenharia tem contratação própria.',
     references: [
       {
         name: 'Portal Merovelis',
         title: 'Acompanhamento com acesso por projeto',
         description:
           'Módulos, riscos, roadmap e evidências em uma área autenticada. Cada pessoa acessa os projetos para os quais recebeu permissão.'
-      },
-      {
-        name: 'Satwake / Briefing BTC',
-        title: 'Conteúdo com acesso por assinatura',
-        description:
-          'Edições, histórico disponível e artefatos reunidos em uma área de membros. A apresentação pública descreve os planos e o acesso ao conteúdo.',
-        href: '/produtos/briefing-btc',
-        label: 'Apresentação pública e planos'
       },
       {
         name: 'Merovelis Journal',
@@ -261,21 +233,19 @@ export const productsContent: Record<Locale, ProductsContent> = {
       'Parceria continuada de engenharia de produto, com roadmap, responsabilidades e critérios de aceite acordados. Arquitetura, implementação e operação entram no escopo conforme o contexto.',
     contactLabel: 'Conhecer a parceria de engenharia',
     contactHref: '/parceria',
-    legalLabel: 'Aviso legal e condições de uso',
-    financialNote:
-      'Este briefing é material de preparação operacional e governança. Não constitui recomendação de investimento, sinal de trading ou orientação financeira. A decisão de operar é exclusiva do operador humano. Este produto não gera ordens, não recomenda compra/venda e não aciona sistemas de execução.'
+    legalLabel: 'Aviso legal e condições de uso'
   },
   en: {
     title: 'Products',
     description:
-      'Merovelis Systems products: Strategos, Robson, Satwake / Briefing BTC, Verentir and Initelo, on our own AI platform and infrastructure.',
+      'Merovelis Systems products: Strategos, for logistics, and Verentir, for AI evaluation, with the Thalamus and TruthMetal platforms.',
     eyebrow: 'Products',
     headline: 'The Merovelis products.',
     lead: 'Merovelis Systems builds and operates AI software products. Each has its own brand, address and stage, on the same engineering base: identity, content, payments and operations.',
     disciplines: ['Product engineering', 'Applied AI', 'Sovereign infrastructure'],
     featuredTitle: 'Products',
     featuredLead:
-      'Logistics, execution and risk, subscription content, AI evaluation and education. Each product has its own scope and availability stage.',
+      'Logistics and AI evaluation. Each product has its own scope and availability stage.',
     products: [
       {
         id: 'strategos',
@@ -289,31 +259,6 @@ export const productsContent: Record<Locale, ProductsContent> = {
         linkLabel: 'Strategos website'
       },
       {
-        id: 'robson',
-        name: 'Robson',
-        category: 'Execution & risk',
-        context: 'Open source',
-        description:
-          'An execution and risk management engine for crypto markets. It combines deterministic execution, risk controls and an event trail for auditing.',
-        capabilities: ['Deterministic execution', 'Traceability'],
-        note: 'It is not an autotrader, does not predict prices and does not generate signals. Crypto trading involves risk of loss.',
-        href: '/products/robson',
-        linkLabel: 'About Robson',
-        secondaryLinks: [{ href: 'https://github.com/ldamasio/robson', label: 'Source code' }]
-      },
-      {
-        id: 'satwake',
-        name: 'Satwake / Briefing BTC',
-        category: 'Subscription content',
-        context: 'Published editions',
-        description:
-          'Operational reading of the BTC Futures market, with editions in an authenticated area. Plan-based access separates recent reading from available history and downloadable artifacts.',
-        capabilities: ['Member area', 'Plan-based access', 'Auditable artifacts'],
-        note: 'Operational preparation material. Not investment advice.',
-        href: '/products/briefing-btc',
-        linkLabel: 'About Satwake / Briefing BTC'
-      },
-      {
         id: 'verentir',
         name: 'Verentir',
         category: 'AI quality',
@@ -321,19 +266,22 @@ export const productsContent: Record<Locale, ProductsContent> = {
         description:
           'A measurement and judgment layer for AI systems. It organizes evaluations and quality reports to support human review and the development of assistants.',
         capabilities: ['Response evaluation', 'Human review']
-      },
-      {
-        id: 'initelo',
-        name: 'Initelo',
-        category: 'Education',
-        context: 'First lesson published',
-        description:
-          'An education platform. Its first course is Personal finance with AI, taught in Portuguese, with an open lesson on organizing the month’s money.',
-        capabilities: ['Courses', 'Open lesson'],
-        href: 'https://initelo.com',
-        linkLabel: 'Initelo website'
       }
     ],
+    engineeringTitle: 'Open engineering',
+    engineeringProduct: {
+      id: 'robson',
+      name: 'Robson',
+      category: 'Execution & risk',
+      context: 'Open source',
+      description:
+        'An open-source execution and risk management engine for crypto markets. It combines deterministic execution, risk controls and an event trail for auditing. It is where the Merovelis engineering in discrete control, economics, risk and capital can be read in the code.',
+      capabilities: ['Deterministic execution', 'Traceability'],
+      note: 'It is not an autotrader, does not predict prices and does not generate signals. Crypto trading involves risk of loss.',
+      href: '/products/robson',
+      linkLabel: 'About Robson',
+      secondaryLinks: [{ href: 'https://github.com/ldamasio/robson', label: 'Source code' }]
+    },
     externalTitle: 'External reference · Food Process',
     externalReference: {
       id: 'kulinaryos',
@@ -347,8 +295,9 @@ export const productsContent: Record<Locale, ProductsContent> = {
       href: 'https://kulinaryos.com',
       linkLabel: 'Kulinaryos website'
     },
-    additionalTitle: 'AI platform',
-    additionalLead: 'Two platform products control and evaluate the AI calls of the others.',
+    additionalTitle: 'AI platforms',
+    additionalLead:
+      'Two AI platforms close to Verentir: Thalamus controls AI calls and TruthMetal holds the datasets and criteria for evaluations.',
     additionalProducts: [
       {
         id: 'thalamus',
@@ -434,21 +383,13 @@ export const productsContent: Record<Locale, ProductsContent> = {
       'Data sovereignty depends on the whole system: storage, key management, permissions and portability. Blockchain contributes verifiable records; the scope of each integration is defined and validated within the partnership.',
     referencesTitle: 'Implementation references',
     referencesLead:
-      'The Portal and member area inform these technical capabilities. The references below describe the mechanisms; the content subscription and engineering partnership are separate engagements.',
+      'The Portal and the Journal inform these technical capabilities. The references below describe the mechanisms; the engineering partnership is a separate engagement.',
     references: [
       {
         name: 'Merovelis Portal',
         title: 'Project tracking with controlled access',
         description:
           'Modules, risks, roadmaps and evidence in an authenticated area. Each person can access the projects for which they have permission.'
-      },
-      {
-        name: 'Satwake / Briefing BTC',
-        title: 'Content with subscription access',
-        description:
-          'Editions, available history and artifacts in a member area. The public presentation describes plans and content access.',
-        href: '/products/briefing-btc',
-        label: 'Public presentation and plans'
       },
       {
         name: 'Merovelis Journal',
@@ -464,8 +405,6 @@ export const productsContent: Record<Locale, ProductsContent> = {
       'An ongoing product engineering partnership, with an agreed roadmap, responsibilities and acceptance criteria. Architecture, implementation and operations enter the scope according to the context.',
     contactLabel: 'Explore the engineering partnership',
     contactHref: '/partnership',
-    legalLabel: 'Legal notice and terms of use',
-    financialNote:
-      'This briefing is operational preparation and governance material. It does not constitute investment advice, a trading signal or financial guidance. The decision to trade belongs exclusively to the human operator. This product does not generate orders, does not recommend buying or selling and does not trigger execution systems.'
+    legalLabel: 'Legal notice and terms of use'
   }
 };
