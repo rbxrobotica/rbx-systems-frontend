@@ -3,44 +3,16 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import ts from 'typescript';
-import { importTypeScriptModule } from './test-support/import-typescript-module.mjs';
+import { loadTypeScriptGraph } from './test-support/load-typescript-graph.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const read = (rel) => readFileSync(path.join(root, rel), 'utf8');
+const source = (rel) => new URL(`../src/${rel}`, import.meta.url);
 
-// nav.ts and its two runtime dependencies import through the `$lib` alias, so
-// they are transpiled to CommonJS and wired by hand, as robson-page.test does.
-function loadModule(rel, deps = {}) {
-  const compiled = ts.transpileModule(read(rel), {
-    compilerOptions: {
-      target: ts.ScriptTarget.ES2022,
-      module: ts.ModuleKind.CommonJS,
-      esModuleInterop: true
-    }
-  }).outputText;
-  const exports = {};
-  const require = (specifier) => {
-    // eslint-disable-next-line security/detect-object-injection -- specifier is an import of the repository module under test; deps is this test's own stub table
-    if (specifier in deps) return deps[specifier];
-    throw new Error(`Unexpected dependency of ${rel}: ${specifier}`);
-  };
-  new Function('require', 'exports', compiled)(require, exports);
-  return exports;
-}
-
-const catalog = await importTypeScriptModule(
-  new URL('../src/lib/services/catalog.ts', import.meta.url)
-);
-const alternates = loadModule('src/lib/seo/alternates.ts', { '$lib/services/catalog': catalog });
-const translate = loadModule('src/lib/i18n/translate.ts', {
-  './pt-BR.json': JSON.parse(read('src/lib/i18n/pt-BR.json')),
-  './en.json': JSON.parse(read('src/lib/i18n/en.json'))
-});
-const nav = loadModule('src/lib/design/nav.ts', {
-  '$lib/seo/alternates': alternates,
-  '$lib/i18n/translate': translate
-});
+// nav.ts and what it imports through the `$lib` alias are loaded as real
+// modules. They hold no state, so each graph is as good as another.
+const alternates = loadTypeScriptGraph(source('lib/seo/alternates.ts'));
+const nav = loadTypeScriptGraph(source('lib/design/nav.ts'));
+const { LOCALE_PREFIX, stripLocalePrefix } = loadTypeScriptGraph(source('lib/i18n/locale.ts'));
 
 const LOCALES = ['pt-BR', 'en'];
 
@@ -66,8 +38,10 @@ test('the home page has no breadcrumb and no section', () => {
   }
 });
 
-// Both spellings of a route are live on both hosts, so every static page is
-// checked under both locales, not only under the one that owns its spelling.
+// Either spelling of a route resolves in either language (the server sends a
+// request to the spelling of its language before it renders), so every static
+// page is checked under both locales, not only under the one that owns its
+// spelling.
 for (const locale of LOCALES) {
   test(`${locale}: every static page has a trail that ends in the current page`, () => {
     assert.ok(staticRoutes.length > 30, 'route discovery found too few pages');
@@ -77,13 +51,18 @@ for (const locale of LOCALES) {
       assert.equal(trail.at(-1).href, undefined, `${route} does not end in the current page`);
       for (const crumb of trail.slice(0, -1)) {
         assert.ok(crumb.href, `${route}: ancestor "${crumb.label}" is not linked`);
-        assert.ok(staticRoutes.includes(crumb.href), `${route}: ${crumb.href} is not a route`);
+        // eslint-disable-next-line security/detect-object-injection -- locale iterates LOCALES
+        assert.ok(crumb.href.startsWith(LOCALE_PREFIX[locale]), `${route}: ${crumb.href}`);
+        assert.ok(
+          staticRoutes.includes(stripLocalePrefix(crumb.href)),
+          `${route}: ${crumb.href} is not a route`
+        );
       }
     }
   });
 }
 
-test('every navigation href is a real route in the spelling of its host', () => {
+test('every navigation href is a real route under the segment and in the spelling of its language', () => {
   for (const locale of LOCALES) {
     const items = [
       ...nav.NAV_SECTIONS,
@@ -91,43 +70,77 @@ test('every navigation href is a real route in the spelling of its host', () => 
       ...nav.STANDALONE_PAGES
     ];
     for (const item of [...items, ...items.flatMap((entry) => entry.pages ?? [])]) {
-      const href = alternates.localizedPath(locale, item.path);
-      assert.ok(staticRoutes.includes(href), `${locale}: ${href} is not a route`);
+      const href = alternates.localizedHref(locale, item.path);
+      // eslint-disable-next-line security/detect-object-injection -- locale iterates LOCALES
+      assert.ok(href.startsWith(`${LOCALE_PREFIX[locale]}/`), `${locale}: ${href}`);
+      assert.ok(
+        staticRoutes.includes(stripLocalePrefix(href)),
+        `${locale}: ${href} is not a route`
+      );
     }
   }
-  assert.equal(alternates.localizedPath('en', '/sobre'), '/about');
+  assert.equal(alternates.localizedHref('en', '/sobre'), '/en/about');
+  assert.equal(alternates.localizedHref('pt-BR', '/about'), '/pt-br/sobre');
+  assert.equal(alternates.localizedHref('en', '/'), '/en');
 });
 
-test('a route requested in the other host spelling resolves the same way', () => {
+test('a route requested in the spelling of the other language resolves the same way', () => {
   const ptOnEn = nav.resolveNav('en', '/carreiras');
   assert.equal(ptOnEn.section.key, 'company');
-  assert.deepEqual(ptOnEn.trail, [{ label: 'Company', href: '/about' }, { label: 'Careers' }]);
+  assert.deepEqual(ptOnEn.trail, [{ label: 'Company', href: '/en/about' }, { label: 'Careers' }]);
 
   const enOnPt = nav.resolveNav('pt-BR', '/careers');
   assert.equal(enOnPt.section.key, 'company');
-  assert.deepEqual(enOnPt.trail, [{ label: 'Empresa', href: '/sobre' }, { label: 'Carreiras' }]);
+  assert.deepEqual(enOnPt.trail, [
+    { label: 'Empresa', href: '/pt-br/sobre' },
+    { label: 'Carreiras' }
+  ]);
 
   assert.deepEqual(nav.resolveNav('en', '/sobre').trail, [{ label: 'Company' }]);
   assert.deepEqual(nav.resolveNav('pt-BR', '/about').trail, [{ label: 'Empresa' }]);
+});
+
+test('a path resolves the same with and without its locale segment', () => {
+  // The address a page is served at carries the segment; the model does not.
+  for (const [locale, address, bare] of [
+    ['en', '/en/careers', '/careers'],
+    ['pt-BR', '/pt-br/carreiras', '/carreiras'],
+    ['en', '/en/blog/a-post/', '/blog/a-post'],
+    ['pt-BR', '/pt-br', '/']
+  ]) {
+    assert.deepEqual(
+      nav.resolveNav(locale, address, 'Title'),
+      nav.resolveNav(locale, bare, 'Title'),
+      address
+    );
+    assert.deepEqual(
+      nav.breadcrumbItems(locale, address, 'Title'),
+      nav.breadcrumbItems(locale, bare, 'Title'),
+      address
+    );
+  }
 });
 
 test('pages known only by their parent are named from the page title', () => {
   const post = nav.resolveNav('pt-BR', '/blog/um-post', 'Um post');
   assert.equal(post.section.key, 'journal');
   assert.equal(post.item, undefined);
-  assert.deepEqual(post.trail, [{ label: 'Journal', href: '/journal' }, { label: 'Um post' }]);
+  assert.deepEqual(post.trail, [
+    { label: 'Journal', href: '/pt-br/journal' },
+    { label: 'Um post' }
+  ]);
 
   assert.deepEqual(nav.resolveNav('pt-BR', '/journal/tag/risk', 'risk').trail, [
-    { label: 'Journal', href: '/journal' },
+    { label: 'Journal', href: '/pt-br/journal' },
     { label: 'risk' }
   ]);
   assert.deepEqual(nav.resolveNav('en', '/services/llmops', 'LLMOps').trail, [
-    { label: 'Solutions', href: '/solutions' },
+    { label: 'Solutions', href: '/en/solutions' },
     { label: 'LLMOps' }
   ]);
   for (const spelling of ['/products/strategos', '/produtos/strategos']) {
     assert.deepEqual(nav.resolveNav('en', spelling, 'Strategos').trail, [
-      { label: 'Products', href: '/products' },
+      { label: 'Products', href: '/en/products' },
       { label: 'Strategos' }
     ]);
   }
@@ -135,15 +148,15 @@ test('pages known only by their parent are named from the page title', () => {
   const landing = nav.resolveNav('pt-BR', '/robson', 'Robson, o motor');
   assert.equal(landing.item.path, '/produtos/robson');
   assert.deepEqual(landing.trail, [
-    { label: 'Produtos', href: '/produtos' },
-    { label: 'Robson', href: '/produtos/robson' },
+    { label: 'Produtos', href: '/pt-br/produtos' },
+    { label: 'Robson', href: '/pt-br/produtos/robson' },
     { label: 'Robson, o motor' }
   ]);
 });
 
 test('without a page title the trail stops at the linked parent', () => {
   assert.deepEqual(nav.resolveNav('pt-BR', '/blog/um-post').trail, [
-    { label: 'Journal', href: '/journal' }
+    { label: 'Journal', href: '/pt-br/journal' }
   ]);
 });
 
@@ -151,12 +164,12 @@ test('person pages and the Strategos form are known pages under their parent', (
   const person = nav.resolveNav('pt-BR', '/leandro-damasio', 'ignored CMS title');
   assert.equal(person.item.path, '/equipe');
   assert.deepEqual(person.trail, [
-    { label: 'Empresa', href: '/sobre' },
-    { label: 'Equipe', href: '/equipe' },
+    { label: 'Empresa', href: '/pt-br/sobre' },
+    { label: 'Equipe', href: '/pt-br/equipe' },
     { label: 'Leandro Damasio' }
   ]);
   assert.deepEqual(nav.resolveNav('en', '/contact/strategos').trail, [
-    { label: 'Contact', href: '/contact' },
+    { label: 'Contact', href: '/en/contact' },
     { label: 'Strategos Founder Plan' }
   ]);
 });
@@ -172,7 +185,7 @@ test('leafTitle reads the title the loaders expose, in a fixed order', () => {
 });
 
 test('leafTitle drops the site name that CMS titles carry', () => {
-  // Titles as stored for service and product pages on both hosts.
+  // Titles as stored for service and product pages in both languages.
   assert.equal(nav.leafTitle({ page: { title: 'LLMOps — RBX Systems' } }), 'LLMOps');
   assert.equal(
     nav.leafTitle({ page: { title: 'API Integration · RBX Systems' } }),
@@ -196,23 +209,23 @@ test('leafTitle drops the site name that CMS titles carry', () => {
       nav.leafTitle({ page: { title: 'LLMOps — RBX Systems' } })
     ),
     [
-      { name: 'Home', path: '/' },
-      { name: 'Solutions', path: '/solutions' },
-      { name: 'LLMOps', path: '/services/llmops' }
+      { name: 'Home', path: '/en' },
+      { name: 'Solutions', path: '/en/solutions' },
+      { name: 'LLMOps', path: '/en/services/llmops' }
     ]
   );
 });
 
 test('breadcrumbItems is the visible trail with Home first and the page path last', () => {
   assert.deepEqual(nav.breadcrumbItems('pt-BR', '/carreiras', 'ignored CMS title'), [
-    { name: 'Início', path: '/' },
-    { name: 'Empresa', path: '/sobre' },
-    { name: 'Carreiras', path: '/carreiras' }
+    { name: 'Início', path: '/pt-br' },
+    { name: 'Empresa', path: '/pt-br/sobre' },
+    { name: 'Carreiras', path: '/pt-br/carreiras' }
   ]);
   assert.deepEqual(nav.breadcrumbItems('en', '/blog/a-post/', 'A post'), [
-    { name: 'Home', path: '/' },
-    { name: 'Journal', path: '/journal' },
-    { name: 'A post', path: '/blog/a-post' }
+    { name: 'Home', path: '/en' },
+    { name: 'Journal', path: '/en/journal' },
+    { name: 'A post', path: '/en/blog/a-post' }
   ]);
   for (const locale of LOCALES) {
     for (const route of staticRoutes) {
@@ -227,39 +240,63 @@ test('breadcrumbItems is the visible trail with Home first and the page path las
   }
 });
 
-test('the language switch lands on the same page in the spelling of the other host', () => {
-  assert.equal(nav.localeSwitchHref('pt-BR', 'pt-BR', '/sobre'), '/sobre');
-  assert.equal(nav.localeSwitchHref('pt-BR', 'en', '/sobre'), 'https://rbxsystems.ch/about');
-  assert.equal(nav.localeSwitchHref('en', 'pt-BR', '/about'), 'https://rbx.ia.br/sobre');
+test('the language switch lands on the same page under the other segment, in its spelling', () => {
+  assert.equal(nav.localeSwitchHref('pt-BR', 'pt-BR', '/pt-br/sobre'), '/pt-br/sobre');
+  assert.equal(nav.localeSwitchHref('pt-BR', 'en', '/pt-br/sobre'), '/en/about');
+  assert.equal(nav.localeSwitchHref('en', 'pt-BR', '/en/about'), '/pt-br/sobre');
+  assert.equal(nav.localeSwitchHref('pt-BR', 'en', '/pt-br'), '/en');
+  assert.equal(nav.localeSwitchHref('en', 'pt-BR', '/en'), '/pt-br');
   assert.equal(
-    nav.localeSwitchHref('pt-BR', 'en', '/produtos/strategos'),
-    'https://rbxsystems.ch/products/strategos'
+    nav.localeSwitchHref('pt-BR', 'en', '/pt-br/produtos/strategos'),
+    '/en/products/strategos'
   );
   assert.equal(
-    nav.localeSwitchHref('en', 'pt-BR', '/products/strategos'),
-    'https://rbx.ia.br/produtos/strategos'
+    nav.localeSwitchHref('en', 'pt-BR', '/en/products/strategos'),
+    '/pt-br/produtos/strategos'
   );
-  assert.equal(
-    nav.localeSwitchHref('pt-BR', 'en', '/blog/um-post'),
-    'https://rbxsystems.ch/blog/um-post'
-  );
+  assert.equal(nav.localeSwitchHref('pt-BR', 'en', '/pt-br/blog/um-post'), '/en/blog/um-post');
 });
 
-test('a service under the prefix of the other host switches to its own page', () => {
-  // Both loaders render /services/agentes-de-ia and /servicos/ai-agents on
-  // the pt-BR host; the en loader only knows the en slug.
+test('on a post the language switch goes to the address the post has in that language', () => {
+  // What the loader of a post resolves: its public slug in each language it
+  // exists in. The slug may differ, and a language may be missing.
+  const both = [
+    { locale: 'pt-BR', publicSlug: '2026-08-05-o-primeiro-palmo' },
+    { locale: 'en', publicSlug: '2026-08-05-the-first-span' }
+  ];
+  assert.equal(
+    nav.localeSwitchHref('pt-BR', 'en', '/pt-br/blog/2026-08-05-o-primeiro-palmo', both),
+    '/en/blog/2026-08-05-the-first-span'
+  );
+  assert.equal(
+    nav.localeSwitchHref('en', 'pt-BR', '/en/blog/2026-08-05-the-first-span', both),
+    '/pt-br/blog/2026-08-05-o-primeiro-palmo'
+  );
+  assert.equal(
+    nav.localeSwitchHref('en', 'en', '/en/blog/2026-08-05-the-first-span', both),
+    '/en/blog/2026-08-05-the-first-span'
+  );
+  // No version in the other language: the Journal of that language, not a
+  // missing page.
+  const onlyPt = [{ locale: 'pt-BR', publicSlug: '2026-10-13-so-em-portugues' }];
+  assert.equal(
+    nav.localeSwitchHref('pt-BR', 'en', '/pt-br/blog/2026-10-13-so-em-portugues', onlyPt),
+    '/en/journal'
+  );
+  // Page data of another page carries no alternates, and nothing changes for it.
+  assert.equal(nav.localeSwitchHref('pt-BR', 'en', '/pt-br/sobre', undefined), '/en/about');
+  assert.equal(nav.localeSwitchHref('pt-BR', 'en', '/pt-br/sobre', both), '/en/about');
+});
+
+test('a service under the prefix of the other language switches to its own page', () => {
+  // A slug of one language under the prefix of the other is still the one
+  // mapped service, whichever way it is written.
   for (const mixed of ['/services/agentes-de-ia', '/servicos/ai-agents']) {
     assert.equal(nav.canonicalPath(mixed), '/servicos/agentes-de-ia');
-    assert.equal(
-      nav.localeSwitchHref('pt-BR', 'en', mixed),
-      'https://rbxsystems.ch/services/ai-agents'
-    );
-    assert.equal(
-      nav.localeSwitchHref('en', 'pt-BR', mixed),
-      'https://rbx.ia.br/servicos/agentes-de-ia'
-    );
+    assert.equal(nav.localeSwitchHref('pt-BR', 'en', mixed), '/en/services/ai-agents');
+    assert.equal(nav.localeSwitchHref('en', 'pt-BR', mixed), '/pt-br/servicos/agentes-de-ia');
     assert.deepEqual(nav.resolveNav('pt-BR', mixed, 'Agentes de IA').trail, [
-      { label: 'Soluções', href: '/solucoes' },
+      { label: 'Soluções', href: '/pt-br/solucoes' },
       { label: 'Agentes de IA' }
     ]);
   }
@@ -304,7 +341,7 @@ test('every loader shape names its page in the trail and in BreadcrumbList', () 
     const trail = nav.resolveNav('pt-BR', path, leaf).trail;
     assert.deepEqual(trail[trail.length - 1], { label: expected }, path);
     const items = nav.breadcrumbItems('pt-BR', path, leaf);
-    assert.deepEqual(items[items.length - 1], { name: expected, path }, path);
+    assert.deepEqual(items[items.length - 1], { name: expected, path: `/pt-br${path}` }, path);
   }
   // Layout data alone (an error page) names nothing.
   assert.equal(nav.leafTitle(layout), undefined);

@@ -4,6 +4,7 @@
   import Seo from '$components/Seo.svelte';
   import { authorSlugFor } from '$lib/journal/authors';
   import { canonicalTag } from '$lib/journal/tags';
+  import { localizedUrl, postAlternateLinks, siteHref } from '$lib/seo/alternates';
   import { buildGraph, blogPostingSchema, breadcrumbSchema } from '$lib/seo/schema';
   import { breadcrumbItems, leafTitle } from '$design/nav';
   import { t } from '$lib/i18n/translate';
@@ -11,27 +12,16 @@
 
   let { data }: { data: PageData } = $props();
 
-  const siteUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
   const pageUrl = $derived(
-    data.post ? `${siteUrl}/blog/${data.publicSlug ?? data.post.slug}` : `${siteUrl}/journal`
+    data.post
+      ? localizedUrl(data.locale, `/blog/${data.publicSlug ?? data.post.slug}`)
+      : localizedUrl(data.locale, '/journal')
   );
   const pageTitle = $derived(data.post?.title ?? t(data.locale, 'common.empty'));
   const pageDescription = $derived(data.post?.excerpt ?? '');
   const authorSlug = $derived(data.post ? authorSlugFor(data.post.author) : null);
 
-  const localeBase: Record<string, string> = {
-    'pt-BR': 'https://rbx.ia.br',
-    en: 'https://rbxsystems.ch'
-  };
-  const alternate = $derived.by(() => {
-    if (!data.alternates || data.alternates.length === 0) return undefined;
-    const links = data.alternates.map((alt) => ({
-      hreflang: alt.locale,
-      href: `${localeBase[alt.locale]}/blog/${alt.publicSlug}`
-    }));
-    const xDefault = links.find((l) => l.hreflang === 'en') ?? links[0];
-    return [...links, { hreflang: 'x-default', href: xDefault.href }];
-  });
+  const alternate = $derived(postAlternateLinks(data.alternates));
 
   const schema = $derived(
     data.post
@@ -50,7 +40,6 @@
               cover: data.post.cover
             }),
             breadcrumbSchema(
-              data.locale,
               pageUrl,
               breadcrumbItems(
                 data.locale,
@@ -87,7 +76,9 @@
       {#if data.post.author}
         <p class="rbx-caption">
           {#if authorSlug}
-            <a href="/journal/autor/{authorSlug}" class="author-link">{data.post.author}</a>
+            <a href={siteHref(data.locale, `/journal/autor/${authorSlug}`)} class="author-link"
+              >{data.post.author}</a
+            >
           {:else}
             {data.post.author}
           {/if}{data.post.authorRole ? ` | ${data.post.authorRole}` : ''}
@@ -96,7 +87,7 @@
       {#if data.post.tags.length > 0}
         <ul class="tag-list">
           {#each data.post.tags as tag}
-            <li><a href="/journal/tag/{canonicalTag(tag)}">{tag}</a></li>
+            <li><a href={siteHref(data.locale, `/journal/tag/${canonicalTag(tag)}`)}>{tag}</a></li>
           {/each}
         </ul>
       {/if}
@@ -109,7 +100,7 @@
     <Prose html={data.post.html} />
   </article>
 
-  <a href="/journal" class="back">{t(data.locale, 'common.back')}</a>
+  <a href={siteHref(data.locale, '/journal')} class="back">{t(data.locale, 'common.back')}</a>
 {:else}
   <p class="rbx-caption">{t(data.locale, 'common.empty')}</p>
 {/if}

@@ -7,9 +7,14 @@ import { importTypeScriptModule } from './test-support/import-typescript-module.
 const localeModule = await importTypeScriptModule(
   new URL('../src/lib/i18n/locale.ts', import.meta.url)
 );
-const hosts = [
-  ['https://rbx.ia.br', 'pt-BR'],
-  ['https://rbxsystems.ch', 'en']
+// The locale segment of the address names the language. Either spelling of
+// the route is loaded under either segment: the server redirects to the
+// spelling of the language before a loader runs, and the loader itself only
+// reads the segment.
+const SITE = 'https://merovelis.com';
+const sections = [
+  ['/pt-br', 'pt-BR'],
+  ['/en', 'en']
 ];
 
 // Run each real route with its actual locale resolver and an isolated CMS
@@ -38,26 +43,29 @@ for (const route of ['produtos/robson', 'products/robson']) {
   const createLoad = await routeFactory(route);
 
   test(`${route}: a missing CMS page preserves locale and returns the null used by fallback copy`, async () => {
-    for (const [host, locale] of hosts) {
+    for (const [segment, locale] of sections) {
       const calls = [];
       const load = createLoad(async (...args) => {
         calls.push(args);
         return null;
       });
-      assert.deepEqual(await load({ url: new URL(`/${route}`, host) }), { locale, page: null });
+      assert.deepEqual(await load({ url: new URL(`${segment}/${route}`, SITE) }), {
+        locale,
+        page: null
+      });
       assert.deepEqual(calls, [['robson', locale]]);
     }
   });
 
-  test(`${route}: existing CMS content is preserved in both host locales`, async () => {
-    for (const [host, locale] of hosts) {
+  test(`${route}: existing CMS content is preserved in both languages`, async () => {
+    for (const [segment, locale] of sections) {
       const page = { title: `Robson ${locale}`, html: '<p>Published product copy.</p>' };
       const load = createLoad(async (key, requestedLocale) => {
         assert.equal(key, 'robson');
         assert.equal(requestedLocale, locale);
         return page;
       });
-      const result = await load({ url: new URL(`/${route}`, host) });
+      const result = await load({ url: new URL(`${segment}/${route}`, SITE) });
       assert.equal(result.page, page);
       assert.equal(result.locale, locale);
     }
@@ -68,7 +76,7 @@ for (const route of ['produtos/robson', 'products/robson']) {
     const load = createLoad(async () => {
       throw unavailable;
     });
-    await assert.rejects(load({ url: new URL(`/${route}`, hosts[0][0]) }), (error) => {
+    await assert.rejects(load({ url: new URL(`/pt-br/${route}`, SITE) }), (error) => {
       assert.equal(error, unavailable);
       return true;
     });

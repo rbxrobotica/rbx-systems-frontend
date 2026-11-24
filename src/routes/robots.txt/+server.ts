@@ -1,17 +1,29 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { detectLocaleFromUrl } from '$lib/i18n/locale';
+import { localizedHref, localizedUrl, withLocalePrefix } from '$lib/seo/alternates';
+import { SITE_ORIGIN } from '$lib/seo/site';
 import type { Locale } from '$types/content';
 
-const siteUrlByLocale: Record<Locale, string> = {
-  'pt-BR': 'https://rbx.ia.br',
-  en: 'https://rbxsystems.ch'
-};
+// Trailing slashes are dropped by the handle hook, not by the router.
+export const trailingSlash = 'ignore';
 
-export const GET: RequestHandler = async ({ url }) => {
-  const locale = detectLocaleFromUrl(url);
-  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
-  const siteUrl = siteUrlByLocale[locale];
+const LOCALES: Locale[] = ['pt-BR', 'en'];
 
+/** One rule per language: a page lives under its locale segment, in its spelling. */
+const perLocale = (rule: (href: string) => string, pathname: string) =>
+  LOCALES.map((locale) => rule(localizedHref(locale, pathname))).join('\n');
+
+/**
+ * One rule per language for the posts. They live under /blog, which is not a
+ * page itself (alone it is a retired name of the Journal), so the prefix is
+ * written as it is under each segment.
+ */
+const posts = LOCALES.map((locale) => `Disallow: ${withLocalePrefix(locale, '/blog')}/*?*`).join(
+  '\n'
+);
+
+// One file for the host. It has no language, so it is served without a
+// locale segment and names the pages of both.
+export const GET: RequestHandler = async () => {
   const body = `User-agent: *
 Allow: /
 
@@ -29,17 +41,18 @@ Disallow: /app
 Disallow: /admin
 Disallow: /staging
 Disallow: /healthz
-Disallow: /atelier
+${perLocale((href) => `Disallow: ${href}`, '/atelier')}
 
 # Avoid parameter variants being indexed
-Disallow: /blog/*?*
-Disallow: /solucoes/*?*
-Disallow: /produtos/*?*
-Disallow: /servicos/*?*
+${posts}
+${perLocale((href) => `Disallow: ${href}/*?*`, '/solucoes')}
+${perLocale((href) => `Disallow: ${href}/*?*`, '/produtos')}
+${perLocale((href) => `Disallow: ${href}/*?*`, '/servicos')}
 
-# LLM-readable site index available at ${siteUrl}/llms.txt
+# LLM-readable site index available at ${SITE_ORIGIN}/llms.txt
+# and, in Portuguese, at ${localizedUrl('pt-BR', '/llms.txt')}
 
-Sitemap: ${siteUrl}/sitemap.xml
+Sitemap: ${SITE_ORIGIN}/sitemap.xml
 `;
 
   return new Response(body, {

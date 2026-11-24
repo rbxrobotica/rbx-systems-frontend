@@ -1,7 +1,7 @@
 <script lang="ts">
   import Logo from './Logo.svelte';
   import { t } from '$lib/i18n/translate';
-  import { localizedPath } from '$lib/seo/alternates';
+  import { localizedHref } from '$lib/seo/alternates';
   import type { Locale } from '$types/content';
 
   interface Props {
@@ -11,7 +11,7 @@
   let { locale }: Props = $props();
 
   const tr = (key: string) => t(locale, key);
-  const href = (pathname: string) => localizedPath(locale, pathname);
+  const href = (pathname: string) => localizedHref(locale, pathname);
   const year = new Date().getFullYear();
 </script>
 
@@ -44,7 +44,7 @@
         <h3 class="rbx-label">{tr('footer.resourcesTitle')}</h3>
         <ul>
           <li><a href={href('/journal')}>{tr('nav.journal')}</a></li>
-          <li><a href="/rss.xml" type="application/rss+xml">RSS</a></li>
+          <li><a href={href('/rss.xml')} type="application/rss+xml">RSS</a></li>
           <li><a href={href('/changelog')}>{tr('nav.changelog')}</a></li>
           <li><a href={href('/cases')}>{tr('nav.cases')}</a></li>
           <li><a href={href('/newsroom')}>{tr('nav.newsroom')}</a></li>

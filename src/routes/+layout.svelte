@@ -1,8 +1,8 @@
 <script lang="ts">
   import '$design/tokens.css';
-  import '$lib/i18n';
+  import { locale as dictionaryLocale } from '$lib/i18n';
 
-  import type { Snippet } from 'svelte';
+  import { untrack, type Snippet } from 'svelte';
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
   import NavBar from '$components/NavBar.svelte';
@@ -11,6 +11,7 @@
   import ContactMenu from '$components/ContactMenu.svelte';
   import Analytics from '$lib/analytics/Analytics.svelte';
   import { captureUtm } from '$lib/analytics/utm';
+  import { localizedUrl } from '$lib/seo/alternates';
   import type { LayoutData } from './$types';
 
   interface Props {
@@ -27,11 +28,21 @@
     if (browser) captureUtm($page.url.search);
   });
 
-  const rssBase = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
+  // svelte-i18n keeps one locale for the whole process, and the components
+  // that read it get no locale prop. It follows the locale of the path: set
+  // here while the page is rendered (a render is synchronous, so a request
+  // cannot see the locale of another), and again after each navigation, since
+  // changing language no longer loads a new document.
+  dictionaryLocale.set(untrack(() => data.locale));
+  $effect.pre(() => {
+    dictionaryLocale.set(data.locale);
+  });
+
+  const rssUrl = $derived(localizedUrl(data.locale, '/rss.xml'));
 </script>
 
 <svelte:head>
-  <link rel="alternate" type="application/rss+xml" title="RBX Journal" href="{rssBase}/rss.xml" />
+  <link rel="alternate" type="application/rss+xml" title="RBX Journal" href={rssUrl} />
 </svelte:head>
 
 <div class="rbx-root">

@@ -1,5 +1,6 @@
 import * as asyncHooks from 'node:async_hooks';
 import * as kit from '@sveltejs/kit';
+import * as entities from 'entities';
 import * as jsYaml from 'js-yaml';
 import * as markedModule from 'marked';
 import { createFakeS3 } from './fake-s3-client.mjs';
@@ -20,6 +21,7 @@ export function createContentGateway({ pageSize } = {}) {
   const gateway = loadTypeScriptGraph(source('lib/server/content/gateway.ts'), {
     '@aws-sdk/client-s3': s3.module,
     '@sveltejs/kit': kit,
+    entities,
     'js-yaml': jsYaml,
     marked: markedModule,
     './request-budget': budget
@@ -27,16 +29,25 @@ export function createContentGateway({ pageSize } = {}) {
   return { s3, gateway, budget };
 }
 
-/** The real `handle` hook, wired to the given request budget instance. */
-export function loadHandleHook(budget) {
-  const catalog = loadTypeScriptGraph(source('lib/services/catalog.ts'));
+/** The real `handle` hook, wired to the given gateway and its request budget. */
+export function loadHandleHook({ gateway, budget }) {
   return loadTypeScriptGraph(source('hooks.server.ts'), {
-    '$lib/i18n/locale': loadTypeScriptGraph(source('lib/i18n/locale.ts')),
-    '$lib/seo/alternates': loadTypeScriptGraph(source('lib/seo/alternates.ts'), {
-      '$lib/services/catalog': catalog
-    }),
+    '$lib/server/content/gateway': gateway,
     '$lib/server/content/request-budget': budget
   }).handle;
+}
+
+/**
+ * The event the hook reads, for a request as the server would see it: the
+ * address, the method and the headers a client or the ingress sends.
+ */
+export function hookEvent(address, { routeId = null, method = 'GET', headers = {} } = {}) {
+  const url = new URL(address);
+  return {
+    url,
+    request: new Request(url, { method, headers: { host: url.host, ...headers } }),
+    route: { id: routeId }
+  };
 }
 
 /** Slug of the `index`th post of `publishJournal`. A listing reads posts in this order. */

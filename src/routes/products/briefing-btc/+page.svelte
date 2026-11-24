@@ -5,6 +5,7 @@
   import BriefingPlanSummary from '$components/BriefingPlanSummary.svelte';
   import BriefingSubscribeModal from '$components/BriefingSubscribeModal.svelte';
   import { faqPageSchema } from '$lib/seo/schema';
+  import { SITE_ORIGIN } from '$lib/seo/site';
   import { t, tobjects } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
@@ -12,8 +13,7 @@
 
   let subscribeOpen = $state(untrack(() => data.subscribe.open));
 
-  const siteUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
-  const pageUrl = $derived(`${siteUrl}${$pageStore.url.pathname}`);
+  const pageUrl = $derived(`${SITE_ORIGIN}${$pageStore.url.pathname}`);
   const faqs = $derived(tobjects<{ q: string; a: string }>(data.locale, 'briefing.faq.items'));
   const schemaNodes = $derived(
     faqs.length > 0
