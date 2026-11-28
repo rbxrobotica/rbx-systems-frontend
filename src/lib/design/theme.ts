@@ -1,10 +1,12 @@
 /**
- * Site theme: dark by default, light when the visitor chooses it.
+ * Site theme: the theme of the visitor's system, until they choose one with the
+ * toggle. From then on their choice wins.
  *
  * The choice lives in localStorage under THEME_KEY, on this device only: no cookie,
- * nothing sent to the server. src/app.html applies it before first paint, so the
- * page never flashes the other theme. The same key and values are written there by
- * hand, because that script runs before any module loads.
+ * nothing sent to the server. src/app.html applies the choice, or the system theme
+ * when there is none, before first paint, and keeps following the system while
+ * there is no choice. The same key and values are written there by hand, because
+ * that script runs before any module loads.
  */
 export type Theme = 'dark' | 'light';
 
@@ -17,6 +19,7 @@ export function currentTheme(): Theme {
   return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
 }
 
+/** Applies the theme the visitor chose with the toggle, and stores the choice. */
 export function applyTheme(theme: Theme): void {
   if (theme === 'light') document.documentElement.dataset.theme = 'light';
   else delete document.documentElement.dataset.theme;

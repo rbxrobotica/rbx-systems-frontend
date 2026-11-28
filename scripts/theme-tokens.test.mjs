@@ -56,6 +56,11 @@ test('app.html and theme.ts use the same storage key and theme colours', () => {
   const key = module.match(/THEME_KEY = '([^']+)'/)?.[1];
   assert.ok(key, 'THEME_KEY not found');
   assert.ok(html.includes(`localStorage.getItem('${key}')`), 'app.html reads another key');
+  // Without a stored choice the page follows the system, and a stored choice
+  // of either theme wins over it.
+  assert.match(html, /matchMedia\('\(prefers-color-scheme: light\)'\)/);
+  assert.match(html, /value === 'light' \|\| value === 'dark' \? value : null/);
+  assert.match(html, /addEventListener\('change'/);
   for (const colour of ['#07080A', '#F2EFE6']) {
     assert.ok(html.includes(colour), `app.html lacks ${colour}`);
     assert.ok(module.includes(colour), `theme.ts lacks ${colour}`);

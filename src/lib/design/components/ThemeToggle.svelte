@@ -12,8 +12,8 @@
 
   let { locale, variant = 'icon' }: Props = $props();
 
-  // The server renders the dark default. The real value is read on mount, after
-  // the script in app.html has applied the stored choice.
+  // The server renders dark. The real value is read on mount, after the script
+  // in app.html has applied the stored choice or the theme of the system.
   let theme = $state<Theme>('dark');
   const label = $derived(t(locale, theme === 'dark' ? 'nav.themeToLight' : 'nav.themeToDark'));
 

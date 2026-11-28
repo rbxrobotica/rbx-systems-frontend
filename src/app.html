@@ -6,13 +6,32 @@
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#07080A" />
     <script>
-      // Apply the visitor's stored theme before first paint. Dark is the default.
+      // Apply the theme before first paint: the visitor's stored choice, or the
+      // theme of their system when they have not chosen. Without a stored choice
+      // the page keeps following the system while it is open.
       // Key and values match src/lib/design/theme.ts.
       try {
-        if (localStorage.getItem('theme') === 'light') {
-          document.documentElement.dataset.theme = 'light';
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#F2EFE6');
-        }
+        var root = document.documentElement;
+        var system = window.matchMedia('(prefers-color-scheme: light)');
+        var stored = function () {
+          try {
+            var value = localStorage.getItem('theme');
+            return value === 'light' || value === 'dark' ? value : null;
+          } catch (e) {
+            return null;
+          }
+        };
+        var show = function (theme) {
+          if (theme === 'light') root.dataset.theme = 'light';
+          else delete root.dataset.theme;
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute('content', theme === 'light' ? '#F2EFE6' : '#07080A');
+        };
+        show(stored() || (system.matches ? 'light' : 'dark'));
+        system.addEventListener('change', function (event) {
+          if (!stored()) show(event.matches ? 'light' : 'dark');
+        });
       } catch (e) {}
     </script>
     <link rel="icon" href="%sveltekit.assets%/favicon.svg" type="image/svg+xml" />

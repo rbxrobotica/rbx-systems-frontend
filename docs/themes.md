@@ -1,16 +1,18 @@
 # Themes
 
-The site has two themes. Dark is the default. Light is chosen by the visitor with
-the toggle in the header (in the mobile menu on phones).
+The site has two themes, dark and light. A visitor who has not chosen sees the
+theme of their system. The toggle in the header (in the mobile menu on phones)
+sets a choice, which is stored and wins over the system from then on (owner,
+2026-11-27; until then dark was the default for everyone).
 
 ## How it works
 
-| Piece                                          | Role                                                                                                  |
-| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `src/lib/design/tokens.css`                    | Dark values in `:root`, light values under `[data-theme='light']`                                     |
-| `src/app.html`                                 | Inline script that sets `data-theme` on `<html>` from `localStorage` before first paint               |
-| `src/lib/design/theme.ts`                      | Reads and applies the theme, stores the choice, updates `theme-color`                                 |
-| `src/lib/design/components/ThemeToggle.svelte` | The button. Two instances, header and mobile menu, kept in step by observing `data-theme` on `<html>` |
+| Piece                                          | Role                                                                                                                                                                                            |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/lib/design/tokens.css`                    | Dark values in `:root`, light values under `[data-theme='light']`                                                                                                                               |
+| `src/app.html`                                 | Inline script that sets `data-theme` on `<html>` before first paint, from `localStorage` or, with no stored choice, from `prefers-color-scheme`; it follows the system while there is no choice |
+| `src/lib/design/theme.ts`                      | Reads and applies the theme, stores the choice, updates `theme-color`                                                                                                                           |
+| `src/lib/design/components/ThemeToggle.svelte` | The button. Two instances, header and mobile menu, kept in step by observing `data-theme` on `<html>`                                                                                           |
 
 The light values come from the Voltage definition in the atelier
 (`brand-voltage/TEMA-CLARO.md` and `colors_and_type.css` in `rbxrobotica/rbx-atelier`).
@@ -48,26 +50,31 @@ key in `app.html` and `theme.ts` differ.
 
 ## Trade-offs
 
-- **Dark by default, no automatic switch.** The site does not follow
-  `prefers-color-scheme`. A visitor whose system is light still sees dark until
-  they use the toggle. This keeps one default for everyone and matches the
-  atelier, where light is opt-in.
+- **The system decides until the visitor does.** With no stored choice the site
+  follows `prefers-color-scheme`, at load and while the page is open. Using the
+  toggle stores a choice of either theme, and the system is ignored from then
+  on; there is no control to return to "system" short of clearing site data.
+  Cost: visitors no longer share one default, so the light theme is what a
+  large share of them see first, and it departs from the atelier, where light
+  is opt-in. A crawler or link preview that reports no preference gets dark.
 - **Choice kept in `localStorage`, not in a cookie.** The server never knows the
   theme, so responses stay cacheable and identical for every visitor, and there
   is nothing to add to a consent notice. Cost: the server always renders dark
-  and an inline script corrects it before paint. The choice does not follow the
+  and an inline script corrects it before paint, for a stored light choice and
+  for a light system alike. The choice does not follow the
   visitor to another device or browser.
 - **Inline script in `app.html`.** It is the only way to avoid a flash of the
-  dark page for a visitor who chose light. The site sends no Content Security
+  dark page for a visitor who chose light or whose system is light. The site sends no Content Security
   Policy today. If one is added, this script needs a hash or a nonce.
 
 ## Failure modes
 
 | Failure                                     | Result                                                                                        |
 | ------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `localStorage` blocked or throwing          | The page renders dark. The toggle still switches, for the current page only                   |
-| JavaScript disabled                         | Dark. The toggle does nothing                                                                 |
-| Stored value is neither `light` nor `dark`  | Treated as dark                                                                               |
+| `localStorage` blocked or throwing          | The page follows the system. The toggle still switches, for the current page only             |
+| JavaScript disabled                         | Dark, whatever the system. The toggle does nothing                                            |
+| Stored value is neither `light` nor `dark`  | Treated as no choice: the page follows the system                                             |
+| `matchMedia` missing or throwing            | Dark, unless a light choice is stored                                                         |
 | A new component uses a literal or the scale | It looks right in dark and wrong in light. The test catches the cyan scale, not every literal |
 
 ## Not checked yet
