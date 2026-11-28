@@ -1,6 +1,7 @@
 <script lang="ts">
   import Seo from '$components/Seo.svelte';
   import LandingOffer from '$components/LandingOffer.svelte';
+  import { localizedUrl } from '$lib/seo/alternates';
   import { buildGraph, softwareApplicationSchema } from '$lib/seo/schema';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
@@ -11,19 +12,13 @@
 
   const title = $derived(t(dictionary, 'landing.robson.metaTitle'));
   const description = $derived(t(dictionary, 'landing.robson.metaDescription'));
-  const pageUrl = $derived(
-    data.locale === 'pt-BR' ? 'https://rbx.ia.br/robson' : 'https://rbxsystems.ch/robson'
-  );
+  const pageUrl = $derived(localizedUrl(data.locale, '/robson'));
   // This LP duplicates the /produtos/robson CMS page for campaign traffic;
   // canonical points to the product page (same host) to avoid duplicate content.
-  const canonicalUrl = $derived(
-    data.locale === 'pt-BR'
-      ? 'https://rbx.ia.br/produtos/robson'
-      : 'https://rbxsystems.ch/products/robson'
-  );
+  const canonicalUrl = $derived(localizedUrl(data.locale, '/produtos/robson'));
   const schema = $derived(
     buildGraph(data.locale, pageUrl, title, description, [
-      softwareApplicationSchema(data.locale, pageUrl, 'Robson', description, 'BusinessApplication')
+      softwareApplicationSchema(pageUrl, 'Robson', description, 'BusinessApplication')
     ])
   );
 </script>

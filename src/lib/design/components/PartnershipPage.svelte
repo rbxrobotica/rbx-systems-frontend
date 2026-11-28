@@ -8,6 +8,7 @@
     partnershipPriceNote,
     type PartnershipExchangeRates
   } from '$lib/content/partnership';
+  import { localizedUrl, siteHref } from '$lib/seo/alternates';
   import { buildGraph } from '$lib/seo/schema';
   import { trackPartnershipEvent } from '$lib/analytics/partnership';
   import type { Locale } from '$types/content';
@@ -19,9 +20,7 @@
   // eslint-disable-next-line security/detect-object-injection -- locale is the Locale prop: 'pt-BR' or 'en'
   const content = $derived(partnershipContent[locale]);
   const prices = $derived(getPartnershipPrices(locale, exchangeRates));
-  const pageUrl = $derived(
-    locale === 'pt-BR' ? 'https://rbx.ia.br/parceria' : 'https://rbxsystems.ch/partnership'
-  );
+  const pageUrl = $derived(localizedUrl(locale, '/parceria'));
   const schema = $derived(buildGraph(locale, pageUrl, content.title, content.description));
 
   function observeOffer(node: HTMLElement) {
@@ -56,7 +55,7 @@
       <p class="lead">{content.lead}</p>
       <a
         class="portfolio-link"
-        href={content.portfolioHref}
+        href={siteHref(locale, content.portfolioHref)}
         onclick={() =>
           trackPartnershipEvent('cta_click', {
             locale,
@@ -172,7 +171,7 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   h1 {
     margin: var(--s-5) 0;
@@ -196,7 +195,7 @@
   .offer {
     padding: var(--s-6);
     border: 1px solid var(--border-strong);
-    border-top: 2px solid var(--cyan-brand);
+    border-top: 2px solid var(--accent-line);
     border-radius: var(--radius-md);
     background: var(--bg-1);
   }
@@ -311,7 +310,7 @@
     margin-top: var(--s-6);
     padding: var(--s-5);
     background: var(--bg-1);
-    border-left: 2px solid var(--cyan-dim);
+    border-left: 2px solid var(--accent-edge);
   }
   .steps {
     padding: 0;

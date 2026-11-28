@@ -3,7 +3,7 @@ import type { Locale } from '$types/content';
 type Localized = Record<Locale, string>;
 
 export interface ProductEvidence {
-  id: 'robson' | 'strategos' | 'verentir' | 'thalamus' | 'robson-code' | 'satwake';
+  id: 'robson' | 'strategos' | 'verentir' | 'thalamus' | 'robson-code';
   name: string;
   description: Localized;
   repository: string;
@@ -28,41 +28,6 @@ export interface ProductEvidence {
 // Selected main-branch excerpts verified on 2026-10-05; captures re-taken at device scale factor 2 on 2026-10-08.
 // See docs/products-portfolio.md for capture provenance and demo limitations.
 export const productEvidence: ProductEvidence[] = [
-  {
-    id: 'robson',
-    name: 'Robson',
-    description: {
-      'pt-BR':
-        'O código verifica o limite por operação e o orçamento restante antes de admitir uma entrada.',
-      en: 'The code checks the per-trade cap and the remaining budget before admitting an entry.'
-    },
-    repository: 'ldamasio/robson',
-    commit: '0cef339b22f5c458fd73511238f75fabc527f899',
-    path: 'robson-domain/src/policy.rs',
-    startLine: 225,
-    language: 'rust',
-    code: '        let cap = self.risk_per_trade_amount(capital_base);\n        if cap <= Decimal::ZERO {\n            return false;\n        }\n        let charge = if planned_risk <= Decimal::ZERO {\n            cap\n        } else {\n            planned_risk\n        };\n        if charge > cap {\n            return false;\n        }\n        self.remaining_budget(capital_base, budget_consumed, latent_risk) >= charge',
-    sourceUrl: 'https://github.com/ldamasio/robson/blob/main/robson-domain/src/policy.rs#L225-L237',
-    permalinkUrl:
-      'https://github.com/ldamasio/robson/blob/0cef339b22f5c458fd73511238f75fabc527f899/robson-domain/src/policy.rs#L225-L237',
-    capture: {
-      src: '/products/evidence/robson-main-0cef339.jpg',
-      width: 1862,
-      height: 898,
-      repository: 'ldamasio/robson',
-      commit: '0cef339b22f5c458fd73511238f75fabc527f899',
-      alt: {
-        'pt-BR':
-          'Dashboard Robson com limites de risco e operações preenchidos com dados sintéticos.',
-        en: 'Robson dashboard with risk limits and operations populated with synthetic data.'
-      },
-      caption: {
-        'pt-BR':
-          'Console do Robson em produção, capturado pelo operador na própria conta. Saldos e preços são um instantâneo, não evidência de desempenho.',
-        en: 'The Robson console in production, captured by the operator on their own account. Balances and prices are a snapshot, not performance evidence.'
-      }
-    }
-  },
   {
     id: 'strategos',
     name: 'Strategos',
@@ -164,6 +129,41 @@ export const productEvidence: ProductEvidence[] = [
       'https://github.com/rbxrobotica/thalamus-core/blob/fd19dc4107a479ce9072c41a6f7de4805991d03c/crates/thalamus-core/src/policy.rs#L7-L18'
   },
   {
+    id: 'robson',
+    name: 'Robson',
+    description: {
+      'pt-BR':
+        'O código verifica o limite por operação e o orçamento restante antes de admitir uma entrada.',
+      en: 'The code checks the per-trade cap and the remaining budget before admitting an entry.'
+    },
+    repository: 'ldamasio/robson',
+    commit: '0cef339b22f5c458fd73511238f75fabc527f899',
+    path: 'robson-domain/src/policy.rs',
+    startLine: 225,
+    language: 'rust',
+    code: '        let cap = self.risk_per_trade_amount(capital_base);\n        if cap <= Decimal::ZERO {\n            return false;\n        }\n        let charge = if planned_risk <= Decimal::ZERO {\n            cap\n        } else {\n            planned_risk\n        };\n        if charge > cap {\n            return false;\n        }\n        self.remaining_budget(capital_base, budget_consumed, latent_risk) >= charge',
+    sourceUrl: 'https://github.com/ldamasio/robson/blob/main/robson-domain/src/policy.rs#L225-L237',
+    permalinkUrl:
+      'https://github.com/ldamasio/robson/blob/0cef339b22f5c458fd73511238f75fabc527f899/robson-domain/src/policy.rs#L225-L237',
+    capture: {
+      src: '/products/evidence/robson-main-0cef339.jpg',
+      width: 1862,
+      height: 898,
+      repository: 'ldamasio/robson',
+      commit: '0cef339b22f5c458fd73511238f75fabc527f899',
+      alt: {
+        'pt-BR':
+          'Dashboard Robson com limites de risco e operações preenchidos com dados sintéticos.',
+        en: 'Robson dashboard with risk limits and operations populated with synthetic data.'
+      },
+      caption: {
+        'pt-BR':
+          'Console do Robson em produção, capturado pelo operador na própria conta. Saldos e preços são um instantâneo, não evidência de desempenho.',
+        en: 'The Robson console in production, captured by the operator on their own account. Balances and prices are a snapshot, not performance evidence.'
+      }
+    }
+  },
+  {
     id: 'robson-code',
     name: 'Robson Code',
     description: {
@@ -192,38 +192,6 @@ export const productEvidence: ProductEvidence[] = [
         'pt-BR':
           'Saída real de robson-code query --help, apresentada em uma janela de terminal. Não representa uma sessão ativa de IA.',
         en: 'Actual robson-code query --help output shown in a terminal window. It does not represent an active AI session.'
-      }
-    }
-  },
-  {
-    id: 'satwake',
-    name: 'Satwake',
-    description: {
-      'pt-BR':
-        'Antes de publicar uma edição, o pipeline confere o checksum SHA-256 e o tamanho de cada artefato contra o manifesto.',
-      en: 'Before publishing an edition, the pipeline checks each artifact’s SHA-256 checksum and size against the manifest.'
-    },
-    repository: 'rbxrobotica/rbx-market-briefing',
-    commit: 'e05a6a077d8dfcfc8dded9a5a9b2101afb8cf4f1',
-    path: 'src/pipeline/publisher.ts',
-    startLine: 130,
-    language: 'typescript',
-    code: '      const order: ArtifactName[] = KNOWN_ARTIFACTS.filter((name) => name in declared);\n      const bodies = new Map<ArtifactName, Buffer>();\n      for (const filename of order) {\n        const body = await readFile(join(outDir, filename));\n        const expected = declared[filename];\n        const digest = `sha256:${createHash("sha256").update(body).digest("hex")}`;\n        if (expected?.checksum !== digest || expected?.size_bytes !== body.length) {\n          throw new Error(`Local artifact integrity mismatch: ${filename}`);\n        }\n        bodies.set(filename, body);\n      }',
-    capture: {
-      src: '/products/evidence/satwake-main-2976536.jpg',
-      width: 2400,
-      height: 1500,
-      repository: 'rbxrobotica/rbx-landing-briefing-btc',
-      commit: '297653642334ca3f3d17e8e8a2e950aa49128be6',
-      alt: {
-        'pt-BR':
-          'Landing pública do Satwake em produção, com título, proposta, botões para o formato de uma edição e para o Pro com o preço, e o aviso de que não há sinais nem promessa de resultado.',
-        en: 'Public Satwake landing in production, with headline, offer, the edition-format button and the Pro button with its price, and the notice that there are no signals or promised results.'
-      },
-      caption: {
-        'pt-BR':
-          'Captura direta da página pública em produção, na revisão implantada. Sem acesso a pagamento, login ou conteúdo de membros.',
-        en: 'Direct capture of the public production page at the deployed revision. No payment, sign-in or member content was accessed.'
       }
     }
   }

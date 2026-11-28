@@ -12,17 +12,17 @@
     {
       'pt-BR': {
         chapter: 'Capítulo',
-        label: 'RBX Atelier',
+        label: 'Merovelis Atelier',
         title: 'Criatividade, narrativa e marca',
-        body: 'Um espaço de experimentação onde a engenharia encontra a arte, o design e a identidade. Aqui construímos o sistema visual que traduz a RBX em linguagem, forma e cor.',
+        body: 'Um espaço de experimentação onde a engenharia encontra a arte, o design e a identidade. Aqui construímos o sistema visual que traduz a Merovelis em linguagem, forma e cor.',
         cta: 'Explorar o repositório',
         quote: 'L’atelier où la précision rencontre l’imaginaire.'
       },
       en: {
         chapter: 'Chapter',
-        label: 'RBX Atelier',
+        label: 'Merovelis Atelier',
         title: 'Creativity, narrative and brand',
-        body: 'A space of experimentation where engineering meets art, design and identity. Here we build the visual system that translates RBX into language, form and color.',
+        body: 'A space of experimentation where engineering meets art, design and identity. Here we build the visual system that translates Merovelis into language, form and color.',
         cta: 'Explore the repository',
         quote: 'L’atelier où la précision rencontre l’imaginaire.'
       }
@@ -30,7 +30,7 @@
   );
 </script>
 
-<section class="atelier-hero" aria-label="RBX Atelier">
+<section class="atelier-hero" aria-label="Merovelis Atelier">
   <div class="hero-frame">
     <div class="hero-top">
       <span class="hero-line" aria-hidden="true"></span>
@@ -41,7 +41,7 @@
       <div class="hero-mark">
         <svg viewBox="0 0 64 64" width="96" height="96" aria-hidden="true" class="mark-svg">
           <rect width="64" height="64" fill="var(--bg-0)" />
-          <path fill="var(--cyan-brand)" d="M30 8 H56 V34 L34 56 H8 V30 Z" />
+          <path fill="var(--accent-line)" d="M30 8 H56 V34 L34 56 H8 V30 Z" />
         </svg>
       </div>
 
@@ -88,8 +88,10 @@
 
 <style>
   .atelier-hero {
-    --hero-accent: var(--cyan-brand);
-    --hero-muted: var(--cyan-dim);
+    --hero-accent: var(--accent-line);
+    --hero-muted: var(--accent-edge);
+    --hero-text: var(--accent-text);
+    --hero-outline-hover: var(--accent-outline-hover);
     /* No top padding: the breadcrumb above already sets the distance to the header. */
     padding: 0 0 var(--s-9);
   }
@@ -167,7 +169,7 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--track-label);
-    color: var(--hero-accent);
+    color: var(--hero-text);
   }
 
   .hero-title {
@@ -238,8 +240,8 @@
   }
 
   .hero-cta:hover {
-    border-color: var(--hero-accent);
-    color: var(--hero-accent);
+    border-color: var(--hero-outline-hover);
+    color: var(--hero-text);
   }
 
   .hero-footer {

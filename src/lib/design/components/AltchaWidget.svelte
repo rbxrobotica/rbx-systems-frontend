@@ -91,7 +91,7 @@
     align-items: center;
     gap: var(--s-3);
     padding: var(--s-3) var(--s-4);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--field-bg);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     color: var(--fg-1);
@@ -103,7 +103,7 @@
   }
 
   .altcha-box:hover:not(:disabled) {
-    border-color: var(--cyan-dim);
+    border-color: var(--accent-outline);
   }
 
   .altcha-box:disabled {
@@ -119,15 +119,15 @@
     border: 1px solid var(--border-strong);
     border-radius: 3px;
     background: var(--bg-0);
-    color: var(--bg-0);
+    color: var(--on-cta);
     transition:
       background var(--dur) var(--ease),
       border-color var(--dur) var(--ease);
   }
 
   .checkbox.checked {
-    background: var(--cyan-brand);
-    border-color: var(--cyan-brand);
+    background: var(--cta);
+    border-color: var(--cta);
   }
 
   .checkbox svg {
@@ -138,8 +138,8 @@
   .spinner {
     width: 0.875rem;
     height: 0.875rem;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-top-color: var(--cyan-brand);
+    border: 2px solid color-mix(in srgb, var(--fg-0) 20%, transparent);
+    border-top-color: var(--accent-line);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }

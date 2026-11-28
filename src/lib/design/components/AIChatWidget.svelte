@@ -2,6 +2,7 @@
   import { locale } from 'svelte-i18n';
   import { tick } from 'svelte';
   import { trackPartnershipEvent } from '$lib/analytics/partnership';
+  import { siteHref } from '$lib/seo/alternates';
 
   interface Props {
     onclose: () => void;
@@ -19,8 +20,8 @@
 
   function welcomeMessage(): string {
     return $locale?.startsWith('en')
-      ? "Hello, I'm the RBX Systems assistant. I can explain our products, AI platform and Engineering Partnership. How can I help?"
-      : 'Olá, sou o assistente da RBX Systems. Posso explicar nossos produtos, a plataforma de IA e a Engineering Partnership. Como posso ajudar?';
+      ? "Hello, I'm the Merovelis AI assistant. I can explain our products, AI platform and Engineering Partnership. How can I help?"
+      : 'Olá, sou o assistente da Merovelis IA. Posso explicar nossos produtos, a plataforma de IA e a Engineering Partnership. Como posso ajudar?';
   }
 
   let messages = $state<Message[]>([{ role: 'assistant', content: welcomeMessage() }]);
@@ -64,6 +65,9 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          // The API has one address for both languages: the page says which
+          // language section the visitor is in.
+          locale: partnershipLocale,
           messages: messages.map((m) => ({ role: m.role, content: m.content }))
         })
       });
@@ -108,7 +112,9 @@
     }
   }
 
-  const label = $derived($locale?.startsWith('en') ? 'RBX Assistant' : 'Assistente RBX');
+  const label = $derived(
+    $locale?.startsWith('en') ? 'Merovelis Assistant' : 'Assistente Merovelis'
+  );
   const placeholder = $derived(
     $locale?.startsWith('en') ? 'Ask about our platform…' : 'Pergunte sobre nossa plataforma…'
   );
@@ -132,9 +138,8 @@
     $locale?.startsWith('en') ? 'Subscribe to the BTC Briefing' : 'Assinar o Briefing BTC'
   );
   const partnershipLocale = $derived($locale?.startsWith('en') ? 'en' : 'pt-BR');
-  const partnershipHref = $derived(
-    partnershipLocale === 'en' ? '/partnership#qualificacao' : '/parceria#qualificacao'
-  );
+  const partnershipHref = $derived(siteHref(partnershipLocale, '/parceria#qualificacao'));
+  const contactHref = $derived(siteHref(partnershipLocale, '/contato'));
   const ctaPartnership = $derived(
     partnershipLocale === 'en'
       ? 'Check fit and availability'
@@ -171,7 +176,8 @@
       </div>
       <div>
         <span class="header-title">{label}</span>
-        <span class="header-sub">RBX Systems</span>
+        <span class="header-sub">{$locale?.startsWith('en') ? 'Merovelis AI' : 'Merovelis IA'}</span
+        >
       </div>
     </div>
     <button
@@ -233,7 +239,7 @@
     {:else if showCta && !loading}
       <div class="cta-row">
         <!-- /contato, not /#contact: the home page no longer carries the contact section. -->
-        <a href="/contato" class="cta-btn primary" onclick={onclose}>{ctaForm}</a>
+        <a href={contactHref} class="cta-btn primary" onclick={onclose}>{ctaForm}</a>
         {#if onwhatsapp}
           <button type="button" class="cta-btn secondary" disabled={loading} onclick={onwhatsapp}>
             {ctaWhatsApp}
@@ -282,7 +288,7 @@
     background: var(--bg-1);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-panel);
     display: flex;
     flex-direction: column;
     z-index: 110;
@@ -328,7 +334,7 @@
   .hairline {
     flex-shrink: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--cyan-brand), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent-line), transparent);
   }
 
   .header {
@@ -350,12 +356,12 @@
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
-    background: var(--cyan-subtle);
-    border: 1px solid var(--border-accent);
+    background: var(--accent-subtle);
+    border: 1px solid var(--accent-line);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     flex-shrink: 0;
   }
 
@@ -370,7 +376,7 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--track-label);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     font-weight: 600;
   }
 
@@ -441,8 +447,8 @@
   }
 
   .bubble.user {
-    background: var(--cyan-dim);
-    color: var(--fg-0);
+    background: var(--accent-solid);
+    color: var(--on-accent-solid);
     border-bottom-right-radius: var(--radius-sm);
   }
 
@@ -450,7 +456,7 @@
     background: var(--bg-2);
     color: var(--fg-1);
     border: 1px solid var(--border);
-    border-left: 2px solid var(--cyan-muted);
+    border-left: 2px solid var(--accent-label);
     border-bottom-left-radius: var(--radius-sm);
   }
 
@@ -466,7 +472,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--cyan-muted);
+    background: var(--accent-label);
     animation: blink 1.2s ease-in-out infinite;
   }
 
@@ -535,8 +541,8 @@
   }
 
   .cta-btn.primary {
-    background: linear-gradient(90deg, var(--cyan-signal), var(--cyan-brand));
-    color: var(--bg-0);
+    background: linear-gradient(90deg, var(--cta-hover), var(--cta));
+    color: var(--on-cta);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -544,8 +550,8 @@
 
   .cta-btn.secondary {
     background: transparent;
-    color: var(--cyan-brand);
-    border: 1px solid var(--border-accent);
+    color: var(--accent-text);
+    border: 1px solid var(--accent-line);
   }
 
   .cta-btn:hover {
@@ -564,7 +570,7 @@
   .input {
     flex: 1;
     resize: none;
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--field-bg);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     color: var(--fg-0);
@@ -583,8 +589,8 @@
 
   .input:focus {
     outline: none;
-    border-color: var(--cyan-brand);
-    box-shadow: 0 0 0 2px rgba(34, 229, 229, 0.12);
+    border-color: var(--accent-focus);
+    box-shadow: 0 0 0 2px var(--accent-halo);
   }
 
   .input:disabled {
@@ -597,8 +603,8 @@
     height: 2.25rem;
     border: none;
     border-radius: var(--radius-sm);
-    background: linear-gradient(135deg, var(--cyan-signal), var(--cyan-brand));
-    color: var(--bg-0);
+    background: linear-gradient(135deg, var(--cta-hover), var(--cta));
+    color: var(--on-cta);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -619,8 +625,8 @@
   .spinner {
     width: 0.875rem;
     height: 0.875rem;
-    border: 2px solid rgba(7, 8, 10, 0.3);
-    border-top-color: var(--bg-0);
+    border: 2px solid var(--on-cta-track);
+    border-top-color: var(--on-cta);
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
   }

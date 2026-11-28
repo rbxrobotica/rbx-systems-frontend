@@ -13,8 +13,8 @@
     fullName: 'rbxrobotica/rbx-atelier',
     url: 'https://github.com/rbxrobotica/rbx-atelier',
     description: {
-      'pt-BR': 'Identidade Visual (Brand Voltage) e Design Systems para produtos RBX.',
-      en: 'Visual Identity (Brand Voltage) and Design Systems for RBX products.'
+      'pt-BR': 'Identidade Visual (Brand Voltage) e Design Systems para produtos Merovelis.',
+      en: 'Visual Identity (Brand Voltage) and Design Systems for Merovelis products.'
     },
     language: 'HTML / Design Tokens',
     branch: 'main'
@@ -123,7 +123,7 @@
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: var(--track-label);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
 
   .ref-title {
@@ -204,8 +204,8 @@
   }
 
   .ref-cta:hover {
-    border-color: var(--cyan-brand);
-    color: var(--cyan-brand);
+    border-color: var(--accent-outline-hover);
+    color: var(--accent-text);
   }
 
   .ref-cta svg {

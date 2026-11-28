@@ -1,14 +1,14 @@
 <script lang="ts">
   import ContentPage from '$components/ContentPage.svelte';
   import { personSchemaFor } from '$lib/seo/schema';
+  import { SITE_ORIGIN } from '$lib/seo/site';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
 
-  const siteUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
   const name = $derived(data.page?.title || t(data.locale, 'flaviaRibeiro.headline'));
-  const personId = $derived(`${siteUrl}/#flavia-ribeiro`);
+  const personId = $derived(`${SITE_ORIGIN}/#flavia-ribeiro`);
   const schemaNodes = $derived([
     personSchemaFor(data.locale, 'flavia-ribeiro', name, t(data.locale, 'flaviaRibeiro.jobTitle'))
   ]);

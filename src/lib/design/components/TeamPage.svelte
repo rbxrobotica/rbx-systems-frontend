@@ -1,8 +1,6 @@
 <script lang="ts">
-  import { page as pageStore } from '$app/stores';
   import ContentPage from '$components/ContentPage.svelte';
-  import Seo from '$components/Seo.svelte';
-  import { buildGraph } from '$lib/seo/schema';
+  import { siteHref } from '$lib/seo/alternates';
   import { t } from '$lib/i18n/translate';
   import type { Locale, PageContent } from '$types/content';
 
@@ -13,12 +11,6 @@
 
   let { page, locale }: Props = $props();
 
-  const title = $derived(page?.title || t(locale, 'team.headline'));
-  const description = $derived(page?.description ?? t(locale, 'team.body') ?? '');
-  const siteUrl = $derived(locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
-  const pageUrl = $derived(`${siteUrl}${$pageStore.url.pathname}`);
-  const schema = $derived(buildGraph(locale, pageUrl, title, description));
-
   const founders = $derived([
     {
       key: 'leandro-damasio',
@@ -26,8 +18,8 @@
       role: locale === 'pt-BR' ? 'Fundador & CEO' : 'Founder & CEO',
       bio:
         locale === 'pt-BR'
-          ? 'AI Engineer, Platform & Backend Systems, Technical Leadership. Fundador e CEO da RBX Systems.'
-          : 'AI Engineer, Platform & Backend Systems, Technical Leadership. Founder & CEO of RBX Systems.',
+          ? 'AI Engineer, Platform & Backend Systems, Technical Leadership. Fundador e CEO da Merovelis IA.'
+          : 'AI Engineer, Platform & Backend Systems, Technical Leadership. Founder & CEO of Merovelis AI.',
       href: '/leandro-damasio'
     },
     {
@@ -46,15 +38,14 @@
       role: locale === 'pt-BR' ? 'Fundadora SDR' : 'Founding SDR',
       bio:
         locale === 'pt-BR'
-          ? 'Sales Development, Client Support e Customer Care. Fundadora SDR da RBX Systems.'
-          : 'Sales Development, Client Support and Customer Care. Founding SDR of RBX Systems.',
+          ? 'Sales Development, Client Support e Customer Care. Fundadora SDR da Merovelis IA.'
+          : 'Sales Development, Client Support and Customer Care. Founding SDR of Merovelis AI.',
       href: '/flavia-ribeiro'
     }
   ]);
 </script>
 
-<Seo {title} {description} {locale} canonical={pageUrl} {schema} />
-
+<!-- ContentPage writes the head of the page: one title, one canonical. -->
 <ContentPage
   {page}
   fallbackTitle={t(locale, 'team.headline')}
@@ -67,7 +58,7 @@
   <ul class="founders">
     {#each founders as founder}
       <li class="founder-card">
-        <a href={founder.href} class="founder-link">
+        <a href={siteHref(locale, founder.href)} class="founder-link">
           <span class="founder-name">{founder.name}</span>
           <span class="founder-role">{founder.role}</span>
         </a>
@@ -126,7 +117,7 @@
 
   .founder-role {
     font-size: var(--text-sm);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     font-family: var(--font-mono);
     text-transform: uppercase;
     letter-spacing: var(--track-label);

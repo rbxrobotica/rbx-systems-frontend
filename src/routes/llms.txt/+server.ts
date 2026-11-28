@@ -9,12 +9,12 @@ import {
   partnershipTerms,
   partnershipContent
 } from '$lib/content/partnership';
+import { localizedUrl, siteHref } from '$lib/seo/alternates';
+import { SITE_ORIGIN } from '$lib/seo/site';
 import type { Locale } from '$types/content';
 
-const siteUrlByLocale: Record<Locale, string> = {
-  'pt-BR': 'https://rbx.ia.br',
-  en: 'https://rbxsystems.ch'
-};
+// Trailing slashes are dropped by the handle hook, not by the router.
+export const trailingSlash = 'ignore';
 
 const servicesByLocale = (locale: Locale) =>
   SERVICE_ROUTES.map((service) => ({
@@ -24,9 +24,9 @@ const servicesByLocale = (locale: Locale) =>
 
 const institutionalByLocale: Record<Locale, { label: string; path: string; note: string }[]> = {
   'pt-BR': [
-    { label: 'Sobre', path: '/sobre', note: 'quem é a RBX Systems' },
-    { label: 'História', path: '/historia', note: 'trajetória da RBX Systems' },
-    { label: 'Carreiras', path: '/carreiras', note: 'como trabalhar com a RBX Systems' },
+    { label: 'Sobre', path: '/sobre', note: 'quem é a Merovelis IA' },
+    { label: 'História', path: '/historia', note: 'trajetória da Merovelis IA' },
+    { label: 'Carreiras', path: '/carreiras', note: 'como trabalhar com a Merovelis IA' },
     { label: 'Equipe', path: '/equipe', note: 'time de engenharia e liderança' },
     {
       label: 'Leandro Damasio',
@@ -38,9 +38,9 @@ const institutionalByLocale: Record<Locale, { label: string; path: string; note:
     { label: 'Legal', path: '/legal', note: 'aviso legal' }
   ],
   en: [
-    { label: 'About', path: '/about', note: 'who RBX Systems is' },
-    { label: 'History', path: '/history', note: 'the RBX Systems trajectory' },
-    { label: 'Careers', path: '/careers', note: 'how to work with RBX Systems' },
+    { label: 'About', path: '/about', note: 'who Merovelis AI is' },
+    { label: 'History', path: '/history', note: 'the Merovelis AI trajectory' },
+    { label: 'Careers', path: '/careers', note: 'how to work with Merovelis AI' },
     { label: 'Team', path: '/team', note: 'engineering and leadership team' },
     {
       label: 'Leandro Damasio',
@@ -55,29 +55,35 @@ const institutionalByLocale: Record<Locale, { label: string; path: string; note:
 
 const headings: Record<
   Locale,
-  Record<'services' | 'partnership' | 'products' | 'institutional' | 'journal', string>
+  Record<
+    'services' | 'partnership' | 'products' | 'institutional' | 'journal' | 'languages',
+    string
+  >
 > = {
   'pt-BR': {
     services: 'Serviços',
     partnership: 'Parceria de engenharia',
     products: 'Produtos',
     institutional: 'Institucional',
-    journal: 'Journal'
+    journal: 'Journal',
+    languages: 'Outros idiomas'
   },
   en: {
     services: 'Services',
     partnership: 'Engineering partnership',
     products: 'Products',
     institutional: 'Institutional',
-    journal: 'Journal'
+    journal: 'Journal',
+    languages: 'Other languages'
   }
 };
 
+// Under a locale segment this is the index of that language. Without one it
+// is the English index, at the address the convention expects, and it points
+// at the Portuguese one.
 export const GET: RequestHandler = async ({ url }) => {
   const locale = detectLocaleFromUrl(url);
   const exchangeRates = locale === 'en' ? await getPartnershipExchangeRates() : null;
-  // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
-  const siteUrl = siteUrlByLocale[locale];
   // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
   const h = headings[locale];
 
@@ -87,7 +93,12 @@ export const GET: RequestHandler = async ({ url }) => {
       : 'Systems engineering, operational automation, applied AI and cloud infrastructure for high-demand operations.';
 
   const link = (label: string, path: string, note: string) =>
-    `- [${label}](${siteUrl}${path}): ${note}`;
+    `- [${label}](${SITE_ORIGIN}${siteHref(locale, path)}): ${note}`;
+
+  const otherLanguage =
+    locale === 'pt-BR'
+      ? `- [English](${localizedUrl('en', '/llms.txt')}): this index in English`
+      : `- [Português](${localizedUrl('pt-BR', '/llms.txt')}): este índice em português`;
 
   const serviceLinks = servicesByLocale(locale).map((service) =>
     link(
@@ -99,28 +110,22 @@ export const GET: RequestHandler = async ({ url }) => {
 
   const productLinks =
     locale === 'pt-BR'
-      ? [
-          link('Robson', '/produtos/robson', t(locale, 'robson.headline')),
-          link('Satwake / Briefing BTC', '/produtos/briefing-btc', t(locale, 'briefing.headline'))
-        ]
-      : [
-          link('Robson', '/products/robson', t(locale, 'robson.headline')),
-          link('Satwake / Briefing BTC', '/products/briefing-btc', t(locale, 'briefing.headline'))
-        ];
+      ? [link('Robson', '/produtos/robson', t(locale, 'robson.headline'))]
+      : [link('Robson', '/products/robson', t(locale, 'robson.headline'))];
 
   const partnershipLink =
     locale === 'pt-BR'
       ? link(
-          'RBX Engineering Partnership',
+          'Merovelis Engineering Partnership',
           '/parceria#qualificacao',
           // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
-          `${formatPartnershipPrice(locale)}/mês, em reais (BRL), por ${partnershipTerms.monthlyHours} horas mensais de capacidade técnica liderada pelo fundador com assistência de IA para um produto. Implementação, revisão, testes e comunicação assíncrona incluídos nessa capacidade. Infraestrutura e consumo de APIs do cliente têm orçamento separado. A qualificação inicia pelo formulário; escopo, disponibilidade e início são confirmados por uma pessoa da RBX por e-mail. Não é contratação automática. Contextos para avaliação: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Condições de referência: ${partnershipTerms.version}.`
+          `${formatPartnershipPrice(locale)}/mês, em reais (BRL), por ${partnershipTerms.monthlyHours} horas mensais de capacidade técnica liderada pelo fundador com assistência de IA para um produto. Implementação, revisão, testes e comunicação assíncrona incluídos nessa capacidade. Infraestrutura e consumo de APIs do cliente têm orçamento separado. A qualificação inicia pelo formulário; escopo, disponibilidade e início são confirmados por uma pessoa da Merovelis por e-mail. Não é contratação automática. Contextos para avaliação: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Condições de referência: ${partnershipTerms.version}.`
         )
       : link(
-          'RBX Engineering Partnership',
+          'Merovelis Engineering Partnership',
           '/partnership#qualificacao',
           // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
-          `${formatPartnershipPrice(locale, exchangeRates)}/month. ${partnershipPriceNote(locale, exchangeRates)} For ${partnershipTerms.monthlyHours} monthly hours of founder-led technical capacity with AI assistance for one product. Implementation, review, testing and asynchronous communication share that capacity. Infrastructure and the client's API consumption have a separate budget. Qualification starts with the form; an RBX team member confirms scope, availability and start date by email. This is not automatic contracting. Contexts for assessment: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Reference terms: ${partnershipTerms.version}.`
+          `${formatPartnershipPrice(locale, exchangeRates)}/month. ${partnershipPriceNote(locale, exchangeRates)} For ${partnershipTerms.monthlyHours} monthly hours of founder-led technical capacity with AI assistance for one product. Implementation, review, testing and asynchronous communication share that capacity. Infrastructure and the client's API consumption have a separate budget. Qualification starts with the form; an Merovelis team member confirms scope, availability and start date by email. This is not automatic contracting. Contexts for assessment: ${partnershipContent[locale].fitCards.map((card) => card.title).join('; ')}. Reference terms: ${partnershipTerms.version}.`
         );
 
   // eslint-disable-next-line security/detect-object-injection -- locale is 'pt-BR' or 'en', from detectLocaleFromUrl
@@ -131,15 +136,15 @@ export const GET: RequestHandler = async ({ url }) => {
   const journalLinks =
     locale === 'pt-BR'
       ? [
-          link('RBX Journal', '/journal', t(locale, 'journal.metaDescription')),
+          link('Merovelis Journal', '/journal', t(locale, 'journal.metaDescription')),
           link('RSS do Journal', '/rss.xml', 'feed RSS com todos os artigos')
         ]
       : [
-          link('RBX Journal', '/journal', t(locale, 'journal.metaDescription')),
+          link('Merovelis Journal', '/journal', t(locale, 'journal.metaDescription')),
           link('Journal RSS', '/rss.xml', 'RSS feed with every article')
         ];
 
-  const body = `# RBX Systems
+  const body = `# Merovelis AI
 
 > ${summary}
 
@@ -162,6 +167,10 @@ ${institutionalLinks.join('\n')}
 ## ${h.journal}
 
 ${journalLinks.join('\n')}
+
+## ${h.languages}
+
+${otherLanguage}
 `;
 
   return new Response(body, {

@@ -1,21 +1,21 @@
 /**
- * Navigation model for the public site: five sections, the pages each one
+ * Navigation model for the public site: four sections, the pages each one
  * shows in the secondary band, and the resolution of the current URL into
  * section, band item and breadcrumb trail.
  *
- * Paths in the model are canonical pt-BR routes. Both spellings of a route
- * are live on both hosts (rbxsystems.ch/sobre renders as well as /about), so
- * a requested path is first respelled to its canonical form and only then
- * matched; hrefs go out through `localizedPath`, in the spelling of the
- * active host.
+ * Paths in the model are canonical pt-BR routes, without the locale segment.
+ * A requested path arrives as /en/about or /pt-br/sobre: the segment is
+ * dropped and the rest respelled to its canonical form before it is matched,
+ * so either spelling resolves. Hrefs go out through `localizedHref`, with the
+ * segment and the spelling of the active language.
  *
  * The visible breadcrumb and the BreadcrumbList structured data are both
  * derived from `resolveNav`, with the same page title from `leafTitle`, so
  * they cannot drift apart.
  */
-import { LOCALE_PATH_MAP, getAlternates, localizedPath } from '$lib/seo/alternates';
+import { localizedHref, spelledPath, withLocalePrefix } from '$lib/seo/alternates';
 import { t } from '$lib/i18n/translate';
-import type { Locale } from '$types/content';
+import type { Locale, PostAlternate } from '$types/content';
 
 export interface NavItem {
   /** Canonical internal path (pt-BR route). */
@@ -26,7 +26,7 @@ export interface NavItem {
   label?: string;
   /**
    * Known pages that belong under this item without being band items:
-   * person pages under Equipe, a campaign form under Contato.
+   * person pages under Equipe.
    */
   pages?: NavItem[];
   /**
@@ -42,7 +42,28 @@ export interface NavSection extends NavItem {
   children: NavItem[];
 }
 
+// Order of the header: products first, the partnership last.
 export const NAV_SECTIONS: NavSection[] = [
+  {
+    key: 'products',
+    labelKey: 'nav.products',
+    path: '/produtos',
+    children: [
+      { path: '/produtos', labelKey: 'nav.overview' },
+      { path: '/produtos/robson', label: 'Robson', under: ['/robson'] },
+      { path: '/produtos/briefing-btc', label: 'Briefing BTC' }
+    ]
+  },
+  {
+    key: 'journal',
+    labelKey: 'nav.journal',
+    path: '/journal',
+    children: [
+      { path: '/journal', labelKey: 'nav.journal', under: ['/blog'] },
+      { path: '/changelog', labelKey: 'nav.changelog' },
+      { path: '/newsroom', labelKey: 'nav.newsroom' }
+    ]
+  },
   {
     key: 'company',
     labelKey: 'nav.company',
@@ -65,53 +86,24 @@ export const NAV_SECTIONS: NavSection[] = [
     ]
   },
   {
-    key: 'solutions',
-    labelKey: 'nav.solutions',
-    path: '/solucoes',
-    children: [
-      { path: '/solucoes', labelKey: 'nav.overview', under: ['/servicos'] },
-      { path: '/cases', labelKey: 'nav.cases' },
-      { path: '/atelier', labelKey: 'nav.atelier' }
-    ]
-  },
-  {
-    key: 'products',
-    labelKey: 'nav.products',
-    path: '/produtos',
-    children: [
-      { path: '/produtos', labelKey: 'nav.overview' },
-      { path: '/produtos/robson', label: 'Robson', under: ['/robson'] },
-      { path: '/produtos/briefing-btc', label: 'Briefing BTC' }
-    ]
-  },
-  {
     key: 'partnership',
     labelKey: 'nav.partnership',
     path: '/parceria',
     children: [
       { path: '/parceria', labelKey: 'nav.overview' },
-      { path: '/diagnostico', labelKey: 'nav.diagnostic' }
-    ]
-  },
-  {
-    key: 'journal',
-    labelKey: 'nav.journal',
-    path: '/journal',
-    children: [
-      { path: '/journal', labelKey: 'nav.journal', under: ['/blog'] },
-      { path: '/changelog', labelKey: 'nav.changelog' },
-      { path: '/newsroom', labelKey: 'nav.newsroom' }
+      // What the partnership delivers. It was a section of its own until
+      // 2026-11-23, when products became the first thing the site says.
+      { path: '/solucoes', labelKey: 'nav.solutions', under: ['/servicos'] },
+      { path: '/diagnostico', labelKey: 'nav.diagnostic' },
+      { path: '/cases', labelKey: 'nav.cases' },
+      { path: '/atelier', labelKey: 'nav.atelier' }
     ]
   }
 ];
 
-/** Pages outside the five sections that still get a breadcrumb. */
+/** Pages outside the four sections that still get a breadcrumb. */
 export const STANDALONE_PAGES: NavItem[] = [
-  {
-    path: '/contato',
-    labelKey: 'nav.contact',
-    pages: [{ path: '/contact/strategos', label: 'Strategos Founder Plan' }]
-  },
+  { path: '/contato', labelKey: 'nav.contact' },
   { path: '/legal', labelKey: 'nav.legal' }
 ];
 
@@ -139,38 +131,14 @@ export function navLabel(locale: Locale, item: NavItem): string {
   return item.labelKey ? t(locale, item.labelKey) : item.path;
 }
 
-function normalize(pathname: string): string {
-  return pathname.replace(/\/+$/, '') || '/';
-}
-
-/** English route prefixes whose slugs carry over, with their pt-BR spelling. */
-const PREFIX_PAIRS: [en: string, pt: string][] = [
-  ['/products', '/produtos'],
-  ['/services', '/servicos']
-];
-
 /**
- * The pt-BR spelling of a route, whichever spelling was requested. A service
- * slug may also arrive under the prefix of the other host
- * (/services/agentes-de-ia, /servicos/ai-agents): the loaders render both,
- * so both resolve to the one mapped route.
+ * The pt-BR spelling of a route, whichever spelling and locale segment were
+ * requested. A service slug may also arrive under the prefix of the other
+ * language (/services/agentes-de-ia, /servicos/ai-agents): the loaders render
+ * both, so both resolve to the one mapped route.
  */
 export function canonicalPath(rawPathname: string): string {
-  const pathname = normalize(rawPathname);
-  // eslint-disable-next-line security/detect-object-injection -- pathname is a site path starting with '/', which no inherited property name does
-  const mapped = LOCALE_PATH_MAP[pathname]?.['pt-BR'];
-  if (mapped) return mapped;
-  for (const [en, pt] of PREFIX_PAIRS) {
-    if (pathname.startsWith(`${en}/`)) {
-      const respelled = `${pt}${pathname.slice(en.length)}`;
-      // eslint-disable-next-line security/detect-object-injection -- respelled starts with a pt-BR prefix of PREFIX_PAIRS, which no inherited property name does
-      return LOCALE_PATH_MAP[respelled]?.['pt-BR'] ?? respelled;
-    }
-    if (pathname.startsWith(`${pt}/`)) {
-      return LOCALE_PATH_MAP[`${en}${pathname.slice(pt.length)}`]?.['pt-BR'] ?? pathname;
-    }
-  }
-  return pathname;
+  return spelledPath('pt-BR', rawPathname);
 }
 
 interface Located {
@@ -209,7 +177,7 @@ export function resolveNav(locale: Locale, rawPathname: string, leaf?: string): 
 
   const link = (item: NavItem): Crumb => ({
     label: navLabel(locale, item),
-    href: localizedPath(locale, item.path)
+    href: localizedHref(locale, item.path)
   });
   const here = (label: string): Crumb => ({ label });
   /** Crumbs below the parent: the item, then the page when it is known. */
@@ -245,10 +213,11 @@ export function resolveNav(locale: Locale, rawPathname: string, leaf?: string): 
 
 /**
  * CMS titles of service and product pages end in the site name
- * ("LLMOps — RBX Systems", "API Integration · RBX Systems"); a crumb does not
- * repeat it.
+ * ("LLMOps — Merovelis AI", "API Integration · Merovelis IA"); a
+ * crumb does not repeat it. Pages saved before the change of name still end in
+ * "RBX Systems".
  */
-const SITE_SUFFIX = /\s+[—–·|-]\s+RBX Systems$/;
+const SITE_SUFFIX = /\s+[—–·|-]\s+(?:RBX Systems|Merovelis AI|Merovelis IA)$/;
 
 /**
  * Title of the current page as its loader exposes it: a post, an author, a
@@ -282,16 +251,17 @@ export function leafTitle(data: unknown): string | undefined {
 
 /**
  * The trail as BreadcrumbList items: Home first, then every crumb, the
- * current page with its own path. Feed it to `breadcrumbSchema`.
+ * current page with its own path. Every path carries the locale segment.
+ * Feed it to `breadcrumbSchema`.
  */
 export function breadcrumbItems(
   locale: Locale,
   pathname: string,
   leaf?: string
 ): { name: string; path: string }[] {
-  const current = normalize(pathname);
+  const current = withLocalePrefix(locale, pathname);
   return [
-    { name: t(locale, 'nav.home'), path: '/' },
+    { name: t(locale, 'nav.home'), path: withLocalePrefix(locale, '/') },
     ...resolveNav(locale, pathname, leaf).trail.map((crumb) => ({
       name: crumb.label,
       path: crumb.href ?? current
@@ -299,28 +269,31 @@ export function breadcrumbItems(
   ];
 }
 
-const BASES: Record<Locale, string> = { 'pt-BR': 'https://rbx.ia.br', en: 'https://rbxsystems.ch' };
-
-/** Respell a slug-carrying route prefix for the target locale. */
-function respell(target: Locale, pathname: string): string {
-  for (const [en, pt] of PREFIX_PAIRS) {
-    const [from, to] = target === 'en' ? [pt, en] : [en, pt];
-    if (pathname.startsWith(`${from}/`)) return `${to}${pathname.slice(from.length)}`;
-  }
-  return pathname;
-}
-
 /**
- * Href of the language switch. The other locale lives on the other host: use
- * the hreflang alternate when the route is mapped, looked up by its canonical
- * spelling so a service reached under the other host's prefix still lands on
- * its own page; otherwise the same path, with /produtos/<slug> and
- * /products/<slug> respelled for the target host (blog slugs are shared
- * across hosts and redirect to their alias).
+ * Href of the language switch: the same page under the other locale segment,
+ * in the spelling of that language. A mapped route is looked up by its
+ * canonical spelling, so a service reached under the prefix of the other
+ * language still lands on its own page; an unmapped /produtos/<slug> or
+ * /products/<slug> is respelled, and a path that is the same in both
+ * languages only changes its segment.
+ *
+ * A post is the exception: its slug may differ per language, and it may not
+ * exist in the other one. `alternates` is what the loader of the post
+ * resolved. The switch goes to the post's own address in the target language,
+ * and to the Journal of that language when the post has no version there,
+ * so it never lands on a redirect or on a missing page.
  */
-export function localeSwitchHref(current: Locale, target: Locale, pathname: string): string {
+export function localeSwitchHref(
+  current: Locale,
+  target: Locale,
+  pathname: string,
+  alternates?: PostAlternate[]
+): string {
   if (target === current) return pathname;
-  const alt = getAlternates(current, canonicalPath(pathname))?.find((a) => a.hreflang === target);
-  // eslint-disable-next-line security/detect-object-injection -- target is a Locale: 'pt-BR' or 'en'
-  return alt?.href ?? `${BASES[target]}${respell(target, normalize(pathname))}`;
+  const canonical = canonicalPath(pathname);
+  if (alternates && canonical.startsWith('/blog/')) {
+    const post = alternates.find((alternate) => alternate.locale === target);
+    return localizedHref(target, post ? `/blog/${post.publicSlug}` : '/journal');
+  }
+  return withLocalePrefix(target, spelledPath(target, canonical));
 }

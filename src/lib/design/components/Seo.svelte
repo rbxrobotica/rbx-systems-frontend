@@ -2,6 +2,7 @@
   import { page } from '$app/stores';
   import { getAlternates } from '$lib/seo/alternates';
   import { serializeJsonLd } from '$lib/seo/schema';
+  import { SITE_ORIGIN } from '$lib/seo/site';
   import type { Locale } from '$types/content';
 
   interface Props {
@@ -26,17 +27,18 @@
     schema
   }: Props = $props();
 
-  const siteUrl = $derived(locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
-  const pageUrl = $derived(canonical ?? `${siteUrl}${$page.url.pathname}`);
-  const fullTitle = $derived(`${title} · ${locale === 'pt-BR' ? 'RBX Systems' : 'RBX Systems'}`);
+  // The path already carries the locale segment, so it is the whole address.
+  const pageUrl = $derived(canonical ?? `${SITE_ORIGIN}${$page.url.pathname}`);
+  const siteName = $derived(locale === 'pt-BR' ? 'Merovelis IA' : 'Merovelis AI');
+  const fullTitle = $derived(`${title} · ${siteName}`);
   // Crawlers require an absolute og:image; covers arrive as site-relative
   // proxy paths (/api/blog/cover/...), same absolutization as the schema.
   const ogImage = $derived(
     image
       ? image.startsWith('http')
         ? image
-        : `${siteUrl}${image}`
-      : `${siteUrl}/brand/rbx-og.jpg`
+        : `${SITE_ORIGIN}${image}`
+      : `${SITE_ORIGIN}/brand/rbx-og.jpg`
   );
   const ogLocale = $derived(locale === 'pt-BR' ? 'pt_BR' : 'en_US');
 
@@ -59,7 +61,7 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content={type} />
-  <meta property="og:site_name" content="RBX Systems" />
+  <meta property="og:site_name" content={siteName} />
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={pageUrl} />

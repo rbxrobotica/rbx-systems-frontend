@@ -1,52 +1,55 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { locale } from 'svelte-i18n';
+  import { stripLocalePrefix } from '$lib/i18n/locale';
   import WhatsAppDrawer from './WhatsAppDrawer.svelte';
   import AIChatWidget from './AIChatWidget.svelte';
   import { trackEvent, CHAT_OPEN, WHATSAPP_CLICK } from '$lib/analytics/events';
 
   const contextMessages: Record<string, { pt: string; en: string }> = {
     '/solucoes': {
-      pt: 'Olá, tenho interesse nas soluções da RBX Systems.',
-      en: 'Hello, I am interested in RBX Systems solutions.'
+      pt: 'Olá, tenho interesse nas soluções da Merovelis IA.',
+      en: 'Hello, I am interested in Merovelis AI solutions.'
     },
     '/produtos': {
-      pt: 'Olá, quero saber mais sobre os produtos da RBX Systems.',
-      en: 'Hello, I would like to learn more about RBX Systems products.'
+      pt: 'Olá, quero saber mais sobre os produtos da Merovelis IA.',
+      en: 'Hello, I would like to learn more about Merovelis AI products.'
     },
     '/cases': {
-      pt: 'Olá, quero entender como a RBX pode ajudar minha empresa.',
-      en: 'Hello, I would like to understand how RBX can help my company.'
+      pt: 'Olá, quero entender como a Merovelis pode ajudar minha empresa.',
+      en: 'Hello, I would like to understand how Merovelis can help my company.'
     },
     '/trust': {
-      pt: 'Olá, tenho interesse na proposta de governança e confiança da RBX.',
-      en: 'Hello, I am interested in RBX governance and trust framework.'
+      pt: 'Olá, tenho interesse na proposta de governança e confiança da Merovelis.',
+      en: 'Hello, I am interested in Merovelis governance and trust framework.'
     },
     '/atelier': {
-      pt: 'Olá, quero conhecer mais sobre o Atelier da RBX.',
-      en: 'Hello, I would like to know more about the RBX Atelier.'
+      pt: 'Olá, quero conhecer mais sobre o Atelier da Merovelis.',
+      en: 'Hello, I would like to know more about the Merovelis Atelier.'
     },
     '/blog': {
-      pt: 'Olá, li o blog da RBX e gostaria de conversar.',
-      en: 'Hello, I read the RBX blog and would like to chat.'
+      pt: 'Olá, li o blog da Merovelis e gostaria de conversar.',
+      en: 'Hello, I read the Merovelis blog and would like to chat.'
     },
     '/journal': {
-      pt: 'Olá, li o conteúdo da RBX e gostaria de conversar.',
-      en: 'Hello, I read RBX content and would like to chat.'
+      pt: 'Olá, li o conteúdo da Merovelis e gostaria de conversar.',
+      en: 'Hello, I read Merovelis content and would like to chat.'
     },
     '/newsroom': {
-      pt: 'Olá, vim pela sala de imprensa da RBX e gostaria de conversar.',
-      en: 'Hello, I visited the RBX newsroom and would like to connect.'
+      pt: 'Olá, vim pela sala de imprensa da Merovelis e gostaria de conversar.',
+      en: 'Hello, I visited the Merovelis newsroom and would like to connect.'
     }
   };
 
-  function getContextMessage(path: string, loc: string | null | undefined): string {
+  function getContextMessage(pathname: string, loc: string | null | undefined): string {
     const isEn = loc?.startsWith('en');
+    // The keys are site paths; the address carries the locale segment first.
+    const path = stripLocalePrefix(pathname);
     const entry = Object.entries(contextMessages).find(([key]) => path.startsWith(key));
     if (entry) return isEn ? entry[1].en : entry[1].pt;
     return isEn
-      ? 'Hello, I visited the RBX Systems website and would like to chat.'
-      : 'Olá, vim pelo site da RBX Systems e gostaria de conversar.';
+      ? 'Hello, I visited the Merovelis AI website and would like to chat.'
+      : 'Olá, vim pelo site da Merovelis IA e gostaria de conversar.';
   }
 
   const initialMessage = $derived(getContextMessage($page.url.pathname, $locale));
@@ -159,7 +162,7 @@
       <button
         type="button"
         class="menu-item ouvidoria"
-        aria-label="Contact RBX via WhatsApp"
+        aria-label="Contact Merovelis via WhatsApp"
         onclick={openOuvidoria}
       >
         <div class="item-icon whatsapp">
@@ -193,13 +196,11 @@
     z-index: 41;
     width: 3.5rem;
     height: 3.5rem;
-    border: 1px solid var(--border-accent, #22e5e5);
+    border: 1px solid var(--accent-line);
     border-radius: 50%;
     background: var(--bg-1, #0f1117);
-    color: var(--cyan-brand, #22e5e5);
-    box-shadow:
-      0 4px 16px rgba(34, 229, 229, 0.15),
-      0 2px 8px rgba(0, 0, 0, 0.4);
+    color: var(--accent-text);
+    box-shadow: var(--shadow-float);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -212,9 +213,7 @@
 
   .menu-toggle:hover {
     background: var(--bg-2, #161b22);
-    box-shadow:
-      0 6px 24px rgba(34, 229, 229, 0.25),
-      0 2px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-float-hover);
     transform: scale(1.08);
   }
 
@@ -230,9 +229,7 @@
   /* Expanded menu items */
   .contact-menu.expanded .menu-toggle {
     background: var(--bg-2, #161b22);
-    box-shadow:
-      0 6px 24px rgba(34, 229, 229, 0.25),
-      0 2px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-float-hover);
   }
 
   .menu-overlay {
@@ -285,7 +282,7 @@
 
   .menu-item:hover {
     background: var(--bg-2, #161b22);
-    border-color: var(--cyan-brand, #22e5e5);
+    border-color: var(--accent-outline-hover);
   }
 
   .menu-item:active {
@@ -297,11 +294,11 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--cyan-signal, #0dd9ff), var(--cyan-brand, #22e5e5));
+    background: linear-gradient(135deg, var(--cta-hover), var(--cta));
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--bg-0, #010409);
+    color: var(--on-cta);
     font-weight: 700;
   }
 

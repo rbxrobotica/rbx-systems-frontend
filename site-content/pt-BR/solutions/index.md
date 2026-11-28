@@ -1,5 +1,5 @@
 ---
-title: O que a RBX faz em um produto em operação
+title: O que a Merovelis faz em um produto em operação
 description: 'Funcionalidades, integrações, automação, IA, manutenção e infraestrutura: exemplos de entregas para produtos que já operam.'
 eyebrow: Soluções
 lead: A prioridade do seu produto define o trabalho. Estes são exemplos de problemas e de entregas que podem compor um ciclo da parceria mensal, para produtos em operação ou em piloto avançado.
@@ -7,7 +7,7 @@ lead: A prioridade do seu produto define o trabalho. Estes são exemplos de prob
 
 ## Uma funcionalidade ou um portal precisa entrar no produto
 
-Um fluxo novo, uma área de acesso ou um portal precisa de interface, backend e regras de negócio. A RBX implementa esse conjunto, com integrações de identidade, conteúdo ou pagamentos quando fazem parte do escopo.
+Um fluxo novo, uma área de acesso ou um portal precisa de interface, backend e regras de negócio. A Merovelis implementa esse conjunto, com integrações de identidade, conteúdo ou pagamentos quando fazem parte do escopo.
 
 **Exemplos de entrega:** código da funcionalidade, testes do fluxo e decisões de desenho registradas.
 
@@ -55,7 +55,7 @@ Serviços relacionados: [DevOps e cloud](/servicos/devops-cloud), [observabilida
 
 ## Referências e próximo passo
 
-Artigos no [RBX Journal](/journal) e referências no [portfólio de produtos e evidências](/produtos#evidencias) permitem conhecer o trabalho público da RBX. Produtos próprios têm escopo e estágios separados da parceria.
+Artigos no [Merovelis Journal](/journal) e referências no [portfólio de produtos e evidências](/produtos#evidencias) permitem conhecer o trabalho público da Merovelis. Produtos próprios têm escopo e estágios separados da parceria.
 
 Os exemplos acima orientam a conversa sobre escopo; as entregas de cada ciclo são acordadas. A página da parceria reúne preço, capacidade mensal e condições. O atendimento ocorre em horários acordados; plantão 24 horas e resposta imediata não fazem parte da modalidade.
 

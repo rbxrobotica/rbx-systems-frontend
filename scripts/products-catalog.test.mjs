@@ -7,60 +7,49 @@ const { productsContent } = await importTypeScriptModule(
   new URL('../src/lib/content/products.ts', import.meta.url)
 );
 
-// Contract copied from rbx-market-briefing/src/utils/validator.ts,
-// REQUIRED_DISCLAIMER, checked 2026-10-05. The marketing Markdown contains
-// different EN punctuation; this portfolio follows the product validator.
-const disclosures = {
-  'pt-BR':
-    'Este briefing é material de preparação operacional e governança. Não constitui recomendação de investimento, sinal de trading ou orientação financeira. A decisão de operar é exclusiva do operador humano. Este produto não gera ordens, não recomenda compra/venda e não aciona sistemas de execução.',
-  en: 'This briefing is operational preparation and governance material. It does not constitute investment advice, a trading signal or financial guidance. The decision to trade belongs exclusively to the human operator. This product does not generate orders, does not recommend buying or selling and does not trigger execution systems.'
-};
-
+// Owner, 2026-11-24: Strategos is featured and Verentir is the secondary
+// product, with the two AI platforms beside it. Robson is shown discreetly,
+// outside the grid. Satwake and Initelo are not presented for now.
 const catalog = (content) => [...content.products, ...content.additionalProducts];
-const originalProductIds = [
-  'robson',
-  'strategos',
-  'verentir',
-  'satwake', // Existing Briefing BTC product under its requested public name.
-  'ledger',
-  'yield',
-  'maestro',
-  'argos-radar',
-  'thalamus',
-  'truthmetal'
-];
+const catalogProductIds = ['strategos', 'verentir', 'thalamus', 'truthmetal'];
+const notPresented = /satwake|briefing btc|initelo|maestro|ledger|argos|yield/i;
 
-test('both locales preserve all ten original products with unique matching ids', () => {
+test('both locales list the same four products, Strategos first', () => {
   for (const content of Object.values(productsContent)) {
     const ids = catalog(content).map((product) => product.id);
-    assert.deepEqual(ids, originalProductIds);
+    assert.deepEqual(ids, catalogProductIds);
     assert.equal(new Set(ids).size, ids.length);
   }
 });
 
-test('Kulinaryos remains an external reference outside the RBX catalog and SEO description', () => {
+test('Robson stays outside the grid, with its page and its source', () => {
+  for (const [locale, content] of Object.entries(productsContent)) {
+    const robson = content.engineeringProduct;
+    assert.equal(robson.id, 'robson');
+    assert.ok(catalog(content).every((product) => product.id !== 'robson'));
+    assert.equal(robson.href, `${locale === 'pt-BR' ? '/produtos' : '/products'}/robson`);
+    assert.deepEqual(
+      robson.secondaryLinks.map((link) => link.href),
+      ['https://github.com/ldamasio/robson']
+    );
+    assert.match(robson.note, /autotrader/);
+    assert.doesNotMatch(content.description, /Robson/);
+  }
+});
+
+test('products the owner left out are not named in the portfolio', () => {
+  for (const content of Object.values(productsContent)) {
+    assert.doesNotMatch(JSON.stringify(content), notPresented);
+  }
+});
+
+test('Kulinaryos remains an external reference outside the catalog and SEO description', () => {
   for (const content of Object.values(productsContent)) {
     assert.equal(content.externalReference.id, 'kulinaryos');
     assert.match(content.externalReference.description, /Food Process/);
     assert.doesNotMatch(content.externalReference.description, /fundador|founder/);
     assert.ok(catalog(content).every((product) => product.id !== 'kulinaryos'));
     assert.doesNotMatch(content.description, /Kulinaryos/);
-  }
-});
-
-test('financial disclosures match the runtime canonical contract exactly in both locales', () => {
-  for (const [locale, content] of Object.entries(productsContent)) {
-    // eslint-disable-next-line security/detect-object-injection -- locale iterates the keys of productsContent
-    assert.equal(content.financialNote, disclosures[locale]);
-  }
-});
-
-test('Satwake retains the Briefing BTC name and existing localized destination', () => {
-  for (const [locale, content] of Object.entries(productsContent)) {
-    const product = content.products.find((item) => item.id === 'satwake');
-    assert.match(product.name, /Satwake/);
-    assert.match(product.name, /Briefing BTC/);
-    assert.equal(product.href, `${locale === 'pt-BR' ? '/produtos' : '/products'}/briefing-btc`);
   }
 });
 
@@ -72,8 +61,6 @@ test('navigation uses reviewed public destinations and existing locale routes', 
     // dynamic route alone would not detect an absent CMS object.
     const reviewedPaths = new Set([
       `${prefix}/robson`,
-      `${prefix}/briefing-btc`,
-      `${prefix}/maestro`,
       contact,
       '/blog/2026-08-07-evidence-authority-boundaries',
       '/blog/2026-07-29-governed-public-rag',
@@ -84,7 +71,12 @@ test('navigation uses reviewed public destinations and existing locale routes', 
       'https://strategos.gr',
       'https://kulinaryos.com'
     ]);
-    const entries = [...catalog(content), content.externalReference, ...content.references];
+    const entries = [
+      ...catalog(content),
+      content.engineeringProduct,
+      content.externalReference,
+      ...content.references
+    ];
     const links = [
       content.contactHref,
       ...entries.flatMap((entry) => [
@@ -99,11 +91,7 @@ test('navigation uses reviewed public destinations and existing locale routes', 
         continue;
       }
       assert.ok(reviewedPaths.has(href), `Unreviewed internal destination: ${href}`);
-      const dynamic = href.startsWith('/blog/')
-        ? '/blog/[slug]'
-        : href === `${prefix}/maestro`
-          ? `${prefix}/[slug]`
-          : href;
+      const dynamic = href.startsWith('/blog/') ? '/blog/[slug]' : href;
       assert.ok(
         existsSync(new URL(`../src/routes${dynamic}/+page.svelte`, import.meta.url)),
         `Missing route: ${href}`

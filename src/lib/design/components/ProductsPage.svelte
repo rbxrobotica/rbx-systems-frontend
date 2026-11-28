@@ -9,7 +9,9 @@
     type PartnershipExchangeRates
   } from '$lib/content/partnership';
   import { trackPartnershipEvent } from '$lib/analytics/partnership';
+  import { siteHref } from '$lib/seo/alternates';
   import { buildGraph, collectionPageSchema } from '$lib/seo/schema';
+  import { SITE_ORIGIN } from '$lib/seo/site';
   import type { Locale } from '$types/content';
 
   let {
@@ -19,8 +21,7 @@
 
   // eslint-disable-next-line security/detect-object-injection -- locale is the Locale prop: 'pt-BR' or 'en'
   const content = $derived(productsContent[locale]);
-  const siteUrl = $derived(locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
-  const pageUrl = $derived(`${siteUrl}${$page.url.pathname}`);
+  const pageUrl = $derived(`${SITE_ORIGIN}${$page.url.pathname}`);
   const schema = $derived(
     buildGraph(locale, pageUrl, content.title, content.description, [
       collectionPageSchema(
@@ -28,10 +29,12 @@
         pageUrl,
         content.title,
         content.description,
-        [...content.products, ...content.additionalProducts].map((product) => ({
-          name: product.name,
-          url: `${pageUrl}#${product.id}`
-        }))
+        [...content.products, ...content.additionalProducts, content.engineeringProduct].map(
+          (product) => ({
+            name: product.name,
+            url: `${pageUrl}#${product.id}`
+          })
+        )
       )
     ])
   );
@@ -55,7 +58,7 @@
     </ul>
     <a
       class="partnership-link"
-      href={content.contactHref}
+      href={siteHref(locale, content.contactHref)}
       onclick={() =>
         trackPartnershipEvent('cta_click', {
           locale,
@@ -87,27 +90,14 @@
           {#if product.note}<p class="product-note">{product.note}</p>{/if}
           {#if product.href}
             <div class="product-links">
-              <a href={product.href}>{product.linkLabel}</a>
+              <a href={siteHref(locale, product.href)}>{product.linkLabel}</a>
               {#each product.secondaryLinks ?? [] as link}
-                <a href={link.href}>{link.label}</a>
+                <a href={siteHref(locale, link.href)}>{link.label}</a>
               {/each}
             </div>
           {/if}
         </article>
       {/each}
-    </div>
-  </section>
-
-  <section class="external-reference" aria-labelledby="external-title">
-    <div>
-      <p class="eyebrow">{content.externalTitle}</p>
-      <h2 id="external-title">{content.externalReference.name}</h2>
-    </div>
-    <div>
-      <p>{content.externalReference.description}</p>
-      {#if content.externalReference.href}
-        <a href={content.externalReference.href}>{content.externalReference.linkLabel}</a>
-      {/if}
     </div>
   </section>
 
@@ -122,9 +112,48 @@
           <h3>{product.name}</h3>
           <p class="product-context">{product.context}</p>
           <p>{product.description}</p>
-          {#if product.href}<a href={product.href}>{product.linkLabel}</a>{/if}
+          {#if product.href}<a href={siteHref(locale, product.href)}>{product.linkLabel}</a>{/if}
         </article>
       {/each}
+    </div>
+  </section>
+
+  <section class="external-reference engineering" aria-labelledby="engineering-title">
+    <div>
+      <p class="eyebrow">{content.engineeringTitle}</p>
+      <h2 id="engineering-title">{content.engineeringProduct.name}</h2>
+      <p class="product-context">
+        {content.engineeringProduct.category} · {content.engineeringProduct.context}
+      </p>
+    </div>
+    <div id={content.engineeringProduct.id}>
+      <p>{content.engineeringProduct.description}</p>
+      {#if content.engineeringProduct.note}
+        <p class="product-note">{content.engineeringProduct.note}</p>
+      {/if}
+      {#if content.engineeringProduct.href}
+        <div class="product-links">
+          <a href={siteHref(locale, content.engineeringProduct.href)}
+            >{content.engineeringProduct.linkLabel}</a
+          >
+          {#each content.engineeringProduct.secondaryLinks ?? [] as link}
+            <a href={siteHref(locale, link.href)}>{link.label}</a>
+          {/each}
+        </div>
+      {/if}
+    </div>
+  </section>
+
+  <section class="external-reference" aria-labelledby="external-title">
+    <div>
+      <p class="eyebrow">{content.externalTitle}</p>
+      <h2 id="external-title">{content.externalReference.name}</h2>
+    </div>
+    <div>
+      <p>{content.externalReference.description}</p>
+      {#if content.externalReference.href}
+        <a href={content.externalReference.href}>{content.externalReference.linkLabel}</a>
+      {/if}
     </div>
   </section>
 
@@ -192,7 +221,7 @@
           <p class="eyebrow">{reference.name}</p>
           <h3>{reference.title}</h3>
           <p>{reference.description}</p>
-          {#if reference.href}<a href={reference.href}>{reference.label}</a>{/if}
+          {#if reference.href}<a href={siteHref(locale, reference.href)}>{reference.label}</a>{/if}
         </article>
       {/each}
     </div>
@@ -211,7 +240,7 @@
     </div>
     <a
       class="rbx-cta"
-      href={content.contactHref}
+      href={siteHref(locale, content.contactHref)}
       onclick={() =>
         trackPartnershipEvent('cta_click', {
           locale,
@@ -223,8 +252,7 @@
   </section>
 
   <aside class="portfolio-notes" aria-label={content.legalLabel}>
-    <p><strong>Satwake / Briefing BTC.</strong> {content.financialNote}</p>
-    <a href="/legal">{content.legalLabel}</a>
+    <a href={siteHref(locale, '/legal')}>{content.legalLabel}</a>
   </aside>
 </div>
 
@@ -239,7 +267,7 @@
     letter-spacing: 0.1em;
     line-height: var(--lead-body);
     text-transform: uppercase;
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   .portfolio-header {
     padding: var(--s-5) 0 var(--s-8);
@@ -266,7 +294,7 @@
     font-size: var(--text-sm);
   }
   .collaboration .partnership-price {
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     font-size: var(--text-sm);
   }
   .disciplines,
@@ -290,7 +318,7 @@
     width: 5px;
     height: 5px;
     margin-right: var(--s-3);
-    background: var(--cyan-brand);
+    background: var(--accent-line);
     vertical-align: middle;
   }
   section {
@@ -320,6 +348,10 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--s-4);
+  }
+  /* The first product is the featured one and takes the full row. */
+  .product-card:first-child {
+    grid-column: 1 / -1;
   }
   .product-card {
     display: flex;
@@ -426,7 +458,7 @@
   .platform {
     padding: var(--s-7);
     border: 1px solid var(--border-strong);
-    border-top: 2px solid var(--cyan-brand);
+    border-top: 2px solid var(--accent-line);
     border-radius: var(--radius-md);
     background: var(--bg-1);
   }
@@ -450,7 +482,7 @@
     margin-bottom: var(--s-5);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   .platform h3,
   .reference h3 {
@@ -475,9 +507,12 @@
     justify-content: space-between;
     gap: var(--s-3);
     padding: var(--s-4) var(--s-5);
-    border: 1px solid var(--cyan-dim);
+    border: 1px solid var(--accent-outline);
     border-top: 0;
-    background: var(--cyan-subtle);
+    background: var(--accent-subtle);
+  }
+  .foundation .eyebrow {
+    color: var(--accent-text-on-tint);
   }
   .foundation p {
     font-size: var(--text-sm);
@@ -576,9 +611,6 @@
     font-size: var(--text-sm);
     color: var(--fg-1);
     line-height: var(--lead-loose);
-  }
-  .portfolio-notes p {
-    margin-bottom: var(--s-3);
   }
   @media (max-width: 900px) {
     .product-grid {

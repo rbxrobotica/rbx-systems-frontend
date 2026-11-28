@@ -45,13 +45,13 @@
           reviewBudget: 'I need to evaluate it',
           select: 'Select an option',
           consent:
-            'I authorize RBX Systems to use these details to assess this request and contact me by email about this engineering partnership.',
+            'I authorize Merovelis AI to use these details to assess this request and contact me by email about this engineering partnership.',
           submit: 'Send partnership brief',
           submitting: 'Sending brief…',
-          next: 'RBX will review scope and availability and reply by email. Sending this brief does not reserve capacity or create a contract.',
+          next: 'Merovelis will review scope and availability and reply by email. Sending this brief does not reserve capacity or create a contract.',
           successTitle: 'Brief received',
           success:
-            'Your request has been recorded. RBX will review fit and availability and contact you by email. No meeting is scheduled automatically.',
+            'Your request has been recorded. Merovelis will review fit and availability and contact you by email. No meeting is scheduled automatically.',
           verifyIdle: 'Verify you are not a robot',
           verifyLoading: 'Verifying…',
           verifySuccess: 'Verified',
@@ -93,13 +93,13 @@
           reviewBudget: 'Preciso avaliar',
           select: 'Selecione uma opção',
           consent:
-            'Autorizo a RBX Systems a usar estes dados para avaliar esta solicitação e entrar em contato comigo por e-mail sobre esta parceria de engenharia.',
+            'Autorizo a Merovelis IA a usar estes dados para avaliar esta solicitação e entrar em contato comigo por e-mail sobre esta parceria de engenharia.',
           submit: 'Enviar contexto da parceria',
           submitting: 'Enviando contexto…',
-          next: 'A RBX revisará escopo e disponibilidade e responderá por e-mail. O envio não reserva capacidade nem constitui contratação.',
+          next: 'A Merovelis revisará escopo e disponibilidade e responderá por e-mail. O envio não reserva capacidade nem constitui contratação.',
           successTitle: 'Contexto recebido',
           success:
-            'Sua solicitação foi registrada. A RBX avaliará aderência e disponibilidade e entrará em contato por e-mail. Nenhuma reunião é agendada automaticamente.',
+            'Sua solicitação foi registrada. A Merovelis avaliará aderência e disponibilidade e entrará em contato por e-mail. Nenhuma reunião é agendada automaticamente.',
           verifyIdle: 'Verificar que não sou um robô',
           verifyLoading: 'Verificando…',
           verifySuccess: 'Verificado',
@@ -511,7 +511,7 @@
   select:focus-visible,
   textarea:focus-visible,
   button:focus-visible {
-    outline: 2px solid var(--cyan-brand);
+    outline: 2px solid var(--accent-focus);
     outline-offset: 3px;
   }
 
@@ -525,7 +525,7 @@
   }
 
   .price-reference {
-    color: var(--cyan-brand);
+    color: var(--accent-text);
     font-size: var(--text-sm);
     font-family: var(--font-mono);
   }
@@ -544,7 +544,7 @@
     width: 1.125rem;
     height: 1.125rem;
     margin-top: 0.25rem;
-    accent-color: var(--cyan-brand);
+    accent-color: var(--cta);
   }
 
   .honeypot {
@@ -565,10 +565,10 @@
 
   .submit {
     padding: var(--s-3) var(--s-5);
-    border: 1px solid var(--cyan-brand);
+    border: 1px solid var(--cta);
     border-radius: var(--radius-sm);
-    background: var(--cyan-brand);
-    color: var(--bg-0);
+    background: var(--cta);
+    color: var(--on-cta);
     font: inherit;
     font-weight: 600;
     cursor: pointer;
@@ -579,7 +579,7 @@
   }
 
   .success {
-    border-color: var(--cyan-brand);
+    border-color: var(--accent-line);
     color: var(--fg-1);
   }
 

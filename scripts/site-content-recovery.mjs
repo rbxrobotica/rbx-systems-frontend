@@ -10,13 +10,13 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const bucket = 'rbx-content';
 const limit = 1024 * 1024;
 export const targets = [
-  ['site/pt-BR/home/index.md', '4f5a61d9a0c00ecbdcc060aacdf3ae49dc3870b965573bc391bcc9041287e72c'],
+  ['site/pt-BR/home/index.md', '805351c4f3a29e1bda7976149951e1ae249f2e7f134dee63d443bc2595930bb8'],
   [
     'site/pt-BR/solutions/index.md',
-    '2bc9bea630cbf0ed49c7361f3b427dfd76f47ce054ea363e3f83b041d2a820dc'
+    'e9680a23b0612fe2e88ca4e1a6b453b9544f3087a3454b3f76d9631c862b7e70'
   ],
-  ['site/en/home/index.md', 'e654dec59be034fca08450211d7a6e1c0bfce7f93056a5c145644648f1b89d1a'],
-  ['site/en/solutions/index.md', 'd139d52c42cc075acf53f6ef2c077910a9b18dbac9b0dd38b9a79adf40d4dac1']
+  ['site/en/home/index.md', 'd6b9828f3591cae58ee67f86ffcd03aac211f162689b7e703290b88929ff691b'],
+  ['site/en/solutions/index.md', 'e6b8d615791d2166837cb7765cc66ceead874c8eb6bc0e49917d54124778c84f']
 ];
 export const sha256 = (body) => createHash('sha256').update(body).digest('hex');
 // GET returns quoted ETags. Ceph PUT paths may compare the token directly,

@@ -2,10 +2,11 @@
   import { page } from '$app/stores';
   import { afterNavigate } from '$app/navigation';
   import Logo from './Logo.svelte';
+  import ThemeToggle from './ThemeToggle.svelte';
   import { NAV_SECTIONS, leafTitle, navLabel, resolveNav, localeSwitchHref } from '$design/nav';
   import { t } from '$lib/i18n/translate';
-  import { localizedPath } from '$lib/seo/alternates';
-  import type { Locale } from '$types/content';
+  import { localizedHref } from '$lib/seo/alternates';
+  import type { Locale, PostAlternate } from '$types/content';
 
   interface Props {
     locale: Locale;
@@ -14,7 +15,7 @@
   let { locale }: Props = $props();
 
   const tr = (key: string) => t(locale, key);
-  const href = (pathname: string) => localizedPath(locale, pathname);
+  const href = (pathname: string) => localizedHref(locale, pathname);
 
   // Header in three rows: brand + language + contact; the five sections; and,
   // when the page belongs to a section, a band with that section's pages.
@@ -27,8 +28,10 @@
     nav.trail.length > 1 ? nav.trail[nav.trail.length - 1].label : undefined
   );
 
-  const ptHref = $derived(localeSwitchHref(locale, 'pt-BR', pathname));
-  const enHref = $derived(localeSwitchHref(locale, 'en', pathname));
+  // A post names its address in each language it exists in.
+  const alternates = $derived(($page.data as { alternates?: PostAlternate[] }).alternates);
+  const ptHref = $derived(localeSwitchHref(locale, 'pt-BR', pathname, alternates));
+  const enHref = $derived(localeSwitchHref(locale, 'en', pathname, alternates));
 
   let menuOpen = $state(false);
   let sectionOpen = $state(false);
@@ -42,15 +45,25 @@
 <div class="site-nav">
   <header class="site-header">
     <div class="row brand-row">
-      <a href={href('/')} class="brand" aria-label="RBX Systems">
+      <a
+        href={href('/')}
+        class="brand"
+        aria-label={locale === 'pt-BR' ? 'Merovelis IA' : 'Merovelis AI'}
+      >
         <span class="brand-desktop"><Logo size={28} variant="stacked" /></span>
         <span class="brand-mobile"><Logo size={24} variant="compact" /></span>
       </a>
 
       <div class="tools">
+        <span class="theme-desktop"><ThemeToggle {locale} /></span>
+
+        <!-- Changing language loads a new document, as it did when each
+             language had its own host: whatever a component decided once from
+             the address (the service it calls, the dictionary) starts again. -->
         <div class="lang rbx-eyebrow" role="group" aria-label={tr('nav.language')}>
           <a
             href={ptHref}
+            data-sveltekit-reload
             hreflang="pt-BR"
             lang="pt-BR"
             class:active={locale === 'pt-BR'}
@@ -59,6 +72,7 @@
           <span aria-hidden="true">/</span>
           <a
             href={enHref}
+            data-sveltekit-reload
             hreflang="en"
             lang="en"
             class:active={locale === 'en'}
@@ -209,6 +223,7 @@
         {/if}
       </div>
     {/each}
+    <div class="menu-theme"><ThemeToggle {locale} variant="row" /></div>
   </nav>
 </div>
 
@@ -269,7 +284,7 @@
      is a box-shadow and must stay visible on the active link too. */
   .lang a.active {
     color: var(--fg-0);
-    background: linear-gradient(var(--cyan-brand), var(--cyan-brand)) left bottom / 100% 1px
+    background: linear-gradient(var(--accent-active), var(--accent-active)) left bottom / 100% 1px
       no-repeat;
   }
   .lang span {
@@ -289,7 +304,7 @@
   }
   /* Qualified with .site-nav a so it outranks the generic link hover above. */
   .site-nav a.cta:hover {
-    background: var(--cyan-signal);
+    background: var(--cta-hover);
     color: var(--on-cta);
   }
   .cta-icon {
@@ -321,7 +336,7 @@
   }
   .primary a.active {
     color: var(--fg-0);
-    background: linear-gradient(var(--cyan-brand), var(--cyan-brand)) left bottom / 100% 1px
+    background: linear-gradient(var(--accent-active), var(--accent-active)) left bottom / 100% 1px
       no-repeat;
   }
 
@@ -366,7 +381,7 @@
     color: var(--fg-0);
     padding-bottom: 3px;
     margin-bottom: -3px;
-    background: linear-gradient(var(--cyan-brand), var(--cyan-brand)) left bottom / 100% 1px
+    background: linear-gradient(var(--accent-active), var(--accent-active)) left bottom / 100% 1px
       no-repeat;
   }
 
@@ -374,6 +389,10 @@
   .section-menu,
   .menu {
     display: none;
+  }
+  .theme-desktop {
+    display: inline-flex;
+    margin-right: calc(var(--s-3) * -1);
   }
 
   @media (max-width: 767px) {
@@ -389,6 +408,15 @@
     }
     .tools {
       gap: var(--s-1);
+    }
+    /* No room beside the brand on a phone: the toggle moves into the menu. */
+    .theme-desktop {
+      display: none;
+    }
+    .menu-theme {
+      margin-top: var(--s-4);
+      padding-top: var(--s-3);
+      border-top: 1px solid var(--border);
     }
     .lang {
       margin-right: var(--s-2);
@@ -460,7 +488,7 @@
       white-space: nowrap;
       padding-bottom: 3px;
       margin-bottom: -3px;
-      box-shadow: inset 0 -1px 0 var(--cyan-brand);
+      box-shadow: inset 0 -1px 0 var(--accent-active);
     }
     .chevron {
       flex: none;
@@ -517,6 +545,12 @@
       align-items: center;
       min-height: 44px;
       color: var(--fg-1);
+    }
+  }
+  /* Up to 363px the name does not fit beside the controls: the mark stands alone. */
+  @media (max-width: 363px) {
+    .brand-mobile :global(.wm) {
+      display: none;
     }
   }
 </style>

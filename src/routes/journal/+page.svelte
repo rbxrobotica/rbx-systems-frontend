@@ -2,6 +2,7 @@
   import { formatDate } from '$api/content';
   import PageHeader from '$components/PageHeader.svelte';
   import Seo from '$components/Seo.svelte';
+  import { localizedUrl, siteHref } from '$lib/seo/alternates';
   import { buildGraph, collectionPageSchema } from '$lib/seo/schema';
   import { t } from '$lib/i18n/translate';
   import type { PageData } from './$types';
@@ -10,8 +11,7 @@
 
   const title = $derived(t(data.locale, 'journal.metaTitle'));
   const description = $derived(t(data.locale, 'journal.metaDescription'));
-  const siteUrl = $derived(data.locale === 'pt-BR' ? 'https://rbx.ia.br' : 'https://rbxsystems.ch');
-  const pageUrl = $derived(`${siteUrl}/journal`);
+  const pageUrl = $derived(localizedUrl(data.locale, '/journal'));
   const schema = $derived(
     buildGraph(data.locale, pageUrl, title, description, [
       collectionPageSchema(
@@ -21,7 +21,7 @@
         description,
         data.posts.map((post) => ({
           name: post.title,
-          url: `${siteUrl}/blog/${post.publicSlug}`
+          url: localizedUrl(data.locale, `/blog/${post.publicSlug}`)
         }))
       )
     ])
@@ -34,7 +34,9 @@
 
 <p class="rss-cta">
   <span class="rss-badge">{t(data.locale, 'journal.rssNew')}</span>
-  <a href="/rss.xml" type="application/rss+xml">{t(data.locale, 'journal.rssCta')}</a>
+  <a href={siteHref(data.locale, '/rss.xml')} type="application/rss+xml"
+    >{t(data.locale, 'journal.rssCta')}</a
+  >
 </p>
 
 {#if data.posts.length === 0}
@@ -43,7 +45,7 @@
   <ul class="post-list">
     {#each data.posts as post}
       <li class="post-item">
-        <a href="/blog/{post.publicSlug}">
+        <a href={siteHref(data.locale, `/blog/${post.publicSlug}`)}>
           <span class="post-date">{formatDate(post.date, data.locale)}</span>
           <h2 class="post-title">{post.title}</h2>
           <p class="rbx-caption">{post.excerpt}</p>
@@ -65,8 +67,8 @@
     letter-spacing: var(--track-label);
   }
   .rss-badge {
-    color: var(--cyan-brand);
-    border: 1px solid var(--cyan-brand);
+    color: var(--accent-text);
+    border: 1px solid var(--accent-line);
     border-radius: var(--radius-sm);
     padding: 0 var(--s-1);
   }
@@ -75,7 +77,7 @@
     transition: color var(--dur) var(--ease);
   }
   .rss-cta a:hover {
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   .post-list {
     list-style: none;
@@ -91,7 +93,7 @@
     border-bottom: 1px solid var(--border);
   }
   .post-item a:hover .post-title {
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   .post-date {
     font-family: var(--font-mono);

@@ -198,7 +198,7 @@
   .branch {
     font-family: var(--font-mono);
     font-size: var(--text-xs);
-    color: var(--cyan-brand);
+    color: var(--accent-text);
   }
   .eyebrow {
     text-transform: uppercase;
@@ -237,15 +237,15 @@
     border-color: var(--fg-2);
   }
   button[aria-pressed='true'] {
-    color: var(--cyan-brand);
-    border-color: var(--cyan-muted);
-    background: var(--cyan-subtle);
+    color: var(--accent-text);
+    border-color: var(--accent-label);
+    background: var(--accent-subtle);
   }
   button:focus-visible,
   a:focus-visible,
   summary:focus-visible,
   pre:focus-visible {
-    outline: 2px solid var(--cyan-brand);
+    outline: 2px solid var(--accent-focus);
     outline-offset: 4px;
   }
   article {
