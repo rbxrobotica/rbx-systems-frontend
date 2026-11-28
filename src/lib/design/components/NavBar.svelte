@@ -45,7 +45,11 @@
 <div class="site-nav">
   <header class="site-header">
     <div class="row brand-row">
-      <a href={href('/')} class="brand" aria-label="Merovelis Systems">
+      <a
+        href={href('/')}
+        class="brand"
+        aria-label={locale === 'pt-BR' ? 'Merovelis IA' : 'Merovelis AI'}
+      >
         <span class="brand-desktop"><Logo size={28} variant="stacked" /></span>
         <span class="brand-mobile"><Logo size={24} variant="compact" /></span>
       </a>

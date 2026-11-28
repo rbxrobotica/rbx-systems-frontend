@@ -1,5 +1,5 @@
 ---
-title: Observability — Merovelis Systems
+title: Observability — Merovelis AI
 description: Traces, metrics, logs and alerts with PII redaction for regulated operations.
 eyebrow: Solution
 lead: See what your systems and AI models are doing in production.

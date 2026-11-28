@@ -24,9 +24,9 @@ const servicesByLocale = (locale: Locale) =>
 
 const institutionalByLocale: Record<Locale, { label: string; path: string; note: string }[]> = {
   'pt-BR': [
-    { label: 'Sobre', path: '/sobre', note: 'quem é a Merovelis Sistemas' },
-    { label: 'História', path: '/historia', note: 'trajetória da Merovelis Sistemas' },
-    { label: 'Carreiras', path: '/carreiras', note: 'como trabalhar com a Merovelis Sistemas' },
+    { label: 'Sobre', path: '/sobre', note: 'quem é a Merovelis IA' },
+    { label: 'História', path: '/historia', note: 'trajetória da Merovelis IA' },
+    { label: 'Carreiras', path: '/carreiras', note: 'como trabalhar com a Merovelis IA' },
     { label: 'Equipe', path: '/equipe', note: 'time de engenharia e liderança' },
     {
       label: 'Leandro Damasio',
@@ -38,9 +38,9 @@ const institutionalByLocale: Record<Locale, { label: string; path: string; note:
     { label: 'Legal', path: '/legal', note: 'aviso legal' }
   ],
   en: [
-    { label: 'About', path: '/about', note: 'who Merovelis Systems is' },
-    { label: 'History', path: '/history', note: 'the Merovelis Systems trajectory' },
-    { label: 'Careers', path: '/careers', note: 'how to work with Merovelis Systems' },
+    { label: 'About', path: '/about', note: 'who Merovelis AI is' },
+    { label: 'History', path: '/history', note: 'the Merovelis AI trajectory' },
+    { label: 'Careers', path: '/careers', note: 'how to work with Merovelis AI' },
     { label: 'Team', path: '/team', note: 'engineering and leadership team' },
     {
       label: 'Leandro Damasio',
@@ -144,7 +144,7 @@ export const GET: RequestHandler = async ({ url }) => {
           link('Journal RSS', '/rss.xml', 'RSS feed with every article')
         ];
 
-  const body = `# Merovelis Systems
+  const body = `# Merovelis AI
 
 > ${summary}
 

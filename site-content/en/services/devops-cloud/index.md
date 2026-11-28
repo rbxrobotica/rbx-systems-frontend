@@ -1,5 +1,5 @@
 ---
-title: DevOps & Cloud — Merovelis Systems
+title: DevOps & Cloud — Merovelis AI
 description: Cloud-native, Kubernetes, GitOps, observability and reliability for critical operations.
 eyebrow: Solution
 lead: Sovereign, scalable and observable infrastructure for high-demand operations.

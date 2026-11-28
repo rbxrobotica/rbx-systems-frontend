@@ -1,5 +1,5 @@
 ---
-title: AI Agents — Merovelis Systems
+title: AI Agents — Merovelis AI
 description: AI agents in production with governed orchestration, memory, evaluation and secure integration with enterprise operations.
 eyebrow: Solution
 lead: Autonomous agents that execute tasks within defined, auditable boundaries.

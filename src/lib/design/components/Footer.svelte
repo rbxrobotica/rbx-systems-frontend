@@ -18,7 +18,10 @@
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <a href={href('/')} class="footer-logo" aria-label="Merovelis Systems"
+      <a
+        href={href('/')}
+        class="footer-logo"
+        aria-label={locale === 'pt-BR' ? 'Merovelis IA' : 'Merovelis AI'}
         ><Logo size={24} variant="horizontal" /></a
       >
       <p class="rbx-caption">{tr('footer.description')}</p>
@@ -76,7 +79,7 @@
   <div class="footer-bottom">
     <p class="rbx-caption">
       &copy; {year}
-      {locale === 'pt-BR' ? 'Merovelis Sistemas' : 'Merovelis Systems'}. {tr('footer.rights')}
+      {locale === 'pt-BR' ? 'Merovelis IA' : 'Merovelis AI'}. {tr('footer.rights')}
       <a href={href('/legal')}>{tr('nav.legal')}</a>
     </p>
   </div>

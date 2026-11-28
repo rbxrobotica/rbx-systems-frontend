@@ -9,6 +9,6 @@
 <ContentPage
   page={data.page}
   fallbackTitle={t(data.locale, 'nav.newsroom')}
-  fallbackLead="Notícias, comunicados e posicionamentos oficiais da Merovelis Sistemas."
+  fallbackLead="Notícias, comunicados e posicionamentos oficiais da Merovelis IA."
   locale={data.locale}
 />

@@ -1,5 +1,5 @@
 ---
-title: UX/UI Design · Merovelis Systems
+title: UX/UI Design · Merovelis AI
 description: UX/UI for products and operational tools, with research, clear flows, testable prototypes, accessibility and design systems.
 eyebrow: Service
 lead: Interfaces that make state, risk and the next action understandable to the people who operate the system.

@@ -7,8 +7,8 @@
 
   const fallbackLead = $derived(
     data.locale === 'pt-BR'
-      ? 'Identificação do operador, propriedade intelectual, aviso de risco e privacidade dos sites da Merovelis Sistemas.'
-      : 'Operator identification, intellectual property, risk notice and privacy for the Merovelis Systems websites.'
+      ? 'Identificação do operador, propriedade intelectual, aviso de risco e privacidade dos sites da Merovelis IA.'
+      : 'Operator identification, intellectual property, risk notice and privacy for the Merovelis AI websites.'
   );
 </script>
 

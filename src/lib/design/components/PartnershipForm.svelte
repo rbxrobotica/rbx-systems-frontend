@@ -45,7 +45,7 @@
           reviewBudget: 'I need to evaluate it',
           select: 'Select an option',
           consent:
-            'I authorize Merovelis Systems to use these details to assess this request and contact me by email about this engineering partnership.',
+            'I authorize Merovelis AI to use these details to assess this request and contact me by email about this engineering partnership.',
           submit: 'Send partnership brief',
           submitting: 'Sending brief…',
           next: 'Merovelis will review scope and availability and reply by email. Sending this brief does not reserve capacity or create a contract.',
@@ -93,7 +93,7 @@
           reviewBudget: 'Preciso avaliar',
           select: 'Selecione uma opção',
           consent:
-            'Autorizo a Merovelis Sistemas a usar estes dados para avaliar esta solicitação e entrar em contato comigo por e-mail sobre esta parceria de engenharia.',
+            'Autorizo a Merovelis IA a usar estes dados para avaliar esta solicitação e entrar em contato comigo por e-mail sobre esta parceria de engenharia.',
           submit: 'Enviar contexto da parceria',
           submitting: 'Enviando contexto…',
           next: 'A Merovelis revisará escopo e disponibilidade e responderá por e-mail. O envio não reserva capacidade nem constitui contratação.',

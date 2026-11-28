@@ -18,6 +18,10 @@ catalog, because the subscription flow lives there. The assistant's instructions
 still describe both products. The sections below that mention Satwake or Initelo
 describe the catalog before this change.
 
+**Name of 2026-11-27 (owner).** The public name of the house is Merovelis AI in
+English and Merovelis IA in Portuguese. Where the notes below say Merovelis
+Sistemas or Merovelis Systems, they record the name proposed until that date.
+
 **Positioning of 2026-11-23 (owner).** The house is Merovelis Sistemas (Merovelis
 Systems in English), a product company. The catalog lists seven products:
 Strategos first, as the featured product for logistics, then Robson, Satwake /

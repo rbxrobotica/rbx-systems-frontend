@@ -1,15 +1,15 @@
 ---
 title: Aviso Legal
-description: Identificação do operador, propriedade intelectual, aviso de risco e privacidade dos sites da Merovelis Sistemas.
-eyebrow: Merovelis Sistemas
-lead: Este aviso identifica quem opera os sites da Merovelis Sistemas e as condições que regem o uso do conteúdo.
+description: Identificação do operador, propriedade intelectual, aviso de risco e privacidade dos sites da Merovelis IA.
+eyebrow: Merovelis IA
+lead: Este aviso identifica quem opera os sites da Merovelis IA e as condições que regem o uso do conteúdo.
 ---
 <h2>Identificação</h2>
-<p>O site merovelis.com é operado pela Merovelis Sistemas. Até novembro de 2026 a empresa usava o nome RBX Systems e os endereços rbx.ia.br e rbxsystems.ch, que agora levam a este site.</p>
-<!-- OPERATOR: inserir razão social, CNPJ e endereço registrado antes da divulgação externa deste aviso. -->
+<p>O site merovelis.com é operado pela Merovelis IA. Até novembro de 2026 a empresa usava o nome RBX Systems e os endereços rbx.ia.br e rbxsystems.ch, que agora levam a este site.</p>
+<!-- OPERATOR: inserir a denominação vigente da pessoa jurídica, CNPJ e endereço registrado antes da divulgação externa deste aviso. Merovelis IA é o nome público, não a denominação jurídica (ADR-0030, seção 2). -->
 <p>Contato: <a href="mailto:contact@rbxsystems.ch">contact@rbxsystems.ch</a> ou a <a href="/contato">página de contato</a>.</p>
 <h2>Propriedade intelectual</h2>
-<p>O conteúdo destes sites (textos, marcas, material visual e exemplos de código) pertence à Merovelis Sistemas. Reprodução integral sem autorização prévia não é permitida. Citação com atribuição e link é permitida.</p>
+<p>O conteúdo destes sites (textos, marcas, material visual e exemplos de código) pertence à Merovelis IA. Reprodução integral sem autorização prévia não é permitida. Citação com atribuição e link é permitida.</p>
 <h2>Aviso de risco</h2>
 <p>Robson e o Briefing Diário BTC são produtos de tecnologia e informação. Nada nestes sites constitui recomendação de investimento, oferta de valores mobiliários ou consultoria financeira. Mercados de criptoativos envolvem risco elevado, incluindo a perda integral do capital. Resultados passados não garantem resultados futuros. Decisões de investimento são responsabilidade exclusiva de quem as toma.</p>
 <h2>Privacidade</h2>
@@ -24,6 +24,6 @@ lead: Este aviso identifica quem opera os sites da Merovelis Sistemas e as condi
 <li>Alterações de preço valem apenas para períodos futuros e são comunicadas por e-mail com pelo menos 30 dias de antecedência.</li>
 </ul>
 <h2>Sem garantias</h2>
-<p>O conteúdo é publicado no estado em que se encontra, sem garantia de exatidão, completude ou adequação a um propósito específico. A Merovelis Sistemas pode alterar ou remover conteúdo sem aviso prévio.</p>
+<p>O conteúdo é publicado no estado em que se encontra, sem garantia de exatidão, completude ou adequação a um propósito específico. A Merovelis IA pode alterar ou remover conteúdo sem aviso prévio.</p>
 <h2>Alterações</h2>
 <p>Este aviso pode ser atualizado. Versão de 12 de setembro de 2026.</p>

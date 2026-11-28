@@ -4,9 +4,9 @@ description: Official information, press resources and company facts.
 eyebrow: Press
 lead: Official information, press resources and company facts.
 ---
-<p>This is the institutional source of Merovelis Systems. For press inquiries, use <strong><a href="mailto:contact@rbxsystems.ch">contact@rbxsystems.ch</a></strong>.</p>
+<p>This is the institutional source of Merovelis AI. For press inquiries, use <strong><a href="mailto:contact@rbxsystems.ch">contact@rbxsystems.ch</a></strong>.</p>
 <h2>Boilerplate</h2>
-<p>Merovelis Systems is an engineering company focused on automation, AI infrastructure and operational systems for environments that require control, reliability and long-term maintainability.</p>
+<p>Merovelis AI is an engineering company focused on automation, AI infrastructure and operational systems for environments that require control, reliability and long-term maintainability.</p>
 <h2>Facts</h2>
 <table>
 <thead>

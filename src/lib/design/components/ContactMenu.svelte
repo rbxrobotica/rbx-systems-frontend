@@ -8,12 +8,12 @@
 
   const contextMessages: Record<string, { pt: string; en: string }> = {
     '/solucoes': {
-      pt: 'Olá, tenho interesse nas soluções da Merovelis Sistemas.',
-      en: 'Hello, I am interested in Merovelis Systems solutions.'
+      pt: 'Olá, tenho interesse nas soluções da Merovelis IA.',
+      en: 'Hello, I am interested in Merovelis AI solutions.'
     },
     '/produtos': {
-      pt: 'Olá, quero saber mais sobre os produtos da Merovelis Sistemas.',
-      en: 'Hello, I would like to learn more about Merovelis Systems products.'
+      pt: 'Olá, quero saber mais sobre os produtos da Merovelis IA.',
+      en: 'Hello, I would like to learn more about Merovelis AI products.'
     },
     '/cases': {
       pt: 'Olá, quero entender como a Merovelis pode ajudar minha empresa.',
@@ -48,8 +48,8 @@
     const entry = Object.entries(contextMessages).find(([key]) => path.startsWith(key));
     if (entry) return isEn ? entry[1].en : entry[1].pt;
     return isEn
-      ? 'Hello, I visited the Merovelis Systems website and would like to chat.'
-      : 'Olá, vim pelo site da Merovelis Sistemas e gostaria de conversar.';
+      ? 'Hello, I visited the Merovelis AI website and would like to chat.'
+      : 'Olá, vim pelo site da Merovelis IA e gostaria de conversar.';
   }
 
   const initialMessage = $derived(getContextMessage($page.url.pathname, $locale));

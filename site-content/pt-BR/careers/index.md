@@ -1,5 +1,5 @@
 ---
-title: Carreiras na Merovelis Sistemas
+title: Carreiras na Merovelis IA
 description: Trabalhe com engenharia de sistemas, IA aplicada, cloud e produtos open source em uma equipe remota, técnica e orientada a evidências.
 eyebrow: Pessoas
 lead: Construímos sistemas que precisam funcionar em produção. Procuramos pessoas curiosas, responsáveis e confortáveis com problemas difíceis.

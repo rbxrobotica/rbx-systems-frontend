@@ -1,5 +1,5 @@
 ---
-title: Logistics Software — Merovelis Systems
+title: Logistics Software — Merovelis AI
 description: Interoperability, OCR, traceability, offline-first and decision support for critical logistics operations.
 eyebrow: Solution
 lead: Resilient, integrated logistics systems that work in the field.

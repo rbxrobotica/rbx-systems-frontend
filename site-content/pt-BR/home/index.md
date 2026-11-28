@@ -1,7 +1,7 @@
 ---
-title: Merovelis Sistemas cria e opera produtos de software com IA
-description: 'A Merovelis Sistemas é uma empresa de produtos: Strategos, para logística, e Verentir, para avaliação de IA, sobre a mesma base de engenharia.'
-eyebrow: Merovelis Sistemas
+title: Merovelis IA cria e opera produtos de software com IA
+description: 'A Merovelis IA é uma empresa de produtos: Strategos, para logística, e Verentir, para avaliação de IA, sobre a mesma base de engenharia.'
+eyebrow: Merovelis IA
 lead: 'Somos uma empresa de produtos. Cada um tem marca, endereço e estágio próprios, e todos rodam sobre a mesma base de engenharia: infraestrutura própria, governança de IA e registro auditável.'
 ---
 

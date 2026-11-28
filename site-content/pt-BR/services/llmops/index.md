@@ -1,5 +1,5 @@
 ---
-title: LLMOps — Merovelis Sistemas
+title: LLMOps — Merovelis IA
 description: Observabilidade de LLMs, roteamento de modelos, controle de custo, avaliação e governança em produção.
 eyebrow: Solução
 lead: Opere LLMs em produção com observabilidade, controle de custo e governança.

@@ -1,5 +1,5 @@
 ---
-title: Careers at Merovelis Systems
+title: Careers at Merovelis AI
 description: Work on systems engineering, applied AI, cloud and open-source products in a remote, technical and evidence-driven team.
 eyebrow: People
 lead: We build systems that must work in production. We look for curious, accountable people who are comfortable with difficult problems.

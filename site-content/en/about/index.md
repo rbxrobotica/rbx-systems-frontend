@@ -1,10 +1,10 @@
 ---
-title: About Merovelis Systems
-description: 'Merovelis Systems is an AI software product company: Strategos, for logistics, and Verentir, for AI evaluation, on its own platform.'
+title: About Merovelis AI
+description: 'Merovelis AI is an AI software product company: Strategos, for logistics, and Verentir, for AI evaluation, on its own platform.'
 eyebrow: Company
 lead: A product company. Each product solves an operational problem and all of them run on the same engineering base.
 ---
-<p>Merovelis Systems builds and operates AI software products. <a href="/products#strategos">Strategos</a> is the situation room for logistics and critical operations. Verentir evaluates AI systems, beside the Thalamus and TruthMetal platforms. <a href="/products/robson">Robson</a> is an open-source execution and risk engine.</p>
+<p>Merovelis AI builds and operates AI software products. <a href="/products#strategos">Strategos</a> is the situation room for logistics and critical operations. Verentir evaluates AI systems, beside the Thalamus and TruthMetal platforms. <a href="/products/robson">Robson</a> is an open-source execution and risk engine.</p>
 <h2>The common base</h2>
 <p>The products share identity, content, payments and operations, on infrastructure that Merovelis runs. Thalamus controls AI calls through policies, routing and audit. TruthMetal holds the reference datasets and criteria for evaluations. Each product states its own stage in the <a href="/products">portfolio</a>.</p>
 <h2>Sectors</h2>

@@ -29,8 +29,9 @@ may have changed independently of that seed.
 **Other pages, candidates of 2026-11-23.** Every other page of the site now has a
 source here, `site-content/<locale>/<key>/index.md`, 48 files in all. They were
 derived from the rescued objects in `site-content-recovery/2026-11-07-cache-rescue/`
-with the house renamed: Merovelis Sistemas in Portuguese, Merovelis Systems in
-English. Their bodies are the captured HTML, so they are excluded from Prettier.
+with the house renamed: Merovelis IA in Portuguese, Merovelis AI in English
+(Merovelis Sistemas and Merovelis Systems until the owner's decision of
+2026-11-27). Their bodies are the captured HTML, so they are excluded from Prettier.
 About and History were rewritten by hand for the product positioning and the
 change of name. Legal names `merovelis.com` as the site and records the earlier
 name and addresses. `products/maestro` was not carried over: Maestro left the
@@ -48,7 +49,8 @@ pair, at the owner's request. Its hashes are pinned like the home pair, with the
 same pending independent review.
 
 **Home, revision of 2026-11-23.** The home copy was rewritten for the house under
-its new name, Merovelis Sistemas (Merovelis Systems in English), as a product
+its new name, Merovelis IA (Merovelis AI in English; Merovelis Sistemas and
+Merovelis Systems until 2026-11-27), as a product
 company: products first, the engineering partnership as the closing section. The
 owner approved this copy on 2026-11-23, and on the same day asked for the
 section on Olha Escola, the social project in preparation. `scripts/site-content-recovery.mjs` pins

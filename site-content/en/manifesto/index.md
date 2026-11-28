@@ -1,6 +1,6 @@
 ---
 title: Governed AI Manifesto
-description: The Merovelis Systems governed AI architecture as six separate, auditable and combinable responsibilities.
+description: The Merovelis AI governed AI architecture as six separate, auditable and combinable responsibilities.
 eyebrow: Manifesto
 lead: Trust in AI is not a model property. It is an architectural property.
 ---

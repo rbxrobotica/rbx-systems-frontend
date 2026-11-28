@@ -1,5 +1,5 @@
 ---
-title: System Maintenance · Merovelis Systems
+title: System Maintenance · Merovelis AI
 description: Software support and evolution through fixes, upgrades, security work, observability and continuous operational risk reduction.
 eyebrow: Service
 lead: Risk-driven maintenance for systems that must remain useful, secure and understandable after the first release.

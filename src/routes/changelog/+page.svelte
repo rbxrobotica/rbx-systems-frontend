@@ -9,6 +9,6 @@
 <ContentPage
   page={data.page}
   fallbackTitle={t(data.locale, 'nav.changelog')}
-  fallbackLead="Histórico público de mudanças, releases e decisões da Merovelis Sistemas."
+  fallbackLead="Histórico público de mudanças, releases e decisões da Merovelis IA."
   locale={data.locale}
 />

@@ -1,5 +1,5 @@
 ---
-title: Web Development · Merovelis Systems
+title: Web Development · Merovelis AI
 description: Fast, accessible websites, portals and web applications integrated with your business, with technical SEO, observability and reliable operations.
 eyebrow: Service
 lead: Web development for products and operations that need performance, clarity and long-term maintainability.

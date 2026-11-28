@@ -1,5 +1,5 @@
 ---
-title: Custom Systems · Merovelis Systems
+title: Custom Systems · Merovelis AI
 description: Purpose-built software for specific workflows, with integrations, access control, audit trails and long-term maintenance.
 eyebrow: Service
 lead: Systems built around your operation, existing data and the decisions that must remain under control.

@@ -34,7 +34,7 @@
   <ContentPage
     page={data.page}
     fallbackTitle={t(data.locale, 'nav.atelier')}
-    fallbackLead="Notas de laboratório, experimentos e pesquisa aplicada da Merovelis Sistemas."
+    fallbackLead="Notas de laboratório, experimentos e pesquisa aplicada da Merovelis IA."
     locale={data.locale}
   />
 {/if}

@@ -1,5 +1,5 @@
 ---
-title: Cloud Solutions · Merovelis Systems
+title: Cloud Solutions · Merovelis AI
 description: Cloud architecture, migration and operations with infrastructure as code, security, backups, observability and cost control.
 eyebrow: Service
 lead: Reproducible, observable cloud infrastructure designed for failure without hiding costs or critical dependencies.

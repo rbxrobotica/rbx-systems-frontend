@@ -43,9 +43,9 @@
     "body": "Trust in AI is not a model property. It is an architectural property."
   },
   "home": {
-    "metaTitle": "Merovelis Systems · AI software products",
-    "metaDescription": "Merovelis Systems is a product company: Strategos, for logistics, and Verentir, for AI evaluation, on the same engineering base.",
-    "headline": "Merovelis Systems builds and operates AI software products",
+    "metaTitle": "Merovelis AI · AI software products",
+    "metaDescription": "Merovelis AI is a product company: Strategos, for logistics, and Verentir, for AI evaluation, on the same engineering base.",
+    "headline": "Merovelis AI builds and operates AI software products",
     "body": "We are a product company. Each product has its own brand, address and stage, and all of them run on the same engineering base: our own infrastructure, AI governance and an auditable record.",
     "ctaProducts": "See the products",
     "ctaStrategos": "Strategos",
@@ -56,46 +56,46 @@
     "ctaPartnership": "How the partnership works"
   },
   "about": {
-    "metaTitle": "About Merovelis Systems · AI Engineering, LLMOps & Infrastructure",
-    "metaDescription": "Meet Merovelis Systems: applied AI engineering, sovereign platforms, operational automation and products for logistics, finance and critical operations.",
-    "headline": "Merovelis Systems builds operational platforms with AI",
+    "metaTitle": "About Merovelis AI · AI Engineering, LLMOps & Infrastructure",
+    "metaDescription": "Meet Merovelis AI: applied AI engineering, sovereign platforms, operational automation and products for logistics, finance and critical operations.",
+    "headline": "Merovelis AI builds operational platforms with AI",
     "body": "We are a systems engineering company focused on high-demand operations. We build infrastructure, intelligent agents and enterprise software with governance, observability and predictable scale."
   },
   "team": {
-    "metaTitle": "Merovelis Systems Team · Founders & Leadership",
-    "metaDescription": "Meet the founding team of Merovelis Systems. Systems engineering, applied AI and technical leadership for high-demand operations.",
+    "metaTitle": "Merovelis AI Team · Founders & Leadership",
+    "metaDescription": "Meet the founding team of Merovelis AI. Systems engineering, applied AI and technical leadership for high-demand operations.",
     "headline": "Team",
-    "body": "Merovelis Systems is built by engineers and systems operators. Meet the founders and technical leadership behind the platform."
+    "body": "Merovelis AI is built by engineers and systems operators. Meet the founders and technical leadership behind the platform."
   },
   "leandroDamasio": {
-    "metaTitle": "Leandro Damasio · Founder & CEO of Merovelis Systems",
-    "metaDescription": "Leandro Damasio is an AI Engineer, founder of Merovelis Systems and creator of products such as Strategos, Robson, Verentir and the Merovelis sovereign AI platform.",
+    "metaTitle": "Leandro Damasio · Founder & CEO of Merovelis AI",
+    "metaDescription": "Leandro Damasio is an AI Engineer, founder of Merovelis AI and creator of products such as Strategos, Robson, Verentir and the Merovelis sovereign AI platform.",
     "headline": "Leandro Damasio",
-    "body": "AI Engineer, Platform & Backend Systems, Technical Leadership. Founder & CEO of Merovelis Systems."
+    "body": "AI Engineer, Platform & Backend Systems, Technical Leadership. Founder & CEO of Merovelis AI."
   },
   "caueAlencar": {
-    "metaTitle": "Cauê Alencar · CFO of Merovelis Systems",
-    "metaDescription": "Cauê Alencar is Chief Financial Officer of Merovelis Systems. Financial leadership and strategy for high-demand operations.",
+    "metaTitle": "Cauê Alencar · CFO of Merovelis AI",
+    "metaDescription": "Cauê Alencar is Chief Financial Officer of Merovelis AI. Financial leadership and strategy for high-demand operations.",
     "headline": "Cauê Alencar",
     "body": "Chief Financial Officer. Financial leadership and strategy for high-demand operations.",
-    "jobTitle": "Chief Financial Officer, Merovelis Systems"
+    "jobTitle": "Chief Financial Officer, Merovelis AI"
   },
   "flaviaRibeiro": {
-    "metaTitle": "Flavia Ribeiro · Founding SDR at Merovelis Systems",
-    "metaDescription": "Flavia Ribeiro is Founding SDR at Merovelis Systems. Sales development, client support and customer care for high-demand operations.",
+    "metaTitle": "Flavia Ribeiro · Founding SDR at Merovelis AI",
+    "metaDescription": "Flavia Ribeiro is Founding SDR at Merovelis AI. Sales development, client support and customer care for high-demand operations.",
     "headline": "Flavia Ribeiro",
-    "body": "Sales Development, Client Support and Customer Care. Founding SDR at Merovelis Systems.",
-    "jobTitle": "Founding SDR, Merovelis Systems"
+    "body": "Sales Development, Client Support and Customer Care. Founding SDR at Merovelis AI.",
+    "jobTitle": "Founding SDR, Merovelis AI"
   },
   "history": {
-    "metaTitle": "Merovelis Systems History · From automation to a governed AI platform",
-    "metaDescription": "The trajectory of Merovelis Systems: from automation and robotics consulting to a platform of AI-governed systems for high-demand operations.",
+    "metaTitle": "Merovelis AI History · From automation to a governed AI platform",
+    "metaDescription": "The trajectory of Merovelis AI: from automation and robotics consulting to a platform of AI-governed systems for high-demand operations.",
     "fallbackTitle": "History",
     "fallbackLead": "RBX Systems began as an automation and robotics consultancy, helping companies remove repetitive processes from their operations. Over time the work evolved into systems engineering and infrastructure, and then into complete operational platforms. Today RBX builds AI-governed systems for high-demand operations, guided by the same principle as always: reliability and control above everything."
   },
   "careers": {
     "metaTitle": "Work at Merovelis · Careers in Systems Engineering and AI",
-    "metaDescription": "Careers at Merovelis Systems: systems engineering, applied AI and infrastructure for high-demand operations. Send your resume through our contact page.",
+    "metaDescription": "Careers at Merovelis AI: systems engineering, applied AI and infrastructure for high-demand operations. Send your resume through our contact page.",
     "fallbackTitle": "Careers",
     "fallbackLead": "Work at Merovelis. We build operational platforms with AI for companies that demand control, and we are looking for people who take engineering seriously. If you want to join this team, send your resume and a short introduction through our contact page."
   },
@@ -107,9 +107,9 @@
   },
   "journal": {
     "metaTitle": "Merovelis Journal · Engineering, AI & Field Notes",
-    "metaDescription": "Ideas, engineering and field notes from Merovelis Systems. Technical articles on AI, LLMOps, agents, software and infrastructure.",
+    "metaDescription": "Ideas, engineering and field notes from Merovelis AI. Technical articles on AI, LLMOps, agents, software and infrastructure.",
     "headline": "Merovelis Journal",
-    "body": "Ideas, engineering and field notes from Merovelis Systems.",
+    "body": "Ideas, engineering and field notes from Merovelis AI.",
     "rssCta": "Subscribe free via RSS",
     "rssNew": "New",
     "tagTitle": "Tag",
@@ -118,13 +118,13 @@
     "authorMetaDescription": "Articles by this author in the Merovelis Journal."
   },
   "cases": {
-    "metaTitle": "Merovelis Systems Cases · Proof of Work & Production Systems",
-    "metaDescription": "Merovelis Systems implementation cases: operational automation, AI agents, financial software, logistics and critical systems.",
+    "metaTitle": "Merovelis AI Cases · Proof of Work & Production Systems",
+    "metaDescription": "Merovelis AI implementation cases: operational automation, AI agents, financial software, logistics and critical systems.",
     "headline": "Cases",
     "body": "Proof of work, field notes and systems we put into production."
   },
   "contact": {
-    "metaTitle": "Contact Merovelis Systems · Talk to Our Engineering Team",
+    "metaTitle": "Contact Merovelis AI · Talk to Our Engineering Team",
     "metaDescription": "Talk to Merovelis about your product, an integration or a process that needs to evolve. Share the context in writing, by email or WhatsApp.",
     "heading": "Tell us what needs to evolve.",
     "body": "Describe your product or operation, the current problem and your priority. Choose how you would like us to reply.",
@@ -149,82 +149,82 @@
   },
   "services": {
     "aiEngineering": {
-      "metaTitle": "AI Engineering · Merovelis Systems",
+      "metaTitle": "AI Engineering · Merovelis AI",
       "metaDescription": "Applied AI engineering: intelligent agents, LLMs, evaluation pipelines and integration with enterprise systems.",
       "headline": "AI Engineering"
     },
     "llmops": {
-      "metaTitle": "LLMOps · Merovelis Systems",
-      "metaDescription": "LLMOps at Merovelis Systems: LLM observability, model routing, cost, evaluation and governance in production.",
+      "metaTitle": "LLMOps · Merovelis AI",
+      "metaDescription": "LLMOps at Merovelis AI: LLM observability, model routing, cost, evaluation and governance in production.",
       "headline": "LLMOps"
     },
     "aiAgents": {
-      "metaTitle": "AI Agents · Merovelis Systems",
+      "metaTitle": "AI Agents · Merovelis AI",
       "metaDescription": "AI agents in production: governed orchestration, memory, evaluation and secure integration with enterprise operations.",
       "headline": "AI Agents"
     },
     "devopsCloud": {
-      "metaTitle": "DevOps & Cloud · Merovelis Systems",
+      "metaTitle": "DevOps & Cloud · Merovelis AI",
       "metaDescription": "DevOps, cloud-native and sovereign infrastructure: Kubernetes, GitOps, observability and reliability for critical operations.",
       "headline": "DevOps & Cloud"
     },
     "financialSoftware": {
-      "metaTitle": "Financial Software · Merovelis Systems",
+      "metaTitle": "Financial Software · Merovelis AI",
       "metaDescription": "Tailored financial software: ledgers, automation, risk, compliance and decision systems for fintechs and institutions.",
       "headline": "Financial Software"
     },
     "logisticsSoftware": {
-      "metaTitle": "Logistics Software · Merovelis Systems",
+      "metaTitle": "Logistics Software · Merovelis AI",
       "metaDescription": "Software for logistics and critical operations: interoperability, OCR, traceability, offline-first and decision support.",
       "headline": "Logistics Software"
     },
     "observability": {
-      "metaTitle": "Observability · Merovelis Systems",
+      "metaTitle": "Observability · Merovelis AI",
       "metaDescription": "System and LLM observability: traces, metrics, logs and alerts with PII redaction for regulated operations.",
       "headline": "Observability"
     },
     "webDevelopment": {
-      "metaTitle": "Web Development · Merovelis Systems",
+      "metaTitle": "Web Development · Merovelis AI",
       "metaDescription": "Fast, accessible websites, portals and web applications integrated with the systems that run your operation.",
       "headline": "Web Development"
     },
     "mobileApps": {
-      "metaTitle": "Mobile App Development · Merovelis Systems",
+      "metaTitle": "Mobile App Development · Merovelis AI",
       "metaDescription": "Android and iOS applications connected to your backend, with offline operation, telemetry, security and release support.",
       "headline": "Mobile Apps"
     },
     "customSystems": {
-      "metaTitle": "Custom Systems · Merovelis Systems",
+      "metaTitle": "Custom Systems · Merovelis AI",
       "metaDescription": "Purpose-built systems for specific workflows, with integrations, access control, auditability and long-term operation.",
       "headline": "Custom Systems"
     },
     "technicalConsulting": {
-      "metaTitle": "Technical Consulting · Merovelis Systems",
+      "metaTitle": "Technical Consulting · Merovelis AI",
       "metaDescription": "Architecture, reliability, security and product diagnostics that turn technical evidence into clear priorities and decisions.",
       "headline": "Technical Consulting"
     },
     "processAutomation": {
-      "metaTitle": "Process Automation · Merovelis Systems",
+      "metaTitle": "Process Automation · Merovelis AI",
       "metaDescription": "Business process automation with auditable workflows, integrations, human approval gates and safe exception handling.",
       "headline": "Process Automation"
     },
     "apiIntegration": {
-      "metaTitle": "API Integration · Merovelis Systems",
+      "metaTitle": "API Integration · Merovelis AI",
       "metaDescription": "Secure integration across APIs, legacy systems and SaaS platforms, with contracts, retries, idempotency and observability.",
       "headline": "API Integration"
     },
     "systemMaintenance": {
-      "metaTitle": "System Maintenance · Merovelis Systems",
+      "metaTitle": "System Maintenance · Merovelis AI",
       "metaDescription": "Software maintenance and evolution through fixes, upgrades, observability, security work and operational risk reduction.",
       "headline": "System Maintenance"
     },
     "uxUiDesign": {
-      "metaTitle": "UX/UI Design · Merovelis Systems",
+      "metaTitle": "UX/UI Design · Merovelis AI",
       "metaDescription": "UX/UI for products and operational tools: clear flows, testable prototypes, accessibility and implementable design systems.",
       "headline": "UX/UI Design"
     },
     "cloudSolutions": {
-      "metaTitle": "Cloud Solutions · Merovelis Systems",
+      "metaTitle": "Cloud Solutions · Merovelis AI",
       "metaDescription": "Cloud architecture, migration and operations with infrastructure as code, security, backups, observability and cost control.",
       "headline": "Cloud Solutions"
     }
@@ -419,7 +419,7 @@
       },
       "footer": {
         "note": "Operational reading. Not signals, advice or a promise of results.",
-        "governance": "Subscription managed by Merovelis Systems. Cancellation and refunds:",
+        "governance": "Subscription managed by Merovelis AI. Cancellation and refunds:",
         "legal": "Legal Notice"
       }
     },
@@ -428,7 +428,7 @@
       "items": [
         {
           "q": "What is the Daily BTC Briefing?",
-          "a": "A daily operational read of the BTC futures market (BTC/USDT), produced by Merovelis Systems. Each edition consolidates context, scenarios and a flight plan into six auditable artifacts. It is not buy or sell signals and it is not investment advice."
+          "a": "A daily operational read of the BTC futures market (BTC/USDT), produced by Merovelis AI. Each edition consolidates context, scenarios and a flight plan into six auditable artifacts. It is not buy or sell signals and it is not investment advice."
         },
         {
           "q": "When and how do I receive the briefing?",
@@ -440,7 +440,7 @@
         },
         {
           "q": "How do I cancel my subscription?",
-          "a": "You can cancel any time, with no lock-in. The subscription is managed by Merovelis Systems; talk to the team through the contact form or the email listed in the Legal Notice."
+          "a": "You can cancel any time, with no lock-in. The subscription is managed by Merovelis AI; talk to the team through the contact form or the email listed in the Legal Notice."
         },
         {
           "q": "Who is the BTC Briefing for?",

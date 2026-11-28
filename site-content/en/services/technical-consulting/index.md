@@ -1,5 +1,5 @@
 ---
-title: Technical Consulting · Merovelis Systems
+title: Technical Consulting · Merovelis AI
 description: Independent architecture, reliability, security and product diagnostics that turn technical evidence into clear decisions and priorities.
 eyebrow: Service
 lead: An independent technical view for decisions that should not depend on opinion, urgency or tool preference.

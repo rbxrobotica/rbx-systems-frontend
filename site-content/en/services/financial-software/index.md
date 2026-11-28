@@ -1,5 +1,5 @@
 ---
-title: Financial Software — Merovelis Systems
+title: Financial Software — Merovelis AI
 description: Ledgers, automation, risk, compliance and decision systems for fintechs and financial institutions.
 eyebrow: Solution
 lead: Tailored financial systems with traceability, security and scale.

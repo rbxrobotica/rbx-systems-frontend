@@ -1,15 +1,15 @@
 ---
 title: Legal Notice
-description: Operator identification, intellectual property, risk notice and privacy for the Merovelis Systems websites.
-eyebrow: Merovelis Systems
-lead: This notice identifies who operates the Merovelis Systems websites and the terms governing use of their content.
+description: Operator identification, intellectual property, risk notice and privacy for the Merovelis AI websites.
+eyebrow: Merovelis AI
+lead: This notice identifies who operates the Merovelis AI websites and the terms governing use of their content.
 ---
 <h2>Identification</h2>
-<p>The website merovelis.com is operated by Merovelis Systems. Until November 2026 the company used the name RBX Systems and the addresses rbx.ia.br and rbxsystems.ch, which now lead to this site.</p>
-<!-- OPERATOR: insert registered legal entity name, registration number and address before external distribution of this notice. -->
+<p>The website merovelis.com is operated by Merovelis AI. Until November 2026 the company used the name RBX Systems and the addresses rbx.ia.br and rbxsystems.ch, which now lead to this site.</p>
+<!-- OPERATOR: insert the legal denomination in force, registration number and address before external distribution of this notice. Merovelis AI is the public name, not the legal denomination (ADR-0030, section 2). -->
 <p>Contact: <a href="mailto:contact@rbxsystems.ch">contact@rbxsystems.ch</a> or the <a href="/contact">contact page</a>.</p>
 <h2>Intellectual property</h2>
-<p>The content of these websites (texts, marks, visual material and code examples) belongs to Merovelis Systems. Full reproduction without prior authorization is not permitted. Quotation with attribution and a link is permitted.</p>
+<p>The content of these websites (texts, marks, visual material and code examples) belongs to Merovelis AI. Full reproduction without prior authorization is not permitted. Quotation with attribution and a link is permitted.</p>
 <h2>Risk notice</h2>
 <p>Robson and the Briefing Diário BTC are technology and information products. Nothing on these websites constitutes investment advice, an offer of securities or financial consulting. Cryptoasset markets carry high risk, including total loss of capital. Past results do not guarantee future results. Investment decisions are the sole responsibility of the person making them.</p>
 <h2>Privacy</h2>
@@ -24,6 +24,6 @@ lead: This notice identifies who operates the Merovelis Systems websites and the
 <li>Price changes apply only to future periods and are announced by email at least 30 days in advance.</li>
 </ul>
 <h2>No warranties</h2>
-<p>Content is published as is, without warranty of accuracy, completeness or fitness for a particular purpose. Merovelis Systems may change or remove content without prior notice.</p>
+<p>Content is published as is, without warranty of accuracy, completeness or fitness for a particular purpose. Merovelis AI may change or remove content without prior notice.</p>
 <h2>Changes</h2>
 <p>This notice may be updated. Version of 2026-09-12.</p>

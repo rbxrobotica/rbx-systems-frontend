@@ -213,11 +213,11 @@ export function resolveNav(locale: Locale, rawPathname: string, leaf?: string): 
 
 /**
  * CMS titles of service and product pages end in the site name
- * ("LLMOps — Merovelis Systems", "API Integration · Merovelis Sistemas"); a
+ * ("LLMOps — Merovelis AI", "API Integration · Merovelis IA"); a
  * crumb does not repeat it. Pages saved before the change of name still end in
  * "RBX Systems".
  */
-const SITE_SUFFIX = /\s+[—–·|-]\s+(?:RBX Systems|Merovelis Systems|Merovelis Sistemas)$/;
+const SITE_SUFFIX = /\s+[—–·|-]\s+(?:RBX Systems|Merovelis AI|Merovelis IA)$/;
 
 /**
  * Title of the current page as its loader exposes it: a post, an author, a

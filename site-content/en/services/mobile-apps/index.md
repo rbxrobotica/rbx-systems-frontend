@@ -1,5 +1,5 @@
 ---
-title: Mobile App Development · Merovelis Systems
+title: Mobile App Development · Merovelis AI
 description: Android and iOS applications integrated with your backend, with secure architecture, offline operation, telemetry and release support.
 eyebrow: Service
 lead: Mobile applications designed as part of the system, not as an isolated interface.

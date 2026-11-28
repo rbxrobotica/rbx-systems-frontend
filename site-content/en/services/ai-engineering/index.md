@@ -1,11 +1,11 @@
 ---
-title: AI Engineering — Merovelis Systems
+title: AI Engineering — Merovelis AI
 description: We design and ship intelligent-agent systems, LLM integrations, evaluation pipelines and secure enterprise operations.
 eyebrow: Solution
 lead: Intelligent agents, LLMs and evaluation pipelines integrated into your systems.
 ---
 <h2>What we deliver</h2>
-<p>Merovelis Systems designs and implements applied AI systems for high-demand operations. The work spans from agent architecture to production instrumentation.</p>
+<p>Merovelis AI designs and implements applied AI systems for high-demand operations. The work spans from agent architecture to production instrumentation.</p>
 <ul>
 <li><strong>Intelligent agents</strong> with governed orchestration, memory and continuous evaluation.</li>
 <li><strong>LLM integration</strong> through a sovereign gateway with routing, cost control and observability.</li>

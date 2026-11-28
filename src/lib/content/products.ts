@@ -62,10 +62,10 @@ export const productsContent: Record<Locale, ProductsContent> = {
   'pt-BR': {
     title: 'Produtos',
     description:
-      'Produtos da Merovelis Sistemas: Strategos, para logística, e Verentir, para avaliação de IA, com as plataformas Thalamus e TruthMetal.',
+      'Produtos da Merovelis IA: Strategos, para logística, e Verentir, para avaliação de IA, com as plataformas Thalamus e TruthMetal.',
     eyebrow: 'Produtos',
     headline: 'Os produtos da Merovelis.',
-    lead: 'A Merovelis Sistemas cria e opera produtos de software com IA. Cada um tem marca, endereço e estágio próprios, sobre a mesma base de engenharia: identidade, conteúdo, pagamentos e operação.',
+    lead: 'A Merovelis IA cria e opera produtos de software com IA. Cada um tem marca, endereço e estágio próprios, sobre a mesma base de engenharia: identidade, conteúdo, pagamentos e operação.',
     disciplines: ['Engenharia de produto', 'IA aplicada', 'Infraestrutura soberana'],
     featuredTitle: 'Produtos',
     featuredLead:
@@ -238,10 +238,10 @@ export const productsContent: Record<Locale, ProductsContent> = {
   en: {
     title: 'Products',
     description:
-      'Merovelis Systems products: Strategos, for logistics, and Verentir, for AI evaluation, with the Thalamus and TruthMetal platforms.',
+      'Merovelis AI products: Strategos, for logistics, and Verentir, for AI evaluation, with the Thalamus and TruthMetal platforms.',
     eyebrow: 'Products',
     headline: 'The Merovelis products.',
-    lead: 'Merovelis Systems builds and operates AI software products. Each has its own brand, address and stage, on the same engineering base: identity, content, payments and operations.',
+    lead: 'Merovelis AI builds and operates AI software products. Each has its own brand, address and stage, on the same engineering base: identity, content, payments and operations.',
     disciplines: ['Product engineering', 'Applied AI', 'Sovereign infrastructure'],
     featuredTitle: 'Products',
     featuredLead:

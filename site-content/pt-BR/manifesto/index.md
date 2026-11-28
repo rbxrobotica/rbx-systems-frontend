@@ -1,6 +1,6 @@
 ---
 title: Manifesto de IA Governada
-description: A arquitetura de IA governada da Merovelis Sistemas em seis responsabilidades separadas, auditáveis e combináveis.
+description: A arquitetura de IA governada da Merovelis IA em seis responsabilidades separadas, auditáveis e combináveis.
 eyebrow: Manifesto
 lead: Confiança em IA não é propriedade de um modelo. É propriedade de arquitetura.
 ---

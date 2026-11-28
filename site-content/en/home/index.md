@@ -1,7 +1,7 @@
 ---
-title: Merovelis Systems builds and operates AI software products
-description: 'Merovelis Systems is a product company: Strategos, for logistics, and Verentir, for AI evaluation, on the same engineering base.'
-eyebrow: Merovelis Systems
+title: Merovelis AI builds and operates AI software products
+description: 'Merovelis AI is a product company: Strategos, for logistics, and Verentir, for AI evaluation, on the same engineering base.'
+eyebrow: Merovelis AI
 lead: 'We are a product company. Each product has its own brand, address and stage, and all of them run on the same engineering base: our own infrastructure, AI governance and an auditable record.'
 ---
 

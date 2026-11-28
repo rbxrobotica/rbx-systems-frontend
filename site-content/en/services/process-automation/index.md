@@ -1,5 +1,5 @@
 ---
-title: Process Automation · Merovelis Systems
+title: Process Automation · Merovelis AI
 description: Auditable workflows that reduce manual work, integrate systems and keep people in control of exceptions and important decisions.
 eyebrow: Service
 lead: Automation that removes repetitive work without hiding operational state or removing necessary controls.

@@ -1,5 +1,5 @@
 ---
-title: API Integration · Merovelis Systems
+title: API Integration · Merovelis AI
 description: Secure integration across APIs, SaaS and legacy systems, with versioned contracts, idempotency, observability and failure recovery.
 eyebrow: Service
 lead: Integrations designed to remain correct when vendors, networks and data do not follow the ideal scenario.

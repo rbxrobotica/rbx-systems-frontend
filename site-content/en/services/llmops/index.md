@@ -1,5 +1,5 @@
 ---
-title: LLMOps — Merovelis Systems
+title: LLMOps — Merovelis AI
 description: LLM observability, model routing, cost control, evaluation and governance in production.
 eyebrow: Solution
 lead: Run LLMs in production with observability, cost control and governance.

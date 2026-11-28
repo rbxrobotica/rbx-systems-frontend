@@ -1,6 +1,6 @@
 ---
-title: História da Merovelis Sistemas
-description: Da automação e robótica à engenharia de sistemas e IA governada. Conheça a trajetória, os princípios e o trabalho atual da Merovelis Sistemas.
+title: História da Merovelis IA
+description: Da automação e robótica à engenharia de sistemas e IA governada. Conheça a trajetória, os princípios e o trabalho atual da Merovelis IA.
 eyebrow: Empresa
 lead: 'A Merovelis evoluiu da automação de processos para a construção e operação de sistemas de alta exigência. O princípio permaneceu o mesmo: tecnologia precisa funcionar no mundo real.'
 ---
@@ -10,8 +10,8 @@ lead: 'A Merovelis evoluiu da automação de processos para a construção e ope
 <h2>A evolução para sistemas governados</h2>
 <p>Com a adoção de modelos de linguagem e agentes de IA, a exigência ficou maior. Não bastava gerar uma resposta plausível. Era necessário medir qualidade, controlar custos, registrar decisões, limitar ações e manter pessoas responsáveis pelo resultado.</p>
 <p>Essa necessidade deu forma ao trabalho da casa: engenharia de IA, LLMOps, automação operacional, observabilidade, infraestrutura soberana e produtos open source para operações que exigem controle.</p>
-<h2>De RBX Systems a Merovelis Sistemas</h2>
-<p>Em novembro de 2026 a empresa passou a se chamar Merovelis Sistemas. Merovelis era, até então, a marca de produto da casa para logística. Com a troca, o nome passa a ser o da empresa inteira, e os produtos vêm antes dos serviços: a Merovelis cria e detém os sistemas que opera.</p>
+<h2>De RBX Systems a Merovelis IA</h2>
+<p>Em novembro de 2026 a empresa passou a se chamar Merovelis IA. Merovelis era, até então, a marca de produto da casa para logística. Com a troca, o nome passa a ser o da empresa inteira, e os produtos vêm antes dos serviços: a Merovelis cria e detém os sistemas que opera.</p>
 <h2>O que construímos hoje</h2>
 <p>A Merovelis cria e opera produtos próprios: o Strategos para logística e operações críticas, o Robson para execução e risco, o Satwake, o Verentir e a Initelo, sobre uma plataforma de IA com o Thalamus e o TruthMetal. A mesma equipe atende um número limitado de clientes pela parceria de engenharia.</p>
 <p>O portfólio funciona como prova de trabalho. Cada produto nasce de um problema operacional real e precisa ser observável, auditável e recuperável antes de ser tratado como concluído.</p>

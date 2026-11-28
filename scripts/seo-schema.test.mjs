@@ -125,9 +125,19 @@ test('the organization, the site and the founder are one entity each in both lan
     assert.equal(byType(pt, type)['@id'], byType(en, type)['@id'], type);
     assert.match(byType(pt, type)['@id'], /^https:\/\/merovelis\.com\/#/, type);
   }
-  // The site node is the same on every page; what is said about the
+  // The site node is the same on every page but for its name, which is the
+  // public name in the language of the page; what is said about the
   // organization and the person follows the language of the page.
-  assert.deepEqual(byType(pt, 'WebSite'), byType(en, 'WebSite'));
+  assert.deepEqual(
+    { ...byType(pt, 'WebSite'), name: null },
+    { ...byType(en, 'WebSite'), name: null }
+  );
+  for (const type of ['Organization', 'WebSite']) {
+    assert.equal(byType(pt, type).name, 'Merovelis IA', type);
+    assert.equal(byType(en, type).name, 'Merovelis AI', type);
+  }
+  assert.ok(byType(pt, 'Organization').alternateName.includes('Merovelis AI'));
+  assert.ok(byType(en, 'Organization').alternateName.includes('Merovelis IA'));
   assert.deepEqual(byType(pt, 'WebSite').inLanguage, ['pt-BR', 'en']);
   // An address in structured data is one that is served. The root of the host
   // answers with a redirect, so the organization names the home page in the

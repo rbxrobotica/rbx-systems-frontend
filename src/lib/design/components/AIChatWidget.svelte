@@ -20,8 +20,8 @@
 
   function welcomeMessage(): string {
     return $locale?.startsWith('en')
-      ? "Hello, I'm the Merovelis Systems assistant. I can explain our products, AI platform and Engineering Partnership. How can I help?"
-      : 'Olá, sou o assistente da Merovelis Sistemas. Posso explicar nossos produtos, a plataforma de IA e a Engineering Partnership. Como posso ajudar?';
+      ? "Hello, I'm the Merovelis AI assistant. I can explain our products, AI platform and Engineering Partnership. How can I help?"
+      : 'Olá, sou o assistente da Merovelis IA. Posso explicar nossos produtos, a plataforma de IA e a Engineering Partnership. Como posso ajudar?';
   }
 
   let messages = $state<Message[]>([{ role: 'assistant', content: welcomeMessage() }]);
@@ -176,7 +176,8 @@
       </div>
       <div>
         <span class="header-title">{label}</span>
-        <span class="header-sub">Merovelis Systems</span>
+        <span class="header-sub">{$locale?.startsWith('en') ? 'Merovelis AI' : 'Merovelis IA'}</span
+        >
       </div>
     </div>
     <button

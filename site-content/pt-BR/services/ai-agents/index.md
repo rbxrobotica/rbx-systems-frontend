@@ -1,5 +1,5 @@
 ---
-title: Agentes de IA — Merovelis Sistemas
+title: Agentes de IA — Merovelis IA
 description: Agentes de IA em produção com orquestração governada, memória, avaliação e integração segura com operações empresariais.
 eyebrow: Solução
 lead: Agentes autônomos que executam tarefas dentro de limites definidos e audíveis.

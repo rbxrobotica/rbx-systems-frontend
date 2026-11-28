@@ -18,8 +18,8 @@ export const JOURNAL_AUTHORS: JournalAuthor[] = [
     slug: 'leandro-damasio',
     name: 'Leandro Damasio',
     role: {
-      'pt-BR': 'Fundador e CEO, Merovelis Sistemas',
-      en: 'Founder & CEO, Merovelis Systems'
+      'pt-BR': 'Fundador e CEO, Merovelis IA',
+      en: 'Founder & CEO, Merovelis AI'
     },
     kind: 'person'
   },
@@ -27,8 +27,8 @@ export const JOURNAL_AUTHORS: JournalAuthor[] = [
     slug: 'caue-alencar',
     name: 'Cauê Souza Azevedo Alencar',
     role: {
-      'pt-BR': 'CFO, Merovelis Sistemas',
-      en: 'CFO, Merovelis Systems'
+      'pt-BR': 'CFO, Merovelis IA',
+      en: 'CFO, Merovelis AI'
     },
     kind: 'person'
   },

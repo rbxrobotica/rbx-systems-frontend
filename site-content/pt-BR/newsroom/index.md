@@ -4,9 +4,9 @@ description: Informação oficial, recursos de imprensa e fatos da empresa.
 eyebrow: Press
 lead: Informação oficial, recursos de imprensa e fatos da empresa.
 ---
-<p>Esta é a fonte institucional da Merovelis Sistemas. Para contato de imprensa, use <strong><a href="mailto:contact@rbxsystems.ch">contact@rbxsystems.ch</a></strong>.</p>
+<p>Esta é a fonte institucional da Merovelis IA. Para contato de imprensa, use <strong><a href="mailto:contact@rbxsystems.ch">contact@rbxsystems.ch</a></strong>.</p>
 <h2>Boilerplate</h2>
-<p>A Merovelis Sistemas é uma empresa de engenharia focada em automação, infraestrutura de IA e sistemas operacionais para ambientes que exigem controle, confiabilidade e manutenibilidade de longo prazo.</p>
+<p>A Merovelis IA é uma empresa de engenharia focada em automação, infraestrutura de IA e sistemas operacionais para ambientes que exigem controle, confiabilidade e manutenibilidade de longo prazo.</p>
 <h2>Fatos</h2>
 <table>
 <thead>

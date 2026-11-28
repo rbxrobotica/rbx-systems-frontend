@@ -11,12 +11,18 @@ import type { Locale } from '$types/content';
 import { localizedUrl } from './alternates';
 import { SITE_ORIGIN } from './site';
 
-// One organization and one site for both languages, so one name: the English
-// one, which is also the lockup. The Portuguese name and the names the house
-// had before 2026-11 are alternate names, which is how search engines connect
-// them to the same entity.
-const HOUSE_NAME = 'Merovelis Systems';
-const HOUSE_ALTERNATE_NAMES = ['Merovelis', 'Merovelis Sistemas', 'RBX Systems', 'RBX Robótica'];
+// One organization and one site for both languages. The public name follows
+// the language of the page: Merovelis AI in English, Merovelis IA in
+// Portuguese. The name in the other language and the names the house had
+// before 2026-11 are alternate names, which is how search engines connect
+// them to the same entity. Neither is the legal denomination.
+const houseName = (locale: Locale) => (locale === 'pt-BR' ? 'Merovelis IA' : 'Merovelis AI');
+const houseAlternateNames = (locale: Locale) => [
+  'Merovelis',
+  houseName(locale === 'pt-BR' ? 'en' : 'pt-BR'),
+  'RBX Systems',
+  'RBX Robótica'
+];
 const RBX_LOGO = '/brand/rbx-mark.svg';
 const RBX_DESCRIPTION_PT =
   'Empresa de produtos de software com IA: Strategos, para logística, e Verentir, para avaliação de IA, sobre uma plataforma própria de IA e infraestrutura.';
@@ -24,8 +30,8 @@ const RBX_DESCRIPTION_EN =
   'An AI software product company: Strategos, for logistics, and Verentir, for AI evaluation, on its own AI platform and infrastructure.';
 
 const LEANDRO_NAME = 'Leandro Damasio';
-const LEANDRO_JOB_TITLE_PT = 'Fundador e CEO, Merovelis Sistemas';
-const LEANDRO_JOB_TITLE_EN = 'Founder & CEO, Merovelis Systems';
+const LEANDRO_JOB_TITLE_PT = 'Fundador e CEO, Merovelis IA';
+const LEANDRO_JOB_TITLE_EN = 'Founder & CEO, Merovelis AI';
 const LEANDRO_LINKEDIN = 'https://www.linkedin.com/in/ldamasio/';
 const LEANDRO_GITHUB = 'https://github.com/ldamasio';
 
@@ -45,8 +51,8 @@ export function organizationSchema(locale: Locale = 'pt-BR'): Record<string, unk
   return {
     '@type': 'Organization',
     '@id': ORG_ID,
-    name: HOUSE_NAME,
-    alternateName: HOUSE_ALTERNATE_NAMES,
+    name: houseName(locale),
+    alternateName: houseAlternateNames(locale),
     // The home page in the language of the page: the root itself answers
     // with a redirect, and an address in structured data is one that is served.
     url: localizedUrl(locale, '/'),
@@ -126,13 +132,13 @@ export function personSchemaFor(
 /**
  * The one site, in its two languages. The node is the same on every page;
  * its address is the English home page, the default of the site, because the
- * root answers with a redirect.
+ * root answers with a redirect. Its name follows the language of the page.
  */
-export function websiteSchema(): Record<string, unknown> {
+export function websiteSchema(locale: Locale = 'en'): Record<string, unknown> {
   return {
     '@type': 'WebSite',
     '@id': WEBSITE_ID,
-    name: HOUSE_NAME,
+    name: houseName(locale),
     url: localizedUrl('en', '/'),
     publisher: { '@id': ORG_ID },
     inLanguage: ['pt-BR', 'en']
@@ -324,7 +330,7 @@ export function buildGraph(
   const graph = [
     organizationSchema(locale),
     personSchema(locale),
-    websiteSchema(),
+    websiteSchema(locale),
     webPageSchema(locale, pageUrl, title, description, aboutId),
     ...nodes
   ];
